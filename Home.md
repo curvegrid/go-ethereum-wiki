@@ -1,0 +1,1 @@
+Welcome to the go-ethereum wiki!
