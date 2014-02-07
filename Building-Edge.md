@@ -17,7 +17,7 @@ Now run Ethereum with:
 
 `go-ethereum -m`
 
-This will start mining and gives you access to the developer console. If you'd like to connect to your own mining node run the following:
+This will start up your mining node. If you'd like to connect to your own mining node run the following:
 
 `go-ethereum -c`
 
