@@ -11,7 +11,7 @@ Go Ethereum  depends on the secp256k1 C implementation, which means you require 
 
 Since you've chosen Go you've instantly become awesome and you can get ethereum build with just one command (don't tell the C++ guys it was this easy!)
 
-`go get github.com/ethereum/go-ethereum`
+`go get -u github.com/ethereum/go-ethereum`
 
 Now run Ethereum with:
 
