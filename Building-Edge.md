@@ -27,3 +27,5 @@ This will start up your mining node. If you'd like to connect to your own mining
 `go-ethereum -c`
 
 The -c option starts the developer console which will let you connect to your mining node with the `addp` (add peer) command `addp localhost:30303`.
+
+Please see [go-ethereum repo](https://github.com/ethereum/go-ethereum#command-line-options) for more command line options and dev console commands.
