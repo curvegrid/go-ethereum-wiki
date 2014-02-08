@@ -6,7 +6,7 @@
 
 Unpack it to the `/usr/local` (might require sudo)
 
-`tar -C /usr/local -xzf go1.1.linux-amd64.tar.gz`
+`tar -C /usr/local -xzf go1.2.linux-amd64.tar.gz`
 
 ### OS X
 
