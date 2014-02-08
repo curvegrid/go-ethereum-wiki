@@ -2,10 +2,15 @@ Building the edge version of Go Ethereum is fairly easy. This article assumes yo
 
 ### Getting the dependencies
 
-Go Ethereum  depends on the secp256k1 C implementation, which means you require to have the GMP headers. Getting GMP is easy and straight forward
+Go Ethereum  depends on the secp256k1 C implementation, which means you require to have the GMP headers. Getting GMP is easy and straight forward.
 
 * OS X: `brew install gmp`
 * Ubuntu: `sudo apt-get install libgmp3-dev`
+
+In order to fetch some packages mercurial is required:
+
+* OS X: `brew install mercurial`
+* Ubuntu: `sudo apt-get install mercurial`
 
 ### Installing Ethereum(Go)
 
