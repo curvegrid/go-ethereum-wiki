@@ -16,4 +16,4 @@ Update brew and install Go 1.2
 
 Create the Go dir and set the GOPATH
 
-`mkdir ~/go; export GOPATH="~/go"`
+`mkdir ~/go; export GOPATH=~/go`
