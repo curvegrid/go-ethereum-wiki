@@ -1,5 +1,3 @@
-## Getting Go1.2 installed
-
 ### Windows 
 
 Download and run the installer found at http://golang.org/doc/install
