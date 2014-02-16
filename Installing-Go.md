@@ -5,7 +5,7 @@ Download and run the installer found at http://golang.org/doc/install
 
 ### OS X
 
-Update brew and install Go 1.2 
+Update brew and install Go 
 
 `brew update; brew install go`
 
@@ -17,6 +17,8 @@ Create the Go dir and set the GOPATH
 
 
 ### Ubuntu
+
+Download the latest distribution
 
 `curl -O https://go.googlecode.com/files/go1.2.linux-amd64.tar.gz`
 
