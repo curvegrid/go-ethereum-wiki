@@ -2,7 +2,7 @@
 
 ### Windows 
 
-Download and run the installer at http://golang.org/doc/install
+Download and run the installer found at http://golang.org/doc/install
 
 
 ### OS X
