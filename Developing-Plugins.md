@@ -10,3 +10,7 @@ The `eth` interface exposes Ethereum specific functions:
 The `ui` interface exposes GUI specific functions:
 
 * assetPath(asset) [string]
+
+## Examples
+
+* [NameReg](https://github.com/ethereum/go-ethereum/wiki/Example_NameReg)
