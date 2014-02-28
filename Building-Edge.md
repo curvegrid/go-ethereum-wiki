@@ -14,6 +14,8 @@ In order to fetch some packages mercurial is required:
 * OS X: `brew install mercurial`
 * Ubuntu: `sudo apt-get install mercurial`
 
+The wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions.
+
 ### Installing Ethereum(Go)
 
 Since you've chosen Go you've instantly become awesome and you can get ethereum build with just one command (don't tell the C++ guys it was this easy!)
