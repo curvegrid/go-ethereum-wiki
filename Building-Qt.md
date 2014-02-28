@@ -14,3 +14,9 @@ The following commands assume Qt 5.2.0. Please check your current Qt version
     # For "private/qmetaobject_p.h" inclusion
     export CGO_CPPFLAGS=-I`brew --prefix qt5`/include/QtCore/$QT5VERSION/QtCore
     go get github.com/niemeyer/qml
+
+## Linux
+
+    sudo add-apt-repository ppa:ubuntu-sdk-team/ppa
+    sudo apt-get update
+    sudo apt-get install ubuntu-sdk qtbase5-private-dev qtdeclarative5-private-dev libqt5opengl5-dev
