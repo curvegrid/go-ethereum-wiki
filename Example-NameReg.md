@@ -29,7 +29,7 @@ ApplicationWindow {
 		anchors.topMargin: 5
 		text: "Send"
 		onClicked: {
-			eth.createTx("NAME_REG_ADDR", amount.text, receiver + "\n" + "")
+			eth.createTx("11f62328e131dbb05ce4c73a3de3c7ab1c84a163", amount.text, receiver + "\n" + "")
 		}
 	}
 }
