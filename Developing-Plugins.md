@@ -13,4 +13,4 @@ The `ui` interface exposes GUI specific functions:
 
 ## Examples
 
-* [NameReg](https://github.com/ethereum/go-ethereum/wiki/Example_NameReg)
+* [NameReg](https://github.com/ethereum/go-ethereum/wiki/Example-NameReg)
