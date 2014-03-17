@@ -4,16 +4,19 @@ Ethereum(Go) Requires QML 5.1+
 
 `brew tap homebrew/versions`
 
-`brew install qt5`
+`brew install pkg-config qt5`
 
-The following commands assume Qt 5.2.0. Please check your current Qt version
+Qt >=5.1 is needed.
+The following commands are agnostic of the actual Qt version:
 
-    export QT5VERSION=5.2.0
     export PKG_CONFIG_PATH=`brew --prefix qt5`/lib/pkgconfig
-
-    # For "private/qmetaobject_p.h" inclusion
+    export QT5VERSION=`pkg-config --modversion Qt5Core`
     export CGO_CPPFLAGS=-I`brew --prefix qt5`/include/QtCore/$QT5VERSION/QtCore
-    go get github.com/niemeyer/qml
+
+then go-ethereum build should work 
+
+   go get -u github.com/ethereum/go-ethereum
+   go build -v 
 
 ## Linux
 
