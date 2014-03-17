@@ -25,10 +25,6 @@ Assume you forked eth-go and go-ethtereum (e.g. under github.com/ethersphere). Y
     git checkout develop
     git pull upstream develop
 
-https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum%28Go%29
-
-https://github.com/ethereum/go-ethereum/wiki/Installing-Go
-
 ### prerequisites 
 
     brew update
