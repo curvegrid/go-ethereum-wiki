@@ -1,4 +1,4 @@
-[Building Instructions for Mac OS](https://github.com/ethereum/go-ethereum/wiki/Build-Mac)
+[Building Instructions for Mac OS](https://github.com/ethereum/go-ethereum/wiki/Building-Instructions-for-Mac)
 
 Building the edge version of Go Ethereum is fairly easy. This article assumes you have Go 1.2 installed. 
 
