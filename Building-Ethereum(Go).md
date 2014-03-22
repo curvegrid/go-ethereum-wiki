@@ -18,22 +18,31 @@ In order to fetch some packages mercurial is required:
 
 The wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions.
 
-### Installing Ethereum(Go)
+### Installing Ethereum(Go) node (CLI)
 
 Since you've chosen Go you've instantly become awesome and you can get ethereum build with just one command (don't tell the C++ guys it was this easy!)
 
-`go get -u github.com/ethereum/go-ethereum`
+`go get -u github.com/ethereum/go-ethereum/ethereum`
 
 Now run Ethereum with:
 
-`go-ethereum -m -gui=false`
+`ethereum -m`
 
 This will start up your mining node. **Please note that if you wish to start multiple go-ethereum processes supply a new data directory with `-dir=".ethereum2"`.**
 
 If you'd like to connect to your own mining node run the following for console:
 
-`go-ethereum -c -gui=false`
+`ethereum -c`
 
 The -c option starts the developer console which will let you connect to your mining node with the `addp` (add peer) command `addp localhost:30303`.
 
 Please see [go-ethereum repo](https://github.com/ethereum/go-ethereum#command-line-options) for more command line options and dev console commands.
+
+### Installing Ethereal (GUI)
+
+`go get -u -a github.com/ethereum/go-ethereum/ethereal`
+
+`cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereal`
+
+`go install && ethereal`
+
