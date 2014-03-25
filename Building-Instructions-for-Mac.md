@@ -45,7 +45,11 @@ The resulting executable is called `ethereal`.
 
 ## Compile from working copy of forks
 
-If you intend to develop ethereum go components, the scenario that you compile from a working copy of your fork is the common one. This section describes how you fork and build from your fork.
+If you intend to develop ethereum go components, the scenario that you compile from a working copy of your fork is the common one. This section describes how you fork and build from your fork. 
+
+### prerequisites
+
+as above
 
 ### fork and clone
 
@@ -66,7 +70,7 @@ Assume you forked eth-go and go-ethtereum (e.g. under github.com/ethersphere). Y
     git pull upstream develop
 
 
-### building
+### build
 
 Imports are specified via full paths so if you want to build from your local working copy by simply saying `go build -v` will not work. There is some hacky solutions to this http://stackoverflow.com/questions/14323872/using-forked-package-import-in-go relying on 
 * pretending your local git config is in reality your upstream - but this is abusing .git/config
