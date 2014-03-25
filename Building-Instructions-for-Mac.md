@@ -37,19 +37,20 @@ There is some hacky solutions to this http://stackoverflow.com/questions/1432387
 * pretending your local git config is in reality your upstream - but this is abusing .git/config
 * or faking the import path pointing to your local copy - 
 
-Now if we do this on our usual (say systemwide) GOPATH this makes it impossible to have the upstream version properly installed as well. But there is a solution.
+Now if we do this on our usual (say systemwide) GOPATH this makes it impossible to have the upstream version properly installed as well. But there is a solution. So first just use the systemwide path (here `/usr/local/opt/go/share` within a typical homebrew install). This will install all dependencies, including eth-go and go-ethereum master branches under the system wide go path. 
 
-[For eth-go, it looks tempting to simply rewrite the full path dependencies to local path such as `github.com/ethereum/eth-go/ethchain` -> `./ethchain` or `../ethchain`, etc. Like this, all deps that are part of this package will be taken from this working copy and cannot be fooled by GOPATH settings. The build works just fine. However if we then import this from another go project (like go-ethereum for instance), the go compiler complains: local import "./ethchain" in non-local package.]
+     export GOPATH=/usr/local/opt/go/share
+     go get github.com/ethereum/go-ethereum
 
-The solution relies on multiple ordered go paths. Assume you got your working copy of eth-go under `$HOME/Work/ethereum/eth-go` and your working copy of go-ethereum under `$HOME/Work/ethereum/go-ethereum`.
-Create a link:
+The solution to compile from your local working copy just relies on multiple ordered go paths. Assume you got your working copy of eth-go under `$HOME/Work/ethereum/eth-go` and your working copy of go-ethereum under `$HOME/Work/ethereum/go-ethereum`. Create a link:
     
-    mkdir -p $HOME/Work/ethereum/src/github.com 
-    ln -sf $HOME/Work/ethereum $HOME/Work/ethereum/src/github.com/ethereum
+    cd $HOME/Work/ethereum                 # cd to where your github.com/ethereum projects are cloned to 
+    mkdir -p go/src/github.com             # create a go fake subpath
+    ln -sf ../../.. go/src/github.com/ethereum   # link the ethereum back to the dir containing the clones 
 
-then you can prioritize `$HOME/Work/ethereum` as the first GOPATH used before generic (system-wide) path which may contain the upstream versions installed with `go get github.com/ethereum/go-ethereum` for instance. Using a systemwide go path within a typical brew install:
+then you can prioritize `$HOME/Work/ethereum` as the first GOPATH used before generic (system-wide) path which may contain the upstream versions installed above as well as all the dependencies (which then can be shared between other go projects):
 
-    export GOPATH=$HOME/Work/ethereum/:/usr/local/opt/go/share
+    export GOPATH=$HOME/Work/ethereum/go:/usr/local/opt/go/share
 
 With this solution, both projects compile from fork:
 
@@ -57,7 +58,7 @@ With this solution, both projects compile from fork:
     go get .
     go build -v
 
-then for go-ehereum, you need to set :
+Then for go-ehereum GUI, you need to set a few variables:
 
     cd go-ethereum
     export PKG_CONFIG_PATH=`brew --prefix qt5`/lib/pkgconfig
@@ -67,3 +68,6 @@ then for go-ehereum, you need to set :
     go get .
     go build -v
 
+## A note about a non-solution
+
+For eth-go, it looks tempting to simply rewrite the full path dependencies to local path such as `github.com/ethereum/eth-go/ethchain` -> `./ethchain` or `../ethchain`, etc. Like this, all deps that are part of this package will be taken from this working copy and cannot be fooled by GOPATH settings. The build works just fine. However if we then import this from another go project (like go-ethereum for instance), the go compiler complains: local import "./ethchain" in non-local package.
