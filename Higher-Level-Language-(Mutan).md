@@ -67,7 +67,12 @@ stop()                                             Stops the execution of the cu
 call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
 ```
 
-The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this` (`this.<methodName>()`).
+The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
+```
+Method     = "this" Dot MethodName Parentheses .
+Dot        = "." .
+MethodName = "dataLoad" | "dataSize" | "origin" | "caller" | "gasPrice" | "value" .
+```
 
 ```
 dataLoad()      Returns the data attached to this call
