@@ -58,6 +58,26 @@ int32[10] b
 big[10]   c
 ```
 
+## Build in functions
+
+mutan comes with a couple build in functions
+
+```go
+stop()                                             Stops the execution of the current call
+call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
+```
+
+The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this` (`this.<methodName>()`).
+
+```
+dataLoad()      Returns the data attached to this call
+dataSize()      Returns the size of the data attached to this call
+origin()        Returns the origin address of this execution
+caller()        Returns the current caller of the closure
+gasPrice()      Returns the gas price attached to this call
+value()         Returns the value attached to this call
+```
+
 ## Basic syntax
 
 ```go
@@ -69,4 +89,8 @@ if a < b {
 
 store[a] = 10000
 store[b] = this.origin()
+
+int32[2] in
+int32[10] out
+call(1234567890, 0, 10000, in, out)
 ```
