@@ -14,7 +14,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used at identifiers
 ```
-this if else return exit for
+this if else return exit for asm
 ```
 
 ### Operators and delimiters
@@ -83,6 +83,16 @@ gasPrice()      Returns the gas price attached to this call
 value()         Returns the value attached to this call
 ```
 
+## Assembler
+
+Inline assembler is allowed through the `asm` keyword
+
+```
+InlineAssembler = Asm "(" Code ")" .
+Asm             = "asm" .
+Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
+```
+
 ## Basic syntax
 
 ```go
@@ -98,4 +108,11 @@ store[b] = this.origin()
 int32[2] in
 int32[10] out
 call(1234567890, 0, 10000, in, out)
+
+asm (
+    PUSH 10
+    PUSH 0
+    MSTORE
+)
+
 ```
