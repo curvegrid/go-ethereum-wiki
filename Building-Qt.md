@@ -24,6 +24,8 @@ then go-ethereum build should work
     sudo apt-get update
     sudo apt-get install ubuntu-sdk qtbase5-private-dev qtdeclarative5-private-dev libqt5opengl5-dev
 
+To install ubuntu-sdk, you may need to follow http://askubuntu.com/questions/408463/unmet-dependencies-i-cant-install-ubuntu-sdk
+
 If you get an error which looks like:
 
     FATAL: asset not found: you can set an alternative asset path on on the command line using option 'asset_path'
