@@ -63,24 +63,32 @@ big[10]   c
 mutan comes with a couple build in functions
 
 ```go
-stop()                                             Stops the execution of the current call
-call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
+Exit()                                             Stops the execution of the current call
+Call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
 ```
 
 The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
 ```
 Method     = "this" Dot MethodName Parentheses .
 Dot        = "." .
-MethodName = "dataLoad" | "dataSize" | "origin" | "caller" | "gasPrice" | "value" .
+MethodName = "DataLoad" | "DataSize" | "Origin" | "Caller" | "GasPrice" | "Value" | "Diff" | "PrevHash" | "Time" | "GasPrice" | "Number" | "Coinbase" | "Gas" .
+
 ```
 
 ```
-dataLoad()      Returns the data attached to this call
-dataSize()      Returns the size of the data attached to this call
-origin()        Returns the origin address of this execution
-caller()        Returns the current caller of the closure
-gasPrice()      Returns the gas price attached to this call
-value()         Returns the value attached to this call
+DataLoad      Returns the data attached to this call
+DataSize      Returns the size of the data attached to this call
+Origin        Returns the origin address of this execution
+Caller        Returns the current caller of the closure
+GasPrice      Returns the gas price attached to this call
+Value         Returns the value attached to this call
+Diff          Returns the current difficulty
+PrevHash      Returns the previous block's hash
+Time          Returns the current block's timestamp
+GasPrice      Returns the attached call's gas price
+Number        Returns the current block's number
+Coinbase      Returns the current block's coinbase
+Gas           Returns the current call's attached amount of gas
 ```
 
 ## Assembler
