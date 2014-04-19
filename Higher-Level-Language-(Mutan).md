@@ -181,8 +181,7 @@ Gas           Returns the current call's attached amount of gas
 Inline assembler is allowed through the `asm` keyword
 
 ```
-InlineAssembler = Asm "(" Code ")" .
-Asm             = "asm" .
+InlineAssembler = "asm" "(" Code ")" .
 Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
 ```
 
