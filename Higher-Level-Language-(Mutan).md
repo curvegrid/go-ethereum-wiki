@@ -71,8 +71,8 @@ The following build in functions are related to the current executing context (i
 ```
 Method     = "this" Dot MethodName Parentheses .
 Dot        = "." .
-MethodName = "DataLoad" | "DataSize" | "Origin" | "Caller" | "GasPrice" | "Value" | "Diff" | "PrevHash" | "Time" | "GasPrice" | "Number" | "Coinbase" | "Gas" .
-
+MethodName = "DataLoad" | "DataSize" | "Origin" | "Caller" | "GasPrice" | "Value" |
+             "Diff" | "PrevHash" | "Time" | "GasPrice" | "Number" | "Coinbase" | "Gas" .
 ```
 
 ```
