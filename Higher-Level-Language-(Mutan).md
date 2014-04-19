@@ -107,15 +107,16 @@ Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
 int32 a = 20
 int32 b = 10
 if a < b {
-    exit()
+    Exit()
 }
 
 store[a] = 10000
-store[b] = this.origin()
+store[b] = this.Origin()
 
-int32[2] in
-int32[10] out
-call(1234567890, 0, 10000, in, out)
+for int8 i = 0; i < 10; i++ {
+    int32[10] out
+    Call(1234567890, 0, 10000, i, out)
+}
 
 asm (
     PUSH 10
