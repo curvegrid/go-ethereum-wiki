@@ -14,7 +14,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used at identifiers
 ```
-this if else return exit for asm
+this if else return exit for asm store
 ```
 
 ### Operators and delimiters
@@ -39,10 +39,6 @@ int256      the set of all _unsigned_ integers (0 to 1.1579209e+77)
 big         same as int256
 ```
 
-### String type
-
-Strings are not yet supported.
-
 ### Arrays
 
 Arrays are of theoretical unlimited length
@@ -56,6 +52,95 @@ The following are all valid arrays:
 int16[10] a
 int32[10] b
 big[10]   c
+```
+
+## Declarations
+
+A declaration binds a identifier to a type. Every identifier must be declared. No identifier may be declared twice. All declarations are global (for now, TODO/FIXME).
+
+```
+Declaration = TypeDecl .
+```
+
+Mutan, in it's current state, is globally scoped:
+    1. No identifier may be used twice
+    2. All identifiers must be declared using a Type
+
+```
+Types:
+    int int8 int16 int32 int64 int256 big
+    (todo)
+    bool string
+```
+
+## Statements
+
+```
+Statement = Declaration | Block | IfStmt | ForStmt
+```
+
+## Blocks
+
+Blocks contain, but not necessarily, contain lists of Statements within matching brackets.
+
+```
+Block = "{" StatementList "}" .
+StatementList = { Statement ";" } .
+```
+
+## If statements
+
+If statements specify the conditional execution of two branches according to the value of an expression. If the expression evaluated to true, the "if" branch is executed, else, if present, the else branch is executed.
+
+```
+IfStmt = "if" [ SimpleStmt ";" ] Expression Block [ "else" Block ] .
+```
+
+```
+if x < 10 {
+   x = maximum
+}
+```
+
+The expression may be preceded by a simple statement which executes before the boolean expression
+
+```
+if int8 x = this.Value(); x < 10 {
+    x = maximum
+} else {
+    y = 10
+}
+```
+
+## For statement
+
+A "for" statements specifies repeated execution of a block, the iteration is controlled by a conditional block.
+
+```
+ForStmt = "for" [ InitStmt ] ";" [ Condition ] ";" [ PostStmt ] .
+InitStmt = SimpleStmt .
+PostStmt = SimpleStmt .
+```
+
+A "for" in it's simplest form is a C-Like "while" statement (therefor Mutan doesn't have a "while")
+
+```
+for a < b {
+    a = a * 2
+}
+```
+
+A "for" statement in it's purest form is controlled my a initialiser, condition and a post statement which will be executed at the end of the Block
+
+```
+for int8 = 0; a < b; a++ {
+    b = b - 1
+}
+```
+
+```
+for cond { T() }         is the same as    for ; cond ; { T() }
+for cond; post { T() }   is the same as    for ; cond; post { T() }
 ```
 
 ## Build in functions
