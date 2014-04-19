@@ -96,7 +96,7 @@ If statements specify the conditional execution of two branches according to the
 IfStmt = "if" [ SimpleStmt ";" ] Expression Block [ "else" Block ] .
 ```
 
-```
+```go
 if x < 10 {
    x = maximum
 }
@@ -104,7 +104,7 @@ if x < 10 {
 
 The expression may be preceded by a simple statement which executes before the boolean expression
 
-```
+```go
 if int8 x = this.Value(); x < 10 {
     x = maximum
 } else {
@@ -124,7 +124,7 @@ PostStmt = SimpleStmt .
 
 A "for" in it's simplest form is a C-Like "while" statement (therefor Mutan doesn't have a "while")
 
-```
+```go
 for a < b {
     a = a * 2
 }
@@ -132,7 +132,7 @@ for a < b {
 
 A "for" statement in it's purest form is controlled my a initialiser, condition and a post statement which will be executed at the end of the Block
 
-```
+```go
 for int8 = 0; a < b; a++ {
     b = b - 1
 }
