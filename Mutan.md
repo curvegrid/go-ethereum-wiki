@@ -1,9 +1,9 @@
-HLL [DRAFT]
-===
+#### Compiler & Language definition for the Ethereum project
 
-Contract development can be done in a higher level language so you don't have to muck around with the assembler language (of course you're allowed to do so). The higher level language, draft name **mutan**, can be found [here](https://github.com/obscuren/mutan). mutan is a statically typed language.
+Mutan is a C-Like language for the Ethereum project. Mutan supports a full, statically typed higher level language that compiles to native Ethereum Assembler. [Repo](https://github.com/obscuren/mutan) will be moved.
 
-## Notation
+
+### Notation
 
 The syntax is specified using Extended Backus-Naur Form (EBNF):
 ```
