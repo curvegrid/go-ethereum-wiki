@@ -154,14 +154,14 @@ Call(address, value, gas, calldata, returndata)    Calls another contract (e.g. 
 
 The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
 ```
-Method     = "this" Dot MethodName Parentheses .
+Method     = "this" Dot MethodName "(" [ Expression ] ")" .
 Dot        = "." .
 MethodName = "DataLoad" | "DataSize" | "Origin" | "Caller" | "GasPrice" | "Value" |
              "Diff" | "PrevHash" | "Time" | "GasPrice" | "Number" | "Coinbase" | "Gas" .
 ```
 
 ```
-DataLoad      Returns the data attached to this call
+Data          Returns the x'th value of the attached data of this call
 DataSize      Returns the size of the data attached to this call
 Origin        Returns the origin address of this execution
 Caller        Returns the current caller of the closure
