@@ -199,7 +199,7 @@ store[b] = this.Origin()
 
 for int8 i = 0; i < 10; i++ {
     int32[10] out
-    Call(1234567890, 0, 10000, i, out)
+    Call(0xaabbccddeeff112233445566, 0, 10000, i, out)
 }
 
 asm (
