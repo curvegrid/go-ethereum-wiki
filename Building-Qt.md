@@ -26,6 +26,10 @@ then go-ethereum build should work
 
 To install ubuntu-sdk, you may need to follow http://askubuntu.com/questions/408463/unmet-dependencies-i-cant-install-ubuntu-sdk
 
+On Ubuntu 14.04, you will have to separately install the qtdialogs package
+
+    sudo apt-get instsall qtdeclarative5-dialogs-plugin
+
 If you get an error which looks like:
 
     FATAL: asset not found: you can set an alternative asset path on on the command line using option 'asset_path'
