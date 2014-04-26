@@ -39,6 +39,8 @@ int256      the set of all _unsigned_ integers (0 to 1.1579209e+77)
 big         same as int256
 ```
 
+Numbers may be specified in decimal and hexadecimal format.
+
 ### Arrays
 
 Arrays are of theoretical unlimited length
