@@ -44,7 +44,5 @@ Please see [go-ethereum repo](https://github.com/ethereum/go-ethereum#command-li
 
 `go get -u -a github.com/ethereum/go-ethereum/ethereal`
 
-`cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereal`
-
-`go install && ethereal`
+`cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereal && ethereal`
 
