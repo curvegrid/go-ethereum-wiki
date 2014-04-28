@@ -15,8 +15,7 @@ The following commands set the current Qt version and use it to set a go compile
 
 then go-ethereum build should work 
 
-    go get -u github.com/ethereum/go-ethereum
-    go build -v 
+    go get -u github.com/ethereum/go-ethereum/ethereal
 
 ## Linux
 
