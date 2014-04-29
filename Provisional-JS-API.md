@@ -6,9 +6,9 @@ Please note that the provisional JavaScript API tries to leverage existing JS id
 
 * `getBlock (number or string)`
     Retrieves a block by either the address or the number. If supplied with a string it will assume address, number otherwise.
-* `transact (recipient, value, gas, gas price, data)`
+* `transact (sec, recipient, value, gas, gas price, data)`
     Creates a new transaction using your current key.
-* `create (value, gas, gas price, init, body)`
+* `create (sec, value, gas, gas price, init, body)`
     Creates a new contract using your current key.
 * `getKey (none)`
     Retrieves your current key in hex format.
