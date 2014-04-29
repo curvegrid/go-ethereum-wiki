@@ -14,6 +14,8 @@ Please note that the provisional JavaScript API tries to leverage existing JS id
     Retrieves the storage address of the given object.
 * `watch (string [, string])`
     Watches for changes on a specific address' state object such as state root changes or value changes.
+* `disconnect (string [, string])`
+    Disconnects from a previous `watched` address.
 
 ## Events
 
