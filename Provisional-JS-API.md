@@ -14,6 +14,8 @@ Please note that the provisional JavaScript API tries to leverage existing JS id
     Retrieves your current key in hex format.
 * `getStorage (object address, storage address)`
     Retrieves the storage address of the given object.
+* `getBalance (object address)`
+    Retrieves the balance at the current address
 * `watch (string [, string])`
     Watches for changes on a specific address' state object such as state root changes or value changes.
 * `disconnect (string [, string])`
