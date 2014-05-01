@@ -38,3 +38,11 @@ All events are written in camel cased style beginning with a lowercase letter. S
 
 * `block:new`
     Fired when a new valid block has been found on the wire. The attached value of this call is a block.
+
+## Window settings
+
+QML Window properties can be set through the `set` function which accepts a JavaScript object and will attempt to map the given properties to the current `Window`.
+
+```javascript
+eth.set({width: 350, height: 200, title: "My Window Title"});
+```
