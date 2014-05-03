@@ -1,8 +1,26 @@
 The *provisional* JavaScript API is a purposed API for all things JavaScript. JavaScript technologies can be embedded within Qt(QML) technologies, local web and remote web and therefor the purposed API is written in a ASYNC fashion so that it may be used across all implementations. Hereby it should be known that all functions, unless explicitly specified, take a callback as last function argument which will be called when the operation has been completed.
 
-Please note that the provisional JavaScript API tries to leverage existing JS idioms as much as possible.
+Please note that the PoC JavaScript API tries to leverage existing JS idioms as much as possible.
 
-## General API
+## Arguments
+
+In general most method arguments take strings and can be in the following format:
+* `"*"`
+* `"42"`
+* `"0x2a"`
+
+All of the above are interpreted as the number `42`. The JavaScript `String` object has the following extended methods in order to support proper bin/hex/decimal casting:
+
+* `bin` casts the current string to binary `"0x2a".bin() // => "*"`
+* `unbin` casts the current binary string to hex format `"*".unbin() // => "0x2a"`
+* `pad(len)` casts the current string to binary format and left-pad zeros until `len` is satisfied.
+* `unpad` removes all left-padded zeros.
+
+**Please note** that when passing numbers as arguments; pass them as strings instead. This to support large numbers without the need of extra type checking during argument conversion.
+
+## Ethereum API
+
+The Ethereum API is available through the `eth` object and contains the following methods:
 
 * `getBlock (number or string)`
     Retrieves a block by either the address or the number. If supplied with a string it will assume address, number otherwise.
@@ -23,7 +41,7 @@ Please note that the provisional JavaScript API tries to leverage existing JS id
 
 ## Events
 
-The provisional JavaScript API exposes certain events through a basic eventing mechanism inspired by jQuery.
+Events are supported through a jQuery inspired mechanism.
 
 * `on (event)`
     Subscribe to event which will be called whenever an event of type <event> is received.
@@ -45,4 +63,29 @@ QML Window properties can be set through the `set` function which accepts a Java
 
 ```javascript
 eth.set({width: 350, height: 200, title: "My Window Title"});
+```
+
+## Examples
+
+#### Key pair
+
+```html
+<div>Your current key is: <strong id="key"></strong>.</div>
+<script>
+eth.getKey(function(keyPair) {
+        document.querySelector("#key").innerHTML = keyPair.privateKey;
+});
+</script>
+```
+
+#### Transact
+
+```html
+<div id="tx-hash"></div>
+<script>
+var data = ("42".pad(32) + (7 + 2).toString().pad(32)).unbin()
+eth.transact(key.privateKey, myContractAddr, "0", "10000", "100", data, function(receipt) {
+        document.querySelector("tx-hash").innerHTML = receipt.hash;
+});
+</script>
 ```
