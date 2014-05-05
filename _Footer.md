@@ -1,1 +1,1 @@
-![Gopher](http://1.bp.blogspot.com/-pR-cWhr-kRI/TqzZTFrFX5I/AAAAAAAACe4/eKnZo1pFu1g/s400/Gopher-Image-03.jpg)
+![Gopher](http://golang.org/doc/gopher/talks.png)
