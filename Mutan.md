@@ -78,7 +78,17 @@ Types:
 ## Statements
 
 ```
-Statement = Declaration | Block | IfStmt | ForStmt
+Statement = Declaration | Block | IfStmt | ForStmt | Expression
+```
+
+## Expression
+
+```
+Expression = Ptr | Number | Hex | Identifier .
+Ptr = Identifier | "nil" .
+Number = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" .
+Hex = "0x" "a" | "b" | "c" | "d" | "e" | Number .
+Identifier = * .
 ```
 
 ## Blocks
@@ -147,16 +157,40 @@ for cond; post { T() }   is the same as    for ; cond; post { T() }
 
 ## Build in functions
 
-mutan comes with a couple build in functions
+Mutan comes with a couple build in functions for stopping, creating and transacting between multiple objects and context functions.
 
-```go
-exit()                                             Stops the execution of the current call
-call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
-transact(address, value, data)                     Creates a transaction between two objects
-create(value, script)                              Creates a new contract with the given value and script
+##### exit()
+```
+"exit()"
 ```
 
-The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
+Stops the execution of the current call
+
+##### call(addr, value, gas, in, out)
+```
+Success = "call(" Expression, Expression, Expression, Ptr, Ptr ")"
+```
+
+Calls contract specified by the address and executes. Arguments can be passed to the `in` argument and the return value can be specified by the `out` parameters. Return a `1` or `0` depending whether this call was success or not.
+
+##### transact(addr, value, data)
+```
+Success = "transact(" Expression, Expression, Expression ")"
+```
+
+Handles a transaction between two objects.
+
+##### create(value, script)
+```
+Address = "create(" Expression, Expression ")"
+```
+
+Creates a new contract given by `script` and returns the `Address` of the transaction.
+
+### Context functions
+
+The following functions relate to the current executing context (i.e. the closure). These build-in functions are prefixed with `this.`.
+
 ```
 Method     = "this" Dot MethodName "(" [ Expression ] ")" .
 Dot        = "." .
