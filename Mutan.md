@@ -14,7 +14,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used at identifiers
 ```
-this if else return exit for asm
+this if else return exit for asm nil transact create call
 ```
 
 ### Operators and delimiters
@@ -152,6 +152,7 @@ mutan comes with a couple build in functions
 ```go
 exit()                                             Stops the execution of the current call
 call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
+transact(address, value, data)                     Creates a transaction between two objects
 ```
 
 The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
