@@ -205,6 +205,8 @@ for int8 i = 0; i < 10; i++ {
     call(0xaabbccddeeff112233445566, 0, 10000, i, out)
 }
 
+transact(0xa78f6abe, 10000, nil)
+
 asm (
     PUSH 10
     PUSH 0
