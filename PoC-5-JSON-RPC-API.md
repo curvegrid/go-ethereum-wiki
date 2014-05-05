@@ -1,4 +1,4 @@
-The Ethereum JSON-RPC interface mimics the behaviour of the normal [javascript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API). Most of the functions are implemented except for the **watch** and **disconnect** calls.
+The Ethereum JSON-RPC interface mimics the behaviour of the normal [javascript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API). Most of the functions are implemented except for the **watch** and **disconnect** calls. Please note that all the arguments used in the RPC calls are named.
 
 
 
