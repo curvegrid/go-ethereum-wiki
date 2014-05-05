@@ -153,6 +153,7 @@ mutan comes with a couple build in functions
 exit()                                             Stops the execution of the current call
 call(address, value, gas, calldata, returndata)    Calls another contract (e.g. closure) and executes
 transact(address, value, data)                     Creates a transaction between two objects
+create(value, script)                              Creates a new contract with the given value and script
 ```
 
 The following build in functions are related to the current executing context (i.e. the closure) and are called in combination with `this`
