@@ -38,6 +38,8 @@ The Ethereum API is available through the `eth` object and contains the followin
     Watches for changes on a specific address' state object such as state root changes or value changes.
 * `disconnect (string [, string])`
     Disconnects from a previous `watched` address.
+* `secretToAddress (seckey)`
+    Retrieves the address of the specified secret key.
 
 ## Events
 
