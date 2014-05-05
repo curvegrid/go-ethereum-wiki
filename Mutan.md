@@ -14,7 +14,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used at identifiers
 ```
-this if else return exit for asm store
+this if else return exit for asm
 ```
 
 ### Operators and delimiters
