@@ -205,7 +205,12 @@ for int8 i = 0; i < 10; i++ {
     call(0xaabbccddeeff112233445566, 0, 10000, i, out)
 }
 
+// tx without input data
 transact(0xa78f6abe, 10000, nil)
+// no args and return values
+call(0xab, 0, 10000, nil, nil)
+// create contract
+big ret = create(value, 0xaabbccddeeff0099887766552211)
 
 asm (
     PUSH 10
