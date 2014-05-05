@@ -10,6 +10,8 @@
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
+[JSON-RPC API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
+
 [Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan)
 
 ##### Examples (PoC-5)
