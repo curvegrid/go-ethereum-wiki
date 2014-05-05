@@ -197,8 +197,8 @@ if a < b {
     exit()
 }
 
-store[a] = 10000
-store[b] = this.origin()
+this.store[a] = 10000
+this.store[b] = this.origin()
 
 for int8 i = 0; i < 10; i++ {
     int32[10] out
