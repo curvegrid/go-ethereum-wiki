@@ -42,7 +42,7 @@ main {
   if this.origin() == this.store[1001]{
     // I guess I'm dead; get the money out
     if this.time() - this.store[1003] > 60 * 60 * 24 * 60{
-      transact(this.store[1001], this.value(), nil)
+      transact(this.store[1001], this.balance(), nil)
     }
   }
 }
