@@ -17,7 +17,7 @@ main {
 }
 ```
 
-### Will and testament
+## Will and testament
 ```go
 init {
   this.store[1000] = this.origin() // The person who wants to leave his funds to somebody if he dies a horrible dead
