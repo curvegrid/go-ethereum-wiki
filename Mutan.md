@@ -205,6 +205,7 @@ origin        Returns the origin address of this execution
 caller        Returns the current caller of the closure
 gasPrice      Returns the gas price attached to this call
 value         Returns the value attached to this call
+balance       Returns the value of the current call
 diff          Returns the current difficulty
 prevHash      Returns the previous block's hash
 time          Returns the current block's timestamp
