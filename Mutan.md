@@ -175,7 +175,7 @@ Calls contract specified by the address and executes. Arguments can be passed to
 
 ##### transact(addr, value, data)
 ```
-Success = "transact(" Expression, Expression, Expression ")"
+Success = "transact(" Expression, Expression, Ptr ")"
 ```
 
 Handles a transaction between two objects.
