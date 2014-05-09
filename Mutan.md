@@ -26,7 +26,7 @@ Mutan contains the following operators and delimiters
 +       **       =       |       (   )
 -       ^        ==      &       {   }
 *       >=       ++      ;
-/       <=       --
+/       <=       --      !
 ```
 
 ### Numeric types
