@@ -38,6 +38,7 @@ int16       the set of all _unsigned_ integers (0 to 65535)
 int32       the set of all _unsigned_ integers (0 to 4294967295)
 int64       the set of all _unsigned_ integers (0 to 18446744073709551615)
 int256      the set of all _unsigned_ integers (0 to 1.1579209e+77)
+addr        special type for storing addresses with a size of 20 bytes
 big         type int256
 int         type int32
 byte, bool  type int8
