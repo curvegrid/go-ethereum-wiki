@@ -16,17 +16,17 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used at identifiers
 ```
-this if else return exit for asm nil transact create call sizeof
+this if else return exit for asm nil transact create call sizeof true false
 ```
 
 ### Operators and delimiters
 
-Mutan contains the following operators and delimiters (some are wip)
+Mutan contains the following operators and delimiters
 ```
-+       =       |       (   )
--       ==      &       {   }
-*       >=      ++      ;
-/       <=      --
++       **       =       |       (   )
+-       ^        ==      &       {   }
+*       >=       ++      ;
+/       <=       --
 ```
 
 ### Numeric types
@@ -38,7 +38,9 @@ int16       the set of all _unsigned_ integers (0 to 65535)
 int32       the set of all _unsigned_ integers (0 to 4294967295)
 int64       the set of all _unsigned_ integers (0 to 18446744073709551615)
 int256      the set of all _unsigned_ integers (0 to 1.1579209e+77)
-big         same as int256
+big         type int256
+int         type int32
+byte, bool  type int8
 ```
 
 Numbers may be specified in decimal and hexadecimal format.
@@ -72,9 +74,9 @@ Mutan, in it's current state, is globally scoped:
 
 ```
 Types:
-    int int8 int16 int32 int64 int256 big
+    bool int int8 int16 int32 int64 int256 big
     (todo)
-    bool string
+    string
 ```
 
 ## Statements
