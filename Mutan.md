@@ -23,9 +23,9 @@ this if else return exit for asm nil transact create call sizeof true false
 
 Mutan contains the following operators and delimiters
 ```
-+       **       =       |       (   )
--       ^        ==      &       {   }
-*       >=       ++      ;
++       **       =       |       (     )
+-       ^        ==      &       {     }
+*       >=       ++      ;       <<    >>
 /       <=       --      !
 ```
 
