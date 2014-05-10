@@ -229,6 +229,14 @@ InlineAssembler = "asm" "(" Code ")" .
 Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
 ```
 
+## Pre processor
+
+Mutan has a very basic pre processor that takes any `#define` and replaces that throughout the source code
+
+```
+Output = "#define" Word [ Expression ] .
+```
+
 ## Basic syntax
 
 ```c
