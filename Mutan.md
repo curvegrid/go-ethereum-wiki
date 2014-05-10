@@ -236,6 +236,13 @@ int32 a = 20
 int32 b = 10
 if a < b {
     exit()
+} else {
+    // :-)
+    if !a {
+        if this.data[0] ^ 10 >= 10 {
+            this.data[0] = 1000;
+        }
+    }
 }
 
 this.store[a] = 10000
