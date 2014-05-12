@@ -249,7 +249,7 @@ if a < b {
 } else {
     // :-)
     if !a {
-        if this.data[0] ^ 10 >= 10 {
+        if this.data[0] ** 10 >= 10 {
             this.data[0] = 1000;
         }
     }
@@ -269,6 +269,9 @@ transact(0xa78f6abe, 10000, nil)
 call(0xab, 0, 10000, nil, nil)
 // create contract
 big ret = create(value, 0xaabbccddeeff0099887766552211)
+
+int8 left = 8 << 2
+left = left >> 2
 
 asm (
     PUSH 10
