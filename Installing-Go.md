@@ -8,10 +8,13 @@ Download and run the installer found at http://golang.org/doc/install
 For simplicity down the line, it is recommended to install Go via brew rather than installing via http://golang.org/doc/install
 
 Install brew:
+
 `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
 
 Install Go:
-`brew update; brew install go`
+
+`brew update
+brew install go`
 
 You need a go directory to place your Go apps, so create it. You can call it whatever your want, most people choose to call it 'Go'
 
