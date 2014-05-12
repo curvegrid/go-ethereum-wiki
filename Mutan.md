@@ -239,7 +239,7 @@ Output = "#define" Word [ Expression ] .
 
 ## Basic syntax
 
-```c
+```go
 #define ADDR 0xe6716f9544a56c530d868e4bfbacb172315bdead
 
 int32 a = 20
