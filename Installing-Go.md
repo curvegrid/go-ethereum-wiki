@@ -9,11 +9,11 @@ Update brew and install Go
 
 `brew update; brew install go`
 
-(alternatively, you can also install Go via http://golang.org/doc/install)
-
 Create the Go dir and set the GOPATH
 
 `mkdir ~/go; export GOPATH=$HOME/go`
+
+Note: it is recommend to use the technique above rather than installing via http://golang.org/doc/install
 
 
 ### Ubuntu
