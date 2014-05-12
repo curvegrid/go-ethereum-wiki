@@ -5,11 +5,13 @@ Download and run the installer found at http://golang.org/doc/install
 
 ### OS X
 
-Update brew and install Go 
+Install brew:
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
+Install Go:
 `brew update; brew install go`
 
-Create the Go dir and set the GOPATH
+You need a go directory to place your Go apps, so create a Go dir (you can call it whatever your want) and set the GOPATH
 
 `mkdir ~/go; export GOPATH=$HOME/go`
 
