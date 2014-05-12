@@ -26,7 +26,7 @@ Now set the $GOPATH to the directory you just created. $GOPATH is where Go will 
 
 This will only work for the duration of your session, so save it to your bash profile so it sticks
 
-echo GOPATH=$GOPATH >> ~/.bash_profile
+`echo GOPATH=$GOPATH >> ~/.bash_profile`
 
 
 ### Ubuntu
