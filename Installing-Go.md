@@ -18,7 +18,7 @@ Install Go:
 
 You need a go directory to place your Go apps, so create it. You can call it whatever your want, most people choose to call it 'go', funny enough
 
-`mkdir ~/go;`
+`mkdir ~/go`
 
 Now set the $GOPATH to the directory you just created. $GOPATH is where Go will look for your Go apps
 
