@@ -150,7 +150,7 @@ for a < b {
 A "for" statement in it's purest form is controlled my a initialiser, condition and a post statement which will be executed at the end of the Block
 
 ```go
-for int8 = 0; a < b; a++ {
+for int8 a = 0; a < b; a++ {
     b = b - 1
 }
 ```
