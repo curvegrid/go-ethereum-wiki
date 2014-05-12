@@ -5,17 +5,25 @@ Download and run the installer found at http://golang.org/doc/install
 
 ### OS X
 
+For simplicity down the line, it is recommended to install Go via brew rather than installing via http://golang.org/doc/install
+
 Install brew:
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+`ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
 
 Install Go:
 `brew update; brew install go`
 
-You need a go directory to place your Go apps, so create a Go dir (you can call it whatever your want) and set the GOPATH
+You need a go directory to place your Go apps, so create it. You can call it whatever your want, most people choose to call it 'Go'
 
-`mkdir ~/go; export GOPATH=$HOME/go`
+`mkdir ~/go;`
 
-Note: it is recommend to use the technique above rather than installing via http://golang.org/doc/install
+Now set the GOPATH to the directory you just created. GOPATH is where Go will look for your Go apps
+
+`export GOPATH=$HOME/go`
+
+This will only work for the duration of your session, so save it to your bash profile
+
+echo GOPATH=$GOPATH >> ~/.bash_profile
 
 
 ### Ubuntu
