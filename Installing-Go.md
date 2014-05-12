@@ -13,8 +13,8 @@ Install brew:
 
 Install Go:
 
-`brew update
-brew install go`
+`brew update'
+'brew install go`
 
 You need a go directory to place your Go apps, so create it. You can call it whatever your want, most people choose to call it 'Go'
 
