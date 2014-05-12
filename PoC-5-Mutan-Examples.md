@@ -2,7 +2,7 @@
 
 ```go
 init {
-	store[this.origin()] = 10^20
+	store[this.origin()] = 10**20
 }
 
 main {
