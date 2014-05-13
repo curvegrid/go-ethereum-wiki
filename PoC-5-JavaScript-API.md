@@ -61,11 +61,9 @@ All events are written in camel cased style beginning with a lowercase letter. S
 
 ## Window settings
 
-QML Window properties can be set through the `set` function which accepts a JavaScript object and will attempt to map the given properties to the current `Window`.
+The JavaScipt `window` object references the actual GUI window and therefor changes you make to the `window` object will have an impact on the GUI window.
 
-```javascript
-eth.set({width: 350, height: 200, title: "My Window Title"});
-```
+You can change the title by setting the document's title `window.document.title = "Hello world"`. If you'd like to resize the window to a specific dimension you can use `window.resizeTo(600, 300)`. Please refer to the [JavaScript window object](https://developer.mozilla.org/en/docs/Web/API/Window) for more options.
 
 ## Examples
 
