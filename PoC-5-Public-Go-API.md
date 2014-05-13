@@ -4,9 +4,13 @@ The Go implementation has, besides the regular API implementation, a public API.
 
 * `GetBlock(hexHash)` Returns the block, or nil if nothing was found.
 * `GetKey()` Returns your current seckey.
+* `GetPeerCount()` Returns the number of connected peers.
+* `GetIsMining()` Returns whether or not the current node is mining.
+* `GetIsListening()` Returns whether or not the current node is listening for connections.
+* `GetCoinBase()` Returns the current coinbase address.
 * `GetStateObject(hexAddress)` Returns the state object, or nil if nothing found.
 * `GetStorage(hexAddress, hexStorageAddress)` Returns the value of the storage found at the address.
-* `GetTxCount()` Returns the balance of the current key.
+* `GetTxCountAt()` Returns the transaction nonce of the current key.
 * `IsContract(hexAddress)` Returns a boolean indicating whether this is a contract or not.
 * `Transact(seckey, to, value, gas, gasPrice, data)` Creates a new transaction signed by the specified `seckey`. Arguments are all strings.
 * `Create(secKey, value, gas, gasPrice, init, body)` Creates a new contract signed by the specified `seckey`. Argumens are all strings.
