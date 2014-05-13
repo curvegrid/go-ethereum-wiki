@@ -40,6 +40,16 @@ The Ethereum API is available through the `eth` object and contains the followin
     Disconnects from a previous `watched` address.
 * `secretToAddress (seckey)`
     Retrieves the address of the specified secret key.
+* `getPeerCount()` 
+    Returns the number of connected peers.
+* `getIsMining()` 
+    Returns whether or not the current node is mining.
+* `getIsListening()` 
+    Returns whether or not the current node is listening for connections.
+* `getCoinBase()` 
+    Returns the current coinbase address.
+* `GetTxCountAt()` 
+    Returns the transaction nonce of the current key.
 
 ## Events
 
