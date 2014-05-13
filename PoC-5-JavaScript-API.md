@@ -74,8 +74,8 @@ eth.set({width: 350, height: 200, title: "My Window Title"});
 ```html
 <div>Your current key is: <strong id="key"></strong>.</div>
 <script>
-eth.getKey(function(keyPair) {
-        document.querySelector("#key").innerHTML = keyPair.privateKey;
+eth.getKey(function(privateKey) {
+        document.querySelector("#key").innerHTML = privateKey;
 });
 </script>
 ```
@@ -86,7 +86,7 @@ eth.getKey(function(keyPair) {
 <div id="tx-hash"></div>
 <script>
 var data = ("42".pad(32) + (7 + 2).toString().pad(32)).unbin()
-eth.transact(key.privateKey, myContractAddr, "0", "10000", "100", data, function(receipt) {
+eth.transact(privateKey, myContractAddr, "0", "10000", "100", data, function(receipt) {
         document.querySelector("tx-hash").innerHTML = receipt.hash;
 });
 </script>
