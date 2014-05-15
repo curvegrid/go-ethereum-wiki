@@ -14,6 +14,8 @@
 
 [Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan)
 
+[JS Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
+
 ##### Examples (PoC-5)
 
 [Mutan Examples](http://github.com/ethereum/go-ethereum/wiki/PoC-5-Mutan-Examples)
