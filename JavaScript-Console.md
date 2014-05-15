@@ -2,7 +2,7 @@ The `ethereum` executable (not to be confused with `ethereal`) comes with a Java
 
 ## API
 
-The JS console shares all bindings with the [Ext. JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API). The only difference is that the JS console has all methods starting with an **uppercase** character.
+The JS console shares all bindings with the [Ext. JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API). The only difference is that the JS console has all methods starting with an **uppercase** character. (**might change**)
 
 The Ethereum API is available through the `eth` object and contains the following methods:
 
