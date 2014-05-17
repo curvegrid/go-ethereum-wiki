@@ -1,9 +1,18 @@
 ## Homebrew tap
 
-Installation with homebrew
+There's a howebrew tap for a very installation through homebrew, maintained by Viktor Tron
 https://github.com/ethersphere/homebrew-ethereum_go
 
+
+## Building from source on OSX easy guide
+
+Stephan Tual has written a simple tutorial to install from source:
+http://forum.ethereum.org/discussion/905/go-ethereum-cli-ethereal-simple-build-guide-for-osx
+
+
 ## systemwide install of master branch
+Finally you can also follow the instruction below:
+
 
 ### prerequisites 
 
