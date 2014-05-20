@@ -30,13 +30,13 @@ Now you can run the program:
 
 This will start up the Ethereum mining node. **Please note that if you wish to start multiple go-ethereum processes you must supply a new data directory with `-dir=".ethereum2"`.**
 
-If you would like to connect to your own mining node, run the following command to start the console:
+If you would like to connect to your own mining node, run the following command to start the JS console:
 
-`ethereum -c`
+`ethereum -js`
 
-The `-c` option starts the developer console, which will let you connect to your mining node with the `addp` (add peer) command:
+The `-js` option starts the JavaScript REPL, which will let you connect to your mining node with the `addPeer` (add peer) method:
 
- `addp localhost:30303`
+ `eth.addPeer("localhost:30303")`
 
 Please see [go-ethereum repo](https://github.com/ethereum/go-ethereum#command-line-options) for more command line options and developer console commands.
 
