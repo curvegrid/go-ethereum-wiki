@@ -7,4 +7,4 @@ Go Ethereum tries to keep the amount of external (C) libs to a minimum. At the t
 * [PoC 5 Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 * [Mutan lang](https://github.com/ethereum/go-ethereum/wiki/Mutan)
 * [Mutan online editor & compiler](http://mutan.jeffew.com)
-* [JavaScript REPL & Env](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
+* [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
