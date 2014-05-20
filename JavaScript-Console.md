@@ -30,10 +30,12 @@ The Ethereum API is available through the `eth` object and contains the followin
     Returns the current coinbase address.
 * `GetTxCountAt()` 
     Returns the transaction nonce of the current key.
+* `watch (address [, storage address], cb)`
+    Watches for changes on a specific address' state object such as state root changes or value changes.
+* `addPeer (host)`
+    Make a connection to the specified host. Returns false if it didn't succeed.
 
 Currently the event listening functions are disabled and not supported. This will likely be implemented in the near future.
 
-* `Watch (address [, storage address], cb)`
-    Watches for changes on a specific address' state object such as state root changes or value changes.
 * `Disconnect (address [, storage address], cb)`
     Disconnects from a previous `watched` address.
