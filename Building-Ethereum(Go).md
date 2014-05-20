@@ -34,11 +34,11 @@ If you would like to connect to your own mining node, run the following command 
 
 `ethereum -js`
 
-The `-js` option starts the JavaScript REPL, which will let you connect to your mining node with the `addPeer` (add peer) method:
+The `-js` option starts the JavaScript REPL, which will let you connect to your mining node with the `addPeer` method:
 
  `eth.addPeer("localhost:30303")`
 
-Please see [go-ethereum repo](https://github.com/ethereum/go-ethereum#command-line-options) for more command line options and developer console commands.
+Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) for the full API specification.
 
 ### Installing Ethereal (GUI)
 
