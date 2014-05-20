@@ -35,6 +35,13 @@ The Ethereum API is available through the `eth` object and contains the followin
 * `addPeer (host)`
     Make a connection to the specified host. Returns false if it didn't succeed.
 
+***
+
+#### Other
+
+* `print (object)`
+    Pretty prints the given object
+
 Currently the event listening functions are disabled and not supported. This will likely be implemented in the near future.
 
 * `Disconnect (address [, storage address], cb)`
