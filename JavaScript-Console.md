@@ -35,6 +35,20 @@ The Ethereum API is available through the `eth` object and contains the followin
 * `addPeer (host)`
     Make a connection to the specified host. Returns false if it didn't succeed.
 
+## Loading modules
+
+You can load **modules** by using the `require` method which can load other javascript files from disk and returns a special type of variable called `exports` (just like node.js does).
+
+```javascript
+exports.answer = 42;
+```
+
+and use it as:
+
+```javascript
+var answer = require('./myModuleWhichHasThe').answer;
+```
+
 ***
 
 #### Other
@@ -46,3 +60,14 @@ Currently the event listening functions are disabled and not supported. This wil
 
 * `disconnect (address [, storage address], cb)`
     Disconnects from a previous `watched` address.
+
+
+#### Examples
+
+```javascript
+var inspect = require('sys').inspect;
+
+eth.watch(eth.getAddress().address, function(stateObject) {
+    inspect(stateObject)
+});
+```
