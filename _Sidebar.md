@@ -14,7 +14,7 @@
 
 [Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan)
 
-[JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
+[JavaScript REPL & Env](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
 ##### Examples (PoC-5)
 
