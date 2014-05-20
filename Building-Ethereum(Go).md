@@ -6,8 +6,8 @@ Building the current version of Go Ethereum is fairly easy. This article assumes
 
 Go Ethereum  depends on the secp256k1 C implementation, which means that you are required to have GMP headers installed:
 
-* OS X: `brew install gmp`
-* Ubuntu: `sudo apt-get install libgmp3-dev`
+* OS X: `brew install gmp readline`
+* Ubuntu: `sudo apt-get install libgmp3-dev libreadline6-dev`
 * Arch: `sudo pacman -S gmp`
 
 In order to install a few of the other required packages, the mercurial revision control tool is needed:
