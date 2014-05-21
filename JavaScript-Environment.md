@@ -37,6 +37,38 @@ The Ethereum API is available through the `eth` object and contains the followin
 * `addPeer (host)`
     Make a connection to the specified host. Returns false if it didn't succeed.
 
+### PStateObject
+
+##### `getStateObject(address)`
+
+The StateObject represents an object which has been stored in the state trie and can be queried for it's data
+
+* `getStorage(address)`
+    Returns the value stored at `address`
+* `value()`
+    Returns the value
+* `address()`
+    Returns the address
+* `root()`
+    Returns the root of the state object's state in hex
+* `isContract()`
+    Returns wether the state object is a contract or an account
+* `script()`
+    Returns the disassembled script.
+
+### PKey
+
+##### `getKey()`
+
+The Key object is a key pair consisting of a private and public key from which an address can be derived.
+
+* `privateKey`
+   The private key of this key pair
+* `publicKey`
+   The public key of this key pair
+* `address()`
+   The derived address
+
 ## Loading modules
 
 You can load **modules** by using the `require` method which can load other javascript files from disk and returns a special type of variable called `exports` (just like node.js does).
