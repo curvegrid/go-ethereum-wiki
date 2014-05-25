@@ -286,6 +286,10 @@ Output = "#define" Word [ Expression ] .
 
 int32 a = 20
 int32 b = 10
+
+var str = "hello"
+otherStr := "world"
+
 if a < b {
     exit()
 } else {
@@ -320,5 +324,9 @@ asm (
     PUSH 0
     MSTORE
 )
+
+return lambda {
+    this.store[0] = "hello"
+}
 
 ```
