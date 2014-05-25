@@ -37,6 +37,8 @@ The Ethereum API is available through the `eth` object and contains the followin
 * `addPeer (host)`
     Make a connection to the specified host. Returns false if it didn't succeed.
 
+The following methods are only available in the REPL and interpreter
+
 ### PStateObject
 
 ##### `getStateObject(address)`
@@ -68,6 +70,13 @@ The Key object is a key pair consisting of a private and public key from which a
    The public key of this key pair
 * `address()`
    The derived address
+
+### PBlock
+
+##### `eth.getBlock(hash)`
+
+* `getTransaction(hash)`
+   Returns a transaction if the hash is valid, otherwise undefined
 
 ## Loading modules
 
