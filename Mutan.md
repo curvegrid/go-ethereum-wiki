@@ -26,7 +26,7 @@ Mutan contains the following operators and delimiters
 +       **       =       |       (     )
 -       ^        ==      &       {     }
 *       >=       ++      ;       <<    >>
-/       <=       --      !
+/       <=       --      !       :=
 ```
 
 ### Numeric types
@@ -63,36 +63,46 @@ big[10]   c
 
 ## Declarations
 
-A declaration binds a identifier to a type. Every identifier must be declared. No identifier may be declared twice. All declarations are global (for now, TODO/FIXME).
+A declaration binds an identifier to a type. Every identifier must be declared. No identifier may be declared twice. All declarations are global.
 
 ```
 Declaration = TypeDecl .
 ```
 
-Mutan, in it's current state, is globally scoped:
-    1. No identifier may be used twice
-    2. All identifiers must be declared using a Type
+A declaration can be done in several ways. First and foremost every identifier must be declared either with a type or a variant. Variants can be created in two separate ways, either with the `var` keyword or by using the `:=` assignment operator.
+
+```go
+var a = "a"
+string b = "b"
+c := "c"
+```
+
+If a variable has been declared as a variant and assigned, it's no longer possible to re-assign it with a different type.
+
+```go
+a := 10
+a = "hello" // Error
+```
 
 ```
 Types:
-    bool int int8 int16 int32 int64 int256 big
-    (todo)
-    string
+    var bool int int8 int16 int32 int64 int256 big string
 ```
 
 ## Statements
 
 ```
-Statement = Declaration | Block | IfStmt | ForStmt | Expression
+Statement = Declaration | Block | IfStmt | ForStmt | Expression | Lambda
 ```
 
 ## Expression
 
 ```
-Expression = Ptr | Number | Hex | Identifier .
+Expression = Ptr | Number | Hex | String | Identifier .
 Ptr = Identifier | "nil" .
 Number = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" .
 Hex = "0x" "a" | "b" | "c" | "d" | "e" | Number .
+String = """ * """
 Identifier = * .
 ```
 
@@ -158,6 +168,38 @@ for int8 a = 0; a < b; a++ {
 ```
 for cond { T() }         is the same as    for ; cond ; { T() }
 for cond; post { T() }   is the same as    for ; cond; post { T() }
+```
+
+## String literal
+
+String literals are supported by enclosing a line of text with matching quotes `"string"`. Strings can be assigned to variables and stored in memory. Storing strings in memory only allows storing up to **32 bytes**. This is due to the limitation of the size that is allowed to be stored in each storage location. If a string with a size larger than 32 bytes is assigned to a storage address it will throw an error.
+
+```go
+str := "hello world"
+this.store[0] = "hello world"
+```
+
+## Lambda
+
+A lambda in mutan is a semi lambda and, at the time of writing, can only be used in a return statement. A lambda will compile the given code, enclosed by brackets `{ // code }`. Lambdas are allowed to be of arbitrary size and take up as much memory as needed.
+
+```go
+a := "hello"
+
+return lambda {
+     a := 20
+     if a == 20 {
+     }
+}
+```
+
+Lambdas have their own scope and do not share any memory outside of their own scope, neither can they use any memory outside of their scope. Lambdas should be viewed as separate instances of code.
+
+```go
+var a = "hello"
+return lambda {
+    b := a // Undefined references error
+}
 ```
 
 ## Build in functions
