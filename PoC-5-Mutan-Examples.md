@@ -1,18 +1,19 @@
 ## Currency
 
 ```go
-store[this.origin()] = 10**20
+this.store[this.origin()] = 10**20
 
 return lambda {
-	big to = this.data[0]
-	big from = this.origin()
-	big value = this.data[1]
+    big to = this.data[0]
+    big from = this.origin()
+    big value = this.data[1]
 
-	if store[from] > value {
-		store[from] = store[from] - value
-		store[to] = store[to] + value
-	}
+    if this.store[from] > value {
+        this.store[from] = this.store[from] - value
+        this.store[to] = this.store[to] + value
+    }
 }
+
 ```
 
 ## Will and testament
