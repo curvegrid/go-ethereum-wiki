@@ -4,6 +4,9 @@ Mutan is a C-Like language for the Ethereum project. Mutan supports a full, stat
 
 An online editor and compiler can be found [here](http://mutan.jeffew.com)
 
+### Installation
+
+    go get -u github.com/obscuren/mutan/mutan
 
 ### Notation
 
