@@ -30,7 +30,7 @@ To install ubuntu-sdk, you may need to follow http://askubuntu.com/questions/408
 
 On Ubuntu 14.04, you will have to separately install the qtdialogs package
 
-    sudo apt-get instsall qtdeclarative5-dialogs-plugin
+    sudo apt-get install qtdeclarative5-dialogs-plugin
 
 If you get an error which looks like:
 
