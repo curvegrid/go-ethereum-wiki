@@ -1,7 +1,7 @@
 ## Option 1: Homebrew tap
 
-There's a howebrew tap for a very installation through homebrew, maintained by Viktor Tron
-https://github.com/ethersphere/homebrew-ethereum_go
+There's a Homebrew tap for a very easy installation, follow the instructions there:
+https://github.com/caktux/homebrew-ethereum
 
 
 ## Option 2: Building from source easy guide
