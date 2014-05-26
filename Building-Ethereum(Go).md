@@ -1,4 +1,9 @@
+## Building for OSX
+
 [Building Instructions for Mac OS](https://github.com/ethereum/go-ethereum/wiki/Building-Instructions-for-Mac)
+
+
+## Building for Linux
 
 Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.2 installed. If you do not, please refer to the article [Installing Go 1.2](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
 
@@ -6,13 +11,11 @@ Building the current version of Go Ethereum is fairly easy. This article assumes
 
 Go Ethereum  depends on the secp256k1 C implementation, which means that you are required to have GMP headers installed:
 
-* OS X: `brew install gmp readline`
 * Ubuntu: `sudo apt-get install libgmp3-dev libreadline6-dev`
 * Arch: `sudo pacman -S gmp`
 
 In order to install a few of the other required packages, the mercurial revision control tool is needed:
 
-* OS X: `brew install mercurial`
 * Ubuntu: `sudo apt-get install mercurial`
 * Arch: `sudo pacman -S mercurial`
 
