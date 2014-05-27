@@ -34,9 +34,11 @@ Remember to change <QT Location> to wherever you have QT installed. After settin
     go get -u github.com/go-qml/qml
     go get -u github.com/ethereum/go-ethereum/ethereal
 
-For 13.10, the qt packages in the ppas are not >= 5.1 at this time, so you must download and install QT from [here](http://qt-project.org/downloads). For 14.04, the qt packages in the ppas default to 5.2.1, which is not currently compatible with ethereal. QT 5.2.0 installer can be downloaded from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
+**For 13.10**, the qt packages in the ppas are not >= 5.1 at this time, so you must download and install QT from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
 
-After you run the installer, then you can set the environment variables as described above and it should work as expected. To make sure that Ethereal runs in the proper environment if you are using it from a desktop file then one way to do this is to make a wrapper in your `~/.bin` or other $PATH location which looks something like this:
+**For 14.04**, the qt packages in the ppas default to 5.2.1, which is not currently compatible with ethereal. QT 5.2.0 installer can be downloaded from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
+
+After you run the installer, you will have to set the environment variables as described above and it should work as expected. To make sure that Ethereal runs in the proper environment if you are using it from a desktop file then one way to do this is to make a wrapper in your `~/.bin` or other $PATH location which looks something like this:
 
 ```bash
 #!/usr/bin/env bash
