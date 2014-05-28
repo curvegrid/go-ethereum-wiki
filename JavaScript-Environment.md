@@ -108,7 +108,7 @@ Currently the event listening functions are disabled and not supported. This wil
 #### Examples
 
 ```javascript
-var inspect = require('sys').inspect;
+var inspect = eth.require('sys').inspect;
 
 eth.watch(eth.getAddress().address, function(stateObject) {
     inspect(stateObject)
