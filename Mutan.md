@@ -17,7 +17,7 @@ digit                = "0" | digit excluding zero ;
 ```
 ### Keywords
 
-The following keywords are reserved and may not be used at identifiers
+The following keywords are reserved and may not be used as identifiers
 ```
 this if else return exit for asm nil transact create call sizeof true false
 ```
