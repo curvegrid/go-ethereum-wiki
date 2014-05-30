@@ -1,7 +1,13 @@
 ## Option 1: Homebrew tap
 
-There's a Homebrew tap for a very easy installation, follow the instructions there:
-https://github.com/caktux/homebrew-ethereum
+```
+brew tap caktux/ethereum
+brew install go-ethereum
+```
+
+Then run `ethereal` (GUI) or `ethereum` (CLI)
+
+For options and patches, see: https://github.com/caktux/homebrew-ethereum
 
 
 ## Option 2: Building from source easy guide
