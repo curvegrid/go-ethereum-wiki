@@ -5,6 +5,8 @@
 
 ## Building for Linux
 
+Single script that sets everything up on Ubuntu 14.04, try: https://gist.github.com/mquandalle/ab0d31735e57010ce206
+
 Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.2 installed. If you do not, please refer to the article [Installing Go 1.2](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
 
 ### Installing Dependencies
