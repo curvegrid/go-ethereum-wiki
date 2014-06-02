@@ -108,13 +108,13 @@ remote.call('EthereumApi.Transact', {"recipient": "2ef47100e0787b915105fd5e3f4ff
 ### Ethereum.Create
 Creates a new contract using your current key.
 
-Arguments: init, body, value, gas, gasprice
+Arguments: body, value, gas, gasprice
 
 Return data: createdContract, address, hash, sender
 
 **Example:**
 ```javascript
-  remote.call('EthereumApi.Create', {"init": "store[this.Origin()] = 10^20", "body":"big to = this.Data(0) \
+  remote.call('EthereumApi.Create', {"body":"big to = this.Data(0) \
               big from = this.Origin() \
               big value = this.Data(1) \
               if store[from] > value { \
