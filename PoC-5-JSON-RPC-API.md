@@ -90,13 +90,13 @@ remote.call("EthereumApi.GetStorageAt", {"address": "16dfff98276b30655e825a09c92
 ### Ethereum.Transact
 Creates a new transaction using your current key.
 
-Arguments: recipient, value, gas, gasprice
+Arguments: recipient, value, gas, gasprice, [body]
 
 Return data: createdContract, address, hash, sender
 
 **Example:**
 ```javascript
-remote.call('EthereumApi.Transact', {"recipient": "2ef47100e0787b915105fd5e3f4ff6752079d5cb", "value":"3","gas":"100", "gasprice": "200"}, function(err, result) {
+remote.call('EthereumApi.Transact', {"recipient": "2ef47100e0787b915105fd5e3f4ff6752079d5cb", "value":"3","gas":"100", "gasprice": "200", "body": "sending this tx"}, function(err, result) {
     console.log("result:",result);
     console.log(err);
   });
