@@ -5,6 +5,7 @@ The Go implementation has, besides the regular API implementation, a public API.
 * `GetBlock(hexHash)` Returns the block, or nil if nothing was found.
 * `GetKey()` Returns your current seckey.
 * `GetPeerCount()` Returns the number of connected peers.
+* `GetPeers()` Returns information about the connected peers.
 * `GetIsMining()` Returns whether or not the current node is mining.
 * `GetIsListening()` Returns whether or not the current node is listening for connections.
 * `GetCoinBase()` Returns the current coinbase address.
@@ -51,3 +52,14 @@ A PStateObject can either be a contract or a user's account.
 * `Address()` returns the address of the state object
 * `Nonce()` the nonce (or tx count).
 * `IsContract()`
+
+#### PPeer
+
+A PPeer is a wrapper around the peer information.
+
+* `Inbound` Boolean whether is peer is inbound or not
+* `LastSend` Latest activity registered from this peer
+* `Version` Peer version string
+* `Ip` Reported IP by this peer
+* `Port` Port reported by this peer
+* `Latency` Time it took the peer to respond to latest ping request.
