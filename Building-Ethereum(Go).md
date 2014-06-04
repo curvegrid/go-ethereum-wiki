@@ -5,11 +5,21 @@
 
 ## Building for Linux
 
-Single script that sets everything up on Ubuntu 14.04, try: https://gist.github.com/mquandalle/ab0d31735e57010ce206
+
+### Ubuntu 14.04
+[This Go Ethereum install script](https://gist.github.com/maran/2d69089ed5ea3f83fde8) will install everything required on Ubuntu 14.04. 
+
+```
+wget https://gist.githubusercontent.com/maran/2d69089ed5ea3f83fde8/raw -O install
+chmod +x install 
+./install
+```
+
+### Manual installation
 
 Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.2 installed. If you do not, please refer to the article [Installing Go 1.2](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
 
-### Installing Dependencies
+#### Installing Dependencies
 
 Go Ethereum  depends on the secp256k1 C implementation, which means that you are required to have GMP headers installed:
 
@@ -23,7 +33,7 @@ In order to install a few of the other required packages, the mercurial revision
 
 The Ethereum wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions on how to install them.
 
-### Installing the Ethereum(Go) node (CLI)
+#### Installing the Ethereum(Go) node (CLI)
 
 Since you have chosen Ethereum in Go instead of C++, you get the simplified installation and can download the Ethereum build with just one command (don't tell the C++ guys it was this easy!):
 
@@ -45,7 +55,7 @@ The `-js` option starts the JavaScript REPL, which will let you connect to your 
 
 Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) for the full API specification.
 
-### Installing Ethereal (GUI)
+#### Installing Ethereal (GUI)
 
 `go get -u -a github.com/ethereum/go-ethereum/ethereal`
 
