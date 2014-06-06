@@ -318,7 +318,7 @@ this.store[a] = 10000
 this.store[b] = this.origin()
 
 for i := 0; i < 10; i++ {
-    int32[10] out
+    var[10] out
     call(0xaabbccddeeff112233445566, 0, 10000, i, out)
 }
 
