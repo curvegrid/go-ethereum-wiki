@@ -167,6 +167,7 @@ Signature     = Parameters [ Result ] .
 Parameters    = "(" [ ParameterList [ "," ] ] ")" .
 ParameterList = ParemeterDecl { "," ParameterDecl } .
 ParameterDecl = [ Var Identifier ] .
+```
 
 ## Lambda
 
