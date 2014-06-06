@@ -169,10 +169,10 @@ ParameterList = ParemeterDecl { "," ParameterDecl } .
 ParameterDecl = [ Var Identifier ] .
 ```
 
-If the function's signature declares a result parameter, the function body's statement list must end with a return statement.
+If the function's signature declares a result parameter, the function body's statement list must end with a return statement (**TODO**).
 
 ```go
-func fib(var n) {
+func fib(var n) var {
     if n == 0 {
         return 0
     } else {
