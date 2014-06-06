@@ -32,7 +32,7 @@ Mutan contains the following operators and delimiters
 /       <=       --      !       :=
 ```
 
-### Numeric types
+## Numeric types
 
 Numeric types in Mutan can only be represented by integer values and are architecture-independent. They are all represented in big endian byte order. Numbers may be specified in decimal and hexadecimal format.
 
@@ -40,7 +40,35 @@ Numeric types in Mutan can only be represented by integer values and are archite
 10      0xabc     0xABC
 ```
 
-### Arrays
+## Pointer types
+
+A pointer type denotes the set of all pointer to variadics. The default value of an uninitialised pointer is *nil*.
+
+```
+Pointer = "*" Var .
+```
+
+```go
+var *a
+```
+
+## Address operations
+
+Address operations are performed with the ampersand "&". The operand must be *addressable* (i.e, a variable).
+
+```
+var a = 10
+var *b = &a
+```
+
+The pointer indirection `*x` denotes the value pointed by `x`.
+
+```
+var old = *b
+*b = 1
+```
+
+## Arrays
 
 Arrays are of theoretical unlimited length
 ```
