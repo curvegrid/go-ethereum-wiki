@@ -60,7 +60,7 @@ A declaration binds an identifier to a type. Every identifier must be declared. 
 Declaration = TypeDecl .
 ```
 
-A declaration can be done in several ways. First and foremost every identifier must be declared either with a type or a variant. Variants can be created in two separate ways, either with the `var` keyword or by using the `:=` assignment operator.
+A declaration can be done in several ways. First and foremost every identifier must be declared as a variant. Variants can be created in two ways, either with the `var` keyword or by using the `:=` assignment operator.
 
 ```go
 var a = "a"
