@@ -245,15 +245,14 @@ The following functions relate to the current executing context (i.e. the closur
 ```
 Method     = "this" Dot MethodName "(" [ Expression ] ")" .
 Dot        = "." .
-MethodName = "dataLoad" | "dataSize" | "origin" | "address" | "caller" | "gasPrice" | "value" |
+MethodName = "dataLoad" | "dataSize" | "origin" | "caller" | "gasPrice" | "value" |
              "diff" | "prevHash" | "time" | "gasPrice" | "number" | "coinbase" | "gas" .
 ```
 
 ```
 data          Returns the x'th value of the attached data of this call
 dataSize      Returns the size of the data attached to this call
-origin        Returns the original caller that initiated the first call
-address       Returns the direct address of this execution
+origin        Returns the origin address of this execution
 caller        Returns the current caller of the closure
 gasPrice      Returns the gas price attached to this call
 value         Returns the value attached to this call
