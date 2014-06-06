@@ -1,1 +1,1 @@
-![Gopher](http://golang.org/doc/gopher/talks.png)
+0x676f
