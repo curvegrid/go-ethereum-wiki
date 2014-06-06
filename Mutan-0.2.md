@@ -185,26 +185,26 @@ func fib(var n) var {
 }
 ```
 
-## Lambda
+## Compile
 
-A lambda in mutan is a semi lambda and, at the time of writing, can only be used in a return statement. A lambda will compile the given code, enclosed by brackets `{ // code }`. Lambdas are allowed to be of arbitrary size and take up as much memory as needed.
+You can invoke the compiler from within mutan allowing you compile code inline. At this time of writing compile can only be used in combination with an `exit` statement. Compile will compile the given code, enclosed by brackets. 
 
 ```go
 a := "hello"
 
-return lambda {
+return compile {
      a := 20
      if a == 20 {
      }
 }
 ```
 
-Lambdas have their own scope and do not share any memory outside of their own scope, neither can they use any memory outside of their scope. Lambdas should be viewed as separate instances of code.
+Mutan code that is inline compiled does not share any memory outside of its own scope, and thus can not use any variables outside the enclosed brackets.
 
 ```go
 var a = "hello"
-return lambda {
-    b := a // Undefined references error
+return compile {
+    b := a // Undefined reference error
 }
 ```
 
