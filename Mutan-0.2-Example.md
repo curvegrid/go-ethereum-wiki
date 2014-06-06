@@ -1,6 +1,6 @@
 # Life Insurance Mutan 0.2
 
-```
+```go
 #define CLAIMER 0xd766c288f24b91ae9781fe2b155d3260b8674c62 
 this.store[1000] = this.origin() 
 
