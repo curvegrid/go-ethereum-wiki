@@ -169,6 +169,22 @@ ParameterList = ParemeterDecl { "," ParameterDecl } .
 ParameterDecl = [ Var Identifier ] .
 ```
 
+If the function's signature declares a result parameter, the function body's statement list must end with a return statement.
+
+```go
+func fib(var n) {
+    if n == 0 {
+        return 0
+    } else {
+        if n == 1 {
+            return 1
+        }
+    }
+
+    return fib(n-1) + fib(n-2)
+}
+```
+
 ## Lambda
 
 A lambda in mutan is a semi lambda and, at the time of writing, can only be used in a return statement. A lambda will compile the given code, enclosed by brackets `{ // code }`. Lambdas are allowed to be of arbitrary size and take up as much memory as needed.
