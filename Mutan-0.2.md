@@ -79,7 +79,7 @@ Statement = Declaration | Block | IfStmt | ForStmt | Expression | Lambda
 Expression = Ptr | Number | Hex | String | Identifier .
 Ptr        = Identifier | "nil" .
 Number     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" .
-Hex        = "0x" "a" | "b" | "c" | "d" | "e" | Number .
+Hex        = "0x" "a" | "b" | "c" | "d" | "e" | "f" | Number .
 String     = """ * """
 Identifier = * .
 ```
