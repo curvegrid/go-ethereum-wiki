@@ -9,7 +9,7 @@ func heartbeat() var {
         this.store[1002] = this.time()
         return true
     } else {
-        if this.store[1002] > 2592000 {
+        if this.time() > this.store[1002] - 2592000 {
             return false
         } else {
             return true
