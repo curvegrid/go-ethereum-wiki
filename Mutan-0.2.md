@@ -363,9 +363,9 @@ var left = 8 << 2
 left = left >> 2
 
 asm {
-    PUSH 10
-    PUSH 0
-    MSTORE
+    push1 10
+    push1 0
+    mstore
 }
 
 return compile {
