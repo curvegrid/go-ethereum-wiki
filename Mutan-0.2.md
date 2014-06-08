@@ -215,12 +215,12 @@ func fib(var n) var {
 
 ## Compile
 
-You can invoke the compiler from within mutan allowing you compile code inline. At this time of writing compile can only be used in combination with an `return` statement. Compile will compile the given code, enclosed by brackets. 
+You can invoke the compiler from within mutan allowing you compile code inline. At this time of writing compile can only be used in combination with an `exit` statement. Compile will compile the given code, enclosed by brackets. 
 
 ```go
 a := "hello"
 
-return compile {
+exit compile {
      a := 20
      if a == 20 {
      }
