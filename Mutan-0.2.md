@@ -302,7 +302,7 @@ gas           Returns the current call's attached amount of gas
 Inline assembler is allowed through the `asm` keyword
 
 ```
-InlineAssembler = "asm" "(" Code ")" .
+InlineAssembler = "asm" "{" Code "}" .
 Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
 ```
 
@@ -360,11 +360,11 @@ big ret = create(value, 0xaabbccddeeff0099887766552211)
 var left = 8 << 2
 left = left >> 2
 
-asm (
+asm {
     PUSH 10
     PUSH 0
     MSTORE
-)
+}
 
 return compile {
     this.store[0] = "hello"
