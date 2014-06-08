@@ -306,6 +306,8 @@ InlineAssembler = "asm" "{" Code "}" .
 Code            = "abcdefghijklmnopqrstuwvxyz" | "1234567890" .
 ```
 
+For a full list of `asm` opcodes see the [Assembler](https://github.com/ethereum/go-ethereum/wiki/Assembler) page.
+
 ## Pre processor
 
 Mutan has a very basic pre processor that takes any `#define` and replaces that throughout the source code
