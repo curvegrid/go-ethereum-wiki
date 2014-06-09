@@ -1,4 +1,20 @@
-# Life Insurance Mutan 0.2
+## Currency
+
+```go
+this.store[this.origin()] = 10**20
+
+exit compile {
+    var to = this.data[0]
+    var from = this.origin()
+    var value = this.data[1]
+
+    if this.store[from] > value {
+        this.store[from] = this.store[from] - value
+        this.store[to] = this.store[to] + value
+    }
+}
+
+## Life Insurance
 
 ```go
 #define CLAIMER 0xd766c288f24b91ae9781fe2b155d3260b8674c62 
