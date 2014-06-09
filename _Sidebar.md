@@ -18,6 +18,6 @@
 
 ##### Examples (PoC-5)
 
-[Mutan Examples](http://github.com/ethereum/go-ethereum/wiki/PoC-5-Mutan-Examples)
+[Mutan 0.1 Examples](http://github.com/ethereum/go-ethereum/wiki/PoC-5-Mutan-0.1-Examples)
 
 [Mutan 0.2 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2-Example)
