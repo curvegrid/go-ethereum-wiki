@@ -12,7 +12,7 @@
 
 [JSON-RPC API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JSON-RPC-API)
 
-[Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan)
+[Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
