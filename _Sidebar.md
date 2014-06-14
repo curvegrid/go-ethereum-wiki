@@ -4,6 +4,10 @@
 
 [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
+##### Usage
+
+[Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
+
 ##### Developing
 
 [JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API)
