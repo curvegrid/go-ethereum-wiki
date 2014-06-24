@@ -9,8 +9,6 @@
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
 ##### Developing
-[Creating Ethereum Node](https://github.com/ethereum/go-ethereum/wiki/Creating-your-own-Ethereum-apps-using-Eth-go)
-
 [JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API)
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
@@ -20,6 +18,8 @@
 [Mutan](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
+
+[Eth-Go App](https://github.com/ethereum/go-ethereum/wiki/Creating-your-own-Ethereum-apps-using-Eth-go)
 
 ##### Examples (PoC-5)
 
