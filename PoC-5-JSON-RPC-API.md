@@ -78,7 +78,7 @@ Return data: key, value address
 
 **Example:**
 ```javascript
-remote.call("EthereumApi.GetStorageAt", {"address": "16dfff98276b30655e825a09c9266a1ece888fde", "key":"2ef47100e0787b915105fd5e3f4ff6752079d5cb"}, function(err, result){
+remote.call("EthereumApi.GetStorageAt", {"address": "16dfff98276b30655e825a09c9266a1ece888fde", "key":"0x2ef47100e0787b915105fd5e3f4ff6752079d5cb"}, function(err, result){
     console.log(result)
   })
 ```
