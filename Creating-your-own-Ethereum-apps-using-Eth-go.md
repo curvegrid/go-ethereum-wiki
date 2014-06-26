@@ -1,77 +1,111 @@
-The modular nature of Go and the Ethereum Go implementation, [eth-go](github.com/ethereum/eth-go), make it very easy to build your own Ethereum based applications. 
+The modular nature of Go and the Ethereum Go implementation, [eth-go](github.com/ethereum/eth-go), make it very easy to build your own Ethereum native applications. 
 
-This post will show you the minimal steps required to build your own Ethereum based application.
+This pos twill cover the minimal steps required to build an native Ethereum application.
 
-The first thing you will have to do is pick a data folder and tell EthUtil to use said folder for all files and configs.
+Ethereum comes with a global config found in the [ethutil](https://github.com/ethereum/eth-go/ethutil) package. The global config requires you to set a base path to store it's files (database, settings, etc).
 
 ```go
 func main() {
+	// Read config
 	ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
 }
 ```  
 
 ReadConfig takes four arguments. The data folder to use, a log flag, a globalConf instance and an id string to identify your app to other nodes in the network.
 
-Next it's time to create our actual Ethereum object.
+Once you've configured the global config you can set up and create your Ethereum node. The Ethereum Object, or Node, will handle all trafic from and to the Ethereum network as well as handle all incoming block and transactions. A new node can be created through the `new` method found in [eth-go](github.com/ethereum/eth-go).
 
 ```go
 func main() {
+		// Read config
         ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
+        
+        // Create a new ethereum node
         ethereum, err := eth.New(eth.CapDefault, false)
         if err != nil {
-            panic(fmt.Sprintf("Could not start node: %s\n", err))
+            	panic(fmt.Sprintf("Could not start node: %s\n", err))
         }
+        // Set the port (default 30303)
         ethereum.Port = "10101"
+        // Once we reach max, bounce them off.
         ethereum.MaxPeers = 10
 }
 ```
 
 New requires two arguments; the capabilities of the node and whether or not to use UPNP for port-forwarding. If you don't want to fallback to client-only features set an Ethereum port and the max amount of peers this node can connect to. 
 
-Now in order to identify itself to other nodes your node will require a public/private keypair. The easiest way to generate this is via the utils package. Let's add that in.
+In order to indentify the node to the network you'll be required to create a private key. The easiest way to create a new keypair is by using the `KeyRing` found in the `ethutil` package.
 
 ```go
 func main() {
-	ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
-
-	ethereum, err := eth.New(eth.CapDefault, false)
-	if err != nil {
-		panic(fmt.Sprintf("Could not start node: %s\n", err))
-	}
-
-	utils.CreateKeyPair(false)
-
-	ethereum.Port = "10101"
-	ethereum.MaxPeers = 10
+    	// Read config
+        ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
+        
+        // Create a new ethereum node
+        ethereum, err := eth.New(eth.CapDefault, false)
+        if err != nil {
+            panic(fmt.Sprintf("Could not start node: %s\n", err))
+        }
+        // Set the port (default 30303)
+        ethereum.Port = "10101"
+        // Once we reach max, bounce them off.
+        ethereum.MaxPeers = 10
+        
+        keyRing := ethutil.KeyRing
+        // Create a new key if non exist
+        if keyRing.Len() == 0 {
+    	    	// Create a new keypair
+	        	keyPair, err := ethutil.GenerateNewKeyPair()
+    	        if err != nil {
+        		    	panic(err)
+	            }
+            
+    	        // Add the keypair to the key ring
+        	    keyRing.Add(keyPair)
+        }
 }
 ```
 
-The only thing left now is to start it and to keep running our node until an exit signal comes in. The complete program will now look something like this.
+Once the base Ethereum stack has been set up it's time to fire up its engines and connect to the main network.
 
 ```go
 package main
 
 import (
-	"github.com/ethereum/eth-go"
-	"github.com/ethereum/eth-go/ethutil"
+		"github.com/ethereum/eth-go"
+		"github.com/ethereum/eth-go/ethutil"
 )
 
 func main() {
-	ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
+	    // Read config
+    	ethutil.ReadConfig(".test", ethutil.LogStd, nil, "MyEthApp")
+    
+	    // Create a new ethereum node
+    	ethereum, err := eth.New(eth.CapDefault, false)
+	    if err != nil {
+    		    panic(fmt.Sprintf("Could not start node: %s\n", err))
+	    }
+    	// Set the port (default 30303)
+	    ethereum.Port = "10101"
+    	// Once we reach max, bounce them off.
+	    ethereum.MaxPeers = 10
+    
+    	keyRing := ethutil.KeyRing
+	    // Create a new key if non exist
+    	if keyRing.Len() == 0 {
+        		// Create a new keypair
+		        keyPair, err := ethutil.GenerateNewKeyPair()
+        		if err != nil {
+			            panic(err)
+        		}
+        
+		        // Add the keypair to the key ring
+        		keyRing.Add(keyPair)
+	    }
 
-	ethereum, err := eth.New(eth.CapDefault, false)
-	if err != nil {
-		panic(fmt.Sprintf("Could not start node: %s\n", err))
-	}
-	utils.CreateKeyPair(false)
-
-	ethereum.Port = "10101"
-	ethereum.MaxPeers = 10
-
-	ethereum.Start(true)
-	ethereum.WaitForShutdown()
+    	ethereum.Start(true)
+	    ethereum.WaitForShutdown()
 }
-
 ```
 
 `ethereum.Start()` takes one argument, whether or not we want to connect to one of the known seed nodes. If you want your own little testnet-in-a-box you can disable it else set it to true.
