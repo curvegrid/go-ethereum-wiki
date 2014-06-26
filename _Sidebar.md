@@ -19,7 +19,7 @@
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
-[Eth-Go App](https://github.com/ethereum/go-ethereum/wiki/Creating-your-own-Ethereum-apps-using-Eth-go)
+[Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
 ##### Examples (PoC-5)
 
