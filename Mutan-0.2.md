@@ -19,7 +19,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used as identifiers
 ```
-this if else return exit for asm nil transact create call sizeof true false
+this if else return exit for asm nil transact create call sizeof true false import
 ```
 
 ### Operators and delimiters
@@ -297,6 +297,18 @@ coinbase      Returns the current block's coinbase
 gas           Returns the current call's attached amount of gas
 ```
 
+## import
+
+Importing sourcefiles can be done through the `import` keyword
+
+```
+Import = "import" StringLiteral
+```
+
+```go
+import "std.mu"
+```
+
 ## Assembler
 
 Inline assembler is allowed through the `asm` keyword
@@ -320,6 +332,8 @@ Output = "#define" Word [ Expression ] .
 
 ```go
 #define ADDR 0xe6716f9544a56c530d868e4bfbacb172315bdead
+
+import "std.mu"
 
 func pow(var x, var y) {
     return x ** y
