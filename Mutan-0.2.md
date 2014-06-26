@@ -254,9 +254,9 @@ Success = "call(" Expression, Expression, Expression, Ptr, Ptr ")"
 
 Calls contract specified by the address and executes. Arguments can be passed to the `in` argument and the return value can be specified by the `out` parameters. Return a `1` or `0` depending whether this call was success or not.
 
-##### transact(addr, value, data)
+##### transact(addr, gas, value, data)
 ```
-Success = "transact(" Expression, Expression, Ptr ")"
+Success = "transact(" Expression, Expression, Expression, Ptr ")"
 ```
 
 Handles a transaction between two objects.
