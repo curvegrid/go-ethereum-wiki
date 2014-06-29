@@ -90,7 +90,7 @@ func main() {
     	// Once we reach max, bounce them off.
 	    ethereum.MaxPeers = 10
     
-    	keyRing := ethutil.KeyRing
+    	keyRing := ethutil.GetKeyRing()
 	    // Create a new key if non exist
     	if keyRing.Len() == 0 {
         		// Create a new keypair
