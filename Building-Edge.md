@@ -1,22 +1,33 @@
 We assume you have a GOPATH set up appropriately. If not, you can read about setting it up here: http://golang.org/doc/code.html#GOPATH.
 
-Note: Using a separate GOPATH for ethereum development may provide a cleaner development environment.
+In order to 'build edge', we need to switch 3 repos to their 'develop' branch
 
-In order to 'build edge', we will want to use the `develop` branch of the go-ethereum repo. This will likely require using the `develop` branch of the eth-go backend, as well.
+* Begin by getting the newest version of the go client source and their dependencies:
 
-* Begin by getting the newest version of go-ethereum and its dependencies:
+        go get -u -d github.com/ethereum/go-ethereum/ethereum
+        go get -u -d github.com/ethereum/go-ethereum/ethereal
 
-        go get -u github.com/ethereum/go-ethereum
+* Init the serpent submodule
 
-* Switch to the `develop` branch on both the eth-go and go-ethereum src directories, and reinstall:
+        cd $GOPATH/src/github.com/obscuren/serpent-go
+        git submodule init
+        git submodule update
+
+* Switch to the `develop` branch the necessary repos:
+
+        cd $GOPATH/src/github.com/ethereum/go-ethereum
+        git checkout develop
 
         cd $GOPATH/src/github.com/ethereum/eth-go
         git checkout develop
-        go install
-        cd $GOPATH/src/github.com/ethereum/go-ethereum
+
+        cd $GOPATH/src/github.com/obscuren/mutan
         git checkout develop
-        go install
 
-* go-ethereum should now be built in `$GOPATH/bin/`. Run it:
+* Go forth and build away:
 
-        $GOPATH/bin/go-ethereum
+        cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereum
+        go install -v
+
+        cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereal
+        go install -v
