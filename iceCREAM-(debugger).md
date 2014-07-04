@@ -2,7 +2,7 @@ Go Ethereum comes with a handy EVM debugger called iceCREAM (after the famous 'S
 
 ![](https://photos-5.dropbox.com/t/0/AACUFqkxJZxCr0S_K-65D8lBwFcD9g2fXj0EM6VK8cosTA/12/4270001/png/1024x768/3/1404478800/0/2/Screenshot%202014-07-04%2013.46.16.png/b0UNfgLTmovpciCPHQwXjDKVM2NEUGG4bUuKDhC3jSk)
 
-The interface of the debugger is pretty straight forward and can be accessed from [Ethereal](http://github.com/ethereum/go-ethereum/) from the menu (⌘-D)
+The interface of the debugger is pretty straight forward and can be accessed from within [Ethereal](http://github.com/ethereum/go-ethereum/) from the menu (⌘-D)
 
 - In the centre of the window you'll find the main editor which support [mutan](http://github.com/obscuren/mutan) and [serpent]().
 - On the left side you'll find the disassembled instruction sequence.
