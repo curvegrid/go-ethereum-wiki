@@ -10,8 +10,8 @@ The interface of the debugger is pretty straight forward and can be accessed fro
 - Temp is the VM stack
 - Memory is the current in-use memory. Each item is one word (32 bytes)
 - Storage inspector
-- Debugger log
 - Debugger CLI
+- Debugger log
 
 The debugger supports `break` points on an instruction level (so don't try to use line numbers). Adding a breakpoint through the debugger CLI (⌘-L) can be done with `break <instr number>`. When the EVM encounters a breakpoint it will halt the execution and displays the current state of the VM such as the current memory, storage and stack, and allows you to step through the following instructions using the `next` button (⌘-N).
 
