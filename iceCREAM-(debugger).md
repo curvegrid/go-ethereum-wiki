@@ -6,6 +6,7 @@ The interface of the debugger is pretty straight forward and can be accessed fro
 
 - In the centre of the window you'll find the main editor which support [mutan](http://github.com/obscuren/mutan) and [serpent]().
 - On the left side you'll find the disassembled instruction sequence.
+- Right top corner are pre-made snippets
 - Right side you'll find the simulated data field, endowment, amount of gas & gas price.
 - Temp is the VM stack
 - Memory is the current in-use memory. Each item is one word (32 bytes)
