@@ -5,8 +5,7 @@
 
 ## Building for Linux
 
-
-### Ubuntu 14.04
+### Automatic installation
 [This Go Ethereum install script](https://gist.github.com/maran/2d69089ed5ea3f83fde8) will install everything required on Ubuntu 14.04. 
 
 ```
@@ -33,7 +32,7 @@ In order to install a few of the other required packages, the mercurial revision
 
 The Ethereum wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions on how to install them.
 
-#### Installing the Ethereum(Go) node (CLI)
+#### Installing the node (CLI)
 
 Since you have chosen Ethereum in Go instead of C++, you get the simplified installation and can download the Ethereum build with just one command (don't tell the C++ guys it was this easy!):
 
