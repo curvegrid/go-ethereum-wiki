@@ -19,7 +19,7 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used as identifiers
 ```
-this if else return exit for asm nil transact create call sizeof true false import
+block contract tx byte if else return exit stop for asm nil transact create call sizeof true false import
 ```
 
 ### Operators and delimiters
@@ -138,7 +138,7 @@ if x < 10 {
 The expression may be preceded by a simple statement which executes before the boolean expression
 
 ```go
-if x := this.Value(); x < 10 {
+if x := value(); x < 10 {
     x = maximum
 } else {
     y = 10
@@ -182,7 +182,7 @@ String literals are supported by enclosing a line of text with matching quotes `
 
 ```go
 str := "hello world"
-this.store[0] = "hello world"
+contract.storage[0] = "hello world"
 ```
 
 ## Function Declarations
@@ -286,8 +286,9 @@ gasPrice    Returns the gas price set for the transaction
 
 ```
 ContractMethod   = "contract" "." MethodName "(" [ Expression ] ")" .
-MethodName       = "data" | "address" | "value" | "gas" .
+MethodName       = "storage" | "data" | "address" | "value" | "gas" .
 
+storage          Returns the contract's storage given by the key
 data             Returns the x'th value of the attached data of this call
 address          Returns the direct address of this execution
 value            Returns the value attached to this call
@@ -362,8 +363,8 @@ if a < b {
 } else {
     // :-)
     if !a {
-        if this.data[0] ** 10 >= 10 {
-            this.data[0] = 1000;
+        if contract.data[0] ** 10 >= 10 {
+            contract.data[0] = 1000;
         }
     }
 }
