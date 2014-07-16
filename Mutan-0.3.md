@@ -280,6 +280,7 @@ MethodName  = "origin" | "gasPrice" .
 
 origin      Returns the initiator of the first call (sender of the transaction)
 gasPrice    Returns the gas price set for the transaction
+value       Returns the value of the transaction
 ```
 
 #### Contract methods
@@ -291,7 +292,6 @@ MethodName       = "storage" | "data" | "address" | "value" | "gas" .
 storage          Returns the contract's storage given by the key
 data             Returns the x'th value of the attached data of this call
 address          Returns the direct address of this execution
-value            Returns the value attached to this call
 gas              Returns the current call's attached amount of gas
 ```
 
