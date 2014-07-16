@@ -287,14 +287,22 @@ value       Returns the value of the transaction
 
 ```
 ContractMethod   = "contract" "." MethodName "(" [ Expression ] ")" .
-MethodName       = "storage" | "data" | "address" | "value" | "gas" .
+MethodName       = "storage" | "address" .
 
 storage          Returns the contract's storage given by the key
 data             Returns the x'th value of the attached data of this call
 address          Returns the direct address of this execution
-gas              Returns the current call's attached amount of gas
 ```
 
+#### Call methods
+
+```
+CallMethod   = "contract" "." MethodName "(" [ Expression ] ")" .
+MethodName       = "call" | "data" | "gas" | "address" .
+
+gas              Returns the current call's attached amount of gas
+
+```
 #### Block methods
 
 ```
