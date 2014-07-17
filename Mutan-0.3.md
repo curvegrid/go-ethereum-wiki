@@ -19,8 +19,10 @@ digit                = "0" | digit excluding zero ;
 
 The following keywords are reserved and may not be used as identifiers
 ```
-block contract tx byte if else return exit stop for asm nil transact 
-create call sizeof true false import
+block         if         true       exit        sizeof     import
+contract      else       false      return      byte       asm
+tx            for        var        stop        call
+this          return     nil        import      create
 ```
 
 ### Operators and delimiters
