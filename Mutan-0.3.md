@@ -297,8 +297,8 @@ address          Returns the direct address of this execution
 #### Call methods
 
 ```
-CallMethod   = "contract" "." MethodName "(" [ Expression ] ")" .
-MethodName       = "call" | "data" | "gas" | "address" .
+CallMethod   = "this" "." MethodName "(" [ Expression ] ")" .
+MethodName   = "data" | "gas" | "address" .
 
 gas              Returns the current call's attached amount of gas
 
