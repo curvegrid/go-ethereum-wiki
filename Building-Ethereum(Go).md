@@ -16,7 +16,7 @@ chmod +x install
 
 ### Manual installation
 
-Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.2 installed. If you do not, please refer to the article [Installing Go 1.2](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
+Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.3 installed (1.2 is fine too). If you do not, please refer to the article [Installing Go 1.3](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
 
 #### Installing Dependencies
 
