@@ -290,7 +290,6 @@ ContractMethod   = "contract" "." MethodName "(" [ Expression ] ")" .
 MethodName       = "storage" | "address" .
 
 storage          Returns the contract's storage given by the key
-data             Returns the x'th value of the attached data of this call
 address          Returns the direct address of this execution
 ```
 
@@ -298,8 +297,9 @@ address          Returns the direct address of this execution
 
 ```
 CallMethod   = "this" "." MethodName "(" [ Expression ] ")" .
-MethodName   = "data" | "gas" | "address" .
+MethodName   = "data" | "gas" .
 
+data             Returns the x'th value of the attached data of this call
 gas              Returns the current call's attached amount of gas
 
 ```
