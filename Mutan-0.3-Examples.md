@@ -1,7 +1,7 @@
 ## Currency
 
 ```go
-contract.storage[this.origin()] = 10**20
+contract.storage[tx.origin()] = 10**20
 
 return compile {
     var to = this.data[0]
