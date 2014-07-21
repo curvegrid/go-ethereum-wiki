@@ -279,9 +279,9 @@ Creates a new contract given by `script` and returns the `Address` of the transa
 
 ```
 TxMethod    = "tx" "." MethodName [ "(" [ Expression ] ")" ] .
-MethodName  = "origin" | "gasPrice" .
+MethodName  = "sender" | "gasPrice" | "value" .
 
-origin      Returns the initiator of the first call (sender of the transaction)
+sender      Returns the initiator of the first call (sender of the transaction)
 gasPrice    Returns the gas price set for the transaction
 value       Returns the value of the transaction
 ```
