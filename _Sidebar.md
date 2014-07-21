@@ -26,6 +26,6 @@
 [iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
 
 ##### Examples (PoC-5)
-[Mutan 0.3 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.3-Examples)
+[Mutan 0.4 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
 
 [Mutan 0.2 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2-Example)
