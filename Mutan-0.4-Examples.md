@@ -1,11 +1,11 @@
 ## Currency
 
 ```go
-contract.storage[tx.sender()] = 10**20
+contract.storage[tx.origin()] = 10**20
 
 return compile {
     var to = this.data[0]
-    var from = tx.sender()
+    var from = tx.origin()
     var value = this.data[1]
 
     if contract.storage[from] > value {
@@ -19,10 +19,10 @@ return compile {
 
 ```go
 #define CLAIMER 0xd766c288f24b91ae9781fe2b155d3260b8674c62 
-this.store[1000] = tx.sender() 
+this.store[1000] = tx.origin() 
 
 func heartbeat() var {
-    if contract.storage[1000] == tx.sender() {
+    if contract.storage[1000] == tx.origin() {
         contract.storage[1002] = block.time()
         return true
     } else {
@@ -35,7 +35,7 @@ func heartbeat() var {
 }
 
 func claim() var {
-    if tx.sender() == CLAIMER {
+    if tx.origin() == CLAIMER {
         h := heartbeat()
         if h == false {
             transact(CLAIMER, balance(contract.address()), nil)
@@ -47,7 +47,7 @@ func claim() var {
 }
 
 func withdraw(var amount, var address) var {
-    if contract.storage[1000] == tx.sender() {
+    if contract.storage[1000] == tx.origin() {
         h := heartbeat()
         if h == true {
             return transact(address, amount, nil)
@@ -58,7 +58,7 @@ func withdraw(var amount, var address) var {
 }
 
 func run() {
-    if contract.storage[1000] == tx.sender() {
+    if contract.storage[1000] == tx.origin() {
         if this.data[0] == "heartbeat" {
             h := heartbeat()
             return h
@@ -69,7 +69,7 @@ func run() {
         }
     }
 
-    if tx.sender() == CLAIMER {
+    if tx.origin() == CLAIMER {
         if this.data[0] == "claim" {
             c := claim()
             return c
