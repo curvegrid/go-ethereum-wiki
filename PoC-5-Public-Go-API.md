@@ -13,7 +13,7 @@ The Go implementation has, besides the regular API implementation, a public API.
 * `GetStorage(hexAddress, hexStorageAddress)` Returns the value of the storage found at the address.
 * `GetTxCountAt()` Returns the transaction nonce of the current key.
 * `IsContract(hexAddress)` Returns a boolean indicating whether this is a contract or not.
-* `Transact(seckey, to, value, gas, gasPrice, data)` Creates a new transaction signed by the specified `seckey`. Arguments are all strings.
+* `Transact(seckey, to, value, gas, gasPrice, data)` Creates a new transaction signed by the specified `seckey`. Arguments are all strings. Separate multiple data arguments with "\n" (eg. the list ["abc", 12, "bob"] would be formatted "\"abc\"\n12\n\"bob\"").
 * `Create(secKey, value, gas, gasPrice, init, body)` Creates a new contract signed by the specified `seckey`. Argumens are all strings.
 
 #### PBlock
