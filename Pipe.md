@@ -1,6 +1,6 @@
 # Ethereum Pipe API
 
-General, easy to use, ethereum query interface. This API allows you to easily interface with ethereum's state and their respective objects, create transactions and directly evaluate contracts.
+General, easy to use, ethereum query interface. This API allows you to easily interface with ethereum's state and their respective objects, create transactions and directly evaluate contract code.
 
 ```go
 import "github.com/ethereum/eth-go/ethpipe"
