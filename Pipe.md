@@ -1,6 +1,6 @@
 # Ethereum Pipe API
 
-General, easy to use, ethereum query interface.
+General, easy to use, ethereum query interface. This API allows you to easily interface with ethereum's state and their respective objects, create transactions and directly evaluate contracts.
 
 ```go
 import "github.com/ethereum/eth-go/ethpipe"
@@ -29,6 +29,7 @@ Be aware that all methods return something. Nil isn't ever returned unless expli
 * `ToAddress(privateKey []byte) []byte`: converts a private key to an ethereum address.
 * `Execute(address, data []byte, value, gas, price *Value) []byte`: Simulates an evaluation of the object's code given by the `address` and returns the outcome.
 * `ExecuteObject(object *StateObject, data []byte, value, gas, price *Value) []byte`: Similar to the above only takes an actual `StateObject` instead of an address.
+* `Transact(key *KeyPair, address []byte, value, gas, price *Value, data []byte) error`: creates a new transaction using the given `key`.
 
 ### `world` Methods
 
