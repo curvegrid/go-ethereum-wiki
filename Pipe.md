@@ -23,6 +23,7 @@ Be aware that all methods return something. Nil isn't ever returned unless expli
 
 * `World() *world`: returns the world object through which you can query ethereum's state.
 * `Balance(address []byte) *Value`: returns the balance of the given `address`.
+* `Exists(address []byte) bool`: returns whether an object with the given `address` exists.
 * `Nonce(address []byte) *uint64`: returns the the nonce of the given `address`.
 * `Block(hash []byte) *Block`: returns the given block by `hash`.
 * `Storage(address, storage []byte) *Value`: returns the given object by `address`'s value given by the `storage` address.
