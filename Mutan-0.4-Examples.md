@@ -1,3 +1,22 @@
+## Register with NameReg
+
+```go
+#define CONFADDR 0x661005d2720d855f1d9976f88bb10c1a3398c77f
+
+var a = 0
+var nameRegAddr = 0
+
+// Get NameReg's address
+call(CONFADDR, 0, 1000, a, nameRegAddr)
+
+var[2] nameRegArgs
+nameRegArgs[0] = "register"
+nameRegArgs[1] = "MyName"
+
+// Register with NameReg
+call(nameRegAddr, 0, 1000, nameRegArgs, nil)
+```
+
 ## Currency
 
 ```go
