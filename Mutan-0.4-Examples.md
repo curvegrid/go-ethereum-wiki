@@ -17,6 +17,45 @@ nameRegArgs[1] = "MyName"
 call(nameRegAddr, 0, 1000, nameRegArgs, nil)
 ```
 
+## Saving w/ lock
+
+```go
+#define CONFADDR 0x661005d2720d855f1d9976f88bb10c1a3398c77f
+
+var a = 0
+var nameRegAddr = 0
+
+call(CONFADDR, 0, 1000, a, nameRegAddr)
+
+var[2] nameRegArgs
+nameRegArgs[0] = "register"
+nameRegArgs[1] = "TimeLock"
+
+call(nameRegAddr, 0, 1000, nameRegArgs, nil)
+
+contract.storage["owner"] = tx.sender()
+contract.storage["period"] = 20
+contract.storage["initiated"] = block.time()
+
+return compile {
+    if this.data[0] == "lock" {
+        if tx.sender() == contract.storage["owner"] {
+            if contract.storage["recipient"] == 0 {
+                contract.storage["recipient"] = this.data[1]
+            }
+        }
+        
+        stop()
+    }
+        
+    if this.data[0] == "withdraw" {
+        if block.time() > contract.storage["period"] + contract.storage["initiated"] {
+            suicide(contract.storage["recipient"])
+        }
+    }
+}
+```
+
 ## Currency
 
 ```go
