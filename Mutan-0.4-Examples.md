@@ -116,11 +116,11 @@ return compile {
 ## Currency
 
 ```go
-contract.storage[tx.origin()] = 10**20
+contract.storage[tx.sender()] = 10**20
 
 return compile {
     var to = this.data[0]
-    var from = tx.origin()
+    var from = tx.sender()
     var value = this.data[1]
 
     if contract.storage[from] > value {
