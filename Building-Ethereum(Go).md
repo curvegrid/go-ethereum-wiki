@@ -40,7 +40,7 @@ Since you have chosen Ethereum in Go instead of C++, you get the simplified inst
 
 Now you can run the program:
 
-`ethereum -m`
+`ethereum -mine`
 
 This will start up the Ethereum mining node. **Please note that if you wish to start multiple go-ethereum processes you must supply a new data directory with `-dir=".ethereum2"`.**
 
