@@ -42,7 +42,7 @@ Now you can run the program:
 
 `ethereum -mine`
 
-This will start up the Ethereum mining node. **Please note that if you wish to start multiple go-ethereum processes you must supply a new data directory with `-dir=".ethereum2"`.**
+This will start up the Ethereum mining node. **Please note that if you wish to start multiple go-ethereum processes you must supply a new data directory with `-datadir=".ethereum2"`.**
 
 If you would like to connect to your own mining node, run the following command to start the JS console:
 
