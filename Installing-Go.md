@@ -15,7 +15,7 @@ The apt-get repositories for 14.04 contain golang 1.3. You can use `sudo apt-get
 #### Other distros
 Download the latest distribution
 
-`curl -O https://go.googlecode.com/files/go1.3.linux-amd64.tar.gz`
+`curl -O https://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz`
 
 Unpack it to the `/usr/local` (might require sudo)
 
@@ -26,5 +26,5 @@ Unpack it to the `/usr/local` (might require sudo)
 For Go to work properly, you need to set the following two environment variables:
 
 - Setup a go folder `mkdir ~/go; echo "export GOPATH=$HOME/go" >> ~/.bashrc` 
-- Update your path `echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc` 
+- Update your path `echo "export PATH=$PATH:$HOME/go/bin:/usr/local/go/bin" >> ~/.bashrc` 
 
