@@ -6,7 +6,7 @@ The QML API has one magic object `eth`. The eth object exposes method and variab
 
 ## QML Javascript API
 
-* `getBlock ( number_or_hash )`: Retrieves a block in the canonical chain by the given `number` or `hash`. `-1` may be given to get the latest block.
+* `block ( number_or_hash )`: Retrieves a block in the canonical chain by the given `number` or `hash`. `-1` may be given to get the latest block.
 * `eachStorageAt ( address, callback )`: Iterates over the storage of the given object's `address` yielding `callback` for each key / pair.
 * `key ( )`: Returns the current key object. A `Key` object consist out of the following fields:
   * `address`: address associated with this key.
