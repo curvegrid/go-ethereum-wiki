@@ -1,7 +1,7 @@
 Go ethereum database
 
 ```
-"PV"  : Number       // The protocol version this database is compatible with.
+"PV"  : Number      // The protocol version this database is compatible with.
 "LTD" : Number      // The highest known total difficulty
 ```
 
