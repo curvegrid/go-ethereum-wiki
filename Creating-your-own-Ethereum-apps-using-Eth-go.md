@@ -1,6 +1,6 @@
 The modular nature of Go and the Ethereum Go implementation, [eth-go](https://github.com/ethereum/eth-go), make it very easy to build your own Ethereum native applications. 
 
-This pos twill cover the minimal steps required to build an native Ethereum application.
+This post will cover the minimal steps required to build an native Ethereum application.
 
 Ethereum comes with a global config found in the [ethutil](https://github.com/ethereum/eth-go/tree/master/ethutil) package. The global config requires you to set a base path to store it's files (database, settings, etc).
 
