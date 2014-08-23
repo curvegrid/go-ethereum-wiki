@@ -34,7 +34,7 @@ func main() {
 
 New requires two arguments; the capabilities of the node and whether or not to use UPNP for port-forwarding. If you don't want to fallback to client-only features set an Ethereum port and the max amount of peers this node can connect to. 
 
-In order to indentify the node to the network you'll be required to create a private key. The easiest way to create a new keypair is by using the `KeyRing` found in the `ethutil` package.
+In order to identify the node to the network you'll be required to create a private key. The easiest way to create a new keypair is by using the `KeyRing` found in the `ethutil` package.
 
 ```go
 func main() {
