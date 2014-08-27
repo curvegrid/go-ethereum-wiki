@@ -4,6 +4,7 @@ In order to 'build edge', we need to switch 3 repos to their 'develop' branch
 
 * Begin by getting the newest version of the go client source and their dependencies:
 
+        go get -u -d github.com/obscuren/serpent-go
         go get -u -d github.com/ethereum/go-ethereum/ethereum
         go get -u -d github.com/ethereum/go-ethereum/ethereal
 
