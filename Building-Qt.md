@@ -31,7 +31,7 @@ Then you will need to have >= QT5.1 AND <= QT5.2.0 installed and your environmen
 
 Remember to change <QT Location> to wherever you have QT installed. After setting your environmental variables, you will need to reinstall the go-qml package and the ethereal package:
 
-    go get -u github.com/go-qml/qml
+    go get -u gopkg.in/qml.v1
     go get -u github.com/ethereum/go-ethereum/ethereal
 
 **For 13.10**, the qt packages in the ppas are not >= 5.1 at this time, so you must download and install QT from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
