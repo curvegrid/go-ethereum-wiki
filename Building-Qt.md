@@ -12,7 +12,9 @@ Please see [build instruction for OSX](https://github.com/ethereum/go-ethereum/w
     sudo apt-get update
     sudo apt-get install ubuntu-sdk qtbase5-private-dev qtdeclarative5-private-dev libqt5opengl5-dev
 
-To install ubuntu-sdk, you may need to follow http://askubuntu.com/questions/408463/unmet-dependencies-i-cant-install-ubuntu-sdk
+To install ubuntu-sdk, you may need to follow http://askubuntu.com/questions/408463/unmet-dependencies-i-cant-install-ubuntu-sdk. Installing ubuntu-sdk on Ubuntu 14.04 using apt-get can fail because of an unmet dependency. Using <code>aptitude</code> will allow installing it, leaving the dependency unresolved. Use the following command:
+
+    sudo apt-get install aptitude; sudo aptitude install ubuntu-sdk
 
 On Ubuntu 14.04, you will have to separately install the qtdialogs package
 
