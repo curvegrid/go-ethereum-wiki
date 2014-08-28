@@ -10,7 +10,7 @@ Please refer to the [build instruction for OSX](https://github.com/ethereum/go-e
 
 #### Ubuntu 14.04 
 
-The apt-get repositories for 14.04 contain golang 1.3. You can use `sudo apt-get install golang` from 14.04 rather than having to download and build from source as above. You will still have to set the $GOPATH and $PATH variables as specified below.
+The apt-get repositories for 14.04 contain golang 1.2.1. You can use `sudo apt-get install golang` from 14.04 rather than having to download and build from source as above. You will still have to set the $GOPATH and $PATH variables as specified below.
 
 #### Other distros
 Download the latest distribution
