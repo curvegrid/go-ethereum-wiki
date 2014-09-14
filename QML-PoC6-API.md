@@ -16,12 +16,8 @@ The API also adds a helper function not directly related to the state of ethereu
 
 * `fromNumber ( hex )`: Casts the given value passed by `hex` to a Big integer and returns it as string.
 
-Filtering of `messages` is done in a slightly different way and requires the QML file to import the `filter.js` file found in `go-ethereum/assets/ext`. The filtering API allows you to create new filtering objects through which you watch for changes with the given filtering options in the following manner:
-
 ```qml
-import "go/src/github.com/ethereum/go-ethereum/ethereal/assets/ext/filter.js" as Eth
-
-var filter = new Eth.Filter({latest: -1, to: "cc6b22b87c8d1b607c92f4870f70e20658112f96"});
+var filter = new eth.watch({latest: -1, to: "cc6b22b87c8d1b607c92f4870f70e20658112f96"});
 filter.changed(function(messages) {
     console.log(messages);
 });
