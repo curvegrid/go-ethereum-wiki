@@ -17,7 +17,7 @@ The API also adds a helper function not directly related to the state of ethereu
 * `fromNumber ( hex )`: Casts the given value passed by `hex` to a Big integer and returns it as string.
 
 ```qml
-var filter = new eth.watch({latest: -1, to: "cc6b22b87c8d1b607c92f4870f70e20658112f96"});
+var filter = eth.watch({latest: -1, to: "cc6b22b87c8d1b607c92f4870f70e20658112f96"});
 filter.changed(function(messages) {
     console.log(messages);
 });
