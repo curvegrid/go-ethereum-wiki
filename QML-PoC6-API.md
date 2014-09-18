@@ -27,7 +27,7 @@ filter.changed(function(messages) {
 
 Qml files loaded as a plugin within `ethereal` will be added as a tab to the sidebar. Qml files can customise the sidebar:
 
-![](https://photos-3.dropbox.com/t/0/AAC-jzgMWKUGG7dvXSfPCCDXUsF1KTP0In2RnzjD8eJF_w/12/4270001/png/1024x768/3/1408550400/0/2/reqs.png/Uf_HhuRTcKGNhvuS6dbgJpdhiKqbbMVtkSpAZwqQnYA)
+![](https://dl.dropboxusercontent.com/u/4270001/reqs.png)
 
 1. `iconSource`
 2. `title`
