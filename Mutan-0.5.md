@@ -21,7 +21,7 @@ The following keywords are reserved and may not be used as identifiers
 ```
 block         if         true       exit        sizeof     import
 contract      else       false      return      byte       asm
-tx            for        var        stop        call
+tx            for        var        stop        call       print
 this          return     nil        import      create
 ```
 
@@ -242,6 +242,12 @@ return compile {
 ## Build in functions
 
 Mutan comes with a couple build in functions for stopping, creating and transacting between multiple objects and context functions.
+
+##### print(expr)
+```
+print "(" Expression ")"
+
+Prints the given expression (given that the interpreters understands this pseudo OP)
 
 ##### exit() / stop()
 ```
