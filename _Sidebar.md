@@ -17,9 +17,7 @@
 
 [JSON-RPC API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JSON-RPC-API)
 
-[Mutan 0.4](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4)
-
-[Mutan 0.2](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
+[Mutan 0.5](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
@@ -32,6 +30,14 @@
 [QML DApp](https://github.com/ethereum/go-ethereum/wiki/qml-poc6-Examples)
 
 ### Examples (PoC-5)
+
 [Mutan 0.4 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
 
+### Legacy
+
+[Mutan 0.4](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4)
+
+[Mutan 0.2](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
+
 [Mutan 0.2 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2-Example)
+
