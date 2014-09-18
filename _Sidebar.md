@@ -29,11 +29,11 @@
 
 [QML DApp](https://github.com/ethereum/go-ethereum/wiki/qml-poc6-Examples)
 
-[Mutan 0.5](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5-Examples)
+[Mutan 0.5 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5-Examples)
 
 ### Examples (PoC-5)
 
-[Mutan 0.4 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
+[Mutan 0.4 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
 
 ### Legacy
 
