@@ -30,7 +30,7 @@ Be aware that all methods return something. Nil isn't ever returned unless expli
 * `ToAddress(privateKey []byte) []byte`: converts a private key to an ethereum address.
 * `Execute(address, data []byte, value, gas, price *Value) []byte`: Simulates an evaluation of the object's code given by the `address` and returns the outcome.
 * `ExecuteObject(object *Object, data []byte, value, gas, price *Value) []byte`: Similar to the above only takes an actual `StateObject` instead of an address.
-* `Transact(key *KeyPair, address []byte, value, gas, price *Value, data []byte) error`: creates a new transaction using the given `key`.
+* `Transact(key *KeyPair, address []byte, value, gas, price *Value, data []byte) ([]byte, error)`: creates a new transaction using the given `key`.
 
 ### `World` Methods
 
@@ -89,12 +89,12 @@ namereg.Storage(addr)
 
 var err error
 // Transact
-err = pipe.Transact(key, recp, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), nil)
+tx_hash, err = pipe.Transact(key, recp, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), nil)
 if err != nil {
 	t.Error(err)
 }
 // Create
-err = pipe.Transact(key, nil, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), data)
+contract_addr, err = pipe.Transact(key, nil, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), data)
 if err != nil {
 	t.Error(err)
 }
