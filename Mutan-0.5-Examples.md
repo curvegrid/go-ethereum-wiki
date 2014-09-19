@@ -44,7 +44,7 @@ call(nameRegAddr, 0, 1000, nameRegArgs, nil)
 contract.storage["owner"] = tx.sender()
 
 return compile {
-    if this.data[0] == "register" && contract.storage[this.data[1]] == 0 {
+    if message.data[0] == "register" && contract.storage[message.data[1]] == 0 {
         // Deregister old
         if contract.storage[tx.sender()] != 0 {
             contract.storage[contract.storage[tx.sender()]] = 0
@@ -52,14 +52,14 @@ return compile {
         
         // Ex. jeff.eth => "192.168.0.1"
         // 0xac000001
-        contract.storage[this.data[1]] = this.data[2]
-        contract.storage[tx.sender()] = this.data[1]
-    } else if this.data[0] == "deregister" {
-        if contract.storage[tx.sender()] == this.data[1] {
+        contract.storage[message.data[1]] = message.data[2]
+        contract.storage[tx.sender()] = message.data[1]
+    } else if message.data[0] == "deregister" {
+        if contract.storage[tx.sender()] == message.data[1] {
             contract.storage[tx.sender()] = 0
-            contract.storage[this.data[1]] = 0
+            contract.storage[message.data[1]] = 0
         }
-    } else if this.data[0] == "kill" {
+    } else if message.data[0] == "kill" {
         if contract.storage["owner"] == tx.sender() {
             suicide(tx.sender())
         }
@@ -88,11 +88,11 @@ contract.storage["period"] = 20
 contract.storage["initiated"] = block.time()
 
 return compile {
-    if this.data[0] == "lock" {
+    if message.data[0] == "lock" {
         if tx.sender() == contract.storage["owner"] && contract.storage["recipient"] == 0 {
-            contract.storage["recipient"] = this.data[1]
+            contract.storage["recipient"] = message.data[1]
         }
-    } else this.data[0] == "withdraw" {
+    } else message.data[0] == "withdraw" {
         if block.time() > contract.storage["period"] + contract.storage["initiated"] {
             suicide(contract.storage["recipient"])
         }
@@ -106,9 +106,9 @@ return compile {
 contract.storage[tx.sender()] = 10**20
 
 return compile {
-    var to = this.data[0]
+    var to = message.data[0]
     var from = tx.sender()
-    var value = this.data[1]
+    var value = message.data[1]
 
     if contract.storage[from] > value {
         contract.storage[from] = contract.storage[from] - value
