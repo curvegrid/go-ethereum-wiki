@@ -18,7 +18,7 @@ All of the above are interpreted as the number `42`. The JavaScript `String` obj
 The Ethereum JS API implemented in Mist uses a **Future/Promises** pattern style for authoring HTML DApps. 
 If you need a recap of **futures** have a look at [HTML5 Rocks JavaScript Promises](http://www.html5rocks.com/en/tutorials/es6/promises/).
 
-All methods return promises so you can easily use them in your own code and chain them together.
+All methods return promises so you can easily use them in your own code and chain them together. Parameters them self may also be promises, they are properly handled within the API.
 
 * `coinbase` Returns the coinbase address
 * `block(number_or_hash)` Returns the block with the given number or hash
