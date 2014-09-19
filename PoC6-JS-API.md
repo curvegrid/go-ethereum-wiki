@@ -31,3 +31,21 @@ All methods return promises so you can easily use them in your own code and chai
   * `data` Data or code for the transaction
 * `compile(code)` Compiles the given code and returns the byte code (`mutan` and `serpent` supported)
 * `key` Returns the default private key
+
+### Examples
+
+```javascript
+var code = eth.compile("var y = 10")
+    tx   = eth.transact({
+                    from: eth.key(),
+                    value: 10,
+                    gas: 10000,
+                    gasPrice: 10000000,
+                    data: code,
+            });
+tx.then(function(tx) {
+    console.log("Created tx", tx);
+}).catch(error) {
+    console.log("error tx", error);
+});
+```
