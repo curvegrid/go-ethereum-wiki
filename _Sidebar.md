@@ -31,6 +31,8 @@
 
 [Mutan 0.5 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5-Examples)
 
+[[PoC6 JS API]]
+
 ### Examples (PoC-5)
 
 [Mutan 0.4 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
