@@ -50,7 +50,7 @@ Methods, just as properties, will return a new promise when invoked.
 ```javascript
 var code = eth.compile("var y = 10")
     tx   = eth.transact({
-                    from: eth.key(),
+                    from: eth.key,
                     value: 10,
                     gas: 10000,
                     gasPrice: 10000000,
