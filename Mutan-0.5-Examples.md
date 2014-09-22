@@ -103,7 +103,7 @@ return compile {
 ## Currency
 
 ```go
-contract.storage[tx.sender()] = 10**20
+contract.storage[tx.sender()] = 10**12
 
 return compile {
     var to = message.data[0]
