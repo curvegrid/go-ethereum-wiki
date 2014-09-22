@@ -27,7 +27,7 @@
 
 ### Examples (PoC-6)
 
-[QML DApp](https://github.com/ethereum/go-ethereum/wiki/qml-poc6-Examples)
+[[QML PoC6 API]]
 
 [Mutan 0.5 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5-Examples)
 
