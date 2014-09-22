@@ -25,27 +25,23 @@ If you get an error which looks like:
     FATAL: asset not found: you can set an alternative asset path on on the command line using option 'asset_path'
     panic: file:///$GOPATH/src/github.com/ethereum/go-ethereum/ethereal/assets/qml/wallet.qml:5 module "QtQuick.Window" version 2.1 is not installed
 
-Then you will need to have >= QT5.1 AND <= QT5.2.0 installed and your environmental variables set to something like this:
+Then you will need to have 5.3.1 installed and your environmental variables set to something like this:
 
-    export PKG_CONFIG_PATH=<QT Location>/Qt5.2.0/5.2.0/gcc_64/lib/pkgconfig
-    export CGO_CPPFLAGS="-I<QT Location>/Qt5.2.0/5.2.0/gcc_64/include/QtCore/5.2.0/QtCore"
-    export LD_LIBRARY_PATH=<QT Location>/Qt5.2.0/5.2.0/gcc_64/lib
+    export PKG_CONFIG_PATH=<QT Location>/Qt5.3.1/5.3.1/gcc_64/lib/pkgconfig
+    export CGO_CPPFLAGS="-I<QT Location>/Qt5.3.1/5.3.1/gcc_64/include/QtCore/5.2.0/QtCore"
+    export LD_LIBRARY_PATH=<QT Location>/Qt5.3.1/5.3.1/gcc_64/lib
 
 Remember to change <QT Location> to wherever you have QT installed. After setting your environmental variables, you will need to reinstall the go-qml package and the ethereal package:
 
     go get -u gopkg.in/qml.v1
     go get -u github.com/ethereum/go-ethereum/ethereal
 
-**For 13.10**, the qt packages in the ppas are not >= 5.1 at this time, so you must download and install QT from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
-
-**For 14.04**, the qt packages in the ppas default to 5.2.1, which is not currently compatible with ethereal. QT 5.2.0 installer can be downloaded from [here](https://download.qt-project.org/archive/qt/5.2/5.2.0/). 
-
 After you run the installer, you will have to set the environment variables as described above and it should work as expected. To make sure that Ethereal runs in the proper environment if you are using it from a desktop file then one way to do this is to make a wrapper in your `~/.bin` or other $PATH location which looks something like this:
 
 ```bash
 #!/usr/bin/env bash
-export PKG_CONFIG_PATH=<QT Location>/Qt5.2.0/5.2.0/gcc_64/lib/pkgconfig
-export CGO_CPPFLAGS="-I<QT Location>/Qt5.2.0/5.2.0/gcc_64/include/QtCore/5.2.0/QtCore"
-export LD_LIBRARY_PATH=<QT Location>/Qt5.2.0/5.2.0/gcc_64/lib  
+export PKG_CONFIG_PATH=<QT Location>/Qt5.3.1/5.3.1/gcc_64/lib/pkgconfig
+export CGO_CPPFLAGS="-I<QT Location>/Qt5.3.1/5.3.1/gcc_64/include/QtCore/5.2.0/QtCore"
+export LD_LIBRARY_PATH=<QT Location>/Qt5.3.1/5.3.1/gcc_64/lib  
 <GO BIN FOLDER>/ethereal -asset_path=<GO FOLDER>/src/github.com/ethereum/go-ethereum/ethereal/assets
 ```
