@@ -36,6 +36,11 @@ Methods, just as properties, will return a new promise when invoked.
 
 * `block(number_or_hash)` Returns the block with the given number or hash
 * `balanceAt(address)` Returns the given address' account balance
+* `compile(code)` Compiles the given code and returns the byte code (`mutan` and `serpent` supported)
+* `codeAt(address)` Returns the code at the given address, given the address is valid.
+
+#### Transacting
+
 * `transact(options)` Creates a new transaction with the given options (options them self may be promises):
   * `to` Address of the recipient
   * `from` Key for signing the transaction
@@ -43,7 +48,21 @@ Methods, just as properties, will return a new promise when invoked.
   * `gas` Total amount of gas
   * `gasPrice` Gas priced to be used for this transaction
   * `data` Data or code for the transaction
-* `compile(code)` Compiles the given code and returns the byte code (`mutan` and `serpent` supported)
+
+```javascript
+eth.transact({to: "...", from: eth.key, value: 10000, gas: 500, gasPrice: eth.gasPrice});
+```
+
+* `call(options)` Executes a new transaction immediately using a transient state and returns the direct result of that transaction. Given options are the same as `transact`.
+
+```javascript
+var p = eth.call({to: "...", from: eth.key, gas: 5000, gasPrice: eth.gasPrice});
+p.then(function(res) { console.log(res); });
+```
+
+### Messaging
+
+
 
 ### Examples
 
