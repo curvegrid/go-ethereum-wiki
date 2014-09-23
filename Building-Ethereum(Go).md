@@ -6,7 +6,7 @@
 ## Building for Linux
 
 ### Automatic installation
-[This Go Ethereum install script](https://gist.github.com/maran/2d69089ed5ea3f83fde8) will install everything required on Ubuntu 14.04. 
+[This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
 ```
 wget https://gist.githubusercontent.com/maran/2d69089ed5ea3f83fde8/raw -O install
@@ -54,9 +54,9 @@ The `-js` option starts the JavaScript REPL, which will let you connect to your 
 
 Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) for the full API specification.
 
-#### Installing Ethereal (GUI)
+#### Installing Mist (GUI)
 
-`go get -u -a github.com/ethereum/go-ethereum/ethereal`
+`go get -u -a github.com/ethereum/go-ethereum/mist`
 
-`cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereal && ethereal`
+`cd $GOPATH/src/github.com/ethereum/go-ethereum/mist && mist`
 
