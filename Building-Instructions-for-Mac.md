@@ -23,7 +23,7 @@ http://forum.ethereum.org/discussion/905/go-ethereum-cli-ethereal-simple-build-g
 
 ## Option 4: Manual installation
 
-This option is meant for OS X but you could probably be applied to any *NIX OS given you correct some of the paths (mainly Qt). I'll also assume you've Go 1.3 installed. If not refer to [this]() page.
+This option is meant for OS X but you could probably be applied to any *NIX OS given you correct some of the paths (mainly Qt). I'll also assume you've Go 1.3 installed. If not refer to [this](https://github.com/ethereum/go-ethereum/wiki/Installing-Go) page.
 
 First install Qt 5.3.x (5.2 should work but not supported):
 
