@@ -9,7 +9,7 @@
 [This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
 ```
-wget https://gist.githubusercontent.com/maran/2d69089ed5ea3f83fde8/raw -O install
+wget https://gist.githubusercontent.com/obscuren/fa1cc95360421194f363/raw -O install
 chmod +x install 
 ./install
 ```
