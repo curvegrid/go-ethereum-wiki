@@ -4,6 +4,8 @@
 
 [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
+[Installing Go](https://github.com/ethereum/go-ethereum/wiki/Installing-Go)
+
 ### Usage
 
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
