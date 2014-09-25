@@ -22,7 +22,7 @@ The following keywords are reserved and may not be used as identifiers
 block         if         true       exit        sizeof     import
 contract      else       false      return      byte       asm
 tx            for        var        stop        call       print
-this(L)          return     nil        import      create
+this(L)       return     nil        import      create
 ```
 
 `(L) = legacy`
