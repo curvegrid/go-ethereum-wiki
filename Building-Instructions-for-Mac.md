@@ -50,3 +50,12 @@ Compile **Mist**
 ```
 go get -u github.com/ethereum/go-ethereum/mist && mist
 ```
+
+We're almost there; since go doesn't directly build `*.app` files, we'll use the [go build](https://github.com/ethereum/go-build) tool.
+
+```
+git clone git@github.com:ethereum/go-build.git
+cd go-build/osx && python build.py
+```
+
+This will eave a `Mist.app` in the **osx** directory.
