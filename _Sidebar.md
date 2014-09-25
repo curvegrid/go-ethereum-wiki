@@ -27,7 +27,14 @@
 
 [iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
 
-### Examples (PoC-6)
+### Next (Develop)
+
+[Mutan 0.6](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.6)
+
+[Mutan 0.6 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.6-Examples)
+
+
+### PoC-6
 
 [[QML PoC6 API]]
 
@@ -35,7 +42,7 @@
 
 [[PoC6 JS API]]
 
-### Examples (PoC-5)
+### PoC-5
 
 [Mutan 0.4 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
 
