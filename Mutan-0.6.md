@@ -416,9 +416,8 @@ big ret = create(value, compile {
 var left = 8 << 2
 left = left >> 2
 
-var[2] array
-array[0] = 42
-array[1] = 0
+var[3] array = { 42, 10 }
+array[2] = 0
 var re = sha3(array, sizeof(array))
 
 asm {
