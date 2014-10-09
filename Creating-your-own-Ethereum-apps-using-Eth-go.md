@@ -110,6 +110,6 @@ func main() {
 
 `ethereum.Start()` takes one argument, whether or not we want to connect to one of the known seed nodes. If you want your own little testnet-in-a-box you can disable it else set it to true.
 
-Your node should now be catching up with the blockchain. From here on out you are own your own. You could create a reactor to listen to specific events or just dive into the chain state directly. If you want to look at some example code you can check [DNSEth here.](https://github.com/maran/dnseth)
+Your node should now be catching up with the blockchain. From here on out you are on your own. You could create a reactor to listen to specific events or just dive into the chain state directly. If you want to look at some example code you can check [DNSEth here.](https://github.com/maran/dnseth)
 
 Have fun!
