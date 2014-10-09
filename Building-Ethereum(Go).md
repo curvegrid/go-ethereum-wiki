@@ -60,3 +60,16 @@ Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaSc
 
 `cd $GOPATH/src/github.com/ethereum/go-ethereum/mist && mist`
 
+#### Troubleshooting
+1. If you get:
+```
+go get -u github.com/ethereum/go-ethereum/ethereum
+# github.com/obscuren/serpent-go
+../go/src/github.com/obscuren/serpent-go/all.cpp:1:30: fatal error: serpent/bignum.cpp: No such file or directory
+ #include "serpent/bignum.cpp"
+                              ^
+compilation terminated.
+```
+Try running the last steps from: https://gist.github.com/obscuren/fa1cc95360421194f363
+
+More specifically, the steps starting with: `go get -u -d github.com/obscuren/serpent-go`
