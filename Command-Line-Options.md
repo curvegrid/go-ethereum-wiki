@@ -45,12 +45,12 @@ start an rpc client on port 8000:
 
 ## GUI Client 
 
-    ethereal [options]
+    mist [options]
     
 Options:
 
     -asset_path="": absolute path to GUI assets directory
-    -datadir=".ethereal": specifies the datadir to use. Takes precedence over config file.
+    -datadir=".mist": specifies the datadir to use. Takes precedence over config file.
     -export=false: export private key
     -genaddr=false: create a new priv/pub key
     -genesis=false: prints genesis header and exits
@@ -67,4 +67,4 @@ default value after =. Note the `=` is optional.
 
 Example: 
 
-    ethereal --asset_path /absolute/path/to/assets
+    mist --asset_path /absolute/path/to/assets
