@@ -28,11 +28,13 @@ Go Ethereum  depends on the secp256k1 C implementation, which means that you are
 
 * Ubuntu: `sudo apt-get install libgmp3-dev libreadline6-dev`
 * Arch: `sudo pacman -S gmp`
+* Fedora: `sudo dnf install gmp-devel readline-devel`
 
 In order to install a few of the other required packages, the mercurial revision control tool is needed:
 
 * Ubuntu: `sudo apt-get install mercurial`
 * Arch: `sudo pacman -S mercurial`
+* Fedora: `sudo dnf install mercurial`
 
 The Ethereum wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions on how to install them.
 
@@ -77,3 +79,21 @@ compilation terminated.
 Try running the last steps from: https://gist.github.com/obscuren/fa1cc95360421194f363
 
 More specifically, the steps starting with: `go get -u -d github.com/obscuren/serpent-go`
+
+#### Linux distribution specific step-by-step install instructions
+
+* Fedora:
+```
+sudo dnf install golang gmp-devel readline-devel mercurial
+mkdir $HOME/go
+export GOPATH=$HOME/go
+cd $GOPATH
+go get -u -d github.com/obscuren/serpent-go
+cd src/github.com/obscuren/serpent-go/
+git submodule init
+git submodule update
+cd $GOPATH
+go get -u -a github.com/ethereum/go-ethereum/mist
+cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereum
+go install -v
+```
