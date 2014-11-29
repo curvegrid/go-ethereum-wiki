@@ -32,9 +32,9 @@ First install Qt 5.3.x (5.2 should work but not supported):
 Now configure some path for go-qml to properly build
 
 ```
-export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.3.1/lib/pkgconfig
-export CGO_CPPFLAGS="-I/usr/local/Cellar/qt5/5.3.1/include/QtCore/5.3.1/QtCore"
-export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.3.1/lib
+export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.3.2/lib/pkgconfig
+export CGO_CPPFLAGS="-I/usr/local/Cellar/qt5/5.3.2/include/QtCore/5.3.2/QtCore"
+export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.3.2/lib
 ```
 
 Fetch `serpent-go` and initialise the submodule:
