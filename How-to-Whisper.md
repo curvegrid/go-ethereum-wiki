@@ -58,3 +58,40 @@ whisper.Watch(Filter{
         },
 })
 ```
+
+## Connecting it all together
+
+Now if we tie it all together and supply whisper as a sub-protocol to the DEV's P2P service we have whisper including peer handling and message propagation.
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/ethereum/go-ethereum/whisper"
+	"github.com/obscuren/secp256k1-go"
+)
+
+func main() {
+	pub, _ := secp256k1.GenerateKeyPair()
+
+	whisper := whisper.New()
+
+	srv := p2p.Server{
+		MaxPeers:   10,
+		Identity:   p2p.NewSimpleClientIdentity("my-whisper-app", "1.0", "", string(pub)),
+		ListenAddr: ":8000",
+		Protocols: []p2p.Protocol{whisper.Protocol()},
+	}
+	if err := srv.Start(); err != nil {
+		fmt.Println("could not start server:", err)
+		os.Exit(1)
+	}
+
+	select {}
+}
+```
