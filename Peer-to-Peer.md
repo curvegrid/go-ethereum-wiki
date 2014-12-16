@@ -46,14 +46,14 @@ func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
             return err // if reading fails return err which will disconnect the peer.
         }
 
-        var myMessage Message
+        var myMessage [1]Message
         err = msg.Decode(&myMessage) // 5.
         if err != nil {
             // handle decode error
             continue
         }
         
-        switch myMessage {
+        switch myMessage[0] {
         case "foo":
             err := ws.WriteMsg(p2p.NewMsg(messageId, "bar"))  // 6.
             if err != nil {
