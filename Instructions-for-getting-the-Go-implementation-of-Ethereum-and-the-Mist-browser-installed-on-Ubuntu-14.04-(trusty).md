@@ -13,9 +13,12 @@ Go Ethereum depends on the secp256k1 C implementation, which means that you are 
 ###Enable all core software repositories
 For anyone following precisely the process I am following to get this set up on a USB startup disk, you need to go through the software sources. This is called 'software and updates' in Ubuntu 14.04, you need to enable all of the by-default unselected categories of the repository. Once these repository branches are enabled you can install mercurial. Much the same will probably apply to a standard in-place installation of 14.04 as well, you may have enabled some of them in particular by selecting to install the installation of the mp3 codec and other 'nonfree' that will be a bit different from what is not enabled in a usb startup disk with a persistence file. There is no harm in having all of them enabled, though some are not necessary for this project, a blanket enabling of them all will ensure that everything is available.
 
+###Optional: Mercurial
 In order to install a few of the other required packages, the mercurial revision control tool is needed:
 
     sudo apt-get install mercurial
+
+Note that this is not actually required for the procedure I outline in this document, however it can be used in other procedures that you can find in other places related to ethereum-go.
 
 ###Installing Go 1.4 from Source
 The next step is to install Go itself. Because I am of the opinion it is always better to use the most up to date version, since sooner or later the platform will move onto this anyway, and I know that Ethereum and the Mist browser work in this environment from previous installations, next step is to download and build the source of the Go 1.4 package. 
