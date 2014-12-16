@@ -45,7 +45,7 @@ You will need to create the directory ~/gopath. The go package will create the r
 
 I should note that both the ethereum wiki and the go wiki do not give clear and simple instructions for how to set up a go environment, it is somewhat arbitrary but I think the structure I have suggested is logical. There is also issues later on with setting working directories for the actual executables of Mist and Ethereum CLI, I will discuss this later.
 
-In previous attempts I have been very ad-hoc as to how I do this but in this guide I am aiming to simplify and make sure every step is done in the most logical possible way. Everything will live within the 'go' folder which in my procedure I suggest you place in the root of your user profile folder, /home/<username>
+In previous attempts I have been very ad-hoc as to how I do this but in this guide I am aiming to simplify and make sure every step is done in the most logical possible way. Everything will live within the 'go' folder which in my procedure I suggest you place in the root of your user profile folder, /home/username
 
 ###Qt5 and g++
 Next, there is a whole collection of other prerequisites, mainly g++ and QT 5 that need to be installed. As described on this page: https://github.com/ethereum/cpp-ethereum/wiki/Building-on-Ubuntu#install-dependencies - these are the installation commands you will need to proceed from here:
