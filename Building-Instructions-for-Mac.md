@@ -4,7 +4,7 @@
 brew tap caktux/ethereum
 brew install go-ethereum
 ```
-Then run `ethereal` (GUI) or `ethereum` (CLI)
+Then run `mist` (GUI) or `ethereum` (CLI)
 
 For options and patches, see: https://github.com/caktux/homebrew-ethereum
 
