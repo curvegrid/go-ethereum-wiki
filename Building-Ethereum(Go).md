@@ -9,6 +9,20 @@
 
 ## Building for Linux
 
+### Install from PPA on Ubuntu
+
+For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the -dev one.
+
+```
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ethereum/ethereum
+sudo add-apt-repository ppa:ethereum/ethereum-dev
+sudo apt-get update
+sudo apt-get install go-ethereum
+```
+
+Run `mist` for the GUI or `ethereum` for the CLI.
+
 ### Automatic installation
 [This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
