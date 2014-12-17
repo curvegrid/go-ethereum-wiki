@@ -33,5 +33,24 @@ Block processing starts in the `ChainManager` (https://github.com/ethereum/go-et
                      * it's worth noting that `jump` (https://github.com/ethereum/go-ethereum/blob/docbranch/vm/vm_debug.go#L88) uses the jump positions in order to determine whether the `JUMP` landed on a valid position.
                      * .... Run code .... (evaluation of code is a different topic)
                      * Eventually the execution will end, be it a success or a failure (stack err, OOG, depth level, etc) and return a value and whether it was successful.
-               
-              
+    * Evaluate outcome and set the code accordingly (if action was create) (https://github.com/ethereum/go-ethereum/blob/docbranch/core/state_transition.go#L178)
+    * Update the state changes made during the state transition (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L140)
+    * Create a new receipt for validity checks at the end of the transaction processing (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L143)
+    * Validate the receipts by creating a new bloom filter out of it and compare it against the received block's bloom (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L204)
+    * Validate the transaction hash (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L210)
+    * Validate the receipt hash (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L216)
+    * Accumulate the reward for the miner (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L222)
+        * Validate the uncle's parent (must be in chain) (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L311)
+        * Validate the uncle's block number (not greater than 6) (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L316)
+        * Validate the uncle's not includes multiple times (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L320)
+        * Reward miner (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L338)
+    * Update the state with _all_ changes and validate the merkle root (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L228)
+    * Calculate the total difficulty of the block (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L234)
+    * Sync the state to the db (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L236)
+    * Return the total difficulty if the process was a success (https://github.com/ethereum/go-ethereum/blob/docbranch/core/block_manager.go#L245)
+* Write block to the database (https://github.com/ethereum/go-ethereum/blob/docbranch/core/chain_manager.go#L292)
+* Compare the total difficulty of the process block to our current known TD (https://github.com/ethereum/go-ethereum/blob/docbranch/core/chain_manager.go#L293) if greater than:
+    * Set new TD (https://github.com/ethereum/go-ethereum/blob/docbranch/core/chain_manager.go#L298)
+    * Insert in to the canonical chain by setting it as current block (https://github.com/ethereum/go-ethereum/blob/docbranch/core/chain_manager.go#L292)
+
+## fin     
