@@ -1,12 +1,12 @@
 ## Option 1: Homebrew tap
 
 ```
-brew tap caktux/ethereum
+brew tap ethereum/ethereum
 brew install go-ethereum
 ```
 Then run `mist` (GUI) or `ethereum` (CLI)
 
-For options and patches, see: https://github.com/caktux/homebrew-ethereum
+For options and patches, see: https://github.com/ethereum/homebrew-ethereum
 
 
 ## Option 2: SLOLI, the one line installer
