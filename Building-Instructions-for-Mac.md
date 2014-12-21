@@ -25,16 +25,16 @@ http://forum.ethereum.org/discussion/905/go-ethereum-cli-ethereal-simple-build-g
 
 This option is meant for OS X but you could probably be applied to any *NIX OS given you correct some of the paths (mainly Qt). I'll also assume you've Go 1.3 installed. If not refer to [this](https://github.com/ethereum/go-ethereum/wiki/Installing-Go) page.
 
-First install Qt 5.3.x (5.2 should work but not supported):
+First install Qt 5.4.x (5.3 works; 5.2 should also work, but is not officially supported):
 
 ```brew install qt5```
 
 Now configure some path for go-qml to properly build
 
 ```
-export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.3.2/lib/pkgconfig
-export CGO_CPPFLAGS="-I/usr/local/Cellar/qt5/5.3.2/include/QtCore/5.3.2/QtCore"
-export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.3.2/lib
+export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.4.0/lib/pkgconfig
+export CGO_CPPFLAGS="-I/usr/local/Cellar/qt5/5.4.0/include/QtCore/5.4.0/QtCore"
+export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.4.0/lib
 ```
 
 Fetch `serpent-go` and initialise the submodule:
