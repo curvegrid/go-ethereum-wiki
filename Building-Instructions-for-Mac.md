@@ -40,15 +40,15 @@ export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.4.0/lib
 Fetch `serpent-go` and initialise the submodule:
 
 ```
-go get -u -d github.com/obscuren/serpent-go
-cd $GOPATH/src/github.com/obscuren/serpent-go
+go get -u -d github.com/ethereum/serpent-go
+cd $GOPATH/src/github.com/ethereum/serpent-go
 git submodule init && git submodule update
 ```
 
 Compile **Mist**
 
 ```
-go get -u github.com/ethereum/go-ethereum/mist && mist
+go get -u github.com/ethereum/go-ethereum/cmd/mist && mist
 ```
 
 We're almost there; since go doesn't directly build `*.app` files, we'll use the [go build](https://github.com/ethereum/go-build) tool.
