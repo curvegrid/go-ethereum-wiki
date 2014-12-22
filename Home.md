@@ -6,4 +6,4 @@ Go Ethereum tries to keep the amount of external (C) libs to a minimum. At the t
 * [Instructions for building Ethereum-Go on Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-%28trusty%29)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
-* [Pipe API](https://github.com/ethereum/go-ethereum/wiki/Pipe)
+* [eXtended Ethereum API](https://github.com/ethereum/go-ethereum/wiki/XEth)
