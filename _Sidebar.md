@@ -13,25 +13,17 @@
 ### Developing
 [JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API)
 
-[[QML PoC6 API]]
+[[QML API]]
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
 [JSON-RPC API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JSON-RPC-API)
-
-[Mutan 0.5](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
 [Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
 [iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
-
-### Next (Develop)
-
-[Mutan 0.6](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.6)
-
-[Mutan 0.6 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.6-Examples)
 
 
 ### PoC-6
