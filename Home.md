@@ -5,11 +5,5 @@ Go Ethereum tries to keep the amount of external (C) libs to a minimum. At the t
 * [Build instructions for Ethereum(Go)](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum(Go))
 * [Instructions for building Ethereum-Go on Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-%28trusty%29)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
-* [PoC 5 JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API)
-* [PoC 5 Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
-* [Mutan lang](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4)
-* [Mutan online editor & compiler](http://mutan.jeffew.com)
 * [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
-* [iceCREAM (EVM Debugger)](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
-
 * [Pipe API](https://github.com/ethereum/go-ethereum/wiki/Pipe)
