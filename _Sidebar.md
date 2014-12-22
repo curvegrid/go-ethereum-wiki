@@ -13,7 +13,7 @@
 ### Developing
 [JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API)
 
-[[QML API]]
+[QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
@@ -45,4 +45,3 @@
 [Mutan 0.2](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
 
 [Mutan 0.2 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2-Example)
-
