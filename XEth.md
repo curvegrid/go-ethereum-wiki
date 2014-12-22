@@ -1,25 +1,25 @@
-# Ethereum Pipe API
+# eXtended Ethereum API
 
 General, easy to use, ethereum query interface. This API allows you to easily interface with ethereum's state and their respective objects, create transactions and directly evaluate contract code.
 
 ```go
-import "github.com/ethereum/eth-go/ethpipe"
+import "github.com/ethereum/go-ethereum/xeth"
 ```
 
 Be aware that all methods return something. Nil isn't ever returned unless explicitly specified.
 
 ### Objects
 
-* `Pipe`: The general Pipe query and information interface
+* `XEth`: Top level query interface
 * `World`: world object through which you can query ethereum's state and objects.
 * `Config`: config object through which you can query the `Config` contract if available.
 * `Object`: object which functions as a proxy for `StateObject`. Returned by `config`
 
 ### Functions
 
-* `New(ethchain.EthManager) *Pipe`: instantiate a new ethpipe object.
+* `New(ethchain.EthManager) *XEth`: instantiate a new ethpipe object.
 
-### `Pipe` Methods
+### `XEth` Methods
 
 * `World() *world`: returns the world object through which you can query ethereum's state.
 * `Balance(address []byte) *Value`: returns the balance of the given `address`.
@@ -55,15 +55,15 @@ Be aware that all methods return something. Nil isn't ever returned unless expli
 ## Example
 
 ```go
-import "github.com/ethereum/eth-go/ethpipe"
+import "github.com/ethereum/go-ethereum/xeth"
 
-pipe := ethpipe.New(ethereum)
+xeth := xeth.New(ethereum)
 
 var addr, privy, recp, data []byte
 var object *ethstate.StateObject
 var key *ethcrypto.KeyPair
 
-world := pipe.World()
+world := xeth.World()
 world.Get(addr)
 world.Coinbase()
 world.IsMining()
@@ -73,15 +73,15 @@ peers := world.Peers()
 peers.Len()
 
 // Shortcut functions
-pipe.Balance(addr)
-pipe.Nonce(addr)
-pipe.Block(addr)
-pipe.Storage(addr, addr)
-pipe.ToAddress(privy)
+xeth.Balance(addr)
+xeth.Nonce(addr)
+xeth.Block(addr)
+xeth.Storage(addr, addr)
+xeth.ToAddress(privy)
 // Doesn't change state
-pipe.Execute(addr, nil, Val(0), Val(1000000), Val(10))
+xeth.Execute(addr, nil, Val(0), Val(1000000), Val(10))
 // Doesn't change state
-pipe.ExecuteObject(object, nil, Val(0), Val(1000000), Val(10))
+xeth.ExecuteObject(object, nil, Val(0), Val(1000000), Val(10))
 
 conf := world.Config()
 namereg := conf.Get("NameReg")
@@ -89,12 +89,12 @@ namereg.Storage(addr)
 
 var err error
 // Transact
-tx_hash, err = pipe.Transact(key, recp, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), nil)
+tx_hash, err = xeth.Transact(key, recp, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), nil)
 if err != nil {
 	t.Error(err)
 }
 // Create
-contract_addr, err = pipe.Transact(key, nil, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), data)
+contract_addr, err = xeth.Transact(key, nil, ethutil.NewValue(0), ethutil.NewValue(0), ethutil.NewValue(0), data)
 if err != nil {
 	t.Error(err)
 }
