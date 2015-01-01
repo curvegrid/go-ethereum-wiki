@@ -32,6 +32,8 @@ chmod +x install
 ./install
 ```
 
+(caveat: it's also necessary to install the `qtdeclarative5-dialogs-plugin` package, which isn't included in the above script) 
+
 ### Manual installation
 
 Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.3 installed (1.2 is fine too). If you do not, please refer to the article [Installing Go 1.3](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
