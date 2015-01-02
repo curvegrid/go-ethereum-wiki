@@ -1,36 +1,34 @@
-The `ethereum` executable (not to be confused with `ethereal`) comes with a JavaScript console. The JS console can be invoked from the command line with the `-js` flag. **note** this flag disables all default logging to **stdout**. If you need log information, `tail -f $ETHEREUM/debug.log`.
+The `ethereum` executable (not to be confused with `mist`) comes with a JavaScript console. The JS console can be invoked from the command line with the `-js` flag. **note** this flag disables all default logging to **stdout**. If you need log information, `tail -f $ETHEREUM/debug.log`.
 
 It's also possible to use `ethereum` directly as a JavaScript intepreter. If you want to load a JavaScript file and invoke the VM directly execute `ethereum [options] <filename>`. 
 
 ## API
 
-The JavaScript environment shares all bindings with the [Ext. JavaScript API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JavaScript-API).
+The JavaScript REPL that comes with `ethereum` and it's API should not be confused with the [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API). It tries to mimic the DApp API as much as possible except that private key accessibility is still possible. The intention of the REPL is very clear; utility. 
 
 The Ethereum API is available through the `eth` object and contains the following methods:
 
-* `getBlock (hash)`
+* `block (hash)`
     Retrieves a block by either the address or the number. If supplied with a string it will assume address, number otherwise.
 * `transact (sec, recipient, value, gas, gas price, data)`
     Creates a new transaction using your current key.
-* `create (sec, value, gas, gas price, init, body)`
-    Creates a new contract using your current key.
-* `getKey ()`
+* `gxey ()`
     Retrieves your current key in hex format.
-* `getStorageAt (object address, storage address)`
+* `storageAt (object address, storage address)`
     Retrieves the storage address of the given object.
-* `getBalanceAt (address)`
+* `balanceAt (address)`
     Retrieves the balance at the current address
 * `secretToAddress (sec)`
     Retrieves the address of the specified secret key.
-* `getPeerCount()` 
+* `peerCount()` 
     Returns the number of connected peers.
-* `getIsMining()` 
+* `isMining()` 
     Returns whether or not the current node is mining.
-* `getIsListening()` 
+* `isListening()` 
     Returns whether or not the current node is listening for connections.
-* `getCoinBase()` 
+* `coinbase()` 
     Returns the current coinbase address.
-* `getTxCountAt()` 
+* `txCountAt()` 
     Returns the transaction nonce of the current key.
 * `watch (address [, storage address], cb)`
     Watches for changes on a specific address' state object such as state root changes or value changes.
