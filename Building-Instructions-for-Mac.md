@@ -27,6 +27,8 @@ This option is meant for OS X but you could probably be applied to any *NIX OS g
 
 First install Qt 5.4.x (5.3 works; 5.2 should also work, but is not officially supported):
 
+**WARNING: There is a breaking bug in QT 5.4.0. See [issue #212](https://github.com/ethereum/go-ethereum/issues/212) for more information and instructions on downgrading to 5.3.2**
+
 ```brew install qt5```
 
 Now configure some path for go-qml to properly build
@@ -58,4 +60,4 @@ git clone git@github.com:ethereum/go-build.git
 cd go-build/osx && python build.py
 ```
 
-This will eave a `Mist.app` in the **osx** directory.
+This will save a `Mist.app` in the **osx** directory.
