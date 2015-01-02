@@ -58,7 +58,7 @@ The StateObject represents an object which has been stored in the state trie and
 
 ### PKey
 
-##### `getKey()`
+##### `key()`
 
 The Key object is a key pair consisting of a private and public key from which an address can be derived.
 
