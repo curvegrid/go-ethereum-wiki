@@ -58,7 +58,7 @@ The Ethereum wallet also requires Qt and the Go QML binding. Please refer to [Bu
 
 Since you have chosen Ethereum in Go instead of C++, you get the simplified installation and can download the Ethereum build with just one command (don't tell the C++ guys it was this easy!):
 
-`go get -u github.com/ethereum/go-ethereum/ethereum`
+`go get -u github.com/ethereum/go-ethereum/cmd/ethereum`
 
 Now you can run the program:
 
@@ -80,21 +80,21 @@ Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaSc
 
 `go get -u -a github.com/ethereum/go-ethereum/mist`
 
-`cd $GOPATH/src/github.com/ethereum/go-ethereum/mist && mist`
+`cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist`
 
 #### Troubleshooting
 1. If you get:
 ```
 go get -u github.com/ethereum/go-ethereum/ethereum
-# github.com/obscuren/serpent-go
-../go/src/github.com/obscuren/serpent-go/all.cpp:1:30: fatal error: serpent/bignum.cpp: No such file or directory
+# github.com/etheruem/serpent-go
+../go/src/github.com/etheruem/serpent-go/all.cpp:1:30: fatal error: serpent/bignum.cpp: No such file or directory
  #include "serpent/bignum.cpp"
                               ^
 compilation terminated.
 ```
 Try running the last steps from: https://gist.github.com/obscuren/fa1cc95360421194f363
 
-More specifically, the steps starting with: `go get -u -d github.com/obscuren/serpent-go`
+More specifically, the steps starting with: `go get -u -d github.com/etheruem/serpent-go`
 
 #### Linux distribution specific step-by-step install instructions
 
@@ -104,12 +104,12 @@ sudo dnf install golang gmp-devel readline-devel mercurial
 mkdir $HOME/go
 export GOPATH=$HOME/go
 cd $GOPATH
-go get -u -d github.com/obscuren/serpent-go
-cd src/github.com/obscuren/serpent-go/
+go get -u -d github.com/etheruem/serpent-go
+cd src/github.com/etheruem/serpent-go/
 git submodule init
 git submodule update
 cd $GOPATH
-go get -u -a github.com/ethereum/go-ethereum/mist
-cd $GOPATH/src/github.com/ethereum/go-ethereum/ethereum
+go get -u -a github.com/ethereum/go-ethereum/cmd/mist
+cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/ethereum
 go install -v
 ```
