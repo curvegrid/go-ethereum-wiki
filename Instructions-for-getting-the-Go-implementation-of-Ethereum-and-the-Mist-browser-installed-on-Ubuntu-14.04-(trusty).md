@@ -80,18 +80,18 @@ Note that the last command for me flagged that there was not a public key to ver
 ##Installing Ethereum and Mist
 At last you will now be finished with all the prerequisites. The following commands will build ethereum CLI and the Mist GUI client for you:
 
-    go get -u github.com/ethereum/go-ethereum/ethereum
+    go get -u github.com/ethereum/go-ethereum/cmd/ethereum
 
-    go get -u -a github.com/ethereum/go-ethereum/mist
+    go get -u -a github.com/ethereum/go-ethereum/cmd/mist
 
 The other gotcha to be aware of is that mist does not automatically look in the right location for its GUI assets. for this reason you have to launch it using the following command:
 
-    cd $GOPATH/src/github.com/ethereum/go-ethereum/mist && mist
+    cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
 
 To eliminate the need to remember this cumbersome command, I recommend you create the following file in $GOPATH/bin :
 
     #!/bin/bash
-    cd $GOPATH/src/github.com/ethereum/go-ethereum/mist && mist
+    cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
 
 I called the file 'misted' and you have to make it executable so you don't have to call the shell to execute it:
 
