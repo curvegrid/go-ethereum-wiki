@@ -11,6 +11,8 @@
 
 ### Install from PPA on Ubuntu
 
+*[An alternative guide is available](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty)). These should probably be merged*
+
 For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the -dev one.
 
 ```
