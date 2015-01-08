@@ -27,7 +27,8 @@ Run `mist` for the GUI or `ethereum` for the CLI.
 
 ### Automatic installation
 
-**Warning: This script is outdated** 
+**Warning: This script is outdated**
+
 [This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
 ```
@@ -82,7 +83,7 @@ Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaSc
 
 #### Installing Mist (GUI)
 
-`go get -u -a github.com/ethereum/go-ethereum/mist`
+`go get -u -a github.com/ethereum/go-ethereum/cmd/mist`
 
 `cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist`
 
