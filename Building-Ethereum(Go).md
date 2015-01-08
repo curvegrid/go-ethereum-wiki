@@ -26,6 +26,8 @@ sudo apt-get install go-ethereum
 Run `mist` for the GUI or `ethereum` for the CLI.
 
 ### Automatic installation
+
+**Warning: This script is outdated** 
 [This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
 ```
