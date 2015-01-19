@@ -47,7 +47,7 @@ Offset  |||
 0       | signature | Ensures authenticity of sender, `SIGN(sender-privkey, MDC)`
 65      | MDC       | Ensures integrity of packet, `SHA3(sender-pubkey || type || data)`
 97      | type      | Single byte in range [1, 4] that determines the structure of Packet Data
-98      | data      | RLP encoded, see section Packet Data Contents.
+98      | data      | RLP encoded, see section Packet Data
 
 The packets are signed and authenticated. The sender's Node ID is determined by
 recovering the public key from the signature.
