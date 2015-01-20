@@ -44,8 +44,8 @@ Offset  |Name| Description|
 ------: | ----------- | -------------------------------------------------------------------------
       0 | `ecies-nonce`   |  256 bit value 
      32 | `cipher-text`         | ECIES cipher (uses AES-256, blocksize 16)
-     256 | `ecies-mac` | ECIES message authentication code (256 bit)
-     288 | **Total*
+     240 | `ecies-mac` | ECIES message authentication code (256 bit)
+     272 | **Total*
 
 
 
@@ -91,7 +91,7 @@ Whether a token was used is indicated in the last byte (`known-peer`) of the han
 `known-peer` is a byte indicating if a previous session token is used (0x00 if not, 0x01 if yes), so basically signal whether the initiator recognises the receiver as a known peer.
 
 Altogether the initiator handshake is 65+32+64+32+1 = 194 bytes long.
-Rounding it up to the nearest 32 byte block boundary it gives a 224 byte long ECIES ciphertext size and overall 288 byte encrypted payload.
+AES-256 operates on 128-bit (16 byte) blocks, so rounding it up to the nearest 16 byte block boundary it gives a 208 byte long ECIES ciphertext size and overall 272 byte encrypted payload.
 
 ### Receiver handshake
 
@@ -105,6 +105,14 @@ The receiver handshake is sent encrypted with the initiator's public key using E
 
     receiver-handshake = ECIES.Encrypt(initiator-pubkey, receiver-handshake)
 
+Offset  |Name| Description|
+------: | ----------- | -------------------------------------------------------------------------
+      0 | `ecies-nonce`   |  256 bit value 
+     32 | `cipher-text`         | ECIES cipher (uses AES-256, blocksize 16)
+     144 | `ecies-mac` | ECIES message authentication code (256 bit)
+     176 | **Total*
+
+
 where `receiver-handshake` has the following structure:
 
 Offset |Name| Description|
@@ -117,6 +125,8 @@ Offset |Name| Description|
 It is somewhat unclear what the expected behaviour is if initiator submits an auth with session token, but receiver does not remember it and responds with 0x00. Should the connection be terminated or is there a fallback to shared secret?
 
 Originator needs to inspect the receiver handshake response to recover `receiver-ecdhe-random-pubkey` and `receiver-nonce`. And this completes the key exchange.
+
+The 97 byte handshake rounds up to 7x16 = 112 AES cipher, an overall 176byte long ECIES encrypted payload.
 
 ### Creating a new secure session
 Once the encryption handshake's been completed, both parties can calculate the same initial values for encryption and authentication.
