@@ -38,14 +38,15 @@ Initiator sends the following handshake.
 
     initiator-handshake := ECIES.Encrypt(remote-pubkey, auth)
 
-The initiator handshake is the authentication message `auth` encrypted with the remote peer's known public key using ECIES (Elliptic Curve Integrated Encryption System) and will have the following structure:
+The initiator handshake is the authentication message `auth` encrypted with the remote peer's known public key using ECIES (Elliptic Curve Integrated Encryption System). Using AES256 in CTR mode with full MAC, the ECIES encrypted payload will have the following structure:
 
 Offset  |Name| Description|
 ------: | ----------- | -------------------------------------------------------------------------
-      0 | `ecies-nonce`   |  256 bit value 
-     32 | `cipher-text`         | ECIES cipher (uses AES-256, blocksize 16)
-     240 | `ecies-mac` | ECIES message authentication code (256 bit)
-     272 | **Total*
+      0 | `ecies-pubkey`   |  65 byte representation of the pubkey needed for symmetric cipher
+     65 | `AES-initial-vector` | 16 byte initial block for AES
+     81 | `cipher-text`         | ECIES ciphertext size identical to plain text (uses AES-256 CTR, blocksize 16)
+     275 | `ecies-mac` | ECIES message authentication code (256 bit)
+     307 | **Total**
 
 
 
@@ -107,10 +108,11 @@ The receiver handshake is sent encrypted with the initiator's public key using E
 
 Offset  |Name| Description|
 ------: | ----------- | -------------------------------------------------------------------------
-      0 | `ecies-nonce`   |  256 bit value 
-     32 | `cipher-text`         | ECIES cipher (uses AES-256, blocksize 16)
-     144 | `ecies-mac` | ECIES message authentication code (256 bit)
-     176 | **Total*
+      0 | `ecies-pubkey`   |  65 byte representation of the pubkey needed for symmetric cipher
+     65 | `AES-initial-vector` | 16 byte initial block for AES
+     81 | `cipher-text`         | ECIES ciphertext size identical to plain text (uses AES-256 CTR, blocksize 16)
+     178 | `ecies-mac` | ECIES message authentication code (256 bit)
+     210 | **Total**
 
 
 where `receiver-handshake` has the following structure:
