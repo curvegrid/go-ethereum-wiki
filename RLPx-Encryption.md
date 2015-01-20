@@ -2,15 +2,15 @@
 
 This section describes how a peer session is created. 
 
-It is assumed that the underlying trasport layer has an already established connection between peers. A session is established in two phases. The first phase is the encryption handshake and the second is the base protocol handshake. 
+It is assumed that the underlying trasport layer has an already established connection between peers. A session is established in two phases. The first phase is **peer authentication** with an encryption handshake (or crypto handshake) and the second is the base protocol handshake. 
 
-The purpose of the encryption handshake is to establish a secure communication channel by setting up an encrypted, authenticated message stream. 
+The purpose of peer authentication is to establish a secure communication channel by setting up an encrypted, authenticated message stream. And the purpose of the encryption handshake is to exchange ephemeral keys to set initial values for this secure session.
 
-The second phase is to negotiate supported protocols and described in the DEVp2p wire protocol specification. 
+The second phase is to negotiate supported protocols, checking versions and network Ids and described in the DEVp2p wire protocol specification. 
 
 From the point of view of one peer we will distinguish connections in two ways. If the connection was initiated by a peer, we say that they are the **initiator**, and the other peer is **receiver**. The word __remote__ is used to describe the 'other' peer in a connection when talking from a point of view of a node. 
 
-The other disinction is whether the remote peer is known or new. A known peer is one which has previously been connected and for which a corresponding session token is remembered. Session tokens are assumed to be persisted across sessions. 
+The other disinction is whether the remote peer is known or new. A known peer is one which has previously been connected and for which a corresponding **session token** is remembered. Session tokens are assumed to be persisted across sessions. 
 
 The protocol is somewhat different depending on whether the peer is initiator or responder on the one hand and whether the remote peer is known or new.
 
@@ -21,7 +21,7 @@ Creating a secure connection consists of the following steps.
 1. Initiator sends an authentication message to receiver
 2. Receiver responds with an authentication response message and sets up a secure session
 3. Initiator checks receiver's response and establishes a secure session 
-4. Initiator then sends base protocol handshake on the established secure channel. 
+4. Receiver and Initiator then send base protocol handshake on the established secure channel. 
 
 Either side may disconnect if authentication fails or if the protocol handshake isn’t appropriate. 
 
@@ -29,7 +29,7 @@ If the handshake fails, if and only if initiating a connection TO a known peer, 
 
 All packets following the encryption handshake, including protocol negotiation handshake in step 4, are framed, encrypted and authenticated using the setup negotiated during the encryption handshake. 
 
-If the handshakes succeed, the fixed array of protocols supported by both peers will run on the connection parallelly to send and receive messages. Once established, packets are encapsulated as frames which are encrypted using AES-256 in CTR mode. Initial values for the message authentication and cipher are never the same, key material for the session is derived via a KDF and ECDHE-derived shared-secret. ECC uses secp256k1 curve (ECP). It is the purpose of the encryption handshake to negotiate these key values for a new secure session.
+If the handshakes succeed, the fixed array of protocols supported by both peers will run on the connection paralelly to send and receive messages. Once established, packets are encapsulated as frames which are encrypted using AES-256 in CTR mode. Initial values for the message authentication and cipher are never the same, key material for the session is derived via a KDF and ECDHE-derived shared-secret. ECC uses secp256k1 curve (ECP). It is the purpose of the encryption handshake to negotiate these key values for a new secure session.
 
 ## Encryption handshake spec
 ### Initiator handshake 
@@ -38,7 +38,17 @@ Initiator sends the following handshake.
 
     initiator-handshake := ECIES.Encrypt(remote-pubkey, auth)
 
-The initiator handshake is the authentication message `auth` encrypted with the remote peer's known public key using ECIES (Elliptic Curve Integrated Encryption System). 
+The initiator handshake is the authentication message `auth` encrypted with the remote peer's known public key using ECIES (Elliptic Curve Integrated Encryption System) and will have the following structure:
+
+Offset  |Name| Description|
+------: | ----------- | -------------------------------------------------------------------------
+      0 | `ecies-nonce`   |  256 bit value 
+     32 | `cipher-text`         | ECIES cipher (uses AES-256, blocksize 16)
+     256 | `ecies-mac` | ECIES message authentication code (256 bit)
+     288 | **Total*
+
+
+
 
 This authentication message serves to prove the following: 
 - the owner of the private key wants a connection with the node controlling a particular public key
@@ -50,11 +60,11 @@ and has the following structure:
 Offset  |Name| Description|
 ------: | ----------- | -------------------------------------------------------------------------
       0 | `signature`   | `Sign(ecdhe-random-key, shared-secret ^ init_nonce)`
-     65 | `ephemeral-key-mac`         | `SHA3(initiator-ecdhe-random-pubkey)`
-     97 | `permanent-public-key` | NodeId public key
-    129 | `initiator-nonce` | a random key generated by the initiator for this session
-    161 | `known-peer` | flag indicating if a token was used as shared secret, 0x00: no, 0x01: yes 
-
+     65 | `ephemeral-key-mac`         | `SHA3(initiator-ecdhe-random-pubkey)` (256 bit)
+     97 | `permanent-public-key` | NodeId public key (512 bit)
+    161 | `initiator-nonce` | a random key generated by the initiator for this session
+    193 | `known-peer` | flag indicating if a token was used as shared secret, 0x00: no, 0x01: yes 
+    194 | **Total
 
 The signature part is there to check if both parties agree on the same shared secret. Initiator signs the shared secret with an ephemeral key using standard ECDSA with P256 Curve. The signature length is therefore exactly 65 bytes.
 
@@ -80,7 +90,8 @@ Whether a token was used is indicated in the last byte (`known-peer`) of the han
 
 `known-peer` is a byte indicating if a previous session token is used (0x00 if not, 0x01 if yes), so basically signal whether the initiator recognises the receiver as a known peer.
 
-Altogether the initiator handshake is 65+32+32+32+1 = 162 bytes long.
+Altogether the initiator handshake is 65+32+64+32+1 = 194 bytes long.
+Rounding it up to the nearest 32 byte block boundary it gives a 224 byte long ECIES ciphertext size and overall 288 byte encrypted payload.
 
 ### Receiver handshake
 
@@ -99,10 +110,9 @@ where `receiver-handshake` has the following structure:
 Offset |Name| Description|
 |------------- | ------|-------------------------------------------------------------------
   0  |`receiver-ecdhe-random-pubkey`  | newly generated ephemeral key to serve as basis for session-secret
-32 |`receiver-nonce` |a randomly generated nonce 
-64 |`receiver-known-peer` |if receiver has found session token for initiator (0x00) or not (0x01)
-
-Altogether then the receiver handshake is 65 bytes long.
+64 |`receiver-nonce` |a randomly generated nonce 
+96 |`receiver-known-peer` |if receiver has found session token for initiator (0x00) or not (0x01)
+97 | **Total**
 
 It is somewhat unclear what the expected behaviour is if initiator submits an auth with session token, but receiver does not remember it and responds with 0x00. Should the connection be terminated or is there a fallback to shared secret?
 
