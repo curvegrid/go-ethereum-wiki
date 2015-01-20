@@ -91,9 +91,6 @@ Whether a token was used is indicated in the last byte (`known-peer`) of the han
 
 `known-peer` is a byte indicating if a previous session token is used (0x00 if not, 0x01 if yes), so basically signal whether the initiator recognises the receiver as a known peer.
 
-Altogether the initiator handshake is 65+32+64+32+1 = 194 bytes long.
-AES-256 operates on 128-bit (16 byte) blocks, so rounding it up to the nearest 16 byte block boundary it gives a 208 byte long ECIES ciphertext size and overall 272 byte encrypted payload.
-
 ### Receiver handshake
 
 Receiver receives the initiator handshake and decrypts it with its own public key. If the initiator indicated the use of a session token (last byte is set to 0x01) and the receiver finds it (under `persistent-public-key` or otherwise), then it can recover initiator's ephemeral public key with ECrecover by supplying the plain text which is `shared_secret^initiator-nonce`:
@@ -127,8 +124,6 @@ Offset |Name| Description|
 It is somewhat unclear what the expected behaviour is if initiator submits an auth with session token, but receiver does not remember it and responds with 0x00. Should the connection be terminated or is there a fallback to shared secret?
 
 Originator needs to inspect the receiver handshake response to recover `receiver-ecdhe-random-pubkey` and `receiver-nonce`. And this completes the key exchange.
-
-The 97 byte handshake rounds up to 7x16 = 112 AES cipher, an overall 176byte long ECIES encrypted payload.
 
 ### Creating a new secure session
 Once the encryption handshake's been completed, both parties can calculate the same initial values for encryption and authentication.
