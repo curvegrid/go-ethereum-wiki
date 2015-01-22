@@ -57,7 +57,6 @@ func main() {
 	}
 	fmt.Println("balance =", balance)
 
-
 	// This will do an actual transaction (const = false)
 	ret, err := account.Call("send", Address([]byte("my_address")), Int256("111111111111111111"))
 	if err != nil {
@@ -68,6 +67,13 @@ func main() {
 	// "low" level transaction method w/ private key
 	to := state.GetAccount(toAddress)
 	tx, err := state.Transact(hot, to, Int256("123"), Int256("123"), Int256("123"), []byte("data"))
+	if err != nil {
+		exit(err)
+	}
+	fmt.Println("tx =", tx)
+
+	// This should return an error (no private key)
+	tx, err = state.Transact(to, hot, Int256("123"), Int256("123"), Int256("123"), []byte("data"))
 	if err != nil {
 		exit(err)
 	}
