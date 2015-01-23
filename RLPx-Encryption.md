@@ -143,8 +143,8 @@ The other parameters are only relevant for this session:
 
     aes-secret = sha3(ecdhe-shared-secret || shared-secret)
     mac-secret = sha3(ecdhe-shared-secret || aes-secret)
-    receiver-mac = sha3(mac-secret^receiver-nonce || init-auth)
-    initiator-mac = sha3(mac-secret^initiator-nonce || init-auth)
+    initiator-mac = sha3(mac-secret^receiver-nonce || init-auth)
+    receiver-mac = sha3(mac-secret^initiator-nonce || init-auth)
 
 Note that if any of these calculations do not match for the peers, frame authentication will fail immediately, so the connection will be terminated. 
 
@@ -160,7 +160,7 @@ Ingress MAC is updated with the plaintext of the decrypted frame payload and the
 
 For the MACs to match, we need to ensure that initiator's egress MAC should be identical to receiver's ingress MAC, and initiator's ingress MAC should be identical to receiver's egress MAC. So given the key definitions at the end of the handshake, initiator initialises its `egress-mac` with `initiator-mac` and receiver initialises its `egress-mac` with `receiver-mac`.
 
-Encryption uses the AES-256 block cipher using `aes-secret` as key and initial vector??
+Encryption uses the AES-256 block cipher in CTR mode using `aes-secret` as key and initial vector ?
 
 
 
