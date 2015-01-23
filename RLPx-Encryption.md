@@ -150,15 +150,15 @@ Note that if any of these calculations do not match for the peers, frame authent
 
 # Encryption and authentication 
 
-The connection is secured by encryption and authentication. 
+The connection is secured by encryption and authentication. Encryption and authentication is done frame by frame separately for headers and payload.
 
-Authentication is using Keyed-Hash Message Authentication Code (HMAC FIPS198). An HMAC is set up for incoming (**ingress**) and outgoing (**egress**) traffic. 
+Authentication is using Keyed-Hash Message Authentication Code (HMAC FIPS198) using SHA256. An HMAC is set up for incoming (**ingress**) and outgoing (**egress**) traffic. 
 
-Egress MAC is updated with the the plaintext of the outgoing frame payload and the checksum is sent appended to the frame (in cleartext).
+Egress MAC is updated with the plaintext of the outgoing frame payload and the checksum is sent appended to the frame (in cleartext).
 
-Ingress MAC is updated with the plaintext of the decrypted frame payload and the checksum is verified against the MAC received appended to the frame. If they do not match, the datastream has been tampered with, the connection must be terminated. If they match, it proves the authenticity of the frame since the attacker knows the entire history of this session as well as the ephemeral keys exchanged during the handshake. 
+Ingress MAC is updated with the plaintext of the decrypted frame payload and the checksum is verified against the MAC received appended to the frame. If they do not match, the datastream has been tampered with, the connection must be terminated. If they match, it proves the authenticity of the frame since an attacker would need the entire history of this session as well as the ephemeral keys exchanged during the handshake even.
 
-For the MACs to match, we need to ensure that initiator's egress MAC should be identical to receiver's ingress MAC, and initiator's ingress MAC should be identical to receiver's egress MAC. So given the key definitions at the end of the handshake, initiator initialises its `egress-mac` with `initiator-mac` and receiver initialises its `egress-mac` with `receiver-mac`.
+For the MACs to match, we need to ensure that initiator's egress MAC is identical to receiver's ingress MAC, and initiator's ingress MAC is identical to receiver's egress MAC. So given the key definitions at the end of the handshake, initiator initialises its `egress-mac` with `initiator-mac` and its `ingress-mac` with `receiver-mac`, whereas receiver initialises its `egress-mac` with `receiver-mac` and its `ingress-mac` with `initiator-mac`.
 
 Encryption uses the AES-256 block cipher in CTR mode using `aes-secret` as key and initial vector ?
 
