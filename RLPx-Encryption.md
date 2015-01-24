@@ -12,7 +12,7 @@ From the point of view of one peer we will distinguish connections in two ways. 
 
 The other disinction is whether the remote peer is known or new. A known peer is one which has previously been connected and for which a corresponding **session token** is remembered. Session tokens are assumed to be persisted across sessions. 
 
-The protocol is somewhat different depending on whether the peer is initiator or responder on the one hand and whether the remote peer is known or new.
+The protocol is somewhat different depending on whether the peer is initiator or receiver on the one hand and whether the remote peer is known or new on the other.
 
 ## Encryption handshake
 
