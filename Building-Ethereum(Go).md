@@ -9,9 +9,11 @@
 
 ## Building for Linux
 
-### Install from PPA on Ubuntu
-
 *[An alternative guide is available](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty)). These should probably be merged*
+
+
+
+### Install from PPA on Ubuntu
 
 For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the -dev one.
 
@@ -27,7 +29,7 @@ Run `mist` for the GUI or `ethereum` for the CLI.
 
 ### Automatic installation
 
-**Warning: This script is outdated**
+**Warning: This script is outdated** however another option for Qt5.4 is https://gist.github.com/tgerring/41275735ebb057b58ea8
 
 [This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
 
