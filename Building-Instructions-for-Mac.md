@@ -12,7 +12,7 @@ For options and patches, see: https://github.com/ethereum/homebrew-ethereum
 
 Assumptions:
 * Go 1.2+ is installed. If not refer to [this](https://github.com/ethereum/go-ethereum/wiki/Installing-Go) page.
-* Brew is installed. If not, run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" and follow the prompts`
+* Brew is installed. If not, run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"` and follow the prompts
 
 Install Qt 5.4.x:
 
