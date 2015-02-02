@@ -3,7 +3,6 @@ This is the Ethereum Wiki for the Go implementation. Ethereum is in heavy develo
 Go Ethereum tries to keep the amount of external (C) libs to a minimum. At the time of writing it uses Qt, secp256-k1 and GNU readline which are both C(++) libraries and therefor it's not possible to do cross compilation. Apart from that it uses [mutan](https://github.com/obscuren/mutan) as its contract development language.
 
 * [Build instructions for Ethereum(Go)](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum(Go))
-* [Instructions for building Ethereum-Go on Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-%28trusty%29)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 * [eXtended Ethereum API](https://github.com/ethereum/go-ethereum/wiki/XEth)
