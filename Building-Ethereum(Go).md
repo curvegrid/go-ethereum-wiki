@@ -6,40 +6,11 @@
 
 [Building Instructions for Mac OS](https://github.com/ethereum/go-ethereum/wiki/Building-Instructions-for-Mac)
 
-
 ## Building for Linux
 
-*[An alternative guide is available](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty)). These should probably be merged*
+[Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty))
 
-
-
-### Install from PPA on Ubuntu
-
-For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the -dev one.
-
-```
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:ethereum/ethereum
-sudo add-apt-repository ppa:ethereum/ethereum-dev
-sudo apt-get update
-sudo apt-get install go-ethereum
-```
-
-Run `mist` for the GUI or `ethereum` for the CLI.
-
-### Automatic installation
-
-**Warning: This script is outdated** however another option for Qt5.4 is https://gist.github.com/tgerring/41275735ebb057b58ea8
-
-[This Mist install script](https://gist.github.com/obscuren/fa1cc95360421194f363) will install everything required on Ubuntu 14.04. 
-
-```
-wget https://gist.githubusercontent.com/obscuren/fa1cc95360421194f363/raw -O install
-chmod +x install 
-./install
-```
-
-(caveat: it's also necessary to install the `qtdeclarative5-dialogs-plugin` package, which isn't included in the above script) 
+**Below information is deprecated**
 
 ### Manual installation
 
