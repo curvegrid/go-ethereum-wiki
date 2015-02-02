@@ -10,9 +10,7 @@
 
 [Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty))
 
-*Below information is deprecated and needs to be cleaned up*
-
-#### Installing Dependencies
+#### Below information is deprecated and needs to be cleaned up
 
 Go Ethereum  depends on the secp256k1 C implementation, which means that you are required to have GMP headers installed:
 
