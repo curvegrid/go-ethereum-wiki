@@ -10,11 +10,7 @@
 
 [Ubuntu 14.04](https://github.com/ethereum/go-ethereum/wiki/Instructions-for-getting-the-Go-implementation-of-Ethereum-and-the-Mist-browser-installed-on-Ubuntu-14.04-(trusty))
 
-**Below information is deprecated**
-
-### Manual installation
-
-Building the current version of Go Ethereum is fairly easy. This article assumes you have Go 1.3 installed (1.2 is fine too). If you do not, please refer to the article [Installing Go 1.3](https://github.com/ethereum/go-ethereum/wiki/Installing-Go).
+*Below information is deprecated and needs to be cleaned up*
 
 #### Installing Dependencies
 
@@ -32,47 +28,6 @@ In order to install a few of the other required packages, the mercurial revision
 
 The Ethereum wallet also requires Qt and the Go QML binding. Please refer to [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) for instructions on how to install them.
 
-#### Installing the node (CLI)
-
-Since you have chosen Ethereum in Go instead of C++, you get the simplified installation and can download the Ethereum build with just one command (don't tell the C++ guys it was this easy!):
-
-`go get -u github.com/ethereum/go-ethereum/cmd/ethereum`
-
-Now you can run the program:
-
-`ethereum -mine`
-
-This will start up the Ethereum mining node. **Please note that if you wish to start multiple go-ethereum processes you must supply a new data directory with `-datadir=".ethereum2"`.**
-
-If you would like to connect to your own mining node, run the following command to start the JS console:
-
-`ethereum -js`
-
-The `-js` option starts the JavaScript REPL, which will let you connect to your mining node with the `addPeer` method:
-
- `eth.addPeer("localhost:30303")`
-
-Please see [JavaScript REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) for the full API specification.
-
-#### Installing Mist (GUI)
-
-`go get -u -a github.com/ethereum/go-ethereum/cmd/mist`
-
-`cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist`
-
-#### Troubleshooting
-1. If you get:
-```
-go get -u github.com/ethereum/go-ethereum/ethereum
-# github.com/etheruem/serpent-go
-../go/src/github.com/etheruem/serpent-go/all.cpp:1:30: fatal error: serpent/bignum.cpp: No such file or directory
- #include "serpent/bignum.cpp"
-                              ^
-compilation terminated.
-```
-Try running the last steps from: https://gist.github.com/obscuren/fa1cc95360421194f363
-
-More specifically, the steps starting with: `go get -u -d github.com/etheruem/serpent-go`
 
 #### Linux distribution specific step-by-step install instructions
 
