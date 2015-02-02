@@ -40,22 +40,24 @@ First install GMP & Readline from repositories:
 sudo apt-get install -y libgmp3-dev libreadline6-dev
 ```
 
-After installation completes, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
+Second, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
 ## Installing Mist
 At last you will now be finished with all the prerequisites. The following commands will build the Ethereum Mist GUI client for you:
 
     go get -u github.com/ethereum/go-ethereum/cmd/mist
 
-* **Note:** Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it using the following command:*
+**Note: Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it from its build directory:**
 
     cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
 
-To eliminate the need to remember this cumbersome command, I recommend you create the following file in $GOPATH/bin :
+To eliminate the need to remember this cumbersome command, you can create the following a file in $GOPATH/bin :
 
     #!/bin/bash
     cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
 
-I called the file 'misted' and you have to make it executable so you don't have to call the shell to execute it:
+Name the file 'misted' and make it executable:
 
     chmod +x $GOPATH/bin/misted
+
+Now mist can be run with the command `misted`
