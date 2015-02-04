@@ -1,6 +1,6 @@
 # eXtended Ethereum API
 
-*This documentation is out-of-date and in need of refresh against current codebase*
+_**NOTE:** This documentation is out-of-date and in need of refresh against current codebase_
 
 General, easy to use, ethereum query interface. This API allows you to easily interface with ethereum's state and their respective objects, create transactions and directly evaluate contract code.
 
