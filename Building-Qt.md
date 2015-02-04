@@ -24,4 +24,4 @@ cd $GOPATH/src/github.com/obscuren/qml && git checkout v1
 go build
 ```
 
-If you receive an error about not being able to find Qt* items, check that PKG_CONFIG_PATH has been set (`echo $PKG_CONFIG_PATH`) and if not, `source /opt/qt54/bin/qt54-env.sh`.
+If you receive an error about not being able to find Qt* items, check that PKG_CONFIG_PATH and LD_LIBRARY_PATH have been set (`echo $PKG_CONFIG_PATH` and `echo $LD_LIBRARY_PATH`) and if not, running `source /opt/qt54/bin/qt54-env.sh` will set the variables for the current session.
