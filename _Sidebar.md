@@ -11,13 +11,12 @@
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
 ### Developing
+
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 
 [JSON-RPC API](https://github.com/ethereum/wiki/wiki/Generic-JSON-RPC)
 
 [QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
-
-[Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
@@ -25,8 +24,9 @@
 
 [iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
 
+### Legacy
 
-### PoC-6
+[Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
 [[QML PoC6 API]]
 
@@ -34,11 +34,7 @@
 
 [[PoC6 JS API]]
 
-### PoC-5
-
 [Mutan 0.4 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
-
-### Legacy
 
 [Mutan 0.4](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4)
 
