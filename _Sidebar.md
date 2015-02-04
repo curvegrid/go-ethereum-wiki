@@ -11,13 +11,13 @@
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
 ### Developing
-[JavaScript API](https://github.com/ethereum/wiki/wiki/Generic-JSON-RPC)
+[JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
+
+[JSON-RPC API](https://github.com/ethereum/wiki/wiki/Generic-JSON-RPC)
 
 [QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
-
-[JSON-RPC API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-JSON-RPC-API)
 
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
