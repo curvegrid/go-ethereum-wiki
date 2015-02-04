@@ -11,7 +11,7 @@
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
 ### Developing
-[JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
+[JavaScript API](https://github.com/ethereum/wiki/wiki/Generic-JSON-RPC)
 
 [QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
 
