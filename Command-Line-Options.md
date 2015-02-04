@@ -16,6 +16,8 @@ Options:
     -port="30303": listening port
     -rpc=false: start rpc server
     -rpcport=8080: port to start json-rpc server on
+    -ws=false: start websocket server (watches /ws path)
+    -wsport=40404: port to listen for websockets on
     -seed=true: seed peers
     -upnp=false: enable UPnP support
     -y=false: non-interactive mode (say yes to confirmations)
@@ -60,6 +62,8 @@ Options:
     -port="30303": listening port
     -rpc=false: start rpc server
     -rpcport=8080: port to start json-rpc server on
+    -ws=false: start websocket server (watches /ws path)
+    -wsport=40404: port to listen for websockets on
     -seed=true: seed peers
     -upnp=false: enable UPnP support
 
