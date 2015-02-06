@@ -32,8 +32,7 @@ Compile **Mist**
 go get -u github.com/ethereum/go-ethereum/cmd/mist
 ```
 
-Run Mist
-_This is necessary as a separate step due to an outstanding bug requiring mist to be run from its build directory_
+Run Mist (_This is necessary as a separate step due to an outstanding bug requiring mist to be run from its build directory_)
 
 ```
 cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && go build && ./mist
