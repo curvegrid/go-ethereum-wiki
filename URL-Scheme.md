@@ -102,8 +102,7 @@ Now you can alternatively host your app in Swarm by creating the following manif
   { "index.html": HASH(<dir>/index.html) },
   { "img/logo.gif": HASH(<dir>/img/logo.gif) },
   { "img/avatars/": HASH(<dir>/img/avatars/index.html) },
-  { "img/avatars/fefe.jpg": HASH(img/avatars/fefe.jpg) },
-  { "img/avatars/": HASH(<dir>/img/avatars/index.html) }
+  { "img/avatars/fefe.jpg": HASH(img/avatars/fefe.jpg) }
 ]
 ```
 
