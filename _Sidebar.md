@@ -14,7 +14,7 @@
 
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 
-[JSON-RPC API](https://github.com/ethereum/wiki/wiki/Generic-JSON-RPC)
+[JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
 [QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
 
