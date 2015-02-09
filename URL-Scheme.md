@@ -24,9 +24,9 @@ Example:
 ``` json
 [
    { 
-      "path": "chat", 
-      "hash": "sdfhsd76ftsd86ft76sdgf78h7tg" 
-      "status": 200
+      "path": "chat",
+      "hash": "sdfhsd76ftsd86ft76sdgf78h7tg",
+      "status": 200,
       "content-type": "document/pdf"
    }
    ...
@@ -56,7 +56,7 @@ Examples:
 ``` json
 [
   {
-   "path": "cv.pdf" 
+   "path": "cv.pdf",
    "content-type": "document/pdf",
    "hash": "sdfhsd76ftsd86ft76sdgf78h7tg", 
   }
