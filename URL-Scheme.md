@@ -8,7 +8,7 @@
 
 Irrespective of the main protocol, `<source>` should be resolved via ethereum `NameReg` (name registration contract).
 It is up to debate how we indicate that. One idea is to use a top level domain, such as `.eth` (<source> == `<name>.eth`)
-In the special case of the bzz protocol, `<source>` must resolve to a Swarm hash of the content (in other words, the root key of the content). This content is assumed to be of mime type `application/bzz-manifest` the only mime-type directly handled by Swarm. 
+In the special case of the bzz protocol, `<source>` must resolve to a Swarm hash of the content (in other words, the root key of the content). This content is assumed to be of mime type `application/bzz-manifest+json` the only mime-type directly handled by Swarm. 
 
 ## Swarm manifests
 
