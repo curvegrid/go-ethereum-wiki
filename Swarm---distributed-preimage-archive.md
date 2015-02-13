@@ -9,6 +9,8 @@
 ## Docs & specs
 - TODO: https://github.com/ethereum/go-ethereum/wiki/Swarm---TODO
 - URL scheme: https://github.com/ethereum/go-ethereum/wiki/URL-Scheme
+- https://github.com/ethereum/go-ethereum/wiki/Swarm---Channels
+- https://github.com/ethereum/go-ethereum/wiki/Peer-to-Peer
 - Dani & Viktor on public wiki: https://github.com/ethereum/wiki/wiki/Distributed-Preimage-Archive
 - Multi-protocol peer selection https://github.com/ethereum/go-ethereum/wiki/Multi-protocol-peer-selection
 - Gav on public wiki: https://github.com/ethereum/cpp-ethereum/wiki/Swarm
