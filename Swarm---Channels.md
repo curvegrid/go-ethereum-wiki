@@ -11,11 +11,11 @@ parameters
 ### additional manifest json fields:
 on manifest entries or global:
 - `cache`: cache entry, ctag?
-- `www`: old web address :) e.g., `http://eth:bzz@google.com`
+- `www`: old web address :) e.g., `http://eth:bzz@google.com` (or just http://mywebsite.com ?)
 - `host`: eth host name registered (or to register) with NameReg
-- `channel-name`: back and forth tracker, 
+- `channelName`: back and forth tracker, 
 - `auth`: devp2p cryptohandshake public key(s)
-- `stream-start`: root key of initial state of the stream 
+- `start`: root key of initial state of the stream 
 - `previous`: previous state of stream 
 - `next`: next state of stream
 
@@ -59,11 +59,11 @@ every named host defines a timeline,
 { "Manifest":
   [
     {
-      "Host": "fefe.eth",
-      "Previous": "ffca34987",
-      "Next": "aefbc4569ab",
-      "This": "90daefaaabbc",
-      "Start": "bbcdff5679ff",
+      "host": "fefe.eth",
+      "previous": "ffca34987",
+      "next": "aefbc4569ab",
+      "this": "90daefaaabbc", // is this possible, writing the hash of this manifest, before its saved? 
+      "start": "bbcdff5679ff",
     }
   ],
   "auth": "3628aeefbc7689523aebc2489",
