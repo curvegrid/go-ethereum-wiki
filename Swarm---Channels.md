@@ -15,7 +15,7 @@ on manifest entries or global:
 - `host`: eth host name registered (or to register) with NameReg
 - `channelName`: back and forth tracker, 
 - `auth`: devp2p cryptohandshake public key(s)
-- `start`: root key of initial state of the stream 
+- `first`: root key of initial state of the stream 
 - `previous`: previous state of stream 
 - `next`: next state of stream
 
@@ -63,7 +63,7 @@ every named host defines a timeline,
       "previous": "ffca34987",
       "next": "aefbc4569ab",
       "this": "90daefaaabbc", // is this possible, writing the hash of this manifest, before its saved? 
-      "start": "bbcdff5679ff",
+      "first": "bbcdff5679ff",
     }
   ],
   "auth": "3628aeefbc7689523aebc2489",
