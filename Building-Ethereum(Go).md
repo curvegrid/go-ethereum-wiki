@@ -1,3 +1,5 @@
+_ **Note:** There are several bugs that may prevent Mist from running correctly within VirtualBox in certain scenarios. See https://www.virtualbox.org/ticket/12746 and https://bugreports.qt.io/browse/QTBUG-43110 _
+
 ## Building for Windows
 
 [Building Instructions for Windows](https://github.com/ethereum/go-build#windows)
