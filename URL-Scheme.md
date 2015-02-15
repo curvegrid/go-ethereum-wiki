@@ -6,9 +6,11 @@
 <protocol>://<source>/<path>
 ```
 
-Irrespective of the main protocol, `<source>` should be resolved via ethereum `NameReg` (name registration contract).
+Irrespective of the main protocol, `<source>` should be resolved via ethereum `NameReg` (name registration contract) and/or via swarm signed version stream.
+
 It is up to debate how we indicate that. One idea is to use a top level domain, such as `.eth` (<source> == `<name>.eth`)
-In the special case of the bzz protocol, `<source>` must resolve to a Swarm hash of the content (in other words, the root key of the content). This content is assumed to be of mime type `application/bzz-manifest+json` the only mime-type directly handled by Swarm. 
+
+In the special case of the bzz protocol, `<source>` must resolve to a Swarm hash of the content (in other words, the root key of the content). This content is assumed to be of mime type `application/bzz-sitemap+json` the only mime-type directly handled by Swarm. 
 
 ## Swarm manifests
 
@@ -38,27 +40,6 @@ If `contentType` is empty or missing, manifest if assumed by default.
 
 (NOTE: Unclear. When no path matches and there is no fallback path e.g. a root `/` path with hash specified, it should return a simple 404 status code)
 
-## ArcHive API 
-parameters
-- `-default`: default file fallback with 404 : index.html
-- `manifest-template`: manifest template: the entries found in the directory scan are merged into this template to yield the resulting site-map.
-- `links=[redirect,dowload]` (download is default = _ethercrawl_) external links are interpreted by the browser as redirects. By default the uploader downloads, stores and embeds the content.
-- `register-names` use `eth://NameReg/...` to register paths with names 
-
-### Examples
-```js
-{
-   entries: [
-      { 
-         "path": "chat",
-         "hash": "sdfhsd76ftsd86ft76sdgf78h7tg",
-         "status": 200,
-         "contentType": "document/pdf"
-      },
-      ...
-   ]
-}
-```
 
 
 ## Url resolution
@@ -74,12 +55,14 @@ in the browser, the following steps need to happen:
 - the browser sees that its bzz protocol and checks if `<source>` is a hash or resolves to a hash via NameReg and signed version table. 
    - it then passes the `<source>` and `<path>` to bzz protocol handler
 - the bzz protocol handler first retrieves the content for the hash (with integrity check) which it interprets as a manifest file 
-- this manifest file is then parsed, read and the json array element with the longest prefix `p` of `<path>` is looked up. I.e., `p` is the longest prefix such that `<path> == p'/p''`. (If the longest prefix is 0 length, the row with <name> == "" is chosen.)
+- this manifest file is then parsed, read and the json array element with the longest prefix `p` of `<path>` is looked up. I.e., `p` is the longest prefix such that `<path> == p'/p''`. (If the longest prefix is 0 length, the row with `<path> == ""` (or left out) is chosen.)
+- as a special case, trailing forward slashes are ignored so all variants will match the directory.
 - the protocol then looks up content for `p'` and serves it to the browser together with the status type and content type. 
 - if content is of type manifest, bzz retrieves it and repeats the steps using `p''` to match manifest `<path>` values against
 - the url relative path is set to `p''` 
+- if the url looked up is an old-world http site, then a standard http client call is sufficient.
 
-Examples:
+### Example 1
 
 ```js
 {
@@ -94,11 +77,14 @@ Examples:
 ```
 
 where the hash is the hash of the actual file `cv.pdf`.
-If this manifest hashes is `dafghjfgsdgfjfgsdjfgsd`, then `bzz://dafghjfgsdgfjfgsdjfgsd/cv.pdf` will serve cv.pdf
+
+If this manifest hash is `dafghjfgsdgfjfgsdjfgsd`, then `bzz://dafghjfgsdgfjfgsdjfgsd/cv.pdf` will serve `cv.pdf`
 
 Now you can register the manifest hash with NameReg to resolve `my-website` the file as follows: 
 
+```
    http://my-website.eth/cv.pdf 
+```
 
 serves `cv.pdf`
 
@@ -127,41 +113,51 @@ the webserver has the following routing rules:
 Now you can alternatively host your app in Swarm by creating the following manifest:
 
 ``` json
-[
+{ 
+  "entries": [
   { "hash": HASH(<dir>/index.html) },
-  { "index.html": HASH(<dir>/index.html) },
-  { "img/logo.gif": HASH(<dir>/img/logo.gif) },
-  { "img/avatars/": HASH(<dir>/img/avatars/index.html) },
-  { "img/avatars/fefe.jpg": HASH(img/avatars/fefe.jpg) }
+  { "path": "index.html", "hash": HASH(<dir>/index.html) },
+  { "path": "img/logo.gif", "hash": HASH(<dir>/img/logo.gif) },
+  { "path": "img/avatars/", "hash": HASH(<dir>/img/avatars/index.html) },
+  { "path": "img/avatars/fefe.jpg", "hash": HASH(img/avatars/fefe.jpg) }
 ]
 ```
 
 ## Swarm webservers
 
 Swarm webservers are simply manifest files routing relative paths to static assets.
-Manifest route entries specify metadata: http header values, etag, redirects, links,   
+Manifest route entries specify metadata: http header values, etag, redirects, links, etc.  
 
 In a typical scenario, the developer has a website within a working copy directory on their dev environment and they want to create a decentralised version of their site.
 
-They then register domain with ethereum NameReg, upload all desired static assets to swarm, and produce a site manifest.
-
+They then register domain with ethereum NameReg or swarm signed version stream, upload all desired static assets to swarm, and produce a site manifest.
 
 In order to facilitate the creation of the manifest file for existing web projects,  a native API and a command line utility are provided to automatically generate manifest files from a directory.
 
-- all files found within  will generate a routing entry 
-- if an index.html is found under any subdirectory, it is mapped to the subdirectory as the path.
+## ArcHive API 
 
-Now you can embed this DAPP A in another DAPP B under `chat` by adding this file the line to A's manifest:
+A native API and a command line utility are provided to automatically swarmify document collections. In order to generate manifest files from a directory.
 
-``` json
-[
-   { 
-      "path": "/chat/", 
-      "hash": HASH(manifest(B)) 
-   }
-]
+
+parameters
+- `not-found`: default file fallback with 404 : index.html
+- `template`: manifest template: the entries found in the directory scan are merged into this template to yield the resulting site-map.
+- `register-names` use `eth://NameReg/...` to register paths with names 
+
+### Examples
+```json
+{
+   entries: [
+      { 
+         "path": "chat",
+         "hash": "sdfhsd76ftsd86ft76sdgf78h7tg",
+         "status": 200,
+         "contentType": "document/pdf"
+      },
+      ...
+   ]
+}
 ```
-This basically mimics redirect of relative path `chat` to DAPP B
 
 
 
