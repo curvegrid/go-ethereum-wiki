@@ -171,6 +171,7 @@ URL: bzz://dsf32f3cdsfsd/somefolder/other
 // e.g.:
 // bzz://dsf32f3cdsfsd/somefolder/other === bzz://dsf32f3cdsfsd/somefolder/other/
 
+``` json
 {
   previous: 'jgjgj67576576576567ytjy',
 first: 
@@ -239,3 +240,4 @@ first:
     contentType: 'image/png',
   }]
 }
+```
