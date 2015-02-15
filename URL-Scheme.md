@@ -162,3 +162,80 @@ Now you can embed this DAPP A in another DAPP B under `chat` by adding this file
 ]
 ```
 This basically mimics redirect of relative path `chat` to DAPP B
+
+
+
+URL: bzz://dsf32f3cdsfsd/somefolder/other
+
+// Also mapp folder with and without "/"
+// e.g.:
+// bzz://dsf32f3cdsfsd/somefolder/other === bzz://dsf32f3cdsfsd/somefolder/other/
+
+{
+  previous: 'jgjgj67576576576567ytjy',
+first: 
+// version 
+
+  entries:[{
+    // Custom error page
+    path: '/i18n/',
+    file: '/errorpages/404.html',
+    // adds: hash: '7685trgdrreewr34f34', contentType: 'text/html'
+    status: 404
+
+  },{
+    // custom fallback file for this folder: "/images/sdffsdfds/"
+    path: '/images/sdffsdfds/',
+    file: '/index.html',
+    // adds: hash: '345678678678678678tryrty', contentType: 'text/html'
+
+  },{
+    // custom fallback file with custom header.
+    path: '/',
+    file: '/index.html',
+    // adds: hash: '434534534f34k234234hrkj34hkjrh34', contentType: 'text/html'
+    status: 500
+
+  },{
+    // redirect (changing url after?)
+    path: '/somefolder/',
+    redirect: 'http://google.com'
+
+  },{
+    // linking?
+    path: '/somefolder/other/',
+    link: 'bzz://43greg45gerg5t45gerge/chat/' // hash to another manifest
+
+  },{
+    // downloading a file by pointing to a folder
+    path: '/somefolder/other/',
+    file: '/mybook.pdf',
+    // adds: hash: '645325ytrhfgdge4tgre43f34', contentType: 'application/pdf'
+    download: true // trigger a download in the browser for this link (find the right header type content: download?)
+
+  },{
+    // downloading
+    path: '/test.html',
+    file: '/test.html',
+    // adds: hash: '645325ytrhfgdge4tgre43f34', contentType: 'text/html'
+    download: true // trigger a download in the browser for this link (find the right header type content: download?)
+
+  // automatic generated files
+  },{
+    path: '/i18n/app.en.json',
+    hash: '456yrtgfds43534t45',
+    contentType: 'text/json',
+  },{
+    path: '/somefolder/other/image.png',
+    hash: '434534534f34khrkj34hkjrh34',
+    contentType: 'image/png',
+  },{
+    path: '/somefolder/other/343242.png',
+    hash: '434534534f34k234234hrkj34hkjrh34',
+    contentType: 'image/png',
+  },{
+    path: '/somefold/frau.png',
+    hash: 'sdfsdfsdfsdfsdfsdfsd',
+    contentType: 'image/png',
+  }]
+}
