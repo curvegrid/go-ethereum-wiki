@@ -24,17 +24,19 @@ A Swarm manifest is a json formatted description of url routing. Manifest has th
 
 A route descriptor manifest entry json object has the following attributes:
 
-- `path`: a path relative to the url that resolved the the manifest (_optional, with empty default_)
+- `path`: a path relative to the url that resolved to the manifest (_optional, with empty default_)
 - `hash`: key of the content to be looked up by swarm (_optional_)
 - `link`: external link (_optional_)
-- `content-type`: mime type of the content (_optional, `application/bzz-manifest` by default_)
+- `contentType`: mime type of the content (_optional, `application/bzz-server` by default_)
 - `status`: optional http status code to pass back to the server (_optional, 200 by default_)
 - `cache`: cache entry, etag? and other header options
 - `www`: alternative old web address that the route replicates: e.g., `http://eth:bzz@google.com`
 
 
-If `path` is the empty string or is missing, the path matches the _document-root_ of the DAPP.
-If `content-type` is empty or missing, manifest if assumed by default.
+If `path` is an empty string or is missing, the path matches the _document-root_ of the DAPP.
+If `contentType` is empty or missing, manifest if assumed by default.
+
+(NOTE: Unclear. When no path matches and there is no fallback path e.g. a root `/` path with hash specified, it should return a simple 404 status code)
 
 ## ArcHive API 
 parameters
@@ -44,16 +46,18 @@ parameters
 - `register-names` use `eth://NameReg/...` to register paths with names 
 
 ### Examples
-``` json
-[
-   { 
-      "path": "chat",
-      "hash": "sdfhsd76ftsd86ft76sdgf78h7tg",
-      "status": 200,
-      "content-type": "document/pdf"
-   }
-   ...
-]
+```js
+{
+   entries: [
+      { 
+         "path": "chat",
+         "hash": "sdfhsd76ftsd86ft76sdgf78h7tg",
+         "status": 200,
+         "contentType": "document/pdf"
+      },
+      ...
+   ]
+}
 ```
 
 
@@ -65,33 +69,36 @@ Given
  bzz://<source>/<path>
 ```
 
-in the browser, the following steps need to happen: 
--- the browser sees that its bzz protocol and checks if `<source>` is a hash or resolves to a hash via NameReg and signed version table. 
---- it then passes the `<source>` and `<path>` to bzz protocol handler
--- the bzz protocol handler first retrieves the content for the hash (with integrity check) which it interprets as a manifest file 
--- this manifest file is then parsed, read and the json array element with the longest prefix `p` of `<path>` is looked up. I.e., `p` is the longest prefix such that `<path> == p'/p''`. (If the longest prefix is 0 length, the row with <name> == "" is chosen.)
--- the protocol then looks up content for `p'` and serves it to the browser together with the status type and content type. 
--- if content is of type manifest, bzz retrieves it and repeats the steps using `p''` to match manifest `<path>` values against
--- the url relative path is set to `p''` 
+in the browser, the following steps need to happen:
+
+- the browser sees that its bzz protocol and checks if `<source>` is a hash or resolves to a hash via NameReg and signed version table. 
+   - it then passes the `<source>` and `<path>` to bzz protocol handler
+- the bzz protocol handler first retrieves the content for the hash (with integrity check) which it interprets as a manifest file 
+- this manifest file is then parsed, read and the json array element with the longest prefix `p` of `<path>` is looked up. I.e., `p` is the longest prefix such that `<path> == p'/p''`. (If the longest prefix is 0 length, the row with <name> == "" is chosen.)
+- the protocol then looks up content for `p'` and serves it to the browser together with the status type and content type. 
+- if content is of type manifest, bzz retrieves it and repeats the steps using `p''` to match manifest `<path>` values against
+- the url relative path is set to `p''` 
 
 Examples:
 
-``` json
-[
-  {
-   "path": "cv.pdf",
-   "content-type": "document/pdf",
-   "hash": "sdfhsd76ftsd86ft76sdgf78h7tg", 
-  }
-]
+```js
+{
+   entries: [
+     {
+        "path": "cv.pdf",
+        "contentType": "document/pdf",
+        "hash": "sdfhsd76ftsd86ft76sdgf78h7tg", 
+      }
+   ]
+}
 ```
 
 where the hash is the hash of the actual file `cv.pdf`.
-If this manifest hashes to dafghjfgsdgfjfgsdjfgsd, then `bzz://dafghjfgsdgfjfgsdjfgsd/cv.pdf` will serve cv.pdf
+If this manifest hashes is `dafghjfgsdgfjfgsdjfgsd`, then `bzz://dafghjfgsdgfjfgsdjfgsd/cv.pdf` will serve cv.pdf
 
-Now you can register the manifest hash with NameReg to resolve `fabian`, then 
+Now you can register the manifest hash with NameReg to resolve `my-website` the file as follows: 
 
-   http://fabian.eth/cv.pdf 
+   http://my-website.eth/cv.pdf 
 
 serves `cv.pdf`
 
