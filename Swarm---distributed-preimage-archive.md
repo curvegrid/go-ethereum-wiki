@@ -32,6 +32,11 @@
 - Vitalik: 'Swarm is out-of-scope': https://www.reddit.com/r/ethereum/comments/2phvml/constructive_criticism_of_ethereum_project_not/cmwtfqq
 - Vitalik on eth components, swarm at 4:00 http://www.naation.com/2015/02/02/ethereum-explained-with-vitalik-buterin-inventor-and-leader-of-the-ethereum-project/5764/
 
+## Media
+- https://twitter.com/jeffehh/status/565927366271467521
+- https://twitter.com/avsa/status/566255260713627648
+- https://twitter.com/zeligf/status/566042020909973504
+
 ## Code 
 - bzz PR: https://github.com/ethereum/go-ethereum/pull/255, 
 - repo https://github.com/ethersphere/go-ethereum/tree/bzz/
