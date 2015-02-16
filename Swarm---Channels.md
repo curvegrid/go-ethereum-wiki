@@ -1,40 +1,27 @@
-### cli uploader: 
+# Channels and streams
 
-parameters
-- `-default`: default file fallback with 404 : index.html
-- `manifest-path`: manifest itself is public and is under: /manifest.json
-- `manifest-template`: manifest template: the directory is merged into this template (it will typically contain external links or assets)
-- `redirect` (download is default = ethercrawl) external links are interpreted by the browser as redirects. By default the uploader downloads, stores and embeds the content. The resulting root key will be shown as hostname.
-- `register-names` use `eth://NameReg/...` to register paths with names 
+a *swarm chain* is an ordered list of content that are linked as a forkless chain.
+.
+This is simply modeled as linked manifests. 
 
+a *channel* is a sequence of manifests (_S_) and a relative path _P_ with a starting manifest _M_ and a streamsize _n_ (can be infinite). A channel is well-formed or regular if in every manifest in the stream _P_ resolves to a consistent mime type _T_ . For instance , if _T_ is `application/bzz-manifest+json`, we say the channel is a _manifest channel_, if the mime-type is `mpeg`, its a video channel. 
 
-### additional manifest json fields:
-on manifest entries or global:
-- `cache`: cache entry, ctag?
-- `www`: old web address :) e.g., `http://eth:bzz@google.com` (or just http://mywebsite.com ?)
-- `host`: eth host name registered (or to register) with NameReg
-- `channelName`: back and forth tracker, 
-- `auth`: devp2p cryptohandshake public key(s)
-- `first`: root key of initial state of the stream 
-- `previous`: previous state of stream 
-- `next`: next state of stream
+A *primary channel* is a channel that actually respect chronological order of creation. 
 
+A *live channel* is a primary channel that keeps updating (adding episodes to the end of the chain)  can have a (semi)-persistent mime-type for  path _P_
 
-### channels
-_channel_ is a stream  of manifest that are somehow linked as forkless chain.
-- channels can have a (semi)-persistent mime-type for any path
-- primary stream is sequence of updated states
-- history: *blockstream* content provable linked in time via eth NameReg (granularity: 0 (new state at every block) = _continuous_)
+A *blockstream channel* is a primary channel provable linked in time via hashes.
 
+A *signed channel* is a primary channel provably linked by signatures (sequence position index signed by the publisher)
 
-#### types of channels:
-- primary streams (realtime content with `previous` )
-- name histories
-- content trackers 
-- archive of named hosts (old world www histories)
+*Trackers* are a manifest channel which tracks updates to a primary channel and provides forward linking .
+
+## Example channels:
+
+- name histories, e.g updates of a domain, temporal snapshots of content
 - blockchain: blockchain is a special case of blockstream
-- git graph, versioning, snapshot streaming 
-- modeling a source of information. provable communication with hash chain, not allowed to fork, numbered. structure
+- git graph, versioning
+- modeling a source of information: provable communication with hash chain, not allowed to fork, numbered. 
 
 #### content trackers
 
@@ -47,23 +34,21 @@ reverse index of a stream
 - git version control
 
 every named host defines a timeline, 
-- create a manifest stream tracking a site : recommended format <name>.str.eth for <name>.eth
-- old-world indexes: content tracker for www sites `google.com.str.eth`?
-- better record as metadata 
+- create a manifest stream tracking a site
 
-- 
+## Ways to link manifests
 
 #### examples
 
 ``` json
-{ "Manifest":
+{ "entries":
   [
     {
       "host": "fefe.eth",
+      "number": 9067,
       "previous": "ffca34987",
       "next": "aefbc4569ab",
-      "this": "90daefaaabbc", // is this possible, writing the hash of this manifest, before its saved? 
-      "first": "bbcdff5679ff",
+      "this": "90daefaaabbc",
     }
   ],
   "auth": "3628aeefbc7689523aebc2489",
