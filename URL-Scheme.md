@@ -63,7 +63,7 @@ in the browser, the following steps need to happen:
 
 ### Example 1
 
-```json
+```js
 {
    entries: [
      {
@@ -111,7 +111,7 @@ the webserver has the following routing rules:
 
 Now you can alternatively host your app in Swarm by creating the following manifest:
 
-``` json
+``js
 { 
   "entries": [
   { "hash": HASH(<dir>/index.html) },
@@ -262,7 +262,7 @@ If both `without-scan` and `without-upload` are omitted then `path` is used to a
 if `register-names` is set all named nodes.
 
 ### Examples
-```json
+```js
 {
    "entries": [
       { 
@@ -292,20 +292,20 @@ We should also map folder with and without "/" so that the path lookup for path:
     // Custom error page
     path: '/i18n/',
     file: '/errorpages/404.html',
-    // parses "file" and add when processing the folder: hash: '7685trgdrreewr34f34', contentType: 'text/html'
+    // parses "file" when processing the folder and add: hash: '7685trgdrreewr34f34', contentType: 'text/html'
     status: 404
 
   },{
     // custom fallback file for this folder: "/images/sdffsdfds/"
     path: '/images/sdffsdfds/',
     file: '/index.html',
-    // parses "file" and add when processing the folder: hash: '345678678678678678tryrty', contentType: 'text/html'
+    // parses "file" when processing the folder and add: hash: '345678678678678678tryrty', contentType: 'text/html'
 
   },{
     // custom fallback file with custom header.
     path: '/',
     file: '/index.html',
-    // parses "file" and add when processing the folder: hash: '434534534f34k234234hrkj34hkjrh34', contentType: 'text/html'
+    // parses "file" when processing the folder and add: hash: '434534534f34k234234hrkj34hkjrh34', contentType: 'text/html'
     status: 500
 
   },{
@@ -322,14 +322,14 @@ We should also map folder with and without "/" so that the path lookup for path:
     // downloading a file by pointing to a folder
     path: '/somefolder/other/',
     file: '/mybook.pdf',
-    // parses "file" and add when processing the folder: hash: '645325ytrhfgdge4tgre43f34', BUT no contentType, as its already present
+    // parses "file" when processing the folder and add: hash: '645325ytrhfgdge4tgre43f34', BUT no contentType, as its already present
     contentType: 'application/octet-stream' // trigger a download in the browser for this link)
 
   },{
     // downloading
     path: '/test.html',
     file: '/test.html',
-    // parses "file" and add when processing the folder: hash: '645325ytrhfgdge4tgre43f34', BUT no contentType, as its already present
+    // parses "file" when processing the folder and add: hash: '645325ytrhfgdge4tgre43f34', BUT no contentType, as its already present
     contentType: 'application/octet-stream' // trigger a download in the browser for this link)
 
   // automatic generated files
