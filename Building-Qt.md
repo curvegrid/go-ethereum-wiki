@@ -10,6 +10,7 @@ Please see [build instruction for OSX](https://github.com/ethereum/go-ethereum/w
 
 ```
 sudo apt-get install mesa-common-dev libglu1-mesa-dev
+sudo apt-get install pkg-config
 sudo add-apt-repository ppa:beineri/opt-qt54-trusty
 sudo apt-get update
 sudo apt-get install -y qt54quickcontrols qt54webengine
