@@ -284,7 +284,7 @@ Same as: eth://myname.reggae/somefolder/other
 We should also map folder with and without "/" so that the path lookup for path: "/something/myfolder" is the same as "/something/myfolder/"
 
 ## Server config examples:
-``js
+```js
 {
   previous: 'jgjgj67576576576567ytjy',
   first: 'ds564rh5656hhfghfg',
