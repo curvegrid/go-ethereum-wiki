@@ -17,5 +17,5 @@ _**Note:** There are some upstream bugs that may prevent Mist from running corre
 The develop branch is automatically updated in Docker Hub with RPC exposed. To use it, ensure docker is installed correctly and execute the following commands:
 ```
 docker pull ethereum/client-go
-docker run -p 8045:8045 -p30303:30303 ethereum/client-go
+docker run -p 8545:8545 -p 30303:30303 ethereum/client-go
 ```
