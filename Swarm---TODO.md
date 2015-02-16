@@ -39,9 +39,12 @@ I suggest we each pick 2/3 and read up on their project status, features, useabi
 
 # Brainstorming
 
-- storage economy, incentivisation
+- storage economy, incentivisation, examples:
+-- content owner pays recurring ether fee for storage.
+-- scheme to reward content owner each time content is accessed. i.e accessing content would requires fee. this would reward popular content. should be optional though.
 - dht  - chain interaction
 - proof of custody https://docs.google.com/document/d/1F81ulKEZFPIGNEVRsx0H1gl2YRtf0mUMsX011BzSjnY/edit
+- proof of resources http://systemdocs.maidsafe.net/content/system_components/proof_of_resources.html
 - nonoutsourceable proofs of storage as mining criteria 
 - proof of storage capacity directly rewarded by contract
 - streaming, hash chains 
@@ -49,6 +52,8 @@ I suggest we each pick 2/3 and read up on their project status, features, useabi
 - minimising hops
 - forwarding strategies, optimising dispersion of requests 
 - lifetime of requests, renewals (repeated retrieval requests), expiry, reposting (repeated storage request)
+- redundancy - store same data in multiple nodes (e.g 4x)
+- the more accessed a content is, the more available it should be, should increase performance for popular content.
 
 # Simulations
 
