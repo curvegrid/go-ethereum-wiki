@@ -111,7 +111,7 @@ the webserver has the following routing rules:
 
 Now you can alternatively host your app in Swarm by creating the following manifest:
 
-``js
+```js
 { 
   "entries": [
   { "hash": HASH(<dir>/index.html) },
@@ -284,6 +284,7 @@ Same as: eth://myname.reggae/somefolder/other
 We should also map folder with and without "/" so that the path lookup for path: "/something/myfolder" is the same as "/something/myfolder/"
 
 ## Server config examples:
+
 ```js
 {
   previous: 'jgjgj67576576576567ytjy',
