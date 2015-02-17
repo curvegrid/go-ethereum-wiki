@@ -44,8 +44,8 @@ UDP packets are structured as follows:
 
 Offset  |||
 ------: | ----------| -------------------------------------------------------------------------
-0       | signature | Ensures authenticity of sender, `SIGN(sender-privkey, MDC)`
-65      | MDC       | Ensures integrity of packet, `SHA3(sender-pubkey || type || data)`
+0       | MDC       | Ensures integrity of packet, `SHA3(signature || type || data)`
+32      | signature | Ensures authenticity of sender, `SIGN(sender-privkey, MDC)`
 97      | type      | Single byte in range [1, 4] that determines the structure of Packet Data
 98      | data      | RLP encoded, see section Packet Data
 
@@ -54,14 +54,10 @@ recovering the public key from the signature.
 
     sender-pubkey = ECRECOVER(Signature)
 
-The integrity of the packet can then be verified by computing the
+The integrity of the packet can be verified by computing the
 expected MDC of the packet as:
 
-    MDC = SHA3(sender-pubkey || type || data)
-
-As an optimization, implementations may look up the public key by
-the UDP sending address and compute MDC before recovering the sender ID.
-If the MDC values do not match, the packet can be dropped.
+    MDC = SHA3(signature || type || data)
 
 ## Packet Data
 
@@ -79,7 +75,7 @@ RLP encoding: **[** `IP`, `Port`, `Expiration` **]**
 
 Element   ||
 ----------|------------------------------------------------------------
-`IP`      | (length 4 or 16) IP address on which the node is listening
+`IP`      | IP address (ASCII string) on which the node is listening
 `Port`    | listening port of the node
 
 ### Pong (type 0x02)
@@ -115,6 +111,5 @@ Each `Node` is a list of the form **[** `Version`, `IP`, `Port`, `ID` **]**
 Element   ||
 ----------|---------------------------------------------------------------
 `ID`      | The advertised node's public key
-`Version` | the RLPx protocol version that the node implements
 `IP`      | (length 4 or 16) IP address on which the node is listening
 `Port`    | listening port of the node
