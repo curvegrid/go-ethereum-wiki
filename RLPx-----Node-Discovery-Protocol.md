@@ -9,9 +9,8 @@ distributed database of the IDs and endpoints of all listening nodes.
 
 Each node keeps a node table as described in the Kademlia paper
 [[Maymounkov, Mazières 2002][kad-paper]]. The node table is configured
-with a bucket size of 16 (denoted `k` in Kademlia), concurrency of 3
-(denoted `α` in Kademlia), and 8 bits per hop (denoted `b` in
-Kademlia) for routing. The eviction check interval is 75 milliseconds,
+with a bucket size of 16 (denoted `k` in Kademlia), and concurrency of 3
+(denoted `α` in Kademlia). The eviction check interval is 75 milliseconds,
 and the idle bucket-refresh interval is
 3600 seconds.
 
