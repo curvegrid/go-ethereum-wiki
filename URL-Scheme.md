@@ -171,21 +171,24 @@ if `register-names` is set all named nodes.
 
 ## Without swarm, the zip fallback
 
-namereg has:
-contentOf('eth/wallet') -> 324234kj23h4kj2h3kj423kj4h23  (don't look at the domain name with /, its gav's way and we have to see if thats even possible)
+namereg resolution:
 
-This name reg has also a url where it can find the file (or even a raw pastebin)
+`contentOf('eth/wallet') -> 324234kj23h4kj2h3kj423kj4h23`
+
+This name reg has also a `urlOf` where it can find the file (e.g. from a raw pastebin)
 
 It then downloads the file, extracts it and resolves all relative/absolute paths, based on the manifest it finds in it.
 
-For the developer, the upload mechanism in mix will be the same, as he chooses a folder and can provide a serverconfig.json (manfiest)
+For the developer, the upload mechanism in mix will be the same, as he chooses a folder and can provide a `serverconfig.json` (or manfiest)
 
 The only difference is the lookup and where it gets the files from.
 
+```
 swarm -> content hashes
 before swarm -> zip file content
+```
 
-both are resolved through the same manifest scheme
+And both are resolved through the same manifest scheme
 
 ## Server config examples:
 
