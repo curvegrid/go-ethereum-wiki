@@ -39,6 +39,9 @@ First install GMP & Readline from repositories:
 ```
 sudo apt-get install -y libgmp3-dev libreadline6-dev
 ```
+Second, follow the instructions for Building Qt
+
+Installing Mist
 
 Second, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
@@ -46,6 +49,8 @@ Second, follow the instructions for [Building Qt](https://github.com/ethereum/go
 At last you will now be finished with all the prerequisites. The following commands will build the Ethereum Mist GUI client for you:
 
     go get -u github.com/ethereum/go-ethereum/cmd/mist
+
+(You may need to run "sudo apt-get install mercurial" first)
 
 **Note: Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it from its build directory:**
 
