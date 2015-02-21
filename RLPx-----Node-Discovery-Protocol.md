@@ -104,7 +104,7 @@ Neighbors is the reply to Find Node. It contains up to `k` nodes that
 the sender knows which are closest to the requested `Target`.
 
 RLP encoding: **[ [** `Node₁`, `Node₂`, ..., `Nodeₙ` **]**, `Expiration` **]**  
-Each `Node` is a list of the form **[** `Version`, `IP`, `Port`, `ID` **]**
+Each `Node` is a list of the form **[** `IP`, `Port`, `ID` **]**
 
 Element   ||
 ----------|---------------------------------------------------------------
