@@ -10,8 +10,7 @@ distributed database of the IDs and endpoints of all listening nodes.
 Each node keeps a node table as described in the Kademlia paper
 [[Maymounkov, Mazières 2002][kad-paper]]. The node table is configured
 with a bucket size of 16 (denoted `k` in Kademlia), and concurrency of 3
-(denoted `α` in Kademlia). The eviction check interval is 75 milliseconds,
-and the idle bucket-refresh interval is
+(denoted `α` in Kademlia). The idle bucket-refresh interval is
 3600 seconds.
 
 In order to maintain a well-formed network, RLPx nodes should try to connect
