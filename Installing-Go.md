@@ -4,7 +4,7 @@ Download and run the installer found at http://golang.org/doc/install
 
 
 ### OS X
-Please refer to the [build instruction for OSX](https://github.com/ethereum/go-ethereum/wiki/Building-Instructions-for-Mac)
+Download an install the darwin binary from https://golang.org/dl/
 
 ### Linux
 
