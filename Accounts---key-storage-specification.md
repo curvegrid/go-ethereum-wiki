@@ -52,7 +52,7 @@ The Mist UI must support:
 3. Copy-paste of account addresses to easily use when receiving funds.
 4. Choosing one of the available accounts when sending a tx.
 5. Typing password when accessing one of the hot wallet keys
-6. Showing the possible ways to temporarily input cold wallet keys when needed
+6. Showing the possible ways to temporarily input wallet keys when needed
 
 ## RPC API
 
