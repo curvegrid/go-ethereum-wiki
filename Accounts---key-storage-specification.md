@@ -1,6 +1,6 @@
 # Accounts / key storage specification
 
-This is an attempt to write down a single specification from the multiple sources of conversations which have so far been used for accounts / key storage specs:
+This is an attempt to compile a single, written specification from the multiple sources which have so far been used for accounts / key storage specs:
 
 * Skype calls
 * Skype chats
@@ -15,7 +15,9 @@ This is an attempt to write down a single specification from the multiple source
 
 Up until Ethereum PoC 8, the Go client has used a single, default key in plaintext on disk for use as wallet and for signing all txs. We want to extend this to have a more generic key storage supporting multiple keys. We also want an "accounts" abstraction over these keys where an account corresponds to a key, and a user can have multiple accounts and be able to send / receive to any of them.
 
-# Spec
+The goal of this is to support better wallet / account functionality both in Mist as well as in DAPPs.
+
+# Specification
 
 ## Key Storage
 
