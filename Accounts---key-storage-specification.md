@@ -8,6 +8,8 @@ This is an attempt to write down a single specification from the multiple source
 * Github issues
 * Github pull request comments
 * Github commits
+* Lively in-person discussions in the Amsterdam office.
+* Several past instances of the Amsterdam office whiteboard contents.
 
 # Background
 
