@@ -1,5 +1,8 @@
 ## Option 1: Homebrew tap
 
+Assumptions:
+* Brew is installed. If not, run ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" and follow the prompts
+
 ```
 brew tap ethereum/ethereum
 brew install go-ethereum
