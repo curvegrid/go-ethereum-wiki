@@ -35,6 +35,8 @@ The key storage must support:
 
 ## Account Manager
 
+0. Account == address of an Ethereum account == address of EC public key of EC private key the user controls.
+
 The account manager must support:
 
 1. Account creation & deletion
