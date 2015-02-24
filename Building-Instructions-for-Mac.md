@@ -5,7 +5,7 @@ Assumptions:
 
 ```
 brew tap ethereum/ethereum
-brew install go-ethereum
+brew install go-ethereum # Install develop branch with --devel
 ```
 Then run `mist` (GUI) or `ethereum` (CLI)
 
