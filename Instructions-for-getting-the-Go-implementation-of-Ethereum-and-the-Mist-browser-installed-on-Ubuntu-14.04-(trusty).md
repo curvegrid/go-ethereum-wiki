@@ -8,9 +8,11 @@ sudo add-apt-repository ppa:ethereum/ethereum
 sudo add-apt-repository ppa:ethereum/ethereum-dev
 sudo apt-get update
 sudo apt-get install go-ethereum
+export LD_LIBRARY_PATH=/opt/qt54/lib
 ```
-
 Run `mist` for the GUI or `ethereum` for the CLI.
+
+You might want to add `export LD_LIBRARY_PATH=/opt/qt54/lib` to your `~/.bashrc` or `~/.bash_profile`.
 
 # Option 2: Automatic installation
 
