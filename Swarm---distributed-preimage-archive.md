@@ -36,6 +36,8 @@
 - https://twitter.com/jeffehh/status/565927366271467521
 - https://twitter.com/avsa/status/566255260713627648
 - https://twitter.com/zeligf/status/566042020909973504
+- https://www.reddit.com/r/ethereum/comments/2wryru/eli5_how_is_ethereum_supposed_to_be_a_dropbox/
+- 
 
 ## Code 
 - bzz PR: https://github.com/ethereum/go-ethereum/pull/255, 
@@ -49,7 +51,7 @@
 
 - storj - http://storj.io/
 - maidsafe - http://maidsafe.net/
-- ipfs - http://ipfs.io/, https://www.youtube.com/watch?v=Fa4pckodM9g, http://static.benet.ai/t/ipfs.pdf, https://github.com/jbenet/go-ipfs
+- ipfs - http://ipfs.io/, https://www.youtube.com/watch?v=Fa4pckodM9g, http://static.benet.ai/t/ipfs.pdf, https://github.com/jbenet/go-ipfs, https://www.youtube.com/watch?v=8CMxDNuuAiQ, https://www.reddit.com/r/ethereum/comments/2wot2i/ipfs_alpha_demo/
 - filecoin - http://filecoin.io/
 - permacoin - https://www.cs.umd.edu/~elaine/docs/permacoin.pdf, https://bitcointalk.org/index.php?topic=640410.0, http://blog.dshr.org/2014/06/permacoin.html
 - siacoin - http://www.siacoin.com/
