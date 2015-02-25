@@ -36,8 +36,7 @@
 - https://twitter.com/jeffehh/status/565927366271467521
 - https://twitter.com/avsa/status/566255260713627648
 - https://twitter.com/zeligf/status/566042020909973504
-- https://www.reddit.com/r/ethereum/comments/2wryru/eli5_how_is_ethereum_supposed_to_be_a_dropbox/
-- 
+- https://www.reddit.com/r/ethereum/comments/2wryru/eli5_how_is_ethereum_supposed_to_be_a_dropbox
 
 ## Code 
 - bzz PR: https://github.com/ethereum/go-ethereum/pull/255, 
