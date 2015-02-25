@@ -44,7 +44,7 @@
 - ethereum p2p: https://github.com/ethereum/go-ethereum/p2p
 - peer selection, peer pool: https://github.com/ethereum/go-ethereum/pull/253 
 - p2p cademlia branch (discontinued): https://github.com/ethersphere/go-ethereum/tree/kademlia
-- Felix's node discovery code: https://github.com/fjl/go-ethereum/blob/udp-kademlia/p2p/discover (will be merged)
+- Felix's node discovery code: https://github.com/ethereum/go-ethereum/tree/develop/p2p/discover
 
 # Alternatives
 
