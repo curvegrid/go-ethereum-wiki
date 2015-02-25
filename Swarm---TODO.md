@@ -20,7 +20,7 @@
 
 ### - 
 ## Encryption
-- encryption gateway to incentivise encryption of public content (to protect copyright infringement issues)
+- encryption gateway to incentivise encryption of public content
 - xor encryption with random chunks
 - in-memory encryption keys
 - originator encryption for private content 
