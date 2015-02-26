@@ -16,10 +16,10 @@ You might want to add `export LD_LIBRARY_PATH=/opt/qt54/lib` to your `~/.bashrc`
 
 # Option 2: Automatic installation
 
-[This Mist install script](https://gist.github.com/tgerring/41275735ebb057b58ea8) will install everything required from a fresh Ubuntu 14.04 installation and start running Mist.
+[This Mist install script](https://gist.github.com/tgerring/d4ab3f1672ed91a53c6c) will install everything required from a fresh Ubuntu 14.04 installation and start running Mist.
 
 ```
-wget https://gist.githubusercontent.com/tgerring/41275735ebb057b58ea8/raw/e166190f242d873cc8edeae5cb8f1cc667a126ac/goethereumqt54.sh -O install
+wget https://gist.githubusercontent.com/tgerring/d4ab3f1672ed91a53c6c/raw/677a3dd9c6db099eee620657bf7fb1e664173ee1/mist-develop.sh -O install
 chmod +x install 
 ./install
 ```
