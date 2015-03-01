@@ -78,6 +78,10 @@ or supply an absolute `-asset_path` option:
 
     mist -asset_path $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets
 
+## Git flow
+
+To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
+
 ## Testing
 
 Testing one library:
@@ -123,4 +127,16 @@ godep save ./...
 Changes to the [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) should be manually verified then commited.
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
+
+# Contributing
+
+Only github is used to track issues.
+
+Pull requests should by default commit on the `develop` branch.
+The `master` branch is only used for finished stable major releases.
+
+# Code formatting 
+
+Sources are formatted according to the [Go Formatting
+Style](http://golang.org/doc/effective_go.html#formatting).
 
