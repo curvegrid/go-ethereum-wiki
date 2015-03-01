@@ -19,3 +19,7 @@ The develop branch is automatically updated in Docker Hub with RPC exposed. To u
 docker pull ethereum/client-go
 docker run -p 8545:8545 -p 30303:30303 ethereum/client-go
 ```
+
+## Building from fork/working copy
+
+Follow the [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
