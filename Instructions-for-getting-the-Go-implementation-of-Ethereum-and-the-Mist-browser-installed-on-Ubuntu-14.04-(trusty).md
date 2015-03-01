@@ -41,10 +41,6 @@ First install GMP & Readline from repositories:
 ```
 sudo apt-get install -y libgmp3-dev libreadline6-dev
 ```
-Second, follow the instructions for Building Qt
-
-Installing Mist
-
 Second, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
 ## Installing Mist
@@ -54,9 +50,14 @@ At last you will now be finished with all the prerequisites. The following comma
 
 (You may need to run "sudo apt-get install mercurial" first)
 
-**Note: Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it from its build directory:**
+**Note**: Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it from its build directory
 
     cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
+
+or supply an absolute `-asset_path` option:
+
+    mist -asset_path $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets
+
 
 To eliminate the need to remember this cumbersome command, you can create the following a file in $GOPATH/bin :
 
