@@ -12,6 +12,8 @@
 
 ### Developing
 
+[Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
+
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 
 [JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
