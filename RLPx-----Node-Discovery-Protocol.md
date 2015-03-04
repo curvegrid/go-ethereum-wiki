@@ -108,6 +108,7 @@ Each `Node` is a list of the form **[** `IP`, `Port`, `ID` **]**
 
 Element   ||
 ----------|---------------------------------------------------------------
-`ID`      | The advertised node's public key
 `IP`      | IP address (ASCII string) on which the node is listening
 `Port`    | listening port of the node
+`ID`      | The advertised node's public key
+
