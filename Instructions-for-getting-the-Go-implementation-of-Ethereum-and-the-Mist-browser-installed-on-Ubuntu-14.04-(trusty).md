@@ -6,6 +6,7 @@ For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:ethereum/ethereum
 sudo add-apt-repository ppa:ethereum/ethereum-dev
+sudo add-apt-repository ppa:beineri/opt-qt541-trusty
 sudo apt-get update
 sudo apt-get install go-ethereum
 export LD_LIBRARY_PATH=/opt/qt54/lib
