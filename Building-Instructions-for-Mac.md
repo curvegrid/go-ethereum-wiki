@@ -32,13 +32,7 @@ export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.4.0/lib
 Compile **Mist**
 
 ```
-go get -u github.com/ethereum/go-ethereum/cmd/mist
-```
-
-Run Mist (_This is necessary as a separate step due to an outstanding bug requiring mist to be run from its build directory_)
-
-```
-cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && go build && ./mist
+go get github.com/ethereum/go-ethereum/cmd/mist
 ```
 
 This should start Mist and connect you to the Ethereum network. However, if you want a traditional `*.app` file we'll need to use our [build tool](https://github.com/ethereum/go-build).
