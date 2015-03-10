@@ -23,6 +23,7 @@
 
 ## Forum
 - empty as of 01/2015: https://forum.ethereum.org/categories/swarm
+- 
 
 ## Mentions, discussions
 - http://www.reddit.com/r/ethereum/comments/2d4uyw/swarm_and_whisper/
@@ -37,6 +38,7 @@
 - https://twitter.com/avsa/status/566255260713627648
 - https://twitter.com/zeligf/status/566042020909973504
 - https://www.reddit.com/r/ethereum/comments/2wryru/eli5_how_is_ethereum_supposed_to_be_a_dropbox
+- https://forum.ethereum.org/discussion/comment/7593/#Comment_7593
 
 ## Code 
 - bzz PR: https://github.com/ethereum/go-ethereum/pull/255, 
