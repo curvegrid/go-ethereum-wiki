@@ -1,4 +1,4 @@
-# Option 1: Install from PPA
+## Option 1: Install from PPA
 
 For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
@@ -15,7 +15,7 @@ Run `mist` for the GUI or `ethereum` for the CLI.
 
 You can alternatively install only the CLI or GUI, with `apt-get install ethereum-cli` or `apt-get install mist` respectively.
 
-# Option 2: Automatic installation
+## Option 2: Automatic installation
 
 **Note** Outdated, please use the PPA.
 
@@ -27,13 +27,13 @@ chmod +x install
 ./install
 ```
 
-# Option 3: Manual build from source
+## Option 3: Manual build from source
 
-## Installing Go
+### Installing Go
 
 Verify that Go is installed by running `go version` and checking the version. If not, see [Installing Go](https://github.com/ethereum/go-ethereum/wiki/Installing-Go)
 
-## Prerequisites
+### Prerequisites
 
 Mist depends on the following external libraries to be installed:
 * [GMP](https://gmplib.org)
@@ -46,7 +46,7 @@ sudo apt-get install -y libgmp3-dev libreadline6-dev
 ```
 Second, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
-## Installing Mist
+### Installing Mist
 At last you will now be finished with all the prerequisites. The following commands will build the Ethereum Mist GUI client for you:
 
     go get -u github.com/ethereum/go-ethereum/cmd/mist
