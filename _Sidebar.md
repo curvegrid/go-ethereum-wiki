@@ -1,6 +1,6 @@
 ### Building 
 
-[Building Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum(Go))
+[Building Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 
 [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
