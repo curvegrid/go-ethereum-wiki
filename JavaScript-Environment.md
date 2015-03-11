@@ -10,29 +10,33 @@ It's also possible to use the JavaScript intepreter with files so it gives a ful
 
 Ethereum's javascript VM offers the full
  [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API) by autoloading [ethereum.js](https://github.com/ethereum/ethereum.js).
-An admin interface is available via the `eth` object and contains the following methods:
+An admin interface is available via the `admin` object and contains the following methods:
 **note** that the following is likely to change:
 
-* `suggestPeer(nodeURL)`
-tells the p2p server that we would like to dial out and connect to a specific peer. `nodeURL` is in [`enode`](https://github.com/ethereum/wiki/wiki/enode-url-format) format. You can find out your own from the logs when the client boots up (line to look for looks like:
+* `addPeer(nodeURL)`
+tells the p2p server that we would like to dial out and connect to a specific peer.  Returns true if success, false there was an error. `nodeURL` is in [`enode`](https://github.com/ethereum/wiki/wiki/enode-url-format) format. You can find out your own from the logs when the client boots up (line to look for looks like:
 
     [P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
 
-. Once you acquired the enode url of your favourite peer (say via whisper chat), to attempt connection you can use:
+Once you acquired the enode url of your favourite peer (say via whisper chat), to attempt connection you can use:
 
-    eth.suggestPeer(" enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303")
+    admin.addPeer(" enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303")
+
+* `removePeer(nodeId)` 
+disconnects from a peer,  Returns true if success, false there was an error.
 
 * `dumpBlock(numberOrHash)`
-return the raw dump of a block referred to by block number or block hash
+returns the raw dump of a block referred to by block number or block hash
 
 * `import(filename)`
-imports the blockchain from a marshalled binary format. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
+imports the blockchain from a marshalled binary format.  Returns true if success, false there was an error. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
 * `export(filename)`
-exports the blockchain to the given file in binary format.
+exports the blockchain to the given file in binary format. Returns true if success, false there was an error.
 
 * `setMining(true|false)`
-starts/stops mining 
+starts/stops mining returns true if mining, false if not mining.
+
 
 ## Loading modules
 
@@ -48,7 +52,7 @@ and use it as:
 var answer = require('./myModuleWhichHasThe').answer;
 ```
 
-## caveat 
+## Caveat 
 
 The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
 
