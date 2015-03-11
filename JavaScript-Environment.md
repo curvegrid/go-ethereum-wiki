@@ -1,80 +1,38 @@
-The `ethereum` executable (not to be confused with `mist`) comes with a JavaScript console. The JS console can be invoked from the command line with the `-js` flag. **note** this flag disables all default logging to **stdout**. If you need log information, `tail -f $ETHEREUM/debug.log`.
+The `ethereum CLI` executable (not to be confused with `mist`) comes with a JavaScript interpreter. The interpreter can be accesses via an interactive console (with persisted history). The JS console can be invoked from the command line with the `js` subcommand. If you need log information, start with (note the flags before the subcommand:
 
-It's also possible to use `ethereum` directly as a JavaScript intepreter. If you want to load a JavaScript file and invoke the VM directly execute `ethereum [options] <filename>`. 
+    ethereum -logfile /tmp/eth.log -loglevel 5 js
+
+It's also possible to use the JavaScript intepreter with files so it gives a fully scriptable command line interface to the ethereum stack. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
+
+    ethereum js script.0.js script.1.js
 
 ## API
 
-The JavaScript REPL that comes with `ethereum` and it's API should not be confused with the [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API). It tries to mimic the DApp API as much as possible except that private key accessibility is still possible. The intention of the REPL is very clear; utility. 
+Ethereum's javascript VM offers the full
+ [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API) by autoloading [ethereum.js](https://github.com/ethereum/ethereum.js).
+An admin interface is available via the `eth` object and contains the following methods:
+**note** that the following is likely to change:
 
-The Ethereum API is available through the `eth` object and contains the following methods:
+* `suggestPeer(nodeURL)`
+tells the p2p server that we would like to dial out and connect to a specific peer. `nodeURL` is in [`enode`](https://github.com/ethereum/wiki/wiki/enode-url-format) format. You can find out your own from the logs when the client boots up (line to look for looks like:
 
-* `block (hash)`
-    Retrieves a block by either the address or the number. If supplied with a string it will assume address, number otherwise.
-* `transact (sec, recipient, value, gas, gas price, data)`
-    Creates a new transaction using your current key.
-* `gxey ()`
-    Retrieves your current key in hex format.
-* `storageAt (object address, storage address)`
-    Retrieves the storage address of the given object.
-* `balanceAt (address)`
-    Retrieves the balance at the current address
-* `secretToAddress (sec)`
-    Retrieves the address of the specified secret key.
-* `peerCount()` 
-    Returns the number of connected peers.
-* `isMining()` 
-    Returns whether or not the current node is mining.
-* `isListening()` 
-    Returns whether or not the current node is listening for connections.
-* `coinbase()` 
-    Returns the current coinbase address.
-* `txCountAt()` 
-    Returns the transaction nonce of the current key.
-* `watch (address [, storage address], cb)`
-    Watches for changes on a specific address' state object such as state root changes or value changes.
-* `addPeer (host)`
-    Make a connection to the specified host. Returns false if it didn't succeed.
+    [P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
 
-The following methods are only available in the REPL and interpreter
+. Once you acquired the enode url of your favourite peer (say via whisper chat), to attempt connection you can use:
 
-### PStateObject
+    eth.suggestPeer(" enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303")
 
-##### `getStateObject(address)`
+* `dumpBlock(numberOrHash)`
+return the raw dump of a block referred to by block number or block hash
 
-The StateObject represents an object which has been stored in the state trie and can be queried for it's data
+* `import(filename)`
+imports the blockchain from a marshalled binary format. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
-* `getStorage(address)`
-    Returns the value stored at `address`
-* `value()`
-    Returns the value
-* `address()`
-    Returns the address
-* `root()`
-    Returns the root of the state object's state in hex
-* `isContract()`
-    Returns wether the state object is a contract or an account
-* `script()`
-    Returns the disassembled script.
+* `export(filename)`
+exports the blockchain to the given file in binary format.
 
-### PKey
-
-##### `key()`
-
-The Key object is a key pair consisting of a private and public key from which an address can be derived.
-
-* `privateKey`
-   The private key of this key pair
-* `publicKey`
-   The public key of this key pair
-* `address()`
-   The derived address
-
-### PBlock
-
-##### `eth.getBlock(hash)`
-
-* `getTransaction(hash)`
-   Returns a transaction if the hash is valid, otherwise undefined
+* `setMining(true|false)`
+starts/stops mining 
 
 ## Loading modules
 
@@ -90,25 +48,21 @@ and use it as:
 var answer = require('./myModuleWhichHasThe').answer;
 ```
 
-***
+## caveat 
 
-#### Other
+The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
 
-* `print (object)`
-    Pretty prints the given object
+* "use strict" will parse, but does nothing.
+* The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
+* missing `setTimeout` and `setInterval`. These timing functions are not actually part of the ECMA-262 specification. Typically, they belong to the windows object (in the browser).
 
-Currently the event listening functions are disabled and not supported. This will likely be implemented in the near future.
+Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
-* `disconnect (address [, storage address], cb)`
-    Disconnects from a previous `watched` address.
-
-
-#### Examples
+For scripting you may find useful the following implementation of sleep:
 
 ```javascript
-var inspect = eth.require('sys').inspect;
-
-eth.watch(eth.getAddress().address, function(stateObject) {
-    inspect(stateObject)
-});
+function sleep(seconds) {
+  var now = new Date().getTime();
+  while(new Date().getTime() < now + seconds){}
+}
 ```
