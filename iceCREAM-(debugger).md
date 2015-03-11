@@ -1,3 +1,5 @@
+**UPDATE** IceCream has been removed as of 0.9.0 in favour of more advanced other tools.
+
 Go Ethereum comes with a handy EVM debugger called iceCREAM (after the famous 'SoftICE' kernel debugger). This article will give you a basic understanding of debugging EVM code and operating the iceCREAM debugger.
 
 ![](https://photos-5.dropbox.com/t/0/AACUFqkxJZxCr0S_K-65D8lBwFcD9g2fXj0EM6VK8cosTA/12/4270001/png/1024x768/3/1404478800/0/2/Screenshot%202014-07-04%2013.46.16.png/b0UNfgLTmovpciCPHQwXjDKVM2NEUGG4bUuKDhC3jSk)
