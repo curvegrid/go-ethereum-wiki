@@ -33,9 +33,9 @@ Install Qt 5.4.x:
 Now configure some path for go-qml to properly build:
 
 ```
-export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.4.0/lib/pkgconfig
-export CGO_CPPFLAGS="-I/usr/local/Cellar/qt5/5.4.0/include/QtCore/5.4.0/QtCore"
-export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.4.0/lib
+export PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
+export CGO_CPPFLAGS="-I/usr/local/opt/qt5/include/QtCore"
+export LD_LIBRARY_PATH=/usr/local/opt/qt5/lib
 ```
 
 Compile **Mist**
