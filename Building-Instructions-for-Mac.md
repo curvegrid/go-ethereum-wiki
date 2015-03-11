@@ -1,12 +1,21 @@
 ## Option 1: Homebrew tap
 
 Assumptions:
-* Brew is installed. If not, run `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` and follow the prompts
+* Brew is installed. If not, run:
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+and follow the prompts.
 
 ```
 brew tap ethereum/ethereum
-brew install go-ethereum # Install develop branch with --devel
+brew install ethereum
 ```
+
+Install the latest develop branch with `--devel`.
+
+Add `--with-gui` to brew the `mist` browser.
+
 Then run `mist` (GUI) or `ethereum` (CLI)
 
 For options and patches, see: https://github.com/ethereum/homebrew-ethereum
