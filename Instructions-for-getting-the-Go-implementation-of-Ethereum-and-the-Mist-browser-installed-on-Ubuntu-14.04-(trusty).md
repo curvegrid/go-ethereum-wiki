@@ -1,6 +1,6 @@
 # Option 1: Install from PPA
 
-For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
+For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
 ```
 sudo apt-get install software-properties-common
