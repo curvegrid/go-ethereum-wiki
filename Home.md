@@ -6,6 +6,5 @@ Main entry points:
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
-* [eXtended Ethereum API](https://github.com/ethereum/go-ethereum/wiki/XEth)
 
 Sidebar lists all pages.
