@@ -16,17 +16,18 @@
 
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 
-[JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
-
-[QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
-
 [JavaScript Env & REPL](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
 
 [Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
-[iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
 
 ### Legacy
+
+[JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
+
+[QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
+
+[iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
 
 [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
 
