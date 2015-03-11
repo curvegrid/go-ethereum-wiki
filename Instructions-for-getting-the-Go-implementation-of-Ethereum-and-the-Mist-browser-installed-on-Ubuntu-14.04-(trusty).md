@@ -1,21 +1,23 @@
 # Option 1: Install from PPA
 
-For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the -dev one.
+For the latest development snapshot, both ppa:ethereum/ethereum and ppa:ethereum/ethereum-dev are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
 ```
 sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ethereum/ethereum-qt
 sudo add-apt-repository ppa:ethereum/ethereum
 sudo add-apt-repository ppa:ethereum/ethereum-dev
-sudo add-apt-repository ppa:beineri/opt-qt541-trusty
 sudo apt-get update
-sudo apt-get install go-ethereum
-export LD_LIBRARY_PATH=/opt/qt54/lib
+sudo apt-get install ethereum
 ```
+
 Run `mist` for the GUI or `ethereum` for the CLI.
 
-You might want to add `export LD_LIBRARY_PATH=/opt/qt54/lib` to your `~/.bashrc` or `~/.bash_profile`.
+You can alternatively install only the CLI or GUI, with `apt-get install ethereum-cli` or `apt-get install mist` respectively.
 
 # Option 2: Automatic installation
+
+**Note** Outdated, please use the PPA.
 
 [This Mist install script](https://gist.github.com/tgerring/d4ab3f1672ed91a53c6c) will install everything required from a fresh Ubuntu 14.04 installation and start running Mist.
 
