@@ -1,118 +1,108 @@
 # CLI client
 
-```
-    ethereum [options] [filename]
-```
-
-Options:
+Command line client options are a moving target under constant change now. Please refer to the clients help option. Output of `ethereum help` (version 0.9.0, 2015.03.12). 
 
 ```
-  -bootnodes="": space-separated node URLs for discovery bootstrap
-  -chain="": Imports given chain
-  -conf="<datadir>/conf.ini": config file
-  -datadir="$HOME/Library/Ethereum": specifies the datadir to use
-  -debug="": debug file (no debugging if not set)
-  -dial=true: dial out connections (default on)
-  -diff="all": sets the level of diff output [vm, all]. Has no effect if difftool=false
-  -difftool=false: creates output for diff'ing. Sets LogLevel=0
-  -dump=false: output the ethereum state in JSON format. Sub args [number, hash]
-  -export="": exports the session keyring to files in the directory given
-  -genaddr=false: create a new priv/pub key
-  -genesis=false: Dump the genesis block
-  -hash="": specify arg in hex
-  -id="": Custom client identifier
-  -import="": imports the file given (hex or mnemonic formats)
-  -js=false: launches javascript console
-  -keyring="": identifier for keyring to use
-  -keystore="db": system to store keyrings: db|file 
-  -logfile="": log file (defaults to standard output)
-  -logformat="std": logformat: std,raw
-  -loglevel=3: loglevel: 0-5 (= silent,error,warn,info,debug,debug detail)
-  -maxpeer=30: maximum desired peers
-  -mine=false: start dagger mining
-  -minerthreads=8: number of miner threads
-  -nat="any": port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-  -nodekey="": network private key file
-  -nodekeyhex="": network private key (for testing)
-  -number=-1: specify arg in number
-  -port="30303": listening port
-  -rpc=false: start rpc server
-  -rpcaddr="127.0.0.1": address for json-rpc server to listen on
-  -rpcport=8545: port to start json-rpc server on
-  -version=false: prints version number
-  -vm=0: Virtual Machine type: 0-1: standard, debug
-  -ws=false: start websocket server
-  -wsport=40404: port to start websocket rpc server on
-  -y=false: non-interactive mode (say yes to confirmations)
+ethereum [global options] command [command options] [arguments...]
 
-  filename   Load the given file and interpret as JavaScriptdefault value after =. Note the `=` is optional.
+VERSION:
+   0.9.0
+
+COMMANDS:
+   version      print ethereum version numbers
+   account      manage accounts
+   dump         dump a specific block from storage
+   js           interactive JavaScript console
+   import       import a blockchain file
+   export       export blockchain into file
+   help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --unlock                                     Unlock a given account untill this programs exits (address:password)
+   --bootnodes                                  Space-separated enode URLs for discovery bootstrap
+   --datadir "/$HOME/Library/Ethereum"     Data directory to be used
+   --port "30303"                               Network listening port
+   --logfile                                    Send log output to a file
+   --logformat "std"                            "std" or "raw"
+   --loglevel "3"                               0-5 (silent, error, warn, info, debug, debug detail)
+   --maxpeers "16"                              Maximum number of network peers
+   --minerthreads "8"                           Number of miner threads
+   --mine                                       Enable mining
+   --nat "any"                                  Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --nodekey                                    P2P node key file
+   --nodekeyhex                                 P2P node key as hex (for testing)
+   --rpc                                        Whether RPC server is enabled
+   --rpcaddr "127.0.0.1"                        Listening address for the JSON-RPC server
+   --rpcport "8545"                             Port on which the JSON-RPC server should listen
+   --unencrypted-keys                           disable private key disk encryption (for testing)
+   --vmdebug                                    Virtual Machine debug output
+   --help, -h                                   show help
 
 ```
 
-Note that the default for datadir is platform-specific, the example shown is for Mac OSX.
-
+Note that the default for datadir is platform-specific, "/$HOME/Library/Ethereum" is the pattern for MacOS. 
 
 ## Examples: 
 
-executes `test.js` javascript using js API and logs to `/path/to/logfile`:
+executes `test.js` javascript using js API and logs Debug level log messages to `/path/to/logfile`:
 
-    ethereum -logfile /path/to/logfile test.js  # 
+    ethereum -logfile /path/to/logfile -loglevel js test.js  # 
    
-non-interactively imports a key and exits (used to programmatically set address from script):
+imports a blockchain from file (used to programmatically set address from script):
 
-    ethereum -y -import `cat mysecret.hex`
+    ethereum import blockchain.bin
 
 start two mining nodes with their own client ids using different data directories listening on ports 30300 and 30301 respectively:
 
-    ethereum -nat=upnp -id ethersphere.0 -datadir /usr/local/share/ethereum/0 -port 30300
-    ethereum -nat=upnp -id ethersphere.1 -datadir /usr/local/share/ethereum/1 -port 30301
+    ethereum -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30303 -port 30303
+    ethereum -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30304 -port 30304
     
 start an rpc client on port 8000:
 
     ethereum -rpc true -rpcport 8000
 
+Start a client and connect to specific peers:
+
+    ethereum -bootnodes="enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303 enode://0b2fa1e93dfcd90ce503ab1338332d6a1371b464838b49f37af8534a510992bd4d96b24134ba262ad9298ab4aa6f132132f84c3b6d10ebaead5f9a236be286f10@54.169.166.218:30305" -maxpeers 2
+
+
 ## GUI Client 
 
-    mist [options]
-    
-Options:
+The output of `mist help`. Please refer to the client for uptodate info. 
 
 ```
-  -asset_path="/Users/tron/Work/ethereum/go/src/github.com/ethereum/Resources": absolute path to GUI assets directory
-  -bootnodes="": space-separated node URLs for discovery bootstrap
-  -conf="<datadir>/conf.ini": config file
-  -datadir="$HOME/Library/Ethereum": specifies the datadir to use
- -debug="": debug file (no debugging if not set)
-  -export="": exports the session keyring to files in the directory given
-  -genaddr=false: create a new priv/pub key
-  -id="": Custom client identifier
-  -import="": imports the file given (hex or mnemonic formats)
-  -keyring="": identifier for keyring to use
-  -keystore="db": system to store keyrings: db|file
-  -logfile="": log file (defaults to standard output)
-  -loglevel=3: loglevel: 0-5 (= silent,error,warn,info,debug,debug detail)
-  -maxpeer=30: maximum desired peers
-  -minerthreads=8: number of miner threads
-  -nat="any": port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-  -nodekey="": network private key file
-  -nodekeyhex="": network private key (for testing)
-  -port="30303": listening port
-  -rpc=true: start rpc server
-  -rpcaddr="127.0.0.1": address for json-rpc server to listen on
-  -rpcport=8545: port to start json-rpc server on
-  -vm=0: Virtual Machine type: 0-1: standard, debug
-  -ws=false: start websocket server
-  -wsport=40404: port to start websocket rpc server on
-  -y=false: non-interactive mode (say yes to confirmations)
-```
+mist [global options] command [command options] [arguments...]
 
-default value after =. Note the `=` is optional.
+VERSION:
+   0.9.0
+
+COMMANDS:
+   help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --asset_path "/Users/tron/Work/ethereum/go/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
+   --bootnodes                                                                                          Space-separated enode URLs for discovery bootstrap
+   --datadir "/Users/tron/Library/Ethereum"                                                             Data directory to be used
+   --port "30303"                                                                                       Network listening port
+   --logfile                                                                                            Send log output to a file
+   --loglevel "3"                                                                                       0-5 (silent, error, warn, info, debug, debug detail)
+   --maxpeers "16"                                                                                      Maximum number of network peers
+   --minerthreads "8"                                                                                   Number of miner threads
+   --nat "any"                                                                                          Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --nodekey                                                                                            P2P node key file
+   --rpcaddr "127.0.0.1"                                                                                Listening address for the JSON-RPC server
+   --rpcport "8545"                                                                                     Port on which the JSON-RPC server should listen
+   --help, -h                                                                                           show help
+   --version, -v                                                                                        print the version
+```
 
 Example: 
 
     mist --asset_path /absolute/path/to/assets
 
 ## Alternative ways to set flags
+
+**WARNING:** This is not available for the latest frontier poc9.
 
 The same flags can be set via config file (by default `<datadir>/conf.ini`) as well as environment variables. 
 
