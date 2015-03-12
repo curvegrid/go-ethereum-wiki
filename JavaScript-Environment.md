@@ -70,3 +70,49 @@ function sleep(seconds) {
   while(new Date().getTime() < now + seconds){}
 }
 ```
+
+## Examples 
+
+### Balance
+
+```javascript
+coinbase = web3.eth.coinbase;
+web3.eth.getBalance(coinbase).toNumber();
+web3.eth.filter('pending').watch(function() {
+  print(web3.eth.getBalance(coinbase).toNumber());
+});
+```
+
+### Contract and transaction 
+**note** solidity compilation doesn't work 
+
+```javascript
+var source = "" +
+  "contract test {\n" +
+  " /// @notice Will multiply `a` by 7. \n" +
+  " function multiply(uint a) returns(uint d) {\n" +
+  " return a * 7;\n" +
+  " }\n" +
+  "}\n";
+
+var desc = [{
+  "name": "multiply(uint256)",
+  "type": "function",
+  "inputs": [
+  {
+    "name": "a",
+    "type": "uint256"
+  }
+  ],
+    "outputs": [
+    {
+      "name": "d",
+      "type": "uint256"
+    }
+  ]
+}];
+var address = web3.eth.sendTransaction({code: web3.eth.solidity(source)});
+var contract = web3.eth.contract(address, desc);
+var param = 3
+contract.sendTransaction().multiply(param);
+```
