@@ -10,6 +10,9 @@ It's also possible to use the JavaScript intepreter with files so it gives a ful
 
 Ethereum's javascript VM offers the full
  [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API) by autoloading [ethereum.js](https://github.com/ethereum/ethereum.js).
+
+Beside `web3`, its subcomponents are accessible directly from the global namespace as `eth`, `shh`, `db` and `net`.
+
 An admin interface is available via the `admin` object and contains the following methods:
 **note** that the following is likely to change:
 
@@ -23,20 +26,43 @@ Once you acquired the enode url of your favourite peer (say via whisper chat), t
     admin.addPeer(" enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303")
 
 * `removePeer(nodeId)` 
-disconnects from a peer,  Returns true if success, false there was an error.
+disconnects from a peer,  Returns true if success, false if there was an error.
+
+* `peers()`
+returns an array of objects representing info on all connected peers
+
+* `startRpc(portNumber)`
+starts the http server for [json-rpc](https://github.com/ethereum/wiki/wiki/JSON-RPC). Returns true if success, false if there was an error.
+
+* `stopRpc()`
+stops the http server for [json-rpc](https://github.com/ethereum/wiki/wiki/JSON-RPC). Returns true if success, false if there was an error.
+
+* `nodeInfo()`
+returns information on the node 
+
+* `unlock(address, password, 10.0)`
+unlock the account belonging to address
+
+* `newAccount(path, useEncryption, password)`
+creates a new account and saves the key under `path`. If `path` is undefined, then the keys directory (`<datadir>/keys`) is used.
+If `useEncryption` is true, the key is encrypted with `password`. If `password` is undefined, it prompts for one.
+Returns the address of the account or undefined if there was an error.
 
 * `dumpBlock(numberOrHash)`
-returns the raw dump of a block referred to by block number or block hash
+returns the raw dump of a block referred to by block number or block hash or undefined if the block is not found.
 
 * `import(filename)`
-imports the blockchain from a marshalled binary format.  Returns true if success, false there was an error. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
+imports the blockchain from a marshalled binary format.  Returns true if success, false if there was an error. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
 * `export(filename)`
-exports the blockchain to the given file in binary format. Returns true if success, false there was an error.
+exports the blockchain to the given file in binary format. Returns true if success, false if there was an error.
 
-* `setMining(true|false)`
-starts/stops mining returns true if mining, false if not mining.
+* `startMining(numberOfMinerThreads)`
+Starts mining on `numberOfMinerThreads` parallel threads.
+Returns true if success, false there was an error.
 
+* `stopMining()`
+Stops all miners.  Returns true if success, false if there was an error.
 
 ## Loading modules
 
@@ -50,6 +76,15 @@ and use it as:
 
 ```javascript
 var answer = require('./myModuleWhichHasThe').answer;
+```
+
+relative paths in required modules are searched in `libPath`, a command line option. As a fallback `<path>.js` is tried. 
+ 
+Once we got the module repository scheme using namereg and swarm, this is likely become much easier, like:
+
+```javascript
+require("bzz://ethrepo/ethereum/dapps/hivewallet/1.5.4")
+require("bzz://github/ethersphere/faethbvk/tree/homestead/alpha/")
 ```
 
 ## Caveat 
