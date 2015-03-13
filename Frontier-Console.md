@@ -20,22 +20,13 @@ The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (for
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
-For scripting you may find useful the following implementation of sleep:
-
-```javascript
-function sleep(seconds) {
-  var now = new Date().getTime();
-  while(new Date().getTime() < now + seconds){}
-}
-```
-
 ## Console API
 
 Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
 
 * [admin](#admin)
   * [nodeInfo](#adminnodeinfo)
-  * [addPeer](#adminaddpeer)
+  * [suggestPeer](#adminsuggestpeer)
   * [peers](#adminpeers)
   * [startRpc](#adminstartrpc)
   * [stopRpc](#adminstoprpc)
@@ -73,9 +64,9 @@ admin.nodeInfo()
 
 ***
 
-##### admin.addPeer
+##### admin.suggestPeer
 
-    admin.addPeer(nodeURL)
+    admin.suggestPeer(nodeURL)
 
 Pass a `nodeURL` to suggest a new peer to the network. The `nodeURL`need to be in a [enode url format](https://github.com/ethereum/wiki/wiki/enode-url-format).
 
@@ -88,7 +79,7 @@ You can find out your own enode by looking at the logs when the node boots up e.
 **Returns** `true` on success.
 
 ```javascript
-admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
+admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
 ```
 
 ***
@@ -123,7 +114,7 @@ admin.startRpc(8545)
 
 ##### admin.stopRpc
 
-    admin.stopRpc()
+    admin.stopRpc() [not implemented]
 
 Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
@@ -170,7 +161,7 @@ admin.stopMining()
 
     admin.unlock(address, password, timeout)
 
-Unlock the account for the time `timeout` in seconds.
+Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
 
 **Returns** `true` on success, otherwise `false`.
 
@@ -185,7 +176,7 @@ admin.unlock('0x833b8ed5a2957e5b050ba6539efa66cb67165eec', '1234', 1000 * 60 * 1
 
     admin.newAccount(password)
 
-Creates a new account and encrypts it with `password`. If no `password` is given the key is stored unencrypted.
+Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
 
 **Returns** `true` on success, otherwise `false`.
 
