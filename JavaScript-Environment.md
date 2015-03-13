@@ -10,6 +10,25 @@ It's also possible to pass files to the JavaScript intepreter. Load and execute 
 
     $ ethereum console script1.js script2.js
 
+## Caveat 
+
+The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
+
+* "use strict" will parse, but does nothing.
+* The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
+* missing `setTimeout` and `setInterval`. These timing functions are not actually part of the ECMA-262 specification. Typically, they belong to the windows object (in the browser).
+
+Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
+
+For scripting you may find useful the following implementation of sleep:
+
+```javascript
+function sleep(seconds) {
+  var now = new Date().getTime();
+  while(new Date().getTime() < now + seconds){}
+}
+```
+
 ## Console API
 
 Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
@@ -258,25 +277,6 @@ The `shh` is a shortcut for `web3.shh`.
 The `db` is a shortcut for `web3.db`.
 
 ***
-
-## Caveat 
-
-The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
-
-* "use strict" will parse, but does nothing.
-* The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
-* missing `setTimeout` and `setInterval`. These timing functions are not actually part of the ECMA-262 specification. Typically, they belong to the windows object (in the browser).
-
-Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
-
-For scripting you may find useful the following implementation of sleep:
-
-```javascript
-function sleep(seconds) {
-  var now = new Date().getTime();
-  while(new Date().getTime() < now + seconds){}
-}
-```
 
 ## Examples 
 
