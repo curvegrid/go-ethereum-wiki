@@ -10,13 +10,13 @@
 
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
+[Frontier Console](https://github.com/ethereum/go-ethereum/wiki/Frontier-Console)
+
 ### Developing
 
 [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
 
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
-
-[Frontier Console](https://github.com/ethereum/go-ethereum/wiki/Frontier-Console)
 
 [Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
