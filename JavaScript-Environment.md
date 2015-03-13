@@ -36,6 +36,8 @@ Beside `web3`, its subcomponents are accessible directly from the global namespa
 * [shh](#shh)
 * [db](#db)
 
+***
+
 ##### admin
 The `admin` exposes the methods to administrate the node.
 
