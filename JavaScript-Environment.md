@@ -259,30 +259,6 @@ The `db` is a shortcut for `web3.db`.
 
 ***
 
-
-## Loading modules (not implemented)
-
-You can load **modules** by using the `require` method which can load other javascript files from disk and returns a special type of variable called `exports` (just like node.js does).
-
-```javascript
-exports.answer = 42;
-```
-
-and use it as:
-
-```javascript
-var answer = require('./myModuleWhichHasThe').answer;
-```
-
-relative paths in required modules are searched in `libPath`, a command line option. As a fallback `<path>.js` is tried. 
- 
-Once we got the module repository scheme using namereg and swarm, this is likely become much easier, like:
-
-```javascript
-require("bzz://ethrepo/ethereum/dapps/hivewallet/1.5.4")
-require("bzz://github/ethersphere/faethbvk/tree/homestead/alpha/")
-```
-
 ## Caveat 
 
 The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
