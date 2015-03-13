@@ -16,7 +16,7 @@
 
 [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 
-[Frontier Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Environment)
+[Frontier Console](https://github.com/ethereum/go-ethereum/wiki/Frontier-Console)
 
 [Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
