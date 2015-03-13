@@ -12,10 +12,7 @@ It's also possible to pass files to the JavaScript intepreter. Load and execute 
 
 ## Console API
 
-Ethereum's javascript VM offers the full
- [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API) by autoloading [ethereum.js](https://github.com/ethereum/ethereum.js).
-
-Beside `web3`, its subcomponents are accessible directly from the global namespace as `eth`, `shh`, `db` and `net`.
+Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
 
 * [admin](#admin)
   * [nodeInfo](#adminnodeinfo)
