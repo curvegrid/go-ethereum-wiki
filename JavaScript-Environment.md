@@ -45,7 +45,7 @@ The `admin` exposes the methods to administrate the node.
 
 ##### admin.nodeInfo
 
-   admin.nodeInfo()
+    admin.nodeInfo()
 
 **Returns** information on the node.
 
@@ -58,7 +58,7 @@ admin.nodeInfo()
 
 ##### admin.addPeer
 
-   admin.addPeer(nodeURL)
+    admin.addPeer(nodeURL)
 
 Pass a `nodeURL` to suggest a new peer to the network. The `nodeURL`need to be in a [enode url format](https://github.com/ethereum/wiki/wiki/enode-url-format).
 
@@ -78,7 +78,7 @@ admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d869
 
 ##### admin.peers
 
-   admin.peers()
+    admin.peers()
 
 **Returns** an array of objects with information about connected peers.
 
@@ -91,7 +91,7 @@ admin.peers()
 
 ##### admin.startRpc
 
-   admin.startRpc(portNumber)
+    admin.startRpc(portNumber)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
@@ -106,7 +106,7 @@ admin.startRpc(8545)
 
 ##### admin.stopRpc
 
-   admin.stopRpc()
+    admin.stopRpc()
 
 Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
@@ -121,7 +121,7 @@ admin.stopRpc()
 
 ##### admin.startMining
 
-   admin.startMining(threadNumber)
+    admin.startMining(threadNumber)
 
 Starts mining on with the given `threadNumber` of parallel threads.
 
@@ -136,7 +136,7 @@ admin.startMining(4)
 
 ##### admin.stopMining
 
-   admin.stopMining()
+    admin.stopMining()
 
 Stops all miners.
 
@@ -151,7 +151,7 @@ admin.stopMining()
 
 ##### admin.unlock
 
-   admin.unlock(address, password, timeout)
+    admin.unlock(address, password, timeout)
 
 Unlock the account for the time `timeout` in seconds.
 
@@ -166,7 +166,7 @@ admin.unlock('0x833b8ed5a2957e5b050ba6539efa66cb67165eec', '1234', 1000 * 60 * 1
 
 ##### admin.newAccount
 
-   admin.newAccount(password)
+    admin.newAccount(password)
 
 Creates a new account and encrypts it with `password`. If no `password` is given the key is stored unencrypted.
 
@@ -185,7 +185,7 @@ returns the raw dump of a block referred to by block number or block hash or und
 
 ##### admin.dumpBlock
 
-   admin.dumpBlock(numberOrHash)
+    admin.dumpBlock(numberOrHash)
 
 **Returns** the raw dump of a block referred to by block number or block hash or undefined if the block is not found.
 
@@ -198,7 +198,7 @@ admin.dumpBlock(29)
 
 ##### admin.import
 
-   admin.import()
+    admin.import()
 
 Imports the blockchain from a marshalled binary format.
 **Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
@@ -215,7 +215,7 @@ admin.import('path/to/file')
 
 ##### admin.export
 
-   admin.export()
+    admin.export()
 
 Exports the blockchain to the given file in binary format.
 
