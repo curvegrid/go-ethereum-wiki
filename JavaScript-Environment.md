@@ -8,7 +8,7 @@ If you need log information, start with:
 
 It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
 
-    $ ethereum js script.0.js script.1.js
+    $ ethereum js script1.js script2.js
 
 ## Console API
 
