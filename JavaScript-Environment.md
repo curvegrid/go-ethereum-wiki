@@ -1,70 +1,258 @@
-The `ethereum CLI` executable (not to be confused with `mist`) comes with a JavaScript interpreter. The interpreter can be accesses via an interactive console (with persisted history). The JS console can be invoked from the command line with the `js` subcommand. If you need log information, start with (note the flags before the subcommand:
+The `ethereum CLI` executable has a JavaScript console, which can be started with the `js` subcommand:
 
-    ethereum -logfile /tmp/eth.log -loglevel 5 js
+    $ ethereum js
 
-It's also possible to use the JavaScript intepreter with files so it gives a fully scriptable command line interface to the ethereum stack. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
+If you need log information, start with:
 
-    ethereum js script.0.js script.1.js
+    $ ethereum -logfile /tmp/eth.log -loglevel 5 js
 
-## API
+It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
+
+    $ ethereum js script.0.js script.1.js
+
+## Console API
 
 Ethereum's javascript VM offers the full
  [DApp JS API](https://github.com/ethereum/wiki/wiki/JavaScript-API) by autoloading [ethereum.js](https://github.com/ethereum/ethereum.js).
 
 Beside `web3`, its subcomponents are accessible directly from the global namespace as `eth`, `shh`, `db` and `net`.
 
-An admin interface is available via the `admin` object and contains the following methods:
-**note** that the following is likely to change:
+* [admin](#admin)
+  * [nodeInfo](#adminnodeinfo)
+  * [addPeer](#adminaddpeer)
+  * [peers](#adminpeers)
+  * [startRpc](#adminstartrpc)
+  * [stopRpc](#adminstoprpc)
+  * [startMining](#adminstartmining)
+  * [stopMining](#adminstopmining)
+  * [unlock](#adminunlock)
+  * [newAccount](#adminnewaccount)
+  * [dumpBlock](#admindumpblock)
+  * [import](#adminimport)
+  * [export](#adminexport)
+* [web3](#web3)
+* [net](#net)
+* [eth](#eth)
+* [shh](#shh)
+* [db](#db)
 
-* `addPeer(nodeURL)`
-tells the p2p server that we would like to dial out and connect to a specific peer.  Returns true if success, false there was an error. `nodeURL` is in [`enode`](https://github.com/ethereum/wiki/wiki/enode-url-format) format. You can find out your own from the logs when the client boots up (line to look for looks like:
+##### admin
+The `admin` exposes the methods to administrate the node.
 
-    [P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
+***
 
-Once you acquired the enode url of your favourite peer (say via whisper chat), to attempt connection you can use:
+##### admin.nodeInfo
 
-    admin.addPeer(" enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303")
+   admin.nodeInfo()
 
-* `removePeer(nodeId)` 
-disconnects from a peer,  Returns true if success, false if there was an error.
+**Returns** information on the node.
 
-* `peers()`
-returns an array of objects representing info on all connected peers
+```javascript
+admin.nodeInfo()
+// {...}
+```
 
-* `startRpc(portNumber)`
-starts the http server for [json-rpc](https://github.com/ethereum/wiki/wiki/JSON-RPC). Returns true if success, false if there was an error.
+***
 
-* `stopRpc()`
-stops the http server for [json-rpc](https://github.com/ethereum/wiki/wiki/JSON-RPC). Returns true if success, false if there was an error.
+##### admin.addPeer
 
-* `nodeInfo()`
-returns information on the node 
+   admin.addPeer(nodeURL)
 
-* `unlock(address, password, 10.0)`
-unlock the account belonging to address
+Pass a `nodeURL` to suggest a new peer to the network. The `nodeURL`need to be in a [enode url format](https://github.com/ethereum/wiki/wiki/enode-url-format).
 
-* `newAccount(path, useEncryption, password)`
-creates a new account and saves the key under `path`. If `path` is undefined, then the keys directory (`<datadir>/keys`) is used.
-If `useEncryption` is true, the key is encrypted with `password`. If `password` is undefined, it prompts for one.
-Returns the address of the account or undefined if there was an error.
+You can find out your own enode by looking at the logs when the node boots up e.g.:
+
+```
+[P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
+```
+
+**Returns** `true` on success.
+
+```javascript
+admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
+```
+
+***
+
+##### admin.peers
+
+   admin.peers()
+
+**Returns** an array of objects with information about connected peers.
+
+```javascript
+admin.peers()
+// [{...},{...}]
+```
+
+***
+
+##### admin.startRpc
+
+   admin.startRpc(portNumber)
+
+Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.startRpc(8545)
+// true
+```
+
+***
+
+##### admin.stopRpc
+
+   admin.stopRpc()
+
+Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.stopRpc()
+// true
+```
+
+***
+
+##### admin.startMining
+
+   admin.startMining(threadNumber)
+
+Starts mining on with the given `threadNumber` of parallel threads.
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.startMining(4)
+// true
+```
+
+***
+
+##### admin.stopMining
+
+   admin.stopMining()
+
+Stops all miners.
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.stopMining()
+// true
+```
+
+***
+
+##### admin.unlock
+
+   admin.unlock(address, password, timeout)
+
+Unlock the account for the time `timeout` in seconds.
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.unlock('0x833b8ed5a2957e5b050ba6539efa66cb67165eec', '1234', 1000 * 60 * 10) // unlock for 10 mins
+// true
+```
+
+***
+
+##### admin.newAccount
+
+   admin.newAccount(password)
+
+Creates a new account and encrypts it with `password`. If no `password` is given the key is stored unencrypted.
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.newAccount('1234')
+// true
+```
+
+***
 
 * `dumpBlock(numberOrHash)`
 returns the raw dump of a block referred to by block number or block hash or undefined if the block is not found.
 
-* `import(filename)`
-imports the blockchain from a marshalled binary format.  Returns true if success, false if there was an error. Note that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
-* `export(filename)`
-exports the blockchain to the given file in binary format. Returns true if success, false if there was an error.
+##### admin.dumpBlock
 
-* `startMining(numberOfMinerThreads)`
-Starts mining on `numberOfMinerThreads` parallel threads.
-Returns true if success, false there was an error.
+   admin.dumpBlock(numberOrHash)
 
-* `stopMining()`
-Stops all miners.  Returns true if success, false if there was an error.
+**Returns** the raw dump of a block referred to by block number or block hash or undefined if the block is not found.
 
-## Loading modules
+```javascript
+admin.dumpBlock(29)
+// {...}
+```
+
+***
+
+##### admin.import
+
+   admin.import()
+
+Imports the blockchain from a marshalled binary format.
+**Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
+
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.import('path/to/file')
+// true
+```
+
+***
+
+##### admin.export
+
+   admin.export()
+
+Exports the blockchain to the given file in binary format.
+
+**Returns** `true` on success, otherwise `false`.
+
+```javascript
+admin.export()
+// binary ?
+```
+
+***
+
+##### web3
+The `web3` exposes all the method of the [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
+
+***
+
+##### net
+The `net` is a shortcut for `web3.net`.
+
+***
+
+##### eth
+The `eth` is a shortcut for `web3.eth`.
+
+***
+
+##### shh
+The `shh` is a shortcut for `web3.shh`.
+
+***
+
+##### db
+The `db` is a shortcut for `web3.db`.
+
+***
+
+
+## Loading modules (not implemented)
 
 You can load **modules** by using the `require` method which can load other javascript files from disk and returns a special type of variable called `exports` (just like node.js does).
 
