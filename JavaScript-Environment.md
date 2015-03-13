@@ -232,6 +232,8 @@ admin.export()
 
 Loads a JavaScript file and executes it.
 
+***
+
 ##### web3
 The `web3` exposes all the method of the [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
 
