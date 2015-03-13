@@ -27,6 +27,7 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
   * [dumpBlock](#admindumpblock)
   * [import](#adminimport)
   * [export](#adminexport)
+* [loadScript](#loadscript)
 * [web3](#web3)
 * [net](#net)
 * [eth](#eth)
@@ -224,6 +225,12 @@ admin.export()
 ```
 
 ***
+
+#### loadScript
+
+     loadScript('/path/to/myfile.js');
+
+Loads a JavaScript file and executes it.
 
 ##### web3
 The `web3` exposes all the method of the [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
