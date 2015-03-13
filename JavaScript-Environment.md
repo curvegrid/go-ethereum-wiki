@@ -1,14 +1,14 @@
-The `ethereum CLI` executable has a JavaScript console, which can be started with the `js` subcommand:
+The `ethereum CLI` executable has a JavaScript console, which can be started with the `console` subcommand:
 
-    $ ethereum js
+    $ ethereum console
 
 If you need log information, start with:
 
-    $ ethereum -logfile /tmp/eth.log -loglevel 5 js
+    $ ethereum -logfile /tmp/eth.log -loglevel 5 console
 
-It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
+It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `console` subcommand: 
 
-    $ ethereum js script1.js script2.js
+    $ ethereum console script1.js script2.js
 
 ## Console API
 
