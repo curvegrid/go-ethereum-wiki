@@ -17,7 +17,7 @@ git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum
 ## Godep for dependency management
 As of POC-8, go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
 
-Istall godep: 
+Install godep: 
 
 ```
 go get github.com/tools/godep
@@ -124,7 +124,7 @@ To track a new dependency, add it to the project as normal than run
 godep save ./...
 ```
 
-Changes to the [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) should be manually verified then commited.
+Changes to the [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) should be manually verified then committed.
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
 
