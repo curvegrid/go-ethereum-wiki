@@ -6,9 +6,9 @@ If you need log information, start with:
 
     $ ethereum -logfile /tmp/eth.log -loglevel 5 console
 
-It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `console` subcommand: 
+It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
 
-    $ ethereum console script1.js script2.js
+    $ ethereum js script1.js script2.js
 
 ## Caveat 
 
@@ -81,6 +81,8 @@ You can find out your own enode by looking at the logs when the node boots up e.
 [P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
 ```
 
+*Note*: there is good reason this function is called `suggestPeer` and not `addPeer` (as well as reason why `removePeer` is not available. It is ultimately the p2p server's discretion to connect and disconnect peers depending on number of factors. In normal cases however, when the number of maxpeers is not saturated and your suggested peer is well behaved and compatible, connection may even persist for a long time. 
+
 **Returns** `true` on success.
 
 ```javascript
@@ -143,6 +145,8 @@ admin.stopRpc()
 Starts mining on with the given `threadNumber` of parallel threads.
 
 **Returns** `true` on success, otherwise `false`.
+
+**Note** threadNumber is currently idle until thread safety in ethash is fixed.
 
 ```javascript
 admin.startMining(4)
@@ -270,7 +274,7 @@ admin.export()
 
      loadScript('/path/to/myfile.js');
 
-Loads a JavaScript file and executes it.
+Loads a JavaScript file and executes it. Relative paths are interpreted as relative to `jspath` which is specified as a command line flag, see [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options).
 
 ***
 
