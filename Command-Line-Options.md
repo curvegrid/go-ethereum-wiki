@@ -1,18 +1,20 @@
 # CLI client
 
-Command line client options are a moving target under constant change now. Please refer to the clients help option. Output of `ethereum help` (version 0.9.0, 2015.03.12). 
+Command line client options are a moving target under constant change now. Please refer to the clients help option. Output of `ethereum help` (version 0.9.1, 2015.03.18). 
 
 ```
 ethereum [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.0
+   0.9.1
 
 COMMANDS:
+   blocktest    loads a block test file
    version      print ethereum version numbers
    account      manage accounts
    dump         dump a specific block from storage
-   js           interactive JavaScript console
+   console      Ethereum Console: interactive JavaScript environment
+   js           executes the given JavaScript files in the Ethereum Frontier JavaScript VM
    import       import a blockchain file
    export       export blockchain into file
    help, h      Shows a list of commands or help for one command
@@ -20,7 +22,8 @@ COMMANDS:
 GLOBAL OPTIONS:
    --unlock                                     Unlock a given account untill this programs exits (address:password)
    --bootnodes                                  Space-separated enode URLs for discovery bootstrap
-   --datadir "/$HOME/Library/Ethereum"     Data directory to be used
+   --datadir "$HOME/Library/Ethereum"           Data directory to be used
+   --jspath "."                                 JS library path to be used with console and js subcommands
    --port "30303"                               Network listening port
    --logfile                                    Send log output to a file
    --logformat "std"                            "std" or "raw"
@@ -36,6 +39,8 @@ GLOBAL OPTIONS:
    --rpcport "8545"                             Port on which the JSON-RPC server should listen
    --unencrypted-keys                           disable private key disk encryption (for testing)
    --vmdebug                                    Virtual Machine debug output
+   --protocolversion "58"                       ETH protocol version
+   --networkid "0"                              Network Id
    --help, -h                                   show help
 
 ```
@@ -80,7 +85,7 @@ COMMANDS:
    help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --asset_path "/Users/tron/Work/ethereum/go/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
+   --asset_path "$GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
    --bootnodes                                                                                          Space-separated enode URLs for discovery bootstrap
    --datadir "/Users/tron/Library/Ethereum"                                                             Data directory to be used
    --port "30303"                                                                                       Network listening port
@@ -92,8 +97,12 @@ GLOBAL OPTIONS:
    --nodekey                                                                                            P2P node key file
    --rpcaddr "127.0.0.1"                                                                                Listening address for the JSON-RPC server
    --rpcport "8545"                                                                                     Port on which the JSON-RPC server should listen
+   --jspath "."                                                                                         JS library path to be used with console and js subcommands
+   --protocolversion "58"                                                                               ETH protocol version
+   --networkid "0"                                                                                      Network Id
    --help, -h                                                                                           show help
    --version, -v                                                                                        print the version
+
 ```
 
 Example: 
