@@ -13,3 +13,7 @@ Present a signed receipt by a signed up node and a deposit covering the upload o
 ## Present chunk to avoid paying compensation
 
 No compensation is paid for lost chunks, if chunk is presented within the deadline. The cost of uploading the chunk is compensated exactly from the demand's deposit, with the remainder refunded. Comes with an accessor for checking that a given node is liable for compensation, so the node is notified to present the chunk in a timely fashion.
+
+# Price considerations
+
+The ratio of compensation over the price of the receipt decreases with Kademlia distance between the node address and the Swarm hash of the chunk and increases with the term of the receipt.
