@@ -35,6 +35,7 @@
 - Vitalik's blogpost of 08/2014 - https://blog.ethereum.org/2014/08/16/secret-sharing-erasure-coding-guide-aspiring-dropbox-decentralizer/
 - Vitalik: 'Swarm is out-of-scope': https://www.reddit.com/r/ethereum/comments/2phvml/constructive_criticism_of_ethereum_project_not/cmwtfqq
 - Vitalik on eth components, swarm at 4:00 http://www.naation.com/2015/02/02/ethereum-explained-with-vitalik-buterin-inventor-and-leader-of-the-ethereum-project/5764/
+- https://www.youtube.com/watch?v=zgkmQ-jQJHk&feature=youtu.be
 
 ## Media
 - https://twitter.com/jeffehh/status/565927366271467521
