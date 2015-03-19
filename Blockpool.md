@@ -1,3 +1,5 @@
+# Blockpool --  technical notes to the go-ethereum blockchain synchronisation module
+
 ## Intro 
 
 An ethereum node needs to acquire the set of blocks from which the current consensus can be proved. This includes scenarios where the node starts up from scratch (i.e., with an empty database) in which case the block pool acts as a _download manager_ as well as normal operation where the node needs to synchronize recent blocks by finding the best candidate new blocks. Since network latency and disruption can cause any amount of blocks to be missed the two scenarios can be considered the same task: finding the best chain to give to the blockchain manager. 
