@@ -8,7 +8,7 @@ Pay a deposit in Ether and register public key. Comes with an accessor for check
 
 ## Demand compensation for loss of chunk
 
-Present a signed receipt by a signed up node and a deposit covering the upload of a chunk. After a given deadline, the corresponding compensation is paid and the deposit refunded, unless a PoC (in the simplest case, the chunk itself) is presented. Comes with an accessor for checking that a given chunk has been lost (compensation has been paid), so that other claimants can also demand their compensation.
+Present a signed receipt by a signed up node and a deposit covering the upload of a PoC (in the simplest case, the chunk itself). After a given deadline, the corresponding compensation is paid and the deposit refunded, unless a PoC is presented. Comes with an accessor for checking that a given chunk has been lost (compensation has been paid), so that other claimants can also demand their compensation.
 
 ## Present PoC to avoid paying compensation
 
