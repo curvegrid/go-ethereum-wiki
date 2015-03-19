@@ -1,4 +1,4 @@
-# Blockpool --  technical notes to the go-ethereum blockchain synchronisation module
+technical notes to the go-ethereum blockchain synchronisation module
 
 ## Intro 
 
