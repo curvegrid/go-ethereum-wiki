@@ -17,3 +17,5 @@ No compensation is paid for lost chunks, if chunk is presented within the deadli
 # Price considerations
 
 The ratio of compensation over the price of the receipt decreases with Kademlia distance between the node address and the Swarm hash of the chunk and increases with the term of the receipt.
+
+The deposit for compensating the node for uploading the chunk into the block chain should be substantially higher (e.g. a small integer multiple) of the corresponding upload measured with the gas price used to upload the demand.
