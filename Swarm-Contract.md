@@ -8,7 +8,7 @@ Pay a deposit in Ether and register public key. Comes with an accessor for check
 
 ## Demand penalty for loss of chunk
 
-Present a signed receipt by a signed up node and a deposit covering the upload of a chunk. After a given deadline, the signer node's deposit is taken and the presenting node's deposit refunded, unless the chunk is presented. Comes with an accessor for checking that a given chunk has been lost (signed receipt presented, deadline passed), so that holders of receipts by other swarm nodes can punish them as well for losing the chunk.
+Present a signed receipt by a signed up node and a deposit covering the upload of a chunk. After a given deadline, the signer node's deposit is taken and the presenting node's deposit refunded, unless the chunk is presented. Comes with an accessor for checking that a given chunk has been reported lost, so that holders of receipts by other swarm nodes can punish them as well for losing the chunk, which, in turn, incentivizes whoever holds the chunk to present it.
 
 ## Present chunk to avoid penalty
 
