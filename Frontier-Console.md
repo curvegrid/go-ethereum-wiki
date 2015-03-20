@@ -110,24 +110,24 @@ admin.peers()
 ```
 ***
 
-##### admin.startRpc
+##### admin.startRPC
 
-    admin.startRpc(portNumber)
+    admin.startRPC(portNumber)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
 **Returns** `true` on success, otherwise `false`.
 
 ```javascript
-admin.startRpc(8545)
+admin.startRPC(8545)
 // true
 ```
 
 ***
 
-##### admin.stopRpc
+##### admin.stopRPC
 
-    admin.stopRpc() [not implemented]
+    admin.stopRPC() [not implemented]
 
 Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
