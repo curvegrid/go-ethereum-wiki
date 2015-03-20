@@ -20,3 +20,14 @@ For the price of accepting a chunk for storing, see [Incentives](https://github.
 
 The deposit for compensating the swarm node for uploading the chunk into the block chain should be substantially higher (e.g. a small integer multiple) of the corresponding upload measured with the gas price used to upload the demand to prevent DoS attacks.
 
+# Termination
+
+Users of Swarm should be able to count on the loss of deposit as a disincentive, so it should not be refunded before the term of Swarm membership expires. If penalites were paid out as compensation to holders of receipts of lost chunks, it would provide an avenue of early exit for a Swarm member by "losing" chunks deposited by colluding users. Since users of Swarm are interested in their information being reliably stored, their primary incentive for keeping the receipts is to keep the Swarm motivated, not the potential compensation.
+
+# Receipt circulation
+
+End-users of Swarm keeping important information in it are obviously interested in keeping as many receipts of it as possible available for "litigation". The storage space required for storing a receipt is a sizable fraction of that used for storing the information itself, so end users can reduce their storage requirement further by storing the receipts in Swarm as well. Doing this recursively would result in end users only having to store a single receipt, yet being
+able to penalize quite a few Swarm nodes, in case only a small part of their stored information
+is lost.
+
+Swarm nodes that use the rest of Swarm as a backup may want to propagate the receipts in the opposite direction of storage requests, so that the cost of storing receipts is eventually paid by the end user either in the form of allocated storage space or as a direct payment to Swarm.
