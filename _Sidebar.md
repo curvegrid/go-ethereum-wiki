@@ -10,7 +10,7 @@
 
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
-[JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/Frontier-Console)
+[JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
 ### Developing
 
