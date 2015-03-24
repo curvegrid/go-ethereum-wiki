@@ -18,6 +18,8 @@ No penalty is paid for lost chunks, if chunk is presented within the deadline. T
 
 For the price of accepting a chunk for storing, see [Incentives](https://github.com/ethersphere/swarm/blob/master/doc/incentives.md)
 
+This price should be proportional to the sign-up deposit of the swarm node.
+
 The deposit for compensating the swarm node for uploading the chunk into the block chain should be substantially higher (e.g. a small integer multiple) of the corresponding upload measured with the gas price used to upload the demand to prevent DoS attacks.
 
 # Termination
