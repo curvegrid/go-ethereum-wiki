@@ -5,6 +5,6 @@ Main entry points:
 * [Build instructions for Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
-* [Frontier Console](https://github.com/ethereum/go-ethereum/wiki/Frontier-Console)
+* [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
 Sidebar lists all pages.
