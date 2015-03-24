@@ -112,14 +112,14 @@ admin.peers()
 
 ##### admin.startRPC
 
-    admin.startRPC(portNumber)
+     admin.startRPC(ipAddress, portNumber)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
 **Returns** `true` on success, otherwise `false`.
 
 ```javascript
-admin.startRPC(8545)
+admin.startRPC("127.0.0.1", 8545)
 // true
 ```
 
