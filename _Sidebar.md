@@ -10,6 +10,8 @@
 
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
+[Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
+
 [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
 ### Developing
