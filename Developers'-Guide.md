@@ -47,7 +47,7 @@ Each wrapper/executable found in
 To build the CLI:
 
 ```
-godep go build -v ./cmd/ethereum
+godep go install -v ./cmd/geth
 ```
 
 ## Building Mist (GUI)
