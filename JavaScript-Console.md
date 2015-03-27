@@ -1,14 +1,14 @@
-The `ethereum CLI` executable has a JavaScript console, which can be started with the `console` subcommand:
+The `ethereum CLI` executable `geth` has a JavaScript console, which can be started with the `console` subcommand:
 
-    $ ethereum console
+    $ geth console
 
 If you need log information, start with:
 
-    $ ethereum -logfile /tmp/eth.log -loglevel 5 console
+    $ geth -logfile /tmp/eth.log -loglevel 5 console
 
 It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
 
-    $ ethereum js script1.js script2.js
+    $ geth js script1.js script2.js
 
 ## Caveat 
 
@@ -310,10 +310,10 @@ The `db` is a shortcut for `web3.db`.
 ### Balance
 
 ```javascript
-coinbase = web3.eth.coinbase;
-web3.eth.getBalance(coinbase).toNumber();
-web3.eth.filter('pending').watch(function() {
-  print(web3.eth.getBalance(coinbase).toNumber());
+coinbase = eth.coinbase;
+eth.getBalance(coinbase).toNumber();
+eth.filter('pending').watch(function() {
+  print(eth.getBalance(coinbase).toNumber());
 });
 ```
 
@@ -345,8 +345,8 @@ var desc = [{
     }
   ]
 }];
-var address = web3.eth.sendTransaction({code: web3.eth.solidity(source)});
-var contract = web3.eth.contract(address, desc);
+var address = eth.sendTransaction({code: eth.solidity(source)});
+var contract = eth.contract(address, desc);
 var param = 3
 contract.sendTransaction().multiply(param);
 ```
