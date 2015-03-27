@@ -2,8 +2,7 @@
 Remember your password. 
 
 If you lose the password you use to encrypt your account, you will not be able to access that account.
-Repeat: It is NOT possible to access your account without a password and there is no forgot your password option. 
-Do not forget it.
+Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
 
 ## Account management
 The ethereum CLI `geth` provides account management via the `account` subcommand:
@@ -77,7 +76,7 @@ geth account list
 import [arguments...]
 
 
-    ethereum account import <keyfile>
+    geth account import <keyfile>
 
 Imports an unencrypted private key from <keyfile> and creates a new account.
 Prints the address.
