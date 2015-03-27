@@ -4,6 +4,7 @@ Main entry points:
 
 * [Build instructions for Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
+* [Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
