@@ -2,7 +2,7 @@
 
 For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
-**Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.**
+**Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
 
 ```
 sudo apt-get install software-properties-common
@@ -13,9 +13,9 @@ sudo apt-get update
 sudo apt-get install ethereum
 ```
 
-Run `mist` for the GUI or `ethereum` for the CLI.
+Run `mist` for the GUI or `geth` for the CLI.
 
-You can alternatively install only the CLI or GUI, with `apt-get install ethereum-cli` or `apt-get install mist` respectively.
+You can alternatively install only the CLI or GUI, with `apt-get install geth` or `apt-get install mist` respectively.
 
 ## Option 2: Automatic installation
 
