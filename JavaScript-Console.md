@@ -6,6 +6,15 @@ If you need log information, start with:
 
     $ geth -logfile /tmp/eth.log -loglevel 5 console
 
+Otherwise mute your logs, so that it does not pollute your console:
+
+    $ geth -logfile /dev/null console 
+
+or 
+
+    $ geth -loglevel 0 console
+
+
 It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
 
     $ geth js script1.js script2.js
