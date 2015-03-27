@@ -25,7 +25,7 @@ GLOBAL OPTIONS:
    --unlock                                     unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
    --password                                   Path to password file for (un)locking an existing account.
    --bootnodes                                  Space-separated enode URLs for discovery bootstrap
-   --datadir "/Users/tron/Library/Ethereum"     Data directory to be used
+   --datadir "$HOME/Library/Ethereum"           Data directory to be used
    --jspath "."                                 JS library path to be used with console and js subcommands
    --port "30303"                               Network listening port
    --logfile                                    Send log output to a file
@@ -51,40 +51,65 @@ GLOBAL OPTIONS:
 
 Note that the default for datadir is platform-specific, "/$HOME/Library/Ethereum" is the pattern for MacOS. 
 
-## Examples: 
+## Examples
 
-import ether presale wallet into your node:
+### Accounts
+See [Account management](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
+
+Import ether presale wallet into your node (prompts for password):
 
     geth wallet import /path/to/my/etherwallet.json
 
-imports an EC privatekey into an ethereum account:
+Import an EC privatekey into an ethereum account (prompts for password):
 
     geth account import /path/to/key.prv
 
-executes `test.js` javascript using js API and logs Debug level log messages to `/path/to/logfile`:
+### Geth JavaScript Runtime Environment 
 
-    geth -logfile /path/to/logfile -loglevel js test.js  # 
-   
-imports a blockchain from file (used to programmatically set address from script):
+See [Geth javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
+
+Bring up the geth javascript console:
+
+    geth --loglevel 5 --logfile /tmp/eth0.log --jspath /mydapp/js console 
+
+Execute `test.js` javascript using js API and log Debug-level messages to `/path/to/logfile`:
+
+    geth -logfile /path/to/logfile -loglevel 4 js test.js  # 
+
+### Import/export chains and dump blocks
+
+Import a blockchain from file:
 
     geth import blockchain.bin
 
-start two mining nodes with their own client ids using different data directories listening on ports 30303 and 30304 respectively:
+### Mining and networking
+
+Start two mining nodes using different data directories listening on ports 30303 and 30304, respectively:
 
     geth -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30303 -port 30303
     geth -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30304 -port 30304
     
-start an rpc client on port 8000:
+Start an rpc client on port 8000:
 
     geth -rpc true -rpcport 8000
 
-Start a client and connect to specific peers:
+Start a client with a private network id and connect to specific peers using [enode urls](https://github.com/ethereum/wiki/wiki/enode-url-format):
 
-    geth -bootnodes="enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303 enode://0b2fa1e93dfcd90ce503ab1338332d6a1371b464838b49f37af8534a510992bd4d96b24134ba262ad9298ab4aa6f132132f84c3b6d10ebaead5f9a236be286f10@54.169.166.218:30305" -maxpeers 2
+    geth --networkid 3301 -bootnodes="enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303 enode://0b2fa1e93dfcd90ce503ab1338332d6a1371b464838b49f37af8534a510992bd4d96b24134ba262ad9298ab4aa6f132132f84c3b6d10ebaead5f9a236be286f10@54.169.166.218:30305" -maxpeers 2
 
-create a private network using `networkid`
+Launch the client without network:
 
-   geth --networkid 1 --nodeKeyHash 
+    geth --maxpeers 0 js justwannarunthis.js
+
+### Sample usage in testing environment
+
+The lines below are meant only for test network and safe environments for non-interactive scripted use.
+
+```
+geth -datadir /tmp/eth/42 -logfile /dev/null -password <(echo -n notsosecret) account new 
+geth -datadir /tmp/eth/42 -logfile /dev/null -port 30342  js <(echo 'console.log(admin.nodeInfo().NodeUrl)') > enode
+geth -datadir /tmp/eth/42 -logfile /tmp/eth/42.log -port 30342 -password <(echo -n notsosecret) -unlock primary -minerthreads 4 -mine
+```
 
 ## GUI Client 
 
@@ -100,24 +125,23 @@ COMMANDS:
    help Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --asset_path "/Users/tron/Work/ethereum/go/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
-   --bootnodes                                                                                          Space-separated enode URLs for discovery bootstrap
-   --datadir "/Users/tron/Library/Ethereum"                                                             Data directory to be used
-   --port "30303"                                                                                       Network listening port
-   --logfile                                                                                            Send log output to a file
-   --loglevel "3"                                                                                       0-5 (silent, error, warn, info, debug, debug detail)
-   --maxpeers "16"                                                                                      Maximum number of network peers
-   --minerthreads "8"                                                                                   Number of miner threads
-   --nat "any"                                                                                          Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-   --nodekey                                                                                            P2P node key file
-   --rpcaddr "127.0.0.1"                                                                                Listening address for the JSON-RPC server
-   --rpcport "8545"                                                                                     Port on which the JSON-RPC server should listen
-   --jspath "."                                                                                         JS library path to be used with console and js subcommands
-   --protocolversion "59"                                                                               ETH protocol version
-   --networkid "0"                                                                                      Network Id
-   --help, -h                                                                                           show help
-   --version, -v                                                                                        print the version
-
+   --asset_path "$GOPATH/src/.../mist/assets"      Absolute path to GUI assets directory
+   --bootnodes                                     Space-separated enode URLs for discovery bootstrap
+   --datadir "$HOME/Library/Ethereum"              Data directory to be used
+   --port "30303"                                  Network listening port
+   --logfile                                       Send log output to a file
+   --loglevel "3"                                  0-5 (silent, error, warn, info, debug, debug detail)
+   --maxpeers "16"                                 Maximum number of network peers
+   --minerthreads "8"                              Number of miner threads
+   --nat "any"                                     Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --nodekey                                       P2P node key file
+   --rpcaddr "127.0.0.1"                           Listening address for the JSON-RPC server
+   --rpcport "8545"                                Port on which the JSON-RPC server should listen
+   --jspath "."                                    JS library path to be used with console and js subcommands
+   --protocolversion "59"                          ETH protocol version
+   --networkid "0"                                 Network Id
+   --help, -h                                      Show help
+   --version, -v                                   Print version 
 
 ```
 
