@@ -16,7 +16,7 @@ Install the latest develop branch with `--devel`.
 
 Add `--with-gui` to brew the `mist` browser.
 
-Then run `mist` (GUI) or `ethereum` (CLI)
+Then run `mist` (GUI) or `geth` (CLI)
 
 For options and patches, see: https://github.com/ethereum/homebrew-ethereum
 
