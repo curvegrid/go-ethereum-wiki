@@ -1,4 +1,4 @@
-_**Note:** in this tutorial we will set up private network with 2 nodes, using go-ethereum._
+_**Note:** in this tutorial we will set up private network with 2 nodes_
 
 ## Build go-ethereum
 
