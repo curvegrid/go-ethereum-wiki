@@ -39,8 +39,7 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
   * [peers](#adminpeers)
   * [startRPC](#adminstartrpc)
   * [stopRPC](#adminstoprpc)
-  * [startMining](#adminstartmining)
-  * [stopMining](#adminstopmining)
+  * [miner](#miner)
   * [unlock](#adminunlock)
   * [newAccount](#adminnewaccount)
   * [dumpBlock](#admindumpblock)
@@ -149,9 +148,9 @@ admin.stopRpc()
 
 ***
 
-##### admin.startMining
+##### admin.miner.start
 
-    admin.startMining(threadNumber)
+    admin.miner.start(threadNumber)
 
 Starts mining on with the given `threadNumber` of parallel threads.
 
@@ -160,24 +159,36 @@ Starts mining on with the given `threadNumber` of parallel threads.
 **Note** threadNumber is currently idle until thread safety in ethash is fixed.
 
 ```javascript
-admin.startMining(4)
+admin.miner.start(4)
 // true
 ```
 
 ***
 
-##### admin.stopMining
+##### admin.miner.stop
 
-    admin.stopMining()
+    admin.miner.stop()
 
 Stops all miners.
 
 **Returns** `true` on success, otherwise `false`.
 
 ```javascript
-admin.stopMining()
+admin.miner.stop()
 // true
 ```
+
+##### admin.miner.hashrate
+    
+    admin.miner.hashrate()
+
+Returns the current hash rate
+
+##### admin.miner.setExtra
+
+    admin.miner.setExtra("extra data")
+
+**Sets** the extra data for the block when finding a block. Limited to 1024 bytes.
 
 ***
 
