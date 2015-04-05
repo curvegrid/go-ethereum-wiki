@@ -101,6 +101,12 @@ Launch the client without network:
 
     geth --maxpeers 0 js justwannarunthis.js
 
+#### Resetting the blockchain
+
+In the datadir, delete the blockchain directory.  For an example above:
+
+    rm -rf /usr/local/share/ethereum/30303/blockchain
+
 ### Sample usage in testing environment
 
 The lines below are meant only for test network and safe environments for non-interactive scripted use.
@@ -156,5 +162,4 @@ Example:
 The same flags can be set via config file (by default `<datadir>/conf.ini`) as well as environment variables. 
 
 **Precedence**: default < config file < environment variables < command line
-
 
