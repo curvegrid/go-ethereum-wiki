@@ -42,6 +42,8 @@ You can test the connection  by typing in geth console:
   listening: true,
   peerCount: 1
 }
+> admin.peers
+...
 ```
 
 ## Local cluster
@@ -81,4 +83,6 @@ An ethereum network is a private network if the nodes are not connected to the m
 
 ## Monitoring your nodes
 
-[This page](https://github.com/ethereum/wiki/wiki/Network-Status) describes how to use the [The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats")](http://eth-netstats.herokuapp.com) to monitor your nodes. Note that this won't work for private networks.
+[This page](https://github.com/ethereum/wiki/wiki/Network-Status) describes how to use the [The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats")](http://eth-netstats.herokuapp.com) to monitor your nodes.
+
+[This page](https://github.com/ethereum/go-ethereum/wiki/Setting-up-monitoring-on-local-cluster) describes how you set up your own monitoring service for a (private or public) local cluster.
