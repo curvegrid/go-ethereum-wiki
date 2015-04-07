@@ -7,6 +7,6 @@ Main entry points:
 * [Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
-* [Setting up private network](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
+* [Setting up private network or local cluster](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
 
 Sidebar lists all pages.
