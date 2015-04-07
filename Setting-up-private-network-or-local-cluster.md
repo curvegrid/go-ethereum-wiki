@@ -20,7 +20,7 @@ We started the node with the console, so that we can grab the enode for instance
 enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@9[::]:30303
 ```
 
-here you see `[::]` instead of an IP address. You can just write `127.0.0.1` localhost. If your nodes will be on a local network, you can get your IP address with `ifconfig` (on linux and macos) :
+`[::]` will be parsed as localhost (`127.0.0.1`). If your nodes are on a local network check each individual host machine and find your ip with `ifconfig` (on Linux and MacOS):
 
 ```bash
 $ ifconfig|grep netmask|awk '{print $2}'
