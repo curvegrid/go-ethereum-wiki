@@ -39,6 +39,10 @@ Usage:
 - `ws_server` is the eth-netstats server.
 - `ws_secret` is the eth-netstats secret.
 
+For example:
+
+    bash intelligence . 5 mynode http://localhost:3000 big-secret    
+
 Run the script and copy the resulting `app.json` into the `eth-net-intelligence-api` directory. Afterwards, `cd` into `eth-netstats` and run the relays using `pm2 start app.json`. To stop the relays, you can use `pm2 delete app.json`.
 
 At this point, your monitoring site should monitor all your nodes!
