@@ -10,14 +10,14 @@ In order to run multiple ethereum nodes locally, you have to make sure:
 
 You start the first node (let's make port explicit)
 ```bash
-geth --datadir="/tmp/eth/60/00" -loglevel 5 -logfile /tmp/eth/60/00.log -port 30300 -rpc -rpcport 8100  console
+geth --datadir="/tmp/eth/60/01" -loglevel 5 -logfile /tmp/eth/60/01.log -port 30301 -rpc -rpcport 8101  console
 ```
 
 We started the node with the console, so that we can grab the enode for instance:
 
 ```
 > admin.nodeInfo()
-enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@9[::]:30303
+enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@9[::]:30301
 ```
 
 `[::]` will be parsed as localhost (`127.0.0.1`). If your nodes are on a local network check each individual host machine and find your ip with `ifconfig` (on Linux and MacOS):
@@ -31,7 +31,7 @@ $ ifconfig|grep netmask|awk '{print $2}'
 Now you can launch a second node with:
 
 ```bash
-geth --datadir="/tmp/eth/60/01" -loglevel 5 -logfile /tmp/eth/60/01.log -port 30301 -rpc -rpcport 8101 -bootnodes="enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@127.0.0.1:30300" 
+geth --datadir="/tmp/eth/60/02" -loglevel 5 -logfile /tmp/eth/60/02.log -port 30302 -rpc -rpcport 8102 -bootnodes="enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@127.0.0.1:30301" 
 ```
 
 You can test the connection  by typing in geth console:
