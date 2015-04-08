@@ -27,7 +27,7 @@ Clone the repo, install dependencies and make sure you have pm2 installed:
     npm install
     sudo npm install -g pm2
 
-Now, use [this script (intelligence)](https://gist.githubusercontent.com/kobigurk/a12dbb580507bbd4382d/raw/2c9939dd97a6c407fd591e106e7889b3d6dc313c/intelligence) to create an `app.json` suitable for pm2.
+Now, use [this script (intelligence)](https://gist.githubusercontent.com/kobigurk/a12dbb580507bbd4382d/raw/4ea274229e10f52d353105395f312c05fdf248b2/intelligence) to create an `app.json` suitable for pm2.
 
 Usage:
 
