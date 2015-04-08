@@ -36,7 +36,7 @@ Usage:
 - `destination_app_json_path` is the target directory for the resulting app.json.
 - `number_of_clusters` is the number of nodes in the cluster.
 - `name_prefix` is a prefix for the node names as will appear in the listing.
-- `ws_server` is the eth-netstats server.
+- `ws_server` is the eth-netstats server. Make sure you write the full url, for example: http://localhost:3000.
 - `ws_secret` is the eth-netstats secret.
 
 For example:
