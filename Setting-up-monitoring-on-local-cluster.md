@@ -50,4 +50,6 @@ For example:
 
 Run the script and copy the resulting `app.json` into the `eth-net-intelligence-api` directory. Afterwards, `cd` into `eth-net-intelligence-api` and run the relays using `pm2 start app.json`. To stop the relays, you can use `pm2 delete app.json`.
 
+**NOTE**: The script assumes the nodes have RPC ports 8101, 8102, ... . If that's not the case, edit app.json and change it accordingly for each peer.
+
 At this point, your monitoring site should monitor all your nodes!
