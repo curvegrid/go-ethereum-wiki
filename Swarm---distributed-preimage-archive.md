@@ -15,6 +15,7 @@
 - Multi-protocol peer selection https://github.com/ethereum/go-ethereum/wiki/Multi-protocol-peer-selection
 - Dani on swarm hash: https://github.com/ethereum/wiki/wiki/Swarm-Hash
 - Dani on incentive system: https://github.com/ethersphere/swarm/blob/master/doc/incentives.md 
+- The swarm smart contract: https://github.com/ethereum/go-ethereum/wiki/Swarm-Contract
 - gav on url-hint https://github.com/ethereum/wiki/wiki/URL-Hint-Protocol
 - Gav on public wiki: https://github.com/ethereum/cpp-ethereum/wiki/Swarm
 - on kademlia: https://github.com/ethereum/wiki/wiki/Cademlia-Peer-Selection
