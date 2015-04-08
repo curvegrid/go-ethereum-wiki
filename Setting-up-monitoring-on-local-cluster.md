@@ -22,8 +22,8 @@ These processes will relay the information from each of your cluster nodes to th
 
 Clone the repo, install dependencies and make sure you have pm2 installed:
 
-    git clone https://github.com/cubedro/eth-netstats
-    cd eth-netstats
+    git clone https://github.com/cubedro/eth-net-intelligence-api
+    cd eth-net-intelligence-api
     npm install
     sudo npm install -g pm2
 
