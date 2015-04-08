@@ -1,5 +1,10 @@
 This page describes how to set up a monitoring site, [like this one](http://eth-netstats.herokuapp.com/), for your private network. It builds upon [this wiki article](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster) and assumes you've created a local cluster using [this script (cluster)](https://gist.githubusercontent.com/kobigurk/a12dbb580507bbd4382d/raw/25f26c6cde0c130030310a51883ce8dffaa1e805/cluster).
 
+The monitoring system consists of two components:
+
+1. **eth-netstats** - the monitoring site which lists the nodes.
+2. **eth-net-intelligence-api** - these are processes that communicate with the ethereum client using RPC and push the data to the monitoring site.
+
 #Monitoring site
 Clone the repo and install dependencies:
 
