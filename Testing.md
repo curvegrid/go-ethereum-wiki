@@ -15,6 +15,7 @@ https://github.com/ethereum/tests/wiki/State-tests
 
 ### Transaction
 See https://github.com/ethereum/tests/wiki/Transaction-Tests
+`go test tests/transaction_test.go`
 
 ### Blockchain
 See https://github.com/ethereum/tests/wiki/Blockchain-Tests and  https://github.com/ethereum/tests/wiki/Blockchain-Tests-II
