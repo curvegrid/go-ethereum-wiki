@@ -87,7 +87,7 @@ To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branch
 Testing one library:
 
 ```
-godep go -v -cpu 4 test ./eth  
+godep go test -v -cpu 4 ./eth  
 ```
 
 Using options `-cpu` (number of cores allowed) and `-v` (logging even if no error) is recommended.
@@ -95,7 +95,7 @@ Using options `-cpu` (number of cores allowed) and `-v` (logging even if no erro
 Testing only some methods:
 
 ```
-godep go -v -cpu 4 test ./eth -run TestMethod
+godep go test -v -cpu 4 ./eth -run TestMethod
 ```
 
 **Note**: here all tests with prefix TestMethod will be run, so if you got TestMethod, TestMethod1, then both!
