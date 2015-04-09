@@ -20,7 +20,9 @@ go test ./tests/
 
 ### Transaction
 [Transaction Test wiki](https://github.com/ethereum/tests/wiki/Transaction-Tests)
-`go test ./tests/transaction_test.go`
+```
+go test ./tests/transaction_test.go
+```
 
 ### Blockchain
 [Blockchain Test wiki](https://github.com/ethereum/tests/wiki/Blockchain-Tests-II) 
@@ -28,6 +30,8 @@ go test ./tests/
 ### RPC
 [RPC Tests repo](https://github.com/ethereum/rpc-tests)
 
-1. Install geth
-2. Load test JSON with `geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc`
-3. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
+1. Load test JSON with
+    ```
+    geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
+    ````
+2. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
