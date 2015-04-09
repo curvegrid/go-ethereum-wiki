@@ -19,7 +19,7 @@ go test ./tests/
 [VM Test wiki](https://github.com/ethereum/tests/wiki/VM-Tests)
 
 ### State
-[State Test wiki](https://github.com/ethereum/tests/wiki/State-tests
+[State Test wiki](https://github.com/ethereum/tests/wiki/State-tests)
 
 ### Transaction
 [Transaction Test wiki](https://github.com/ethereum/tests/wiki/Transaction-Tests)
@@ -34,7 +34,7 @@ go test ./tests/transaction_test.go
 [RPC Tests repo](https://github.com/ethereum/rpc-tests)
 
 1. Load test JSON with
-```
-geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
-```
+    ```
+    geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
+    ```
 2. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
