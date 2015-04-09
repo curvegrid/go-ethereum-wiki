@@ -1,14 +1,15 @@
-# Testing
+# Testing the go-ethereum implementation
+This page assumes go-ethereum has been configured according to the [Developers Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide). All commands (unless stated otherwise) are assumed to be run from `$GOPATH/src/github.com/ethereum/go-ethereum`
 
 ## Unit tests
 See [Travis](https://travis-ci.org/ethereum/go-ethereum/builds) or [Coveralls](https://coveralls.io/r/ethereum/go-ethereum) for status.
 
-Test the full codebase locally by changing to the repository directory (`cd $GOPATH/src/github.com/ethereum/go-ethereum`) and running `test ./...`
+Test the full codebase locally by changing to the repository directory and running `test ./...`
 
 ## Integration tests
 Integration tests for Go are included in the `tests` directory and can be run with standard go testing (i.e. `go test`). To run all the integration tests simply run:
 ```
-cd $GOPATH/src/github.com/ethereum/go-ethereum && go test ./tests/
+go test ./tests/
 ```
 
 ### VM
@@ -19,7 +20,7 @@ cd $GOPATH/src/github.com/ethereum/go-ethereum && go test ./tests/
 
 ### Transaction
 [Transaction Test wiki](https://github.com/ethereum/tests/wiki/Transaction-Tests)
-Run with `go test ./tests/transaction_test.go`
+`go test ./tests/transaction_test.go`
 
 ### Blockchain
 [Blockchain Test wiki](https://github.com/ethereum/tests/wiki/Blockchain-Tests-II) 
