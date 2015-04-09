@@ -6,22 +6,27 @@ See [Travis](https://travis-ci.org/ethereum/go-ethereum/builds) or [Coveralls](h
 Test the full codebase locally by changing to the repository directory (`cd $GOPATH/src/github.com/ethereum/go-ethereum`) and running `test ./...`
 
 ## Integration tests
+Integration tests for Go are included in the `tests` directory and can be run with standard go testing (i.e. `go test`). To run all the integration tests simply run:
+```
+cd $GOPATH/src/github.com/ethereum/go-ethereum && go test ./tests/
+```
 
 ### VM
-https://github.com/ethereum/tests/wiki/VM-Tests
+[VM Test wiki](https://github.com/ethereum/tests/wiki/VM-Tests)
 
 ### State
-https://github.com/ethereum/tests/wiki/State-tests
+[State Test wiki](https://github.com/ethereum/tests/wiki/State-tests
 
 ### Transaction
-See https://github.com/ethereum/tests/wiki/Transaction-Tests
-`go test tests/transaction_test.go`
+[Transaction Test wiki](https://github.com/ethereum/tests/wiki/Transaction-Tests)
+Run with `go test ./tests/transaction_test.go`
 
 ### Blockchain
-See https://github.com/ethereum/tests/wiki/Blockchain-Tests and  https://github.com/ethereum/tests/wiki/Blockchain-Tests-II
+[Blockchain Test wiki](https://github.com/ethereum/tests/wiki/Blockchain-Tests-II) 
 
 ### RPC
+[RPC Tests repo](https://github.com/ethereum/rpc-tests)
 
 1. Install geth
-2. Load test JSON `geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc`
+2. Load test JSON with `geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc`
 3. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
