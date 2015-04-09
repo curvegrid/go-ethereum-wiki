@@ -1,4 +1,4 @@
-# Testing the go-ethereum implementation
+# Running tests on go-ethereum
 This page assumes go-ethereum has been configured according to the [Developers Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide). All commands (unless stated otherwise) are assumed to be run from `$GOPATH/src/github.com/ethereum/go-ethereum`
 
 ## Unit tests
