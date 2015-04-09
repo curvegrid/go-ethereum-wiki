@@ -4,7 +4,10 @@ This page assumes go-ethereum has been configured according to the [Developers G
 ## Unit tests
 See [Travis](https://travis-ci.org/ethereum/go-ethereum/builds) or [Coveralls](https://coveralls.io/r/ethereum/go-ethereum) for status.
 
-Test the full codebase locally by changing to the repository directory and running `test ./...`
+Test the full codebase locally by changing to the repository directory and running
+```
+test ./...
+```
 
 ## Integration tests
 Integration tests for Go are included in the `tests` directory and can be run with standard go testing (i.e. `go test`). To run all the integration tests simply run:
@@ -31,7 +34,7 @@ go test ./tests/transaction_test.go
 [RPC Tests repo](https://github.com/ethereum/rpc-tests)
 
 1. Load test JSON with
-    ```
-    geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
-    ````
+```
+geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
+```
 2. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
