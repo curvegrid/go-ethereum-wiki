@@ -71,10 +71,7 @@ The `admin` exposes the methods to administrate the node.
 
 information on the node.
 
-```javascript
-admin.nodeInfo()
-// {...}
-```
+##### Example
 
 ```
 > admin.nodeInfo()
@@ -103,6 +100,8 @@ You can find out your own enode by using [nodeInfo](#adminnodeinfo) or looking a
 
 `true` on success.
 
+##### Example
+
 ```javascript
 admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
 ```
@@ -117,10 +116,7 @@ admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144
 
 an array of objects with information about connected peers.
 
-```javascript
-admin.peers()
-// [{...},{...}]
-```
+##### Example
 
 ```
 > admin.peers()
@@ -137,6 +133,8 @@ Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/
 ##### Resturns
 
 `true` on success, otherwise `false`.
+
+##### Example
 
 ```javascript
 admin.startRPC("127.0.0.1", 8545)
@@ -155,6 +153,8 @@ Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/J
 
 `true` on success, otherwise `false`.
 
+##### Example
+
 ```javascript
 admin.stopRpc()
 // true
@@ -168,11 +168,13 @@ admin.stopRpc()
 
 Starts mining on with the given `threadNumber` of parallel threads.
 
+**Note** threadNumber is currently idle until thread safety in ethash is fixed.
+
 ##### Resturns
 
 `true` on success, otherwise `false`.
 
-**Note** threadNumber is currently idle until thread safety in ethash is fixed.
+##### Example
 
 ```javascript
 admin.miner.start(4)
@@ -190,6 +192,8 @@ Stops all miners.
 ##### Resturns
 
 `true` on success, otherwise `false`.
+
+##### Example
 
 ```javascript
 admin.miner.stop()
@@ -226,12 +230,9 @@ Unlock the account for the time `timeout` in seconds. If password is undefined, 
 
 `true` on success, otherwise `false`.
 
-```javascript
-admin.unlock('0x833b8ed5a2957e5b050ba6539efa66cb67165eec', '1234', 1000 * 60 * 10) // unlock for 10 mins
-// true
-```
+##### Example
 
-```
+```js
 > admin.unlock("8dbad2d2b85bbb727ee35b31e64f5092ff54a93e")
 Please enter a passphrase now.
 Passphrase:
@@ -251,12 +252,9 @@ Creates a new account and encrypts it with `password`. If no `password` is given
 
 `true` on success, otherwise `false`.
 
-```javascript
-admin.newAccount('1234')
-// true
-```
+##### Example
 
-```
+```js
 > admin.newAccount()
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
@@ -276,12 +274,9 @@ Repeat Passphrase:
 
 the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
 
-```javascript
-admin.dumpBlock(29)
-// {...}
-```
+##### Example
 
-```
+```js
 > admin.dumpBlock()
 { Root: 'e26e11f5252fca8b61d5979c0dea584c22d0e1b3bf687c915276c90c04bdb4bb', Accounts: { 2091fc869cbf49e84e72365bfbaee012f7f0c3ad368ef8c56c167ba75538c1ad: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 5b70e80538acdabd6137353b0f9d8d149f4dba91e8be2e7946e409bfdbe685b9: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 9bc17373cefddb760ffc916a98ea7152ceb68a400a74fb36e770b695e16e48b0: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, a28629e41841cc5e702899227a10d8fd7debed9ce87f47a95dcc3bedd9a8a4ef: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, cc7fbca600b4bbd1d889076147f61721f0f04cef8b3f1a6ee8097f454543ce55: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, d52688a8f926c816ca1e079067caba944f158e764817b83fc43594370ca9cf62: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, e044041bfd3b93fab85f2a1f96c7993754ae741bfe6fee5992f8b23dd181992c: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 1468288056310c82aa4c01a7e12a10f8111a0560e72b700555479031b86c357d: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 70009f4500e4fc823b89deed6bb8bfb9b4d3edcffb92a431d65d6e3b920943d7: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 8782e9da2bab05079eceaaa3551f40e16fb8f0c47476b00498a13b25e1de8dd6: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, a876da518a393dbd067dc72abfa08d475ed6447fca96d92ec3f9e7eba503ca61: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, fb147bae72727a9e8b7e9fc8c22e690345179367915f7d6c57c43e4c863ae48b: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 3eb1ce4f84b7004d8c653aa4f5f7be9b54a240c293fbdd2553d1da13ceacf687: { Balance: '42000000000000000000', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } } } }
 >
@@ -300,6 +295,8 @@ Imports the blockchain from a marshalled binary format.
 
 `true` on success, otherwise `false`.
 
+##### Example
+
 ```javascript
 admin.import('path/to/file')
 // true
@@ -316,6 +313,8 @@ Exports the blockchain to the given file in binary format.
 ##### Returns
 
 `true` on success, otherwise `false`.
+
+##### Example
 
 ```javascript
 admin.export()
