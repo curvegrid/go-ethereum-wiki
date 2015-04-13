@@ -182,11 +182,15 @@ admin.miner.stop()
 // true
 ```
 
+***
+
 ##### admin.miner.hashrate
     
     admin.miner.hashrate()
 
 Returns the current hash rate
+
+***
 
 ##### admin.miner.setExtra
 
@@ -241,10 +245,8 @@ Repeat Passphrase:
 'cf68505ae04bb425eb431eceb629c351bd9a4eee'
 >
 ```
-***
 
-* `dumpBlock(numberOrHash)`
-returns the raw dump of a block referred to by block number or block hash or undefined if the block is not found.
+***
 
 ##### admin.dumpBlock
 
