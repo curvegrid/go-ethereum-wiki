@@ -58,16 +58,18 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
 
 ***
 
-##### admin
+#### admin
 The `admin` exposes the methods to administrate the node.
 
 ***
 
-##### admin.nodeInfo
+#### admin.nodeInfo
 
     admin.nodeInfo()
 
-**Returns** information on the node.
+##### Resturns
+
+information on the node.
 
 ```javascript
 admin.nodeInfo()
@@ -83,7 +85,7 @@ To connect to a node, use the [enode-format](https://github.com/ethereum/wiki/wi
 
 ***
 
-##### admin.suggestPeer
+#### admin.suggestPeer
 
     admin.suggestPeer(nodeURL)
 
@@ -97,7 +99,9 @@ You can find out your own enode by using [nodeInfo](#adminnodeinfo) or looking a
 
 *Note*: there is good reason this function is called `suggestPeer` and not `addPeer` (as well as reason why `removePeer` is not available. It is ultimately the p2p server's discretion to connect and disconnect peers depending on number of factors. In normal cases however, when the number of maxpeers is not saturated and your suggested peer is well behaved and compatible, connection may even persist for a long time. 
 
-**Returns** `true` on success.
+##### Resturns
+
+`true` on success.
 
 ```javascript
 admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
@@ -105,11 +109,13 @@ admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144
 
 ***
 
-##### admin.peers
+#### admin.peers
 
     admin.peers()
 
-**Returns** an array of objects with information about connected peers.
+##### Resturns
+
+an array of objects with information about connected peers.
 
 ```javascript
 admin.peers()
@@ -122,13 +128,15 @@ admin.peers()
 ```
 ***
 
-##### admin.startRPC
+#### admin.startRPC
 
      admin.startRPC(ipAddress, portNumber)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.startRPC("127.0.0.1", 8545)
@@ -137,13 +145,15 @@ admin.startRPC("127.0.0.1", 8545)
 
 ***
 
-##### admin.stopRPC
+#### admin.stopRPC
 
     admin.stopRPC() [not implemented]
 
 Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.stopRpc()
@@ -152,13 +162,15 @@ admin.stopRpc()
 
 ***
 
-##### admin.miner.start
+#### admin.miner.start
 
     admin.miner.start(threadNumber)
 
 Starts mining on with the given `threadNumber` of parallel threads.
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 **Note** threadNumber is currently idle until thread safety in ethash is fixed.
 
@@ -169,13 +181,15 @@ admin.miner.start(4)
 
 ***
 
-##### admin.miner.stop
+#### admin.miner.stop
 
     admin.miner.stop()
 
 Stops all miners.
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.miner.stop()
@@ -184,15 +198,17 @@ admin.miner.stop()
 
 ***
 
-##### admin.miner.hashrate
+#### admin.miner.hashrate
     
     admin.miner.hashrate()
 
-Returns the current hash rate
+##### Returns
+
+`String` Returns the current hash rate in MH.
 
 ***
 
-##### admin.miner.setExtra
+#### admin.miner.setExtra
 
     admin.miner.setExtra("extra data")
 
@@ -200,13 +216,15 @@ Returns the current hash rate
 
 ***
 
-##### admin.unlock
+#### admin.unlock
 
     admin.unlock(address, password, timeout)
 
 Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.unlock('0x833b8ed5a2957e5b050ba6539efa66cb67165eec', '1234', 1000 * 60 * 10) // unlock for 10 mins
@@ -223,13 +241,15 @@ true
 
 ***
 
-##### admin.newAccount
+#### admin.newAccount
 
     admin.newAccount(password)
 
 Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.newAccount('1234')
@@ -248,11 +268,13 @@ Repeat Passphrase:
 
 ***
 
-##### admin.dumpBlock
+#### admin.dumpBlock
 
     admin.dumpBlock(numberOrHash)
 
-**Returns** the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
+##### Resturns
+
+the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
 
 ```javascript
 admin.dumpBlock(29)
@@ -266,7 +288,7 @@ admin.dumpBlock(29)
 ```
 ***
 
-##### admin.import
+#### admin.import
 
     admin.import()
 
@@ -274,7 +296,9 @@ Imports the blockchain from a marshalled binary format.
 **Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
 
-**Returns** `true` on success, otherwise `false`.
+##### Resturns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.import('path/to/file')
@@ -283,13 +307,15 @@ admin.import('path/to/file')
 
 ***
 
-##### admin.export
+#### admin.export
 
     admin.export()
 
 Exports the blockchain to the given file in binary format.
 
-**Returns** `true` on success, otherwise `false`.
+##### Returns
+
+`true` on success, otherwise `false`.
 
 ```javascript
 admin.export()
@@ -306,27 +332,27 @@ Loads a JavaScript file and executes it. Relative paths are interpreted as relat
 
 ***
 
-##### web3
+#### web3
 The `web3` exposes all methods of the [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
 
 ***
 
-##### net
+#### net
 The `net` is a shortcut for `web3.net`.
 
 ***
 
-##### eth
+#### eth
 The `eth` is a shortcut for `web3.eth`.
 
 ***
 
-##### shh
+#### shh
 The `shh` is a shortcut for `web3.shh`.
 
 ***
 
-##### db
+#### db
 The `db` is a shortcut for `web3.db`.
 
 ***
