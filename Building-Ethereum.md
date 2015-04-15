@@ -20,6 +20,7 @@ docker pull ethereum/client-go
 docker run -p 8545:8545 -p 30303:30303 ethereum/client-go
 ```
 
-## Building from fork/working copy
+## Building the latest
 
-Follow the [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
+Ethereum is under rapid development, and though it may sound contradictory, using the latest can be more stable and gratifying than using an older build.
+To join the party, follow the [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
