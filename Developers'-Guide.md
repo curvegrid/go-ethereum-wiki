@@ -15,7 +15,7 @@ git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum
 ```
 
 ## Godep for dependency management
-As of POC-8, go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
+With POC-8 and later, go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
 
 Install godep: 
 
