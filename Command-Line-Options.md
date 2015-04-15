@@ -19,6 +19,7 @@ COMMANDS:
    js           executes the given JavaScript files in the Geth JavaScript VM
    import       import a blockchain file
    export       export blockchain into file
+   upgradedb    upgrade chainblock database
    help         Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
@@ -81,6 +82,12 @@ Execute `test.js` javascript using js API and log Debug-level messages to `/path
 Import a blockchain from file:
 
     geth import blockchain.bin
+
+### Upgrade chainblock database
+
+When the consensus algorithm is changed blocks in the blockchain must be reimported with the new algorithm. Geth will inform the user with instructions when and how to do this when it's necessary.
+
+    geth upgradedb
 
 ### Mining and networking
 
@@ -162,4 +169,3 @@ Example:
 The same flags can be set via config file (by default `<datadir>/conf.ini`) as well as environment variables. 
 
 **Precedence**: default < config file < environment variables < command line
-
