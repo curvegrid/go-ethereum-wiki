@@ -132,7 +132,7 @@ To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branch
 
 # Contributing
 
-Only github is used to track issues.
+Only github is used to track issues. (Please include the commit and branch when reporting an issue.)
 
 Pull requests should by default commit on the `develop` branch.
 The `master` branch is only used for finished stable major releases.
