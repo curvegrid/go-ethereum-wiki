@@ -52,6 +52,8 @@ godep go install -v ./cmd/geth
 
 ## Building Mist (GUI)
 
+**Note**: Recall that Geth is the priority for the Frontier release (Mist is not the focus and may lag).
+
 For the GUI, you need to [install `QT5`](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) and set variables.
 
 On OSX with a brew install of `qt5`:
