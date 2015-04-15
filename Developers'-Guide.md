@@ -4,7 +4,7 @@
 
 We assuming that you have [`go` installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), `GOPATH` is set.
 
-**Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`. 
+**Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`. You also usually want to checkout the `develop` branch (instead of master).
 
 Since `go` does not use relative path for import, in working in any other directory will have no effect, since the import paths will be appended to `$GOPATH/src`, and if the lib does not exist, the version at master HEAD will be downloaded.
 
