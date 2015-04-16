@@ -1,4 +1,6 @@
 This page describes how to set up a local cluster of nodes, advise how to make it private, and how to hook up your nodes on the eth-netstat network monitoring app. 
+A fully controlled ethereum network is useful as a backend for network integration testing (core developers working on issues related to networking/blockchain synching/message propagation, etc or DAPP developers testing multi-block and multi-user scenarios).
+
 We assume you are able to build `geth` following the [build instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 
 ## Setting up multiple nodes
@@ -6,7 +8,8 @@ We assume you are able to build `geth` following the [build instructions](https:
 In order to run multiple ethereum nodes locally, you have to make sure:
 - each instance has a separate data directory
 - each instance runs on a different port (both eth and rpc)
-- the instances know about each other.
+- the instances know about each other
+- [ONLY TEMPORARY]: only one instance does mining ( until #555 fixes dag versioning in ethash, `/tmp/dag` cannot be shared by multiple instances.)
 
 You start the first node (let's make port explicit)
 ```bash
@@ -49,40 +52,15 @@ You can test the connection  by typing in geth console:
 ## Local cluster
 
 As an extention of the above, you can spawn a local cluster of nodes easily. It can also be scripted including account creation which is needed for mining. 
-See [this script](https://gist.github.com/zelig/adcbb8cd4e9c8259327c)
-
-Usage:
-
-```
-bash cluster <root> <n> <network_id> <runid> <local_IP> [[params]...]
-```
-
-This will set up a local cluster of nodes
-- <n> is the number of clusters
-- <root> is the root directory for the cluster, the nodes are set up 
-  with datadir `<root>/00`, `<root>/01`, ...
-- new accounts are created for each node
-- they launch on port 30300, 30301, ...
-- by collecting the nodes nodeUrl, they get connected to each other
-- if enode has no IP, `<local_IP>` is substituted
-- if `<network_id>` is not 0, they will not connect to a default client,
-  resulting in a private isolated network
-- the nodes log into `<root>/00.<runid>.log`, `<root>/01.<runid>.log`, ...
-- `<runid>` is just an arbitrary tag or index you can use to log multiple 
-  subsequent launches of the same cluster
-- The nodes launch in mining mode 
-- the cluster can be killed with `killall geth` (FIXME: should record PIDs)
-  and restarted from the same state
-- if you want to interact with the nodes, use rpc
-- you can supply additional params on the command line which will be passed 
-  to each node
+See [`gethcluster.sh`](https://github.com/ethersphere/eth-utils) script, and the README there for usage and examples.
 
 ## Private network 
 
-An ethereum network is a private network if the nodes are not connected to the main network nodes. Since connections are valid only if peers have identical protocol version an network id, you can effectively isolate your network by setting either of these to a non-canonical value. We recommend using the semantic `networkid` command line option for this. Its argument is an integer, the cannonical network id is 0.
+An ethereum network is a private network if the nodes are not connected to the main network nodes. So in this context private only means reserved or isolated, rather than protected or secure. Since connections are valid only if peers have identical protocol version an network id, you can effectively isolate your network by setting either of these to a non-canonical value. We recommend using the semantic `networkid` command line option for this. Its argument is an integer, the canonical network has id 0 (the default).
 
 ## Monitoring your nodes
 
 [This page](https://github.com/ethereum/wiki/wiki/Network-Status) describes how to use the [The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats")](http://eth-netstats.herokuapp.com) to monitor your nodes.
 
-[This page](https://github.com/ethereum/go-ethereum/wiki/Setting-up-monitoring-on-local-cluster) describes how you set up your own monitoring service for a (private or public) local cluster.
+[This page](https://github.com/ethereum/go-ethereum/wiki/Setting-up-monitoring-on-local-cluster) or [this README]((https://github.com/ethersphere/eth-utils) 
+describes how you set up your own monitoring service for a (private or public) local cluster.
