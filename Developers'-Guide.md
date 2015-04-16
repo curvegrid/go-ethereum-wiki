@@ -2,11 +2,11 @@
 
 ## Go environment  
 
-We assuming that you have [`go` installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), `GOPATH` is set.
+We assume that you have [`go` installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), `GOPATH` is set.
 
 **Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`. You also usually want to checkout the `develop` branch (instead of master).
 
-Since `go` does not use relative path for import, in working in any other directory will have no effect, since the import paths will be appended to `$GOPATH/src`, and if the lib does not exist, the version at master HEAD will be downloaded.
+Since `go` does not use relative path for import, working in any other directory will have no effect, since the import paths will be appended to `$GOPATH/src`, and if the lib does not exist, the version at master HEAD will be downloaded.
 
 Most likely you will be working from your fork of `go-ethereum`, let's say from `github.com/nirname/go-ethereum`. Clone or move your fork into the right place:
 
@@ -15,7 +15,7 @@ git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum
 ```
 
 ## Godep for dependency management
-With POC-8 and later, go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
+go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
 
 Install godep: 
 
@@ -44,15 +44,21 @@ Switch to the go-ethereum repository root directory (Godep expects a local [Gode
 Each wrapper/executable found in 
 [the `cmd` directory](https://github.com/ethereum/go-ethereum/tree/develop/cmd) can be built individually.
 
+## Building Geth (CLI)
+
+**Note**: Geth (the ethereum command line client) is the focus of the [Frontier release](https://github.com/ethereum/go-ethereum/wiki/Frontier).
+
 To build the CLI:
 
 ```
 godep go install -v ./cmd/geth
 ```
 
+See the [documentation on how to use Geth](https://github.com/ethereum/go-ethereum/wiki/Geth)
+
 ## Building Mist (GUI)
 
-**Note**: Recall that Geth is the priority for the Frontier release (Mist is not the focus and may lag).
+**Note**: Mist is not officially released as part of [Frontier](https://github.com/ethereum/go-ethereum/wiki/Frontier)
 
 For the GUI, you need to [install `QT5`](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) and set variables.
 
