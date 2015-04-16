@@ -1,9 +1,9 @@
-This page describes how to set up a monitoring site, [like this one](http://eth-netstats.herokuapp.com/), for your private network. It builds upon [this wiki article](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster) and assumes you've created a local cluster using [this script (cluster)](https://gist.githubusercontent.com/kobigurk/a12dbb580507bbd4382d/raw/25f26c6cde0c130030310a51883ce8dffaa1e805/cluster).
+This page describes how to set up a monitoring site, [like this one](http://eth-netstats.herokuapp.com/), for your private network. It builds upon [this wiki article](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster) and assumes you've created a local cluster using [this script (gethcluster.sh)](https://github.com/ethersphere/eth-utils).
 
 The monitoring system consists of two components:
 
 1. **eth-netstats** - the monitoring site which lists the nodes.
-2. **eth-net-intelligence-api** - these are processes that communicate with the ethereum client using RPC and push the data to the monitoring site.
+2. **eth-net-intelligence-api** - these are processes that communicate with the ethereum client using RPC and push the data to the monitoring site via websockets.
 
 #Monitoring site
 Clone the repo and install dependencies:
@@ -32,13 +32,12 @@ Clone the repo, install dependencies and make sure you have pm2 installed:
     npm install
     sudo npm install -g pm2
 
-Now, use [this script (intelligence)](https://gist.githubusercontent.com/kobigurk/a12dbb580507bbd4382d/raw/4ea274229e10f52d353105395f312c05fdf248b2/intelligence) to create an `app.json` suitable for pm2.
+Now, use [this script (netstatconf.sh)](https://github.com/ethersphere/eth-utils) to create an `app.json` suitable for pm2.
 
 Usage:
 
-    bash intelligence <destination_app_json_path> <number_of_clusters> <name_prefix> <ws_server> <ws_secret>
+    bash netstatconf.sh <number_of_clusters> <name_prefix> <ws_server> <ws_secret>
 
-- `destination_app_json_path` is the target directory for the resulting app.json.
 - `number_of_clusters` is the number of nodes in the cluster.
 - `name_prefix` is a prefix for the node names as will appear in the listing.
 - `ws_server` is the eth-netstats server. Make sure you write the full URL, for example: http://localhost:3000.
@@ -46,10 +45,10 @@ Usage:
 
 For example:
 
-    bash intelligence . 5 mynode http://localhost:3000 big-secret    
+    bash netstatconf.sh 5 mynode http://localhost:3000 big-secret > app.json
 
 Run the script and copy the resulting `app.json` into the `eth-net-intelligence-api` directory. Afterwards, `cd` into `eth-net-intelligence-api` and run the relays using `pm2 start app.json`. To stop the relays, you can use `pm2 delete app.json`.
 
 **NOTE**: The script assumes the nodes have RPC ports 8101, 8102, ... . If that's not the case, edit app.json and change it accordingly for each peer.
 
-At this point, your monitoring site should monitor all your nodes!
+At this point, open `http://localhost:3000` and your monitoring site should monitor all your nodes!
