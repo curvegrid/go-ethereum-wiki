@@ -43,7 +43,7 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
     * [start](#adminminerstart)
     * [stop](#adminminerstop)
     * [hashrate](#adminminerhashrate)
-    * [setExtra](#adminminersetExtra)
+    * [setExtra](#adminminersetextra)
   * [unlock](#adminunlock)
   * [newAccount](#adminnewaccount)
   * [dumpBlock](#admindumpblock)
