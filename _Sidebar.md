@@ -1,12 +1,12 @@
+[Main Ethereum Wiki](https://github.com/ethereum/wiki/wiki)
+
+[Frontier Release](https://github.com/ethereum/go-ethereum/wiki/Frontier)
+
 ### Install and build  
 
 [Installing Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 
 [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
-
-[Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
-
-[Installing Go](https://github.com/ethereum/go-ethereum/wiki/Installing-Go)
 
 ### Usage
 
