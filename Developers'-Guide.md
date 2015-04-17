@@ -143,10 +143,31 @@ Only github is used to track issues. (Please include the commit and branch when 
 Pull requests should by default commit on the `develop` branch.
 The `master` branch is only used for finished stable major releases.
 
+# Stacktrace
+
+The code uses `pprof` on localhost port 6060. So bring up `localhost:6060/debug/pprof` to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
+
+Note that if you run multiple instances of `geth`, this port will only work for the first instance that was launched. If you want to generate stacktraces for these other instances, you need to send it a `-QUIT` signal. Make sure you are redirecting stderr to a logfile. 
+
+```
+geth -port=30300 -loglevel 5 2>> /tmp/00.glog
+geth -port=30301 -loglevel 5 2>> /tmp/01.glog
+geth -port=30302 -loglevel 5 2>> /tmp/02.glog
+killall -QUIT geth 
+```
+
+This will dump stracktraces for each instance to their respective log file.
+
 # Code formatting 
 
 Sources are formatted according to the [Go Formatting
 Style](http://golang.org/doc/effective_go.html#formatting).
 
 # Dev Tutorials 
+
+* [Private networks, local clusters and monitoring](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
+
+* [P2P 101](https://github.com/ethereum/go-ethereum/wiki/Peer-to-Peer): a tutorial about setting up and creating a p2p server and p2p sub protocol.
+
+* [How to Whisper](https://github.com/ethereum/go-ethereum/wiki/How-to-Whisper): an introduction to whisper.
 
