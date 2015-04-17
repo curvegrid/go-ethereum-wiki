@@ -51,8 +51,7 @@ Developers and community enthusiast are advised to read the [Developers' Guide](
 
 ## License
 
-The Ethereum Core Protocol licensed under the GNU Lesser General Public License. 
-The go-ethereum client is licensed under the GPL.
+The Ethereum Core Protocol licensed under the [GNU Lesser General Public License](https://www.gnu.org/licenses/lgpl.html). All frontend client software (under [cmd](https://github.com/ethereum/go-ethereum/tree/develop/cmd)) is licensed under the [GNU General Public License](https://www.gnu.org/copyleft/gpl.html).
 
 ## Troubleshooting
 
@@ -70,4 +69,3 @@ Non-sensitive bug reports are welcome on github. Please always state the version
 - [Gitter](https://gitter.im/ethereum/go-ethereum)
 - [Forum](https://forum.ethereum.org/categories/go-implementation)
 - Helpdesk 
-
