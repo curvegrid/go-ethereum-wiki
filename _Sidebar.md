@@ -10,13 +10,19 @@
 
 ### Usage
 
-[Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
-
 [Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
+
+[Mining](https://github.com/ethereum/go-ethereum/wiki/Mining)
+
+[Contracts and transaction](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions)
+
+### Interface Documentation
+
+[Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 
 [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
-[Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
+[JSON-RPC server](https://github.com/ethereum/go-ethereum/wiki/JSON-RPC)
 
 ### Issues
 
