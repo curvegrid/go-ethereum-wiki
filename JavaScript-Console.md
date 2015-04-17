@@ -4,11 +4,11 @@ The `ethereum CLI` executable `geth` has a JavaScript console, which can be star
 
 If you need log information, start with:
 
-    $ geth -logfile /tmp/eth.log -loglevel 5 console
+    $ geth -logfile /tmp/eth.log -loglevel 5 console 2>> /tmp/eth.glog
 
 Otherwise mute your logs, so that it does not pollute your console:
 
-    $ geth -logfile /dev/null console 
+    $ geth -logfile /dev/null console 2>> /dev/null
 
 or 
 
@@ -19,9 +19,11 @@ It's also possible to pass files to the JavaScript intepreter. Load and execute 
 
     $ geth js script1.js script2.js
 
+If you want to have the console as well as load scripts, use [loadScript](#loadscript).
+
 ## Caveat 
 
-The go-ethereum CLI uses the [Otto JS VM](https://github.com/obscuren/otto) (forked from https://github.com/robertkrimen/otto) which has some limitations:
+The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) which has some limitations:
 
 * "use strict" will parse, but does nothing.
 * The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
@@ -67,7 +69,7 @@ The `admin` exposes the methods to administrate the node.
 
     admin.nodeInfo()
 
-##### Resturns
+##### Returns
 
 information on the node.
 
@@ -96,7 +98,7 @@ You can find out your own enode by using [nodeInfo](#adminnodeinfo) or looking a
 
 *Note*: there is good reason this function is called `suggestPeer` and not `addPeer` (as well as reason why `removePeer` is not available. It is ultimately the p2p server's discretion to connect and disconnect peers depending on number of factors. In normal cases however, when the number of maxpeers is not saturated and your suggested peer is well behaved and compatible, connection may even persist for a long time. 
 
-##### Resturns
+##### Returns
 
 `true` on success.
 
@@ -112,7 +114,7 @@ admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144
 
     admin.peers()
 
-##### Resturns
+##### Returns
 
 an array of objects with information about connected peers.
 
@@ -126,18 +128,18 @@ an array of objects with information about connected peers.
 
 #### admin.startRPC
 
-     admin.startRPC(ipAddress, portNumber)
+     admin.startRPC(ipAddress, portNumber, corsheader)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
 ##### Example
 
 ```javascript
-admin.startRPC("127.0.0.1", 8545)
+admin.startRPC("127.0.0.1", 8545, )
 // true
 ```
 
@@ -145,11 +147,11 @@ admin.startRPC("127.0.0.1", 8545)
 
 #### admin.stopRPC
 
-    admin.stopRPC() [not implemented]
+    admin.stopRPC() 
 
 Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
@@ -170,7 +172,7 @@ Starts mining on with the given `threadNumber` of parallel threads.
 
 **Note** threadNumber is currently idle until thread safety in ethash is fixed.
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
@@ -189,7 +191,7 @@ admin.miner.start(4)
 
 Stops all miners.
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
@@ -226,7 +228,7 @@ admin.miner.stop()
 
 Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
@@ -248,7 +250,7 @@ true
 
 Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
@@ -270,7 +272,7 @@ Repeat Passphrase:
 
     admin.dumpBlock(numberOrHash)
 
-##### Resturns
+##### Returns
 
 the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
 
@@ -291,7 +293,7 @@ Imports the blockchain from a marshalled binary format.
 **Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
 
 
-##### Resturns
+##### Returns
 
 `true` on success, otherwise `false`.
 
