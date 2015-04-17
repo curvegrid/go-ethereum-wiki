@@ -1,6 +1,8 @@
-### Building 
+### Install and build  
 
-[Building Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
+[Installing Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
+
+[Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
 
 [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
@@ -14,35 +16,18 @@
 
 [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
-### Developing
-
-[Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
-
-[JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
-
 [Tutorials](https://github.com/ethereum/go-ethereum/wiki/Tutorials)
 
+### Issues
+
+[Troubleshooting](https://github.com/ethereum/go-ethereum/wiki/Troubleshooting)
+
+[FAQ](https://github.com/ethereum/go-ethereum/wiki/FAQ)
+
+[Reporting issues](https://github.com/ethereum/go-ethereum/wiki/geth#reporting)
+
+[Community and support](https://github.com/ethereum/go-ethereum/wiki/geth#community-and-support)
 
 ### Legacy
 
-[JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC)
-
-[QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
-
-[iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
-
-[Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
-
-[[QML PoC6 API]]
-
-[Mutan 0.5 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.5-Examples)
-
-[[PoC6 JS API]]
-
-[Mutan 0.4 Examples](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4-Examples)
-
-[Mutan 0.4](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.4)
-
-[Mutan 0.2](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2)
-
-[Mutan 0.2 Example](https://github.com/ethereum/go-ethereum/wiki/Mutan-0.2-Example)
+[Legacy pages](https://github.com/ethereum/go-ethereum/wiki/Legacy)
