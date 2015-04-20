@@ -1,3 +1,8 @@
+* [So what is mining anyway?](#sowhatismininganyway)
+* [Mining with geth](#miningwithgeth)
+* [GPU mining](#gpumining)
+* [Resources](#resources)
+
 ## So what is mining anyway?
 
 Ethereum Frontier like all blockchain technologies uses an incentive-driven model of security. Consensus is based on choosing the block with the highest total difficulty. 
@@ -93,12 +98,12 @@ Passphrase:
 true
 ```
 
-### GPU mining
+## GPU mining
 
+**TODO**
 Using a graphic card processor chip for mining.
 
-
-### Resources:
+## Resources:
 
 * https://blog.ethereum.org/2014/07/05/stake/
 * https://blog.ethereum.org/2014/10/03/slasher-ghost-developments-proof-stake/
