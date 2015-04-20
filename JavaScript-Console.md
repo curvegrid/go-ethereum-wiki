@@ -39,6 +39,10 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
   * [nodeInfo](#adminnodeinfo)
   * [suggestPeer](#adminsuggestpeer)
   * [peers](#adminpeers)
+  * [unlock](#adminunlock)
+  * [newAccount](#adminnewaccount)
+  * [import](#adminimport)
+  * [export](#adminexport)
   * [startRPC](#adminstartrpc)
   * [stopRPC](#adminstoprpc)
   * [miner](#adminminerstart)
@@ -46,14 +50,10 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
     * [stop](#adminminerstop)
     * [hashrate](#adminminerhashrate)
     * [setExtra](#adminminersetextra)
-  * [unlock](#adminunlock)
-  * [newAccount](#adminnewaccount)
-  * [debug](#admindumpblock)
-    * [dumpBlock](#admindumpblock)
-    * [printBlock](#adminprintblock)
-    * [getBlockRlp](#admingetblockrlp)
-  * [import](#adminimport)
-  * [export](#adminexport)
+  * [debug](#admindebuggetblockrlp)
+    * [getBlockRlp](#admindebuggetblockrlp)
+    * [printBlock](#admindebugprintblock)
+    * [dumpBlock](#admindebugdumpblock)
 * [loadScript](#loadscript)
 * [web3](#web3)
 * [net](#net)
@@ -128,6 +128,93 @@ an array of objects with information about connected peers.
 [ { ID: '0x6cdd090303f394a1cac34ecc9f7cda18127eafa2a3a06de39f6d920b0e583e062a7362097c7c65ee490a758b442acd5c80c6fce4b148c6a391e946b45131365b', Name: 'Ethereum(G)/v0.9.0/linux/go1.4.1', Caps: 'eth/56, shh/2', RemoteAddress: '54.169.166.226:30303', LocalAddress: '10.1.4.216:58888' } { ID: '0x4f06e802d994aaea9b9623308729cf7e4da61090ffb3615bc7124c5abbf46694c4334e304be4314392fafcee46779e506c6e00f2d31371498db35d28adf85f35', Name: 'Mist/v0.9.0/linux/go1.4.2', Caps: 'eth/58, shh/2', RemoteAddress: '37.142.103.9:30303', LocalAddress: '10.1.4.216:62393' } ]
 ```
 ***
+
+#### admin.unlock
+
+    admin.unlock(address, password, timeout)
+
+Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```js
+> admin.unlock("8dbad2d2b85bbb727ee35b31e64f5092ff54a93e")
+Please enter a passphrase now.
+Passphrase:
+true
+>
+```
+
+***
+
+#### admin.newAccount
+
+    admin.newAccount(password)
+
+Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```js
+> admin.newAccount()
+The new account will be encrypted with a passphrase.
+Please enter a passphrase now.
+Passphrase:
+Repeat Passphrase:
+'cf68505ae04bb425eb431eceb629c351bd9a4eee'
+>
+```
+2
+***
+
+#### admin.import
+
+    admin.import()
+
+Imports the blockchain from a marshalled binary format.
+**Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
+
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```javascript
+admin.import('path/to/file')
+// true
+```
+
+***
+
+#### admin.export
+
+    admin.export()
+
+Exports the blockchain to the given file in binary format.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```javascript
+admin.export()
+// binary ?
+```
+
+***
+
 
 #### admin.startRPC
 
@@ -232,15 +319,17 @@ admin.miner.stop()
 Returns the hexadecimal representation of the RLP encoding of the block.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
 
-#### Returns 
+##### Returns 
 
 The hex representation of the RLP encoding of the block.
 
 ##### Example
 
-    > admin.debug.getBlockRlp(131805)
-    'f90210f9020ba0ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81ea01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794a4d8e9cae4d04b093aac82e6cd355b6b963fb7ffa01f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26da056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000083bb9266830202dd832fefd880845534406d91ce9e5448ce9ed0af535048ce9ed0afce9ea04cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850883f9e9ce6a261381cc0c0'
 ```
+> admin.debug.getBlockRlp(131805)    'f90210f9020ba0ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81ea01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794a4d8e9cae4d04b093aac82e6cd355b6b963fb7ffa01f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26da056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000083bb9266830202dd832fefd880845534406d91ce9e5448ce9ed0af535048ce9ed0afce9ea04cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850883f9e9ce6a261381cc0c0'
+```
+
+***
 
 #### admin.debug.printBlock
 
@@ -254,7 +343,7 @@ See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 `true` on success, otherwise `false`.
 
-#### Example
+##### Example
 
 ```
 > admin.debug.printBlock(131805)
@@ -288,6 +377,8 @@ Uncles:
 
 ```
 
+
+
 ***
 
 
@@ -302,6 +393,7 @@ see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ##### Example
 
+
 ```js
 > admin.dumpBlock()
 >
@@ -310,92 +402,6 @@ see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ***
 
-
-#### admin.unlock
-
-    admin.unlock(address, password, timeout)
-
-Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```js
-> admin.unlock("8dbad2d2b85bbb727ee35b31e64f5092ff54a93e")
-Please enter a passphrase now.
-Passphrase:
-true
->
-```
-
-***
-
-#### admin.newAccount
-
-    admin.newAccount(password)
-
-Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```js
-> admin.newAccount()
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
-Passphrase:
-Repeat Passphrase:
-'cf68505ae04bb425eb431eceb629c351bd9a4eee'
->
-```
-2
-***
-
-#### admin.import
-
-    admin.import()
-
-Imports the blockchain from a marshalled binary format.
-**Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
-
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```javascript
-admin.import('path/to/file')
-// true
-```
-
-***
-
-#### admin.export
-
-    admin.export()
-
-Exports the blockchain to the given file in binary format.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```javascript
-admin.export()
-// binary ?
-```
-
-***
 
 #### loadScript
 
@@ -430,48 +436,3 @@ The `db` is a shortcut for `web3.db`.
 
 ***
 
-## Examples 
-
-### Balance
-
-```javascript
-coinbase = eth.coinbase;
-eth.getBalance(coinbase).toNumber();
-eth.filter('pending').watch(function() {
-  print(eth.getBalance(coinbase).toNumber());
-});
-```
-
-### Contract and transaction 
-**note** solidity compilation doesn't work 
-
-```javascript
-var source = "" +
-  "contract test {\n" +
-  " /// @notice Will multiply `a` by 7. \n" +
-  " function multiply(uint a) returns(uint d) {\n" +
-  " return a * 7;\n" +
-  " }\n" +
-  "}\n";
-
-var desc = [{
-  "name": "multiply(uint256)",
-  "type": "function",
-  "inputs": [
-  {
-    "name": "a",
-    "type": "uint256"
-  }
-  ],
-    "outputs": [
-    {
-      "name": "d",
-      "type": "uint256"
-    }
-  ]
-}];
-var address = eth.sendTransaction({code: eth.solidity(source)});
-var contract = eth.contract(address, desc);
-var param = 3
-contract.sendTransaction().multiply(param);
-```
