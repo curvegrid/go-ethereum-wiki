@@ -159,7 +159,7 @@ Creates a new account and encrypts it with `password`. If no `password` is given
 
 ##### Returns
 
-`true` on success, otherwise `false`.
+account address on success, otherwise `false`.
 
 ##### Example
 
