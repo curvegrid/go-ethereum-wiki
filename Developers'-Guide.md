@@ -117,6 +117,8 @@ godep go test -v -cpu 4 -bench . -run BenchmarkJoin
 
 for more see [go test flags](http://golang.org/cmd/go/#hdr-Description_of_testing_flags)
 
+See integration testing information on the [Testing wiki page](https://github.com/ethereum/go-ethereum/wiki/Testing)
+
 ## Add and update dependencies 
 
 To update a dependency version (for example, to include a new upstream fix), run 
@@ -170,4 +172,3 @@ Style](http://golang.org/doc/effective_go.html#formatting).
 * [P2P 101](https://github.com/ethereum/go-ethereum/wiki/Peer-to-Peer): a tutorial about setting up and creating a p2p server and p2p sub protocol.
 
 * [How to Whisper](https://github.com/ethereum/go-ethereum/wiki/How-to-Whisper): an introduction to whisper.
-
