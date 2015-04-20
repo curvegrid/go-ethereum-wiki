@@ -29,6 +29,9 @@ go test ./tests/transaction_test.go
 
 ### Blockchain
 [Blockchain Test wiki](https://github.com/ethereum/tests/wiki/Blockchain-Tests-II) 
+```
+go test ./tests/block_test.go
+```
 
 ### RPC
 [RPC Tests repo](https://github.com/ethereum/rpc-tests)
