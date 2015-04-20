@@ -300,7 +300,7 @@ admin.miner.stop()
 
 ##### Returns
 
-`String` Returns the current hash rate in MH.
+`String` Returns the current hash rate in KH/s.
 
 ***
 
