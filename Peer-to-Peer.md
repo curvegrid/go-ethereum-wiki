@@ -55,7 +55,7 @@ func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
         
         switch myMessage[0] {
         case "foo":
-            err := ws.WriteMsg(p2p.NewMsg(messageId, "bar"))  // 6.
+            err := p2p.SendItems(ws, messageId, "bar")  // 6.
             if err != nil {
                 return err // return (and disconnect) error if writing fails.
             }
@@ -138,7 +138,7 @@ func msgHandler(peer *p2p.Peer, ws p2p.MsgReadWriter) error {
 
 		switch myMessage {
 		case "foo":
-			err := ws.WriteMsg(p2p.NewMsg(messageId, "bar"))
+			err := p2p.SendItems(ws, messageId, "bar"))
 			if err != nil {
 				return err
 			}
