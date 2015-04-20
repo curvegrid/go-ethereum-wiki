@@ -48,7 +48,10 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
     * [setExtra](#adminminersetextra)
   * [unlock](#adminunlock)
   * [newAccount](#adminnewaccount)
-  * [dumpBlock](#admindumpblock)
+  * [debug](#admindumpblock)
+    * [dumpBlock](#admindumpblock)
+    * [printBlock](#adminprintblock)
+    * [getBlockRlp](#admingetblockrlp)
   * [import](#adminimport)
   * [export](#adminexport)
 * [loadScript](#loadscript)
@@ -222,6 +225,92 @@ admin.miner.stop()
 
 ***
 
+#### admin.debug.getBlockRlp
+
+    admin.debug.getBlockRlp(hashHexStringOrBlockNumber)
+
+Returns the hexadecimal representation of the RLP encoding of the block.
+See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+
+#### Returns 
+
+The hex representation of the RLP encoding of the block.
+
+##### Example
+
+    > admin.debug.getBlockRlp(131805)
+    'f90210f9020ba0ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81ea01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794a4d8e9cae4d04b093aac82e6cd355b6b963fb7ffa01f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26da056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000083bb9266830202dd832fefd880845534406d91ce9e5448ce9ed0af535048ce9ed0afce9ea04cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850883f9e9ce6a261381cc0c0'
+```
+
+#### admin.debug.printBlock
+
+    admin.debug.printBlock(hashHexStringOrBlockNumber)
+
+Prints information about the block such as size, total difficulty, as well as header fields properly formatted.
+
+See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+#### Example
+
+```
+> admin.debug.printBlock(131805)
+BLOCK(be465b020fdbedc4063756f0912b5a89bbb4735bd1d1df84363e05ade0195cb1): Size: 531.00 B TD: 643485290485 {
+NoNonce: ee48752c3a0bfe3d85339451a5f3f411c21c8170353e450985e1faab0a9ac4cc
+Header:
+[
+
+        ParentHash:         ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81e
+        UncleHash:          1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347
+        Coinbase:           a4d8e9cae4d04b093aac82e6cd355b6b963fb7ff
+        Root:               1f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26d
+        TxSha               56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421
+        ReceiptSha:         56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421
+        Bloom:              00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+        Difficulty:         12292710
+        Number:             131805
+        GasLimit:           3141592
+        GasUsed:            0
+        Time:               1429487725
+        Extra:              ΞTHΞЯSPHΞЯΞ
+        MixDigest:          4cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850
+        Nonce:              3f9e9ce6a261381c
+]
+Transactions:
+[]
+Uncles:
+[]
+}
+
+
+```
+
+***
+
+
+#### admin.dumpBlock
+
+    admin.dumpBlock(numberOrHash)
+
+##### Returns
+
+the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
+see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+
+##### Example
+
+```js
+> admin.dumpBlock()
+>
+```
+
+
+***
+
+
 #### admin.unlock
 
     admin.unlock(address, password, timeout)
@@ -265,24 +354,7 @@ Repeat Passphrase:
 'cf68505ae04bb425eb431eceb629c351bd9a4eee'
 >
 ```
-
-***
-
-#### admin.dumpBlock
-
-    admin.dumpBlock(numberOrHash)
-
-##### Returns
-
-the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
-
-##### Example
-
-```js
-> admin.dumpBlock()
-{ Root: 'e26e11f5252fca8b61d5979c0dea584c22d0e1b3bf687c915276c90c04bdb4bb', Accounts: { 2091fc869cbf49e84e72365bfbaee012f7f0c3ad368ef8c56c167ba75538c1ad: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 5b70e80538acdabd6137353b0f9d8d149f4dba91e8be2e7946e409bfdbe685b9: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 9bc17373cefddb760ffc916a98ea7152ceb68a400a74fb36e770b695e16e48b0: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, a28629e41841cc5e702899227a10d8fd7debed9ce87f47a95dcc3bedd9a8a4ef: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, cc7fbca600b4bbd1d889076147f61721f0f04cef8b3f1a6ee8097f454543ce55: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, d52688a8f926c816ca1e079067caba944f158e764817b83fc43594370ca9cf62: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, e044041bfd3b93fab85f2a1f96c7993754ae741bfe6fee5992f8b23dd181992c: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 1468288056310c82aa4c01a7e12a10f8111a0560e72b700555479031b86c357d: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 70009f4500e4fc823b89deed6bb8bfb9b4d3edcffb92a431d65d6e3b920943d7: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 8782e9da2bab05079eceaaa3551f40e16fb8f0c47476b00498a13b25e1de8dd6: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, a876da518a393dbd067dc72abfa08d475ed6447fca96d92ec3f9e7eba503ca61: { Balance: '1', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, fb147bae72727a9e8b7e9fc8c22e690345179367915f7d6c57c43e4c863ae48b: { Balance: '1606938044258990275541962092341162602522202993782792835301376', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } }, 3eb1ce4f84b7004d8c653aa4f5f7be9b54a240c293fbdd2553d1da13ceacf687: { Balance: '42000000000000000000', Nonce: 0, Root: '56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421', CodeHash: 'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470', Storage: {  } } } }
->
-```
+2
 ***
 
 #### admin.import
