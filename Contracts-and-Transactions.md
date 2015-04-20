@@ -9,7 +9,7 @@ Meanwhile see
 ### Balance
 
 ```javascript
-address = admin.accounts[0];
+address = eth.accounts()[0];
 eth.getBalance(address).toNumber();
 eth.filter('pending').watch(function() {
   print(eth.getBalance(address).toNumber());
