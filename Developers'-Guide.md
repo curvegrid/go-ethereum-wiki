@@ -147,14 +147,19 @@ The `master` branch is only used for finished stable major releases.
 
 # Stacktrace
 
-The code uses `pprof` on localhost port 6060. So bring up `localhost:6060/debug/pprof` to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
+The code uses `pprof` on localhost port 6060 by default if `geth` is started with the `--pprof` option. So bring up http://localhost:6060/debug/pprof to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
 
-Note that if you run multiple instances of `geth`, this port will only work for the first instance that was launched. If you want to generate stacktraces for these other instances, you need to send it a `-QUIT` signal. Make sure you are redirecting stderr to a logfile. 
+Note that if you run multiple instances of `geth`, this port will only work for the first instance that was launched. If you want to generate stacktraces for these other instances, you need to start them up choosing an alternative pprof port. Make sure you are redirecting stderr to a logfile. 
 
 ```
-geth -port=30300 -loglevel 5 2>> /tmp/00.glog
-geth -port=30301 -loglevel 5 2>> /tmp/01.glog
-geth -port=30302 -loglevel 5 2>> /tmp/02.glog
+geth -port=30300 -loglevel 5 --pprof --pprofport 6060 2>> /tmp/00.glog
+geth -port=30301 -loglevel 5 --pprof --pprofport 6061 2>> /tmp/01.glog
+geth -port=30302 -loglevel 5 --pprof --pprofport 6062 2>> /tmp/02.glog
+```
+
+Alternatively if you want to kill the clients (in case they hang or stalled synching, etc) but have the stacktrace too, you can use the `-QUIT` signal with `kill`:
+
+```
 killall -QUIT geth 
 ```
 
