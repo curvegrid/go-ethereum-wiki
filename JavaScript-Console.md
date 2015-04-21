@@ -27,7 +27,6 @@ The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) 
 
 * "use strict" will parse, but does nothing.
 * The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
-* missing `setTimeout` and `setInterval`. These timing functions are not actually part of the ECMA-262 specification. Typically, they belong to the windows object (in the browser).
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
@@ -37,6 +36,7 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
 
 * [admin](#admin)
   * [verbosity](#adminverbosity)
+  * [progress](#adminprogress)
   * [nodeInfo](#adminnodeinfo)
   * [suggestPeer](#adminsuggestpeer)
   * [peers](#adminpeers)
@@ -69,6 +69,16 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
 
 #### admin
 The `admin` exposes the methods to administrate the node.
+
+***
+
+#### admin.progress
+
+    admin.progress()
+
+Prints info on blockchain synching.
+
+###
 
 ***
 
@@ -237,6 +247,7 @@ admin.export()
      admin.startRPC(ipAddress, portNumber, corsheader)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+If corsheader is missing or the empty string, CORS header is not set.
 
 ##### Returns
 
@@ -245,7 +256,7 @@ Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/
 ##### Example
 
 ```javascript
-admin.startRPC("127.0.0.1", 8545, )
+admin.startRPC("127.0.0.1", 8545, "*")
 // true
 ```
 
