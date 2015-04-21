@@ -36,6 +36,7 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
 Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
 
 * [admin](#admin)
+  * [verbosity](#adminverbosity)
   * [nodeInfo](#adminnodeinfo)
   * [suggestPeer](#adminsuggestpeer)
   * [peers](#adminpeers)
@@ -50,7 +51,10 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
     * [stop](#adminminerstop)
     * [hashrate](#adminminerhashrate)
     * [setExtra](#adminminersetextra)
-  * [debug](#admindebuggetblockrlp)
+  * [debug](#admindebugbacktrace)
+    * [backtrace](#admindebugbacktrace)
+    * [setHead](#admindebugsethead)
+    * [processBlock](#admindebugprocessblock)
     * [getBlockRlp](#admindebuggetblockrlp)
     * [printBlock](#admindebugprintblock)
     * [dumpBlock](#admindebugdumpblock)
@@ -65,6 +69,18 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
 
 #### admin
 The `admin` exposes the methods to administrate the node.
+
+***
+
+#### admin.verbosity
+
+    admin.verbosity(level)
+
+**Sets** logger verbosity level to _level_. 1-6: silent, error, warn, info, debug, detail
+
+##### Example
+
+    admin.verbosity(6)
 
 ***
 
@@ -309,6 +325,54 @@ admin.miner.stop()
     admin.miner.setExtra("extra data")
 
 **Sets** the extra data for the block when finding a block. Limited to 1024 bytes.
+
+***
+
+#### admin.debug.backtrace
+
+    admin.debug.backtrace("matcher")
+
+a stack trace will be written to the log whenever execution hits the statement matched by the matcher.
+Matcher is file and line number holding a logging statement, e.g., `chain_manager.go:234`
+
+##### Example
+
+    admin.debug.backtrace("chain_manager.go:234")
+
+***
+
+#### admin.debug.setHead
+
+    admin.debug.setHead(hashHexStringOrBlockNumber)
+
+**Sets** the current head of the blockchain to the block referred to by _hashHexStringOrBlockNumber_.
+See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+
+##### Returns 
+
+`true` on success, otherwise `false`.
+
+##### Example 
+
+    admin.debug.setHead(140101)
+
+***
+
+#### admin.debug.processBlock
+
+    admin.debug.processBlock(hashHexStringOrBlockNumber)
+
+Processes the given block referred to by _hashHexStringOrBlockNumber_ with the VM in debug mode.
+See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+In combination with `setHead`, this can be used to replay processing of a block to debug VM execution.
+
+##### Returns 
+
+`true` on success, otherwise `false`.
+
+##### Example 
+
+    admin.debug.processBlock(140101)
 
 ***
 
