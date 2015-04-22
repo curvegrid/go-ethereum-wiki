@@ -1,10 +1,10 @@
-## Option 1: Install from PPA
+## Installing from PPA
 
 For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
 **Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
 
-```
+```shell
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:ethereum/ethereum-qt
 sudo add-apt-repository ppa:ethereum/ethereum
@@ -17,60 +17,81 @@ Run `mist` for the GUI or `geth` for the CLI.
 
 You can alternatively install only the CLI or GUI, with `apt-get install geth` or `apt-get install mist` respectively.
 
-## Option 2: Automatic installation
+## Building from source
 
-**Note** Outdated, please use the PPA.
+### Building Geth
 
-[This Mist install script](https://gist.github.com/tgerring/d4ab3f1672ed91a53c6c) will install everything required from a fresh Ubuntu 14.04 installation and start running Mist.
+Clone the repository to a directory of your choosing:
 
-```
-wget https://gist.githubusercontent.com/tgerring/d4ab3f1672ed91a53c6c/raw/677a3dd9c6db099eee620657bf7fb1e664173ee1/mist-develop.sh -O install
-chmod +x install 
-./install
+```shell
+$ git clone https://github.com/ethereum/go-ethereum
 ```
 
-## Option 3: Manual build from source
+Building `geth` requires some external libraries to be installed:
 
-### Installing Go
-
-Verify that Go is installed by running `go version` and checking the version. If not, see [Installing Go](https://github.com/ethereum/go-ethereum/wiki/Installing-Go)
-
-### Prerequisites
-
-Mist depends on the following external libraries to be installed:
 * [GMP](https://gmplib.org)
-* [Readline](http://www.gnu.org/s/readline/)
-* [Qt 5.4](http://www.qt.io/download-open-source/).
+* [Go](https://golang.org)
 
-First install GMP & Readline from repositories:
+```shell
+$ sudo apt-get install -y libgmp3-dev golang
 ```
-sudo apt-get install -y libgmp3-dev libreadline6-dev
+
+Finally, build the `geth` program using the following command.
+```shell
+$ cd go-ethereum
+$ make geth
+[ ... build output ... ]
+Done building.
+Run "build/bin/geth" to launch geth.
 ```
-Second, follow the instructions for [Building Qt](https://github.com/ethereum/go-ethereum/wiki/Building-Qt)
 
-### Installing Mist
-At last you will now be finished with all the prerequisites. The following commands will build the Ethereum Mist GUI client for you:
+### Building Mist
 
-    go get -u github.com/ethereum/go-ethereum/cmd/mist
+**Note: Mist is currently a work in progress and might not always work.**
 
-(You may need to run "sudo apt-get install mercurial" first)
+Clone the repository to a directory of your choosing:
 
-**Note**: Mist does not automatically look in the right location for its GUI assets. For this reason you have to launch it from its build directory
+```shell
+$ git clone https://github.com/ethereum/go-ethereum
+```
 
-    cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
+Building `mist` requires some external libraries to be installed:
 
-or supply an absolute `-asset_path` option:
+* [GMP](https://gmplib.org)
+* [Qt 5](https://www.qt.io)
+* [Qt 5 WebEngine](http://wiki.qt.io/QtWebEngine)
+* [Go](https://golang.org)
 
-    mist -asset_path $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets
+The Qt libraries we need aren't all that easy to obtain, so your
+best bet is our PPA:
 
+```shell
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:ethereum/ethereum-qt
+$ sudo apt-get update
+$ sudo apt-get install -y libgmp3-dev golang qtbase5-dev qtbase5-private-dev libqt5opengl5-dev qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-dialogs libqt5webengine5-dev
+```
 
-To eliminate the need to remember this cumbersome command, you can create the following a file in $GOPATH/bin :
+Finally, build the `mist` program using the following command.
 
-    #!/bin/bash
-    cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
+```shell
+$ cd go-ethereum
+$ make geth
+[ ... build output ... ]
+Done building.
+Run "build/bin/mist --asset_path=cmd/mist/assets" to launch mist.
+```
 
-Name the file 'misted' and make it executable:
+Mist does not automatically look in the right location for its GUI
+assets. You can set the asset path on the command line.
 
-    chmod +x $GOPATH/bin/misted
+```shell
+$ build/bin/mist --asset_path cmd/mist/assets
+```
 
-Now mist can be run with the command `misted`
+Or launch it from its source directory instead:
+
+```shell
+$ cd cmd/mist
+$ ../../build/bin/mist
+```
