@@ -1,4 +1,4 @@
-## Installing from our Homebrew tap
+## Installing with Homebrew
 
 By far the easiest way to install go-ethereum is to use the
 Homebrew tap. If you don't have Homebrew, [install it first](http://brew.sh).
