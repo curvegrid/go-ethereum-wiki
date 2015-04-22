@@ -1,61 +1,95 @@
-## Option 1: Homebrew tap
+## Installing from our Homebrew tap
 
-Assumptions:
-* Brew is installed. If not, run:
-```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-and follow the prompts.
+By far the easiest way to install go-ethereum is to use the
+Homebrew tap. If you don't have Homebrew, [install it first](http://brew.sh).
 
-```
+Then run the following commands to add the tap and install `geth`:
+
+```shell
 brew tap ethereum/ethereum
 brew install ethereum
 ```
 
-Install the latest develop branch with `--devel`.
+You can install the develop branch by running `--devel`:
 
-Add `--with-gui` to brew the `mist` browser.
+```shell
+brew install ethereum --devel
+```
 
-Then run `mist` (GUI) or `geth` (CLI)
+For installing `mist`, add `--with-gui`.
+
+After installing, run `geth` to start your node.
 
 For options and patches, see: https://github.com/ethereum/homebrew-ethereum
 
-## Option 2: Manual installation
+## Building from source
 
-Assumptions:
-* Go 1.2+ is installed. If not refer to [this](https://github.com/ethereum/go-ethereum/wiki/Installing-Go) page.
-* Brew is installed. If not, run `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"` and follow the prompts
+### Building Geth (command line client)
 
-Install Qt 5.4.x:
+Clone the repository to a directory of your choosing:
 
-```brew install qt5```
-
-Now configure some path for go-qml to properly build:
-
-```
-export PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
-export CGO_CPPFLAGS="-I/usr/local/opt/qt5/include/QtCore"
-export LD_LIBRARY_PATH=/usr/local/opt/qt5/lib
+```shell
+git clone https://github.com/ethereum/go-ethereum
 ```
 
-Compile **Mist**
+Building `geth` requires some external libraries to be installed:
 
-```
-go get github.com/ethereum/go-ethereum/cmd/mist
-```
+* [GMP](https://gmplib.org)
+* [Go](https://golang.org)
 
-This should start Mist and connect you to the Ethereum network. However, if you want a traditional `*.app` file we'll need to use our [build tool](https://github.com/ethereum/go-build).
-
-```
-git clone git@github.com:ethereum/go-build.git
-cd go-build/osx && python build.py
+```shell
+brew install gmp go
 ```
 
-This will save a `Mist.app` in the **osx** directory.
+Finally, build the `geth` program using the following command.
+```shell
+cd go-ethereum
+make geth
+```
 
-## Option 3: Building from source easy guide
+You can now run `build/bin/geth` to start your node.
 
-**WARNING: Guide is outdated but remains for references**
+### Building Mist (GUI)
 
-We now have a simple tutorial to install from source:
-http://forum.ethereum.org/discussion/905/go-ethereum-cli-ethereal-simple-build-guide-for-osx
+**Note: Mist is currently a work in progress and might not always work.**
+
+Clone the repository to a directory of your choosing:
+
+```shell
+git clone https://github.com/ethereum/go-ethereum
+```
+
+Building `mist` requires some external libraries to be installed:
+
+* [GMP](https://gmplib.org)
+* [Qt 5](https://www.qt.io)
+* [Qt 5 WebEngine](http://wiki.qt.io/QtWebEngine)
+* [Go](https://golang.org)
+
+Install these first:
+
+```shell
+brew install gmp go qt5
+brew link -f qt5 # This is required, sorry.
+```
+
+Finally, build the `mist` program using the following commands:
+
+```shell
+cd go-ethereum
+make mist
+```
+
+Mist does not automatically look in the right location for its GUI
+assets. You can set the asset path on the command line.
+
+```shell
+build/bin/mist --asset_path cmd/mist/assets
+```
+
+Or launch it from its source directory instead:
+
+```shell
+cd cmd/mist
+../../build/bin/mist
+```
