@@ -30,8 +30,3 @@ To use the interactive JavaScript console, run:
 ```shell
 docker run -it --entrypoint="/usr/bin/geth" ethereum/client-go console
 ```
-
-## Developing go-ethereum
-
-If you want to implement features or fix bugs in go-ethereum,
-follow the [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers%27-Guide)
