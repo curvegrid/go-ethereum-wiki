@@ -2,7 +2,7 @@
 
 For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
 
-**Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
+*Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
 
 ```shell
 sudo apt-get install software-properties-common
@@ -64,7 +64,7 @@ Building `mist` requires some external libraries to be installed:
 The Qt libraries we need aren't all that easy to obtain, so your
 best bet is our PPA:
 
-**Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
+*Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
 
 ```shell
 sudo apt-get install software-properties-common
