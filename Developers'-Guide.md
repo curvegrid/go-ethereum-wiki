@@ -1,3 +1,6 @@
+**NOTE: Follow these instructions if you want to contribute Go source code changes.
+If you just want to run ethereum, use the normal [Installation Instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)**
+
 # Build and test
 
 ## Go environment  
