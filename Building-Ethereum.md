@@ -14,10 +14,22 @@ _**Note:** There are some upstream bugs that may prevent Mist from running corre
 
 ## Running in Docker
 
-The develop branch is automatically updated in Docker Hub with RPC exposed. To use it, ensure docker is installed correctly and execute the following commands:
+We keep a Docker image with recent snapshot builds from the `develop` branch [on DockerHub](https://registry.hub.docker.com/u/ethereum/client-go). 
+
 ```
 docker pull ethereum/client-go
+```
+
+To start a node that runs the JSON-RPC interface on port **8545**, run:
+
+```
 docker run -p 8545:8545 -p 30303:30303 ethereum/client-go
+```
+
+To use the interactive JavaScript console, run:
+
+```
+docker run -it --entrypoint="/usr/bin/geth" ethereum/client-go console
 ```
 
 ## Building the latest
