@@ -14,7 +14,7 @@ _**Note:** There are some upstream bugs that may prevent Mist from running corre
 
 ## Running in Docker
 
-We keep a Docker image with recent snapshot builds from the `develop` branch [on DockerHub](https://registry.hub.docker.com/u/ethereum/client-go). 
+We keep a Docker image with recent snapshot builds from the `develop` branch [on DockerHub](https://registry.hub.docker.com/u/ethereum/client-go). Run this first:
 
 ```
 docker pull ethereum/client-go
