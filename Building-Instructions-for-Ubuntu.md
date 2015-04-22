@@ -76,7 +76,7 @@ Finally, build the `mist` program using the following command.
 
 ```shell
 $ cd go-ethereum
-$ make geth
+$ make mist
 [ ... build output ... ]
 Done building.
 Run "build/bin/mist --asset_path=cmd/mist/assets" to launch mist.
