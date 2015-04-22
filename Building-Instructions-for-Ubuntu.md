@@ -33,7 +33,7 @@ Building `geth` requires some external libraries to be installed:
 * [Go](https://golang.org)
 
 ```shell
-$ sudo apt-get install -y libgmp3-dev golang
+$ sudo apt-get install -y build-essential libgmp3-dev golang
 ```
 
 Finally, build the `geth` program using the following command.
@@ -69,7 +69,7 @@ best bet is our PPA:
 $ sudo apt-get install software-properties-common
 $ sudo add-apt-repository ppa:ethereum/ethereum-qt
 $ sudo apt-get update
-$ sudo apt-get install -y libgmp3-dev golang qtbase5-dev qtbase5-private-dev libqt5opengl5-dev qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-dialogs libqt5webengine5-dev
+$ sudo apt-get install -y build-essential libgmp3-dev golang qtbase5-dev qtbase5-private-dev libqt5opengl5-dev qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-dialogs libqt5webengine5-dev
 ```
 
 Finally, build the `mist` program using the following command.
