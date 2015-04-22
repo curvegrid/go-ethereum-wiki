@@ -19,7 +19,7 @@ You can alternatively install only the CLI or GUI, with `apt-get install geth` o
 
 ## Building from source
 
-### Building Geth
+### Building Geth (command line client)
 
 Clone the repository to a directory of your choosing:
 
@@ -44,7 +44,7 @@ make geth
 
 You can now run `build/bin/geth` to start your node.
 
-### Building Mist
+### Building Mist (GUI)
 
 **Note: Mist is currently a work in progress and might not always work.**
 
