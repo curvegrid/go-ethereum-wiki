@@ -2,14 +2,13 @@ This is the Wiki for the Ethereum Go implementation. For generic Ethereum-relate
 
 Main entry points:
 
-* [Build instructions for Ethereum](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
-* [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
+* [Installation Instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 * [Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
 * [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
 * [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 * [Setting up private network or local cluster](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
+* [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
 
 Sidebar lists all pages.
-
 
 
