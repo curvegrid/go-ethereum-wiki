@@ -38,6 +38,6 @@ go test ./tests/block_test.go
 
 1. Load test JSON with
     ```
-    geth blocktest <pathToTheTestRepo>/BlockTests/bcJS_API_Test.json JS_API_Tests rpc
+    geth blocktest <pathToTheTestRepo>/BlockTests/bcRPC_API_Test.json RPC_API_Test rpc
     ```
 2. Run rpc-tests (https://github.com/ethereum/rpc-tests#usage)
