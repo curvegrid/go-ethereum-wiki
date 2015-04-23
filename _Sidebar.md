@@ -14,7 +14,7 @@
 
 [Mining](https://github.com/ethereum/go-ethereum/wiki/Mining)
 
-[Contracts and transaction](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions)
+[Contracts and transactions](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions)
 
 ### Interface Documentation
 
@@ -22,7 +22,7 @@
 
 [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
-[JSON-RPC server](https://github.com/ethereum/go-ethereum/wiki/JSON-RPC)
+[JSON-RPC server](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
 ### Issues
 
