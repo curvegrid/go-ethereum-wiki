@@ -29,9 +29,6 @@ git clone https://github.com/ethereum/go-ethereum
 
 Building `geth` requires some external libraries to be installed:
 
-* [GMP](https://gmplib.org)
-* [Go](https://golang.org)
-
 ```shell
 sudo apt-get install -y build-essential libgmp3-dev golang
 ```
