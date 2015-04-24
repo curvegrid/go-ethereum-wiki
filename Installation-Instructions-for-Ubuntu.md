@@ -43,7 +43,7 @@ You can now run `build/bin/geth` to start your node.
 
 ### Building Mist (GUI)
 
-**Note: Mist is currently a work in progress and might not always work.**
+**Note: Mist is currently a work in progress and might not always work: it is NOT part of Frontier.**
 
 Clone the repository to a directory of your choosing:
 
