@@ -4,6 +4,8 @@ Remember your password.
 If you lose the password you use to encrypt your account, you will not be able to access that account.
 Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
 
+_**Note:** Accounts can also be managed with the [interactive console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)._
+
 ## Account management
 The ethereum CLI `geth` provides account management via the `account` subcommand:
 
