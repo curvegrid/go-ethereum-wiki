@@ -492,22 +492,21 @@ The `web3` exposes all methods of the [JavaScript API](https://github.com/ethere
 ***
 
 #### net
-The `net` is a shortcut for `web3.net`.
+The `net` is a shortcut for [web3.net](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3net).
 
 ***
 
 #### eth
-The `eth` is a shortcut for `web3.eth`.
+The `eth` is a shortcut for [web3.eth](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3eth).
 
 ***
 
 #### shh
-The `shh` is a shortcut for `web3.shh`.
+The `shh` is a shortcut for [web3.shh](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3shh).
 
 ***
 
 #### db
-The `db` is a shortcut for `web3.db`.
+The `db` is a shortcut for [web3.db](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3db).
 
 ***
-
