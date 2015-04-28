@@ -2,6 +2,8 @@
 
 This page details the crypto & encodings in the passphrase protected key store in Go. To implement this in another Ethereum implementation the steps below can be followed. The example JSON also acts as a test vector.
 
+**TODO: update github links to mainline branch once the latest key store PR is merged.**
+
 # References
 
 **Go source code & cryptography notes:** https://github.com/Gustav-Simonsson/go-ethereum/blob/improve_key_store_crypto/crypto/key_store_passphrase.go#L29
@@ -37,4 +39,19 @@ We start with the JSON in the key file on disk and list operations to get a priv
     "Id": "0498f19a-59db-4d54-ac95-33901b4f1870",
     "Version": "1"
 }
+```
+
+Go code unmarshaling and decrypting this: https://github.com/Gustav-Simonsson/go-ethereum/blob/improve_key_store_crypto/crypto/key_store_passphrase.go#L199
+
+1. Read in the JSON and parse out the KeyHeader field. Get the **JSON representation of the KeyHeader as a string / byte array**. We need this for MAC calculation.
+
+2. Get the derived key by calling scrypt with the scrypt params, the salt and the passphrase.
+
+3. Calculate MAC as SHA3(KeyHeaderJSON || derivedKey[16:32] || cipherText).
+
+4. Compare calculated MAC with MAC from the JSON object. If not equal, abort and return an error.
+
+5. Decrypt the cipherText using AES-128 with CBC mode and the IV from the JSON. The key used to decrypt is the last 16 bytes of SHA3 of the last 16 bytes of the scrypt derived key:
+```go
+AES_128_CBC_Decrypt( SHA3(derivedKey[:16])[:16], cipherText, iv )
 ```
