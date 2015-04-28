@@ -1,3 +1,5 @@
+**THIS PAGE IS PARTLY OUTDATED! TODO: REFACTOR OR DELETE**
+
 # Accounts / key storage specification
 
 This is an attempt to compile a single, written specification from the multiple sources which have so far been used for accounts / key storage specs:
