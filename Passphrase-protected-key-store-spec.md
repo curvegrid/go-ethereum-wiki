@@ -1,5 +1,5 @@
 ### From JSON to privkey
-```
+```json
 {
     "Address": "d4584b5f6229b7be90727b0fc8c6b91bb427821f",
     "Crypto": {
