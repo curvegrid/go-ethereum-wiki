@@ -1,4 +1,19 @@
-### From JSON to privkey
+# Summary
+
+This page details the crypto & encodings in the passphrase protected key store in Go. To implement this in another Ethereum implementation the steps below can be followed. The example JSON also acts as a test vector.
+
+# References
+
+**Go source code & cryptography notes:** https://github.com/Gustav-Simonsson/go-ethereum/blob/improve_key_store_crypto/crypto/key_store_passphrase.go#L29
+
+The source code comments there also have a list of further references.
+
+# From JSON to privkey
+
+We start with the JSON in the key file on disk and list operations to get a privkey for signing.
+
+**JSON in key file on disk:**
+
 ```json
 {
     "Address": "d4584b5f6229b7be90727b0fc8c6b91bb427821f",
