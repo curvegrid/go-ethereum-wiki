@@ -47,7 +47,10 @@ Go code unmarshaling and decrypting this: https://github.com/Gustav-Simonsson/go
 
 2. Get the derived key by calling scrypt with the scrypt params, the salt and the passphrase.
 
-3. Calculate MAC as SHA3(KeyHeaderJSON || derivedKey[16:32] || cipherText).
+3. Calculate MAC by taking SHA3 of concatentation of KeyHeader JSON, last 16 bytes of derived key and cipher text:
+```go
+SHA3( KeyHeaderJSON || derivedKey[16:32] || cipherText )
+```
 
 4. Compare calculated MAC with MAC from the JSON object. If not equal, abort and return an error.
 
