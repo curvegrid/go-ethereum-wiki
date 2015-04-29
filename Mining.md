@@ -52,7 +52,7 @@ Repeat Passphrase:
 Note that your coinbase does not need to be an address of a local account, just an existing one. 
 
 ```
-admin.accounts
+eth.accounts
 []
 eth.coinbase = 'a4d8e9cae4d04b093aac82e6cd355b6b963fb7ff'
 ```
