@@ -16,7 +16,7 @@ The source code comments there have a list of further references.
 
 We start with the JSON in the key file on disk and list operations to get a privkey for signing.
 
-**JSON in key file on disk:**
+**JSON in key file on disk (password is "foo") :**
 
 ```json
 {
