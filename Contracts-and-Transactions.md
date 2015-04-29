@@ -10,7 +10,7 @@ The simplest transactions are then ether transfer transactions. But before we go
 
 Now in order to deploy the contract to the blockchain you need an account and some ether. You can list your accounts:
 
-```
+```js
 > eth.accounts
 ['0x036a03fc47084741f83938296a1c8ef67f6e34fa', '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5']
 ```
@@ -18,7 +18,7 @@ Now in order to deploy the contract to the blockchain you need an account and so
 The output is an array of addresses (ethereum addresses are 20byte long and written in hexadecimal form with the hex prefix `0x` in front making it ... you guessed 42 byte long string).  The first address is your primary account. Addresses are used to locate accounts that are in the ethereum state and it is crucial in identifying sender and recipient of a transaction. Also, an address is deterministically derived from a public key (the public part of an EC secp256k1 key pair).
 
 But since i forgot the password, i just create a new one.
-```
+```js
 > admin.newAccount()
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
@@ -31,7 +31,7 @@ Repeat Passphrase:
 
 If you want to use this account from now on for transactions, best to unlock it. 
 
-```
+```js
 > admin.unlock(eth.accounts[2])
 Please enter a passphrase now.
 Passphrase:
@@ -42,7 +42,7 @@ Read more about [how to manage your accounts](https://github.com/ethereum/go-eth
 
 If you are [mining](https://github.com/ethereum/go-ethereum/wiki/Mining) (and you wait long enough or get lucky), ether will appear on your account. This you can check with:
 
-```
+```js
 primaryAccount = eth.accounts[0]
 web3.fromWei(eth.getBalance(primaryAccount), "ether")
 //'666.00433'
@@ -50,7 +50,7 @@ web3.fromWei(eth.getBalance(primaryAccount), "ether")
 
 You can also set up wallet monitoring using `watch` and `filters`:
 
-```javascript
+```js
 address = eth.accounts()[0];
 eth.getBalance(address).toNumber();
 eth.filter('pending').watch(function() {
@@ -62,7 +62,7 @@ eth.filter('pending').watch(function() {
 
 Assuming the account you are using as sender has sufficient funds, sending ether couldn't be easier. Which is also why you should probably be careful with this! You have been warned!
 
-```
+```js
 eth.sendTransaction({from: '0x036a03fc47084741f83938296a1c8ef67f6e34fa', to: '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5', value: web3.toWei(1, "ether")})
 ```
 
@@ -72,7 +72,7 @@ For the frontier release, `geth` supports solidity compilation through system ca
 
 If you start up your `geth` node, you can check if this option is immediately available 
 
-```
+```js
 eth.getCompilers()
 ['' ]
 > eth.compile.solidity("")
@@ -88,7 +88,7 @@ geth --datadir ~/frontier/00 --solc /usr/local/bin/solc --natspec
 
 You can also set this option at runtime via the console:
 
-```
+```js
 > admin.setSolc("/usr/local/bin/solc")
 solc v0.9.13
 Solidity Compiler: /usr/local/bin/solc
@@ -98,7 +98,7 @@ true
 
 Let us take this simple contract source:
 
-```
+```js
 > source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
 ```
 
@@ -108,7 +108,7 @@ For more information on contract language go through the [solidity tutorial], br
 
 You are ready to compile solidity code in the `geth` JS console using [`eth.compile.solidity`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity):
 
-```
+```js
 > contract = eth.compile.solidity(source)
 {
   code: '605280600c6000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063c6888fa114602e57005b60376004356041565b8060005260206000f35b6000600782029050604d565b91905056',
@@ -171,7 +171,7 @@ The compiled EVM code is sent off to the blockchain with a contract creation tra
 
 Now that you got both an unlocked account as well as some funds, you can create a contract on the blockchain by [sending a transaction](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction) to the empty address with the evm code as data. Simple ah?
 
-```
+```js
 primaryAddress = eth.accounts[0]
 contractAddress = eth.sendTransaction({from: primaryAddress, data: evmCode})
 ```
@@ -182,7 +182,7 @@ Note that this step requires you to pay for execution and your balance on the ac
 
 The asynchronous way to do the same looks like this:
 
-```
+```js
 eth.sendTransaction({from: primaryAccount, data: evmCode}, function(err, address) {
   if (!err)
     console.log(address); 
@@ -195,13 +195,13 @@ The gas expenditure incurred by running your contract will be bought by the ethe
 
 For testing and playing with contracts you can use the test network or [set up a private node (or cluster)](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-networklock-or-local-cluster) potentially isolated from the other nodes. If you then mine, you can make sure that your transaction will be included in the next block. You can see the pending transactions with:
 
-```
+```js
 eth.getBlock("pending", true).transactions
 ```
 
 You can retrieve blocks by number (height) or by their hash:
 
-```
+```js
 genesis = eth.getBlock(0)
 eth.getBlock(genesis.hash).hash == genesis.hash
 true
@@ -209,7 +209,7 @@ true
 
 Use `eth.blockNumber` to get the current blockchain height and the "latest" magic parameter to access the current head (newest block).
 
-```
+```js
 currentHeight = eth.blockNumber()
 eth.getBlock("latest").hash == eth.getBlock(eth.blockNumber).hash
 true
@@ -231,14 +231,14 @@ By using this scheme, it is sufficient to know a contract's address to look up t
 So if you are a conscientious contract creator, the steps are the following:
 
 1. Get the contract info json file. 
-1. Deploy contract info json file to any url of your choice
-1. Register codehash ->content hash -> url
-1. Deploy the contract itself to the blockchain
+2. Deploy contract info json file to any url of your choice
+3. Register codehash ->content hash -> url
+4. Deploy the contract itself to the blockchain
 
 The JS API makes this process very easy by providing helpers. Call [`admin.contractInfo.register`]() to extract info from the contract, write out its json serialisation in the given file, calculates the content hash of the file and finally registers this content hash to the contract's code hash.
 Once you deployed that file to any url, you can use [`admin.contractInfo.registerUrl`]() to register the url with your content hash on the blockchain as well. (Note that in case a fixed content addressed model is used as document store, the url-hint is no longer necessary.)
 
-```javascript
+```js
 source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
 // compile with solc
 contract = eth.compile.solidity(source)
@@ -257,14 +257,14 @@ admin.contractInfo.registerUrl(primaryAccount, hash, url)
 
 [`eth.contract`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract) can be used to define a contract _class_ that will comply with the contract interface as described in its [ABI definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI).
 
-```javascript
+```js
 var Multiply7 = eth.contract(abiArray);
 var multiply7 = new Multiply7();
 ```
 
 Now all the function calls specified in the abi are made available on the contract instance. You can just call those methods on the contract instance and chain `sendTransaction({from: address})` or `call()` to it, to send it off to the ether. 
 
-```
+```js
 multiply7.multiply.call(6)
 42
 ```
@@ -274,14 +274,14 @@ This is made possible by making available the contract info bundle and register 
 The `admin.contractInfo` API provides convenience methods to fetch this bundle for any contract that chose to register.
 To see how it works, read about [Contract Metadata](https://github.com/ethereum/wiki/wiki/Contract-metadata) or read the contract info deployment section of this document. 
 
-```javascript
+```js
 // get the contract info for contract address to do manual verification
 var info = admin.contractInfo.get(address) // lookup, fetch, decode
 var source = info.source;
 var abiDef = info.abiDefinition
 ```
 
-```
+```js
 // verify an existing contract in blockchain
 admin.contractInfo.verify(address)
 ```
@@ -292,7 +292,7 @@ This section will further elaborate what you can do with contracts and transacti
 
 So we now extend the `multiply7` contract with a smart comment specifying a custom confirmation message  (notice).
 
-```
+```js
 contract test {
    /// @notice Will multiply `a` by 7.
    function multiply(uint a) returns(uint d) {
@@ -305,7 +305,7 @@ The comment has expressions in between backticks which are to be evaluated at th
 
 Let us see a full example. As a very conscientious smart contract dev, you first create your contract and deploy according to the recommended steps above:
 
-```
+```js
 source = "contract test {
    /// @notice Will multiply `a` by 7.
    function multiply(uint a) returns(uint d) {
@@ -330,7 +330,7 @@ geth --natspec --unlock primary console 2>> /tmp/eth.log
 
 Now at the console type:
 
-```
+```js
 // obtain the abi definition for your contract
 var info = admin.contractInfo.get(address)
 var abiDef = info.abiDefinition
@@ -341,7 +341,7 @@ var multiply7 = new Multiply7();
 
 And now try to send an actual transaction:
 
-```
+```js
 > multiply7.multiply.call(6)
 NatSpec: Will multiply 6 by 7. 
 Would you like to proceed? 
@@ -350,7 +350,7 @@ Confirm? [Y/N]
 >
 ```
 
-```javascript
+```js
 primary = eth.accounts[0];
 console.log("primary: "+primary);
 balance = web3.fromWei(eth.getBalance(primary), "ether");
