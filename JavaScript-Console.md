@@ -457,9 +457,9 @@ Uncles:
 ***
 
 
-#### admin.dumpBlock
+#### admin.debug.dumpBlock
 
-    admin.dumpBlock(numberOrHash)
+    admin.debug.dumpBlock(numberOrHash)
 
 ##### Returns
 
@@ -470,7 +470,7 @@ see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 
 ```js
-> admin.dumpBlock()
+> admin.debug.dumpBlock()
 >
 ```
 
