@@ -28,11 +28,11 @@ Note that exporting your key in unencrypted format is NOT supported.
 
 Keys are stored under `<DATADIR>/keys`. Make sure you backup your keys regularly! It is safe to transfer the entire directory or the individual keys therein between ethereum nodes.
 
-And finally. ***DO NOT FORGET YOUR PASSWORD**.
+And finally. **DO NOT FORGET YOUR PASSWORD**
 
-
-SUBCOMMANDS:
 ```
+SUBCOMMANDS:
+
         list    print account addresses
         new     create a new account
         import  import a private key into a new account
