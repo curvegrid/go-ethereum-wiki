@@ -1,4 +1,4 @@
-* [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway)
+* [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway) _(main wiki)_
 * [Mining with geth](#miningwithgeth)
 * [GPU mining](#gpumining)
 * [Resources](#resources)
