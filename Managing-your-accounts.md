@@ -64,12 +64,12 @@ The account is saved in encrypted format, you are prompted for a passphrase. You
 
 For non-interactive use the passphrase can be specified with the --password flag:
 
-    geth --password <passwordfile> account new
+```
+geth --password <passwordfile> account new
+```
 
 Note, this is meant to be used for testing only, it is a bad idea to save your
 password to file or expose in any other way.
-
-```
 
 ### Listing your current accounts
 
@@ -90,6 +90,7 @@ import [arguments...]
 
 
     geth account import <keyfile>
+```
 
 Imports an unencrypted private key from <keyfile> and creates a new account.
 Prints the address.
@@ -103,14 +104,14 @@ You must remember this passphrase to unlock your account in the future.
 
 For non-interactive use the passphrase can be specified with the -password flag:
 
-    geth --password <passwordfile> account import <keyfile>
+```
+geth --password <passwordfile> account import <keyfile>
+```
 
 Note:
 As you can directly copy your encrypted accounts to another ethereum instance,
 this import mechanism is not needed when you transfer an account between
 nodes.
-
-```
 
 **Note**:
 Since you can directly copy your encrypted accounts to another ethereum instance, this import/export mechanism is not needed when you transfer an account between nodes.
