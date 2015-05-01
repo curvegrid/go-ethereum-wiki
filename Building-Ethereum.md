@@ -7,7 +7,7 @@ your platform.
 
 [Installation Instructions for Ubuntu](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu)
 
-[Installation Instructions for Windows (outdated)](https://github.com/ethereum/go-build#windows)
+[Installation Instructions for Windows](https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windows)
 
 _**Note:** There are some upstream bugs that may prevent Mist from running correctly within VirtualBox in certain scenarios. See https://www.virtualbox.org/ticket/12746 and https://bugreports.qt.io/browse/QTBUG-43110_
 
