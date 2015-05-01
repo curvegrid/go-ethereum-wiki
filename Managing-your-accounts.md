@@ -11,7 +11,7 @@ The ethereum CLI `geth` provides account management via the `account` subcommand
 
 ```
 account command [arguments...]
-
+```
 
 Manage accounts lets you create new accounts, list all existing accounts,
 import a private key into a new account.
@@ -26,22 +26,20 @@ either new or import). Without it you are not able to unlock your account.
 
 Note that exporting your key in unencrypted format is NOT supported.
 
-Keys are stored under <DATADIR>/keys.
-It is safe to transfer the entire directory or the individual keys therein
-between ethereum nodes.
-Make sure you backup your keys regularly.
+Keys are stored under `<DATADIR>/keys`. Make sure you backup your keys regularly! It is safe to transfer the entire directory or the individual keys therein between ethereum nodes.
 
-And finally. DO NOT FORGET YOUR PASSWORD.
+And finally. ***DO NOT FORGET YOUR PASSWORD**.
 
 
 SUBCOMMANDS:
+```
         list    print account addresses
         new     create a new account
         import  import a private key into a new account
 
 ```
 
-You can get info about further subcommands by `ethereum account help <subcommand>`
+You can get info about further subcommands by `geth account help <subcommand>`
 
 ### Creating a new account
 
