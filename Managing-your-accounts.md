@@ -53,9 +53,13 @@ You can get info about further subcommands by `ethereum account help <subcommand
 
 Creates a new account. Prints the address.
 
-The account is saved in encrypted format, you are prompted for a passphrase.
+On the console, use:
 
-You must remember this passphrase to unlock your account in the future.
+```
+admin.newAccount()
+```
+
+The account is saved in encrypted format, you are prompted for a passphrase. You **must** remember this passphrase to unlock your account in the future.
 
 For non-interactive use the passphrase can be specified with the --password flag:
 
@@ -68,8 +72,14 @@ password to file or expose in any other way.
 
 ### Listing your current accounts
 
+From the command line, call the CLI with:
 ```
 geth account list
+```
+
+when using the console:
+```
+eth.accounts
 ```
 
 ### Creating an account by importing an EC private key (binary)
