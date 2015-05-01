@@ -30,7 +30,7 @@ Passphrase:
 Repeat Passphrase:
 'ffd25e388bf07765e6d7a00d6ae83fa750460c7e'
 > eth.coinbase
-'0xffd25e388bf07765e6d7a00d6ae83fa750460c7e'```
+'0xffd25e388bf07765e6d7a00d6ae83fa750460c7e'
 ```
 
 Note that your coinbase does not need to be an address of a local account, just an existing one. 
