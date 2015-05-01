@@ -50,6 +50,7 @@ You can get info about further subcommands by `ethereum account help <subcommand
 
 
     geth account new
+```
 
 Creates a new account. Prints the address.
 
