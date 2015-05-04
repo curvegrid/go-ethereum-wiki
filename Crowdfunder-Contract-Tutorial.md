@@ -63,7 +63,7 @@ contract CrowdSale {
     }
 		
     // checks if the goal or time limit has been reached and ends the campaign
-    function checkGoalReached(uint campaignID) returns (bytes32 response) {
+    function checkGoalReached returns (bytes32 response) {
         if (amount >= fundingGoal){
             uint i = 0; 
             beneficiary.send(amount);
@@ -140,13 +140,13 @@ crowdsaleContract = web3.eth.contract(crowdsaleABI)
 crowdsaleInstance = new crowdsaleContract(crowdsaleAddress)
 
 var amount = web3.toWei(1, "ether") 
-crowdsaleInstance.contribute().sendTransaction({from: primaryAddress, value: amount })
+crowdsaleInstance.contribute.sendTransaction({from: primaryAddress, value: amount })
 ```
 
 Now wait a minute for the blocks to pickup and you can check if you received the tokens or check the balance of the contract by doing this: 
 
-`> eth.getBalance(crowdsaleAddresscrowdfundingAddress);`
+`> eth.getBalance(crowdsaleAddress);`
 
 Ethereum doesn't run contracts by itself, they have to be requested, so once the deadline is passed anyone can have the funds sent to either the beneficiary or back to the funders (if it failed) by doing a:
 
-`> crowdsalefundingInstance.checkGoalReachedcheckDeadline().sendTransaction({from: primaryAddress, value: amount })`
+`> crowdsaleInstance.checkGoalReached.sendTransaction({from: primaryAddress })`
