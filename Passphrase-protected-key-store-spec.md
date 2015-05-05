@@ -67,4 +67,4 @@ AES_128_CBC_Decrypt( SHA3(derivedKey[:16])[:16], cipherText, iv )
 
 **Further notes:**
 * The "Address" field in the JSON is the ethereum address of the key.
-* The **Id** is a UUID Version 4. It is used to identify a key not using key-derived data such as the ethereum address, for e.g. key file names.
+* The **Id** is *OPTIONAL*. It is a UUID Version 4. It is used to identify a key not using key-derived data such as the ethereum address, for e.g. key file names.
