@@ -128,11 +128,11 @@ The compiler output is combined into an object representing a single contract an
 #### Deployment 
 
 The immediate structuring of the compiler output (into `code` and `info`) reflects the two very different **paths of deployment**. 
-The compiled EVM code is sent off to the blockchain with a contract creation transaction while the rest (info) will ideally live on the decentralised cloud as publicly verifiable metadata complementing the code sitting on the blockchain.
+The compiled EVM code is sent off to the blockchain with a contract creation transaction while the rest (info) will ideally live on the decentralised cloud as publicly verifiable metadata complementing the code on the blockchain.
 
 #### Creating a contract
 
-Now that you got both an unlocked account as well as some funds, you can create a contract on the blockchain by [sending a transaction](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction) to the empty address with the evm code as data. Simple ah?
+Now that you got both an unlocked account as well as some funds, you can create a contract on the blockchain by [sending a transaction](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction) to the empty address with the evm code as data. Simple, eh?
 
 ```js
 primaryAddress = eth.accounts[0]
