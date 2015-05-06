@@ -28,7 +28,7 @@ Contracts can receive transfers just like externally controlled accounts, but th
 
 ### Compiling a contract
 
-Contracts live on the blockchain in an Ethereum-specific binary format. However, contracts are typically written in some high level language such as _solidity_ and then compiled into this byte code for the purpose of being uploaded into the blockchain.
+Contracts live on the blockchain in an Ethereum-specific binary format. However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
 
 For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. 
 
@@ -67,7 +67,7 @@ Let us take this simple contract source:
 This contract offers a unary method: called with a positive integer `a`, it returns `a * 7`. 
 Note that this document is not about writing interesting contracts or about the features of solidity.
 
-For more information on contract language, go through [solidity tutorial], browse the contracts in our [dapp-bin], read up about [Dapp development], see solidity and dapp resources. 
+For more information on contract language, go through [solidity tutorial](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial), browse the contracts in our [dapp-bin](https://github.com/ethereum/dapp-bin/wiki), see other solidity and dapp resources. 
 
 You are ready to compile solidity code in the `geth` JS console using [`eth.compile.solidity`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity):
 
@@ -218,7 +218,7 @@ hash = admin.contractInfo.register(primaryAccount, address, contract, "~/dapps/s
 admin.contractInfo.registerUrl(primaryAccount, hash, url)
 ```
 
-### Interacting with an existing contracts
+### Interacting with an existing contract
 
 [`eth.contract`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract) can be used to define a contract _class_ that will comply with the contract interface as described in its [ABI definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI).
 
