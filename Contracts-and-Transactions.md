@@ -20,7 +20,7 @@ eth.sendTransaction({from: '0x036a03fc47084741f83938296a1c8ef67f6e34fa', to: '0x
 
 Note the unit conversion in the `value` field. Transaction values are expressed in weis, the most granular units of value. If you want to use some other unit (like `ether` in the example above), use the function `web3.toWei` for conversion.
 
-Also, be advised that the amount debited from the source account will be slightly larger than that credited to the target account. The difference is a small transaction fee, discussed in more detail later.
+Also, be advised that the amount debited from the source account will be slightly larger than that credited to the target account, which is what has been specified. The difference is a small transaction fee, discussed in more detail later.
 
 ### Compiling a contract
 
