@@ -51,7 +51,8 @@ Lots wrong.
 - `SaltLen` unnecessary (just derive it from `Salt`).
 - KDF algorithm given, but not crypto algorithm. 
 - `Version` is intrinsically numeric yet is a string.
-- KDF and cipher are notionally sibling concepts yet are are different heirarchies.
+- KDF and cipher are notionally sibling concepts yet are organised differently.
+
 Please alter this to:
 
 ```json
