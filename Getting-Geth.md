@@ -18,11 +18,15 @@ Once geth is fully started, you should see a `>` prompt, letting you know the co
 
 ### Using stderr
 
-Output from the console can be logged
+Output from the console can be logged or redirected:
 
 `geth console 2>>geth.log`
 
-You can also run one terminal with the interactive console and a second one with the logging output.
+Using standard tools, the log can be monitored in a separate window:
+
+`tail -f geth.log`
+
+Alternatively, you can also run one terminal with the interactive console and a second one with the logging output directly.
 
 1. Open two terminals
 1. In the **second** terminal type `tty`. The output will be something like `/dev/pts/13`
