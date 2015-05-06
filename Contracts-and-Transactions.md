@@ -141,9 +141,9 @@ contractAddress = eth.sendTransaction({from: primaryAddress, data: evmCode})
 
 All binary data is serialised in hexadecimal form. Hex strings always have a hex prefix `0x`.
 
-Note that this step requires you to pay for execution and your balance on the account (that you put as sender in the `from` field) will be reduced according to the gas rules of the VM once your transaction makes it into a block. After some time, your transaction should appear included in a block confirming the state it brought about is a consensus. Your contract now lives on the blockchain. 
+Note that this step requires you to pay for execution. Your balance on the account (that you put as sender in the `from` field) will be reduced according to the gas rules of the VM once your transaction makes it into a block. More on that later. After some time, your transaction should appear included in a block confirming that the state it brought about is a consensus. Your contract now lives on the blockchain. 
 
-The asynchronous way to do the same looks like this:
+The asynchronous way of doing the same looks like this:
 
 ```js
 eth.sendTransaction({from: primaryAccount, data: evmCode}, function(err, address) {
@@ -152,11 +152,13 @@ eth.sendTransaction({from: primaryAccount, data: evmCode}, function(err, address
 });
 ```
 
-So how did you pay for all this? Under the hood, the transaction specified a gas limit and a gasprice. 
-Gas limit is there to protect you from buggy code running until your funds are depleted. Gasprice represents the maximum amount of Wei that you are willing to pay for executing the transaction.
-The gas expenditure incurred by running your contract will be bought by the ether you have in your account at a price you specified in the transaction with `gasPrice`. If you do not have the ether to cover all the gas requirements to complete running your code, the processing aborts and all intermediate state changes roll back to the pre-transaction snapshot. The gas used up to the point where execution stopped were used after all, so the ether balance of your account will reduce. These parameters can be adjusted on the transaction object fields `gas`, and `gasPrice`. The `value` field is used the same as in ether transfer transactions between normal accounts. In other words transferring funds is available between any two nodes, either normal or contract. If your contract runs out of funds, you should see an insufficient funds error. Note that any funds you send to a contract and not used to buy gas, will be returned to you when we release [Homestead](https://github.com/ethereum/go-ethereum/wiki/Homestead) (see [the rules of the game](https://github.com/ethereum/go-ethereum/wiki/Frontier)).
+So how did you pay for all this? Under the hood, the transaction specified a gas limit and a gasprice, both of which could have been specified directly in the transaction object.
 
-For testing and playing with contracts you can use the test network or [set up a private node (or cluster)](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-networklock-or-local-cluster) potentially isolated from the other nodes. If you then mine, you can make sure that your transaction will be included in the next block. You can see the pending transactions with:
+Gas limit is there to protect you from buggy code running until your funds are depleted. The product of `gasPrice` and `gasLimit` represents the maximum amount of Wei that you are willing to pay for executing the transaction. What you specify as `gasPrice` is used by miners to rank transactions for inclusion in the blockchain. It is the price in Wei of one unit of gas, in which VM operations are priced.
+
+The gas expenditure incurred by running your contract will be bought by the ether you have in your account at a price you specified in the transaction with `gasPrice`. If you do not have the ether to cover all the gas requirements to complete running your code, the processing aborts and all intermediate state changes roll back to the pre-transaction snapshot. The gas used up to the point where execution stopped were used after all, so the ether balance of your account will be reduced. These parameters can be adjusted on the transaction object fields `gasLimit` and `gasPrice`. The `value` field is used the same as in ether transfer transactions between normal accounts. In other words transferring funds is available between any two accounts, either normal (i.e. externally controlled) or contract. If your contract runs out of funds, you should see an insufficient funds error. Note that all funds on contract accounts will be irrecoverably lost, once we release [Homestead](https://github.com/ethereum/go-ethereum/wiki/Homestead) (see [the rules of the game](https://github.com/ethereum/go-ethereum/wiki/Frontier)).
+
+For testing and playing with contracts you can use the test network or [set up a private node (or cluster)](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-networklock-or-local-cluster) potentially isolated from all the other nodes. If you then mine, you can make sure that your transaction will be included in the next block. You can see the pending transactions with:
 
 ```js
 eth.getBlock("pending", true).transactions
