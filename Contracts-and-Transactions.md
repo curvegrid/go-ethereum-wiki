@@ -223,8 +223,8 @@ admin.contractInfo.registerUrl(primaryAccount, hash, url)
 [`eth.contract`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract) can be used to define a contract _class_ that will comply with the contract interface as described in its [ABI definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI).
 
 ```js
-var Multiply7 = eth.contract(abiArray);
-var multiply7 = new Multiply7();
+var Multiply7 = eth.contract(contract.info.abiDefinition);
+var multiply7 = new Multiply7(address);
 ```
 
 Now all the function calls specified in the abi are made available on the contract instance. You can just call those methods on the contract instance and chain `sendTransaction({from: address})` or `call()` to it, to send it off to the ether. 
