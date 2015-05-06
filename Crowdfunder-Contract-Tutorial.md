@@ -6,7 +6,7 @@ Since you already have your own internal currency, you can use that to help gath
 
 **Attention: All contracts will be wiped out at the end of Frontier. While balances on normal addresses will be transported to Homestead, balances in contracts, as well as addresses with less than 1 ether, will not. So use this crowdfunding contract for testing purposes and don't put any significant funds unless you know what you are doing.**
 
-```
+```js
 contract token{function sendToken(address receiver,uint256 amount)returns(bool sufficient){}function getBalance(address account)returns(uint256 balance){}}
 
 contract CrowdSale {
