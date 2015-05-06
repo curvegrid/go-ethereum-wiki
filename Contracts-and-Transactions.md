@@ -8,7 +8,7 @@ There are two types of accounts in Ethereum state:
 
 Both types of accounts have an ether balance.
 
-Transactions can be fired from from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on ethereum block chain are set in motion by transactions fired from externally controlled accounts.
+Transactions can be fired from from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on ethereum block chain is set in motion by transactions fired from externally controlled accounts.
 
 The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
@@ -24,11 +24,15 @@ Note the unit conversion in the `value` field. Transaction values are expressed 
 
 Also, be advised that the amount debited from the source account will be slightly larger than that credited to the target account, which is what has been specified. The difference is a small transaction fee, discussed in more detail later.
 
+Contracts can receive transfers just like externally controlled accounts, but they can also receive more complicated transactions that actually run (parts of) their code and update their state. In order to understand those transactions, a rudimentary understanding of contracts is required.
+
 ### Compiling a contract
+
+Contracts live on the blockchain in an Ethereum-specific binary format. However, contracts are typically written in some high level language such as _solidity_ and then compiled into this byte code for the purpose of being uploaded into the blockchain.
 
 For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. 
 
-If you start up your `geth` node, you can check if this option is immediately available 
+If you start up your `geth` node, you can check if this option is immediately available. This is what happens, if it is not:
 
 ```js
 eth.getCompilers()
@@ -62,7 +66,8 @@ Let us take this simple contract source:
 
 This contract offers a unary method: called with a positive integer `a`, it returns `a * 7`. 
 Note that this document is not about writing interesting contracts or about the features of solidity.
-For more information on contract language go through the [solidity tutorial], browse the contracts in our [dapp-bin], read up about [Dapp development], see solidity and dapp resources. 
+
+For more information on contract language, go through [solidity tutorial], browse the contracts in our [dapp-bin], read up about [Dapp development], see solidity and dapp resources. 
 
 You are ready to compile solidity code in the `geth` JS console using [`eth.compile.solidity`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity):
 
