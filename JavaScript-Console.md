@@ -119,19 +119,18 @@ To connect to a node, use the [enode-format](https://github.com/ethereum/wiki/wi
 
 ***
 
-#### admin.suggestPeer
+#### admin.addPeer
 
-    admin.suggestPeer(nodeURL)
+    admin.addPeer(nodeURL)
 
-Pass a `nodeURL` to suggest a new peer to the network. The `nodeURL`need to be in a [enode url format](https://github.com/ethereum/wiki/wiki/enode-url-format).
+Pass a `nodeURL` to connect a to a peer on the network. The `nodeURL` needs to be in [enode URL format](https://github.com/ethereum/wiki/wiki/enode-url-format). geth will maintain the connection until it
+shuts down and attempt to reconnect if the connection drops intermittently.
 
-You can find out your own enode by using [nodeInfo](#adminnodeinfo) or looking at the logs when the node boots up e.g.:
+You can find out your own node URL by using [nodeInfo](#adminnodeinfo) or looking at the logs when the node boots up e.g.:
 
 ```
 [P2P Discovery] Listening, enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303
 ```
-
-*Note*: there is good reason this function is called `suggestPeer` and not `addPeer` (as well as reason why `removePeer` is not available. It is ultimately the p2p server's discretion to connect and disconnect peers depending on number of factors. In normal cases however, when the number of maxpeers is not saturated and your suggested peer is well behaved and compatible, connection may even persist for a long time. 
 
 ##### Returns
 
@@ -140,7 +139,7 @@ You can find out your own enode by using [nodeInfo](#adminnodeinfo) or looking a
 ##### Example
 
 ```javascript
-admin.suggestPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
+admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
 ```
 
 ***
