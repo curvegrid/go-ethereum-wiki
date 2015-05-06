@@ -4,7 +4,7 @@ Now that you have your name secured, let's create a currency for your country. C
 
 You could do all those things by creating a centralized server, but using an Ethereum token contract comes with some free qualities: for one, it's a decentralized service and tokens can be still exchanged even if the original service goes down for any reason. The code guarantees that no tokens will ever be created other than the ones set in the original code. Finally, by having each user hold it's own token, this eliminates the scenarios where one single server break in can result in the loss of funds from thousands of clients.
  
-```
+```js
 contract token { 
     mapping (address => uint) balances;
 	
