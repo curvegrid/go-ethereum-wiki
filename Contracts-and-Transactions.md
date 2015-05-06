@@ -18,6 +18,10 @@ Assuming the account you are using as sender has sufficient funds, sending ether
 eth.sendTransaction({from: '0x036a03fc47084741f83938296a1c8ef67f6e34fa', to: '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5', value: web3.toWei(1, "ether")})
 ```
 
+Note the unit conversion in the `value` field. Transaction values are expressed in weis, the most granular units of value. If you want to use some other unit (like `ether` in the example above), use the function `web3.toWei` for conversion.
+
+Also, be advised that the amount debited from the source account will be slightly larger than that credited to the target account. The difference is a small transaction fee, discussed in more detail later.
+
 ### Compiling a contract
 
 For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. 
