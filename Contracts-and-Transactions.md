@@ -2,61 +2,13 @@ THIS WIKI IS BEING EDITED AND REVIEWED NOW. PLEASE DO NOT RELY ON IT.
 
 ## Contracts
 
-There are two types of accounts in Ethereum state. Normal or externally controlled accounts and contracts, i.e., sinppets of code, think a class. Both types of accounts have an ether balance.
+There are two types of accounts in Ethereum state:
+* Normal or externally controlled accounts and
+* contracts, i.e., sinppets of code, think a class.
 
-The simplest transactions are then ether transfer transactions. But before we go into that just a quick recap about accounts: 
+Both types of accounts have an ether balance.
 
-### Setting up your account
-
-Now in order to deploy the contract to the blockchain you need an account and some ether. You can list your accounts:
-
-```js
-> eth.accounts
-['0x036a03fc47084741f83938296a1c8ef67f6e34fa', '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5']
-```
-
-The output is an array of addresses (ethereum addresses are 20byte long and written in hexadecimal form with the hex prefix `0x` in front making it ... you guessed 42 byte long string).  The first address is your primary account. Addresses are used to locate accounts that are in the ethereum state and it is crucial in identifying sender and recipient of a transaction. Also, an address is deterministically derived from a public key (the public part of an EC secp256k1 key pair).
-
-But since i forgot the password, i just create a new one.
-```js
-> admin.newAccount()
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
-Passphrase:
-Repeat Passphrase:
-'0xc7e9661b625f7ce5b7b959721ca6705d1291d102'
-> eth.accounts
-['0x036a03fc47084741f83938296a1c8ef67f6e34fa', '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5', '0xc7e9661b625f7ce5b7b959721ca6705d1291d102' ]
-```
-
-If you want to use this account from now on for transactions, best to unlock it. 
-
-```js
-> admin.unlock(eth.accounts[2])
-Please enter a passphrase now.
-Passphrase:
-true
-```
-
-Read more about [how to manage your accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts).
-
-If you are [mining](https://github.com/ethereum/go-ethereum/wiki/Mining) (and you wait long enough or get lucky), ether will appear on your account. This you can check with:
-
-```js
-primaryAccount = eth.accounts[0]
-web3.fromWei(eth.getBalance(primaryAccount), "ether")
-//'666.00433'
-```
-
-You can also set up wallet monitoring using `watch` and `filters`:
-
-```js
-address = eth.accounts()[0];
-eth.getBalance(address).toNumber();
-eth.filter('pending').watch(function() {
-  print(eth.getBalance(address).toNumber());
-});
-```
+The simplest transactions are then ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
 ### Ether transfer transactions
 
