@@ -38,7 +38,7 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
   * [verbosity](#adminverbosity)
   * [progress](#adminprogress)
   * [nodeInfo](#adminnodeinfo)
-  * [suggestPeer](#adminsuggestpeer)
+  * [addPeer](#adminaddpeer)
   * [peers](#adminpeers)
   * [unlock](#adminunlock)
   * [newAccount](#adminnewaccount)
