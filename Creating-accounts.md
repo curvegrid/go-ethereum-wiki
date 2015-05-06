@@ -34,11 +34,10 @@ import [arguments...]
     geth account import <keyfile>
 ```
 
-Imports an unencrypted private key from <keyfile> and creates a new account.
-Prints the address.
+Imports an unencrypted private key from `<keyfile>` and creates a new account and prints the address.
 
-The keyfile is assumed to contain an unencrypted private key in canonical EC
-raw bytes format.
+The keyfile is assumed to contain an unencrypted private key as canonical EC
+raw bytes encoded into hex.
 
 The account is saved in encrypted format, you are prompted for a passphrase.
 
