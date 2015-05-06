@@ -4,7 +4,7 @@ The Frontier tool is called Geth (the old english third person singular conjugat
 
 In order to install Geth, open a command line or terminal tool (if you are unsure how to do this, consider waiting for a more user friendly release) and paste the command below:
 
-`ruby -e "$(curl -fsSL https://github.com/cubedro/frontier.ethereum.org/blob/master/bin/install.rb)"`
+`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/cubedro/frontier.ethereum.org/master/bin/install.rb)"`
 
 This script will detect your OS and will attempt to install the ethereum CLI. For more options including package managers, check the OS-specific subsections.
 
@@ -16,10 +16,16 @@ For the purposes of this guide, we will focus on the interactive console, a Java
 
 Once geth is fully started, you should see a `>` prompt, letting you know the console is ready. To exit, type `exit` at the prompt and hit `[enter]`.
 
-### Advanced Use
+### Using stderr
 
-On Linux you can run one terminal with the interactive console and a second one with the logging output. First, start geth will logging:
+Output from the console can be logged
 
 `geth console 2>>geth.log`
 
-Then opening a new terminal and typing `tty`. The output will be something like `/dev/pts/13`. Back in your main terminal, type: `geth console 2>> /dev/pts/13`. This will allow you to monitor your node without cluttering your console.
+You can also run one terminal with the interactive console and a second one with the logging output.
+
+1. Open two terminals
+1. In the **second** terminal type `tty`. The output will be something like `/dev/pts/13`
+1. In your main terminal, type: `geth console 2>> /dev/pts/13`
+
+This will allow you to monitor your node without cluttering the interactive console.
