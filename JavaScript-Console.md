@@ -432,7 +432,9 @@ source = "contract test {\n" +
 "} ";
 contract = eth.compile.solidity(source);
 contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
-admin.contractInfo.register(primary, contractaddress, contract);
+filename = "/tmp/info.json";
+contenthash = admin.contractInfo.register(primary, contractaddress, contract, filename);
+admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
 ```
 
 ***
