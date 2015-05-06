@@ -50,7 +50,13 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
     * [start](#adminminerstart)
     * [stop](#adminminerstop)
     * [hashrate](#adminminerhashrate)
-    * [setExtra](#adminminersetextra)
+    * [setExtra](#adminminersetextra) 
+  * [contractInfo](#admincontractinfo)
+    * [start](#admincontractinfostart)
+    * [stop](#admincontractinfostop)
+    * [get](#admincontractinfoget)
+    * [register](#admincontractinforegister)
+    * [registerUrl](#admincontractinforegisterurl)
   * [debug](#admindebugbacktrace)
     * [backtrace](#admindebugbacktrace)
     * [setHead](#admindebugsethead)
@@ -241,7 +247,6 @@ admin.export()
 
 ***
 
-
 #### admin.startRPC
 
      admin.startRPC(ipAddress, portNumber, corsheader)
@@ -280,6 +285,8 @@ admin.stopRpc()
 ```
 
 ***
+
+### Mining
 
 #### admin.miner.start
 
@@ -338,6 +345,100 @@ admin.miner.stop()
 **Sets** the extra data for the block when finding a block. Limited to 1024 bytes.
 
 ***
+
+### Contract Info
+
+#### admin.contractInfo.start
+
+     admin.contractInfo.start()
+
+activate NatSpec: when sending a transaction to a contract, 
+Registry lookup and url fetching is used to retrieve authentic contract Info for it. It allows for prompting a user with authentic contract-specific confirmation messages.
+
+***
+
+#### admin.contractInfo.stop
+
+     admin.contractInfo.stop()
+
+deactivate NatSpec: when sending a transaction, the user  will be prompted with a generic confirmation message, no contract info is fetched
+
+***
+
+#### admin.contractInfo.get
+
+     admin.contractInfo.get(address)
+
+this will retrieve the contract info json for a contract on the address
+
+##### Returns
+
+returns the contract info object 
+
+##### Examples
+
+```js
+> info = admin.contractInfo.get(contractaddress)
+> source = info.source
+> abi = info.abiDefinition
+```
+
+***
+
+#### admin.contractInfo.register
+
+    admin.contractInfo.register(primary, contractaddress, contract);
+
+this will retrieve the contract info json for a contract on the address
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source);
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+admin.contractInfo.register(primary, contractaddress, contract);
+```
+
+***
+
+#### admin.contractInfo.registerUrl
+
+    admin.contractInfo.registerUrl(codehash, contenthash);
+
+this will register a contant hash to the contract' codehash. This will be used to locate contract's info.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source);
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+admin.contractInfo.register(primary, contractaddress, contract);
+```
+
+***
+
+
+### Debug
 
 #### admin.debug.backtrace
 
