@@ -1,7 +1,5 @@
 # Creating accounts
 
-_Copied from https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts_
-
 ### Creating a new account
 
 ```
