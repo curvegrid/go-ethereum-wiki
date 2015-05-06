@@ -2,7 +2,7 @@
 
 Now that you’ve mastered the basics of Ethereum, let’s move into your first serious contract. It’s a big open territory and sometimes you might feel lonely, so our first order of business will be to create a little automatic companion to greet you whenever you feel lonely. We’ll call him the “Greeter”.
 
-```
+```js
 contract greeter {
 	function greet(bytes32 input) returns (bytes32) {
 		if (input == "") { return "Hello, World"; }
