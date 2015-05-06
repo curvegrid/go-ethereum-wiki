@@ -7,7 +7,7 @@
 
 When you start up your ethereum node with `geth` it is not mining by default. To start it in mining mode, you use the `-mine` [command line option](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). The `-minerthreads` parameter can be used to set the number parallel mining threads (defaulting to the total number of processor cores). 
 
-     geth -mine -minerthreads=4
+`geth --mine --minerthreads=4`
 
 You can also start and stop mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). 
 
