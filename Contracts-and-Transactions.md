@@ -8,11 +8,13 @@ There are two types of accounts in Ethereum state:
 
 Both types of accounts have an ether balance.
 
-The simplest transactions are then ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
+Transactions can be fired from from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on ethereum block chain are set in motion by transactions fired from externally controlled accounts.
+
+The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
 ### Ether transfer transactions
 
-Assuming the account you are using as sender has sufficient funds, sending ether couldn't be easier. Which is also why you should probably be careful with this! You have been warned!
+Assuming the account you are using as sender has sufficient funds, sending ether couldn't be easier. Which is also why you should probably be careful with this! You have been warned.
 
 ```js
 eth.sendTransaction({from: '0x036a03fc47084741f83938296a1c8ef67f6e34fa', to: '0xa8ade7feab1ece71446bed25fa0cf6745c19c3d5', value: web3.toWei(1, "ether")})
