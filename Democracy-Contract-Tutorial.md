@@ -2,7 +2,7 @@
 
 So you raised money for your new country, but so far it’s an Oligarchy, where all the money is controlled by the few people that have the key for your multisignature wallet. This doesn’t sound like a great start for a new society, does it? So let’s create a democratic organization.
 
-```
+```js
 contract multisig {   
 	function multisig() { 
 		// when a contract has a function with the same name as itself, 
