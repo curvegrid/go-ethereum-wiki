@@ -311,7 +311,7 @@ And now try to send an actual transaction:
 ```js
 > multiply7.multiply.sendTransaction(6)
 NatSpec: Will multiply 6 by 7. 
-Confirm? [Y/N]
+Confirm? [Y/N] y
 >
 ```
 
