@@ -1,3 +1,5 @@
+Version 2 documented [here](https://github.com/ethereum/wiki/wiki/Web3-Key-Storage-Definition)
+
 # Summary
 
 This page details the crypto & encodings in the passphrase protected key store in Go. To implement this in another Ethereum implementation the steps below can be followed. The example JSON also acts as a test vector.
@@ -42,19 +44,6 @@ We start with the JSON in the key file on disk and list operations to get a priv
     "Version": "1"
 }
 ```
-
-(Above suggestions removed; Version 2 documented [here](https://github.com/ethereum/wiki/wiki/Web3-Key-Storage-Definition).) 
-
-Gustav's reply to above suggestions:
-
-ACK on capitalisation, removal of address and saltlen fields and addition of encryption cipher field.
-
-NACK on bundling salt with KDF parameters; for both scrypt and PBKDF2 both specs and implementations usually separate between the KDF "configuration" and the input for a single call of the KDF.
-
-Morever, the "parameters" for scrypt / PBKDF2 can stay the same for multiple keys, whereas the salt is unique for each key. Bundling it together with "configuration" KDF parameters can give the wrong impression that it's part of the KDF config, when it's a per-key value.
-
-NACK on having version as integer; a version field should only be compared for equality, so a string makes more sense than an integer. Morever, we haven't defined what version semantic to use here, so using string prepares for any semantic we decide on (and also changes to it in the future!).
-
 
 Go code unmarshaling and decrypting this: https://github.com/Gustav-Simonsson/go-ethereum/blob/improve_key_store_crypto/crypto/key_store_passphrase.go#L199
 
