@@ -43,15 +43,7 @@ We start with the JSON in the key file on disk and list operations to get a priv
 }
 ```
 
-Lots wrong.
-
-- Capitalisation is unjustified and inconsistent (`scrypt` lowercase, `Kdf` mixed-case, `MAC` uppercase).
-- `Address` unnecessary and compromises privacy - remove.
-- `Salt` is a param of the KDF, thus belong in `KdfParams`.
-- `SaltLen` unnecessary (just derive it from `Salt`).
-- KDF algorithm given, but not crypto algorithm. 
-- `Version` is intrinsically numeric yet is a string.
-- KDF and cipher are notionally sibling concepts yet are organised differently.
+(Above suggestions removed; Version 2 documented [here](https://github.com/ethereum/wiki/wiki/Web3-Key-Storage-Definition).) 
 
 Gustav's reply to above suggestions:
 
