@@ -309,13 +309,13 @@ var multiply7 = new Multiply7();
 And now try to send an actual transaction:
 
 ```js
-> multiply7.multiply.call(6)
+> multiply7.multiply.sendTransaction(6)
 NatSpec: Will multiply 6 by 7. 
-Would you like to proceed? 
 Confirm? [Y/N]
-42
 >
 ```
+
+When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored.
 
 ```js
 primary = eth.accounts[0];
