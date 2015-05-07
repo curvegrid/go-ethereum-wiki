@@ -18,7 +18,7 @@ true
 true
 ```
 
-In order to earn ether through you need to have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). Note that miner will not complain if you got no etherbase address set, however money then will be sent to a zero address meaning you are not gonna receive the mining reward. 
+In order to earn ether through you need to have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you got no etherbase address set, then `geth --mine` will not start up.
 
 ```
 > eth.coinbase
