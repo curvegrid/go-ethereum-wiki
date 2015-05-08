@@ -318,10 +318,15 @@ Confirm? [Y/N] y
 When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored.
 
 ```js
+// assume an existing unlocked primary account
 primary = eth.accounts[0];
-console.log("primary: "+primary);
+
+// mine 10 blocks to generate ether
+admin.miner.start();
+admin.debug.waitForBlocks(eth.blockNumber+10);
+admin.miner.stop()  ;
+
 balance = web3.fromWei(eth.getBalance(primary), "ether");
-console.log("balance: "+balance);
 
 admin.contractInfo.newRegistry(primary);
 
@@ -334,50 +339,49 @@ source = "contract test {\n" +
 
 contract = eth.compile.solidity(source);
 
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+contractaddress = eth.sendTransaction({from: primary, data: contract.code});
 
 eth.getBlock("pending", true).transactions;
 
-console.log("multiply7 -> "+contractaddress);
+// wait for the next block
+// should use filters here and/or
+// unfortunately this might crash the miner if blocks are found quickly
 admin.miner.start()
-admin.debug.waitForBlocks(eth.blockNumer+4);
-sleep(1)
+// waits until block height is minimum the number given.
+// basically a sleep function on variable block units of time.
+
+admin.debug.waitForBlocks(eth.blockNumber+1);
 admin.miner.stop()
+
 code = eth.getCode(contractaddress);
-console.log("code: "+code);
 
 abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
-
 Multiply7 = eth.contract(abiDef);
 multiply7 = new Multiply7(contractaddress);
 
 fortytwo = multiply7.multiply.call(6);
 console.log("multiply7.multiply.call(6) => "+fortytwo);
+multiply7.multiply.sendTransaction(6, {from: primary})
 
-admin.miner.start()
-admin.debug.waitForBlocks(eth.blockNumer+4);
-sleep(1)
-admin.miner.stop()
+admin.miner.start();
+admin.debug.waitForBlocks(eth.blockNumber+1);
+admin.miner.stop();
 
 filename = "/tmp/info.json";
 contenthash = admin.contractInfo.register(primary, contractaddress, contract, filename);
+
 admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
 
-admin.miner.start()
-admin.debug.waitForBlocks(eth.blockNumer+4);
-sleep(1)
-admin.miner.stop()
+admin.miner.start();
+admin.debug.waitForBlocks(eth.blockNumber+1);
+admin.miner.stop();
 
 info = admin.contractInfo.get(contractaddress);
-console.log("Info: \n"+JSON.stringify(info));
 
-var primary = eth.accounts[0];
-var contractaddress = "0xa63e5373c52f06fb0847717912d67ec9dbbe3dec";
-var abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
-var Multiply7 = eth.contract(abiDef);
-var multiply7 = new Multiply7(contractaddress);
-var fortytwo = multiply7.multiply.sendTransaction(6, { from: primary, gas: "1000000", gasPrice: "100000" });
-console.log("multiply7.multiply.call(6) => "+fortytwo);
-
+admin.contractInfo.start();
+abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
+Multiply7 = eth.contract(abiDef);
+multiply7 = new Multiply7(contractaddress);
+fortytwo = multiply7.multiply.sendTransaction(6, { from: primary });
 
 ```
