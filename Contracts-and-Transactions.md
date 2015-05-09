@@ -152,6 +152,8 @@ eth.sendTransaction({from: primaryAccount, data: evmCode}, function(err, address
 });
 ```
 
+# Gas and transaction costs
+
 So how did you pay for all this? Under the hood, the transaction specified a gas limit and a gasprice, both of which could have been specified directly in the transaction object.
 
 Gas limit is there to protect you from buggy code running until your funds are depleted. The product of `gasPrice` and `gas` represents the maximum amount of Wei that you are willing to pay for executing the transaction. What you specify as `gasPrice` is used by miners to rank transactions for inclusion in the blockchain. It is the price in Wei of one unit of gas, in which VM operations are priced.
