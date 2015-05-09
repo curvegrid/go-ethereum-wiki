@@ -42,6 +42,8 @@ SUBCOMMANDS:
 
 You can get info about further subcommands by `geth account help <subcommand>`
 
+Accounts can also be managed via the [Javascript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
+
 ## Examples
 ### Interactive use
 
