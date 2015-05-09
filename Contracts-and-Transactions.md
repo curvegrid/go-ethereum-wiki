@@ -28,9 +28,15 @@ Contracts can receive transfers just like externally controlled accounts, but th
 
 # Compiling a contract
 
-Contracts live on the blockchain in an Ethereum-specific binary format. However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
+Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
 
-For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. 
+### Online compilers
+* 
+* http://meteor-dapp-cosmo.meteor.com
+
+For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix]() or [AlethZero](). 
+
+Note that other languages also exist, notably [serpent]() and [lll]().
 
 If you start up your `geth` node, you can check if this option is immediately available. This is what happens, if it is not:
 
