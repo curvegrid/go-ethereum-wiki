@@ -31,7 +31,7 @@ GLOBAL OPTIONS:
    --port "30303"                               Network listening port
    --logfile                                    Send log output to a file
    --logjson                                    Send json structured log output to a file or '-' for standard output (default: no json output)
-   --loglevel "3"                               0-5 (silent, error, warn, info, debug, debug detail)
+   --verbosity "3"                               0-5 (silent, error, warn, info, debug, debug detail)
    --maxpeers "16"                              Maximum number of network peers
    --Etherbase "primary"                        public address for block mining rewards. By default the address of your primary account is used
    --minerthreads "8"                           Number of miner threads
