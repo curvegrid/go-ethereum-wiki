@@ -3,7 +3,7 @@
 * [GPU mining](#gpumining)
 * [Resources](#resources)
 
-## Mining with Geth
+# Mining with Geth
 
 When you start up your ethereum node with `geth` it is not mining by default. To start it in mining mode, you use the `-mine` [command line option](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). The `-minerthreads` parameter can be used to set the number parallel mining threads (defaulting to the total number of processor cores). 
 
@@ -59,11 +59,11 @@ Header:
 }
 ```
 
-You can check your hashrate with [admin.miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in KH/s (1000 Hash operations per second). 
+You can check your hashrate with [admin.miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in H/s (Hash operations per second). 
 
 ```
 > admin.miner.hashrate()
-712
+712000
 ```
 
 After you successfully mined some blocks, you can check the ether balance of your coinbase account. Now assuming your coinbase is a local account:
@@ -82,12 +82,12 @@ Passphrase:
 true
 ```
 
-## GPU mining
+# GPU mining
 
 **TODO**
 Using a graphic card processor chip for mining.
 
-## Resources:
+# Further Resources:
 
 * https://blog.ethereum.org/2014/07/05/stake/
 * https://blog.ethereum.org/2014/10/03/slasher-ghost-developments-proof-stake/
