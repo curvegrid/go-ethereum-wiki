@@ -32,8 +32,11 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
 
 ## Console API
 
-Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API).
+Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API) plus a few additional calls.
 
+* [eth](#eth)
+  * [pendingTransactions](#ethpendingtransactions)
+  * [resend](#ethresend)
 * [admin](#admin)
   * [verbosity](#adminverbosity)
   * [progress](#adminprogress)
@@ -70,6 +73,35 @@ Ethereum's Javascript console exposes admin functionality and the full [JavaScri
 * [eth](#eth)
 * [shh](#shh)
 * [db](#db)
+
+***
+
+#### eth
+In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://github.com/ethereum/web3.js) a few additional calls are exposed.
+
+***
+
+#### eth.pendingTransactions
+
+    admin.pendingTransactions()
+
+Returns pending transactions that belong to one of the users `eth.accounts`.
+
+***
+
+#### eth.resend
+
+    admin.resend(tx, <optional gas price>, <optional gas limit>)
+
+Resends the given transaction returned by `pendingTransactions()` and allows you to overwrite the gas price and gas limit of the transaction.
+
+##### Example
+
+```javascript
+eth.sendTransaction({from: eth.accounts[0], to: "...", gasPrice: "1000"})
+var tx = eth.pendingTransactions()[0]
+eth.resend(tx, web3.toWei(10, "szabo")
+```
 
 ***
 
