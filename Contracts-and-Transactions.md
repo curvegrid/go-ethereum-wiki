@@ -1,6 +1,6 @@
 THIS WIKI IS BEING EDITED AND REVIEWED NOW. PLEASE DO NOT RELY ON IT.
 
-## Contracts
+# Account types and transactions
 
 There are two types of accounts in Ethereum state:
 * Normal or externally controlled accounts and
@@ -12,7 +12,7 @@ Transactions can be fired from from both types of accounts, though contracts onl
 
 The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
-### Ether transfer transactions
+## Ether transfer
 
 Assuming the account you are using as sender has sufficient funds, sending ether couldn't be easier. Which is also why you should probably be careful with this! You have been warned.
 
@@ -26,7 +26,7 @@ Also, be advised that the amount debited from the source account will be slightl
 
 Contracts can receive transfers just like externally controlled accounts, but they can also receive more complicated transactions that actually run (parts of) their code and update their state. In order to understand those transactions, a rudimentary understanding of contracts is required.
 
-### Compiling a contract
+# Compiling a contract
 
 Contracts live on the blockchain in an Ethereum-specific binary format. However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
 
@@ -125,12 +125,10 @@ The compiler output is combined into an object representing a single contract an
 * `userDoc`: [NatSpec user Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
 * `developerDoc`: [NatSpec developer Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
 
-#### Deployment 
-
 The immediate structuring of the compiler output (into `code` and `info`) reflects the two very different **paths of deployment**. 
 The compiled EVM code is sent off to the blockchain with a contract creation transaction while the rest (info) will ideally live on the decentralised cloud as publicly verifiable metadata complementing the code on the blockchain.
 
-#### Creating a contract
+# Creating and deploying a contract
 
 Now that you got both an unlocked account as well as some funds, you can create a contract on the blockchain by [sending a transaction](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction) to the empty address with the evm code as data. Simple, eh?
 
@@ -180,7 +178,7 @@ eth.getBlock("latest").hash == eth.getBlock(eth.blockNumber).hash
 true
 ```
 
-### Contract Metadata/Info 
+# Contract Metadata/Info 
 
 In the previous sections we explained how you create a contract on the blockchain. Now we deal with the rest of the compiler output, the **contract metadata** or contract info. 
 The idea is that 
@@ -218,7 +216,7 @@ hash = admin.contractInfo.register(primaryAccount, address, contract, "~/dapps/s
 admin.contractInfo.registerUrl(primaryAccount, hash, url)
 ```
 
-### Interacting with an existing contract
+# Interacting with contracts
 
 [`eth.contract`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcontract) can be used to define a contract _class_ that will comply with the contract interface as described in its [ABI definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI).
 
@@ -249,11 +247,11 @@ var abiDef = info.abiDefinition
 ```
 
 ```js
-// verify an existing contract in blockchain
+// verify an existing contract in blockchain (NOT IMPLEMENTED)
 admin.contractInfo.verify(address)
 ```
 
-### NatSpec 
+# NatSpec 
 
 This section will further elaborate what you can do with contracts and transactions building on a protocol NatSpec. Solidity implements smart comments doxigen style which then can be used to generate various facades meta documents of the code. One such use case is to generate custom messages for transaction confirmation that clients can prompt users with. 
 
@@ -343,9 +341,6 @@ contractaddress = eth.sendTransaction({from: primary, data: contract.code});
 
 eth.getBlock("pending", true).transactions;
 
-// wait for the next block
-// should use filters here and/or
-// unfortunately this might crash the miner if blocks are found quickly
 admin.miner.start()
 // waits until block height is minimum the number given.
 // basically a sleep function on variable block units of time.
