@@ -108,7 +108,7 @@ geth --password <passwordfile> account new
 Note, this is meant to be used for testing only, it is a bad idea to save your
 password to file or expose in any other way.
 
-### Creating an account by importing an EC private key (binary)
+### Creating an account by importing a private key
 
 ```
 import [arguments...]
@@ -150,7 +150,7 @@ cat > /path/to/password
 >I type my pass here^D
 ```
 
-# Checking balances
+# Listing accounts and checking balances
 
 ### Listing your current accounts
 
