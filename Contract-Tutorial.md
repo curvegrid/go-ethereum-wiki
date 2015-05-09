@@ -1,4 +1,4 @@
-# Greeter Contract
+# Greeter
 
 Now that you’ve mastered the basics of Ethereum, let’s move into your first serious contract. It’s a big open territory and sometimes you might feel lonely, so our first order of business will be to create a little automatic companion to greet you whenever you feel lonely. We’ll call him the “Greeter”.
 
@@ -69,7 +69,7 @@ If your greeter returned "Hello World" then congratulations, you just created yo
 
 Before the last return statement.
 
-# Interacting with contracts: NameReg
+# NameReg
 
 All accounts are referenced in the network by their public address. But addresses are long, difficult to write down, hard to memorize and immutable. The last one is specially important if you want to be able to generate fresh accounts in your name, or upgrade the code of your contract. In order to solve this, there is a default name registrar contract which is used to associate the long addresses with short, human-friendly names.
 
@@ -85,7 +85,7 @@ Try for yourself: By typing just "registrar" you can see all the many functions 
 
 `> registrar.owner("ethereumland")`
 
-# Coin contract
+# Coin
 
 Issue your own money: Coin contract
 
@@ -167,7 +167,10 @@ The reason that the first command was .call() and the second is a .sendTransacti
 * Formal proofing is a way where the contract developer can assert some invariant qualities of the contract, like the total cap of the coin.
 * Meta coin standard is a proposed standardization of function names for coin and token contracts, to allow them to be automatically added to other ethereum contract that utilizes trading, like exchanges or escrow.
 
-# Trustless fundraising: the crowdfunder
+# Crowdfunder
+
+
+Trustless fundraising
 
 Creating a country takes a lot of funds and collective effort. You could ask for donations, but donors prefer to give to projects they are more certain that will get traction and proper funding. This is an example where a crowdfunding would be ideal: you set up a goal and a deadline for reaching it. If you miss your goal, the donations are returned, therefore reducing the risk for donors. Since the code is open and auditable, there is no need for a centralized trusted platform and therefore the only fees everyone will pay are just the gas fees.
 
@@ -319,7 +322,10 @@ Now wait a minute for the blocks to pickup and you can check if you received the
 Ethereum doesn't run contracts by itself, they have to be requested, so once the deadline is passed anyone can have the funds sent to either the beneficiary or back to the funders (if it failed) by doing a:
 
 `> crowdsaleInstance.checkGoalReached.sendTransaction({from: primaryAddress })`
-# A decentralized autonomous organization: the Democracy Contract
+
+# Democracy DAO
+
+A decentralized autonomous organization: the Democracy Contract
 
 So you raised money for your new country, but so far it’s an Oligarchy, where all the money is controlled by the few people that have the key for your multisignature wallet. This doesn’t sound like a great start for a new society, does it? So let’s create a democratic organization.
 
