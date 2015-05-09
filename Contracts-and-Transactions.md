@@ -180,7 +180,7 @@ eth.getBlock("latest").hash == eth.getBlock(eth.blockNumber).hash
 true
 ```
 
-# Contract Metadata/Info 
+# Contract info (metadata)
 
 In the previous sections we explained how you create a contract on the blockchain. Now we deal with the rest of the compiler output, the **contract metadata** or contract info. 
 The idea is that 
