@@ -63,7 +63,7 @@ GLOBAL OPTIONS:
 
 ```
 
-Note that the default for datadir is platform-specific, "/$HOME/Library/Ethereum" is the pattern for MacOS. 
+Note that the default for datadir is platform-specific. See [backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore) for more information.
 
 ## Examples
 
