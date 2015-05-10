@@ -40,7 +40,7 @@ Ethereum's Javascript console exposes admin functionality and the full [web3 Jav
   * [getBalance](#ethgetbalance)
   * [pendingTransactions](#ethpendingtransactions)
   * [resend](#ethresend)
-  * [sendTransaction](#sendTransaction)
+  * [sendTransaction](#ethsendtransaction)
 * [admin](#admin)
   * [verbosity](#adminverbosity)
   * [progress](#adminprogress)
