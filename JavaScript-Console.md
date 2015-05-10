@@ -83,7 +83,7 @@ In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://gith
 
 #### eth.pendingTransactions
 
-    admin.pendingTransactions()
+    eth.pendingTransactions()
 
 Returns pending transactions that belong to one of the users `eth.accounts`.
 
