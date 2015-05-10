@@ -40,6 +40,7 @@ Ethereum's Javascript console exposes admin functionality and the full [web3 Jav
   * [getBalance](#ethgetbalance)
   * [pendingTransactions](#ethpendingtransactions)
   * [resend](#ethresend)
+  * [sendTransaction](#sendTransaction)
 * [admin](#admin)
   * [verbosity](#adminverbosity)
   * [progress](#adminprogress)
@@ -108,7 +109,7 @@ Returns pending transactions that belong to one of the users `eth.accounts`.
 
 #### eth.resend
 
-    admin.resend(tx, <optional gas price>, <optional gas limit>)
+    eth.resend(tx, <optional gas price>, <optional gas limit>)
 
 Resends the given transaction returned by `pendingTransactions()` and allows you to overwrite the gas price and gas limit of the transaction.
 
@@ -118,6 +119,20 @@ Resends the given transaction returned by `pendingTransactions()` and allows you
 eth.sendTransaction({from: eth.accounts[0], to: "...", gasPrice: "1000"})
 var tx = eth.pendingTransactions()[0]
 eth.resend(tx, web3.toWei(10, "szabo")
+```
+
+***
+
+#### eth.sendTransaction
+
+    eth.sendTransaction(trans)
+
+##### Example
+
+Send 0.5 ether from primary address. Use default gas and gas price.
+
+```javascript
+eth.sendTransaction({from: eth.coinbase, to: "0xXXXX", value:web3.toWei(0.5, "ether")})
 ```
 
 ***
