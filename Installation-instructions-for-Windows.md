@@ -4,7 +4,7 @@ _not yet available_
 
 ## Building from source
 
-1. Install Git and Mercurial
+1. Install Git from http://git-scm.com/downloads and Mercurial from http://mercurial.selenic.com/
 1. Install Golang from https://storage.googleapis.com/golang/go1.4.2.windows-amd64.msi
 1. Install winbuilds from http://win-builds.org/1.5.0/win-builds-1.5.0.exe to `c:\winbuilds`
 1. Run win builds here. It's safe to remove big dependencies like QT and GTK which aren't needed. _An exact list of dependencies should be determined_
