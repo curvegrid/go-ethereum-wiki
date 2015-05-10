@@ -28,9 +28,17 @@ Contracts can receive transfers just like externally controlled accounts, but th
 
 # contract のコンパイル
 
-Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
+blockchain 上で有効となる contract は Ethereum 特別仕様の バイナリの形式で、EVM byte コード と呼ばれます。
+しかしながら、典型的には、contract は [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) のような高級言語で記述され、blockchain 上に upload するために、この byte コードへコンパイルされます。
 
-For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix]() or [AlethZero](). 
+flontier リリースでは、geth は Christian R. と Lefteris K が手がけた、コマンドライン [solidity コンパイラ](https://github.com/ethereum/cpp-ethereum/solc) である `solc` をシステムコールを通した、solidity コンパイルをサポートしています。
+以下もお試しください。
+* [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) 
+* [Cosmo](http://meteor-dapp-cosmo.meteor.com) 
+* [Mix]() 
+* [AlethZero]()
+
+
 
 Note that other languages also exist, notably [serpent]() and [lll]().
 
