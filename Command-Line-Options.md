@@ -1,12 +1,12 @@
 # CLI client
 
-Command line client options are a moving target under constant change now. Please refer to the client to geth help. Below is the output of `geth help` (version 0.9.4 27/03/2015). 
+Command line client options are a moving target under constant change now. Please refer to the client to geth help. Below is the output of `geth help` (version 0.9.19 10/5/2015). 
 
 ```
 geth [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.4
+   0.9.19
 
 COMMANDS:
    blocktest    loads a block test file
@@ -23,28 +23,41 @@ COMMANDS:
    help         Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --unlock                                     unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
-   --password                                   Path to password file for (un)locking an existing account.
-   --bootnodes                                  Space-separated enode URLs for discovery bootstrap
-   --datadir "$HOME/Library/Ethereum"           Data directory to be used
+   --identity                                   Custom node name
+   --unlock                                     Unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
+   --password                                   Path to password file to use with options and subcommands needing a password
+   --bootnodes                                  Space-separated enode URLs for p2p discovery bootstrap
+   --datadir "/Users/tron/Library/Ethereum"     Data directory to be used
+   --blockchainversion "2"                      Blockchain version (integer)
    --jspath "."                                 JS library path to be used with console and js subcommands
    --port "30303"                               Network listening port
-   --logfile                                    Send log output to a file
-   --logjson                                    Send json structured log output to a file or '-' for standard output (default: no json output)
-   --verbosity "3"                               0-5 (silent, error, warn, info, debug, debug detail)
-   --maxpeers "16"                              Maximum number of network peers
-   --Etherbase "primary"                        public address for block mining rewards. By default the address of your primary account is used
+   --maxpeers "25"                              Maximum number of network peers (network disabled if set to 0)
+   --maxpendpeers "0"                           Maximum number of pending connection attempts (defaults used if set to 0)
+   --etherbase "primary"                        Public address for block mining rewards. By default the address of your primary account is used
+   --gasprice "10000000000000"                  Sets the minimal gasprice when mining transactions
    --minerthreads "8"                           Number of miner threads
    --mine                                       Enable mining
-   --nat "any"                                  Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --nat "any"                                  NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --natspec                                    Enable NatSpec confirmation notice
    --nodekey                                    P2P node key file
    --nodekeyhex                                 P2P node key as hex (for testing)
-   --rpc                                        Whether RPC server is enabled
+   --rpc                                        Enable the JSON-RPC server
    --rpcaddr "127.0.0.1"                        Listening address for the JSON-RPC server
    --rpcport "8545"                             Port on which the JSON-RPC server should listen
+   --shh                                        Enable whisper
    --vmdebug                                    Virtual Machine debug output
-   --protocolversion "59"                       ETH protocol version
-   --networkid "0"                              Network Id
+   --protocolversion "60"                       ETH protocol version (integer)
+   --networkid "0"                              Network Id (integer)
+   --rpccorsdomain                              Domain on which to send Access-Control-Allow-Origin header
+   --verbosity "3"                              Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
+   --backtrace_at ":0"                          If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
+   --logtostderr                                Logs are written to standard error instead of to files.
+   --vmodule ""                                 The syntax of the argument is a comma-separated list of pattern=N, where pattern is a literal file name (minus the ".go" suffix) or "glob" pattern and N is a log verbosity level.
+   --logfile                                    Send log output to a file
+   --logjson                                    Send json structured log output to a file or '-' for standard output (default: no json output)
+   --pprof                                      Enable the profiling server on localhost
+   --pprofport "6060"                           Port on which the profiler should listen
+   --solc "solc"                                solidity compiler to be used
    --help, -h                                   show help
 
 
@@ -71,11 +84,11 @@ See [Geth javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaS
 
 Bring up the geth javascript console:
 
-    geth --loglevel 5 --logfile /tmp/eth0.log --jspath /mydapp/js console 
+    geth --verbosity 5 --logtostderr --jspath /mydapp/js console 2>> /path/to/logfile
 
 Execute `test.js` javascript using js API and log Debug-level messages to `/path/to/logfile`:
 
-    geth -logfile /path/to/logfile -loglevel 4 js test.js  # 
+    geth --logtostderr --verbosity 6 js test.js  2>> /path/to/logfile
 
 ### Import/export chains and dump blocks
 
@@ -93,12 +106,12 @@ When the consensus algorithm is changed blocks in the blockchain must be reimpor
 
 Start two mining nodes using different data directories listening on ports 30303 and 30304, respectively:
 
-    geth -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30303 -port 30303
-    geth -mine -minerthreads 4 -datadir /usr/local/share/ethereum/30304 -port 30304
+    geth --mine --minerthreads 4 --datadir /usr/local/share/ethereum/30303 --port 30303
+    geth --mine --minerthreads 4 --datadir /usr/local/share/ethereum/30304 --port 30304
     
 Start an rpc client on port 8000:
 
-    geth -rpc true -rpcport 8000
+    geth --rpc true --rpcport 8000 --rpccorsdomain '"*"'
 
 Start a client with a private network id and connect to specific peers using [enode urls](https://github.com/ethereum/wiki/wiki/enode-url-format):
 
@@ -119,9 +132,9 @@ In the datadir, delete the blockchain directory.  For an example above:
 The lines below are meant only for test network and safe environments for non-interactive scripted use.
 
 ```
-geth -datadir /tmp/eth/42 -logfile /dev/null -password <(echo -n notsosecret) account new 
-geth -datadir /tmp/eth/42 -logfile /dev/null -port 30342  js <(echo 'console.log(admin.nodeInfo().NodeUrl)') > enode
-geth -datadir /tmp/eth/42 -logfile /tmp/eth/42.log -port 30342 -password <(echo -n notsosecret) -unlock primary -minerthreads 4 -mine
+geth --datadir /tmp/eth/42 --password <(echo -n notsosecret) account new 2>> /tmp/eth/42.log
+geth --datadir /tmp/eth/42 --port 30342  js <(echo 'console.log(admin.nodeInfo().NodeUrl)') > enode 2>> /tmp/eth/42.log
+geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlock primary --minerthreads 4 --mine 2>> /tmp/eth/42.log
 ```
 
 ## GUI Client 
@@ -132,29 +145,32 @@ The output of `mist help`. Please refer to the client for uptodate info.
 mist [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.0
+   0.9.19
 
 COMMANDS:
    help Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --asset_path "$GOPATH/src/.../mist/assets"      Absolute path to GUI assets directory
-   --bootnodes                                     Space-separated enode URLs for discovery bootstrap
-   --datadir "$HOME/Library/Ethereum"              Data directory to be used
-   --port "30303"                                  Network listening port
-   --logfile                                       Send log output to a file
-   --loglevel "3"                                  0-5 (silent, error, warn, info, debug, debug detail)
-   --maxpeers "16"                                 Maximum number of network peers
-   --minerthreads "8"                              Number of miner threads
-   --nat "any"                                     Port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-   --nodekey                                       P2P node key file
-   --rpcaddr "127.0.0.1"                           Listening address for the JSON-RPC server
-   --rpcport "8545"                                Port on which the JSON-RPC server should listen
-   --jspath "."                                    JS library path to be used with console and js subcommands
-   --protocolversion "59"                          ETH protocol version
-   --networkid "0"                                 Network Id
-   --help, -h                                      Show help
-   --version, -v                                   Print version 
+   --asset_path "$GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
+   --rpccorsdomain "http://localhost"                                                                   Domain on which to send Access-Control-Allow-Origin header
+   --bootnodes                                                                                          Space-separated enode URLs for p2p discovery bootstrap
+   --datadir "$HOME/Library/Ethereum"                                                             Data directory to be used
+   --port "30303"                                                                                       Network listening port
+   --logfile                                                                                            Send log output to a file
+   --verbosity "3"                                                                                      Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
+   --maxpeers "25"                                                                                      Maximum number of network peers (network disabled if set to 0)
+   --maxpendpeers "0"                                                                                   Maximum number of pending connection attempts (defaults used if set to 0)
+   --minerthreads "8"                                                                                   Number of miner threads
+   --nat "any"                                                                                          NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --nodekey                                                                                            P2P node key file
+   --rpcaddr "127.0.0.1"                                                                                Listening address for the JSON-RPC server
+   --rpcport "8545"                                                                                     Port on which the JSON-RPC server should listen
+   --jspath "."                                                                                         JS library path to be used with console and js subcommands
+   --protocolversion "60"                                                                               ETH protocol version (integer)
+   --blockchainversion "2"                                                                              Blockchain version (integer)
+   --networkid "0"                                                                                      Network Id (integer)
+   --help, -h                                                                                           show help
+   --version, -v                                                                                        print the version
 
 ```
 
