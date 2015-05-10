@@ -3,9 +3,9 @@
 * [GPU mining](#gpumining)
 * [Resources](#resources)
 
-_**NOTE:** Ensure your blockchain is fully synchronised with the main chain before starting to mine, otherwise you will not be mining on the main chain._
-
 # Mining with Geth
+
+_**NOTE:** Ensure your blockchain is fully synchronised with the main chain before starting to mine, otherwise you will not be mining on the main chain._
 
 When you start up your ethereum node with `geth` it is not mining by default. To start it in mining mode, you use the `-mine` [command line option](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). The `-minerthreads` parameter can be used to set the number parallel mining threads (defaulting to the total number of processor cores). 
 
