@@ -1,18 +1,20 @@
+# JavaScript Console
+
 The `ethereum CLI` executable `geth` has a JavaScript console, which can be started with the `console` subcommand:
 
     $ geth console
 
 If you need log information, start with:
 
-    $ geth -logfile /tmp/eth.log -loglevel 5 console 2>> /tmp/eth.glog
+    $ geth --verbosity 5 console 2>> /tmp/eth.log
 
 Otherwise mute your logs, so that it does not pollute your console:
 
-    $ geth -logfile /dev/null console 2>> /dev/null
+    $ geth console 2>> /dev/null
 
 or 
 
-    $ geth -loglevel 0 console
+    $ geth --verbosity 0 console
 
 
 It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
@@ -30,9 +32,9 @@ The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) 
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
-## Console API
+# JavaScript Console API
 
-Ethereum's Javascript console exposes admin functionality and the full [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API) plus a few additional calls.
+Ethereum's Javascript console exposes admin functionality and the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the admin API.
 
 * [eth](#eth)
   * [pendingTransactions](#ethpendingtransactions)
