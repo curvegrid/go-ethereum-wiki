@@ -37,6 +37,7 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
 Ethereum's Javascript console exposes admin functionality and the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the admin API.
 
 * [eth](#eth)
+  * [getBalance](#ethgetbalance)
   * [pendingTransactions](#ethpendingtransactions)
   * [resend](#ethresend)
 * [admin](#admin)
@@ -80,6 +81,20 @@ Ethereum's Javascript console exposes admin functionality and the full [web3 Jav
 
 #### eth
 In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://github.com/ethereum/web3.js) a few additional calls are exposed.
+
+***
+
+#### eth.getBalance
+
+    eth.getBalance(address)
+
+Returns the balance for the specified address.
+
+##### Example
+
+```javascript
+web3.fromWei(eth.getBalance(eth.coinbase), "ether")
+```
 
 ***
 
