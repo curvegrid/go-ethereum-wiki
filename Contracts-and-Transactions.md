@@ -1,5 +1,7 @@
 THIS WIKI IS BEING EDITED AND REVIEWED NOW. PLEASE DO NOT RELY ON IT.
 
+# Introduction
+
 # Account types and transactions
 
 There are two types of accounts in Ethereum state:
