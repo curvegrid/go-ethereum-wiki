@@ -6,9 +6,9 @@ For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ether
 
 ```shell
 sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:ethereum/ethereum-qt
-sudo add-apt-repository ppa:ethereum/ethereum
-sudo add-apt-repository ppa:ethereum/ethereum-dev
+sudo add-apt-repository -y ppa:ethereum/ethereum-qt
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo add-apt-repository -y ppa:ethereum/ethereum-dev
 sudo apt-get update
 sudo apt-get install ethereum
 ```
