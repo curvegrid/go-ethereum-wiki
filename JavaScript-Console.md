@@ -37,10 +37,8 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
 Ethereum's Javascript console exposes admin functionality and the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the admin API.
 
 * [eth](#eth)
-  * [getBalance](#ethgetbalance)
   * [pendingTransactions](#ethpendingtransactions)
   * [resend](#ethresend)
-  * [sendTransaction](#ethsendtransaction)
 * [admin](#admin)
   * [verbosity](#adminverbosity)
   * [progress](#adminprogress)
@@ -85,20 +83,6 @@ In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://gith
 
 ***
 
-#### eth.getBalance
-
-    eth.getBalance(address)
-
-Returns the balance for the specified address.
-
-##### Example
-
-```javascript
-web3.fromWei(eth.getBalance(eth.coinbase), "ether")
-```
-
-***
-
 #### eth.pendingTransactions
 
     eth.pendingTransactions()
@@ -119,20 +103,6 @@ Resends the given transaction returned by `pendingTransactions()` and allows you
 eth.sendTransaction({from: eth.accounts[0], to: "...", gasPrice: "1000"})
 var tx = eth.pendingTransactions()[0]
 eth.resend(tx, web3.toWei(10, "szabo")
-```
-
-***
-
-#### eth.sendTransaction
-
-    eth.sendTransaction(trans)
-
-##### Example
-
-Send 0.5 ether from primary address. Use default gas and gas price.
-
-```javascript
-eth.sendTransaction({from: eth.coinbase, to: "0xXXXX", value:web3.toWei(0.5, "ether")})
 ```
 
 ***
