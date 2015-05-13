@@ -226,7 +226,7 @@ admin.contractInfo.registerUrl(primaryAccount, hash, url)
 
 ```js
 var Multiply7 = eth.contract(contract.info.abiDefinition);
-var multiply7 = new Multiply7(address);
+var myMultiply7 = Multiply7.at(address);
 ```
 
 Now all the function calls specified in the abi are made available on the contract instance. You can just call those methods on the contract instance and chain `sendTransaction({from: address})` or `call()` to it. The difference between the two is that `call` performs a "dry run" locally, on your computer, while `sendTransaction` would actually submit your transaction for inclusion in the block chain and the results of its execution will eventually become part of the global consensus. In other words, use `call`, if you are interested only in the return value and use `sendTransaction` if you only care about "side effects" on the state of the contract.
@@ -234,7 +234,7 @@ Now all the function calls specified in the abi are made available on the contra
 In the example above, there are no side effects, therefore `sendTransaction` only burns gas and increases the entropy of the universe. All "useful" functionality is exposed by `call`:
 
 ```js
-multiply7.multiply.call(6)
+myMultiply7.multiply.call(6)
 42
 ```
 
@@ -305,13 +305,13 @@ var info = admin.contractInfo.get(address)
 var abiDef = info.abiDefinition
 // instantiate a contract for transactions
 var Multiply7 = eth.contract(abiDef);
-var multiply7 = new Multiply7();
+var myMultiply7 = Multiply7.at(address);
 ```
 
 And now try to send an actual transaction:
 
 ```js
-> multiply7.multiply.sendTransaction(6)
+> myMultiply7.multiply.sendTransaction(6)
 NatSpec: Will multiply 6 by 7. 
 Confirm? [Y/N] y
 >
@@ -356,11 +356,11 @@ code = eth.getCode(contractaddress);
 
 abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
 Multiply7 = eth.contract(abiDef);
-multiply7 = new Multiply7(contractaddress);
+myMultiply7 = Multiply7.at(contractaddress);
 
-fortytwo = multiply7.multiply.call(6);
-console.log("multiply7.multiply.call(6) => "+fortytwo);
-multiply7.multiply.sendTransaction(6, {from: primary})
+fortytwo = myMultiply7.multiply.call(6);
+console.log("myMultiply7.multiply.call(6) => "+fortytwo);
+myMultiply7.multiply.sendTransaction(6, {from: primary})
 
 admin.miner.start();
 admin.debug.waitForBlocks(eth.blockNumber+1);
@@ -380,7 +380,7 @@ info = admin.contractInfo.get(contractaddress);
 admin.contractInfo.start();
 abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
 Multiply7 = eth.contract(abiDef);
-multiply7 = new Multiply7(contractaddress);
-fortytwo = multiply7.multiply.sendTransaction(6, { from: primary });
+myMultiply7 = Multiply7.at(contractaddress);
+fortytwo = myMultiply7.multiply.sendTransaction(6, { from: primary });
 
 ```
