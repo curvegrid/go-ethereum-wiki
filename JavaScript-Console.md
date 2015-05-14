@@ -198,7 +198,7 @@ an array of objects with information about connected peers.
 
     admin.unlock(address, password, timeout)
 
-Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it.
+Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it. If timeout isn't specified a default of 300 seconds is used.
 
 ##### Returns
 
