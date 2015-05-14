@@ -20,6 +20,8 @@ To check how many peers the client is connected to in the interactive console, c
 }
 ```
 
+The default is 16 peers, but this can be changed on startup with an extra command-line option: `--maxpeers "25"`
+
 To get some more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object:
 ```
 > admin.peers()
