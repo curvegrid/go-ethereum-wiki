@@ -94,5 +94,4 @@ Using a graphic card processor chip for mining.
 * https://blog.ethereum.org/2014/07/05/stake/
 * https://blog.ethereum.org/2014/10/03/slasher-ghost-developments-proof-stake/
 * https://blog.ethereum.org/2014/06/19/mining/
-* https://github.com/ethereum/wiki/wiki/Dagger-Hashimoto
 * https://github.com/ethereum/wiki/wiki/Ethash
