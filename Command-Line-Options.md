@@ -44,11 +44,11 @@ GLOBAL OPTIONS:
    --rpc                                        Enable the JSON-RPC server
    --rpcaddr "127.0.0.1"                        Listening address for the JSON-RPC server
    --rpcport "8545"                             Port on which the JSON-RPC server should listen
+   --rpccorsdomain                              Domain on which to send Access-Control-Allow-Origin header
    --shh                                        Enable whisper
    --vmdebug                                    Virtual Machine debug output
    --protocolversion "60"                       ETH protocol version (integer)
    --networkid "0"                              Network Id (integer)
-   --rpccorsdomain                              Domain on which to send Access-Control-Allow-Origin header
    --verbosity "3"                              Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
    --backtrace_at ":0"                          If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
    --logtostderr                                Logs are written to standard error instead of to files.
