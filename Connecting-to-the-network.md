@@ -81,7 +81,11 @@ geth -—networkid="12345" console
 Geth also supports static and trusted nodes if you have certain peers you always want to connect to.
 
 Static nodes are used as pre-configured connections which are always maintained and re-connected on disconnects.
-`static-nodes.json  // Path within <datadir> to search for the static node list`
+```
+static-nodes.json  // Path within <datadir> to search for the static node list
+```
 
 Trusted nodes are used as pre-configured connections which are always allowed to connect, even above the peer limit.
-`trusted-nodes.json // Path within <datadir> to search for the trusted node list`
+```
+trusted-nodes.json // Path within <datadir> to search for the trusted node list
+```
