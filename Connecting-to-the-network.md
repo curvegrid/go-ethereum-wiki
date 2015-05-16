@@ -2,9 +2,9 @@
 
 ## Bootstrapping
 
-By default, Geth will connect to public bootstrap nodes on startup. These public nodes give the client an entry point into the rest of the network and a way to discover additional peers.
+By default, Geth will connect to public bootstrap nodes on startup. These public nodes give the client an entry point into the rest of the network and a way to discover additional peers up to the `maxpeers` limit. The default is 16 peers, but this can be changed on startup with an extra command-line option: `--maxpeers "25"`
 
-To configure the bootnodes on startup, use the `--bootnodes` option and separate the peers by spaces. For example:
+To change the bootnodes on startup, use the `--bootnodes` option and separate the peers by spaces. For example:
 ```
 geth --bootnodes "enode://pubkey1@ip1:port1 enode://pubkey2@ip2:port2 enode://pubkey3@ip3:port3"
 ```
@@ -20,9 +20,7 @@ To check how many peers the client is connected to in the interactive console, c
 }
 ```
 
-The default is 16 peers, but this can be changed on startup with an extra command-line option: `--maxpeers "25"`
-
-To get some more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object:
+To get more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object:
 ```
 > admin.peers()
 [{
