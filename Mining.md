@@ -180,11 +180,16 @@ eethminer -G -M
 tail -f geth.log
 ```
 
-
 `ethminer` communicates with geth on port 8545 (the default RPC port in geth). You can change this by giving the [`--rpcport` option](https://github.com/ethereum/go-ethereum/Command-Line-Options) to `geth`.
 
 If the default for `ethminer` does not work try to specify the OpenCL device with: `--opencl-device 0 `.
+You should see somthing like:
 
+    Benchmarking on platform: { "platform": "NVIDIA CUDA", "device": "GeForce GTX 750 Ti", "version": "OpenCL 1.1 CUDA" }
+
+or 
+
+    Benchmarking on platform: { "platform": "Apple", "device": "Intel(R) Xeon(R) CPU E5-1620 v2 @ 3.70GHz", "version": "OpenCL 1.2 " }
 
 To debug `geth`:
 
