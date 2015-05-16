@@ -215,3 +215,4 @@ ASICs and FPGAs are relatively inefficient and therefore discouraged.
 * https://blog.ethereum.org/2014/06/19/mining/
 * https://github.com/ethereum/wiki/wiki/Ethash
 * [Benchmarking results for GPU mining](https://forum.ethereum.org/discussion/2134/gpu-mining-is-out-come-and-let-us-know-of-your-bench-scores)
+* [historic moment](https://twitter.com/gavofyork/status/586623875577937922)
