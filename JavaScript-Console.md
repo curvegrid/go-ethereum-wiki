@@ -321,13 +321,13 @@ admin.stopRpc()
 
 ### Mining
 
+
+
 #### admin.miner.start
 
     admin.miner.start(threadNumber)
 
-Starts mining on with the given `threadNumber` of parallel threads.
-
-**Note** threadNumber is currently idle until thread safety in ethash is fixed.
+Starts [mining](see https://github.com/ethereum/go-ethereum/wiki/Mining) on with the given `threadNumber` of parallel threads.
 
 ##### Returns
 
@@ -367,7 +367,7 @@ admin.miner.stop()
 
 ##### Returns
 
-`String` Returns the current hash rate in KH/s.
+`String` Returns the current hash rate in H/s.
 
 ***
 
@@ -402,7 +402,7 @@ deactivate NatSpec: when sending a transaction, the user  will be prompted with 
 
      admin.contractInfo.get(address)
 
-this will retrieve the contract info json for a contract on the address
+this will retrieve the [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) for a contract on the address
 
 ##### Returns
 
@@ -420,9 +420,9 @@ returns the contract info object
 
 #### admin.contractInfo.register
 
-    admin.contractInfo.register(primary, contractaddress, contract);
+    admin.contractInfo.register(address, contractaddress, contract, filename);
 
-this will retrieve the contract info json for a contract on the address
+will extract [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) doc from the contract, calculates its hash and registers that content hash to the codehash of the contract on contractaddress. The register transaction is sent from the address in the first parameter.
 
 ##### Returns
 
@@ -439,16 +439,18 @@ source = "contract test {\n" +
 "} ";
 contract = eth.compile.solidity(source);
 contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
-admin.contractInfo.register(primary, contractaddress, contract);
+filename = "/tmp/info.json";
+admin.contractInfo.register(primary, contractaddress, contract, filename);
 ```
 
 ***
 
 #### admin.contractInfo.registerUrl
 
-    admin.contractInfo.registerUrl(codehash, contenthash);
+    admin.contractInfo.registerUrl(address, codehash, contenthash);
 
-this will register a contant hash to the contract' codehash. This will be used to locate contract's info.
+this will register a contant hash to the contract' codehash. This will be used to locate [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
+files. Address in the first parameter will be used to send the transaction. 
 
 ##### Returns
 
