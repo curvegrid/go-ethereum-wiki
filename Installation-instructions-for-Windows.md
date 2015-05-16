@@ -1,6 +1,16 @@
 ## Installing from Chocolatey
 
-_not yet available_
+_**NOTE:** Not yet published. See https://github.com/tgerring/ethereum-chocolatey_
+
+For master branch:
+```
+choco install geth-stable -pre
+```
+
+For develop branch:
+```
+choco install geth-stable -pre
+```
 
 ## Building from source
 
