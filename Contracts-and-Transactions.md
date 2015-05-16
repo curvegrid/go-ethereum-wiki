@@ -319,6 +319,10 @@ Confirm? [Y/N] y
 
 When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored.
 
+# Example script
+
+The example script below demonstrates most features discussed in this tutorial. You can run it with the [JSRE](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) as `geth js script.js 2>>geth.log` 
+
 ```js
 // assume an existing unlocked primary account
 primary = eth.accounts[0];
