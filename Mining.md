@@ -103,6 +103,7 @@ minedBlocks(1000, eth.coinbase);
 
 Mining success depends on the set block difficulty. Block difficulty dynamically adjusts each block in order to regulate the network hashing power to produce a 12 second blocktime. Your chances of finding a block therefore follows from your hashrate relative to difficulty. The time you need to wait you are expected to find a block can be estimated with the following code:
 
+**INCORRECT...CHECKING**
 ```
 etm = eth.getBlock("latest").difficulty/admin.miner.hashrate(); // estimated time in seconds
 Math.floor(etm / 3600.) + "h " + Math.floor((etm % 3600)/60) + "m " +  Math.floor(etm % 60) + "s";
@@ -112,9 +113,16 @@ Math.floor(etm / 3600.) + "h " + Math.floor((etm % 3600)/60) + "m " +  Math.floo
 Given a difficulty of 3 billion, a typical CPU with 800KH/s is expected to find a block every 
 
 ## Mining Rewards
+
 Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value.
 
+
+### Transaction fees
+
+### Uncles
+
 ## Ethash DAG
+
 Ethash uses a **DAG** (directed acyclic graph) for the proof of work algorithm, this is generated for each **epoch**, i.e every 30000 blocks (100 hours). The DAG takes a long time to generate. Since the clients only generate it on demand, you may see a long wait at each epoch transition before the first block of the new epoch is found. However, the DAG only depends on block number, so it CAN and SHOULD be calculated in advance to avoid long wait at each epoch transition. 
 
 ```
@@ -159,6 +167,7 @@ cd cpp-ethereum
 mkdir -p build
 cd build 
 cmake ..
+```
 
 To set up GPU mining you need a coinbase account. It can be an account created locally or remotely. 
 
@@ -189,11 +198,11 @@ gdb --args ethminer -G -M
 ```
 
 
-
+***
 
 ## Hardware
 
-The algorithm is memory hard and in order to fit the DAG into memory, it needs 1-2GB of RAM on each GPU. 
+The algorithm is memory hard and in order to fit the DAG into memory, it needs 1-2GB of RAM on each GPU. If you get ` Error GPU mining. GPU memory fragmentation?` you havent got enough memory.
 
 The GPU miner is implemented in OpenCL, so AMD GPUs will be 'faster' than same-category NVIDIA GPUs.
 
