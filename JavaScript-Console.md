@@ -1,6 +1,8 @@
 # JavaScript Console
 
-The `ethereum CLI` executable `geth` has a JavaScript console, which can be started with the `console` subcommand:
+Ethereum implements a **javascript runtime environment** (JSRE) that can be used in either interactive (console) or non-interactive (script) mode.
+ 
+The `ethereum CLI` executable `geth` has a JavaScript console (a **Read, Evaluate & Print Loop** = REPL exposing the the JSRE), which can be started with the `console` subcommand:
 
     $ geth console
 
@@ -21,7 +23,7 @@ It's also possible to pass files to the JavaScript intepreter. Load and execute 
 
     $ geth js script1.js script2.js
 
-If you want to have the console as well as load scripts, use [loadScript](#loadscript).
+If you want to have the console as well as load scripts, use [loadScript](#loadscript). Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
 
 ## Caveat 
 
@@ -32,9 +34,12 @@ The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) 
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
-# JavaScript Console API
+Note that the other known limitation of Otto (namely the lack of timers) is taken care. Ethereum JSRE implements both `setTimeout` and `setInterval`. In addition to this, the console provides `sleep(seconds)` as well as a "blocktime sleep" method `waitForBlock(blockNumber)`. 
 
-Ethereum's Javascript console exposes admin functionality and the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the admin API.
+Ethereum's Javascript console exposes the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the [admin API](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#javascript-console-api)
+.
+
+# JavaScript Console API
 
 * [eth](#eth)
   * [pendingTransactions](#ethpendingtransactions)
