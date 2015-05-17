@@ -157,33 +157,35 @@ On Windows:
 To mine with `eth`:
 
 ```
-eth -m on -G
+eth -m on -G -a <coinbase> -i -v 8 //
 ```
 
-## GPU mining with ethminer and geth
+## GPU mining with ethminer 
 
 To install `ethminer` from source:
 
 ```
 cd cpp-ethereum
-mkdir -p build
-cd build 
-cmake ..
+cmake .. -DETHASHCL=1 -DGUI=0
+make -j4
+make install
 ```
 
 To set up GPU mining you need a coinbase account. It can be an account created locally or remotely. 
 
+### `ethminer` with `geth`
+
 ```
 geth account new
 geth --mine --rpc 2>> geth.log &
-eethminer -G -M 
+ethminer -G -M // -G for GPU, -M for benchmark
 tail -f geth.log
 ```
 
 `ethminer` communicates with geth on port 8545 (the default RPC port in geth). You can change this by giving the [`--rpcport` option](https://github.com/ethereum/go-ethereum/Command-Line-Options) to `geth`.
 
 If the default for `ethminer` does not work try to specify the OpenCL device with: `--opencl-device 0 `.
-You should see somthing like:
+When running `ethminer` with `-M` (benchmark), you should see something like:
 
     Benchmarking on platform: { "platform": "NVIDIA CUDA", "device": "GeForce GTX 750 Ti", "version": "OpenCL 1.1 CUDA" }
 
@@ -200,10 +202,17 @@ geth --mine --verbosity 6 2>> geth.log
 To debug the miner: 
 
 ```
-make -DCMAKE_BUILD_TYPE=Debug -DETHASHCL=1
+make -DCMAKE_BUILD_TYPE=Debug -DETHASHCL=1 -DGUI=0
 gdb --args ethminer -G -M
 ```
 
+### `ethminer` with `eth`
+
+```
+eth -i -v 8 -j // -j for rpc
+ethminer -G -M // -G for GPU, -M for benchmark
+tail -f geth.log
+```
 
 ***
 
@@ -215,6 +224,17 @@ The GPU miner is implemented in OpenCL, so AMD GPUs will be 'faster' than same-c
 
 ASICs and FPGAs are relatively inefficient and therefore discouraged. 
 
+```
+apt-get install fglrx
+// wget, tar, opencl
+aticonfig --adapter=all --initial
+```
+
+You check your cooling status:
+
+    aticonfig --adapter=0 --od-gettemperature
+
+
 # Further Resources:
 
 * [yates randall mining video](https://www.youtube.com/watch?v=CnKnclkkbKg)
@@ -224,3 +244,5 @@ ASICs and FPGAs are relatively inefficient and therefore discouraged.
 * https://github.com/ethereum/wiki/wiki/Ethash
 * [Benchmarking results for GPU mining](https://forum.ethereum.org/discussion/2134/gpu-mining-is-out-come-and-let-us-know-of-your-bench-scores)
 * [historic moment](https://twitter.com/gavofyork/status/586623875577937922)
+* [live mining statistic](https://etherapps.info/stats/mining)
+* [netstat ethereum network monitor](stats.ethdev.com)
