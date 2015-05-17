@@ -27,7 +27,7 @@ GLOBAL OPTIONS:
    --unlock                                     Unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
    --password                                   Path to password file to use with options and subcommands needing a password
    --bootnodes                                  Space-separated enode URLs for p2p discovery bootstrap
-   --datadir "/Users/tron/Library/Ethereum"     Data directory to be used
+   --datadir "$HOME/Library/Ethereum"     Data directory to be used
    --blockchainversion "2"                      Blockchain version (integer)
    --jspath "."                                 JS library path to be used with console and js subcommands
    --port "30303"                               Network listening port
@@ -137,7 +137,7 @@ geth --datadir /tmp/eth/42 --port 30342  js <(echo 'console.log(admin.nodeInfo()
 geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlock primary --minerthreads 4 --mine 2>> /tmp/eth/42.log
 ```
 
-## GUI Client 
+# GUI Client 
 
 The output of `mist help`. Please refer to the client for uptodate info. 
 
