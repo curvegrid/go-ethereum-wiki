@@ -39,6 +39,7 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [Solidity FAQ - Ethereum forum](https://forum.ethereum.org/discussion/1460/solidity-faq)
 * [The Solidity Programming Language · ethereum/wiki](https://github.com/ethereum/wiki/wiki/The-Solidity-Programming-Language)
 * [Ethereum ÐΞVcon-0: Solidity, Vision and Roadmap - YouTube Video](https://www.youtube.com/watch?v=DIqGDNPO5YM)
+* [Dapps for beginners](https://dappsforbeginners.wordpress.com/)
 * [Tutorial 1](https://forum.ethereum.org/discussion/1634/tutorial-1-your-first-contract/p1)
 * [Tutorial 2](https://forum.ethereum.org/discussion/1635/tutorial-2-rainbow-coin)
 * [Tutorial 3 (JavaScript API for Ethereum)](https://forum.ethereum.org/discussion/1636/tutorial-3-introduction-to-the-javascript-api)
@@ -46,7 +47,9 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [Dapp tutorial by Andreas Olofsson (Eris Industries)](https://www.youtube.com/playlist?list=PL_kFomDrqPoZBu5uxd8OBGColQPYbuz3i)
 * [Eris Solidity resources](https://github.com/eris-ltd/solidity-resources)
 
+
 #### Examples
+* [a dapp listing](https://github.com/ethereum/wiki/wiki/FAQ#where-can-i-find-example-%C3%90apps)
 * [Solidity Contracts on Ethereum - Ether.Fund](https://ether.fund/contracts/solidity)
 * [Ethereum dapp bin](https://github.com/ethereum/dapp-bin/)
 * [Solidity Standard Library](https://github.com/ethereum/wiki/wiki/Solidity-standard-library)
