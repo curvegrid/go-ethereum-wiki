@@ -217,6 +217,7 @@ ASICs and FPGAs are relatively inefficient and therefore discouraged.
 
 # Further Resources:
 
+* [yates randall mining video](https://www.youtube.com/watch?v=CnKnclkkbKg)
 * https://blog.ethereum.org/2014/07/05/stake/
 * https://blog.ethereum.org/2014/10/03/slasher-ghost-developments-proof-stake/
 * https://blog.ethereum.org/2014/06/19/mining/
