@@ -131,7 +131,7 @@ Ethash uses a **DAG** (directed acyclic graph) for the proof of work algorithm, 
 geth makedag <block number> <outputdir>
 ```
 
-For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` for the DAG and is shared between clients. 
+For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` (Mac/Linux) or `~/AppData/Ethash`  (Windows) for the DAG so that it can shared between clients. 
 
 # GPU mining
 
