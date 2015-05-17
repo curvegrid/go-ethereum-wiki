@@ -65,7 +65,26 @@ Non-sensitive bug reports are welcome on github. Please always state the version
 
 ## Community and support
 
-- IRC Freenode: #ethereum
-- [Gitter](https://gitter.im/ethereum/go-ethereum)
+### IRC 
+
+IRC Freenode channels:
+* `#ethereum`: for general discussion
+* `#ethereum-dev`: for development specific questions and discussions
+* `##ethereum`: for offtopic and banter
+* `#dappdevs`: Dapp developers channel
+* `#ethdev`: buildserver etc
+
+[IRC Logs by ZeroGox](https://zerogox.com/bot/log)
+
+### Gitter 
+[Gitter](https://gitter.im/ethereum/go-ethereum)
+
+### Forum
+
 - [Forum](https://forum.ethereum.org/categories/go-implementation)
-- Helpdesk 
+
+### The ZeroGox Bot
+
+[ZeroGox Bot](https://zerogox.com/bot)
+
+### Helpdesk 
