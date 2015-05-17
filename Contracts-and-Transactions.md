@@ -59,7 +59,8 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 
 ### Serpent 
 
-* 
+* [source on github](https://github.com/ethereum/serpent)
+* [serpent language spec](https://github.com/ethereum/wiki/wiki/Serpent)
 
 ## Contract/Dapp development environments
 
