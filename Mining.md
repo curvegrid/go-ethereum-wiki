@@ -236,6 +236,7 @@ You check your cooling status:
 
 # Further Resources:
 
+* [ethereum forum mining FAQ live update](https://forum.ethereum.org/discussion/197/mining-faq-live-updates)
 * [yates randall mining video](https://www.youtube.com/watch?v=CnKnclkkbKg)
 * https://blog.ethereum.org/2014/07/05/stake/
 * https://blog.ethereum.org/2014/10/03/slasher-ghost-developments-proof-stake/
