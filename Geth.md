@@ -87,4 +87,8 @@ IRC Freenode channels:
 
 [ZeroGox Bot](https://zerogox.com/bot)
 
+### Dapp developers' mailing list
+
+https://dapplist.net/
+
 ### Helpdesk 
