@@ -63,6 +63,16 @@ Security issues are best sent to security@ethereum.org or shared in PM with devs
 
 Non-sensitive bug reports are welcome on github. Please always state the version (on master) or commit of your build (if on develop), give as much detail as possible about the situation and the anomaly that occurred. Provide logs or stacktrace if you can.
 
+## Contributors
+
+Ethereum is joint work of ETHDEV and the community.
+
+Name or blame = list of contributors:
+* [go-ethereum](https://github.com/ethereum/go-ethereum/graphs/contributors)
+* [cpp-ethereum](https://github.com/ethereum/cpp-ethereum/graphs/contributors)
+* [web3.js](https://github.com/ethereum/web3.js/graphs/contributors)
+* [ethash](https://github.com/ethereum/ethash/graphs/contributors)
+
 
 ## Community and support
 
