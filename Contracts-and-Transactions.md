@@ -1,5 +1,3 @@
-THIS WIKI IS BEING EDITED AND REVIEWED NOW. PLEASE DO NOT RELY ON IT.
-
 # Account types and transactions
 
 There are two types of accounts in Ethereum state:
@@ -8,7 +6,7 @@ There are two types of accounts in Ethereum state:
 
 Both types of accounts have an ether balance.
 
-Transactions can be fired from from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on ethereum block chain is set in motion by transactions fired from externally controlled accounts.
+Transactions can be fired from from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on the ethereum block chain is set in motion by transactions fired from externally controlled accounts.
 
 The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
@@ -26,15 +24,55 @@ Also, be advised that the amount debited from the source account will be slightl
 
 Contracts can receive transfers just like externally controlled accounts, but they can also receive more complicated transactions that actually run (parts of) their code and update their state. In order to understand those transactions, a rudimentary understanding of contracts is required.
 
+# Writing a contract
+
+Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into byte code to be uploaded on the blockchain.
+
+Note that other languages also exist, notably [serpent](https://github.com/ethereum/wiki/wiki/Serpent) and [LLL](https://github.com/ethereum/cpp-ethereum/wiki/LLL). Legacy Mutan (an early c-like language) is no longer maintained.
+
+## Language Resources 
+
+### Solidity
+
+#### Docs and tutorials 
+* [Ethereum wiki tutorial](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial)
+* [Solidity FAQ - Ethereum forum](https://forum.ethereum.org/discussion/1460/solidity-faq)
+* [The Solidity Programming Language · ethereum/wiki](https://github.com/ethereum/wiki/wiki/The-Solidity-Programming-Language)
+* [Ethereum ÐΞVcon-0: Solidity, Vision and Roadmap - YouTube Video](https://www.youtube.com/watch?v=DIqGDNPO5YM)
+* [Tutorial 1](https://forum.ethereum.org/discussion/1634/tutorial-1-your-first-contract/p1)
+* [Tutorial 2](https://forum.ethereum.org/discussion/1635/tutorial-2-rainbow-coin)
+* [Tutorial 3 (JavaScript API for Ethereum)](https://forum.ethereum.org/discussion/1636/tutorial-3-introduction-to-the-javascript-api)
+* [Solidity tutorial 1 by Eris Industries](https://eng.erisindustries.com/tutorials/2015/03/11/solidity-1/]
+* [Dapp tutorial by Andreas Olofsson (Eris Industries)](https://www.youtube.com/playlist?list=PL_kFomDrqPoZBu5uxd8OBGColQPYbuz3i)
+* [Eris Solidity resources](https://github.com/eris-ltd/solidity-resources)
+
+#### Examples
+* [Solidity Contracts on Ethereum - Ether.Fund](https://ether.fund/contracts/solidity)
+* [Ethereum dapp bin](https://github.com/ethereum/dapp-bin/)
+* [Solidity Standard Library](https://github.com/ethereum/wiki/wiki/Solidity-standard-library)
+* [Whisper chat Dapp](https://github.com/ethereum/meteor-dapp-whisper-chat-client/tree/master/dist/deploy) written in meteor
+* [order statistic tree](https://github.com/drcode/ethereum-order-statistic-tree) by Conrad Bars
+
+#### Compilers
+
+* [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum)
+
+### Serpent 
+
+* 
+
+## Contract/Dapp development environments
+
+* [Mix standalone IDE](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE) or 
+* in-browser [Cosmo](http://meteor-dapp-cosmo.meteor.com) that connects to `geth` via RPC.
+
 # Compiling a contract
 
-Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into this byte code for the purpose of being uploaded into the blockchain.
+Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into byte code to be uploaded on the blockchain.
 
-For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix]() or [AlethZero](). 
+For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/tree/develop/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE). 
 
-Note that other languages also exist, notably [serpent]() and [lll]().
-
-If you start up your `geth` node, you can check if this option is immediately available. This is what happens, if it is not:
+If you start up your `geth` node, you can check if the solidity compiler is available. This is what happens, if it is not:
 
 ```js
 eth.getCompilers()
@@ -44,7 +82,7 @@ error: eth_compileSolidity method not implemented
 Invalid JSON RPC response
 ```
 
-After you found a way to install `solc`, you make sure it's in the path, if [`eth.getCompilers()`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetcompilers) still does not find it (returns an empty array), you can set a custom path to the `sol` executable on the command line using th `solc` flag.
+After you found a way to install `solc`, you make sure it's in the path. If [`eth.getCompilers()`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetcompilers) still does not find it (returns an empty array), you can set a custom path to the `sol` executable on the command line using th `solc` flag.
 
 ```
 geth --datadir ~/frontier/00 --solc /usr/local/bin/solc --natspec
@@ -67,9 +105,6 @@ Let us take this simple contract source:
 ```
 
 This contract offers a unary method: called with a positive integer `a`, it returns `a * 7`. 
-Note that this document is not about writing interesting contracts or about the features of solidity.
-
-For more information on contract language, go through [solidity tutorial](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial), browse the contracts in our [dapp-bin](https://github.com/ethereum/dapp-bin/wiki), see other solidity and dapp resources. 
 
 You are ready to compile solidity code in the `geth` JS console using [`eth.compile.solidity`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity):
 
@@ -282,7 +317,7 @@ source = "contract test {
    }
 }"
 contract = eth.compile.solidity(source)
-contentHash = admin.contractInfo.register(contract, "~/dapps/shared/contracts/test/info.json")
+contentHash = admin.contractInfo.register(primary, contractaddress, contract, "~/dapps/shared/contracts/test/info.json")
 // put it up on your favourite site:
 admin.contractInfo.registerUrl(contentHash, "http://dapphub.com/test/info.json")
 ```
@@ -318,6 +353,19 @@ Confirm? [Y/N] y
 ```
 
 When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored.
+
+If the transaction is not picked up, we can see it with:
+
+```js
+eth.pendingTransactions()
+```
+
+if you identify the index of your rejected transaction, you can resend it with modified gas limit and gas price (both optional parameters):
+
+```js
+tx = eth.pendingTransactions()[1]
+eth.resend(tx, newGasLimit, newGasPrice)
+```
 
 # Example script
 
