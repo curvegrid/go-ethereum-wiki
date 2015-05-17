@@ -2,6 +2,10 @@
 
 Ethereum implements a **javascript runtime environment** (JSRE) that can be used in either interactive (console) or non-interactive (script) mode.
  
+Ethereum's Javascript console exposes the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the [admin API](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#javascript-console-api).
+
+## Interactive use: the JSRE REPL  Console
+
 The `ethereum CLI` executable `geth` has a JavaScript console (a **Read, Evaluate & Print Loop** = REPL exposing the the JSRE), which can be started with the `console` subcommand:
 
     $ geth console
@@ -18,28 +22,27 @@ or
 
     $ geth --verbosity 0 console
 
+## Non-interactive use: JSRE script mode
 
-It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the `js` subcommand: 
+It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the [`js` subcommand](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options): 
 
     $ geth js script1.js script2.js
 
 If you want to have the console as well as load scripts, use [loadScript](#loadscript). Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
 
 You can exit the console cleanly by typing `exit` or simply with `CTRL-C`.
+Use the `--jspath <path/to/my/js/root>` to set a libdir for your js scripts. Parameters to `loadScript()` with no absolute path will be understood relative to this directory.
 
 ## Caveat 
 
-The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) which has some limitations:
+The go-ethereum JSRE uses the [Otto JS VM](https://github.com/robertkrimen/otto) which has some limitations:
 
 * "use strict" will parse, but does nothing.
 * The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
 
-Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
-
 Note that the other known limitation of Otto (namely the lack of timers) is taken care. Ethereum JSRE implements both `setTimeout` and `setInterval`. In addition to this, the console provides `sleep(seconds)` as well as a "blocktime sleep" method `waitForBlock(blockNumber)`. 
 
-Ethereum's Javascript console exposes the full [web3 JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API) and the [admin API](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#javascript-console-api)
-.
+Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
 # JavaScript Console API
 
@@ -115,7 +118,7 @@ eth.resend(tx, web3.toWei(10, "szabo")
 ***
 
 #### admin
-The `admin` exposes the methods to administrate the node.
+The `admin` exposes the methods to manage the node.
 
 ***
 
@@ -156,7 +159,7 @@ information on the node.
 { Name: 'Ethereum(G)/v0.9.0/darwin/go1.4.1', NodeUrl: 'enode://c32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e@89.42.0.12:30303', NodeID: '0xc32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e', IP: '89.42.0.12', DiscPort: 30303, TCPPort: 30303, Td: '0', ListenAddr: '[89.42.0.12:30303' }
 ```
 
-To connect to a node, use the [enode-format](https://github.com/ethereum/wiki/wiki/enode-url-format) nodeUrl as an argument to [suggestPeer](#adminsuggestpeer) or with CLI param `bootnodes`.
+To connect to a node, use the [enode-format](https://github.com/ethereum/wiki/wiki/enode-url-format) nodeUrl as an argument to [addPeer](#adminaddpeer) or with CLI param `bootnodes`.
 
 ***
 
