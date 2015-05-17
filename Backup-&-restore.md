@@ -8,4 +8,4 @@ Accounts are stored in the `keystore` subdirectory. The contents of this directo
 
 To configure the location of Geth's files, the `--datadir` parameter can be specified. See [CLI Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options) for more details.
 
-_**Note:** The mining DAG is stored at ~/.ethash so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
+_**Note:** The mining DAG is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
