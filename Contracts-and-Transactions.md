@@ -226,7 +226,7 @@ The idea is that
 * anyone can find out what the `url` is only knowing the contracts address
 
 These requirements are achieved very simply by using a 2 step blockchain registry. The first step registers the contract code (hash) with a content hash in a contract called `HashReg`. The second step registers a url with the content hash in the `UrlHint` contract. 
-These [simple registry contracts]() will be part of the frontier proposition.
+These [simple registry contracts](https://github.com/ethereum/go-ethereum/blob/develop/common/resolver/contracts.go) will be part of the frontier proposition.
 
 By using this scheme, it is sufficient to know a contract's address to look up the url and fetch the actual contract metadata info bundle. Read on to learn why this is good.
 
@@ -317,6 +317,7 @@ source = "contract test {
    }
 }"
 contract = eth.compile.solidity(source)
+contractaddress = eth.sendTransaction{from: primary, data: contract.code})
 contentHash = admin.contractInfo.register(primary, contractaddress, contract, "~/dapps/shared/contracts/test/info.json")
 // put it up on your favourite site:
 admin.contractInfo.registerUrl(contentHash, "http://dapphub.com/test/info.json")
@@ -352,12 +353,18 @@ Confirm? [Y/N] y
 >
 ```
 
-When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored.
+When this transaction gets included in a block, somewhere on a lucky miner's computer, 6 will get multiplied by 7, with the result ignored. Mission accomplished.
 
 If the transaction is not picked up, we can see it with:
 
 ```js
 eth.pendingTransactions()
+```
+
+This accumulates all the transactions sent, even the ones that were rejected and are not included in the current mined block (trans state). These latter can be shown by:
+
+```js
+eth.getBlock("pending", true).transactions()
 ```
 
 if you identify the index of your rejected transaction, you can resend it with modified gas limit and gas price (both optional parameters):
