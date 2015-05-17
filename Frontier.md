@@ -26,7 +26,7 @@ Apart from `geth` the go cli, the Frontier release contains the following ingred
 
 * `web3.js`  library implementing the [JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 * `solc` a standalone solidity compiler. You only need this if you want to use your Dapp or [console to compile solidity code](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#compiling-a-contract).
-* `ethminer` a standalone miner for openCL GPU mining](https://github.com/ethereum/go-ethereum/wiki/Mining#gpu-mining)
+* `ethminer` a standalone miner for openCL [GPU mining](https://github.com/ethereum/go-ethereum/wiki/Mining#gpu-mining)
 * `netstat`  [network monitoring GUI](https://github.com/ethereum/wiki/wiki/Network-Status) is a `node.js` in-browser Dapp.
 
 Resources: 
