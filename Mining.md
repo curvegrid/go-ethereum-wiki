@@ -1,7 +1,4 @@
 * [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway) _(main wiki)_
-* [Mining with geth](#miningwithgeth)
-* [GPU mining](#gpumining)
-* [Resources](#resources)
 
 # Mining with Geth
 
@@ -82,7 +79,7 @@ Passphrase:
 true
 ```
 
-You can check which blocks are mined by a particlar miner (address) with the following code snippet on the console:
+You can check which blocks are mined by a particular miner (address) with the following code snippet on the console:
 
 ```
 function minedBlocks(lastn, addr) {
@@ -113,6 +110,8 @@ Math.floor(etm / 3600.) + "h " + Math.floor((etm % 3600)/60) + "m " +  Math.floo
 ```
 
 Given a difficulty of 3 billion, a typical CPU with 800KH/s is expected to find a block every 
+
+Note that it will happen often that you find a block yet it never makes it to the canonical chain. This means when you locally include your mined block, the current state will show the mining reward credited to your account, however, after a while, the better chain is discovered and we switch to a chain in which your block is not included and therefore no mining reward is credited. Therefore it is quite possible that as a miner monitoring their coinbase balance will find that it may fluctuate quite a bit. 
 
 ## Mining Rewards
 
