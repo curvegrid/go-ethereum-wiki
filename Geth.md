@@ -63,7 +63,22 @@ Security issues are best sent to security@ethereum.org or shared in PM with devs
 
 Non-sensitive bug reports are welcome on github. Please always state the version (on master) or commit of your build (if on develop), give as much detail as possible about the situation and the anomaly that occurred. Provide logs or stacktrace if you can.
 
+
 ## Community and support
+
+### Ethereum on social media
+- Main site: https://www.ethereum.org
+- ETHDEV: https://ethdev.com
+- Forums: https://forum.ethereum.org
+- Github: https://github.com/ethereum
+- Blog: https://blog.ethereum.org
+- Wiki: http://wiki.ethereum.org
+- Twitter: http://twitter.com/ethereumproject
+- Reddit: http://reddit.com/r/ethereum
+- Meetups: http://ethereum.meetup.com
+- Facebook: https://www.facebook.com/ethereumproject
+- Youtube: http://www.youtube.com/ethereumproject
+- Google+: http://google.com/+EthereumOrgOfficial
 
 ### IRC 
 
