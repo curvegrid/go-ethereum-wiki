@@ -25,6 +25,8 @@ It's also possible to pass files to the JavaScript intepreter. Load and execute 
 
 If you want to have the console as well as load scripts, use [loadScript](#loadscript). Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
 
+You can exit the console cleanly by typing `exit` or simply with `CTRL-C`.
+
 ## Caveat 
 
 The go-ethereum CLI uses the [Otto JS VM](https://github.com/robertkrimen/otto) which has some limitations:
