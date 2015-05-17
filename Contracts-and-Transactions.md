@@ -10,7 +10,7 @@ Transactions can be fired from from both types of accounts, though contracts onl
 
 The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
-## Ether transfer
+# Ether transfer
 
 Assuming the account you are using as sender has sufficient funds, sending ether couldn't be easier. Which is also why you should probably be careful with this! You have been warned.
 
