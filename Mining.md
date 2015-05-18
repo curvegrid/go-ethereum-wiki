@@ -134,15 +134,43 @@ For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` 
 
 # GPU mining
 
+***
+
+## Hardware
+
+The algorithm is memory hard and in order to fit the DAG into memory, it needs 1-2GB of RAM on each GPU. If you get ` Error GPU mining. GPU memory fragmentation?` you havent got enough memory.
+
+The GPU miner is implemented in OpenCL, so AMD GPUs will be 'faster' than same-category NVIDIA GPUs.
+`fglrx` a `cudacl` are your friends.
+
+
+ASICs and FPGAs are relatively inefficient and therefore discouraged. 
+
+Getting openCL for your chipset and platform, try:
+* [AMD SDK openCL](http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk)
+* [NVIDIA CUDA openCL](https://developer.nvidia.com/cuda-downloads)
+
+```
+apt-get install fglrx
+// wget, tar, opencl
+aticonfig --adapter=all --initial
+```
+
+You check your cooling status:
+
+    aticonfig --adapter=0 --od-gettemperature
+
+## Mining Software
+
 Currently `geth` only supports a CPU miner natively. We are working on a GPU miner, but it may not be available for the Frontier release. Geth however can be used in conjunction with `ethminer`, using the standalone miner as workers and `geth` as scheduler communicating via [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
 
 The [C++ implementation of Ethereum](https://github.com/ethereum/cpp-ethereum/) (not officially released) however has a GPU miner. It can be used from `eth`, `AlethZero` (GUI) and `ethMiner` (the standalone miner). 
 
-You can install this via ppa on linux, brew tap on MacOS or from source. 
+[You can install this](https://github.com/ethereum/cpp-ethereum/wiki/Installing-clients) via ppa on linux, brew tap on MacOS or from source. 
 
 On MacOS:
 ```
-brew install cpp-ethereum --with-gpu-mining --devel
+brew install cpp-ethereum --with-gpu-mining --devel --build-from-source
 ```
 
 On Linux:
@@ -152,14 +180,12 @@ apt-get install cpp-ethereum
 
 On Windows: 
 
-
+## GPU mining with ethminer 
 To mine with `eth`:
 
 ```
 eth -m on -G -a <coinbase> -i -v 8 //
 ```
-
-## GPU mining with ethminer 
 
 To install `ethminer` from source:
 
@@ -172,7 +198,7 @@ make install
 
 To set up GPU mining you need a coinbase account. It can be an account created locally or remotely. 
 
-### `ethminer` with `geth`
+### Using ethminer with geth
 
 ```
 geth account new
@@ -205,7 +231,9 @@ make -DCMAKE_BUILD_TYPE=Debug -DETHASHCL=1 -DGUI=0
 gdb --args ethminer -G -M
 ```
 
-### `ethminer` with `eth`
+### ethminer and eth
+
+`ethminer` can be used in conjunction with `eth` via rpc
 
 ```
 eth -i -v 8 -j // -j for rpc
@@ -213,26 +241,11 @@ ethminer -G -M // -G for GPU, -M for benchmark
 tail -f geth.log
 ```
 
-***
-
-## Hardware
-
-The algorithm is memory hard and in order to fit the DAG into memory, it needs 1-2GB of RAM on each GPU. If you get ` Error GPU mining. GPU memory fragmentation?` you havent got enough memory.
-
-The GPU miner is implemented in OpenCL, so AMD GPUs will be 'faster' than same-category NVIDIA GPUs.
-
-ASICs and FPGAs are relatively inefficient and therefore discouraged. 
+or you can use `eth` to GPU mine by itself:
 
 ```
-apt-get install fglrx
-// wget, tar, opencl
-aticonfig --adapter=all --initial
+eth -m on -G -a <coinbase> -i -v 8 //
 ```
-
-You check your cooling status:
-
-    aticonfig --adapter=0 --od-gettemperature
-
 
 # Further Resources:
 
