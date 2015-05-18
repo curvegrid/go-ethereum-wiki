@@ -150,10 +150,21 @@ Getting openCL for your chipset and platform, try:
 * [AMD SDK openCL](http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk)
 * [NVIDIA CUDA openCL](https://developer.nvidia.com/cuda-downloads)
 
+## On Ubuntu
 ```
 apt-get install fglrx
 // wget, tar, opencl
 aticonfig --adapter=all --initial
+```
+
+## On MacOSx
+
+```
+wget http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.29_mac.pkg
+sudo installer -pkg ~/Desktop/cuda_7.0.29_mac.pkg -target /
+brew update
+brew tap ethereum/ethereum
+brew reinstall cpp-ethereum --with-gpu-mining --devel --headless --build-from-source
 ```
 
 You check your cooling status:
@@ -202,14 +213,17 @@ To set up GPU mining you need a coinbase account. It can be an account created l
 
 ```
 geth account new
-geth --mine --rpc 2>> geth.log &
-ethminer -G -M // -G for GPU, -M for benchmark
+geth --rpccorsdomain localhost 2>> geth.log &
+ethminer -G  // -G for GPU, -M for benchmark
 tail -f geth.log
 ```
 
 `ethminer` communicates with geth on port 8545 (the default RPC port in geth). You can change this by giving the [`--rpcport` option](https://github.com/ethereum/go-ethereum/Command-Line-Options) to `geth`.
+Ethminer will find get on any port. Note that you need to set the CORS header with `--rpccorsdomain localhost`. 
 
-If the default for `ethminer` does not work try to specify the OpenCL device with: `--opencl-device 0 `.
+Also note that you do **not** need to give `geth` the `--mine` option or start the miner in the console unless you want to do CPU mining on TOP of GPU mining. 
+
+If the default for `ethminer` does not work try to specify the OpenCL device with: `--opencl-device X` where X is 0, 1, 2, etc.
 When running `ethminer` with `-M` (benchmark), you should see something like:
 
     Benchmarking on platform: { "platform": "NVIDIA CUDA", "device": "GeForce GTX 750 Ti", "version": "OpenCL 1.1 CUDA" }
@@ -221,7 +235,7 @@ or
 To debug `geth`:
 
 ```
-geth --mine --verbosity 6 2>> geth.log
+geth  --rpccorsdomain "localhost" --verbosity 6 2>> geth.log
 ```
 
 To debug the miner: 
