@@ -202,7 +202,7 @@ To install `ethminer` from source:
 
 ```
 cd cpp-ethereum
-cmake .. -DETHASHCL=1 -DGUI=0
+cmake -DETHASHCL=1 -DGUI=0
 make -j4
 make install
 ```
