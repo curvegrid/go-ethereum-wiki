@@ -2,7 +2,7 @@
 
 ## Bootstrapping
 
-By default, Geth will connect to public bootstrap nodes on startup. These public nodes give the client an entry point into the rest of the network and a way to discover additional peers up to the `maxpeers` limit. The default is 16 peers, but this can be changed on startup with an extra command-line option: `--maxpeers "25"`
+By default, Geth will connect to public bootstrap nodes on startup. These public nodes give the client an entry point into the rest of the network and a way to discover additional peers up to the `maxpeers` limit. The default is 25 peers.
 
 To change the bootnodes on startup, use the `--bootnodes` option and separate the peers by spaces. For example:
 ```
