@@ -5,7 +5,7 @@ Now that you’ve mastered the basics of Ethereum, let’s move into your first 
 ```js
 contract greeter {
 	function greet(bytes32 input) returns (bytes32) {
-		if (input == "") { return "Hello, World"; }
+		if (input == "") {	return "Hello, World"; }
 		return input; 
 	}
 }
@@ -15,59 +15,91 @@ As you can see, the Greeter is an intelligent digital entity that lives on the b
 
 Before you are able to upload it to the network, you need two things: the compiled code, and the Application Binary Interface, which is a sort of user guide on how to interact with the contract.
 
-The first you can get by using a compiler. While there are better tools being built right now, we suggest you use this [online solidity compiler](https://chriseth.github.io/cpp-ethereum/) for now. Follow the instructions and copy the output code where it says "bytecode". Do not close the compiler tab, you’ll need it later! Once you have the compiled code, go back to your Geth console and store it in a local variable:
+The first you can get by using a compiler. You should have a solidity compiler built in on your geth console. To test it, use this command:
 
-```
-> var greeterCode = "0x608180600c6000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063e9ebeafe14602e57005b60376004356041565b8060005260206000f35b600060008214604e576075565b7f48656c6c6f2c20576f726c6400000000000000000000000000000000000000009050607c565b819050607c565b91905056"
-```
+`eth.getCompilers()`
 
-Notice that you must put the bytecode between quotes and prepend it with "0x", so the system will know that this is a hexadecimal string. Now type these commands on the console:
+If you have it installed, it should output something like this:
 
-```
-> var primaryAccount = eth.accounts[0]
-> var greeterAddress = eth.sendTransaction({data: greeterCode, from: primaryAccount}); 
-```
+`['Solidity' ]`
 
-You might be asked for your password. You are choosing from which account will pay for the transaction. Wait a minute for your transaction to be picked up and then type:
+If instead the command returns an error, then read the documentation on how to install a compiler, use Aleth zero or use the  online solidity compiler. 
 
-```
-> eth.getCode(greeterAddress)
+If you have Geth Solidity Compiler installed,  you need now reformat by removing spaces so it fits into a string variable:
+
+```js
+var greeterSource = 'contract greeter { function greet(bytes32 input) returns(bytes32) { if (input == "") { return "Hello, World!"; } return input; } }'
 ```
 
-This will return the code of your contract. If it returns “0x”, it means that your transaction has not been picked up yet. Wait a little bit more. If it takes more than five minutes for your transaction to be mined, your gas price might have been too low, or maybe you are not connected to the network.
+Once you sucessfully executed the above, compile it and publish to the network using the following commands:
 
-After your code has been accepted, `eth.getCode(codeAddress)` will return a long string of numbers. If that’s the case, congratulations, your little Greeter is live! If the contract is created again (by performing another eth.sendTransaction), it will be published to a new address. To cleanup old contracts, the SUICIDE opcode can be called.
-
-Now that your contract is live on the network, anyone can interact with it by instantiating a local copy. But in order to do that, your computer needs to know how to interact with it, which is what the Application Binary Interface (ABI) is for. Go back to the compiler page (if you don’t have the code, just go back to the beginning of the section just to regenerate it, you won’t need to upload the greeter again). Copy the code that says "interface" and store it in a variable on the console:
-
-`> var greeterABI =  [{ YOURABIHERE  }];`
-
-Notice the code isn't enclosed by quotes, it's because it's not a string, but an object. It will look probably like this:
-
-```
-> var greeterABI = [{ "constant": false, "inputs": [{ "name" : "input", "type": "bytes32" }], "name": "greet", "outputs" : [{ "name": "", "type": "bytes32" }], "type": "function" }]
+```js
+var greeterCompiled = eth.compile.solidity(greeterSource)
+var primaryAccount = eth.accounts[0]
+var greeterAddress = eth.sendTransaction({data: greeterCompiled.code, from: primaryAccount}); 
 ```
 
-Now type the following commands:
+You will probably be asked for the password you picked in the beginning. You are choosing from which account will pay for the transaction. Wait a minute for your transaction to be picked up and then type:
 
+```js
+eth.getCode(greeterAddress)
 ```
-> greeterContract = eth.contract(greeterABI)
-> greeterInstance = new greeterContract(greeterAddress)
+
+This should return the code of your contract. If it returns “0x”, it means that your transaction has not been picked up yet. Wait a little bit more. If it still hasn't check if you are connected to the network
+
+```js
+net.peerCount
 ```
+
+If you have more than 0 peers and it takes more than a minute or two for your transaction to be mined, your gas price might have been too low. You can experiment with different gas prices like this:
+
+```js
+var greeterAddress = eth.sendTransaction({data: greeterCompiled.code, from: primaryAccount, gas: 100000, gasPrice: web3.toWei(10, "szabo")}); 
+```
+
+
+The latest gas price can be checked at the [Network Stats Dashboard](https://stats.ethdev.com). Don't get hanged too much on the specific unit conventions or the values of the numbers above, just tweak around that range. Go too up and you might reach gas limit of the block, go too low and the price might be too low, or the gas insuficient for the transaction to be picked up.
+
+After your code has been accepted, `eth.getCode(codeAddress)` will return a long string of numbers. If that’s the case, congratulations, your little Greeter is live! If the contract is created again (by performing another eth.sendTransaction), it will be published to a new address. To ensure that old contracts can be cleaned and recover it's ether balance, be sure to include a `Suicide` call on it.
+
+Now that your contract is live on the network, anyone can interact with it by instantiating a local copy. But in order to do that, your computer needs to know how to interact with it, which is what the Application Binary Interface (ABI) is for. This is how you instantiate a contract:
+
+
+```js
+greeterContract = eth.contract(greeterCompiled.info.abiDefinition)
+greeterInstance = new greeterContract(greeterAddress)
+```
+
+**Tip:** if the solidity compiler isn't properly installed in your machine, you can get the ABI from the online compiler . To do so, use the code below carefully replacing the first line variable with the abi from your compiler.
+
+```js
+greeterAbiDefinition = [{  constant: false,  inputs: [{    name: 'input',    type: 'bytes32'  } ],  name: 'greet',  outputs: [{    name: '',    type: 'bytes32'  } ],  type: 'function'} ]
+greeterContract = eth.contract(greeterAbiDefinition)
+greeterInstance = new greeterContract(greeterAddress)
+```
+
 
 Your instance is ready. In order to call it, just type the following command in your terminal:
 
-`> greeterInstance.greet.call("");`
+```js
+greeterInstance.greet.call("");
+```
 
-If your greeter returned "Hello World" then congratulations, you just created your first digital conversationalist bot!  Try again with: 
+If your greeter returned `“Hello World”` then congratulations, you just created your first digital conversationalist bot!  Try again with: 
 
-`> greeterInstance.greet.call("hi");`
+```
+greeterInstance.greet.call("hi");
+```
 
-**Try for yourself**: You can experiment changing its parameters to make it smarter. You could have it charge ether for its profound advice by adding:
+Try for yourself:  You can experiment changing its parameters to make it smarter. You could have it charge ether for its profound advice by adding:
 
-`if (msg.value>0) { return "Thanks!"; }`
+```js
+if (msg.value>0) { return "Thanks!"; }
+```
 
 Before the last return statement.
+
+
 
 # NameReg
 
@@ -75,23 +107,28 @@ All accounts are referenced in the network by their public address. But addresse
 
 So let’s pick a unique name for your country. Names have to use only alphanumeric characters and, cannot contain blank spaces. In future releases the name registrar will likely implement a bidding process to prevent name squatting but for now, it's a first come first served based. So as long as no one else registered the name, you can claim it.
 
-`> registrar.reserve.sendTransaction("ethereumland", {from: primaryAccount});`
+```js
+registrar.reserve.sendTransaction("ethereumland", {from: primaryAccount});
 
-`> registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true, 
-{from: primaryAccount});`
+registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true,{from: primaryAccount});
+```
 
 
-Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can check a owner of any address by typing:
 
-`> registrar.owner("ethereumland")`
+Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can check the owner of any address by typing:
+
+```js
+registrar.owner("ethereumland")
+```
+
 
 # Coin
-
-Issue your own money: Coin contract
 
 Now that you have your name secured, let's create a currency for your country. Currencies are much more interesting and useful than they seem, they are in essence just a tradeable token, but can become much more, depending on how you use them. It's value depends on it's use: a token can be used to control access (an entrance ticket), can be used for voting rights in an organization (a share), can be placeholders for an asset held by a third party (a certificate of ownership) or even be simply used as an exchange of value within a context (a currency). 
 
 You could do all those things by creating a centralized server, but using an Ethereum token contract comes with some free qualities: for one, it's a decentralized service and tokens can be still exchanged even if the original service goes down for any reason. The code guarantees that no tokens will ever be created other than the ones set in the original code. Finally, by having each user hold it's own token, this eliminates the scenarios where one single server break in can result in the loss of funds from thousands of clients.
+
+This is the code for the contract we're building:
  
 ```js
 contract token { 
@@ -117,55 +154,77 @@ contract token {
 }
 ```
 
-
-
-If you have ever programmed, you won't find it hard to understand what it does: it's a contract that generates 10 thousand tokens to the creator of the contract, and then allows anyone with a balance to send it to others. 
+If you have ever programmed, you won't find it hard to understand what it does: it's a contract that generates 10 thousand tokens to the creator of the contract, and then allows anyone with a balance to send it to others.  
 
 So let's run it!
-```
-var tokenCompiledCode = "0x5b612710600060005060003373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050819055505b610172806100466000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063412664ae1461003a578063f8b2cb4f1461005257005b610048600435602435610067565b8060005260206000f35b61005d600435610134565b8060005260206000f35b600081600060005060003373ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060005054106100a4576100ad565b6000905061012e565b81600060005060003373ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282825054039250508190555081600060005060008573ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000828282505401925050819055506001905061012e565b92915050565b6000600060005060008373ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060005054905061016d565b91905056"
-```
-```
-var tokenABI = [   {      "constant" : false,      "inputs" : [         {            "name" : "receiver",            "type" : "address"         },         {            "name" : "amount",            "type" : "uint256"         }      ],      "name" : "sendToken",      "outputs" : [         {            "name" : "sufficient",            "type" : "bool"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "account",            "type" : "address"         }      ],      "name" : "getBalance",      "outputs" : [         {            "name" : "balance",            "type" : "uint256"         }      ],      "type" : "function"   }]
+
+```js
+var tokenSource = 'contract token { mapping (address => uint) balances;  function token() { balances[msg.sender] = 10000; } function sendToken(address receiver, uint amount) returns(bool sufficient) {        if (balances[msg.sender] < amount) return false;        balances[msg.sender] -= amount; balances[receiver] += amount;        return true; } function getBalance(address account) returns(uint balance){ return balances[account]; } }'
 ```
 
-Now let’s set up the contract, just like we did in the previous section.
+Now let’s set up the contract, just like we did in the previous section. Since this is a more complex contract than the Greeter, we will add more gas than the default. Extra Gas is returned.
 
-```
-> var primaryAddress = eth.accounts[0]
-> var tokenAddress = eth.sendTransaction({data: tokenCompiledCode, from: primaryAddress, gas:150000})
+```js
+var tokenCompiled = eth.compile.solidity(tokenSource)
+var primaryAccount = eth.accounts[0]
+var tokenAddress = eth.sendTransaction({data: tokenCompiled.code, from: primaryAccount, gas:1000000}); 
 ```
 
 Wait minute until and use the code below to test if your code has been deployed.
 
-
-`eth.getCode(tokenAddress)`
-
-If it has, then do these commands to instantiate it locally.
-
+```js
+eth.getCode(tokenAddress)
 ```
-tokenContract = eth.contract(tokenABI)
+
+And then 
+
+```js
+tokenContract = eth.contract(tokenCompiled.info.abiDefinition)
 tokenInstance = new tokenContract(tokenAddress)
 ```
 
 You can check your own balance with:
 
-`> tokenInstance.getBalance.call(primaryAddress)`
+```js
+tokenInstance.getBalance.call(primaryAccount)
+```
 
 It should have all the 10 000 coins that were created once the contract was published. Since there is not any other defined way for new coins to be issued, those are all that will ever exist. 
 
 Now of course those tokens aren't very useful if you hoard them all, so in order to send them to someone else, use this command:
 
-`> tokenInstance.sendToken.sendTransaction(eth.accounts[1], 100, {from: primaryAddress})`
+```js
+tokenInstance.sendToken.sendTransaction(eth.accounts[1], 100, {from: primaryAccount})
+```
 
-The reason that the first command was .call() and the second is a .sendTransaction() is that the former is just a read operation and the latter is using gas to change the state of the blockchain, and as such, it needs to be set who is it coming from.
+The reason that the first command was .call() and the second is a .sendTransaction() is that the former is just a read operation and the latter is using gas to change the state of the blockchain, and as such, it needs to be set who is it coming from. Now, wait a minute and check both accounts balances:
 
-**Try for yourself:** This contract has a coin that is capped to the initial issuance. Try writing a function for issuing new coins or removing coins from circulation, maybe simply depending on the owner's decisions or something more complex. Some companies might require some control of the tokens they issue, so you might need to have a function that allows assets to be frozen. 
+```js
+tokenInstance.getBalance.call(eth.accounts([0])
+tokenInstance.getBalance.call(eth.accounts([1])
+```
 
-**Learn more:**
+**Try for yourself:** You just created your own cryptocurrency, imagine all the possibilities! Right now this cryptocurrency is quite limited as there will only ever be 10,000 coins and all are controlled by the coin creator, but you can change that. By adding the following function you issue a coin for everyone who finds an ethereum block:
 
-* Formal proofing is a way where the contract developer can assert some invariant qualities of the contract, like the total cap of the coin.
-* Meta coin standard is a proposed standardization of function names for coin and token contracts, to allow them to be automatically added to other ethereum contract that utilizes trading, like exchanges or escrow.
+```js
+mapping (uint => address) miningReward;
+function claimMiningReward() {
+	if (msg.sender == block.coinbase && miningReward[block.number] == 0) {
+		balances[msg.sender] += 1;
+miningReward[block.number] = msg.sender;
+	}
+}
+```
+
+You could modify this to anything else: maybe reward someone who finds a solution for a new puzzle, wins a game of chess, install a solar panel—as long as that can be somehow translated to a contract. Or maybe you want to create a central bank for your personal country, so you can keep track of hours worked, favors owed or control of property. In that case you might want to add a function to allow the bank to remotely freeze funds and destroy tokens if needed.
+
+
+##Future improvements, not yet implemented: 
+
+* [Formal proofing](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format#documentation-output) is a way where the contract developer will be able to assert some invariant qualities of the contract, like the total cap of the coin.
+* [Meta coin standard](https://github.com/ethereum/cpp-ethereum/wiki/MetaCoin-API)is a proposed standardization of function names for coin and token contracts, to allow them to be automatically added to other ethereum contract that utilizes trading, like exchanges or escrow.
+
+
 
 # Crowdfunder
 
