@@ -101,7 +101,7 @@ miners and will easily generate a lot of test ether to play around
 ## Advanced
 
 Geth also supports a feature called static nodes if you have certain
-peers you always want to connect to. Static nodes are which are re-connected
+peers you always want to connect to. Static nodes are re-connected
 on disconnects. You can configure permanent static nodes by putting something like
 the following into `<datadir>/static-nodes.json`:
 
