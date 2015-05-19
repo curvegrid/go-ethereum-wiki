@@ -1,15 +1,25 @@
 # Connecting to the network 
 
-## Bootstrapping
+## How Peers Are Found
 
-By default, Geth will connect to public bootstrap nodes on startup. These public nodes give the client an entry point into the rest of the network and a way to discover additional peers up to the `maxpeers` limit. The default is 25 peers.
+Geth continuously attempts to connect to other nodes on the network
+until it has peers. If you have UPnP enabled on your router or run
+ethereum on an Internet-facing server, it will also accept connections
+from other nodes.
 
-To change the bootnodes on startup, use the `--bootnodes` option and separate the peers by spaces. For example:
-```
-geth --bootnodes "enode://pubkey1@ip1:port1 enode://pubkey2@ip2:port2 enode://pubkey3@ip3:port3"
-```
+Geth finds peers through something called the discovery protocol. In
+the discovery protocol, nodes are gossipping with each other to find
+out about other nodes on the network. In order to get going initially,
+geth uses a set of bootstrap nodes whose endpoints are recorded in the
+source code.
 
-## Checking connectivity
+To change the bootnodes on startup, use the `--bootnodes` option and
+separate the nodes by spaces. For example:
+
+    geth --bootnodes "enode://pubkey1@ip1:port1 enode://pubkey2@ip2:port2 enode://pubkey3@ip3:port3"
+
+
+## Checking Connectivity
 
 To check how many peers the client is connected to in the interactive console, check the `net` object:
 ```
@@ -66,24 +76,33 @@ To check the ports used by geth and also find your enode URI run:
 }
 ```
 
-## Custom networks
+## Common Problems With Connectivity
 
-Sometimes you might not need to connect to the live public network, you can instead choose to create your own private testnet. This is very useful if you don't need to test external contracts and want just to test the technology, because you won't have to compete with other miners and will easily generate a lot of test ether to play around (replace 12345 with any non-negative number):
+Sometimes you just can't get connected. The most common reasons are
+as follows:
 
-```
-geth -—networkid="12345" console
-```
+- Your local time might be incorrect. An accurate clock is required
+  to participate in the Ethereum network.
+- Some firewall configurations can prevent UDP traffic from flowing.
+  You can use the static nodes feature or `admin.addPeer()` on the console
+  to configure connections by hand.
+
+## Custom Networks
+
+Sometimes you might not need to connect to the live public network,
+you can instead choose to create your own private testnet. This is
+very useful if you don't need to test external contracts and want just
+to test the technology, because you won't have to compete with other
+miners and will easily generate a lot of test ether to play around
+(replace 12345 with any non-negative number):
+
+	geth -—networkid="12345" console
 
 ## Advanced
 
-Geth also supports static and trusted nodes if you have certain peers you always want to connect to.
+Geth also supports a feature called static nodes if you have certain
+peers you always want to connect to. Static nodes are which are re-connected
+on disconnects. You can configure permanent static nodes by putting something like
+the following into `<datadir>/static-nodes.json`:
 
-Static nodes are used as pre-configured connections which are always maintained and re-connected on disconnects.
-```
-static-nodes.json  // Path within <datadir> to search for the static node list
-```
-
-Trusted nodes are used as pre-configured connections which are always allowed to connect, even above the peer limit.
-```
-trusted-nodes.json // Path within <datadir> to search for the trusted node list
-```
+	static-nodes.json  // Path within <datadir> to search for the static node list
