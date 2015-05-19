@@ -101,7 +101,7 @@ Before the last return statement.
 
 
 
-# NameReg
+# NameReg and Contract Registration
 
 All accounts are referenced in the network by their public address. But addresses are long, difficult to write down, hard to memorize and immutable. The last one is specially important if you want to be able to generate fresh accounts in your name, or upgrade the code of your contract. In order to solve this, there is a default name registrar contract which is used to associate the long addresses with short, human-friendly names.
 
@@ -114,13 +114,61 @@ registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true,{from
 ```
 
 
-
 Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can check the owner of any address by typing:
 
 ```js
 registrar.owner("ethereumland")
 ```
 
+In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
+
+
+First, let's start with a basic contract:
+```
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+// compile the solidity contract
+contract = eth.compile.solidity(source);
+
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+
+// wait for the transaction to be mined
+// mining...
+
+// extract the abi and register it
+filename = "/tmp/info.json";
+admin.contractInfo.register(primary, contractaddress, contract, filename);
+
+// wait for the transaction to be mined
+// mining...
+```
+
+Once the metadata is registered, it can easily be recalled:
+
+```
+info = admin.contractInfo.get(contractaddress);
+console.log(info.abiDefinition);
+``
+_For more info see [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts)_
+
+Connecting both the NameReg and MetadataReg together makes it quite easy to share a contract with others:
+
+```
+account = accounts[0];
+nameregName = "multiply7";
+info = admin.contractInfo.get(registrar.owner(nameregName));
+var Multiply7 = eth.contract(info.abiDefinition);
+var myMultiply7 = Multiply7.at(account);
+myMultiply7.multiply.call(5);
+```
+
+or compacted into a 1-liner:
+
+`web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(5);`
 
 # Coin
 
