@@ -18,6 +18,16 @@ separate the nodes by spaces. For example:
 
     geth --bootnodes "enode://pubkey1@ip1:port1 enode://pubkey2@ip2:port2 enode://pubkey3@ip3:port3"
 
+## Common Problems With Connectivity
+
+Sometimes you just can't get connected. The most common reasons are
+as follows:
+
+- Your local time might be incorrect. An accurate clock is required
+  to participate in the Ethereum network.
+- Some firewall configurations can prevent UDP traffic from flowing.
+  You can use the static nodes feature or `admin.addPeer()` on the console
+  to configure connections by hand.
 
 ## Checking Connectivity
 
@@ -76,16 +86,6 @@ To check the ports used by geth and also find your enode URI run:
 }
 ```
 
-## Common Problems With Connectivity
-
-Sometimes you just can't get connected. The most common reasons are
-as follows:
-
-- Your local time might be incorrect. An accurate clock is required
-  to participate in the Ethereum network.
-- Some firewall configurations can prevent UDP traffic from flowing.
-  You can use the static nodes feature or `admin.addPeer()` on the console
-  to configure connections by hand.
 
 ## Custom Networks
 
@@ -105,4 +105,8 @@ peers you always want to connect to. Static nodes are which are re-connected
 on disconnects. You can configure permanent static nodes by putting something like
 the following into `<datadir>/static-nodes.json`:
 
-	static-nodes.json  // Path within <datadir> to search for the static node list
+	[
+    	"enode://f4642fa65af50cfdea8fa7414a5def7bb7991478b768e296f5e4a54e8b995de102e0ceae2e826f293c481b5325f89be6d207b003382e18a8ecba66fbaf6416c0@33.4.2.1:30303",
+    ]
+
+
