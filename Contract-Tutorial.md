@@ -229,8 +229,6 @@ You could modify this to anything else: maybe reward someone who finds a solutio
 # Crowdfunder
 
 
-Trustless fundraising
-
 Creating a country takes a lot of funds and collective effort. You could ask for donations, but donors prefer to give to projects they are more certain that will get traction and proper funding. This is an example where a crowdfunding would be ideal: you set up a goal and a deadline for reaching it. If you miss your goal, the donations are returned, therefore reducing the risk for donors. Since the code is open and auditable, there is no need for a centralized trusted platform and therefore the only fees everyone will pay are just the gas fees.
 
 Since you already have your own internal currency, you can use that to help gather funds. In this crowdsale contract everyone who contribute will also get a proportional amount of the tokens you created. This can be used to as a proof of citizenship, as a share system or simply as a reward for their help as early pioneers.
@@ -238,7 +236,10 @@ Since you already have your own internal currency, you can use that to help gath
 **Attention: All contracts will be wiped out at the end of Frontier. While balances on normal addresses will be transported to Homestead, balances in contracts, as well as addresses with less than 1 ether, will not. So use this crowdfunding contract for testing purposes and don't put any significant funds unless you know what you are doing.**
 
 ```js
-contract token{function sendToken(address receiver,uint256 amount)returns(bool sufficient){}function getBalance(address account)returns(uint256 balance){}}
+contract token{
+function sendToken(address receiver,uint256 amount)returns(bool sufficient){}
+function getBalance(address account)returns(uint256 balance){}
+}
 
 contract CrowdSale {
 	
@@ -294,14 +295,12 @@ contract CrowdSale {
     }
 		
     // checks if the goal or time limit has been reached and ends the campaign
-    function checkGoalReached returns (bytes32 response) {
+    function checkGoalReached() returns (bytes32 response) {
         if (amount >= fundingGoal){
             uint i = 0; 
             beneficiary.send(amount);
-			tokenReward.sendToken(beneficiary, tokenReward.getBalance(this));
-			suicide(beneficiary);
-
-        	return "Goal Reached!"; 
+	     suicide(beneficiary);
+ 	     return "Goal Reached!"; 
         }
         else if (deadline <= block.number){
             uint j = 0;
