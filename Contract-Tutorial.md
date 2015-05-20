@@ -101,7 +101,9 @@ Before the last return statement.
 
 
 
-# NameReg and Contract Registration
+# Registrars
+
+## NameReg
 
 All accounts are referenced in the network by their public address. But addresses are long, difficult to write down, hard to memorize and immutable. The last one is specially important if you want to be able to generate fresh accounts in your name, or upgrade the code of your contract. In order to solve this, there is a default name registrar contract which is used to associate the long addresses with short, human-friendly names.
 
@@ -119,6 +121,8 @@ Try for yourself: By typing just "registrar" you can see all the many functions 
 ```js
 registrar.owner("ethereumland")
 ```
+
+## Contract Metadata Registration
 
 In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
 
