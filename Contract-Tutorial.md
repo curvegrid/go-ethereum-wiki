@@ -146,8 +146,9 @@ contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: 
 
 // extract the abi and register it
 filename = "/tmp/info.json";
-admin.contractInfo.register(primary, contractaddress, contract, filename);
-
+hash = admin.contractInfo.register(primary, contractaddress, contract, filename);
+url = "https://path/to/your/deployed/abi.json";
+admin.contractInfo.registerUrl(primaryAccount, hash, url)
 // wait for the transaction to be mined
 // mining...
 ```
