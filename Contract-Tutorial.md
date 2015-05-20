@@ -111,8 +111,9 @@ So let’s pick a unique name for your country. Names have to use only alphanume
 
 ```js
 registrar.reserve.sendTransaction("ethereumland", {from: primaryAccount});
-
+// wait for transaction to be mined
 registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true,{from: primaryAccount});
+// wait for transaction to be mined
 ```
 
 
@@ -128,7 +129,7 @@ In addition the a contract name registry, it can be useful to store the contract
 
 
 First, let's start with a basic contract:
-```
+```js
 source = "contract test {\n" +
 "   /// @notice will multiply `a` by 7.\n" +
 "   function multiply(uint a) returns(uint d) {\n" +
@@ -156,14 +157,14 @@ Once the metadata is registered, it can easily be recalled:
 ```
 info = admin.contractInfo.get(contractaddress);
 console.log(info.abiDefinition);
-``
+```
 _For more info see [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts)_
 
 Connecting both the NameReg and MetadataReg together makes it quite easy to share a contract with others:
 
 ```
-account = accounts[0];
-nameregName = "multiply7";
+nameregName = "multiply7"; // contract namereg
+account = accounts[0]; // calling/sending account
 info = admin.contractInfo.get(registrar.owner(nameregName));
 var Multiply7 = eth.contract(info.abiDefinition);
 var myMultiply7 = Multiply7.at(account);
