@@ -168,13 +168,13 @@ account = accounts[0]; // calling/sending account
 info = admin.contractInfo.get(registrar.owner(nameregName));
 var Multiply7 = eth.contract(info.abiDefinition);
 var myMultiply7 = Multiply7.at(account);
-myMultiply7.multiply.call(5);
+myMultiply7.multiply.call(6);
 ```
 
 or compacted into a 1-liner:
 
 ```js
-web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(5);
+web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(6);
 ```
 
 # Coin
