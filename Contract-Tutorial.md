@@ -128,29 +128,35 @@ registrar.owner("ethereumland")
 In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata). _See [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts) for more information._
 
 
-First, let's start with a basic contract:
 ```js
+// first, let's start with a basic contract
 source = "contract test {\n" +
 "   /// @notice will multiply `a` by 7.\n" +
 "   function multiply(uint a) returns(uint d) {\n" +
 "      return a * 7;\n" +
 "   }\n" +
 "} ";
-// compile the solidity contract
+// compile the Solidity contract and store the result
 contract = eth.compile.solidity(source);
 
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+// set primary account variable
+primary = eth.coinbase
+// send a transaction and store the resulting address
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
 
 // wait for the transaction to be mined
-// mining...
 
-// extract the abi and register it
-filename = "/tmp/info.json";
+// extract the metadata to a file and register the contract
+filename = "/tmp/metadata.json";
 hash = admin.contractInfo.register(primary, contractaddress, contract, filename);
-url = "https://path/to/your/deployed/abi.json";
-admin.contractInfo.registerUrl(primaryAccount, hash, url)
+
 // wait for the transaction to be mined
-// mining...
+
+// upload the metadata file. raw pastebin or github gist works great
+url = "https://path/to/your/deployed/mycontract.json";
+admin.contractInfo.registerUrl(primary, hash, url);
+
+// wait for the transaction to be mined
 ```
 
 Once the metadata is registered, it can easily be recalled:
