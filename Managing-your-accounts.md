@@ -159,7 +159,6 @@ Importing your presale wallet is very easy. If you remember your password that i
 ```
 geth wallet import /path/to/my/presale.wallet
 ```
-    get wallet import /path/to/my/presale.wallet
 
 will prompt for your password and imports your ether presale account.
 It can be used non-interactively with the --password option taking a 
@@ -200,7 +199,14 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id"
 }
 ```
 
-If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes an account (in hex) as argument so you can unlock an account programmatically for one session. This is useful if you want to use your account from Dapps via RPC. On the console you can also unlock accounts. 
+If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes an account (in hex) as argument so you can unlock an account programmatically for one session. This is useful if you want to use your account from Dapps via RPC. `--unlock primary` will unlock the first account. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
+
+```
+geth --password <(echo this is not secret!) account new 
+geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain localhost --verbosity 6 2>> geth.log 
+```
+
+On the console you can also unlock accounts. 
 
 ```
 admin.unlock(address)
