@@ -125,7 +125,7 @@ registrar.owner("ethereumland")
 
 ## Contract Metadata Registration
 
-In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
+In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata). _See [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts) for more information._
 
 
 First, let's start with a basic contract:
@@ -154,15 +154,15 @@ admin.contractInfo.register(primary, contractaddress, contract, filename);
 
 Once the metadata is registered, it can easily be recalled:
 
-```
+```js
 info = admin.contractInfo.get(contractaddress);
 console.log(info.abiDefinition);
 ```
-_For more info see [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts)_
+
 
 Connecting both the NameReg and MetadataReg together makes it quite easy to share a contract with others:
 
-```
+```js
 nameregName = "multiply7"; // contract namereg
 account = accounts[0]; // calling/sending account
 info = admin.contractInfo.get(registrar.owner(nameregName));
@@ -173,7 +173,9 @@ myMultiply7.multiply.call(5);
 
 or compacted into a 1-liner:
 
-`web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(5);`
+```js
+web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(5);
+```
 
 # Coin
 
