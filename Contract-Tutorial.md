@@ -164,17 +164,16 @@ Connecting both the NameReg and MetadataReg together makes it quite easy to shar
 
 ```js
 nameregName = "multiply7"; // contract namereg
-account = accounts[0]; // calling/sending account
 info = admin.contractInfo.get(registrar.owner(nameregName));
 var Multiply7 = eth.contract(info.abiDefinition);
-var myMultiply7 = Multiply7.at(account);
+var myMultiply7 = Multiply7.at(registrar.owner(nameregName));
 myMultiply7.multiply.call(6);
 ```
 
-or compacted into a 1-liner:
+or compacted into a single line:
 
 ```js
-web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(accounts[0]).multiply.call(6);
+web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(registrar.owner(nameregName)).multiply.call(6);
 ```
 
 # Coin
