@@ -152,6 +152,19 @@ cat > /path/to/password
 >I type my pass here^D
 ```
 
+# Importing your presale wallet
+
+Importing your presale wallet is very easy. If you remember your password that is:
+
+```
+geth wallet import /path/to/my/presale.wallet
+```
+    get wallet import /path/to/my/presale.wallet
+
+will prompt for your password and imports your ether presale account.
+It can be used non-interactively with the --password option taking a 
+passwordfile as argument containing the wallet password in cleartext.
+
 # Listing accounts and checking balances
 
 ### Listing your current accounts
@@ -165,6 +178,8 @@ Account #1: {da65665fc30803cb1fb7e6d86691e20b1826dee0}
 Account #2: {e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32}
 Account #3: {f4dd5c3794f1fd0cdc0327a83aa472609c806e99}
 ```
+
+to list your accounts in order of creation. The first account created is called *primary* account. 
 
 when using the console:
 ```
@@ -184,6 +199,14 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id"
   "result": ["0x407d73d8a49eeb85d32cf465507dd71d507100c1"]
 }
 ```
+
+If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes an account (in hex) as argument so you can unlock an account programmatically for one session. This is useful if you want to use your account from Dapps via RPC. On the console you can also unlock accounts. 
+
+```
+admin.unlock(address)
+```
+
+Note that we do NOT recommend using the password argument here, since the console history is logged, so you may compromise your account. You have been warned. 
 
 ### Checking account balances
 
