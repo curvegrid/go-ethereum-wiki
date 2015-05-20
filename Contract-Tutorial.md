@@ -130,6 +130,7 @@ In addition the a contract name registry, it can be useful to store the contract
 
 ```js
 // first, let's start with a basic contract
+// the name of the contract here is `test` and will appear in objects later
 source = "contract test {\n" +
 "   /// @notice will multiply `a` by 7.\n" +
 "   function multiply(uint a) returns(uint d) {\n" +
@@ -142,13 +143,14 @@ contract = eth.compile.solidity(source);
 // set primary account variable
 primary = eth.coinbase
 // send a transaction and store the resulting address
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
+contractaddress = eth.sendTransaction({from: primary, data: contract.test.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
 
 // wait for the transaction to be mined
 
-// extract the metadata to a file and register the contract
+// define where to extract the metadata
 filename = "/tmp/metadata.json";
-hash = admin.contractInfo.register(primary, contractaddress, contract, filename);
+// register the contract and store the hash
+hash = admin.contractInfo.register(primary, contractaddress, contract.test, filename);
 
 // wait for the transaction to be mined
 
