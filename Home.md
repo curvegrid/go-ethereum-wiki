@@ -8,7 +8,7 @@ Main entry points:
 * [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 * [Setting up private network or local cluster](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
+* [Cross Compiling](https://github.com/ethereum/go-ethereum/wiki/Cross-compiling-Ethereum)
 
 Sidebar lists all pages.
-
 
