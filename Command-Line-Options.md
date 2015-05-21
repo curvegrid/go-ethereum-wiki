@@ -6,59 +6,61 @@ Command line client options are a moving target under constant change now. Pleas
 geth [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.19
+   0.9.23
 
 COMMANDS:
-   blocktest    loads a block test file
-   makedag      generate ethash dag (for testing)
-   version      print ethereum version numbers
-   wallet       ethereum presale wallet
-   account      manage accounts
-   dump         dump a specific block from storage
-   console      Geth Console: interactive JavaScript environment
-   js           executes the given JavaScript files in the Geth JavaScript VM
-   import       import a blockchain file
-   export       export blockchain into file
-   upgradedb    upgrade chainblock database
-   help         Shows a list of commands or help for one command
-
+   blocktest	loads a block test file
+   makedag	generate ethash dag (for testing)
+   version	print ethereum version numbers
+   wallet	ethereum presale wallet
+   account	manage accounts
+   dump		dump a specific block from storage
+   console	Geth Console: interactive JavaScript environment
+   js		executes the given JavaScript files in the Geth JavaScript VM
+   import	import a blockchain file
+   export	export blockchain into file
+   upgradedb	upgrade chainblock database
+   removedb	Remove blockchain and state databases
+   help		Shows a list of commands or help for one command
+   
 GLOBAL OPTIONS:
-   --identity                                   Custom node name
-   --unlock                                     Unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
-   --password                                   Path to password file to use with options and subcommands needing a password
-   --bootnodes                                  Space-separated enode URLs for p2p discovery bootstrap
-   --datadir "$HOME/Library/Ethereum"     Data directory to be used
-   --blockchainversion "2"                      Blockchain version (integer)
-   --jspath "."                                 JS library path to be used with console and js subcommands
-   --port "30303"                               Network listening port
-   --maxpeers "25"                              Maximum number of network peers (network disabled if set to 0)
-   --maxpendpeers "0"                           Maximum number of pending connection attempts (defaults used if set to 0)
-   --etherbase "primary"                        Public address for block mining rewards. By default the address of your primary account is used
-   --gasprice "10000000000000"                  Sets the minimal gasprice when mining transactions
-   --minerthreads "8"                           Number of miner threads
-   --mine                                       Enable mining
-   --nat "any"                                  NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-   --natspec                                    Enable NatSpec confirmation notice
-   --nodekey                                    P2P node key file
-   --nodekeyhex                                 P2P node key as hex (for testing)
-   --rpc                                        Enable the JSON-RPC server
-   --rpcaddr "127.0.0.1"                        Listening address for the JSON-RPC server
-   --rpcport "8545"                             Port on which the JSON-RPC server should listen
-   --rpccorsdomain                              Domain on which to send Access-Control-Allow-Origin header
-   --shh                                        Enable whisper
-   --vmdebug                                    Virtual Machine debug output
-   --protocolversion "60"                       ETH protocol version (integer)
-   --networkid "0"                              Network Id (integer)
-   --verbosity "3"                              Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
-   --backtrace_at ":0"                          If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
-   --logtostderr                                Logs are written to standard error instead of to files.
-   --vmodule ""                                 The syntax of the argument is a comma-separated list of pattern=N, where pattern is a literal file name (minus the ".go" suffix) or "glob" pattern and N is a log verbosity level.
-   --logfile                                    Send log output to a file
-   --logjson                                    Send json structured log output to a file or '-' for standard output (default: no json output)
-   --pprof                                      Enable the profiling server on localhost
-   --pprofport "6060"                           Port on which the profiler should listen
-   --solc "solc"                                solidity compiler to be used
-   --help, -h                                   show help
+   --identity 					Custom node name
+   --unlock 					Unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
+   --password 					Path to password file to use with options and subcommands needing a password
+   --bootnodes 					Space-separated enode URLs for p2p discovery bootstrap
+   --datadir "/Users/tgerring/Library/Ethereum"	Data directory to be used
+   --blockchainversion "2"			Blockchain version (integer)
+   --jspath "."					JS library path to be used with console and js subcommands
+   --port "30303"				Network listening port
+   --maxpeers "25"				Maximum number of network peers (network disabled if set to 0)
+   --maxpendpeers "0"				Maximum number of pending connection attempts (defaults used if set to 0)
+   --etherbase "primary"			Public address for block mining rewards. By default the address of your primary account is used
+   --gasprice "10000000000000"			Sets the minimal gasprice when mining transactions
+   --minerthreads "4"				Number of miner threads
+   --mine					Enable mining
+   --autodag					Enable automatic DAG pregeneration
+   --nat "any"					NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --natspec					Enable NatSpec confirmation notice
+   --nodekey 					P2P node key file
+   --nodekeyhex 				P2P node key as hex (for testing)
+   --rpc					Enable the JSON-RPC server
+   --rpcaddr "127.0.0.1"			Listening address for the JSON-RPC server
+   --rpcport "8545"				Port on which the JSON-RPC server should listen
+   --shh					Enable whisper
+   --vmdebug					Virtual Machine debug output
+   --protocolversion "60"			ETH protocol version (integer)
+   --networkid "0"				Network Id (integer)
+   --rpccorsdomain 				Domain on which to send Access-Control-Allow-Origin header
+   --verbosity "3"				Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
+   --backtrace_at ":0"				If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
+   --logtostderr				Logs are written to standard error instead of to files.
+   --vmodule ""					The syntax of the argument is a comma-separated list of pattern=N, where pattern is a literal file name (minus the ".go" suffix) or "glob" pattern and N is a log verbosity level.
+   --logfile 					Send log output to a file
+   --logjson 					Send json structured log output to a file or '-' for standard output (default: no json output)
+   --pprof					Enable the profiling server on localhost
+   --pprofport "6060"				Port on which the profiler should listen
+   --solc "solc"				solidity compiler to be used
+   --help, -h					show help
 
 
 ```
