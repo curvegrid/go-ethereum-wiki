@@ -658,10 +658,7 @@ The `net` is a shortcut for [web3.net](https://github.com/ethereum/wiki/wiki/Jav
 ***
 
 #### eth
-The `eth` is a shortcut for [web3.eth](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3eth).
-
-#### eth
-In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://github.com/ethereum/web3.js) a few additional calls are exposed.
+The `eth` is a shortcut for [web3.eth](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3eth). In addition to the `web3` and `eth` interfaces exposed by [web3.js](https://github.com/ethereum/web3.js) a few additional calls are exposed.
 
 ***
 
