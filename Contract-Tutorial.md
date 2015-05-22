@@ -1,3 +1,111 @@
+# Registrars
+
+## NameReg
+
+All accounts are referenced in the network by their public address. But addresses are long, difficult to write down, hard to memorize and immutable. The last one is specially important if you want to be able to generate fresh accounts in your name, or upgrade the code of your contract. In order to solve this, there is a default name registrar contract which is used to associate the long addresses with short, human-friendly names.
+
+Names have to use only alphanumeric characters and, cannot contain blank spaces. In future releases the name registrar will likely implement a bidding process to prevent name squatting but for now, it's a first come first served based. So as long as no one else registered the name, you can claim it.
+
+First, select your name:
+
+```js
+var myName = "bob"
+```
+
+Then, check the availability of your name:
+
+```js
+registrar.addr(myName)
+```
+
+If that function returns "0x00..", you can claim it to yourself:
+
+```js
+registrar.reserve.sendTransaction(myName, {from: eth.accounts[0]});
+```
+
+Wait for the previous transaction to be picked up. Wait up to thirty seconds and then try:
+
+```js
+registrar.owner(myName)
+```
+
+ If it returns your address, it means you own that name and are able to set your chosen name to any address you want:
+
+```js
+registrar.setAddress.sendTransaction(myName, eth.accounts[1], true,{from: eth.accounts[0]});
+```
+
+You can send a transaction to anyone by name instead of account simply by typing 
+
+```js
+eth.sendTransaction({from: eth.accounts[0], to: registrar.addr("bob"), value: web3.toWei(1, "ether")})
+```
+
+Tip: don't mistake registrar.addr for registrar.owner. The first is to which address that name is pointed at: anyone can point a name to anywhere else, just like anyone can forward a link to google.com, but only the owner of the name can change and update the link. You can set both to be the same address.
+
+## Contract Metadata Registration
+
+In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata). _See [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts) for more information._
+
+
+```js
+// first, let's start with a basic contract
+// the name of the contract here is `test` and will appear in objects later
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+// compile the Solidity contract and store the result
+contract = eth.compile.solidity(source);
+
+// set primary account variable
+primary = eth.coinbase
+// send a transaction and store the resulting address
+contractaddress = eth.sendTransaction({from: primary, data: contract.test.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
+
+// wait for the transaction to be mined
+
+// define where to extract the metadata
+filename = "/tmp/metadata.json";
+// register the contract and store the hash
+hash = admin.contractInfo.register(primary, contractaddress, contract.test, filename);
+
+// wait for the transaction to be mined
+
+// upload the metadata file. raw pastebin or github gist works great
+url = "https://path/to/your/deployed/mycontract.json";
+admin.contractInfo.registerUrl(primary, hash, url);
+
+// wait for the transaction to be mined
+```
+
+Once the metadata is registered, it can easily be recalled:
+
+```js
+info = admin.contractInfo.get(contractaddress);
+console.log(info.abiDefinition);
+```
+
+
+Connecting both the NameReg and MetadataReg together makes it quite easy to share a contract with others:
+
+```js
+nameregName = "multiply7"; // contract namereg
+info = admin.contractInfo.get(registrar.addr(nameregName));
+var Multiply7 = eth.contract(info.abiDefinition);
+var myMultiply7 = Multiply7.at(registrar.addr(nameregName));
+myMultiply7.multiply.call(6);
+```
+
+or compacted into a single line:
+
+```js
+web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(registrar.owner(nameregName)).multiply.call(6);
+```
+
 # Greeter
 
 Now that you’ve mastered the basics of Ethereum, let’s move into your first serious contract. It’s a big open territory and sometimes you might feel lonely, so our first order of business will be to create a little automatic companion to greet you whenever you feel lonely. We’ll call him the “Greeter”.
@@ -101,95 +209,7 @@ Before the last return statement.
 
 
 
-# Registrars
 
-## NameReg
-
-All accounts are referenced in the network by their public address. But addresses are long, difficult to write down, hard to memorize and immutable. The last one is specially important if you want to be able to generate fresh accounts in your name, or upgrade the code of your contract. In order to solve this, there is a default name registrar contract which is used to associate the long addresses with short, human-friendly names.
-
-So let’s pick a unique name for your country. Names have to use only alphanumeric characters and, cannot contain blank spaces. In future releases the name registrar will likely implement a bidding process to prevent name squatting but for now, it's a first come first served based. So as long as no one else registered the name, you can claim it.
-
-```js
-registrar.reserve.sendTransaction("ethereumland", {from: primaryAccount});
-// wait for transaction to be mined
-registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true,{from: primaryAccount});
-// wait for transaction to be mined
-```
-
-
-Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can look up the registered value with:
-
-```js
-registrar.addr("ethereumland")
-```
-
-You can also check the owner of any address by typing:
-
-```js
-registrar.owner("ethereumland")
-```
-
-## Contract Metadata Registration
-
-In addition the a contract name registry, it can be useful to store the contract ABI definition in a public location for easy access. To make this a bit easier, some convenience methods are provided to register and recall this [metadata](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata). _See [Interacting with contracts](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#interacting-with-contracts) for more information._
-
-
-```js
-// first, let's start with a basic contract
-// the name of the contract here is `test` and will appear in objects later
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-// compile the Solidity contract and store the result
-contract = eth.compile.solidity(source);
-
-// set primary account variable
-primary = eth.coinbase
-// send a transaction and store the resulting address
-contractaddress = eth.sendTransaction({from: primary, data: contract.test.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
-
-// wait for the transaction to be mined
-
-// define where to extract the metadata
-filename = "/tmp/metadata.json";
-// register the contract and store the hash
-hash = admin.contractInfo.register(primary, contractaddress, contract.test, filename);
-
-// wait for the transaction to be mined
-
-// upload the metadata file. raw pastebin or github gist works great
-url = "https://path/to/your/deployed/mycontract.json";
-admin.contractInfo.registerUrl(primary, hash, url);
-
-// wait for the transaction to be mined
-```
-
-Once the metadata is registered, it can easily be recalled:
-
-```js
-info = admin.contractInfo.get(contractaddress);
-console.log(info.abiDefinition);
-```
-
-
-Connecting both the NameReg and MetadataReg together makes it quite easy to share a contract with others:
-
-```js
-nameregName = "multiply7"; // contract namereg
-info = admin.contractInfo.get(registrar.addr(nameregName));
-var Multiply7 = eth.contract(info.abiDefinition);
-var myMultiply7 = Multiply7.at(registrar.addr(nameregName));
-myMultiply7.multiply.call(6);
-```
-
-or compacted into a single line:
-
-```js
-web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(registrar.owner(nameregName)).multiply.call(6);
-```
 
 # Coin
 
