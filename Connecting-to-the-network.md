@@ -98,7 +98,7 @@ miners and will easily generate a lot of test ether to play around
 
 	geth -—networkid="12345" console
 
-## Advanced
+## Static nodes
 
 Geth also supports a feature called static nodes if you have certain
 peers you always want to connect to. Static nodes are re-connected
