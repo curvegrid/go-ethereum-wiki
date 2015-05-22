@@ -117,7 +117,13 @@ registrar.setAddress.sendTransaction("ethereumland", eth.accounts[0], true,{from
 ```
 
 
-Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can check the owner of any address by typing:
+Try for yourself: By typing just "registrar" you can see all the many functions available to the name registrar. Experiment with them. You can look up the registered value with:
+
+```js
+registrar.addr("ethereumland")
+```
+
+You can also check the owner of any address by typing:
 
 ```js
 registrar.owner("ethereumland")
@@ -173,9 +179,9 @@ Connecting both the NameReg and MetadataReg together makes it quite easy to shar
 
 ```js
 nameregName = "multiply7"; // contract namereg
-info = admin.contractInfo.get(registrar.owner(nameregName));
+info = admin.contractInfo.get(registrar.addr(nameregName));
 var Multiply7 = eth.contract(info.abiDefinition);
-var myMultiply7 = Multiply7.at(registrar.owner(nameregName));
+var myMultiply7 = Multiply7.at(registrar.addr(nameregName));
 myMultiply7.multiply.call(6);
 ```
 
