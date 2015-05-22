@@ -22,6 +22,8 @@ or
 
     $ geth --verbosity 0 console
 
+Note: Since the database can only be accessed by one process, this means you cannot run `geth console` if you have an instance of geth already running.
+
 ## Non-interactive use: JSRE script mode
 
 It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the [`js` subcommand](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options): 
