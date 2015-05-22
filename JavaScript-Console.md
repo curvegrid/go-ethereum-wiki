@@ -64,6 +64,9 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
   * [miner](#adminminerstart)
     * [start](#adminminerstart)
     * [stop](#adminminerstop)
+    * [startAutoDAG](#adminminerstartautodag)
+    * [stopAutoDAG](#adminminerstopautodag)
+    * [makeDAG](#adminminermakedag)
     * [hashrate](#adminminerhashrate)
     * [setExtra](#adminminersetextra) 
   * [contractInfo](#admincontractinfo)
@@ -371,6 +374,44 @@ admin.miner.stop()
 
 ***
 
+
+#### admin.miner.startAutoDAG
+
+    admin.miner.startAutoDAG()
+
+Starts automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). This process make sure that the DAG for the subsequent epoch is avaiable allowing mining right after the new epoch starts. If this is used by most network nodes, then blocktimes are expected to be normal at epoch transition. Auto DAG is switched on automatically when mining is started and switched off when the miner stops. 
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+***
+
+#### admin.miner.stopAutoDAG
+
+    admin.miner.stopAutoDAG()
+
+Stops automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). Auto DAG is switched off automatically when mining is stops.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+***
+
+#### admin.miner.makeDAG
+
+    admin.miner.makeAutoDAG(blockNumber, dir)
+
+Generates the DAG for epoch `blockNumber/epochLength`. dir specifies a target directory,
+If `dir` is the empty string, then ethash will use the default directories `~/.ethash` on Linux and MacOS, and `~\AppData\Ethash` on Windows. The DAG file's name is `full-<revision-number>R-<seedhash>`
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+***
+
 #### admin.miner.hashrate
     
     admin.miner.hashrate()
@@ -447,7 +488,7 @@ source = "contract test {\n" +
 "      return a * 7;\n" +
 "   }\n" +
 "} ";
-contract = eth.compile.solidity(source);
+contract = eth.compile.solidity(source).test;
 contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
 filename = "/tmp/info.json";
 admin.contractInfo.register(primary, contractaddress, contract, filename);
@@ -475,7 +516,7 @@ source = "contract test {\n" +
 "      return a * 7;\n" +
 "   }\n" +
 "} ";
-contract = eth.compile.solidity(source);
+contract = eth.compile.solidity(source).test;
 contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
 filename = "/tmp/info.json";
 contenthash = admin.contractInfo.register(primary, contractaddress, contract, filename);
