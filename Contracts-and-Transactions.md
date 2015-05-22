@@ -113,7 +113,7 @@ This contract offers a unary method: called with a positive integer `a`, it retu
 You are ready to compile solidity code in the `geth` JS console using [`eth.compile.solidity`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity):
 
 ```js
-> contract = eth.compile.solidity(source)
+> contract = eth.compile.solidity(source).test
 {
   code: '605280600c6000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063c6888fa114602e57005b60376004356041565b8060005260206000f35b6000600782029050604d565b91905056',
   info: {
@@ -155,16 +155,17 @@ The following example shows how you interface `geth` via JSON-RPC to use the com
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_compileSolidity","params":["contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"],"id":1}' http://127.0.0.1:8100
 ```
 
-The compiler output is combined into an object representing a single contract and is serialised as json. It contains the following fields:
+The compiler output for one contract is combined into an object representing a single contract and is serialised as json. The actual return value of `eth.compile.solidity` is a map of contract name -- contract object pairs. Since our contract's name is `test`, `eth.compile.solidity(source).test` will give you the contract object for the test contract containing the following fields:
 
 * `code`: the compiled EVM code
-* `source`: the source code 
-* `language`: contract language (Solidity, Serpent, LLL)
-* `languageVersion`: contract language version
-* `compilerVersion`: compiler version 
-* `abiDefinition`: [Application Binary Interface Definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
-* `userDoc`: [NatSpec user Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
-* `developerDoc`: [NatSpec developer Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
+* `info`: the rest of the metainfo the compiler outputs
+  * `source`: the source code 
+  * `language`: contract language (Solidity, Serpent, LLL)
+  * `languageVersion`: contract language version
+  * `compilerVersion`: compiler version 
+  * `abiDefinition`: [Application Binary Interface Definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI)
+  * `userDoc`: [NatSpec user Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification- Format)
+  * `developerDoc`: [NatSpec developer Doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
 
 The immediate structuring of the compiler output (into `code` and `info`) reflects the two very different **paths of deployment**. 
 The compiled EVM code is sent off to the blockchain with a contract creation transaction while the rest (info) will ideally live on the decentralised cloud as publicly verifiable metadata complementing the code on the blockchain.
@@ -247,7 +248,7 @@ Once you deployed that file to any url, you can use [`admin.contractInfo.registe
 ```js
 source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
 // compile with solc
-contract = eth.compile.solidity(source)
+contract = eth.compile.solidity(source).test
 // send off the contract to the blockchain
 address = eth.sendTransaction({from: primaryAccount, data: contract.code})
 // extracts info from contract, save the json serialisation in the given file, 
@@ -320,7 +321,7 @@ source = "contract test {
        return a * 7;
    }
 }"
-contract = eth.compile.solidity(source)
+contract = eth.compile.solidity(source).test
 contractaddress = eth.sendTransaction{from: primary, data: contract.code})
 contentHash = admin.contractInfo.register(primary, contractaddress, contract, "~/dapps/shared/contracts/test/info.json")
 // put it up on your favourite site:
@@ -380,7 +381,13 @@ eth.resend(tx, newGasLimit, newGasPrice)
 
 # Example script
 
-The example script below demonstrates most features discussed in this tutorial. You can run it with the [JSRE](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) as `geth js script.js 2>>geth.log` 
+The example script below demonstrates most features discussed in this tutorial. You can run it with the [JSRE](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) as `geth js script.js 2>>geth.log` . If you want to run this test on a local private chain, then start geth with:
+
+```
+geth --maxpeers 0 --networkid 123456 --unlock primary js script.js 2>> geth.log
+```
+
+Note that `networkid` can be any arbitrary non-negative integer, 0 is always the live net.
 
 ```js
 // assume an existing unlocked primary account
@@ -393,6 +400,8 @@ admin.miner.stop()  ;
 
 balance = web3.fromWei(eth.getBalance(primary), "ether");
 
+// this is needed only on private networks,  
+// you can expect the registry contracts to be deployed on the live net.
 admin.contractInfo.newRegistry(primary);
 
 source = "contract test {\n" +
@@ -402,7 +411,7 @@ source = "contract test {\n" +
 "   }\n" +
 "} ";
 
-contract = eth.compile.solidity(source);
+contract = eth.compile.solidity(source).test;
 
 contractaddress = eth.sendTransaction({from: primary, data: contract.code});
 
