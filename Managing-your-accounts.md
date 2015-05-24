@@ -25,7 +25,7 @@ either new or import). Without it you are not able to unlock your account.
 
 Note that exporting your key in unencrypted format is NOT supported.
 
-Keys are stored under `<DATADIR>/keys`. Make sure you backup your keys regularly! 
+Keys are stored under `<DATADIR>/keys`. Make sure you backup your keys regularly! See [DATADIR backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore) for more information.
 
 It is safe to transfer the entire directory or the individual keys therein between ethereum nodes.
 
@@ -48,17 +48,17 @@ Accounts can also be managed via the [Javascript Console](https://github.com/eth
 ### Interactive use
 
 ```
-$ geth -datadir /tmp/eth  account new
+$ geth account new
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
 Passphrase:
 Repeat Passphrase:
 Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
 
-$ geth --datadir /tmp/eth  account list
+$ geth account list
 Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
 
-$ geth --datadir /tmp/eth.0  account import ./key.prv
+$ geth --datadir /someOtherEthDataDir  account import ./key.prv
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
 Passphrase:
@@ -73,13 +73,13 @@ You supply a plaintext password file as argument to the `--password` flag.
 Supplying the password directly as part of the command line is not encouraged, but you can always use shell trickery to get round this restriction.
 
 ```
-$ geth --datadir /tmp/eth --password /path/to/password account new
+$ geth --password /path/to/password account new
 Address: b0047c606f3af7392e073ed13253f8f4710b08b6
 
-$ geth --datadir /tmp/eth account list
+$ geth account list
 Address: {b0047c606f3af7392e073ed13253f8f4710b08b6}
 
-$ geth --datadir /tmp/eth1 --password /path/to/anotherpassword account import ./key.prv
+$ geth --datadir /someOtherEthDataDir --password /path/to/anotherpassword account import ./key.prv
 Address: b0047c606f3af7392e073ed13253f8f4710b08b6
 ```
 
@@ -240,4 +240,3 @@ That can then be executed with:
   eth.accounts[2]: 0xe470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32 	balance: 1 ether
   eth.accounts[3]: 0xf4dd5c3794f1fd0cdc0327a83aa472609c806e99 	balance: 6 ether
 ```
-
