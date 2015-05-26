@@ -10,6 +10,24 @@ To configure the location of Geth's files, the `--datadir` parameter can be spec
 
 _**Note:** The mining DAG is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
 
+## Upgrades
+
+Sometimes the internal database formats need updating (for example, when upgrade from before 0.9.20). This can be run with the following command (geth should not be otherwise running):
+
+```
+geth upgradedb
+```
+
+## Cleanup
+
+Geth's blockchain and state databases can be removed with:
+
+```
+geth removedb
+```
+
+This is useful for deleting an old chain and sync'ing to a new one.
+
 ## Blockchain import/export
 
 Export the blockchain in binary format with:
