@@ -151,13 +151,13 @@ Getting openCL for your chipset and platform, try:
 * [NVIDIA CUDA openCL](https://developer.nvidia.com/cuda-downloads)
 
 ## On Ubuntu
-AMD
+### AMD
 ```
 apt-get install fglrx
 // wget, tar, opencl
 aticonfig --adapter=all --initial
 ```
-Nvidia
+### Nvidia
 The following instructions are, for the most part, relevant to any system with Ubuntu 14.04 and a Nvidia GPU.
 [Setting up an EC2 instance for mining](https://forum.ethereum.org/discussion/comment/8889/#Comment_8889)
 
