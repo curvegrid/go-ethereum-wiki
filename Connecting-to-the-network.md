@@ -105,9 +105,11 @@ peers you always want to connect to. Static nodes are re-connected
 on disconnects. You can configure permanent static nodes by putting something like
 the following into `<datadir>/static-nodes.json`:
 
-	[
-    	"enode://f4642fa65af50cfdea8fa7414a5def7bb7991478b768e296f5e4a54e8b995de102e0ceae2e826f293c481b5325f89be6d207b003382e18a8ecba66fbaf6416c0@33.4.2.1:30303",
-"enode://pubkey@ip:port"
-    ]
+```js
+[
+  "enode://f4642fa65af50cfdea8fa7414a5def7bb7991478b768e296f5e4a54e8b995de102e0ceae2e826f293c481b5325f89be6d207b003382e18a8ecba66fbaf6416c0@33.4.2.1:30303",
+  "enode://pubkey@ip:port"
+]
+```
 
 
