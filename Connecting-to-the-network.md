@@ -24,7 +24,9 @@ Sometimes you just can't get connected. The most common reasons are
 as follows:
 
 - Your local time might be incorrect. An accurate clock is required
-  to participate in the Ethereum network.
+  to participate in the Ethereum network.  Check your OS for how to resync
+  your clock (example sudo ntpdate -s time.nist.gov) because even 12
+  seconds too fast can lead to 0 peers.
 - Some firewall configurations can prevent UDP traffic from flowing.
   You can use the static nodes feature or `admin.addPeer()` on the console
   to configure connections by hand.
