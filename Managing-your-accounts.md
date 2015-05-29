@@ -240,3 +240,14 @@ That can then be executed with:
   eth.accounts[2]: 0xe470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32 	balance: 1 ether
   eth.accounts[3]: 0xf4dd5c3794f1fd0cdc0327a83aa472609c806e99 	balance: 6 ether
 ```
+
+Since this function will disappear after restarting geth, it can be helpful to store commonly used functions to be recalled later. The [loadScript](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#loadscript) function makes this very easy.
+
+First, save the `checkAllBalances()` function definition to a file on your computer. For example, `/Users/username/gethload.js`. Then load the file from the interactive console:
+
+```
+> loadScript("/Users/username/gethload.js")
+true
+```
+
+The file will modify your JavaScript environment as if you has typed the commands manually. Feel free to experiment!
