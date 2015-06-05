@@ -40,6 +40,7 @@ Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wi
 
 ### Net
 Network related functions
+* [addPeer](#net_addpeer)
 * [id](#net_id)
 * [getPeerCount](#net_getpeercount)
 * [getListening](#net_getlistening)
@@ -133,6 +134,17 @@ none
 
 #### Return
 `boolean` indication if the command was successful
+
+***
+
+### net_addpeer
+Add peer
+
+#### Parameters
+`URL`, peer enode
+
+#### Return
+`boolean` indication if peer was added
 
 ***
 
