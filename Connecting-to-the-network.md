@@ -35,16 +35,17 @@ To start geth without the discovery protocol, you can use the `--nodiscover` par
 
 ## Checking Connectivity
 
-To check how many peers the client is connected to in the interactive console, check the `net` object:
-```
-> net
-{
-  listening: true,
-  peerCount: 4
-}
+To check how many peers the client is connected to in the interactive console, the `net` module has two attributes give you info about the number of peers and whether you are a listening node.
+
+```js
+> net.listening
+true
+> net.peerCount
+4
 ```
 
-To get more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object:
+To get more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object. `admin.peers()` returns the list of currently connected peers.
+
 ```
 > admin.peers()
 [{
@@ -121,3 +122,5 @@ You can also add static nodes at runtime via the js console using [`admin.addPee
 ```js
 admin.addPeer("enode://f4642fa65af50cfdea8fa7414a5def7bb7991478b768e296f5e4a54e8b995de102e0ceae2e826f293c481b5325f89be6d207b003382e18a8ecba66fbaf6416c0@33.4.2.1:30303")
 ```
+
+Caveat: Currently the console is lacking support for removing a peer, increasing peercount or adding a non-static peer but not to keep try reconnecting.
