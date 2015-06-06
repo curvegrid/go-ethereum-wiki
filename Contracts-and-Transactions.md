@@ -390,20 +390,6 @@ geth --maxpeers 0 --networkid 123456 --unlock primary js script.js 2>> geth.log
 
 Note that `networkid` can be any arbitrary non-negative integer, 0 is always the live net.
 
-```js
-// assume an existing unlocked primary account
-primary = eth.accounts[0];
-
-// mine 10 blocks to generate ether
-admin.miner.start();
-admin.debug.waitForBlocks(eth.blockNumber+10);
-admin.miner.stop()  ;
-
-balance = web3.fromWei(eth.getBalance(primary), "ether");
-
-// this is needed only on private networks,  
-// you can expect the registry contracts to be deployed on the live net.
-admin.contractInfo.newRegistry(primary);
 
 source = "contract test {\n" +
 "   /// @notice will multiply `a` by 7.\n" +
@@ -456,4 +442,184 @@ Multiply7 = eth.contract(abiDef);
 myMultiply7 = Multiply7.at(contractaddress);
 fortytwo = myMultiply7.multiply.sendTransaction(6, { from: primary });
 
+```
+
+# Testing contracts and transactions
+
+Often you need to resort to a low level strategy of testing and debugging contracts and transactions.
+This section introduces some debug tools and practices you can use.
+In order to test contracts and transactions without real-word consequences, you best test it on a private blockchain. This can be achieved with configuring an alternative network id (select a unique integer) and/or disable peers. fIt is recommended practice that for testing you use an alternative data directory and ports so that you never even accidentally clash with your live running node (assuming that runs using the defaults.
+Starting your `geth` with in VM debug mode with profiling and highest logging verbosity level is recommended:
+
+```js
+geth --datadir ~/dapps/testing/00/ --port 30310 --rcpport 8110 --networkid 4567890 --nodiscover --maxpeers 0 --vmdebug --verbosity 6 --pprof --pprofport 6110 console 2>> ~/dapp/testint/00/00.log
+```
+
+Before you can submit any transactions, you need mine some ether on your private chain and for that you need an account. See the sections on [Mining](https://github.com/ethereum/go-ethereum/wiki/Mining) and [Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-Your-Accounts)
+
+```js
+// create account. will prompt for password
+admin.newAccount();
+// name your primary account, will often use it
+primary = eth.accounts[0];
+// check your balance (denominated in ether)
+balance = web3.fromWei(eth.getBalance(primary), "ether");
+```
+
+```js
+// assume an existing unlocked primary account
+primary = eth.accounts[0];
+
+// mine 10 blocks to generate ether 
+
+// starting miner
+admin.miner.start();
+// wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
+admin.debug.waitForBlocks(eth.blockNumber+10);
+// then stop mining (just not to burn heat in vain)
+admin.miner.stop()  ;
+balance = web3.fromWei(eth.getBalance(primary), "ether");
+```
+
+After you create transactions, you can force process them with the following lines:
+
+```
+confirmations = 10;
+admin.miner.start();
+// wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
+admin.debug.waitForBlocks(eth.blockNumber+confirmations);
+admin.miner.stop()  ;
+```
+
+you can check your pending transactions with 
+
+```js
+// number of pending txs
+eth.getBlockTransactionCount("pending");
+// print all pending txs
+eth.getBlock("pending", true).transactions
+```
+
+If you submitted contract creation transaction, you can check if the desired code actually got inserted in the current blockchain:
+
+```js
+contractaddress = eth.sendTansaction({from:primary, data: code})
+//... mining
+eth.getCode(contractaddress)
+```
+
+# Registrar services 
+
+The frontier chain comes with some very basic baselayer services, most of all the registrar.
+The registrar is composed of 3 components. 
+
+* GlobalRegistrar to associate names (strings) to accounts (addresses). 
+* HashReg to associate hashes to hashes (map any object to a 'content' hash.
+* UrlHint to associate content hashes to a hint for the location of the content. This is needed only if content storage is not content addressed, otherwise content hash is already the content address. If it is used, content fetched from the url should hash to content hash. In order to check authenticity of content one can check if this verifies.
+
+## create and deploy GlobalRegistrar, HashReg and UrlHint
+
+
+If the registrar contracts are not hardcoded in the blockchain (they are not at the time of writing), the registrars need to be deployed at least once on every chain.
+
+If you are on *the main live chain*, the address of the main global registrar is hardcoded in 
+the latest clients and therefore *you do not need to do anything*. If you want to change this or you are on a private chain you need to deploy these contracts at least once:
+
+```js
+primary = eth.accounts[0];
+
+globalRegistrarAddr = admin.setGlobalRegistrar("", primary);
+hashRegAddr = admin.setHashReg("", primary);
+urlHintAddr = admin.setUrlHint("", primary);
+```
+
+You need to mine or wait till the txs are all picked up.
+Initialise the registrar on the new address and check if the other registrars' names resolve to the correct addresses:
+
+```js 
+primary == registrar.owner("HashReg");
+primary == registrar.owner("UrlHint");
+hashRegAddr == registrar.addr("HashReg");
+urlHintAddr registrar.addr("UrlHint");
+```
+
+and the following ones return correct code:
+
+```js
+eth.getCode(registrar.address);
+eth.getCode(registrar.addr("HashReg"));
+eth.getCode(registrar.addr("UrlHint"));
+```
+
+From the second time onwards on the same chain as well as on other nodes, you simply seed with the GlobalRegistrars address, the rest is handled through it.
+
+```js
+primary = eth.accounts[0];
+globalRegistrarAddr = "0x225178b4829bbe7c9f8a6d2e3d9d87b66ed57d4f"
+
+// set the global registrar address
+admin.setGlobalRegistrar(globalRegistrarAddr)
+// set HashReg address via globalRegistrar
+hashRegAddr = admin.setHashReg()
+// set UrlHint address via globalRegistrar
+urlHintAddr = admin.setUrlHint()
+
+// (re)sets the registrar variable to a GlobalRegistrar contract instance 
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
+```
+
+If this is successful, you should be able to check with the following commands if the registrar returns addresses:
+
+```js 
+registrar.owner("HashReg");
+registrar.owner("UrlHint");
+registrar.addr("HashReg");
+registrar.addr("UrlHint");
+```
+
+and the following ones return correct code:
+
+```js
+eth.getCode(registrar.address);
+eth.getCode(registrar.addr("HashReg"));
+eth.getCode(registrar.addr("UrlHint"));
+```
+
+## Using the registrar services
+
+Can provide useful interfaces between contracts and dapps. 
+
+### Global registrar
+
+To reserve a name register an account address with it, you need the following:
+
+```
+registrar.reserve.sendTransaction(name, {from:primary})
+registrar.setAddress.sendTransaction (name, address, true, {from: primary})
+```
+
+You need to wait for the transactions to be picked up (or force mine them if you are on a private chain). To check you query the registrar:
+
+```js
+registrar.owner(name)
+registrar.addr(name)
+```
+
+### HashReg and UrlHint 
+
+HashReg and UrlHint can be used with the following abis:
+
+```js
+```
+
+Associate a content hash to a key hash:
+
+```js
+hashReg.register.sendTransaction(keyhash, contenthash, {from:primary})
+```
+
+Associate a url to a content hash:
+
+```js
+urlHint.register.sendTransaction(contenthash, url, {from:primary})
 ```
