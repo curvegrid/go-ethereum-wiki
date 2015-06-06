@@ -1,5 +1,26 @@
 * [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway) _(main wiki)_
 
+## Mining Rewards
+
+Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value.
+
+### Transaction fees
+
+### Uncles
+
+## Ethash DAG
+
+Ethash uses a **DAG** (directed acyclic graph) for the proof of work algorithm, this is generated for each **epoch**, i.e every 30000 blocks (100 hours). The DAG takes a long time to generate. If clients only generate it on demand, you may see a long wait at each epoch transition before the first block of the new epoch is found. However, the DAG only depends on block number, so it CAN and SHOULD be calculated in advance to avoid long wait at each epoch transition. `geth` implements automatic DAG generation and maintains two DAGS at a time for smooth epoch transitions. Automatic DAG generation is turned on and off when mining is controlled from the console. It is also turned on by default if `geth` is launched with the `--mine` option. Note that clients share a DAG resource, so if you are running multiple instances of any client, make sure automatic dag generation is switched on in at most one client. 
+
+To generate the DAG for an arbitrary epoch:
+
+```
+geth makedag <block number> <outputdir>
+```
+
+For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` (Mac/Linux) or `~/AppData/Ethash`  (Windows) for the DAG so that it can shared between clients. 
+
+
 # Mining with Geth
 
 _**NOTE:** Ensure your blockchain is fully synchronised with the main chain before starting to mine, otherwise you will not be mining on the main chain._
@@ -8,7 +29,7 @@ When you start up your ethereum node with `geth` it is not mining by default. To
 
 `geth --mine --minerthreads=4`
 
-You can also start and stop mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). 
+You can also start and stop CPU mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). `admin.miner.start` takes an optional parameter for the number of miner threads. 
 
 ```
 > admin.miner.start()
@@ -16,6 +37,8 @@ true
 > admin.miner.stop()
 true
 ```
+
+Note that mining for real ether only makes sense if you are in sync with the network (since you mine on top of the consensus block). Therefore the eth blockchain downloader/synchroniser will delay mining until syncing is complete, and after that mining automatically starts unless you cancel your intention with `admin.miner.stop()`.
 
 In order to earn ether through you need to have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you got no etherbase address set, then `geth --mine` will not start up.
 
@@ -100,6 +123,10 @@ minedBlocks(1000, eth.coinbase);
 //[352708, 352655, 352559]
 ```
 
+Note that it will happen often that you find a block yet it never makes it to the canonical chain. This means when you locally include your mined block, the current state will show the mining reward credited to your account, however, after a while, the better chain is discovered and we switch to a chain in which your block is not included and therefore no mining reward is credited. Therefore it is quite possible that as a miner monitoring their coinbase balance will find that it may fluctuate quite a bit. 
+
+The logs show locally mined blocks confirmed after 5 blocks. At the moment you may find it easier and faster to generate the list of your mined blocks from these logs.
+
 Mining success depends on the set block difficulty. Block difficulty dynamically adjusts each block in order to regulate the network hashing power to produce a 12 second blocktime. Your chances of finding a block therefore follows from your hashrate relative to difficulty. The time you need to wait you are expected to find a block can be estimated with the following code:
 
 **INCORRECT...CHECKING**
@@ -109,28 +136,8 @@ Math.floor(etm / 3600.) + "h " + Math.floor((etm % 3600)/60) + "m " +  Math.floo
 // 1h 3m 30s
 ```
 
-Given a difficulty of 3 billion, a typical CPU with 800KH/s is expected to find a block every 
+Given a difficulty of 3 billion, a typical CPU with 800KH/s is expected to find a block every ....?
 
-Note that it will happen often that you find a block yet it never makes it to the canonical chain. This means when you locally include your mined block, the current state will show the mining reward credited to your account, however, after a while, the better chain is discovered and we switch to a chain in which your block is not included and therefore no mining reward is credited. Therefore it is quite possible that as a miner monitoring their coinbase balance will find that it may fluctuate quite a bit. 
-
-## Mining Rewards
-
-Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value.
-
-
-### Transaction fees
-
-### Uncles
-
-## Ethash DAG
-
-Ethash uses a **DAG** (directed acyclic graph) for the proof of work algorithm, this is generated for each **epoch**, i.e every 30000 blocks (100 hours). The DAG takes a long time to generate. Since the clients only generate it on demand, you may see a long wait at each epoch transition before the first block of the new epoch is found. However, the DAG only depends on block number, so it CAN and SHOULD be calculated in advance to avoid long wait at each epoch transition. 
-
-```
-geth makedag <block number> <outputdir>
-```
-
-For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` (Mac/Linux) or `~/AppData/Ethash`  (Windows) for the DAG so that it can shared between clients. 
 
 # GPU mining
 
