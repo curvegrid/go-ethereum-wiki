@@ -5,7 +5,7 @@ If you just want to run ethereum, use the normal [Installation Instructions](htt
 
 ## Go environment  
 
-We assume that you have [`go` installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), `GOPATH` is set.
+We assume that you have [`go` v1.4 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
 **Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`. You also usually want to checkout the `develop` branch (instead of master).
 
