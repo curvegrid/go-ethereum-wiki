@@ -380,70 +380,6 @@ tx = eth.pendingTransactions()[1]
 eth.resend(tx, newGasLimit, newGasPrice)
 ```
 
-# Example script
-
-The example script below demonstrates most features discussed in this tutorial. You can run it with the [JSRE](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) as `geth js script.js 2>>geth.log` . If you want to run this test on a local private chain, then start geth with:
-
-```
-geth --maxpeers 0 --networkid 123456 --unlock primary js script.js 2>> geth.log
-```
-
-Note that `networkid` can be any arbitrary non-negative integer, 0 is always the live net.
-
-
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-
-contract = eth.compile.solidity(source).test;
-
-contractaddress = eth.sendTransaction({from: primary, data: contract.code});
-
-eth.getBlock("pending", true).transactions;
-
-admin.miner.start()
-// waits until block height is minimum the number given.
-// basically a sleep function on variable block units of time.
-
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop()
-
-code = eth.getCode(contractaddress);
-
-abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
-Multiply7 = eth.contract(abiDef);
-myMultiply7 = Multiply7.at(contractaddress);
-
-fortytwo = myMultiply7.multiply.call(6);
-console.log("myMultiply7.multiply.call(6) => "+fortytwo);
-myMultiply7.multiply.sendTransaction(6, {from: primary})
-
-admin.miner.start();
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop();
-
-filename = "/tmp/info.json";
-contenthash = admin.contractInfo.register(primary, contractaddress, contract, filename);
-
-admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
-
-admin.miner.start();
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop();
-
-info = admin.contractInfo.get(contractaddress);
-
-admin.contractInfo.start();
-abiDef = JSON.parse('[{"constant":false,"inputs":[{"name":"a","type":"uint256"}],"name":"multiply","outputs":[{"name":"d","type":"uint256"}],"type":"function"}]');
-Multiply7 = eth.contract(abiDef);
-myMultiply7 = Multiply7.at(contractaddress);
-fortytwo = myMultiply7.multiply.sendTransaction(6, { from: primary });
-
-```
-
 # Testing contracts and transactions
 
 Often you need to resort to a low level strategy of testing and debugging contracts and transactions.
@@ -622,4 +558,97 @@ Associate a url to a content hash:
 
 ```js
 urlHint.register.sendTransaction(contenthash, url, {from:primary})
+```
+
+
+
+# Example script
+
+The example script below demonstrates most features discussed in this tutorial. You can run it with the [JSRE](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) as `geth js script.js 2>>geth.log` . If you want to run this test on a local private chain, then start geth with:
+
+```
+geth --maxpeers 0 --networkid 123456 --nodiscover --unlock primary js script.js 2>> geth.log
+```
+
+Note that `networkid` can be any arbitrary non-negative integer, 0 is always the live net.
+
+```
+// set your primary account address
+primary = eth.accounts[0];
+
+// set up registrar services
+globalRegistrarAddr = admin.setGlobalRegistrar("", primary);
+hashRegAddr = admin.setHashReg("", primary);
+urlHintAddr = admin.setUrlHint("", primary);
+// (re)sets the registrar variable to a GlobalRegistrar contract instance 
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
+
+// example source code for multiply7
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+
+contract = eth.compile.solidity(source).test;
+
+contractaddress = eth.sendTransaction({from: primary, data: contract.code});
+
+// to check if the transaction went through to the pool:
+eth.getBlock("pending", true).transactions;
+
+// force mine txs
+admin.miner.start();
+// waits until block height is minimum the number given.
+admin.debug.waitForBlocks(eth.blockNumber+1);
+admin.miner.stop()
+
+// use the contract
+// get abi definition from compiler output
+abiDef = contract.info.abiDefinition;
+// define the contract class
+Multiply7 = eth.contract(abiDef);
+// instantiate the contract instrance from an address
+multiply7 = Multiply7.at(contractaddress);
+
+// test the contract by calling the instance 
+fortytwo = myMultiply7.multiply.call(6, {from:primary});
+console.log("multiply7.multiply.call(6, {from:primary}) => "+fortytwo);
+
+// register a name for the contract
+registrar.reserve.sendTransaction(primary,  {from: primary});
+registrar.rsetAddress.sendTransaction("multiply7", contractaddress, true, {from: primary});
+// mine the registration into effect:
+admin.miner.start(); 
+admin.debug.waitForBlocks(eth.blockNumber+1);
+admin.miner.stop();
+
+// save info json, for later use and register contract info with the location
+filename = "/tmp/info.json";
+contenthash = admin.contractInfo.saveInfo(contract, filename);
+// register contenthash to contract address (using the sha3 of the code on contractaddress as codehash 
+// using HashReg: codehash -> contenthash
+admin.contractInfo.register(primary, contractaddress, contenthash);
+// register a url hint with the content hash
+admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
+
+// mine the registrations into effect:
+admin.miner.start();
+admin.debug.waitForBlocks(eth.blockNumber+1);
+admin.miner.stop();
+
+// retrieve contract address using global registrar entry with 'multply7'
+contractaddress = registrar.addr("multiply7);
+// retrieve the info using the url 
+info = admin.contractInfo.get(contractaddress);
+abiDef = info.abiDefinition;
+Multiply7 = eth.contract(abiDef);
+multiply7 = Multiply7.at(contractaddress);
+
+// switch on Natspec
+admin.contractInfo.start();
+myMultiply7.multiply.sendTransaction(6, { from: primary });
+// 
+console.log("Pending TX count should be 0: "+eth.getTransactionCountForBlock("pending"));
 ```
