@@ -1,3 +1,5 @@
+**DO NOT FORGET YOUR PASSWORD** and **BACKUP YOUR KEYSTORE**
+
 ## Data directory
 
 Everything `geth` persists gets written inside its data directory (except for the PoW Ethash DAG, see note below).
@@ -7,9 +9,9 @@ The default data directory locations are platform specific:
 * Linux: `~/.ethereum`
 * Windows: `~/AppData/Roaming/Ethereum"`
 
-Accounts are stored in the `keystore` subdirectory. The contents of this directories should be transportable between platforms, but is specific to the Go implementation.
+Accounts are stored in the `keystore` subdirectory. The contents of this directories should be transportable between nodes, platforms, implementations (C++, Go, Python).
 
-To configure the location of Geth's files, the `--datadir` parameter can be specified. See [CLI Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options) for more details.
+To configure the location of the data directory, the `--datadir` parameter can be specified. See [CLI Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options) for more details.
 
 _**Note:** The [Ethash DAG](https://github.com/ethereum/go-ethereum/wiki/Mining#ethash-dag) is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
 
@@ -44,3 +46,6 @@ geth import <filename>
 ```
 
 _See https://github.com/ethereum/wiki/wiki/Blockchain-import-export for more info_
+
+
+And finally: **DO NOT FORGET YOUR PASSWORD** and **BACKUP YOUR KEYSTORE**
