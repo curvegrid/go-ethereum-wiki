@@ -1,4 +1,7 @@
-Default data storage locations:
+## Data directory
+
+Everything `geth` persists gets written inside its data directory (except for the PoW Ethash DAG, see note below).
+The default data directory locations are platform specific:
 
 * Mac: `~/Library/Ethereum`
 * Linux: `~/.ethereum`
@@ -8,7 +11,7 @@ Accounts are stored in the `keystore` subdirectory. The contents of this directo
 
 To configure the location of Geth's files, the `--datadir` parameter can be specified. See [CLI Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options) for more details.
 
-_**Note:** The mining DAG is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
+_**Note:** The [Ethash DAG](https://github.com/ethereum/go-ethereum/wiki/Mining#ethash-dag) is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
 
 ## Upgrades
 
@@ -32,7 +35,7 @@ This is useful for deleting an old chain and sync'ing to a new one.
 
 Export the blockchain in binary format with:
 ```
-geth export <filename>
+geth --first 314150 --last 400000 export <filename>
 ```
 
 Import binary-format blockchain exports with:
