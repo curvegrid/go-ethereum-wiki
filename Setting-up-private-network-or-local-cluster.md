@@ -9,11 +9,10 @@ In order to run multiple ethereum nodes locally, you have to make sure:
 - each instance has a separate data directory
 - each instance runs on a different port (both eth and rpc)
 - the instances know about each other
-- [ONLY TEMPORARY]: only one instance does mining ( until #555 fixes dag versioning in ethash, `/tmp/dag` cannot be shared by multiple instances.)
 
 You start the first node (let's make port explicit)
 ```bash
-geth --datadir="/tmp/eth/60/01" -loglevel 5 -logfile /tmp/eth/60/01.log -port 30301 -rpc -rpcport 8101  console
+geth --datadir="/tmp/eth/60/01" -verbosity 6 --port 30301 --rpcport 8101 console 2>> /tmp/eth/60/01.log
 ```
 
 We started the node with the console, so that we can grab the enode for instance:
@@ -31,20 +30,21 @@ $ ifconfig|grep netmask|awk '{print $2}'
 192.168.1.97
 ```
 
+If your peers are not on the local network, you need to know your external IP address (use a service) to construct the enode. If you want to connect to specific peer, enter the enodes in a `static-nodes.json` file. 
+
 Now you can launch a second node with:
 
 ```bash
-geth --datadir="/tmp/eth/60/02" -loglevel 5 -logfile /tmp/eth/60/02.log -port 30302 -rpc -rpcport 8102 -bootnodes="enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@127.0.0.1:30301" 
+geth --datadir="/tmp/eth/60/02" --verbosity 6 --port 30302 --rpcport 8102 console 2>> /tmp/eth/60/02.log 
 ```
 
 You can test the connection  by typing in geth console:
 
 ```javascript
-> net
-{
-  listening: true,
-  peerCount: 1
-}
+> net.listening
+true
+> net.peerCount 
+1
 > admin.peers
 ...
 ```
@@ -56,11 +56,11 @@ See [`gethcluster.sh`](https://github.com/ethersphere/eth-utils) script, and the
 
 ## Private network 
 
-An ethereum network is a private network if the nodes are not connected to the main network nodes. So in this context private only means reserved or isolated, rather than protected or secure. Since connections are valid only if peers have identical protocol version an network id, you can effectively isolate your network by setting either of these to a non-canonical value. We recommend using the semantic `networkid` command line option for this. Its argument is an integer, the canonical network has id 0 (the default).
+An ethereum network is a private network if the nodes are not connected to the main network nodes. So in this context private only means reserved or isolated, rather than protected or secure. Since connections are valid only if peers have identical protocol version and network id, you can effectively isolate your network by setting either of these to a non-canonical value. We recommend using the semantic `networkid` command line option for this. Its argument is an integer, the canonical network has id 0 (the default). And also allows you to work or mine on the same database as the live network.
 
 ## Monitoring your nodes
 
-[This page](https://github.com/ethereum/wiki/wiki/Network-Status) describes how to use the [The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats")](http://eth-netstats.herokuapp.com) to monitor your nodes.
+[This page](https://github.com/ethereum/wiki/wiki/Network-Status) describes how to use the [The Ethereum (centralised) network status monitor (known sometimes as "eth-netstats")](http://stats.ethdev.com) to monitor your nodes.
 
 [This page](https://github.com/ethereum/go-ethereum/wiki/Setting-up-monitoring-on-local-cluster) or [this README](https://github.com/ethersphere/eth-utils) 
 describes how you set up your own monitoring service for a (private or public) local cluster.
