@@ -46,6 +46,10 @@ Note that the other known limitation of Otto (namely the lack of timers) is take
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
+# Timers
+
+In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is augmented with various timers. It implements `setInterval`, `clearInterval`, `setTimeout`, `clearTimeout` you may be used to using in browser windows. It also provides implementation for `sleep(seconds)` and a blockchain-height based timer, `sleepBlocks(n)` which sleeps till the number of new blocks added is equal to or greater than `sleepBlocks(n)`, think "wait for n confirmations". 
+
 # JavaScript Console API
 
 * [eth](#eth)
@@ -71,6 +75,7 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
     * [makeDAG](#adminminermakedag)
     * [hashrate](#adminminerhashrate)
     * [setExtra](#adminminersetextra) 
+    * [setGasPrice] (#adminminersetgasprice)
   * [contractInfo](#admincontractinfo)
     * [start](#admincontractinfostart)
     * [stop](#admincontractinfostop)
@@ -80,13 +85,21 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
   * [debug](#admindebugbacktrace)
     * [backtrace](#admindebugbacktrace)
     * [setHead](#admindebugsethead)
+    * [seedHash](#adminseedhash)
     * [processBlock](#admindebugprocessblock)
-    * [getBlockRlp](#admindebuggetblockrlp)
+    * [getBlockRlp](#admindebugge tblockrlp)
     * [printBlock](#admindebugprintblock)
     * [dumpBlock](#admindebugdumpblock)
 * [loadScript](#loadscript)
+* [sleep](#sleep)
+* [sleepBlocks](#sleepBlocks)
+* [setInterval](#setInterval)
+* [clearInterval](#clearInterval)
+* [setTimeout](#setTimeout)
+* [clearTimeout](#clearTimeout)
 * [web3](#web3)
 * [net](#net)
+* [web3](#web3)
 * [eth](#eth)
 * [shh](#shh)
 * [db](#db)
@@ -95,7 +108,7 @@ Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumbe
 
 
 #### admin
-The `admin` exposes the methods to manage the node.
+The `admin` exposes the methods to manage, control, debug, test or monitor your node. It allows for limited file system access. 
 
 ***
 
@@ -442,6 +455,60 @@ returns the contract info object
 ```
 
 ***
+#### admin.contractInfo.saveInfo
+
+    admin.contractInfo.register(contract.info, filename);
+
+will write [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) into the target file, calculates its content hash. This content hash then can used to associate a public url with where the contract info is publicly available and verifiable. If you register the codehash (hash of the code of the contract on contractaddress).
+
+##### Returns
+
+`contenthash` on success, otherwise `undefined`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+filename = "/tmp/info.json";
+contenthash = admin.contractInfo.saveInfo(contract.info, filename);
+```
+
+***
+#### admin.contractInfo.register
+
+    admin.contractInfo.register(address, contractaddress, contenthash);
+
+will register content hash to the codehash (hash of the code of the contract on contractaddress). The register transaction is sent from the address in the first parameter. The transaction needs to be processed and confirmed on the canonical chain for the registration to take effect.
+
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+filename = "/tmp/info.json";
+contenthash = admin.contractInfo.saveInfo(contract.info, filename);
+admin.contractInfo.register(primary, contractaddress, contenthash);
+```
+
+***
 
 #### admin.contractInfo.register
 
@@ -532,6 +599,23 @@ See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ***
 
+#### admin.debug.seedHash
+
+    admin.debug.seedHash(hashHexStringOrBlockNumber)
+
+**Sets** the current head of the blockchain to the block referred to by _hashHexStringOrBlockNumber_.
+See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+
+##### Returns 
+
+`true` on success, otherwise `false`.
+
+##### Example 
+
+    admin.debug.seedHash(140101)
+
+***
+
 #### admin.debug.processBlock
 
     admin.debug.processBlock(hashHexStringOrBlockNumber)
@@ -549,6 +633,12 @@ In combination with `setHead`, this can be used to replay processing of a block 
     admin.debug.processBlock(140101)
 
 ***
+
+#### admin.debug.insertBlock
+
+
+***
+
 
 #### admin.debug.getBlockRlp
 
@@ -645,7 +735,28 @@ see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
      loadScript('/path/to/myfile.js');
 
-Loads a JavaScript file and executes it. Relative paths are interpreted as relative to `jspath` which is specified as a command line flag, see [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options).
+Loads a JavaScript file and executes it. Relative paths are interpreted as relative to `jspath` which is specified as a command line flag, see [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). 
+
+#### sleep 
+
+    sleep(s)
+
+Sleeps for s seconds. 
+
+#### sleepBlocks 
+
+    sleepBlocks(n)
+
+Sleeps for s seconds. 
+
+#### setInterval
+
+    setInterval(s, func() {})
+
+#### clearInterval
+#### setTimeout
+#### clearTimeout
+
 
 ***
 
