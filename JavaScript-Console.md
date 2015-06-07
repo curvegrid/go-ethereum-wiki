@@ -118,8 +118,6 @@ The `admin` exposes the methods to manage, control, debug, test or monitor your 
 
 Prints info on blockchain synching.
 
-###
-
 ***
 
 #### admin.verbosity
