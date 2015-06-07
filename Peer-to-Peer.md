@@ -17,7 +17,7 @@ If we wanted to extend the capabilities of our p2p server we'd need to pass it a
 An additional sub protocol that has the ability to respond to the message "foo" with "bar" requires you to setup an `p2p.Protocol{}`:
 
 ```go
-func MyProtocol() {
+func MyProtocol() p2p.Protocol {
 	return p2p.Protocol{ // 1.
 		Name:    "MyProtocol",                                                    // 2.
 		Version: 1,                                                               // 3.
