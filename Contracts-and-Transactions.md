@@ -155,7 +155,7 @@ The following example shows how you interface `geth` via JSON-RPC to use the com
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_compileSolidity","params":["contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"],"id":1}' http://127.0.0.1:8100
 ```
 
-The compiler output for one contract is combined into an object representing a single contract and is serialised as json. The actual return value of `eth.compile.solidity` is a map of contract name -- contract object pairs. Since our contract's name is `test`, `eth.compile.solidity(source).test` will give you the contract object for the test contract containing the following fields:
+The compiler output for one source will give you contract objects each representing a single contract. The actual return value of `eth.compile.solidity` is a map of contract name -- contract object pairs. Since our contract's name is `test`, `eth.compile.solidity(source).test` will give you the contract object for the test contract containing the following fields:
 
 * `code`: the compiled EVM code
 * `info`: the rest of the metainfo the compiler outputs
@@ -169,6 +169,13 @@ The compiler output for one contract is combined into an object representing a s
 
 The immediate structuring of the compiler output (into `code` and `info`) reflects the two very different **paths of deployment**. 
 The compiled EVM code is sent off to the blockchain with a contract creation transaction while the rest (info) will ideally live on the decentralised cloud as publicly verifiable metadata complementing the code on the blockchain.
+
+If your source contains multiple contracts, the output will contain an entry for each contact, the corresponding contract info object can be retrieved with the name of the contract as attribute name. 
+You can try this by inspecting the most current GlobalRegistrar code:
+
+```js
+contracts = eth.compilers.solidity(globalRegistrarSrc)
+```
 
 # Creating and deploying a contract
 
@@ -324,10 +331,13 @@ source = "contract test {
 }"
 contract = eth.compile.solidity(source).test
 contractaddress = eth.sendTransaction{from: primary, data: contract.code})
-contentHash = admin.contractInfo.register(primary, contractaddress, contract, "~/dapps/shared/contracts/test/info.json")
-// put it up on your favourite site:
+contentHash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
+contentHash = admin.contractInfo.register(primary, contractaddress, contenthash)
+// put it up on your favourite oldworld site:
 admin.contractInfo.registerUrl(contentHash, "http://dapphub.com/test/info.json")
 ```
+
+Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address itself.
 
 For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.contractInfo.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
 
@@ -355,7 +365,7 @@ And now try to send an actual transaction:
 ```js
 > myMultiply7.multiply.sendTransaction(6)
 NatSpec: Will multiply 6 by 7. 
-Confirm? [Y/N] y
+Confirm? [y/n] y
 >
 ```
 
@@ -453,7 +463,7 @@ The registrar is composed of 3 components.
 * HashReg to associate hashes to hashes (map any object to a 'content' hash.
 * UrlHint to associate content hashes to a hint for the location of the content. This is needed only if content storage is not content addressed, otherwise content hash is already the content address. If it is used, content fetched from the url should hash to content hash. In order to check authenticity of content one can check if this verifies.
 
-## create and deploy GlobalRegistrar, HashReg and UrlHint
+## Create and deploy GlobalRegistrar, HashReg and UrlHint
 
 
 If the registrar contracts are not hardcoded in the blockchain (they are not at the time of writing), the registrars need to be deployed at least once on every chain.
@@ -473,6 +483,7 @@ You need to mine or wait till the txs are all picked up.
 Initialise the registrar on the new address and check if the other registrars' names resolve to the correct addresses:
 
 ```js 
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
 primary == registrar.owner("HashReg");
 primary == registrar.owner("UrlHint");
 hashRegAddr == registrar.addr("HashReg");
@@ -626,7 +637,7 @@ admin.miner.stop();
 
 // save info json, for later use and register contract info with the location
 filename = "/tmp/info.json";
-contenthash = admin.contractInfo.saveInfo(contract, filename);
+contenthash = admin.contractInfo.saveInfo(contract.info, filename);
 // register contenthash to contract address (using the sha3 of the code on contractaddress as codehash 
 // using HashReg: codehash -> contenthash
 admin.contractInfo.register(primary, contractaddress, contenthash);
