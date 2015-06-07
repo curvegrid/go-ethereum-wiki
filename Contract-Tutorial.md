@@ -59,19 +59,20 @@ source = "contract test {\n" +
 "   }\n" +
 "} ";
 // compile the Solidity contract and store the result
-contract = eth.compile.solidity(source);
+contract = eth.compile.solidity(source).test;
 
 // set primary account variable
 primary = eth.coinbase
 // send a transaction and store the resulting address
-contractaddress = eth.sendTransaction({from: primary, data: contract.test.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: web3.toWei("10", "szabo") });
 
 // wait for the transaction to be mined
 
 // define where to extract the metadata
 filename = "/tmp/metadata.json";
 // register the contract and store the hash
-hash = admin.contractInfo.register(primary, contractaddress, contract.test, filename);
+hash = admin.contractInfo.saveInfo(contract.info, filename);
+admin.contractInfo.register(primary, contractaddress, hash);
 
 // wait for the transaction to be mined
 
@@ -103,7 +104,7 @@ myMultiply7.multiply.call(6);
 or compacted into a single line:
 
 ```js
-web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.owner("multiply7")).abiDefinition)).at(registrar.owner(nameregName)).multiply.call(6);
+web3.eth.contract(eth.contract(admin.contractInfo.get(registrar.addr("multiply7")).abiDefinition)).at(registrar.addr(nameregName)).multiply.sendTransaction(6, {from: primaryAddress});
 ```
 
 # Greeter
@@ -125,11 +126,15 @@ Before you are able to upload it to the network, you need two things: the compil
 
 The first you can get by using a compiler. You should have a solidity compiler built in on your geth console. To test it, use this command:
 
-`eth.getCompilers()`
+```js
+eth.getCompilers()
+```
 
 If you have it installed, it should output something like this:
 
-`['Solidity' ]`
+```js
+['Solidity' ]
+```
 
 If instead the command returns an error, then read the documentation on how to install a compiler, use Aleth zero or use the  online solidity compiler. 
 
@@ -142,7 +147,7 @@ var greeterSource = 'contract greeter { function greet(bytes32 input) returns(by
 Once you sucessfully executed the above, compile it and publish to the network using the following commands:
 
 ```js
-var greeterCompiled = eth.compile.solidity(greeterSource)
+var greeterCompiled = eth.compile.solidity(greeterSource).greeter
 var primaryAccount = eth.accounts[0]
 var greeterAddress = eth.sendTransaction({data: greeterCompiled.code, from: primaryAccount}); 
 ```
@@ -166,9 +171,9 @@ var greeterAddress = eth.sendTransaction({data: greeterCompiled.code, from: prim
 ```
 
 
-The latest gas price can be checked at the [Network Stats Dashboard](https://stats.ethdev.com). Don't get hanged too much on the specific unit conventions or the values of the numbers above, just tweak around that range. Go too up and you might reach gas limit of the block, go too low and the price might be too low, or the gas insuficient for the transaction to be picked up.
+The latest gas price can be checked at the [Network Stats Dashboard](https://stats.ethdev.com). Don't get hanged too much on the specific unit conventions or the values of the numbers above, just tweak around that range. Go too up and you might reach gas limit of the block, go too low and the price might be too low, or the gas insufficient for the transaction to be picked up.
 
-After your code has been accepted, `eth.getCode(codeAddress)` will return a long string of numbers. If that’s the case, congratulations, your little Greeter is live! If the contract is created again (by performing another eth.sendTransaction), it will be published to a new address. To ensure that old contracts can be cleaned and recover it's ether balance, be sure to include a `Suicide` call on it.
+After your code has been accepted, `eth.getCode(codeAddress)` will return a string which is your compiled code in hex notation. If that’s the case, congratulations, your little Greeter is live! If the contract is created again (by performing another `eth.sendTransactio`n), it will be published to a new address. To ensure that old contracts can be cleaned and recover it's ether balance, be sure to include a `Suicide` call on it.
 
 Now that your contract is live on the network, anyone can interact with it by instantiating a local copy. But in order to do that, your computer needs to know how to interact with it, which is what the Application Binary Interface (ABI) is for. This is how you instantiate a contract:
 
@@ -195,7 +200,7 @@ greeterInstance.greet.call("");
 
 If your greeter returned `“Hello World”` then congratulations, you just created your first digital conversationalist bot!  Try again with: 
 
-```
+```js
 greeterInstance.greet.call("hi");
 ```
 
@@ -254,7 +259,7 @@ var tokenSource = 'contract token { mapping (address => uint) balances;  functio
 Now let’s set up the contract, just like we did in the previous section. Since this is a more complex contract than the Greeter, we will add more gas than the default. Extra Gas is returned.
 
 ```js
-var tokenCompiled = eth.compile.solidity(tokenSource)
+var tokenCompiled = eth.compile.solidity(tokenSource).token
 var primaryAccount = eth.accounts[0]
 var tokenAddress = eth.sendTransaction({data: tokenCompiled.code, from: primaryAccount, gas:1000000}); 
 ```
@@ -286,7 +291,7 @@ Now of course those tokens aren't very useful if you hoard them all, so in order
 tokenInstance.sendToken.sendTransaction(eth.accounts[1], 100, {from: primaryAccount})
 ```
 
-The reason that the first command was .call() and the second is a .sendTransaction() is that the former is just a read operation and the latter is using gas to change the state of the blockchain, and as such, it needs to be set who is it coming from. Now, wait a minute and check both accounts balances:
+The reason that the first command was `.call()` and the second is a `.sendTransaction()` is that the former is just a read operation and the latter is using gas to change the state of the blockchain, and as such, it needs to be set who is it coming from. Now, wait a minute and check both accounts balances:
 
 ```js
 tokenInstance.getBalance.call(eth.accounts([0])
@@ -330,7 +335,7 @@ function sendToken(address receiver,uint256 amount)returns(bool sufficient){}
 function getBalance(address account)returns(uint256 balance){}
 }
 
-contract CrowdSale {
+contract crowdSale {
 	
 	address admin;
 	address beneficiary;
@@ -416,25 +421,28 @@ Compile it and copy the following commands on the terminal:
 `> var crowdsaleABI = [   {      "constant" : false,      "inputs" : [         {            "name" : "campaignID",            "type" : "uint256"         }      ],      "name" : "checkGoalReached",      "outputs" : [         {            "name" : "response",            "type" : "bytes32"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_beneficiary",            "type" : "address"         },         {            "name" : "_fundingGoal",            "type" : "uint256"         },         {            "name" : "_deadline",            "type" : "uint256"         },         {            "name" : "_price",            "type" : "uint256"         },         {            "name" : "_reward",            "type" : "address"         }      ],      "name" : "setup",      "outputs" : [         {            "name" : "response",            "type" : "bytes32"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [],      "name" : "contribute",      "outputs" : [         {            "name" : "response",            "type" : "bytes32"         }      ],      "type" : "function"   }]`
 
 Set your sending account and store the resulting contract address:
-```
-> var primaryAccount = eth.accounts[0]
-> var crowdsaleAddress = web3.eth.sendTransaction({data: crowdsaleCode, from: primaryAccount, gas:1000000}); 
+
+```js
+var primaryAccount = eth.accounts[0]
+var crowdsaleAddress = web3.eth.sendTransaction({data: crowdsaleCode, from: primaryAccount, gas:1000000}); 
 ```
 
 Wait minute until and use the code below to test if your code has been deployed.
 
-`> eth.getCode(crowdsaleAddress)`
+```js
+eth.getCode(crowdsaleAddress)
+```
 
 If it has, then do these commands to instantiate it locally.
 
-```
-crowdsaleContract = web3.eth.contract(crowdsaleABI)
-crowdsaleInstance = new crowdsaleContract(crowdsaleAddress)
+```js
+CrowdsaleContract = web3.eth.contract(crowdsaleABI)
+crowdsaleInstance = CrowdsaleContract.at(crowdsaleAddress)
 ```
 
 Your first step now is to set the contract up. You can only do it once and it needs to come from the same account that created the contract in the first place.
 
-```
+```js
 var beneficiary = eth.accounts[1];  // create an account for this
 var fundingGoal = web3.toWei(100, "ether"); // raises a 100 ether
 var deadline = eth.blockNumber + 200000; // about four weeks
@@ -444,12 +452,15 @@ var reward = tokenAddress; 	// the token contract address.
 
 On Beneficiary put the new address that will receive the raised funds. The funding goal is the amount of ether to be raised. Deadline is measured in blocktimes which average 12 seconds, so the default is about 4 weeks. The price is tricky: but just change the number 2 for the amount of tokens the contributors will receive for each ether donated. Finally reward should be the address of the token contract you created in the last section.
 
-`> crowdsaleInstance.setup.sendTransaction(beneficiary, fundingGoal, deadline, price, reward, {from: primaryAccount});`
+```js
+crowdsaleInstance.setup.sendTransaction(beneficiary, fundingGoal, deadline, price, reward, {from: primaryAccount});
+```
 
 Dont forget to fund your newly created contract with the necessary tokens so it can pay back the contributors!
 
-`> tokenInstance.sendToken.sendTransaction(crowdsaleAddress, 200,{from: primaryAddress})`
-
+```js
+tokenInstance.sendToken.sendTransaction(crowdsaleAddress, 200,{from: primaryAddress})
+```
 You are now set. Anyone can now contribute by following these steps. First, send them the code address you just created. Now anyone can simply follow these steps:
 
 ```
@@ -464,11 +475,15 @@ crowdsaleInstance.contribute.sendTransaction({from: primaryAddress, value: amoun
 
 Now wait a minute for the blocks to pickup and you can check if you received the tokens or check the balance of the contract by doing this: 
 
-`> eth.getBalance(crowdsaleAddress);`
+```js
+eth.getBalance(crowdsaleAddress);
+```
 
 Ethereum doesn't run contracts by itself, they have to be requested, so once the deadline is passed anyone can have the funds sent to either the beneficiary or back to the funders (if it failed) by doing a:
 
-`> crowdsaleInstance.checkGoalReached.sendTransaction({from: primaryAddress })`
+```js
+crowdsaleInstance.checkGoalReached.sendTransaction({from: primaryAddress })
+```
 
 # Democracy DAO
 
@@ -540,65 +555,71 @@ Now take that contract and compile it via the online tool provided.
 
 The most important is the compiled hex code and the contract interface. Replace the code below by what the compiler has provided you.
 
-`var compiledCode = "0x5b6001600060005081905550600060005054600160005081905550600060005054600260005060003373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050819055505b6103db806100636000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063243669ad146100665780632f54bf6e14610078578063510f43f61461008d5780637065cb481461009f578063a7cf6e22146100b0578063f77ac668146100c857005b61006e61026d565b8060005260206000f35b61008360043561022c565b8060005260206000f35b61009561027f565b8060005260206000f35b6100aa60043561019f565b60006000f35b6100be600435602435610291565b8060005260206000f35b6100d66004356024356100dc565b60006000f35b6100e53361022c565b6100ee5761019a565b610160600260005060003373ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000505460408473ffffffffffffffffffffffffffffffffffffffff166c01000000000000000000000000028152601401838152602001604090036040206102f9565b61016957610199565b8173ffffffffffffffffffffffffffffffffffffffff166000826000600060006000848787f161019557005b5050505b5b5b5050565b6101a83361022c565b6101b157610228565b6101ba8161022c565b156101c457610227565b6000600081815054809291906001019190505550600160026000600050540401600160005081905550600060005054600260005060008373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050819055505b5b5b50565b60006000600260005060008473ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060005054119050610268565b919050565b6000600060005054905061027c565b90565b6000600160005054905061028e565b90565b60006003600050600060408573ffffffffffffffffffffffffffffffffffffffff166c010000000000000000000000000281526014018481526020016040900360402081526020019081526020016000206000506001016000505490506102f3565b92915050565b600060008360020a905060008160036000506000868152602001908152602001600020600050600001600050541614610331576103d3565b8060036000506000858152602001908152602001600020600050600001600082828250541692505081905550600160005054600360005060008581526020019081526020016000206000506001016000818150546001019190508190551015610399576103d2565b600360005060008481526020019081526020016000206000600082016000506000905560018201600050600090555050600191506103d4565b5b5b509291505056"`
+```js
+var compiledCode = "0x5b6001600060005081905550600060005054600160005081905550600060005054600260005060003373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050819055505b6103db806100636000396000f3006000357c010000000000000000000000000000000000000000000000000000000090048063243669ad146100665780632f54bf6e14610078578063510f43f61461008d5780637065cb481461009f578063a7cf6e22146100b0578063f77ac668146100c857005b61006e61026d565b8060005260206000f35b61008360043561022c565b8060005260206000f35b61009561027f565b8060005260206000f35b6100aa60043561019f565b60006000f35b6100be600435602435610291565b8060005260206000f35b6100d66004356024356100dc565b60006000f35b6100e53361022c565b6100ee5761019a565b610160600260005060003373ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000505460408473ffffffffffffffffffffffffffffffffffffffff166c01000000000000000000000000028152601401838152602001604090036040206102f9565b61016957610199565b8173ffffffffffffffffffffffffffffffffffffffff166000826000600060006000848787f161019557005b5050505b5b5b5050565b6101a83361022c565b6101b157610228565b6101ba8161022c565b156101c457610227565b6000600081815054809291906001019190505550600160026000600050540401600160005081905550600060005054600260005060008373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050819055505b5b5b50565b60006000600260005060008473ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060005054119050610268565b919050565b6000600060005054905061027c565b90565b6000600160005054905061028e565b90565b60006003600050600060408573ffffffffffffffffffffffffffffffffffffffff166c010000000000000000000000000281526014018481526020016040900360402081526020019081526020016000206000506001016000505490506102f3565b92915050565b600060008360020a905060008160036000506000868152602001908152602001600020600050600001600050541614610331576103d3565b8060036000506000858152602001908152602001600020600050600001600082828250541692505081905550600160005054600360005060008581526020019081526020016000206000506001016000818150546001019190508190551015610399576103d2565b600360005060008481526020019081526020016000206000600082016000506000905560018201600050600090555050600191506103d4565b5b5b509291505056"`
 
-`var ABI = [   {      "constant" : false,      "inputs" : [],      "name" : "totalOwners",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "addr",            "type" : "address"         }      ],      "name" : "isOwner",      "outputs" : [         {            "name" : "",            "type" : "bool"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [],      "name" : "totalRequiredConfirmations",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_newOwner",            "type" : "address"         }      ],      "name" : "addOwner",      "outputs" : [],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_to",            "type" : "address"         },         {            "name" : "_value",            "type" : "uint256"         }      ],      "name" : "pendingConfirmations",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_to",            "type" : "address"         },         {            "name" : "_value",            "type" : "uint256"         }      ],      "name" : "transact",      "outputs" : [],      "type" : "function"   }]`
-
+var multisigAbi = [   {      "constant" : false,      "inputs" : [],      "name" : "totalOwners",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "addr",            "type" : "address"         }      ],      "name" : "isOwner",      "outputs" : [         {            "name" : "",            "type" : "bool"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [],      "name" : "totalRequiredConfirmations",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_newOwner",            "type" : "address"         }      ],      "name" : "addOwner",      "outputs" : [],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_to",            "type" : "address"         },         {            "name" : "_value",            "type" : "uint256"         }      ],      "name" : "pendingConfirmations",      "outputs" : [         {            "name" : "",            "type" : "uint256"         }      ],      "type" : "function"   },   {      "constant" : false,      "inputs" : [         {            "name" : "_to",            "type" : "address"         },         {            "name" : "_value",            "type" : "uint256"         }      ],      "name" : "transact",      "outputs" : [],      "type" : "function"   }]
 ```
+
+```js
 var sender = eth.accounts[0]
 var codeAddress = eth.sendTransaction({data: compiledCode, from: sender}); 
 ```
 
 Wait minute until and use the code below to test if your code has been deployed.
 
-`eth.getCode(codeAddress)`
+```js
+eth.getCode(codeAddress)
+```
 
 If it has, then do these commands to instantiate it locally.
 
-```
-multisigContract = eth.contract(ABI)
-multisigInstance = new multisigContract(codeAddress)
+```js
+MultisigContract = eth.contract(multisigAbi)
+multisigInstance = MultisigContract.at(codeAddress)
 ```
 
 The code is ready for use. The first thing you need to do is to add a new owner to it. If you want to test it with a friend, put his address here, but if you want to test it locally, you’ll need multiple accounts. Read the section “creating a new account” above, if you haven’t done so already.
 
-```
+```js
 //.call().totalOwners()
 //.call().totalRequiredConfirmations()
 //.pendingConfirmations(eth.accounts[4], web3.toWei(1, "ether"))
 
 var newSigner = eth.accounts[1]
-multisigInstance.addOwner(newSigner).sendTransaction({from: sender})
+multisigInstance.addOwner.sendTransaction(newSigner, {from: sender})
 ```
 
 The next step is to fund your collective account. All contracts can hold ether, just like a normal account. Notice that any ether sent to the contract belongs to it now, and will be only moved under the specific circumstances set up by its code. So before you send any significant amount, test it with a tiny bit of funds, because if anything goes wrong that money will be lost forever.
 
-```
+```js
 var amount = web3.toWei(0.01, "ether");
 eth.sendTransaction({from: sender, to: codeAddress, value: amount})
 ```
 
 Wait for a minute for the transaction to be picked up by the network and then you can execute this command to test the balance:
 
-`eth.getBalance(codeAddress)`
-
+```js
+eth.getBalance(codeAddress)
+```
 
 If the balance is not zero, this means that you have successfully funded your account, and that means that your previous transaction, adding a new owner to your multi-owned account, has also gone through. We’re going to ask for your contract now to send money to someone else. Generate a third account to be the beneficiary and type the following code:
 
-```
+```js
 var beneficiary = eth.accounts[2] 
-multisigInstance.sendTransaction({from: sender}).transact(beneficiary, 1000)
+multisigInstance.transact.sendTransaction(beneficiary, 1000, {from: sender})
 ```
 
 If you check the balance of the beneficiary or the contract, you’ll see that they haven’t changed, and this time it’s not a question of waiting a minute or so. It’s because for this particular contract’s transaction to go through, they need the approval of at least half, plus one, of the account owners. Since your contract is only owned by 2 accounts, it needs 2 approvals. In this case, this is done by having the second account send an identical transaction–same beneficiary and exact amount–as the previous:
 
-`multisigInstance.sendTransaction({from: newSigner}).transact(beneficiary, 1000)`
+```js
+multisigInstance.transact.sendTransaction(beneficiary, 1000, {from: newSigner})`
 
 Note: this transaction, because it’s intended to change the state of the blockchain, requires gas to be executed. If you just created the newSigner account and it doesn’t have any funds, it won’t be able to pay the gas for it to be executed. Check the section on sending transactions to learn how to send money to that account, before it can interact with the blockchain.
 
 Now, wait a minute or so and check the balance of both the account and the beneficiary and you’ll see that the balance changed.
 
-```
+```js
 eth.getBalance(beneficiary)
 eth.getBalance(codeAddress)
 ```
