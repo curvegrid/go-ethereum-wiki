@@ -331,13 +331,13 @@ source = "contract test {
 }"
 contract = eth.compile.solidity(source).test
 contractaddress = eth.sendTransaction{from: primary, data: contract.code})
-contentHash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
-contentHash = admin.contractInfo.register(primary, contractaddress, contenthash)
+contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
+admin.contractInfo.register(primary, contractaddress, contenthash)
 // put it up on your favourite oldworld site:
 admin.contractInfo.registerUrl(contentHash, "http://dapphub.com/test/info.json")
 ```
 
-Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address itself.
+Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address of the content itself.
 
 For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.contractInfo.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
 
