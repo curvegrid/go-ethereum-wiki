@@ -37,8 +37,16 @@ This is useful for deleting an old chain and sync'ing to a new one.
 
 Export the blockchain in binary format with:
 ```
-geth --first 314150 --last 400000 export <filename>
+geth export <filename>
 ```
+
+Or if you want to back up portions of the chain over time, a first and last block can be specified. For example, to back up the first epoch:
+
+```
+geth export <filename> 0 29999
+```
+
+Note that when backing up a partial chain, the file will be appended rather than truncated.
 
 Import binary-format blockchain exports with:
 ```
