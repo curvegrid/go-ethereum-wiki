@@ -4,18 +4,42 @@
 Beside the official [DApp API](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface the go ethereum node has support for additional management API's. These API's are offered using [JSON-RPC](http://www.jsonrpc.org/specification) and follow the same conventions as used in the DApp API. The go ethereum package comes with a console client which has support for all additional API's.
 
 # How to
-It is possible to specify the set of API's which are offered with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the official DApp API or `ipc`.
+It is possible to specify the set of API's which are offered over an interface with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the official DApp API or `ipc` for an unix socket on unix or named pipe on Windows.
 
 For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3"` will
 * enable the admin, official DApp and miner API over the IPC interface
 * enable the eth and web3 API over the official RPC interface
 
-Please note that offering a API over the `rpc` interface will give everyone access to the admin interface who can access the `rpc` interface (e.g. DApp's). So be careful which API's are offered over an interface.
+Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable.
 
 By default geth enables all API's over the `ipc` interface and only the eth and web3 API's over the official `rpc` interface.
 
+To test which API's an interface provides the `modules` transaction can be executes, e.g. over an `ipc` interface on unix systems:
+
+```
+echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U /home/bas/.ethereum/geth.ipc
+```
+will give all enabled modules including the API version number:
+```
+{  
+   "id":1,
+   "jsonrpc":"2.0",
+   "result":{  
+      "admin":"1.0",
+      "debug":"1.0",
+      "eth":"1.0",
+      "miner":"1.0",
+      "net":"1.0",
+      "personal":"1.0",
+      "shh":"1.0",
+      "txpool":"1.0",
+      "web3":"1.0"
+   }
+}
+```
+
 ## Integration
-These additional API's follow the same conventions the official DApp API. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional API's. 
+These additional API's follow the same conventions as the official DApp API. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional API's. 
 
 # API's
 The management functions are split into multiple smaller logically grouped API's.
@@ -38,7 +62,7 @@ Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wi
 * [stopAutoDAG](#miner_stopautodag)
 * [makeDAG](#miner_makedag)
 
-### Net
+## Net
 Network related functions
 * [addPeer](#net_addpeer)
 * [id](#net_id)
@@ -46,7 +70,13 @@ Network related functions
 * [getListening](#net_getlistening)
 * [peers](#net_peers)
 
-### Web3
+## Personal
+Support for account management.
+
+## Txpool
+Allows control over the transaction pool
+
+## Web3
 
 
 ### miner_start
