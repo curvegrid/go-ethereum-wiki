@@ -99,7 +99,6 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
 * [clearTimeout](#clearTimeout)
 * [web3](#web3)
 * [net](#net)
-* [web3](#web3)
 * [eth](#eth)
 * [shh](#shh)
 * [db](#db)
