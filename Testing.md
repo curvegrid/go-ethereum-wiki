@@ -15,19 +15,46 @@ Integration tests for Go are included in the `tests` directory and can be run wi
 go test ./tests/
 ```
 
-### VM
+Alternatively, there is a CLI application, `ethtest` who can be used to run these tests without Go. The binary can be built from `./cmd/ethtest` and then run from anywhere (such as the root directory of the test files). Some examples:
+
+Run all tests from current directory, looking in their respective sub directories for json files:
+`ethtest`
+
+Run all VM json tests from ./VMTests/ directory
+`ethtest --test "vm" --file "./VMTests/"`
+
+Run all tests in a cousin directory supplied by environment variable
+`ETHEREUM_TEST_PATH="../../tests/files" ethtest --test "all"`
+
+Run a single transaction test
+`ethtest --test "tx" --file "./TransactionTests/ttTransactionTest.json"`
+
+Flags:
+```
+   --test "all"		Test type (string): VMTests, TransactionTests, StateTests, BlockTests
+   --file "."		Test file or directory. Directories are searched for .json files 1 level deep [$ETHEREUM_TEST_PATH]
+   --continue		Continue running tests on error (true) or exit immediately (false)
+```
+
+#### VM
 [VM Test wiki](https://github.com/ethereum/tests/wiki/VM-Tests)
+```
+go test ./tests/vm_test.go
+```
 
-### State
+#### State
 [State Test wiki](https://github.com/ethereum/tests/wiki/State-tests)
+```
+go test ./tests/state_test.go
+```
 
-### Transaction
+#### Transaction
 [Transaction Test wiki](https://github.com/ethereum/tests/wiki/Transaction-Tests)
 ```
 go test ./tests/transaction_test.go
 ```
 
-### Blockchain
+#### Blockchain
 [Blockchain Test wiki](https://github.com/ethereum/tests/wiki/Blockchain-Tests-II) 
 ```
 go test ./tests/block_test.go
