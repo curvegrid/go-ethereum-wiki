@@ -454,7 +454,7 @@ returns the contract info object
 ***
 #### admin.contractInfo.saveInfo
 
-    admin.contractInfo.register(contract.info, filename);
+    admin.contractInfo.saveInfo(contract.info, filename);
 
 will write [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) into the target file, calculates its content hash. This content hash then can used to associate a public url with where the contract info is publicly available and verifiable. If you register the codehash (hash of the code of the contract on contractaddress).
 
@@ -503,33 +503,6 @@ contractaddress = eth.sendTransaction({from: primary, data: contract.code });
 filename = "/tmp/info.json";
 contenthash = admin.contractInfo.saveInfo(contract.info, filename);
 admin.contractInfo.register(primary, contractaddress, contenthash);
-```
-
-***
-
-#### admin.contractInfo.register
-
-    admin.contractInfo.register(address, contractaddress, contract, filename);
-
-will extract [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) doc from the contract, calculates its hash and registers that content hash to the codehash of the contract on contractaddress. The register transaction is sent from the address in the first parameter.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Examples
-
-```js
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
-filename = "/tmp/info.json";
-admin.contractInfo.register(primary, contractaddress, contract, filename);
 ```
 
 ***
