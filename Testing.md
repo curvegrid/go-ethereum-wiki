@@ -15,6 +15,7 @@ Integration tests for Go are included in the `tests` directory and can be run wi
 go test ./tests/
 ```
 
+### Ethtest
 Alternatively, there is a CLI application, `ethtest` who can be used to run these tests without Go. The binary can be built from `./cmd/ethtest` and then run from anywhere (such as the root directory of the test files). Some examples:
 
 Run all tests from current directory, looking in their respective sub directories for json files:
