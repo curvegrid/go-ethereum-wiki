@@ -387,7 +387,7 @@ if you identify the index of your rejected transaction, you can resend it with m
 
 ```js
 tx = eth.pendingTransactions()[1]
-eth.resend(tx, newGasLimit, newGasPrice)
+eth.resend(tx, newGasPrice, newGasLimit)
 ```
 
 # Testing contracts and transactions
