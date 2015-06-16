@@ -30,7 +30,7 @@ func MyProtocol() p2p.Protocol {
 1. A sub-protocol object in the p2p package is called `Protocol{}`. Each time a peer connects with the capability of handling this type of protocol will use this;
 2. The name of your protocol to identify the protocol on the network;
 3. The version of the protocol.
-4. The amount of messages this protocol relies on. Because the p2p is extendible and thus has the ability to send an arbitrary amount of messages (with a type, which we'll see later) the p2p handler needs to know how much space it needs to reverse for your protocol, this to ensure consensus can be reached between the peers doing a negotiation over the message IDs. Our protocol supports only one; `message` (as you'll see later).
+4. The amount of messages this protocol relies on. Because the p2p is extendible and thus has the ability to send an arbitrary amount of messages (with a type, which we'll see later) the p2p handler needs to know how much space it needs to resersev for your protocol, this to ensure consensus can be reached between the peers doing a negotiation over the message IDs. Our protocol supports only one; `message` (as you'll see later).
 5. The main handler of your protocol. We've left this intentionally blank for now. The `peer` variable is the peer connected to you and provides you with some basic information regarding the peer. The `ws` variable which is a reader and a writer allows you to communicate with the peer. If a message is being send to us by that peer the `MsgReadWriter` will handle it and vice versa.
 
 Lets fill in the blanks and create a somewhat useful peer by allowing it to communicate with another peer:
