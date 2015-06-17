@@ -163,10 +163,8 @@ Getting openCL for your chipset and platform, try:
 * http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing
 * http://developer.amd.com/tools-and-sdks/graphics-development/display-library-adl-sdk/
 
-download:
-```
-ADL_SDK8.zip 
-AMD-APP-SDK-v2.9-1.599.381-GA-linux64.sh
+download: `ADL_SDK8.zip ` and `AMD-APP-SDK-v2.9-1.599.381-GA-linux64.sh`
+
 ```
 ./AMD-APP-SDK-v2.9-1.599.381-GA-linux64.sh
 ln -s /opt/AMDAPPSDK-2.9-1 /opt/AMDAPP
