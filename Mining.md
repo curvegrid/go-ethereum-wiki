@@ -175,10 +175,15 @@ reboot
 ```
 
 ```
-apt-get install fglrx
+apt-get install fglrx-updates
 // wget, tar, opencl
-aticonfig --adapter=all --initial
+sudo aticonfig --adapter=all --initial
+sudo aticonfig --list-adapters
+* 0. 01:00.0 AMD Radeon R9 200 Series
+
+* - Default adapter
 ```
+
 ### Nvidia
 The following instructions are, for the most part, relevant to any system with Ubuntu 14.04 and a Nvidia GPU.
 [Setting up an EC2 instance for mining](https://forum.ethereum.org/discussion/comment/8889/#Comment_8889)
