@@ -40,7 +40,7 @@ true
 
 Note that mining for real ether only makes sense if you are in sync with the network (since you mine on top of the consensus block). Therefore the eth blockchain downloader/synchroniser will delay mining until syncing is complete, and after that mining automatically starts unless you cancel your intention with `admin.miner.stop()`.
 
-In order to earn ether through you need to have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you got no etherbase address set, then `geth --mine` will not start up.
+In order to earn ether you must have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you don't have an etherbase address set, then `geth --mine` will not start up.
 
 ```
 > eth.coinbase
