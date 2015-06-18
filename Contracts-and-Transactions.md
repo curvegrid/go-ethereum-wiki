@@ -185,17 +185,19 @@ Now that you got both an unlocked account as well as some funds, you can create 
 ```js
 primaryAddress = eth.accounts[0]
 MyContract = eth.contract(abi);
-contact = MyContract.new({from: primaryAddress, data: evmCode})
+contact = MyContract.new([arg1, arg2, ...,]{from: primaryAddress, data: evmCode})
 ```
 
 All binary data is serialised in hexadecimal form. Hex strings always have a hex prefix `0x`.
 
-Note that this step requires you to pay for execution. Your balance on the account (that you put as sender in the `from` field) will be reduced according to the gas rules of the VM once your transaction makes it into a block. More on that later. After some time, your transaction should appear included in a block confirming that the state it brought about is a consensus. Your contract now lives on the blockchain. 
+Note that `arg1, arg2, ...` are the arguments for the contract constructor, in case it accepts any.
+
+Also note that this step requires you to pay for execution. Your balance on the account (that you put as sender in the `from` field) will be reduced according to the gas rules of the VM once your transaction makes it into a block. More on that later. After some time, your transaction should appear included in a block confirming that the state it brought about is a consensus. Your contract now lives on the blockchain. 
 
 The asynchronous way of doing the same looks like this:
 
 ```js
-eth.sendTransaction({from: primaryAccount, data: evmCode}, function(err, address) {
+MyContract.new([arg1, arg2, ...,]{from: primaryAccount, data: evmCode}, function(err, address) {
   if (!err)
     console.log(address); 
 });
@@ -259,7 +261,7 @@ source = "contract test { function multiply(uint a) returns(uint d) { return a *
 // compile with solc
 contract = eth.compile.solidity(source).test
 // send off the contract to the blockchain
-address = eth.sendTransaction({from: primaryAccount, data: contract.code})
+address = contract.new({from: primaryAccount, data: contract.code})
 // extracts info from contract, save the json serialisation in the given file, 
 contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
 // calculates the content hash and registers it with the code hash in `HashReg`
@@ -332,7 +334,7 @@ source = "contract test {
    }
 }"
 contract = eth.compile.solidity(source).test
-contractaddress = eth.sendTransaction{from: primary, data: contract.code})
+contractaddress = contract.new({from: primary, data: contract.code})
 contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
 admin.contractInfo.register(primary, contractaddress, contenthash)
 // put it up on your favourite oldworld site:
