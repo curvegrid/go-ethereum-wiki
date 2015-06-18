@@ -608,7 +608,7 @@ source = "contract test {\n" +
 
 contract = eth.compile.solidity(source).test;
 
-contractaddress = eth.sendTransaction({from: primary, data: contract.code});
+contractaddress = contract.new({from: primary, data: contract.code});
 
 // to check if the transaction went through to the pool:
 eth.getBlock("pending", true).transactions;
