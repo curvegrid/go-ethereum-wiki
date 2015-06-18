@@ -43,8 +43,8 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [Tutorial 1](https://forum.ethereum.org/discussion/1634/tutorial-1-your-first-contract/p1)
 * [Tutorial 2](https://forum.ethereum.org/discussion/1635/tutorial-2-rainbow-coin)
 * [Tutorial 3 (JavaScript API for Ethereum)](https://forum.ethereum.org/discussion/1636/tutorial-3-introduction-to-the-javascript-api)
-* [Solidity tutorial 1 by Eris Industries](https://eng.erisindustries.com/tutorials/2015/03/11/solidity-1/]
-* [Dapp tutorial by Andreas Olofsson (Eris Industries)](https://www.youtube.com/playlist?list=PL_kFomDrqPoZBu5uxd8OBGColQPYbuz3i)
+* [Solidity tutorial 1 by Eris Industries](https://eng.erisindustries.com/tutorials/2015/03/11/solidity-1/)
+* [Dapp tutorials by Andreas Olofsson (Eris Industries)](https://www.youtube.com/playlist?list=PL_kFomDrqPoZBu5uxd8OBGColQPYbuz3i)
 * [Eris Solidity resources](https://github.com/eris-ltd/solidity-resources)
 
 
@@ -65,10 +65,11 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [source on github](https://github.com/ethereum/serpent)
 * [serpent language spec](https://github.com/ethereum/wiki/wiki/Serpent)
 
-## Contract/Dapp development environments
+## Contract/Dapp development environments and framworks
 
-* [Mix standalone IDE](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE) or 
-* in-browser [Cosmo](http://meteor-dapp-cosmo.meteor.com) that connects to `geth` via RPC.
+* [Mix standalone IDE](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE) by ETHDEV
+* in-browser [Cosmo](http://meteor-dapp-cosmo.meteor.com) that connects to `geth` via RPC. By Nick Dodson
+* [embark framework](https://github.com/iurimatias/embark-framework/) by Iuri Mathias
 
 # Compiling a contract
 
@@ -260,10 +261,11 @@ contract = eth.compile.solidity(source).test
 // send off the contract to the blockchain
 address = eth.sendTransaction({from: primaryAccount, data: contract.code})
 // extracts info from contract, save the json serialisation in the given file, 
+contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
 // calculates the content hash and registers it with the code hash in `HashReg`
 // it uses address to send the transaction. 
 // returns the content hash that we use to register a url
-hash = admin.contractInfo.register(primaryAccount, address, contract, "~/dapps/shared/contracts/test/info.json")
+admin.contractInfo.register(primaryAccount, address, contenthash)
 // here you deploy ~/dapps/shared/contracts/test/info.json to a url
 admin.contractInfo.registerUrl(primaryAccount, hash, url)
 ```
