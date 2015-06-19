@@ -185,7 +185,7 @@ Now that you got both an unlocked account as well as some funds, you can create 
 ```js
 primaryAddress = eth.accounts[0]
 MyContract = eth.contract(abi);
-contact = MyContract.new([arg1, arg2, ...,]{from: primaryAddress, data: evmCode})
+contact = MyContract.new(arg1, arg2, ...,{from: primaryAddress, data: evmCode})
 ```
 
 All binary data is serialised in hexadecimal form. Hex strings always have a hex prefix `0x`.
