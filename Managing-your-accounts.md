@@ -67,7 +67,7 @@ Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
 ```
 
 ### Non-interactive use 
-You supply a plaintext password file as argument to the `--password` flag.  
+You supply a plaintext password file as argument to the `--password` flag. The data in the file consists of the raw characters of the password, followed by a single newline.
 
 **Note**: 
 Supplying the password directly as part of the command line is not encouraged, but you can always use shell trickery to get round this restriction.
