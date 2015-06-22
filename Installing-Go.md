@@ -10,7 +10,7 @@ Download an install the darwin binary from https://golang.org/dl/
 
 #### Ubuntu 14.04 
 
-The apt-get repositories for 14.04 contain golang 1.2.1.  Version 1.4.2 is required, so you can download directly (as above); or  you can use `sudo apt-get install golang 1.4.2` to install. Alternatively, you can [add the ethereum apt repository](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu#installing-from-ppa), which hosts golang 1.4.2. Then  You will still have to set the $GOPATH and $PATH variables as specified below.
+The apt-get repositories for 14.04 contain golang 1.2.1.  Version 1.4.2 is required, so you can download directly (as above). Alternatively, you can [add the ethereum apt repository](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu#installing-from-ppa), which hosts golang 1.4.2. Then  You will still have to set the $GOPATH and $PATH variables as specified below.
 
 #### Other distros
 Download the latest distribution
