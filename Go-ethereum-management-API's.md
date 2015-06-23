@@ -4,20 +4,20 @@
 Beside the official [DApp API](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface the go ethereum node has support for additional management API's. These API's are offered using [JSON-RPC](http://www.jsonrpc.org/specification) and follow the same conventions as used in the DApp API. The go ethereum package comes with a console client which has support for all additional API's.
 
 # How to
-It is possible to specify the set of API's which are offered over an interface with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the official DApp API or `ipc` for an unix socket on unix or named pipe on Windows.
+It is possible to specify the set of API's which are offered over an interface with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the `http` interface or `ipc` for an unix socket on unix or named pipe on Windows.
 
 For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3"` will
 * enable the admin, official DApp and miner API over the IPC interface
-* enable the eth and web3 API over the official RPC interface
+* enable the eth and web3 API over the RPC interface
 
 Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable.
 
-By default geth enables all API's over the `ipc` interface and only the eth and web3 API's over the official `rpc` interface.
+By default geth enables all API's over the `ipc` interface and only the eth and web3 API's over the `rpc` interface.
 
 To test which API's an interface provides the `modules` transaction can be executes, e.g. over an `ipc` interface on unix systems:
 
 ```
-echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U /home/bas/.ethereum/geth.ipc
+echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
 ```
 will give all enabled modules including the API version number:
 ```
