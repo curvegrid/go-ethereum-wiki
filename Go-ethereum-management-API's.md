@@ -45,6 +45,109 @@ These additional API's follow the same conventions as the official DApp API. Web
 The management functions are split into multiple smaller logically grouped API's.
 
 ## Admin
+Provides various function for managing a geth node
+* [addPeer](#admin_addpeer)
+* [peers] (#admin_peers)
+* [importChain](#admin_importchain)
+* [exportChain](#admin_exportchain)
+* [verbosity](#admin_verbosity)
+* [setSolc](#admin_setsolc)
+* [startRPC](#admin_startrpc)
+* [stopRPC](#admin_stoprpc)
+
+### admin_addpeer
+Add peer to node
+
+#### Parameters
+* `Url`, peer enode url
+
+#### Return
+`boolean` indicating if the peer was added
+
+#### Example
+`admin.addPeer("enode://4d19a2d...167fa41@XXX.XXX.XXX.XXX:30303")`
+***
+
+### admin_peers
+This property will show all connected peers.
+
+#### Example
+`admin.peers`
+***
+
+### admin_importchain
+Import an exported chain from file into node
+
+#### Parameters
+* `Filename`, the fully qualified path to the file containing the chain to be imported
+
+#### Return
+`boolean` indicating if chain was imported
+
+#### Example
+`admin.importChain("/tmp/chain.txt")`
+***
+
+### admin_exportchain
+Export the blockchain to a file
+
+#### Parameters
+* `Filename`, the fully qualified path to the file where the blockchain must be exported
+
+#### Return
+`boolean` indicating if chain was exported
+
+#### Example
+`admin.exportChain("/tmp/chain.txt")`
+***
+
+### admin_verbosity
+Set loglevel
+
+#### Parameters
+* `Level`, the verbosity level with 0 the least and 6 the most verbose
+
+#### Return
+`boolean` indicating if chain was exported
+
+#### Example
+`admin.verbosity(5)`
+***
+
+### admin_setSolc
+Set the path to the solidity compiler for `eth.compileSolidity`.
+
+#### Parameters
+* `Path`, full path to solidity compiler
+
+#### Return
+`string` in case the path was valid a brief description about the solidity compiler
+
+#### Example
+`admin.setSolc("/tmp/solc")`
+***
+
+### admin_startrpc
+Start the http RPC interface
+
+#### Parameters
+* `ListenAddress`, open listener on this host
+* `ListenPort`, open listener on this port
+* `CorsDomain`, the cross origin resource shared header
+* `Apis`, comma separated list with the API modules which are offered over this interface
+
+#### Return
+`boolean` indication if the interface was started
+
+#### Example
+`admin.startRPC("127.0.0.1", 8545, "*", "eth,net,web3")`
+***
+
+### admin_stoprpc
+Stop the http RPC interface
+
+#### Return
+`boolean` indication if the interface was stopped
 
 ## Debug
 
