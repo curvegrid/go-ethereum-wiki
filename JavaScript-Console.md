@@ -6,9 +6,17 @@ Ethereum's Javascript console exposes the full [web3 JavaScript Dapp API](https:
 
 ## Interactive use: the JSRE REPL  Console
 
-The `ethereum CLI` executable `geth` has a JavaScript console (a **Read, Evaluate & Print Loop** = REPL exposing the the JSRE), which can be started with the `console` subcommand:
+The `ethereum CLI` executable `geth` has a JavaScript console (a **Read, Evaluate & Print Loop** = REPL exposing the JSRE), which can be started with the `console` or `attach` subcommand. The `console` subcommands starts the geth node and then opens the console. The `attach` subcommand will not start the geth node but instead tries to open the console on a running geth instance.
 
     $ geth console
+    $ geth attach
+
+The attach node accepts an endpoint in case the geth node is running with a non default ipc endpoint or you would like to connect over the rpc interface.
+
+    $ geth attach ipc:/some/custom/path
+    $ geth attach rpc:http://191.168.1.1:8545
+
+Note that by default the geth node doesn't start the rpc service and not all functionality is provided over this interface due to security reasons. These defaults can be overridden when the geth node is started.
 
 If you need log information, start with:
 
@@ -34,6 +42,10 @@ If you want to have the console as well as load scripts, use [loadScript](#loads
 
 You can exit the console cleanly by typing `exit` or simply with `CTRL-C`.
 Use the `--jspath <path/to/my/js/root>` to set a libdir for your js scripts. Parameters to `loadScript()` with no absolute path will be understood relative to this directory.
+
+A second option is to use the `--exec` argument in conjunction with the `console` or `attach` subcommand. For example this command will execute the local `$HOME/Dev/checkbalances.js` script on the remote host over the http/rpc interface.
+
+    $ geth --exec "loadScript('checkbalances.js')" --jspath $HOME/Dev attach rpc:http://remotehost:8545
 
 ## Caveat 
 
