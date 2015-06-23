@@ -186,7 +186,7 @@ Allows control over the transaction pool
 This will generates the DAG if necessary and starts the miner
 
 #### Parameters
-* `THREADS`, an option integer which specifies the number of threads, if not specified the number of CPU's is used
+* `THREADS`, an optional integer which specifies the number of threads, if not specified the number of CPU's is used
 
 #### Return
 `boolean` indicating if the miner was started
@@ -238,7 +238,7 @@ Set the gas price.
 ***
 
 ### miner_startAutoDAG
-Pregenerate the DAG, this will allow for a seamless transition between the different epochs. If not enables the miner will need to generate the DAG when a new epoch begins. This can take some time will the miner will need to wait for it to finish.
+Pregenerate the DAG, this will allow for a seamless transition between the different epochs. If not enabled the miner will need to generate the DAG when a new epoch begins (each 30k blocks). This takes some time and will stop the miner until the DAG is generated.
 
 #### Parameters
 none
