@@ -1,5 +1,3 @@
-**Please note, this is work in progress!**
-
 # Overview
 Beside the official [DApp API](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface the go ethereum node has support for additional management API's. These API's are offered using [JSON-RPC](http://www.jsonrpc.org/specification) and follow the same conventions as used in the DApp API. The go ethereum package comes with a console client which has support for all additional API's.
 
@@ -40,18 +38,23 @@ will give all enabled modules including the version number:
 ## Integration
 These additional API's follow the same conventions as the official DApp API. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional API's. 
 
-# API's
-The different functions are split into multiple smaller logically grouped API's. Examples are given for the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to a rpc request. 2 examples:
+The different functions are split into multiple smaller logically grouped API's. Examples are given for the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to a rpc request.
 
-Console: `> miner.start()`
+**2 examples:**
+
+Console: `miner.start()`
 
 IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | nc -U $datadir/geth.ipc`
 
+RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":74}' localhost:8545`
+
 With the number of THREADS as an arguments:
 
-Console: `> miner.start(4)`
+Console: `miner.start(4)`
 
 IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":1}' | nc -U $datadir/geth.ipc`
+
+RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
 
 ## Admin
 Provides various function for managing a geth node
