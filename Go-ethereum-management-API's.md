@@ -10,7 +10,7 @@ For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3"` will
 
 Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable. By default geth enables all API's over the `ipc` interface and only the db,eth,net and web3 API's over the `rpc` interface.
 
-To determine which API's an interface provides the `modules` transaction can be executes, e.g. over an `ipc` interface on unix systems:
+To determine which API's an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
 
 ```
 echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
@@ -57,7 +57,7 @@ With the number of THREADS as an arguments:
 * RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
 
 ## Admin
-Provides various function for managing a geth node
+Provides various functions for managing a geth node
 * [addPeer](#admin_addpeer)
 * [peers] (#admin_peers)
 * [importChain](#admin_importchain)
