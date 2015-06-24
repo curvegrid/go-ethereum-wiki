@@ -63,6 +63,42 @@ Provides various function for managing a geth node
 * [startRPC](#admin_startrpc)
 * [stopRPC](#admin_stoprpc)
 
+## Debug
+
+## Eth
+This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+
+## Miner
+Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG).
+* [start](#miner_start)
+* [stop](#miner_stop)
+* [hashrate](#miner_hashrate)
+* [setExtra](#miner_setextra)
+* [setGasPrice](#miner_setgasprice)
+* [startAutoDAG](#miner_startautodag)
+* [stopAutoDAG](#miner_stopautodag)
+* [makeDAG](#miner_makedag)
+
+## Net
+Network related functions
+* [addPeer](#net_addpeer)
+* [id](#net_id)
+* [getPeerCount](#net_getpeercount)
+* [getListening](#net_getlistening)
+* [peers](#net_peers)
+
+## Personal
+Support for account management.
+* [listAccounts](#personal_listaccounts)
+* [newAccount](#personal_newaccount)
+* [deleteAccount](#personal_deleteaccount)
+* [unlockAccount](#personal_unlockaccount)
+
+## Txpool
+Allows control over the transaction pool
+
+## Web3
+
 ### admin_addpeer
 Add peer to node
 
@@ -157,44 +193,11 @@ Stop the http RPC interface
 #### Return
 `boolean` indication if the interface was stopped
 
-## Debug
-
-## Eth
-This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
-
-## Miner
-Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG).
-* [start](#miner_start)
-* [stop](#miner_stop)
-* [hashrate](#miner_hashrate)
-* [setExtra](#miner_setextra)
-* [setGasPrice](#miner_setgasprice)
-* [startAutoDAG](#miner_startautodag)
-* [stopAutoDAG](#miner_stopautodag)
-* [makeDAG](#miner_makedag)
-
-## Net
-Network related functions
-* [addPeer](#net_addpeer)
-* [id](#net_id)
-* [getPeerCount](#net_getpeercount)
-* [getListening](#net_getlistening)
-* [peers](#net_peers)
-
-## Personal
-Support for account management.
-
-## Txpool
-Allows control over the transaction pool
-
-## Web3
-
-
 ### miner_start
 This will generates the DAG if necessary and starts the miner
 
 #### Parameters
-* `THREADS`, an optional integer which specifies the number of threads, if not specified the number of CPU's is used
+`integer`, an optional integer which specifies the number of threads, if not specified the number of CPU's is used
 
 #### Return
 `boolean` indicating if the miner was started
@@ -219,7 +222,7 @@ Miner hashrate
 none
 
 #### Return
-`integer` in hashes p/s
+`integer` hashes p/s
 
 ***
 
@@ -227,7 +230,7 @@ none
 Store additional data in a mined block
 
 #### Parameters
-`DATA` string with extra data (max 1024 bytes)
+`string` string with extra data (max 1024 bytes)
 
 #### Return
 `boolean` indication if the DATA was set
@@ -238,7 +241,7 @@ Store additional data in a mined block
 Set the gas price.
 
 #### Parameters
-`Price` string with new price, this can be a base8 (start with 0b), base10 (no prefix) or base16 representation (start with 0x)
+`string` gas price, this can be a base8 (start with 0b), base10 (no prefix) or base16 representation (start with 0x)
 
 #### Return
 `boolean` indication if the new price was set
@@ -282,7 +285,7 @@ none
 Add peer
 
 #### Parameters
-`URL`, peer enode
+`string`, peer enode
 
 #### Return
 `boolean` indication if peer was added
@@ -320,7 +323,6 @@ none
 #### Return
 `boolean` indication if this node accepts new peers
 
-
 ***
 
 ### net_peers
@@ -330,7 +332,7 @@ Collection with peers
 none
 
 #### Return
-`Array` collection of connected peers. 
+`array` collection of connected peers. 
 
 #### Example
 ```
@@ -355,3 +357,65 @@ none
   Caps: 'eth/60, eth/61'
 } ]
 ```
+
+### personal_listaccounts
+List all accounts
+
+#### Parameters
+none
+
+#### Return
+`array` collection with accounts
+
+#### Example
+` personal.listAccounts`
+
+***
+
+### personal_newaccount
+Create a new account
+
+#### Parameters
+`string`, passphrase to protect the account
+
+#### Return
+`string` address of the new account
+
+#### Example
+` personal.newAccount("mypasswd")`
+
+***
+
+### personal_deleteaccount
+Delete an account
+
+#### Parameters
+`string`, address of the account to delete
+
+`string`, passphrase of the account to delete
+
+#### Return
+`boolean` indication if the account was deleted
+
+#### Example
+` personal.deleteAccount(eth.coinbase, "mypasswd")`
+
+***
+
+### personal_unlockaccount
+Unlock an account
+
+#### Parameters
+`string`, address of the account to delete
+
+`string`, passphrase of the account to delete
+
+`integer`, unlock account for duration seconds (optional)
+
+#### Return
+`boolean` indication if the account was unlocked
+
+#### Example
+` personal.unlockAccount(eth.coinbase, "mypasswd", 300)`
+
+***
