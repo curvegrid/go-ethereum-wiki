@@ -24,6 +24,7 @@ will give all enabled modules including the version number:
    "jsonrpc":"2.0",
    "result":{  
       "admin":"1.0",
+      "db":"1.0",
       "debug":"1.0",
       "eth":"1.0",
       "miner":"1.0",
@@ -63,7 +64,16 @@ Provides various function for managing a geth node
 * [startRPC](#admin_startrpc)
 * [stopRPC](#admin_stoprpc)
 
+## Db
+This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+
 ## Debug
+* [dumpBlock](#debug_dumpblock)
+* [getBlockRlp] (#debug_getblockrlp)
+* [printBlock](#debug_printblock)
+* [processBlock](#debug_processblock)
+* [seedHash](#debug_seedhash)
+* [setHead](#debug_sethead)
 
 ## Eth
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
@@ -99,6 +109,7 @@ Gives insight in the transaction pool
 * [status](#txpool_status)
 
 ## Web3
+This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
 ### admin_addpeer
 Add peer to node
@@ -194,6 +205,94 @@ Stop the http RPC interface
 #### Return
 `boolean` indication if the interface was stopped
 
+#### Example
+`admin.stopRPC()`
+
+***
+
+### debug_dumpblock
+Dump block
+
+#### Parameters
+`integer`, block number
+
+#### Return
+`string` dumped block
+
+#### Example
+`debug.dumpBlock(0)`
+***
+
+### debug_getblockrlp
+Get RLP encoded block
+
+#### Parameters
+`integer`, block number
+
+#### Return
+`string` RLP encoded block
+
+#### Example
+`debug.getBlockRlp(0)`
+***
+
+### debug_printblock
+Pretty print block
+
+#### Parameters
+`integer`, block number
+
+#### Return
+`string` formatted block
+
+#### Example
+`debug.printBlock(0)`
+***
+
+### debug_processblock
+Reprocess a block
+
+#### Parameters
+`integer`, block number
+
+#### Return
+`boolean` indication if the block was successful processed
+
+#### Example
+`debug.processBlock(0)`
+
+***
+
+
+### debug_seedhash
+Block seed hash
+
+#### Parameters
+`NONE`
+
+#### Return
+`string` block seed hash
+
+#### Example
+`debug.seedHash(eth.blockNumber)`
+
+***
+
+
+### debug_sethead
+Rewind the chain to a specific block
+
+#### Parameters
+`integer`, block number
+
+#### Return
+`boolean` indication if the new head was successful set
+
+#### Example
+`debug.setHead(eth.blockNumber-5000)`
+
+***
+
 ### miner_start
 This will generates the DAG if necessary and starts the miner
 
@@ -203,6 +302,8 @@ This will generates the DAG if necessary and starts the miner
 #### Return
 `boolean` indicating if the miner was started
 
+#### Example
+`miner.start()`
 ***
 
 ### miner_stop
@@ -214,6 +315,9 @@ none
 #### Return
 `boolean` indicating if the miner was stopped
 
+#### Example
+`miner.stop()`
+
 ***
 
 ### miner_hashrate
@@ -224,6 +328,9 @@ none
 
 #### Return
 `integer` hashes p/s
+
+#### Example
+`miner.hashrate`
 
 ***
 
@@ -429,9 +536,10 @@ Number of pending/queued transactions
 
 #### Return
 `pending` all processable transactions
+
 `queued` all non-processable transactions
 
 #### Example
-` txpool.Status`
+` txpool.status`
 
 ***
