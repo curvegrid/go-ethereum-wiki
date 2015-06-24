@@ -95,7 +95,8 @@ Support for account management.
 * [unlockAccount](#personal_unlockaccount)
 
 ## Txpool
-Allows control over the transaction pool
+Gives insight in the transaction pool
+* [status](#txpool_status)
 
 ## Web3
 
@@ -417,5 +418,20 @@ Unlock an account
 
 #### Example
 ` personal.unlockAccount(eth.coinbase, "mypasswd", 300)`
+
+***
+
+### txpool_status
+Number of pending/queued transactions
+
+#### Parameters
+`NONE`
+
+#### Return
+`pending` all processable transactions
+`queued` all non-processable transactions
+
+#### Example
+` txpool.Status`
 
 ***
