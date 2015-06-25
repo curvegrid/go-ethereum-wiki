@@ -16,7 +16,7 @@ COMMANDS:
    account	manage accounts
    dump		dump a specific block from storage
    console	Geth Console: interactive JavaScript environment
-   attach       Geth Console: interactive JavaScript environment (connect to node)
+   attach	Geth Console: interactive JavaScript environment (connect to node)
    js		executes the given JavaScript files in the Geth JavaScript VM
    import	import a blockchain file
    export	export blockchain into file
