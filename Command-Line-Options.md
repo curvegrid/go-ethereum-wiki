@@ -16,6 +16,7 @@ COMMANDS:
    account	manage accounts
    dump		dump a specific block from storage
    console	Geth Console: interactive JavaScript environment
+   attach       Geth Console: interactive JavaScript environment (connect to node)
    js		executes the given JavaScript files in the Geth JavaScript VM
    import	import a blockchain file
    export	export blockchain into file
@@ -137,6 +138,14 @@ The lines below are meant only for test network and safe environments for non-in
 geth --datadir /tmp/eth/42 --password <(echo -n notsosecret) account new 2>> /tmp/eth/42.log
 geth --datadir /tmp/eth/42 --port 30342  js <(echo 'console.log(admin.nodeInfo().NodeUrl)') > enode 2>> /tmp/eth/42.log
 geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlock primary --minerthreads 4 --mine 2>> /tmp/eth/42.log
+```
+
+# Attach
+Attach a console to a running geth instance. By default this happens over IPC over the default IPC endpoint but when necessary a custom endpoint could be specified:
+
+```
+geth attach ipc:/some/path
+geth attach rpc:http://host:8545
 ```
 
 # GUI Client 
