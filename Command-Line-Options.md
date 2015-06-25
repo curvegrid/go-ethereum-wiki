@@ -148,47 +148,6 @@ geth attach ipc:/some/path
 geth attach rpc:http://host:8545
 ```
 
-# GUI Client 
-
-The output of `mist help`. Please refer to the client for uptodate info. 
-
-```
-mist [global options] command [command options] [arguments...]
-
-VERSION:
-   0.9.19
-
-COMMANDS:
-   help Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --asset_path "$GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets"      absolute path to GUI assets directory
-   --rpccorsdomain "http://localhost"                                                                   Domain on which to send Access-Control-Allow-Origin header
-   --bootnodes                                                                                          Space-separated enode URLs for p2p discovery bootstrap
-   --datadir "$HOME/Library/Ethereum"                                                             Data directory to be used
-   --port "30303"                                                                                       Network listening port
-   --logfile                                                                                            Send log output to a file
-   --verbosity "3"                                                                                      Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
-   --maxpeers "25"                                                                                      Maximum number of network peers (network disabled if set to 0)
-   --maxpendpeers "0"                                                                                   Maximum number of pending connection attempts (defaults used if set to 0)
-   --minerthreads "8"                                                                                   Number of miner threads
-   --nat "any"                                                                                          NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-   --nodekey                                                                                            P2P node key file
-   --rpcaddr "127.0.0.1"                                                                                Listening address for the JSON-RPC server
-   --rpcport "8545"                                                                                     Port on which the JSON-RPC server should listen
-   --jspath "."                                                                                         JS library path to be used with console and js subcommands
-   --protocolversion "60"                                                                               ETH protocol version (integer)
-   --blockchainversion "2"                                                                              Blockchain version (integer)
-   --networkid "0"                                                                                      Network Id (integer)
-   --help, -h                                                                                           show help
-   --version, -v                                                                                        print the version
-
-```
-
-Example: 
-
-    mist --asset_path /absolute/path/to/assets
-
 ## Alternative ways to set flags
 
 **WARNING:** This is not available for the latest frontier poc9.
