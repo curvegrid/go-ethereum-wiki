@@ -1,4 +1,7 @@
-Version 2 documented [here](https://github.com/ethereum/wiki/wiki/Web3-Key-Storage-Definition)
+
+**THIS VERSION IS OUTDATED! PLEASE SEE VERSION 3.**
+
+Version 3 documented [here](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition)
 
 # Summary
 
