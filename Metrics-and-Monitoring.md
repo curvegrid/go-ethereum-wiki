@@ -102,21 +102,7 @@ By default `geth monitor` uses 5 chart rows. This makes comparative charts easy 
 
 ## Available metrics
 
-As metrics are a debugging tool, every developer is free to add, remove or modify them as he sees fit. Because of this, the available metrics can change drastically between commits. To see the exact available ones:
-
-```
-> geth monitor
-Fatal: No metrics specified.                                                                                                                                                                                   
-                                                                                                                                                                                                               
-Available:
- - core/BlockInsertions/AvgRate01Min
- - core/BlockInsertions/AvgRate05Min
- [...]
- - system/memory/pauses/MeanRate
- - system/memory/pauses/Overall
-```
-
-However, a few may warrant longevity, so feel free to add to the below list if you feel it's worth a more general audience:
+As metrics are a debugging tool, every developer is free to add, remove or modify them as he sees fit. Because of this, the available metrics can change drastically between commits. The exactly available metrics can be queries via `geth monitor` or via `debug.metrics(false)` in the console; however, a few may warrant longevity, so feel free to add to the below list if you feel it's worth a more general audience:
 
  * system/memory/
    * allocs: number of memory allocations made
