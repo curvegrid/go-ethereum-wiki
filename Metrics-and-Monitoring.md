@@ -83,7 +83,7 @@ Although inspecting metrics via the console is very useful to gain an insight in
 
 ![Monitoring tool](http://i.imgur.com/Nug0sPG.png)
 
-Mmonitoring can be started via:
+Monitoring can be started via:
 
 ```
 geth monitor [--attach=api-endpoint] metric1 metric2 ... metricN
