@@ -14,3 +14,112 @@ To that extent, Geth currently implement two types of metrics:
      * Percentile 50: well behaved samples (boring, just to give an idea)
      * Percentile 80: general performance (these should be optimised)
      * Percentile 95: worst case outliers (rare, just handle gracefully)
+
+## Creating and updating metrics
+
+The Geth metrics system is based on the [`go-metrics`](https://github.com/rcrowley/go-metrics) library, so creating metrics is pretty straightforward. The name can be any arbitrary string, however since Geth assumes it to be some meaningful sub-system hierarchy, please name accordingly.
+
+```go
+meter := metrics.GetOrRegisterMeter("system/memory/Allocs", metrics.DefaultRegistry)
+timer := metrics.GetOrRegisterTimer("core/BlockInsertions", metrics.DefaultRegistry)
+```
+
+Metrics can then be updated equally simply:
+
+```go
+meter.Mark(n) // Record the occurrence of `n` events
+
+timer.Update(duration)  // Record an event that took `duration`
+timer.UpdateSince(time) // Record an event that started at `time`
+timer.Time(function)    // Measure and record the execution of `function`
+```
+
+## Querying metrics
+
+Geth automatically exposes all collected metrics in the `debug` RPC API, through the `metrics` method, hence these can be queried simply from the console in:
+
+```javascript
+> debug.metrics().p2p.InboundTraffic
+{
+  Avg01Min: '169.12K (2.82K/s)',
+  Avg05Min: '1.92M (6.42K/s)',
+  Avg15Min: '3.57M (3.96K/s)',
+  Total: '5.83M (2.97K/s)'
+}
+> debug.metrics().core.BlockInsertions
+{
+  Avg01Min: '10 (0.17/s)',
+  Avg05Min: '61 (0.20/s)',
+  Avg15Min: '168 (0.19/s)',
+  Maximum: '2.157261657s',
+  Minimum: '2.271716ms',
+  Percentiles: {
+    20: '6.993756ms',
+    50: '12.342836ms',
+    80: '21.765944ms',
+    95: '218.500479ms',
+    99: '376.015984ms'
+  },
+  Total: '432 (0.22/s)'
+}
+```
+
+By default, the reported metrics are scaled and formatted in a user friendly way to allow quick inspection. These are however not appropriate for programmatic processing, so the raw values may be retrieved via an optional flag:
+
+```javascript
+> debug.metrics(true).p2p.InboundTraffic
+{
+  AvgRate01Min: 1599.6190029292586,
+  AvgRate05Min: 5367.754506658111,
+  AvgRate15Min: 3761.057607521597,
+  MeanRate: 2907.3919382272857,
+  Total: 5901154
+}
+```
+
+## Monitoring metrics
+
+Although inspecting metrics via the console is very useful to gain an insight into the internal state of Geth, it falls short of visualizing how these metrics evolve over time, possibly under different circumstances and events. To overcome this limitation, Geth introduces a monitoring tool (`geth monitor`) that periodically queries a node for the requested metrics and plots them on a terminal based UI.
+
+![Monitoring tool](http://i.imgur.com/Nug0sPG.png)
+
+Mmonitoring can be started via:
+
+```
+geth monitor [--attach=api-endpoint] metric1 metric2 ... metricN
+```
+
+Where a metric may be:
+ * Full canonical metric (e.g. `system/memory/allocs/AvgRate05Min`)
+ * Group of metrics (e.g. `system/memory/allocs` or `system/memory`)
+ * Multiple branching metrics (e.g. `system/memory/allocs,frees/AvgRate01Min`)
+
+Not yet supported but planned:
+ * Wildcard pattern (e.g. `system/memory/*/AvgRate01Min`)
+ * Exclusion pattern (e.g. `system/memory/allocs/!AvgRate01Min`)
+
+By default `geth monitor` uses 5 chart rows. This makes comparative charts easy as meters have 5 components, and timers 10 (out of which 5 are throughput and 5 percentiles). For custom layout you can override with `--rows`.
+
+## Available metrics
+
+As metrics are a debugging tool, every developer is free to add, remove or modify them as he sees fit. Because of this, the available metrics can change drastically between commits. To see the exact available ones:
+
+```
+> geth monitor
+Fatal: No metrics specified.                                                                                                                                                                                   
+                                                                                                                                                                                                               
+Available:
+ - core/BlockInsertions/AvgRate01Min
+ - core/BlockInsertions/AvgRate05Min
+ [...]
+ - system/memory/pauses/MeanRate
+ - system/memory/pauses/Overall
+```
+
+However, a few may warrant longevity, so feel free to add to the below list if you feel it's worth a more general audience:
+
+ * system/memory/
+   * allocs: number of memory allocations made
+   * frees: number of memory releases made
+   * inuse: memory currently being used
+   * pauses: time spent in the garbage collector
