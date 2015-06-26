@@ -102,7 +102,7 @@ By default `geth monitor` uses 5 chart rows. This makes comparative charts easy 
 
 ## Available metrics
 
-As metrics are a debugging tool, every developer is free to add, remove or modify them as he sees fit. Because of this, the available metrics can change drastically between commits. The exactly available metrics can be queries via `geth monitor` or via `debug.metrics(false)` in the console; however, a few may warrant longevity, so feel free to add to the below list if you feel it's worth a more general audience:
+Metrics are a debugging tool, with every developer being free to add, remove or modify them as seen fit. As they can change between commits, the exactly available ones can be queried via `geth monitor` or via `debug.metrics(false)` in the console. A few however may warrant longevity, so feel free to add to the below list if you feel it's worth a more general audience:
 
  * system/memory/
    * allocs: number of memory allocations made
