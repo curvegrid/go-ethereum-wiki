@@ -17,14 +17,14 @@ To that extent, Geth currently implement two types of metrics:
 
 ## Creating and updating metrics
 
-The Geth metrics system is based on the [`go-metrics`](https://github.com/rcrowley/go-metrics) library, so creating metrics is pretty straightforward. The name can be any arbitrary string, however since Geth assumes it to be some meaningful sub-system hierarchy, please name accordingly.
+Although the Geth metrics system is based on the [`go-metrics`](https://github.com/rcrowley/go-metrics) library, custom metric constructors are used that take into consideration the CLI flags to enable or disable metrics collection and reporting:
 
 ```go
-meter := metrics.GetOrRegisterMeter("system/memory/Allocs", metrics.DefaultRegistry)
-timer := metrics.GetOrRegisterTimer("core/BlockInsertions", metrics.DefaultRegistry)
+meter := metrics.NewMeter("system/memory/Allocs")
+timer := metrics.NewTimer("core/BlockInsertions")
 ```
 
-Metrics can then be updated equally simply:
+The name can be any arbitrary string, however since Geth assumes it to be some meaningful sub-system hierarchy, please name accordingly. Metrics can then be updated equally simply:
 
 ```go
 meter.Mark(n) // Record the occurrence of `n` events
