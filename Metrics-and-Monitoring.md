@@ -34,6 +34,8 @@ timer.UpdateSince(time) // Record an event that started at `time`
 timer.Time(function)    // Measure and record the execution of `function`
 ```
 
+Note, metrics collection is disabled by default in order not to incur reporting overhead for the average user. To enable it please specify the `--metrics` flag to geth.
+
 ## Querying metrics
 
 Geth automatically exposes all collected metrics in the `debug` RPC API, through the `metrics` method, hence these can be queried simply from the console in:
