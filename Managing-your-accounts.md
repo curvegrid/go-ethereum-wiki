@@ -96,7 +96,7 @@ Creates a new account and prints the address.
 On the console, use:
 
 ```
-> admin.newAccount()
+> personal.newAccount("password")
 ```
 
 The account is saved in encrypted format, you are prompted for a passphrase. You **must** remember this passphrase to unlock your account in the future.
@@ -209,7 +209,7 @@ geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain loc
 On the console you can also unlock accounts. 
 
 ```
-admin.unlock(address)
+personal.unlock(address, "password")
 ```
 
 Note that we do NOT recommend using the password argument here, since the console history is logged, so you may compromise your account. You have been warned. 
