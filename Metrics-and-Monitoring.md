@@ -46,7 +46,7 @@ Geth automatically exposes all collected metrics in the `debug` RPC API, through
   Avg15Min: '3.57M (3.96K/s)',
   Total: '5.83M (2.97K/s)'
 }
-> debug.metrics().core.BlockInsertions
+> debug.metrics().chain.inserts
 {
   Avg01Min: '10 (0.17/s)',
   Avg05Min: '61 (0.20/s)',
