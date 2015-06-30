@@ -29,27 +29,23 @@ When you start up your ethereum node with `geth` it is not mining by default. To
 
 `geth --mine --minerthreads=4`
 
-You can also start and stop CPU mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). `admin.miner.start` takes an optional parameter for the number of miner threads. 
+You can also start and stop CPU mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). `miner.start` takes an optional parameter for the number of miner threads. 
 
 ```
-> admin.miner.start()
+> miner.start()
 true
-> admin.miner.stop()
+> miner.stop()
 true
 ```
 
-Note that mining for real ether only makes sense if you are in sync with the network (since you mine on top of the consensus block). Therefore the eth blockchain downloader/synchroniser will delay mining until syncing is complete, and after that mining automatically starts unless you cancel your intention with `admin.miner.stop()`.
+Note that mining for real ether only makes sense if you are in sync with the network (since you mine on top of the consensus block). Therefore the eth blockchain downloader/synchroniser will delay mining until syncing is complete, and after that mining automatically starts unless you cancel your intention with `miner.stop()`.
 
 In order to earn ether you must have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you don't have an etherbase address set, then `geth --mine` will not start up.
 
 ```
 > eth.coinbase
 '0x'
-> admin.newAccount()
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
-Passphrase:
-Repeat Passphrase:
+> personal.newAccount("mypassword")
 'ffd25e388bf07765e6d7a00d6ae83fa750460c7e'
 > eth.coinbase
 '0xffd25e388bf07765e6d7a00d6ae83fa750460c7e'
@@ -64,9 +60,9 @@ geth --etherbase '0xa4d8e9cae4d04b093aac82e6cd355b6b963fb7ff' --mine console 2>>
 There is an option [to add extra Data](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminersetextra) (up to the limit of 1Kb) to your mined blocks. By convention this is interpreted as a unicode string, so you can set your vanity tag.
 
 ```
-admin.miner.setExtra("ΞTHΞЯSPHΞЯΞ")
+miner.setExtra("ΞTHΞЯSPHΞЯΞ")
 ...
-admin.debug.printBlock(131805)
+debug.printBlock(131805)
 BLOCK(be465b020fdbedc4063756f0912b5a89bbb4735bd1d1df84363e05ade0195cb1): Size: 531.00 B TD: 643485290485 {
 NoNonce: ee48752c3a0bfe3d85339451a5f3f411c21c8170353e450985e1faab0a9ac4cc
 Header:
@@ -79,10 +75,10 @@ Header:
 }
 ```
 
-You can check your hashrate with [admin.miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in H/s (Hash operations per second). 
+You can check your hashrate with [miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in H/s (Hash operations per second). 
 
 ```
-> admin.miner.hashrate()
+> miner.hashrate
 712000
 ```
 
@@ -96,9 +92,7 @@ After you successfully mined some blocks, you can check the ether balance of you
 In order to spend your earnings [on gas to transact](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions), you will need to have this account unlocked. 
 
 ```
-> admin.unlock(eth.coinbase)
-Please enter a passphrase now.
-Passphrase:
+> personal.unlockAccount(eth.coinbase, "mypassword")
 true
 ```
 
@@ -131,7 +125,7 @@ Mining success depends on the set block difficulty. Block difficulty dynamically
 
 **INCORRECT...CHECKING**
 ```
-etm = eth.getBlock("latest").difficulty/admin.miner.hashrate(); // estimated time in seconds
+etm = eth.getBlock("latest").difficulty/miner.hashrate; // estimated time in seconds
 Math.floor(etm / 3600.) + "h " + Math.floor((etm % 3600)/60) + "m " +  Math.floor(etm % 60) + "s";
 // 1h 3m 30s
 ```
