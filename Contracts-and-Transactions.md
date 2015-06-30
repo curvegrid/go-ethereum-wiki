@@ -378,7 +378,7 @@ When this transaction gets included in a block, somewhere on a lucky miner's com
 If the transaction is not picked up, we can see it with:
 
 ```js
-eth.pendingTransactions()
+eth.pendingTransactions
 ```
 
 This accumulates all the transactions sent, even the ones that were rejected and are not included in the current mined block (trans state). These latter can be shown by:
@@ -390,7 +390,7 @@ eth.getBlock("pending", true).transactions()
 if you identify the index of your rejected transaction, you can resend it with modified gas limit and gas price (both optional parameters):
 
 ```js
-tx = eth.pendingTransactions()[1]
+tx = eth.pendingTransactions[1]
 eth.resend(tx, newGasPrice, newGasLimit)
 ```
 
