@@ -209,7 +209,7 @@ geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain loc
 On the console you can also unlock accounts. 
 
 ```
-personal.unlock(address, "password")
+personal.unlockAccount(address, "password")
 ```
 
 Note that we do NOT recommend using the password argument here, since the console history is logged, so you may compromise your account. You have been warned. 
