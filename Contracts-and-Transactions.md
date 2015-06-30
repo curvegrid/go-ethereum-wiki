@@ -409,7 +409,7 @@ Before you can submit any transactions, you need mine some ether on your private
 
 ```js
 // create account. will prompt for password
-admin.newAccount();
+personal.newAccount("mypassword");
 // name your primary account, will often use it
 primary = eth.accounts[0];
 // check your balance (denominated in ether)
@@ -423,11 +423,11 @@ primary = eth.accounts[0];
 // mine 10 blocks to generate ether 
 
 // starting miner
-admin.miner.start();
+miner.start();
 // wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
-admin.debug.waitForBlocks(eth.blockNumber+10);
+debug.waitForBlocks(eth.blockNumber+10);
 // then stop mining (just not to burn heat in vain)
-admin.miner.stop()  ;
+miner.stop()  ;
 balance = web3.fromWei(eth.getBalance(primary), "ether");
 ```
 
@@ -435,10 +435,10 @@ After you create transactions, you can force process them with the following lin
 
 ```
 confirmations = 10;
-admin.miner.start();
+miner.start();
 // wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
-admin.debug.waitForBlocks(eth.blockNumber+confirmations);
-admin.miner.stop()  ;
+debug.waitForBlocks(eth.blockNumber+confirmations);
+miner.stop()  ;
 ```
 
 you can check your pending transactions with 
@@ -614,10 +614,10 @@ contractaddress = contract.new({from: primary, data: contract.code});
 eth.getBlock("pending", true).transactions;
 
 // force mine txs
-admin.miner.start();
+miner.start();
 // waits until block height is minimum the number given.
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop()
+debug.waitForBlocks(eth.blockNumber+1);
+miner.stop()
 
 // use the contract
 // get abi definition from compiler output
@@ -635,9 +635,9 @@ console.log("multiply7.multiply.call(6, {from:primary}) => "+fortytwo);
 registrar.reserve.sendTransaction(primary,  {from: primary});
 registrar.rsetAddress.sendTransaction("multiply7", contractaddress, true, {from: primary});
 // mine the registration into effect:
-admin.miner.start(); 
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop();
+miner.start(); 
+debug.waitForBlocks(eth.blockNumber+1);
+miner.stop();
 
 // save info json, for later use and register contract info with the location
 filename = "/tmp/info.json";
@@ -649,9 +649,9 @@ admin.contractInfo.register(primary, contractaddress, contenthash);
 admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
 
 // mine the registrations into effect:
-admin.miner.start();
-admin.debug.waitForBlocks(eth.blockNumber+1);
-admin.miner.stop();
+miner.start();
+debug.waitForBlocks(eth.blockNumber+1);
+miner.stop();
 
 // retrieve contract address using global registrar entry with 'multply7'
 contractaddress = registrar.addr("multiply7);
