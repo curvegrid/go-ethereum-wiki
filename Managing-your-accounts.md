@@ -96,10 +96,10 @@ Creates a new account and prints the address.
 On the console, use:
 
 ```
-> personal.newAccount("password")
+> personal.newAccount("passphrase")
 ```
 
-The account is saved in encrypted format, you are prompted for a passphrase. You **must** remember this passphrase to unlock your account in the future.
+The account is saved in encrypted format. You **must** remember this passphrase to unlock your account in the future.
 
 For non-interactive use the passphrase can be specified with the --password flag:
 
