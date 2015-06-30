@@ -47,7 +47,7 @@ true
 To get more information about the connected peers, such as IP address and port number, supported protocols, use the `peers()` function of the `admin` object. `admin.peers()` returns the list of currently connected peers.
 
 ```
-> admin.peers()
+> admin.peers
 [{
   ID: 'a4de274d3a159e10c2c9a68c326511236381b84c9ec52e72ad732eb0b2b1a2277938f78593cdbe734e6002bf23114d434a085d260514ab336d4acdc312db671b',
   Name: 'Geth/v0.9.14/linux/go1.4.2',
@@ -78,7 +78,7 @@ To get more information about the connected peers, such as IP address and port n
 
 To check the ports used by geth and also find your enode URI run:
 ```
-> admin.nodeInfo()
+> admin.nodeInfo
 {
   Name: 'Geth/v0.9.14/darwin/go1.4.2',
   NodeUrl: 'enode://3414c01c19aa75a34f2dbd2f8d0898dc79d6b219ad77f8155abf1a287ce2ba60f14998a3a98c0cf14915eabfdacf914a92b27a01769de18fa2d049dbf4c17694@[::]:30303',
