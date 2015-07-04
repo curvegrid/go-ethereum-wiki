@@ -58,7 +58,7 @@ Repeat Passphrase:
 Address: {168bc315a2ee09042d83d7c5811b533620531f67}
 ```
 
-### Listing accounts
+#### Listing accounts
 
 ```
 $ geth account list
@@ -100,13 +100,12 @@ Supplying the password directly as part of the command line is not encouraged, b
 
 ```
 $ geth --password /path/to/password account new
-Address: b0047c606f3af7392e073ed13253f8f4710b08b6
+
+$ geth --password /path/to/password account update b0047c606f3af7392e073ed13253f8f4710b08b6
 
 $ geth account list
-Address: {b0047c606f3af7392e073ed13253f8f4710b08b6}
 
 $ geth --datadir /someOtherEthDataDir --password /path/to/anotherpassword account import ./key.prv
-Address: b0047c606f3af7392e073ed13253f8f4710b08b6
 ```
 
 # Creating accounts
@@ -127,7 +126,7 @@ On the console, use:
 
 The account is saved in encrypted format. You **must** remember this passphrase to unlock your account in the future.
 
-For non-interactive use the passphrase can be specified with the --password flag:
+For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
 geth --password <passwordfile> account new
@@ -151,7 +150,7 @@ The account is saved in encrypted format, you are prompted for a passphrase.
 
 You must remember this passphrase to unlock your account in the future.
 
-For non-interactive use the passphrase can be specified with the -password flag:
+For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
 geth --password <passwordfile> account import <keyfile>
@@ -188,9 +187,9 @@ for a passphrase to unlock the account and another to save the updated file.
 This same command can therefore be used to migrate an account of a deprecated
 format to the newest format or change the password for an account.
 
-For non-interactive use the passphrase can be specified with the --password flag:
+For non-interactive use the passphrase can be specified with the `--password` flag:
 
-    ethereum --password <passwordfile> account new
+    geth --password <passwordfile> account new
 
 Since only one password can be given, only format update can be performed,
 changing your password is only possible interactively.
@@ -217,9 +216,9 @@ passwordfile as argument containing the wallet password in cleartext.
 ### Listing your current accounts
 
 From the command line, call the CLI with:
+
 ```
 $ geth account list
-
 Primary #0: {d1ade25ccd3d550a7eb532ac759cac7be09c2719}
 Account #1: {da65665fc30803cb1fb7e6d86691e20b1826dee0}
 Account #2: {e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32}
