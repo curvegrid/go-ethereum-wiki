@@ -6,28 +6,27 @@ Remember your password.
 If you lose the password you use to encrypt your account, you will not be able to access that account.
 Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
 
+**Note**: the key file name naming convention changed as of `0.9.36`. This document is meant to reflect accurate information on accounts as used by the frontier release. 
+
 The ethereum CLI `geth` provides account management via the `account` subcommand:
 
 ```
 account command [arguments...]
 ```
 
-Manage accounts lets you create new accounts, list all existing accounts,
-import a private key into a new account.
+Manage accounts lets you create new accounts, list all existing accounts, import a private key into a new account, migrate to newest key format and change your password.
 
-It supports interactive mode, when you are prompted for password as well as
-non-interactive mode where passwords are supplied via a given password file.
-Non-interactive mode is only meant for scripted use on test networks or known
-safe environments.
+It supports interactive mode, when you are prompted for password as well as non-interactive mode where passwords are supplied via a given password file. Non-interactive mode is only meant for scripted use on test networks or known safe environments.
 
-Make sure you remember the password you gave when creating a new account (with
-either new or import). Without it you are not able to unlock your account.
+Make sure you remember the password you gave when creating a new account (with new, update or import). Without it you are not able to unlock your account.
 
 Note that exporting your key in unencrypted format is NOT supported.
 
 Keys are stored under `<DATADIR>/keystore`. Make sure you backup your keys regularly! See [DATADIR backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore) for more information.
+The newest format of the keyfiles is: `UTC--<created_at UTC ISO8601>-<address hex>`.
+The order of accounts when listing, is lexicographic, but as a consequence of the timespamp format, it is actually order of creation 
 
-It is safe to transfer the entire directory or the individual keys therein between ethereum nodes.
+It is safe to transfer the entire directory or the individual keys therein between ethereum nodes. Note that in case you are adding keys to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
 
 And finally. **DO NOT FORGET YOUR PASSWORD**
 
@@ -36,7 +35,9 @@ SUBCOMMANDS:
 
         list    print account addresses
         new     create a new account
+        update  update an existing account
         import  import a private key into a new account
+        
 
 ```
 
@@ -47,23 +48,48 @@ Accounts can also be managed via the [Javascript Console](https://github.com/eth
 ## Examples
 ### Interactive use
 
+#### creating an account 
+
 ```
 $ geth account new
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
+Your new account is locked with a password. Please give a password. Do not forget this password.
 Passphrase:
 Repeat Passphrase:
-Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+Address: {168bc315a2ee09042d83d7c5811b533620531f67}
+```
 
+### Listing accounts
+
+```
 $ geth account list
-Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+Account #0: {a94f5374fce5edbc8e2a8697c15331677e6ebf0b}
+Account #1: {c385233b188811c9f355d4caec14df86d6248235}
+Account #2: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+```
 
+#### Import private key
+
+```
 $ geth --datadir /someOtherEthDataDir  account import ./key.prv
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
 Passphrase:
 Repeat Passphrase:
 Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+```
+
+#### Account update
+
+```
+$ geth account update a94f5374fce5edbc8e2a8697c15331677e6ebf0b
+Unlocking account a94f5374fce5edbc8e2a8697c15331677e6ebf0b | Attempt 1/3
+Passphrase:
+0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
+Account 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b' unlocked.
+Please give a new password. Do not forget this password.
+Passphrase:
+Repeat Passphrase:
+0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
 ```
 
 ### Non-interactive use 
@@ -85,7 +111,7 @@ Address: b0047c606f3af7392e073ed13253f8f4710b08b6
 
 # Creating accounts
 
-### Creating a new account
+## Creating a new account
 
 ```
 geth account new
@@ -110,12 +136,9 @@ geth --password <passwordfile> account new
 Note, this is meant to be used for testing only, it is a bad idea to save your
 password to file or expose in any other way.
 
-### Creating an account by importing a private key
+## Creating an account by importing a private key
 
 ```
-import [arguments...]
-
-
     geth account import <keyfile>
 ```
 
@@ -134,13 +157,10 @@ For non-interactive use the passphrase can be specified with the -password flag:
 geth --password <passwordfile> account import <keyfile>
 ```
 
-Note:
-As you can directly copy your encrypted accounts to another ethereum instance,
-this import mechanism is not needed when you transfer an account between
-nodes.
-
 **Note**:
 Since you can directly copy your encrypted accounts to another ethereum instance, this import/export mechanism is not needed when you transfer an account between nodes.
+
+**Warning:** when you copy keys into an existing node's keystore, the order of accounts you are used to may change. Therefore you make sure you either do not rely on the account order or doublecheck and update the indexes used in your scripts.
 
 **Warning:**
 If you use the password flag with a password file, best to make sure the file is not readable or even listable for anyone but you. You achieve this with:
@@ -151,6 +171,34 @@ chmod 700 /path/to/password
 cat > /path/to/password
 >I type my pass here^D
 ```
+
+## Updating an existing account
+
+You can update an existing account on the command line with the `update` subcommand with the account address or index as parameter. 
+
+```
+geth account update b0047c606f3af7392e073ed13253f8f4710b08b6
+geth account update 2
+```
+
+
+The account is saved in the newest version in encrypted format, you are prompted
+for a passphrase to unlock the account and another to save the updated file.
+
+This same command can therefore be used to migrate an account of a deprecated
+format to the newest format or change the password for an account.
+
+For non-interactive use the passphrase can be specified with the --password flag:
+
+    ethereum --password <passwordfile> account new
+
+Since only one password can be given, only format update can be performed,
+changing your password is only possible interactively.
+
+**Note**: Account update has the a side effect that the order of your accounts changes.
+
+After a successful update, all previous formats/versions of that same key will be removed!
+
 
 # Importing your presale wallet
 
@@ -178,9 +226,12 @@ Account #2: {e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32}
 Account #3: {f4dd5c3794f1fd0cdc0327a83aa472609c806e99}
 ```
 
-to list your accounts in order of creation. The first account created is called *primary* account. 
+to list your accounts in order of creation. 
 
-when using the console:
+**Note**:
+This order can change if you copy keyfiles from other nodes, so make sure you either do not rely on indexes or make sure if you copy keys you check and update your account indexes in your scripts. 
+
+When using the console:
 ```
 > eth.accounts
 ['0x407d73d8a49eeb85d32cf465507dd71d507100c1']
@@ -199,14 +250,25 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id"
 }
 ```
 
-If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes an account (in hex) as argument so you can unlock an account programmatically for one session. This is useful if you want to use your account from Dapps via RPC. `--unlock primary` will unlock the first account. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
+If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes a whitespace separated list of accounts (in hex or index) as argument so you can unlock the accounts programmatically for one session. This is useful if you want to use your account from Dapps via RPC. `--unlock ` will unlock the first account. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
 
+Unlocking one account:
 ```
 geth --password <(echo this is not secret!) account new 
 geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain localhost --verbosity 6 2>> geth.log 
 ```
 
-On the console you can also unlock accounts. 
+Instead of the account address, you can use integer indexes which refers to the address position in the account listing (and corresponds to order of creation)
+
+The command line allows you to unlock multiple accounts. In this case the argument to unlock is a whitespace delimited list of accounts addresses or indexes. 
+
+```
+geth --unlock "0x407d73d8a49eeb85d32cf465507dd71d507100c1 0 5 e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32"
+```
+
+If this construction is used non-interactively, your password file will need to contain the respective passwords for the accounts in question, one per line. 
+
+On the console you can also unlock accounts (one at a time). 
 
 ```
 personal.unlockAccount(address, "password")
