@@ -1,21 +1,22 @@
 ## Installing from PPA
 
-For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, simply omit the `-dev` one.
-
-*Warning: The `ethereum-qt` PPA will upgrade your system-wide Qt5 installation, from 5.2 on Trusty and 5.3 on Utopic, to 5.4.*
+For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, add only the first one.
 
 ```shell
 sudo apt-get install software-properties-common
-sudo add-apt-repository -y ppa:ethereum/ethereum-qt
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo add-apt-repository -y ppa:ethereum/ethereum-dev
 sudo apt-get update
 sudo apt-get install ethereum
 ```
 
-Run `mist` for the GUI or `geth` for the CLI.
+After installing, run `geth account new` to create an account on your node.
 
-You can alternatively install only the CLI or GUI, with `apt-get install geth` or `apt-get install mist` respectively.
+You should now be able to run `geth` and connect to the network.
+
+Make sure to check the different options and commands with `geth --help`
+
+You can alternatively install only the `geth` CLI with `apt-get install geth` if you don't want to install the other utilities (`bootnode`, `evm`, `disasm`, `rlpdump`, `ethtest`).
 
 ## Building from source
 
