@@ -176,7 +176,7 @@ If your source contains multiple contracts, the output will contain an entry for
 You can try this by inspecting the most current GlobalRegistrar code:
 
 ```js
-contracts = eth.compilers.solidity(globalRegistrarSrc)
+contracts = eth.compile.solidity(globalRegistrarSrc)
 ```
 
 # Creating and deploying a contract
