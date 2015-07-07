@@ -588,6 +588,119 @@ geth --maxpeers 0 --networkid 123456 --nodiscover --unlock primary js script.js 
 Note that `networkid` can be any arbitrary non-negative integer, 0 is always the live net.
 
 ```
+personal.newAccount("")
+
+primary = eth.accounts[0];
+balance = web3.fromWei(eth.getBalance(primary), "ether");
+personal.unlockAccount(primary, "");
+// miner.setEtherbase(primary)
+
+miner.start(8); admin.sleepBlocks(10); miner.stop()  ;
+
+// 0xc6d9d2cd449a754c494264e1809c50e34d64562b
+primary = eth.accounts[0];
+balance = web3.fromWei(eth.getBalance(primary), "ether");
+
+globalRegistrarTxHash = admin.setGlobalRegistrar("0x0");
+//'0x0'
+globalRegistrarTxHash = admin.setGlobalRegistrar("", primary);
+//'0xa69690d2b1a1dcda78bc7645732bb6eefcd6b188eaa37abc47a0ab0bd87a02e8'
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+//true
+globalRegistrarAddr = eth.getTransactionReceipt(globalRegistrarTxHash).contractAddress;
+//'0x3d255836f5f8c9976ec861b1065f953b96908b07'
+eth.getCode(globalRegistrarAddr);
+//...
+
+hashRegTxHash = admin.setHashReg("0x0");
+hashRegTxHash = admin.setHashReg("", primary);
+txpool.status
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+hashRegAddr = eth.getTransactionReceipt(hashRegTxHash).contractAddress;
+eth.getCode(hashRegAddr);
+
+registrar.reserve.sendTransaction("HashReg", {from:primary});
+registrar.setAddress.sendTransaction("HashReg",hashRegAddr,true, {from:primary});
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+
+urlHintTxHash = admin.setUrlHint("", primary);
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+urlHintAddr = eth.getTransactionReceipt(urlHintTxHash).contractAddress;
+eth.getCode(urlHintAddr);
+
+registrar.reserve.sendTransaction("UrlHint", {from:primary});
+registrar.setAddress.sendTransaction("UrlHint",urlHintAddr,true, {from:primary});
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+
+registrar.owner("HashReg");
+registrar.owner("UrlHint");
+registrar.addr("HashReg");
+registrar.addr("UrlHint");
+
+admin.stopNatSpec();
+primary = eth.accounts[0];
+personal.unlockAccount(primary, "")
+
+globalRegistrarAddr = "0x3d255836f5f8c9976ec861b1065f953b96908b07";
+admin.setGlobalRegistrar(globalRegistrarAddr);
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
+admin.setHashReg(registrar.addr("HashReg"));
+admin.setUrlHint(registrar.addr("UrlHint"));
+
+registrar.owner("HashReg");
+registrar.owner("UrlHint");
+registrar.addr("HashReg")
+registrar.addr("UrlHint");
+
+eth.getBlockTransactionCount("pending");
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+txhash = eth.sendTransaction({from: primary, data: contract.code});
+
+eth.getBlock("pending", true).transactions;
+
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+contractaddress = eth.getTransactionReceipt(txhash).contractAddress;
+eth.getCode(contractaddress);
+
+multiply7 = eth.contract(contract.info.abiDefinition).at(contractaddress);
+fortytwo = multiply7.multiply.call(6);
+
+admin.stopNatSpec();
+filename = "/info.json";
+contenthash = admin.saveInfo(contract.info, "/tmp" + filename);
+admin.register(primary, contractaddress, contenthash);
+eth.getBlock("pending", true).transactions;
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+
+admin.registerUrl(primary, contenthash, "file://" + filename);
+eth.getBlock("pending", true).transactions;
+miner.start(1); admin.sleepBlocks(1); miner.stop();
+
+// try Natspec
+admin.startNatSpec();
+info = admin.getContractInfo(contractaddress);
+multiply7 = eth.contract(info.abiDefinition).at(contractaddress);
+fortytwo = multiply7.multiply.sendTransaction(6, { from: primary });
+
+
+
+txpool.status
+eth.getBlockTransactionCount("pending")
+eth.getBlock("pending", true).transactions
+
+```
+
+old version (TODO merge)
+
+```
 // set your primary account address
 primary = eth.accounts[0];
 
