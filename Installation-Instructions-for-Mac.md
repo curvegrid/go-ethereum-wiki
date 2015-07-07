@@ -16,9 +16,11 @@ You can install the develop branch by running `--devel`:
 brew install ethereum --devel
 ```
 
-For installing `mist`, add `--with-gui`.
+After installing, run `geth account new` to create an account on your node.
 
-After installing, run `geth` to start your node.
+You should now be able to run `geth` and connect to the network.
+
+Make sure to check the different options and commands with `geth --help`
 
 For options and patches, see: https://github.com/ethereum/homebrew-ethereum
 
