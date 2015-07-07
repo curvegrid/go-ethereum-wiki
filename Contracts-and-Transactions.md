@@ -80,11 +80,12 @@ For the frontier release, `geth` supports solidity compilation through system ca
 If you start up your `geth` node, you can check if the solidity compiler is available. This is what happens, if it is not:
 
 ```js
-eth.getCompilers()
-['' ]
 > eth.compile.solidity("")
-error: eth_compileSolidity method not implemented
-Invalid JSON RPC response
+eth_compileSolidity method not available: solc (solidity compiler) not found
+    at InvalidResponse (<anonymous>:-57465:-25)
+    at send (<anonymous>:-115373:-25)
+    at solidity (<anonymous>:-104109:-25)
+    at <anonymous>:1:1
 ```
 
 After you found a way to install `solc`, you make sure it's in the path. If [`eth.getCompilers()`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetcompilers) still does not find it (returns an empty array), you can set a custom path to the `sol` executable on the command line using th `solc` flag.
