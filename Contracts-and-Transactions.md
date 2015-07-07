@@ -254,8 +254,8 @@ So if you are a conscientious contract creator, the steps are the following:
 3. Register codehash ->content hash -> url
 4. Deploy the contract itself to the blockchain
 
-The JS API makes this process very easy by providing helpers. Call [`admin.contractInfo.register`]() to extract info from the contract, write out its json serialisation in the given file, calculates the content hash of the file and finally registers this content hash to the contract's code hash.
-Once you deployed that file to any url, you can use [`admin.contractInfo.registerUrl`]() to register the url with your content hash on the blockchain as well. (Note that in case a fixed content addressed model is used as document store, the url-hint is no longer necessary.)
+The JS API makes this process very easy by providing helpers. Call [`admin.register`]() to extract info from the contract, write out its json serialisation in the given file, calculates the content hash of the file and finally registers this content hash to the contract's code hash.
+Once you deployed that file to any url, you can use [`admin.registerUrl`]() to register the url with your content hash on the blockchain as well. (Note that in case a fixed content addressed model is used as document store, the url-hint is no longer necessary.)
 
 ```js
 source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
@@ -264,13 +264,13 @@ contract = eth.compile.solidity(source).test
 // send off the contract to the blockchain
 address = contract.new({from: primaryAccount, data: contract.code})
 // extracts info from contract, save the json serialisation in the given file, 
-contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
+contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
 // calculates the content hash and registers it with the code hash in `HashReg`
 // it uses address to send the transaction. 
 // returns the content hash that we use to register a url
-admin.contractInfo.register(primaryAccount, address, contenthash)
+admin.register(primaryAccount, address, contenthash)
 // here you deploy ~/dapps/shared/contracts/test/info.json to a url
-admin.contractInfo.registerUrl(primaryAccount, hash, url)
+admin.registerUrl(primaryAccount, hash, url)
 ```
 
 # Interacting with contracts
@@ -293,19 +293,19 @@ myMultiply7.multiply.call(6)
 
 Now suppose this contract is not yours, and you would like documentation or look at the source code. 
 This is made possible by making available the contract info bundle and register it in the blockchain.
-The `admin.contractInfo` API provides convenience methods to fetch this bundle for any contract that chose to register.
+The `admin` API provides convenience methods to fetch this bundle for any contract that chose to register.
 To see how it works, read about [Contract Metadata](https://github.com/ethereum/wiki/wiki/Contract-metadata) or read the contract info deployment section of this document. 
 
 ```js
 // get the contract info for contract address to do manual verification
-var info = admin.contractInfo.get(address) // lookup, fetch, decode
+var info = admin.getContractInfo(address) // lookup, fetch, decode
 var source = info.source;
 var abiDef = info.abiDefinition
 ```
 
 ```js
 // verify an existing contract in blockchain (NOT IMPLEMENTED)
-admin.contractInfo.verify(address)
+admin.verifyContractInfo(address)
 ```
 
 # NatSpec 
@@ -336,19 +336,19 @@ source = "contract test {
 }"
 contract = eth.compile.solidity(source).test
 contractaddress = contract.new({from: primary, data: contract.code})
-contenthash = admin.contractInfo.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
-admin.contractInfo.register(primary, contractaddress, contenthash)
+contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
+admin.register(primary, contractaddress, contenthash)
 // put it up on your favourite oldworld site:
-admin.contractInfo.registerUrl(contentHash, "http://dapphub.com/test/info.json")
+admin.registerUrl(contentHash, "http://dapphub.com/test/info.json")
 ```
 
 Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address of the content itself.
 
-For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.contractInfo.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
+For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
 
 Now you are done as a dev, so swap seats as it were and pretend that you are a user who is sending a transaction to the infamous multiply7 contract. 
 
-You need to start the client with the `--natspec` flag to enable smart confirmations and contractInfo fetching. You can also set it on the console with `admin.contractInfo.start()` and `admin.contractInfo.stop()`.
+You need to start the client with the `--natspec` flag to enable smart confirmations and contractInfo fetching. You can also set it on the console with `admin.startNatSpec()` and `admin.stopNatSpec()`.
 
 ```
 geth --natspec --unlock primary console 2>> /tmp/eth.log
@@ -358,7 +358,7 @@ Now at the console type:
 
 ```js
 // obtain the abi definition for your contract
-var info = admin.contractInfo.get(address)
+var info = admin.getContractInfo(address)
 var abiDef = info.abiDefinition
 // instantiate a contract for transactions
 var Multiply7 = eth.contract(abiDef);
@@ -755,12 +755,12 @@ miner.stop();
 
 // save info json, for later use and register contract info with the location
 filename = "/tmp/info.json";
-contenthash = admin.contractInfo.saveInfo(contract.info, filename);
+contenthash = admin.saveInfo(contract.info, filename);
 // register contenthash to contract address (using the sha3 of the code on contractaddress as codehash 
 // using HashReg: codehash -> contenthash
-admin.contractInfo.register(primary, contractaddress, contenthash);
+admin.register(primary, contractaddress, contenthash);
 // register a url hint with the content hash
-admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
+admin.registerUrl(primary, contenthash, "file://"+filename);
 
 // mine the registrations into effect:
 miner.start();
@@ -770,13 +770,13 @@ miner.stop();
 // retrieve contract address using global registrar entry with 'multply7'
 contractaddress = registrar.addr("multiply7);
 // retrieve the info using the url 
-info = admin.contractInfo.get(contractaddress);
+info = admin.getContractInfo(contractaddress);
 abiDef = info.abiDefinition;
 Multiply7 = eth.contract(abiDef);
 multiply7 = Multiply7.at(contractaddress);
 
 // switch on Natspec
-admin.contractInfo.start();
+admin.startNatSpec();
 myMultiply7.multiply.sendTransaction(6, { from: primary });
 // 
 console.log("Pending TX count should be 0: "+eth.getTransactionCountForBlock("pending"));
