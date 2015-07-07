@@ -1,67 +1,82 @@
 # CLI client
 
-Command line client options are a moving target under constant change now. Please refer to the client to geth help. Below is the output of `geth help` (version 0.9.19 10/5/2015). 
+Command line client options are a moving target under constant change now. Please refer to the client to geth help. Below is the output of `geth help` (version 0.9.35 2015-07-07). 
 
 ```
 geth [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.23
+   0.9.35
 
 COMMANDS:
+   recover	attempts to recover a corrupted database by setting a new block by number or hash. See help recover.
    blocktest	loads a block test file
-   makedag	generate ethash dag (for testing)
-   version	print ethereum version numbers
-   wallet	ethereum presale wallet
-   account	manage accounts
-   dump		dump a specific block from storage
-   console	Geth Console: interactive JavaScript environment
-   attach	Geth Console: interactive JavaScript environment (connect to node)
-   js		executes the given JavaScript files in the Geth JavaScript VM
    import	import a blockchain file
    export	export blockchain into file
    upgradedb	upgrade chainblock database
    removedb	Remove blockchain and state databases
+   dump		dump a specific block from storage
+   monitor	Geth Monitor: node metrics monitoring and visualization
+   makedag	generate ethash dag (for testing)
+   version	print ethereum version numbers
+   wallet	ethereum presale wallet
+   account	manage accounts
+   console	Geth Console: interactive JavaScript environment
+   attach	Geth Console: interactive JavaScript environment (connect to node)
+   js		executes the given JavaScript files in the Geth JavaScript VM
    help		Shows a list of commands or help for one command
    
 GLOBAL OPTIONS:
-   --identity 					Custom node name
-   --unlock 					Unlock the account given until this program exits (prompts for password). '--unlock primary' unlocks the primary account
-   --password 					Path to password file to use with options and subcommands needing a password
-   --bootnodes 					Space-separated enode URLs for p2p discovery bootstrap
-   --datadir "/Users/tgerring/Library/Ethereum"	Data directory to be used
-   --blockchainversion "2"			Blockchain version (integer)
-   --jspath "."					JS library path to be used with console and js subcommands
-   --port "30303"				Network listening port
-   --maxpeers "25"				Maximum number of network peers (network disabled if set to 0)
-   --maxpendpeers "0"				Maximum number of pending connection attempts (defaults used if set to 0)
-   --etherbase "primary"			Public address for block mining rewards. By default the address of your primary account is used
-   --gasprice "10000000000000"			Sets the minimal gasprice when mining transactions
-   --minerthreads "4"				Number of miner threads
-   --mine					Enable mining
-   --autodag					Enable automatic DAG pregeneration
-   --nat "any"					NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
-   --natspec					Enable NatSpec confirmation notice
-   --nodekey 					P2P node key file
-   --nodekeyhex 				P2P node key as hex (for testing)
-   --rpc					Enable the JSON-RPC server
-   --rpcaddr "127.0.0.1"			Listening address for the JSON-RPC server
-   --rpcport "8545"				Port on which the JSON-RPC server should listen
-   --shh					Enable whisper
-   --vmdebug					Virtual Machine debug output
-   --protocolversion "60"			ETH protocol version (integer)
-   --networkid "0"				Network Id (integer)
-   --rpccorsdomain 				Domain on which to send Access-Control-Allow-Origin header
-   --verbosity "3"				Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
-   --backtrace_at ":0"				If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
-   --logtostderr				Logs are written to standard error instead of to files.
-   --vmodule ""					The syntax of the argument is a comma-separated list of pattern=N, where pattern is a literal file name (minus the ".go" suffix) or "glob" pattern and N is a log verbosity level.
-   --logfile 					Send log output to a file
-   --logjson 					Send json structured log output to a file or '-' for standard output (default: no json output)
-   --pprof					Enable the profiling server on localhost
-   --pprofport "6060"				Port on which the profiler should listen
-   --solc "solc"				solidity compiler to be used
-   --help, -h					show help
+   --identity 								Custom node name
+   --unlock 								Unlock the account given until this program exits (prompts for password). '--unlock n' unlocks the n-th account in order or creation.
+   --password 								Path to password file to use with options and subcommands needing a password
+   --genesisnonce "42"							Sets the genesis nonce
+   --bootnodes 								Space-separated enode URLs for p2p discovery bootstrap
+   --datadir "/Users/bas/Library/Ethereum"				Data directory to be used
+   --blockchainversion "3"						Blockchain version (integer)
+   --jspath "."								JS library path to be used with console and js subcommands
+   --port "30303"							Network listening port
+   --maxpeers "25"							Maximum number of network peers (network disabled if set to 0)
+   --maxpendpeers "0"							Maximum number of pending connection attempts (defaults used if set to 0)
+   --etherbase "primary"						Public address for block mining rewards. By default the address of your primary account is used
+   --gasprice "1000000000000"						Sets the minimal gasprice when mining transactions
+   --minerthreads "8"							Number of miner threads
+   --mine								Enable mining
+   --autodag								Enable automatic DAG pregeneration
+   --nat "any"								NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>)
+   --natspec								Enable NatSpec confirmation notice
+   --nodiscover								Disables the peer discovery mechanism (manual peer addition)
+   --nodekey 								P2P node key file
+   --nodekeyhex 							P2P node key as hex (for testing)
+   --rpc								Enable the JSON-RPC server
+   --rpcaddr "127.0.0.1"						Listening address for the JSON-RPC server
+   --rpcport "8545"							Port on which the JSON-RPC server should listen
+   --rpcapi "db,eth,net,web3"						Specify the API's which are offered over the HTTP RPC interface
+   --ipcdisable								Disable the IPC-RPC server
+   --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"	Specify the API's which are offered over the IPC interface
+   --ipcpath "/Users/bas/Library/Ethereum/geth.ipc"			Filename for IPC socket/pipe
+   --exec 								Execute javascript statement (only in combination with console/attach)
+   --shh								Enable whisper
+   --vmdebug								Virtual Machine debug output
+   --networkid "0"							Network Id (integer)
+   --rpccorsdomain 							Domain on which to send Access-Control-Allow-Origin header
+   --verbosity "3"							Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
+   --backtrace_at ":0"							If set to a file and line number (e.g., "block.go:271") holding a logging statement, a stack trace will be logged
+   --logtostderr							Logs are written to standard error instead of to files.
+   --vmodule ""								The syntax of the argument is a comma-separated list of pattern=N, where pattern is a literal file name (minus the ".go" suffix) or "glob" pattern and N is a log verbosity level.
+   --logfile 								Send log output to a file
+   --logjson 								Send json structured log output to a file or '-' for standard output (default: no json output)
+   --pprof								Enable the profiling server on localhost
+   --pprofport "6060"							Port on which the profiler should listen
+   --metrics								Enables metrics collection and reporting
+   --solc "solc"							solidity compiler to be used
+   --gpomin "1000000000000"						Minimum suggested gas price
+   --gpomax "100000000000000"						Maximum suggested gas price
+   --gpofull "80"							Full block threshold for gas price calculation (%)
+   --gpobasedown "10"							Suggested gas price base step down ratio (1/1000)
+   --gpobaseup "100"							Suggested gas price base step up ratio (1/1000)
+   --gpobasecf "110"							Suggested gas price base correction factor (%)
+   --help, -h								show help
 
 
 ```
