@@ -84,15 +84,15 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [verbosity](#adminverbosity)
   * [setSolc](#adminsetsolc)
   * [sleepBlocks](#adminsleepblocks)
-* [miner](#adminminerstart)
-  * [start](#adminminerstart)
-  * [stop](#adminminerstop)
-  * [startAutoDAG](#adminminerstartautodag)
-  * [stopAutoDAG](#adminminerstopautodag)
-  * [makeDAG](#adminminermakedag)
-  * [hashrate](#adminminerhashrate)
-  * [setExtra](#adminminersetextra) 
-  * [setGasPrice] (#adminminersetgasprice)
+* [miner](#miner)
+  * [start](#minerstart)
+  * [stop](#minerstop)
+  * [startAutoDAG](#minerstartautodag)
+  * [stopAutoDAG](#minerstopautodag)
+  * [makeDAG](#minermakedag)
+  * [hashrate](#minerhashrate)
+  * [setExtra](#minersetextra) 
+  * [setGasPrice] (#minersetgasprice)
 * [contractInfo](#admincontractinfo)
   * [start](#admincontractinfostart)
   * [stop](#admincontractinfostop)
@@ -350,34 +350,15 @@ Solidity Compiler: /some/path/solc
 
 ***
 
-### Mining
+### Miner
 
 
 
-#### admin.miner.start
+#### miner.start
 
-    admin.miner.start(threadNumber)
+    miner.start(threadCount)
 
-Starts [mining](see https://github.com/ethereum/go-ethereum/wiki/Mining) on with the given `threadNumber` of parallel threads.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```javascript
-admin.miner.start(4)
-// true
-```
-
-***
-
-#### admin.miner.stop
-
-    admin.miner.stop()
-
-Stops all miners.
+Starts [mining](see https://github.com/ethereum/go-ethereum/wiki/Mining) on with the given `threadNumber` of parallel threads. This is an optional argument.
 
 ##### Returns
 
@@ -386,18 +367,37 @@ Stops all miners.
 ##### Example
 
 ```javascript
-admin.miner.stop()
+miner.start()
+// true
+```
+
+***
+
+#### miner.stop
+
+    miner.stop(threadCount)
+
+Stops `threadCount` miners. This is an optional argument.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```javascript
+miner.stop()
 // true
 ```
 
 ***
 
 
-#### admin.miner.startAutoDAG
+#### miner.startAutoDAG
 
-    admin.miner.startAutoDAG()
+    miner.startAutoDAG()
 
-Starts automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). This process make sure that the DAG for the subsequent epoch is avaiable allowing mining right after the new epoch starts. If this is used by most network nodes, then blocktimes are expected to be normal at epoch transition. Auto DAG is switched on automatically when mining is started and switched off when the miner stops. 
+Starts automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). This process make sure that the DAG for the subsequent epoch is available allowing mining right after the new epoch starts. If this is used by most network nodes, then blocktimes are expected to be normal at epoch transition. Auto DAG is switched on automatically when mining is started and switched off when the miner stops. 
 
 ##### Returns
 
@@ -405,9 +405,9 @@ Starts automatic pregeneration of the [ethash DAG](https://github.com/ethereum/w
 
 ***
 
-#### admin.miner.stopAutoDAG
+#### miner.stopAutoDAG
 
-    admin.miner.stopAutoDAG()
+    miner.stopAutoDAG()
 
 Stops automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG). Auto DAG is switched off automatically when mining is stops.
 
@@ -417,9 +417,9 @@ Stops automatic pregeneration of the [ethash DAG](https://github.com/ethereum/wi
 
 ***
 
-#### admin.miner.makeDAG
+#### miner.makeDAG
 
-    admin.miner.makeAutoDAG(blockNumber, dir)
+    miner.makeDAG(blockNumber, dir)
 
 Generates the DAG for epoch `blockNumber/epochLength`. dir specifies a target directory,
 If `dir` is the empty string, then ethash will use the default directories `~/.ethash` on Linux and MacOS, and `~\AppData\Ethash` on Windows. The DAG file's name is `full-<revision-number>R-<seedhash>`
@@ -430,21 +430,29 @@ If `dir` is the empty string, then ethash will use the default directories `~/.e
 
 ***
 
-#### admin.miner.hashrate
+#### miner.hashrate
     
-    admin.miner.hashrate()
+    miner.hashrate
 
 ##### Returns
 
-`String` Returns the current hash rate in H/s.
+Returns the current hash rate in H/s.
 
 ***
 
-#### admin.miner.setExtra
+#### miner.setExtra
 
-    admin.miner.setExtra("extra data")
+    miner.setExtra("extra data")
 
 **Sets** the extra data for the block when finding a block. Limited to 1024 bytes.
+
+***
+
+#### miner.setGasPrice
+
+    miner.setGasPrice()
+
+**Sets** the the gasprice for the miner
 
 ***
 
