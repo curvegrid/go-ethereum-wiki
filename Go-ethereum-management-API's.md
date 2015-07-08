@@ -94,11 +94,8 @@ Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wi
 
 ## Net
 Network related functions
-* [addPeer](#net_addpeer)
-* [id](#net_id)
-* [getPeerCount](#net_getpeercount)
-* [getListening](#net_getlistening)
-* [peers](#net_peers)
+* [peerCount](#net_peercount)
+* [listening](#net_listening)
 
 ## Personal
 Support for account management.
@@ -392,29 +389,7 @@ none
 
 ***
 
-### net_addpeer
-Add peer
-
-#### Parameters
-`string`, peer enode
-
-#### Return
-`boolean` indication if peer was added
-
-***
-
-### net_id
-The network id (can be configured from the command line through the networkid argument)
-
-#### Parameters
-none
-
-#### Return
-`integer` network id
-
-***
-
-### net_getPeerCount
+### net_peerCount
 The number of connected peers
 
 #### Parameters
@@ -425,7 +400,7 @@ none
 
 ***
 
-### net_getListening
+### net_listening
 Indication if this node is currently listening for new peers
 
 #### Parameters
@@ -435,39 +410,6 @@ none
 `boolean` indication if this node accepts new peers
 
 ***
-
-### net_peers
-Collection with peers
-
-#### Parameters
-none
-
-#### Return
-`array` collection of connected peers. 
-
-#### Example
-```
-> net.peers()
-[{
-  Caps: 'eth/60',
-  ID: 'cc8125980267bbf5853848843520debaa05f7c66c83da0fe6599bd9f88ddff4c3c69a443e555873a966acfc59abe6ec6f707f6146886774d58a519eb074657f1',
-  LocalAddress: '192.168.178.13:30303',
-  Name: '++eth/v0.9.23/Release/Linux/g++/int',
-  RemoteAddress: '81.241.47.56:38289'
-}, {
-  LocalAddress: '192.168.178.13:37063',
-  Name: '++eth/v0.9.23/Release/Linux/g++/int',
-  RemoteAddress: '54.72.239.134:30303',
-  Caps: 'eth/60, eth/61',
-  ID: '4a5a722a073c1c6356e7859c611260c36a1ac5815900dad21bf55a1014e314169d6156935722b1eb00212b795cf4c74d1167c571c0dfc3795d80b39ef45c1ef3'
-}, {
-  ID: 'e014ceab3d2fbe7215ca55b23e031cc031f46ca582a2a7741626d6189a08e40c77ddabb5970ad532970aa1b817b1428f76dc5454a0321d32a10d6d12efce5ded',
-  LocalAddress: '192.168.178.13:30303',
-  Name: '++eth/v0.9.23/Release/Linux/g++/int',
-  RemoteAddress: '23.94.96.233:46512',
-  Caps: 'eth/60, eth/61'
-} ]
-```
 
 ### personal_listaccounts
 List all accounts
