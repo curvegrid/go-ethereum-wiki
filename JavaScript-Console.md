@@ -16,7 +16,7 @@ The attach node accepts an endpoint in case the geth node is running with a non 
     $ geth attach ipc:/some/custom/path
     $ geth attach rpc:http://191.168.1.1:8545
 
-Note that by default the geth node doesn't start the rpc service and not all functionality is provided over this interface due to security reasons. These defaults can be overridden when the geth node is started.
+Note that by default the geth node doesn't start the rpc service and not all functionality is provided over this interface due to security reasons. These defaults can be overridden when the `--rpcapi` argument when the geth node is started, or with [admin.startRPC](admin_startRPC).
 
 If you need log information, start with:
 
@@ -34,18 +34,22 @@ Note: Since the database can only be accessed by one process, this means you can
 
 ## Non-interactive use: JSRE script mode
 
-It's also possible to pass files to the JavaScript intepreter. Load and execute any number of files by giving files as arguments to the [`js` subcommand](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options): 
+It's also possible to execute files to the JavaScript intepreter. The `console` and `attach` subcommand accept the `--exec` argument which is a javascript statement. 
 
-    $ geth js script1.js script2.js
+    $ geth --exec "eth.blockNumber" attach
 
-If you want to have the console as well as load scripts, use [loadScript](#loadscript). Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
+This prints the current block number of a running geth instance.
 
-You can exit the console cleanly by typing `exit` or simply with `CTRL-C`.
+Or execute a script with more complex statements with:
+
+    $ geth --exec 'loadScript("/tmp/checkbalances.js")' attach
+    $ geth --jspath "/tmp" --exec 'loadScript("checkbalances.js")' attach
+
+Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
+
 Use the `--jspath <path/to/my/js/root>` to set a libdir for your js scripts. Parameters to `loadScript()` with no absolute path will be understood relative to this directory.
 
-A second option is to use the `--exec` argument in conjunction with the `console` or `attach` subcommand. For example this command will execute the local `$HOME/Dev/checkbalances.js` script on the remote host over the http/rpc interface.
-
-    $ geth --exec "loadScript('checkbalances.js')" --jspath $HOME/Dev attach rpc:http://remotehost:8545
+You can exit the console cleanly by typing `exit` or simply with `CTRL-C`.
 
 ## Caveat 
 
