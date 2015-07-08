@@ -93,12 +93,19 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [hashrate](#minerhashrate)
   * [setExtra](#minersetextra) 
   * [setGasPrice] (#minersetgasprice)
+* [personal](#personal)
+  * [newAccount](#personalnewaccount)
+  * [listAccounts](#personallistaccounts)
+  * [deleteAccount](#personaldeleteaccount)
+  * [unlockAccount](#personalunlockaccount)
 * [contractInfo](#admincontractinfo)
   * [start](#admincontractinfostart)
   * [stop](#admincontractinfostop)
   * [get](#admincontractinfoget)
   * [register](#admincontractinforegister)
   * [registerUrl](#admincontractinforegisterurl)
+* [txpool](#txpool)
+  * [status](#txpoolstatus)
 * [debug](#debug)
   * [setHead](#debugsethead)
   * [seedHash](#debugseedhash)
@@ -118,6 +125,81 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
 * [eth](#eth)
 * [shh](#shh)
 * [db](#db)
+
+***
+
+#### Personal
+The `personal` api exposes method for personal  the methods to manage, control or monitor your node. It allows for limited file system access. 
+
+***
+
+#### personal.listAccounts
+    personal.listAccount
+
+List all accounts
+
+#### Return
+collection with accounts
+
+#### Example
+` personal.listAccounts`
+
+***
+
+#### personal.newAccount
+
+    personal.newAccount(passwd)
+
+Create a new password protected account
+
+#### Return
+`string` address of the new account
+
+#### Example
+` personal.newAccount("mypasswd")`
+
+***
+
+#### personal.deleteAccount
+    personal.deleteAccount(addr, passwd)
+
+Delete the account with the given address and password
+
+#### Return
+indication if the account was deleted
+
+#### Example
+` personal.deleteAccount(eth.coinbase, "mypasswd")`
+
+***
+
+#### personal.unlockAccount
+    personal.unlockAccount(addr, passwd, duration)
+
+Unlock the account with the given address, password and an optional duration (in seconds)
+
+#### Return
+`boolean` indication if the account was unlocked
+
+#### Example
+` personal.unlockAccount(eth.coinbase, "mypasswd", 300)`
+
+***
+
+### TxPool
+
+#### txpool.status
+    txpool.status
+
+Number of pending/queued transactions
+
+#### Return
+`pending` all processable transactions
+
+`queued` all non-processable transactions
+
+#### Example
+` txpool.status`
 
 ***
 
