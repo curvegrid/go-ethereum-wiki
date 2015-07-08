@@ -398,6 +398,9 @@ none
 #### Return
 `integer` number of peers
 
+#### Example
+` net.peerCount`
+
 ***
 
 ### net_listening
@@ -408,6 +411,9 @@ none
 
 #### Return
 `boolean` indication if this node accepts new peers
+
+#### Example
+` net.listening`
 
 ***
 
