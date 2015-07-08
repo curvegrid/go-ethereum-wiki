@@ -72,17 +72,17 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [pendingTransactions](#ethpendingtransactions)
   * [resend](#ethresend)
 * [admin](#admin)
-  * [verbosity](#adminverbosity)
-  * [progress](#adminprogress)
-  * [nodeInfo](#adminnodeinfo)
   * [addPeer](#adminaddpeer)
-  * [peers](#adminpeers)
-  * [unlock](#adminunlock)
-  * [newAccount](#adminnewaccount)
-  * [import](#adminimport)
-  * [export](#adminexport)
+  * [peers](#adminpeers)  
+  * [nodeInfo](#adminnodeinfo)
+  * [datadir](#admindatadir)
+  * [importChain](#adminimportchain)
+  * [exportChain](#adminexportchain)
+  * [chainSyncStatus](#adminchainsyncstatus)
   * [startRPC](#adminstartrpc)
   * [stopRPC](#adminstoprpc)
+  * [verbosity](#adminverbosity)
+  * [setSolc](#adminsetsolc)
   * [miner](#adminminerstart)
     * [start](#adminminerstart)
     * [stop](#adminminerstop)
@@ -123,15 +123,24 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
 
 
 #### admin
-The `admin` exposes the methods to manage, control, debug, test or monitor your node. It allows for limited file system access. 
+The `admin` exposes the methods to manage, control or monitor your node. It allows for limited file system access. 
 
 ***
 
-#### admin.progress
+#### admin.chainSyncStatus
 
-    admin.progress()
+    admin.chainSyncStatus
 
 Prints info on blockchain synching.
+
+### return
+`blocksAvailable`, blocks which have not been downloaded
+
+`blocksWaitingForImport`, downloaded blocks waiting before import
+
+`estimate`, a (very rough) estimate before the node has imported all blocks
+
+`importing`, blocks currently importing
 
 ***
 
@@ -143,13 +152,13 @@ Prints info on blockchain synching.
 
 ##### Example
 
-    admin.verbosity(6)
+    > admin.verbosity(6)
 
 ***
 
 #### admin.nodeInfo
 
-    admin.nodeInfo()
+    admin.nodeInfo
 
 ##### Returns
 
@@ -158,8 +167,17 @@ information on the node.
 ##### Example
 
 ```
-> admin.nodeInfo()
-{ Name: 'Ethereum(G)/v0.9.0/darwin/go1.4.1', NodeUrl: 'enode://c32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e@89.42.0.12:30303', NodeID: '0xc32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e', IP: '89.42.0.12', DiscPort: 30303, TCPPort: 30303, Td: '0', ListenAddr: '[89.42.0.12:30303' }
+> admin.nodeInfo
+{
+   Name: 'Ethereum(G)/v0.9.36/darwin/go1.4.1',
+   NodeUrl: 'enode://c32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e@89.42.0.12:30303',
+   NodeID: '0xc32e13952965e5f7ebc85b02a2eb54b09d55f553161c6729695ea34482af933d0a4b035efb5600fc5c3ea9306724a8cbd83845bb8caaabe0b599fc444e36db7e',
+   IP: '89.42.0.12',
+   DiscPort: 30303,
+   TCPPort: 30303,
+   Td: '0',
+   ListenAddr: '[::]:30303'
+}
 ```
 
 To connect to a node, use the [enode-format](https://github.com/ethereum/wiki/wiki/enode-url-format) nodeUrl as an argument to [addPeer](#adminaddpeer) or with CLI param `bootnodes`.
@@ -186,14 +204,14 @@ You can find out your own node URL by using [nodeInfo](#adminnodeinfo) or lookin
 ##### Example
 
 ```javascript
-admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
+> admin.addPeer('enode://6f8a80d14311c39f35f516fa664deaaaa13e85b2f7493f37f6144d86991ec012937307647bd3b9a82abe2974e1407241d54947bbb39763a4cac9f77166ad92a0@54.169.166.226:30303')
 ```
 
 ***
 
 #### admin.peers
 
-    admin.peers()
+    admin.peers
 
 ##### Returns
 
@@ -202,60 +220,14 @@ an array of objects with information about connected peers.
 ##### Example
 
 ```
-> admin.peers()
+> admin.peers
 [ { ID: '0x6cdd090303f394a1cac34ecc9f7cda18127eafa2a3a06de39f6d920b0e583e062a7362097c7c65ee490a758b442acd5c80c6fce4b148c6a391e946b45131365b', Name: 'Ethereum(G)/v0.9.0/linux/go1.4.1', Caps: 'eth/56, shh/2', RemoteAddress: '54.169.166.226:30303', LocalAddress: '10.1.4.216:58888' } { ID: '0x4f06e802d994aaea9b9623308729cf7e4da61090ffb3615bc7124c5abbf46694c4334e304be4314392fafcee46779e506c6e00f2d31371498db35d28adf85f35', Name: 'Mist/v0.9.0/linux/go1.4.2', Caps: 'eth/58, shh/2', RemoteAddress: '37.142.103.9:30303', LocalAddress: '10.1.4.216:62393' } ]
 ```
 ***
 
-#### admin.unlock
+#### admin.importChain
 
-    admin.unlock(address, password, timeout)
-
-Unlock the account for the time `timeout` in seconds. If password is undefined, the user is prompted for it. If timeout isn't specified a default of 300 seconds is used.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Example
-
-```js
-> admin.unlock("8dbad2d2b85bbb727ee35b31e64f5092ff54a93e")
-Please enter a passphrase now.
-Passphrase:
-true
->
-```
-
-***
-
-#### admin.newAccount
-
-    admin.newAccount(password)
-
-Creates a new account and encrypts it with `password`. If no `password` is given the user is prompted for it. 
-
-##### Returns
-
-account address on success, otherwise `false`.
-
-##### Example
-
-```js
-> admin.newAccount()
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
-Passphrase:
-Repeat Passphrase:
-'cf68505ae04bb425eb431eceb629c351bd9a4eee'
->
-```
-2
-***
-
-#### admin.import
-
-    admin.import()
+    admin.importChain()
 
 Imports the blockchain from a marshalled binary format.
 **Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
@@ -268,15 +240,15 @@ Imports the blockchain from a marshalled binary format.
 ##### Example
 
 ```javascript
-admin.import('path/to/file')
+admin.importChain('path/to/file')
 // true
 ```
 
 ***
 
-#### admin.export
+#### admin.exportChain
 
-    admin.export()
+    admin.exportChain()
 
 Exports the blockchain to the given file in binary format.
 
@@ -287,18 +259,16 @@ Exports the blockchain to the given file in binary format.
 ##### Example
 
 ```javascript
-admin.export()
-// binary ?
+admin.exportChain('path/to/file')
 ```
 
 ***
 
 #### admin.startRPC
 
-     admin.startRPC(ipAddress, portNumber, corsheader)
+     admin.startRPC(ipAddress, portNumber, corsheader, modules)
 
-Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
-If corsheader is missing or the empty string, CORS header is not set.
+Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
 
 ##### Returns
 
@@ -307,7 +277,7 @@ If corsheader is missing or the empty string, CORS header is not set.
 ##### Example
 
 ```javascript
-admin.startRPC("127.0.0.1", 8545, "*")
+admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth")
 // true
 ```
 
@@ -326,8 +296,48 @@ Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/J
 ##### Example
 
 ```javascript
-admin.stopRpc()
+admin.stopRPC()
 // true
+```
+
+***
+
+#### admin.datadir
+
+    admin.datadir
+
+the directory this nodes stores its data
+
+##### Returns
+
+directory on success
+
+##### Example
+
+```javascript
+admin.datadir
+'/Users/username/Library/Ethereum'
+```
+
+***
+
+#### admin.setSolc
+
+    admin.setSolc()
+
+Set the solidity compiler
+
+##### Returns
+
+a string describing the compiler version when path was valid, otherwise an error
+
+##### Example
+
+```javascript
+admin.setSolc('/some/path/solc')
+'solc v0.9.29
+Solidity Compiler: /some/path/solc
+'
 ```
 
 ***
