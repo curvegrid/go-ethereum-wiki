@@ -1,14 +1,6 @@
 ## Legacy
 
-- [QML API](https://github.com/ethereum/go-ethereum/wiki/QML-PoC6-API)
-
 - [iceCREAM](https://github.com/ethereum/go-ethereum/wiki/iceCREAM-(debugger))
-
-- [Public Go API](https://github.com/ethereum/go-ethereum/wiki/PoC-5-Public-Go-API)
-
-- [[QML PoC6 API]]
-
-- [[PoC6 JS API]]
 
 - [eth-go](https://github.com/ethereum/go-ethereum/wiki/Creating-your-own-Ethereum-apps-using-Eth-go): An introduction which will help you bootstrap your own, native, Go Ethereum application.
 
