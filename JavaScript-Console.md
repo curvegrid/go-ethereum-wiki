@@ -83,32 +83,32 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [stopRPC](#adminstoprpc)
   * [verbosity](#adminverbosity)
   * [setSolc](#adminsetsolc)
-  * [miner](#adminminerstart)
-    * [start](#adminminerstart)
-    * [stop](#adminminerstop)
-    * [startAutoDAG](#adminminerstartautodag)
-    * [stopAutoDAG](#adminminerstopautodag)
-    * [makeDAG](#adminminermakedag)
-    * [hashrate](#adminminerhashrate)
-    * [setExtra](#adminminersetextra) 
-    * [setGasPrice] (#adminminersetgasprice)
-  * [contractInfo](#admincontractinfo)
-    * [start](#admincontractinfostart)
-    * [stop](#admincontractinfostop)
-    * [get](#admincontractinfoget)
-    * [register](#admincontractinforegister)
-    * [registerUrl](#admincontractinforegisterurl)
-  * [debug](#admindebugbacktrace)
-    * [backtrace](#admindebugbacktrace)
-    * [setHead](#admindebugsethead)
-    * [seedHash](#adminseedhash)
-    * [processBlock](#admindebugprocessblock)
-    * [getBlockRlp](#admindebugge tblockrlp)
-    * [printBlock](#admindebugprintblock)
-    * [dumpBlock](#admindebugdumpblock)
+  * [sleepBlocks](#adminsleepblocks)
+* [miner](#adminminerstart)
+  * [start](#adminminerstart)
+  * [stop](#adminminerstop)
+  * [startAutoDAG](#adminminerstartautodag)
+  * [stopAutoDAG](#adminminerstopautodag)
+  * [makeDAG](#adminminermakedag)
+  * [hashrate](#adminminerhashrate)
+  * [setExtra](#adminminersetextra) 
+  * [setGasPrice] (#adminminersetgasprice)
+* [contractInfo](#admincontractinfo)
+  * [start](#admincontractinfostart)
+  * [stop](#admincontractinfostop)
+  * [get](#admincontractinfoget)
+  * [register](#admincontractinforegister)
+  * [registerUrl](#admincontractinforegisterurl)
+* [debug](#debug)
+  * [setHead](#debugsethead)
+  * [seedHash](#debugseedhash)
+  * [processBlock](#debugprocessblock)
+  * [getBlockRlp](#debuggetblockrlp)
+  * [printBlock](#debugprintblock)
+  * [dumpBlock](#debugdumpblock)
+  * [metrics](#debugmetrics)
 * [loadScript](#loadscript)
 * [sleep](#sleep)
-* [sleepBlocks](#sleepBlocks)
 * [setInterval](#setInterval)
 * [clearInterval](#clearInterval)
 * [setTimeout](#setTimeout)
@@ -302,6 +302,14 @@ admin.stopRPC()
 
 ***
 
+#### admin.sleepBlocks 
+
+    admin.sleepBlocks(n)
+
+Sleeps for n blocks. 
+
+***
+
 #### admin.datadir
 
     admin.datadir
@@ -440,6 +448,7 @@ If `dir` is the empty string, then ethash will use the default directories `~/.e
 
 ***
 
+
 ### Contract Info
 
 #### admin.contractInfo.start
@@ -510,7 +519,6 @@ contenthash = admin.contractInfo.saveInfo(contract.info, filename);
 
 will register content hash to the codehash (hash of the code of the contract on contractaddress). The register transaction is sent from the address in the first parameter. The transaction needs to be processed and confirmed on the canonical chain for the registration to take effect.
 
-
 ##### Returns
 
 `true` on success, otherwise `false`.
@@ -565,22 +573,9 @@ admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
 
 ### Debug
 
-#### admin.debug.backtrace
+#### debug.setHead
 
-    admin.debug.backtrace("matcher")
-
-a stack trace will be written to the log whenever execution hits the statement matched by the matcher.
-Matcher is file and line number holding a logging statement, e.g., `chain_manager.go:234`
-
-##### Example
-
-    admin.debug.backtrace("chain_manager.go:234")
-
-***
-
-#### admin.debug.setHead
-
-    admin.debug.setHead(hashHexStringOrBlockNumber)
+    debug.setHead(hashHexStringOrBlockNumber)
 
 **Sets** the current head of the blockchain to the block referred to by _hashHexStringOrBlockNumber_.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
@@ -591,30 +586,30 @@ See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ##### Example 
 
-    admin.debug.setHead(140101)
+    debug.setHead(eth.blockNumber-1000)
 
 ***
 
-#### admin.debug.seedHash
+#### debug.seedHash
 
-    admin.debug.seedHash(hashHexStringOrBlockNumber)
+    debug.seedHash(hashHexStringOrBlockNumber)
 
-**Sets** the current head of the blockchain to the block referred to by _hashHexStringOrBlockNumber_.
-See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
+Returns the hash for the epoch the given block is in.
 
 ##### Returns 
 
-`true` on success, otherwise `false`.
+hash in hex format
 
 ##### Example 
 
-    admin.debug.seedHash(140101)
+    > debug.seedHash(eth.blockNumber)
+    '0xf2e59013a0a379837166b59f871b20a8a0d101d1c355ea85d35329360e69c000'
 
 ***
 
-#### admin.debug.processBlock
+#### debug.processBlock
 
-    admin.debug.processBlock(hashHexStringOrBlockNumber)
+    debug.processBlock(hashHexStringOrBlockNumber)
 
 Processes the given block referred to by _hashHexStringOrBlockNumber_ with the VM in debug mode.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
@@ -626,19 +621,14 @@ In combination with `setHead`, this can be used to replay processing of a block 
 
 ##### Example 
 
-    admin.debug.processBlock(140101)
-
-***
-
-#### admin.debug.insertBlock
-
+    debug.processBlock(140101)
 
 ***
 
 
-#### admin.debug.getBlockRlp
+#### debug.getBlockRlp
 
-    admin.debug.getBlockRlp(hashHexStringOrBlockNumber)
+    debug.getBlockRlp(hashHexStringOrBlockNumber)
 
 Returns the hexadecimal representation of the RLP encoding of the block.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
@@ -650,14 +640,14 @@ The hex representation of the RLP encoding of the block.
 ##### Example
 
 ```
-> admin.debug.getBlockRlp(131805)    'f90210f9020ba0ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81ea01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794a4d8e9cae4d04b093aac82e6cd355b6b963fb7ffa01f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26da056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000083bb9266830202dd832fefd880845534406d91ce9e5448ce9ed0af535048ce9ed0afce9ea04cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850883f9e9ce6a261381cc0c0'
+> debug.getBlockRlp(131805)    'f90210f9020ba0ea4dcb53fe575e23742aa30266722a15429b7ba3d33ba8c87012881d7a77e81ea01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d4934794a4d8e9cae4d04b093aac82e6cd355b6b963fb7ffa01f892bfd6f8fb2ec69f30c8799e371c24ebc5a9d55558640de1fb7ca8787d26da056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000083bb9266830202dd832fefd880845534406d91ce9e5448ce9ed0af535048ce9ed0afce9ea04cf6d2c4022dfab72af44e9a58d7ac9f7238ffce31d4da72ed6ec9eda60e1850883f9e9ce6a261381cc0c0'
 ```
 
 ***
 
-#### admin.debug.printBlock
+#### debug.printBlock
 
-    admin.debug.printBlock(hashHexStringOrBlockNumber)
+    debug.printBlock(hashHexStringOrBlockNumber)
 
 Prints information about the block such as size, total difficulty, as well as header fields properly formatted.
 
@@ -665,12 +655,12 @@ See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ##### Returns
 
-`true` on success, otherwise `false`.
+formatted string representation of the block
 
 ##### Example
 
 ```
-> admin.debug.printBlock(131805)
+> debug.printBlock(131805)
 BLOCK(be465b020fdbedc4063756f0912b5a89bbb4735bd1d1df84363e05ade0195cb1): Size: 531.00 B TD: 643485290485 {
 NoNonce: ee48752c3a0bfe3d85339451a5f3f411c21c8170353e450985e1faab0a9ac4cc
 Header:
@@ -702,25 +692,41 @@ Uncles:
 ```
 
 
-
 ***
 
 
-#### admin.debug.dumpBlock
+#### debug.dumpBlock
 
-    admin.debug.dumpBlock(numberOrHash)
+    debug.dumpBlock(numberOrHash)
 
 ##### Returns
 
-the raw dump of a block referred to by block number or block hash or undefined if the block is not found. If the argument is missing or is -1, the current head block is returned.
+the raw dump of a block referred to by block number or block hash or undefined if the block is not found. 
 see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
 
 ##### Example
 
 
 ```js
-> admin.debug.dumpBlock()
->
+> debug.dumpBlock(eth.blockNumber)
+```
+
+
+***
+
+#### debug.metrics
+
+    debug.metrics(raw)
+
+##### Returns
+
+Collection metrics
+
+##### Example
+
+
+```js
+> metrics(true)
 ```
 
 
@@ -736,12 +742,6 @@ Loads a JavaScript file and executes it. Relative paths are interpreted as relat
 #### sleep 
 
     sleep(s)
-
-Sleeps for s seconds. 
-
-#### sleepBlocks 
-
-    sleepBlocks(n)
 
 Sleeps for s seconds. 
 
