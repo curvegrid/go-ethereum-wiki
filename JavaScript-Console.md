@@ -309,7 +309,7 @@ an array of objects with information about connected peers.
 
 #### admin.importChain
 
-    admin.importChain()
+    admin.importChain(file)
 
 Imports the blockchain from a marshalled binary format.
 **Note** that the blockchain is reset (to genesis) before the imported blocks are inserted to the chain.
@@ -330,7 +330,7 @@ admin.importChain('path/to/file')
 
 #### admin.exportChain
 
-    admin.exportChain()
+    admin.exportChain(file)
 
 Exports the blockchain to the given file in binary format.
 
@@ -348,7 +348,7 @@ admin.exportChain('path/to/file')
 
 #### admin.startRPC
 
-     admin.startRPC(ipAddress, portNumber, corsheader, modules)
+     admin.startRPC(host, portNumber, corsheader, modules)
 
 Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
 
@@ -413,7 +413,7 @@ admin.datadir
 
 #### admin.setSolc
 
-    admin.setSolc()
+    admin.setSolc(path2solc)
 
 Set the solidity compiler
 
@@ -532,7 +532,7 @@ Returns the current hash rate in H/s.
 
 #### miner.setGasPrice
 
-    miner.setGasPrice()
+    miner.setGasPrice(gasPrice)
 
 **Sets** the the gasprice for the miner
 
@@ -665,9 +665,9 @@ admin.contractInfo.registerUrl(primary, contenthash, "file://"+filename);
 
 #### debug.setHead
 
-    debug.setHead(hashHexStringOrBlockNumber)
+    debug.setHead(blockNumber)
 
-**Sets** the current head of the blockchain to the block referred to by _hashHexStringOrBlockNumber_.
+**Sets** the current head of the blockchain to the block referred to by _blockNumber_.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
 
 ##### Returns 
@@ -682,7 +682,7 @@ See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 #### debug.seedHash
 
-    debug.seedHash(hashHexStringOrBlockNumber)
+    debug.seedHash(blockNumber)
 
 Returns the hash for the epoch the given block is in.
 
@@ -699,9 +699,9 @@ hash in hex format
 
 #### debug.processBlock
 
-    debug.processBlock(hashHexStringOrBlockNumber)
+    debug.processBlock(blockNumber)
 
-Processes the given block referred to by _hashHexStringOrBlockNumber_ with the VM in debug mode.
+Processes the given block referred to by _blockNumber_ with the VM in debug mode.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
 In combination with `setHead`, this can be used to replay processing of a block to debug VM execution.
 
@@ -718,7 +718,7 @@ In combination with `setHead`, this can be used to replay processing of a block 
 
 #### debug.getBlockRlp
 
-    debug.getBlockRlp(hashHexStringOrBlockNumber)
+    debug.getBlockRlp(blockNumber)
 
 Returns the hexadecimal representation of the RLP encoding of the block.
 See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
@@ -737,7 +737,7 @@ The hex representation of the RLP encoding of the block.
 
 #### debug.printBlock
 
-    debug.printBlock(hashHexStringOrBlockNumber)
+    debug.printBlock(blockNumber)
 
 Prints information about the block such as size, total difficulty, as well as header fields properly formatted.
 
@@ -787,7 +787,7 @@ Uncles:
 
 #### debug.dumpBlock
 
-    debug.dumpBlock(numberOrHash)
+    debug.dumpBlock(blockNumber)
 
 ##### Returns
 
@@ -867,7 +867,7 @@ The `eth` is a shortcut for [web3.eth](https://github.com/ethereum/wiki/wiki/Jav
 
 #### eth.pendingTransactions
 
-    eth.pendingTransactions()
+    eth.pendingTransactions
 
 Returns pending transactions that belong to one of the users `eth.accounts`.
 
