@@ -84,6 +84,11 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [verbosity](#adminverbosity)
   * [setSolc](#adminsetsolc)
   * [sleepBlocks](#adminsleepblocks)
+  * [startNatSpec](#adminstartnatspec)
+  * [stopNatSpec](#adminstopnatspec)
+  * [getContractInfo](#admingetcontractinfo)
+  * [register](#adminregister)
+  * [registerUrl](#adminregisterurl)
 * [miner](#miner)
   * [start](#minerstart)
   * [stop](#minerstop)
@@ -98,12 +103,6 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [listAccounts](#personallistaccounts)
   * [deleteAccount](#personaldeleteaccount)
   * [unlockAccount](#personalunlockaccount)
-* [contractInfo](#admincontractinfo)
-  * [start](#admincontractinfostart)
-  * [stop](#admincontractinfostop)
-  * [get](#admincontractinfoget)
-  * [register](#admincontractinforegister)
-  * [registerUrl](#admincontractinforegisterurl)
 * [txpool](#txpool)
   * [status](#txpoolstatus)
 * [debug](#debug)
@@ -432,6 +431,125 @@ Solidity Compiler: /some/path/solc
 
 ***
 
+#### admin.startNatSpec
+
+     admin.startNatSpec()
+
+activate NatSpec: when sending a transaction to a contract, 
+Registry lookup and url fetching is used to retrieve authentic contract Info for it. It allows for prompting a user with authentic contract-specific confirmation messages.
+
+***
+
+#### admin.stopNatSpec
+
+     admin.stopNatSpec()
+
+deactivate NatSpec: when sending a transaction, the user  will be prompted with a generic confirmation message, no contract info is fetched
+
+***
+
+#### admin.getContractInfo
+
+     admin.getContractInfo(address)
+
+this will retrieve the [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) for a contract on the address
+
+##### Returns
+
+returns the contract info object 
+
+##### Examples
+
+```js
+> info = admin.getContractInfo(contractaddress)
+> source = info.source
+> abi = info.abiDefinition
+```
+
+***
+#### admin.saveInfo
+
+    admin.saveInfo(contract.info, filename);
+
+will write [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) into the target file, calculates its content hash. This content hash then can used to associate a public url with where the contract info is publicly available and verifiable. If you register the codehash (hash of the code of the contract on contractaddress).
+
+##### Returns
+
+`contenthash` on success, otherwise `undefined`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+filename = "/tmp/info.json";
+contenthash = admin.saveInfo(contract.info, filename);
+```
+
+***
+#### admin.register
+
+    admin.register(address, contractaddress, contenthash);
+
+will register content hash to the codehash (hash of the code of the contract on contractaddress). The register transaction is sent from the address in the first parameter. The transaction needs to be processed and confirmed on the canonical chain for the registration to take effect.
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+filename = "/tmp/info.json";
+contenthash = admin.saveInfo(contract.info, filename);
+admin.register(primary, contractaddress, contenthash);
+```
+
+***
+
+#### admin.registerUrl
+
+    admin.registerUrl(address, codehash, contenthash);
+
+this will register a contant hash to the contract' codehash. This will be used to locate [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
+files. Address in the first parameter will be used to send the transaction. 
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Examples
+
+```js
+source = "contract test {\n" +
+"   /// @notice will multiply `a` by 7.\n" +
+"   function multiply(uint a) returns(uint d) {\n" +
+"      return a * 7;\n" +
+"   }\n" +
+"} ";
+contract = eth.compile.solidity(source).test;
+contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+filename = "/tmp/info.json";
+contenthash = admin.register(primary, contractaddress, contract, filename);
+admin.registerUrl(primary, contenthash, "file://"+filename);
+```
+
+***
+
 ### Miner
 
 
@@ -539,126 +657,7 @@ Returns the current hash rate in H/s.
 ***
 
 
-### Contract Info
 
-#### admin.contractInfo.start
-
-     admin.contractInfo.start()
-
-activate NatSpec: when sending a transaction to a contract, 
-Registry lookup and url fetching is used to retrieve authentic contract Info for it. It allows for prompting a user with authentic contract-specific confirmation messages.
-
-***
-
-#### admin.contractInfo.stop
-
-     admin.contractInfo.stop()
-
-deactivate NatSpec: when sending a transaction, the user  will be prompted with a generic confirmation message, no contract info is fetched
-
-***
-
-#### admin.getContractInfo
-
-     admin.getContractInfo(address)
-
-this will retrieve the [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) for a contract on the address
-
-##### Returns
-
-returns the contract info object 
-
-##### Examples
-
-```js
-> info = admin.getContractInfo(contractaddress)
-> source = info.source
-> abi = info.abiDefinition
-```
-
-***
-#### admin.saveInfo
-
-    admin.saveInfo(contract.info, filename);
-
-will write [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata) into the target file, calculates its content hash. This content hash then can used to associate a public url with where the contract info is publicly available and verifiable. If you register the codehash (hash of the code of the contract on contractaddress).
-
-##### Returns
-
-`contenthash` on success, otherwise `undefined`.
-
-##### Examples
-
-```js
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code });
-filename = "/tmp/info.json";
-contenthash = admin.saveInfo(contract.info, filename);
-```
-
-***
-#### admin.register
-
-    admin.register(address, contractaddress, contenthash);
-
-will register content hash to the codehash (hash of the code of the contract on contractaddress). The register transaction is sent from the address in the first parameter. The transaction needs to be processed and confirmed on the canonical chain for the registration to take effect.
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Examples
-
-```js
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code });
-filename = "/tmp/info.json";
-contenthash = admin.saveInfo(contract.info, filename);
-admin.register(primary, contractaddress, contenthash);
-```
-
-***
-
-#### admin.registerUrl
-
-    admin.registerUrl(address, codehash, contenthash);
-
-this will register a contant hash to the contract' codehash. This will be used to locate [contract info json](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#contract-info-metadata)
-files. Address in the first parameter will be used to send the transaction. 
-
-##### Returns
-
-`true` on success, otherwise `false`.
-
-##### Examples
-
-```js
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
-filename = "/tmp/info.json";
-contenthash = admin.register(primary, contractaddress, contract, filename);
-admin.registerUrl(primary, contenthash, "file://"+filename);
-```
-
-***
 
 
 ### Debug
