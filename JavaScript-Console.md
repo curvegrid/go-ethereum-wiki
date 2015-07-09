@@ -809,7 +809,7 @@ see [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web
 
 ##### Returns
 
-Collection metrics
+Collection of metrics, see for more information [this](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring) wiki page.
 
 ##### Example
 
