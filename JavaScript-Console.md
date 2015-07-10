@@ -98,6 +98,7 @@ In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is
   * [hashrate](#minerhashrate)
   * [setExtra](#minersetextra) 
   * [setGasPrice] (#minersetgasprice)
+  * [setEtherbase] (#minersetetherbase)
 * [personal](#personal)
   * [newAccount](#personalnewaccount)
   * [listAccounts](#personallistaccounts)
@@ -653,6 +654,14 @@ Returns the current hash rate in H/s.
     miner.setGasPrice(gasPrice)
 
 **Sets** the the gasprice for the miner
+
+***
+
+#### miner.setEtherbase
+
+    miner.setEtherbase(account)
+
+**Sets** the the ether base, the address that will receive mining rewards.
 
 ***
 
