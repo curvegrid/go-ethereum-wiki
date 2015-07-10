@@ -132,7 +132,7 @@ This property will show all connected peers.
 ***
 
 ### admin_importchain
-Import an exported chain from file into node
+Import an exported chain from file into node. This only works if no chain already exists: it does not delete any existing data.
 
 #### Parameters
 * `Filename`, the fully qualified path to the file containing the chain to be imported
