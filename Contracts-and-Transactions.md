@@ -612,6 +612,7 @@ globalRegistrarAddr = eth.getTransactionReceipt(globalRegistrarTxHash).contractA
 //'0x3d255836f5f8c9976ec861b1065f953b96908b07'
 eth.getCode(globalRegistrarAddr);
 //...
+admin.setGlobalRegistrar(globalRegistrarAddr);
 
 hashRegTxHash = admin.setHashReg("0x0");
 hashRegTxHash = admin.setHashReg("", primary);
@@ -633,6 +634,7 @@ registrar.reserve.sendTransaction("UrlHint", {from:primary});
 registrar.setAddress.sendTransaction("UrlHint",urlHintAddr,true, {from:primary});
 miner.start(1); admin.sleepBlocks(1); miner.stop();
 
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
 registrar.owner("HashReg");
 registrar.owner("UrlHint");
 registrar.addr("HashReg");
