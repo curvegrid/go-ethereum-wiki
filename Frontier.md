@@ -10,7 +10,7 @@ Frontier is the first in a series of releases that punctuate the roadmap for the
 
 The ethereum network goes live when the clients consent on the **genesis block** and start mining transactions on it. The genesis block will reference an initial system state where all the accounts set up by the presale exist with the correct amount of pre-issued ether allocated. Synchronised to the Frontier launch several exchanges start offering trade of ether allowing pre-allocated ether owners to sell their holdings as well as miners to exit with their earnings. 
 
-During Frontier though some centralised kill switch functionality will still be in place as a contingency. These features will be removed in _Homestead_. As opposed to our earlier strategy, the decision is not to remove contracts from the blockchain. State in Homestead will be a direct and unmodified continuation of Frontier. 
+During Frontier though some centralised kill switch functionality will still be in place as a contingency measure. These features will be removed in _Homestead_. As opposed to our earlier strategy, the decision is not to remove any contracts from the blockchain and likewise leave all ether balances carry over to Homestead. In other words, the state in Homestead will be a direct and unmodified continuation of the state in Frontier. 
 
 Mining reward is the full amount of 5 ether per block (as opposed to our earlier proposal of a reduced amount). Mining rewards are discussed in detail [here](https://github.com/ethereum/go-ethereum/wiki/Mining#mining-rewards)
 
@@ -33,7 +33,8 @@ Apart from `geth` the go cli, the Frontier release contains the following ingred
 * `netstat`  [network monitoring GUI](https://github.com/ethereum/wiki/wiki/Network-Status) is a `node.js` in-browser Dapp.
 
 Resources: 
-- [original announcement of the release scheme](https://blog.ethereum.org/2015/03/03/ethereum-launch-process)
-- [follow-up blogpost](https://blog.ethereum.org/2015/03/12/getting-to-the-frontier/)
-- [least authority audit](https://blog.ethereum.org/2015/07/07/know-ethereum-secure/), 
-- 
+- [The frontier website](https://frontier.ethereum.org)
+- [Original announcement of the release scheme](https://blog.ethereum.org/2015/03/03/ethereum-launch-process) by Vinay Gupta
+- [Follow-up blogpost](https://blog.ethereum.org/2015/03/12/getting-to-the-frontier/)
+- [Least Authority audit blogpost](https://blog.ethereum.org/2015/07/07/know-ethereum-secure/) with links to the audit report, 
+- [Olympic. Frontier prerelease](https://blog.ethereum.org/2015/05/09/olympic-frontier-pre-release/), Vitalik's blogpost detailing olympic rewards. 
