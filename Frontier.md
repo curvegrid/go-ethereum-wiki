@@ -17,6 +17,26 @@ Mining reward is the full amount of 5 ether per block (as opposed to our earlier
 * We fully expect instability and consensus flaws in the client, some of which may be exploitable
 * As curators, we fully reserve the right to ignore blocks at our discretion
 
+### SECURITY WARNINGS
+
+* **You are responsible for your own computer security.** If your machine is compromised you **will** lose your ether, access to any contracts and maybe more.
+
+* **You are responsible for your own actions.** If you mess something up or break any laws while using this software, it's your fault, and your fault only.
+
+* **You are responsible for your own karma.** Don't be a jerk and respect others.
+
+* This software is open source under a [GNU Lesser General Public License](https://www.gnu.org/licenses/lgpl-3.0.en.html) license.
+
+### LEGAL WARNING: SHORT VERSION
+#### Disclaimer of Liabilites and Warranties
+
+* **The user expressly knows and agrees that the user is using the ethereum platform at the user’s sole risk.**
+* **The user represents that the user has an adequate understanding of the risks, usage and intricacies of cryptographic tokens and blockchain-based open source software, eth platform and eth.** 
+* **The user acknowledges and agrees that, to the fullest extent permitted by any applicable law, the disclaimers of liability contained herein apply to any and all damages or injury whatsoever caused by or related to risks of, use of, or inability to use, eth or the ethereum platform under any cause or action whatsoever of any kind in any jurisdiction, including, without limitation, actions for breach of warranty, breach of contract or tort (including negligence) and that neither stiftung ethereum nor the ethereum team shall be liable for any indirect, incidental, special, exemplary or consequential damages, including for loss of profits, goodwill or data.** 
+* **Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for certain types of damages. therefore, some of the above limitations in this section may not apply to a user. In particular, nothing in these terms shall affect the statutory rights of any user or exclude injury arising from any willful misconduct or fraud of stiftung ethereum.**
+
+
+
 ## Components released
 
 The focus of Frontier is the go implementation of an ethereum full node, with a command line interface codenamed `geth`. 
