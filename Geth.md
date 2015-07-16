@@ -72,14 +72,16 @@ Name or blame = list of contributors:
 * [cpp-ethereum](https://github.com/ethereum/cpp-ethereum/graphs/contributors)
 * [web3.js](https://github.com/ethereum/web3.js/graphs/contributors)
 * [ethash](https://github.com/ethereum/ethash/graphs/contributors)
-
+* [netstats](https://github.com/cubedro/eth-netstats/graphs/contributors), 
+[netintelligence-api](https://github.com/cubedro/eth-net-intelligence-api/graphs/contributors)
 
 ## Community and support
 
 ### Ethereum on social media
+
 - Main site: https://www.ethereum.org
 - ETHDEV: https://ethdev.com
-- Forums: https://forum.ethereum.org
+- Forum: https://forum.ethereum.org
 - Github: https://github.com/ethereum
 - Blog: https://blog.ethereum.org
 - Wiki: http://wiki.ethereum.org
@@ -96,13 +98,18 @@ IRC Freenode channels:
 * `#ethereum`: for general discussion
 * `#ethereum-dev`: for development specific questions and discussions
 * `##ethereum`: for offtopic and banter
+* `#ethereumjs`: for questions related to web3.js and node-ethereum
 * `#dappdevs`: Dapp developers channel
 * `#ethdev`: buildserver etc
 
 [IRC Logs by ZeroGox](https://zerogox.com/bot/log)
 
 ### Gitter 
-[Gitter](https://gitter.im/ethereum/go-ethereum)
+
+* [go-ethereum Gitter](https://gitter.im/ethereum/go-ethereum)
+* [cpp-ethereum Gitter](https://gitter.im/ethereum/cpp-ethereum)
+* [web3.js Gitter](https://gitter.im/ethereum/web3.js)
+* [ethereum documentation project Gitter](https://gitter.im/ethereum/frontier-guide)
 
 ### Forum
 
@@ -117,3 +124,5 @@ IRC Freenode channels:
 https://dapplist.net/
 
 ### Helpdesk 
+
+On gitter, irc, skype
