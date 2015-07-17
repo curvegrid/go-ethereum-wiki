@@ -2,11 +2,19 @@
 
 ## Mining Rewards
 
-Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value.
+Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value (but see [Olympic rewards](https://blog.ethereum.org/2015/05/09/olympic-frontier-pre-release/)). 
 
-### Transaction fees
+The successful PoW miner of the winning block receives:
+* A **static block reward** for the 'winning' block, consisting of exactly 5.0 Ether
+* All of the gas expended within the block, that is, all the gas consumed by the execution of all the transactions in the block submitted by the winning miner is compensated for by the senders. The gascost incurred is  credited to the miner's account as part of the consensus protocoll. Over time, it's expected these will dwarf the static block reward.
+- An extra reward for including Uncles as part of the block, in the form of an extra 1/32 per Uncle included  
 
-### Uncles
+Uncles are stale blocks, ie with parent that are ancestors (max 6 block back) of the including block.
+Valid uncles are rewarded in order to neutralise the effect of network lag on the dispersion of mining rewards, thereby increasing security. 
+Uncles included in a block formed by the successful PoW miner receive 7/8 of the static block reward = 4.375 ether
+A maximum of 2 uncles allowed per block.
+
+Note that following testing, there are no longer any plan to cap the rewards at 10% - Frontier will operate at 100% of the reward mechanism.
 
 ## Ethash DAG
 
@@ -23,6 +31,12 @@ For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` 
 
 # Mining with Geth
 
+At Frontier, the first release of Ethereum, you'll just need a) a GPU and b) an Ethereum client, Geth. CPU mining will be possible but too inefficient to hold any value.
+
+At the moment, Geth only includes a CPU miner, and the team is testing a [GPU miner branch](https://github.com/ethereum/go-ethereum/tree/gpuminer), but this won't be part of Frontier.
+
+The C++ implementation of Ethereum also offers a GPU miner, both as part of Eth (its CLI), AlethZero (its GUI) and EthMiner (the standalone miner). 
+
 _**NOTE:** Ensure your blockchain is fully synchronised with the main chain before starting to mine, otherwise you will not be mining on the main chain._
 
 When you start up your ethereum node with `geth` it is not mining by default. To start it in mining mode, you use the `--mine` [command line option](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). The `-minerthreads` parameter can be used to set the number parallel mining threads (defaulting to the total number of processor cores). 
@@ -32,7 +46,7 @@ When you start up your ethereum node with `geth` it is not mining by default. To
 You can also start and stop CPU mining at runtime using the [console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerstart). `miner.start` takes an optional parameter for the number of miner threads. 
 
 ```
-> miner.start()
+> miner.start(8)
 true
 > miner.stop()
 true
@@ -40,18 +54,17 @@ true
 
 Note that mining for real ether only makes sense if you are in sync with the network (since you mine on top of the consensus block). Therefore the eth blockchain downloader/synchroniser will delay mining until syncing is complete, and after that mining automatically starts unless you cancel your intention with `miner.stop()`.
 
-In order to earn ether you must have a **coinbase** (or **etherbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you don't have an etherbase address set, then `geth --mine` will not start up.
+In order to earn ether you must have your **etherbase** (or **coinbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you don't have an etherbase address, then `geth --mine` will not start up.
 
 ```
 > eth.coinbase
 '0x'
-> personal.newAccount("mypassword")
-'ffd25e388bf07765e6d7a00d6ae83fa750460c7e'
-> eth.coinbase
+> account = personal.newAccount("mypassword")
 '0xffd25e388bf07765e6d7a00d6ae83fa750460c7e'
+> miner.setEtherbase(account)
 ```
 
-Note that your coinbase does not need to be an address of a local account, just an existing one. 
+Note that your etherbase does not need to be an address of a local account, just an existing one. 
 
 ```
 geth --etherbase '0xa4d8e9cae4d04b093aac82e6cd355b6b963fb7ff' --mine console 2>>geth.log
@@ -75,6 +88,8 @@ Header:
 }
 ```
 
+See also [this proposal](https://github.com/ethereum/wiki/wiki/Extra-Data)
+
 You can check your hashrate with [miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in H/s (Hash operations per second). 
 
 ```
@@ -82,7 +97,7 @@ You can check your hashrate with [miner.hashrate](https://github.com/ethereum/go
 712000
 ```
 
-After you successfully mined some blocks, you can check the ether balance of your coinbase account. Now assuming your coinbase is a local account:
+After you successfully mined some blocks, you can check the ether balance of your etherbase account. Now assuming your etherbase is a local account:
 
 ```
 > eth.getBalance(eth.coinbase).toNumber();
@@ -142,12 +157,10 @@ Given a difficulty of 3 billion, a typical CPU with 800KH/s is expected to find 
 The algorithm is memory hard and in order to fit the DAG into memory, it needs 1-2GB of RAM on each GPU. If you get ` Error GPU mining. GPU memory fragmentation?` you havent got enough memory.
 
 The GPU miner is implemented in OpenCL, so AMD GPUs will be 'faster' than same-category NVIDIA GPUs.
-`fglrx` a `cudacl` are your friends.
-
 
 ASICs and FPGAs are relatively inefficient and therefore discouraged. 
 
-Getting openCL for your chipset and platform, try:
+To get openCL for your chipset and platform, try:
 * [AMD SDK openCL](http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk)
 * [NVIDIA CUDA openCL](https://developer.nvidia.com/cuda-downloads)
 
@@ -198,7 +211,7 @@ You check your cooling status:
 
 ## Mining Software
 
-Currently `geth` only supports a CPU miner natively. We are working on a GPU miner, but it may not be available for the Frontier release. Geth however can be used in conjunction with `ethminer`, using the standalone miner as workers and `geth` as scheduler communicating via [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
+The official Frontier release of `geth` only supports a CPU miner natively. We are working on a [GPU miner](https://github.com/ethereum/go-ethereum/tree/gpuminer), but it may not be available for the Frontier release. Geth however can be used in conjunction with `ethminer`, using the standalone miner as workers and `geth` as scheduler communicating via [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
 
 The [C++ implementation of Ethereum](https://github.com/ethereum/cpp-ethereum/) (not officially released) however has a GPU miner. It can be used from `eth`, `AlethZero` (GUI) and `ethMiner` (the standalone miner). 
 
@@ -215,6 +228,7 @@ apt-get install cpp-ethereum
 ```
 
 On Windows: 
+https://github.com/ethereum/cpp-ethereum/wiki/Building-on-Windows
 
 ## GPU mining with ethminer 
 To mine with `eth`:
@@ -244,7 +258,7 @@ tail -f geth.log
 ```
 
 `ethminer` communicates with geth on port 8545 (the default RPC port in geth). You can change this by giving the [`--rpcport` option](https://github.com/ethereum/go-ethereum/Command-Line-Options) to `geth`.
-Ethminer will find get on any port. Note that you need to set the CORS header with `--rpccorsdomain localhost`. You can also set port on `ethminer` with `-F http://127.0.0.1:3301`
+Ethminer will find get on any port. Note that you need to set the CORS header with `--rpccorsdomain localhost`. You can also set port on `ethminer` with `-F http://127.0.0.1:3301`. Setting the ports is necessary if you want several instances mining on the same computer,  although this is somewhat pointless. If you are testing on a private cluster, we recommend you use CPU mining instead. 
 
 Also note that you do **not** need to give `geth` the `--mine` option or start the miner in the console unless you want to do CPU mining on TOP of GPU mining. 
 
@@ -269,6 +283,9 @@ To debug the miner:
 make -DCMAKE_BUILD_TYPE=Debug -DETHASHCL=1 -DGUI=0
 gdb --args ethminer -G -M
 ```
+
+**Note** hashrate info is not available in `geth` when GPU mining. Check your hashrate with `ethminer`, `miner.hashrate` will always report 0. 
+
 
 ### ethminer and eth
 
