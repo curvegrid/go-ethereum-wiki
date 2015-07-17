@@ -58,13 +58,13 @@ The go-ethereum JSRE uses the [Otto JS VM](https://github.com/robertkrimen/otto)
 * "use strict" will parse, but does nothing.
 * The regular expression engine (re2/regexp) is not fully compatible with the ECMA5 specification.
 
-Note that the other known limitation of Otto (namely the lack of timers) is taken care. Ethereum JSRE implements both `setTimeout` and `setInterval`. In addition to this, the console provides `sleep(seconds)` as well as a "blocktime sleep" method `waitForBlock(blockNumber)`. 
+Note that the other known limitation of Otto (namely the lack of timers) is taken care. Ethereum JSRE implements both `setTimeout` and `setInterval`. In addition to this, the console provides `admin.sleep(seconds)` as well as a "blocktime sleep" method `admin.sleepBlocks(number)`. 
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
 # Timers
 
-In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is augmented with various timers. It implements `setInterval`, `clearInterval`, `setTimeout`, `clearTimeout` you may be used to using in browser windows. It also provides implementation for `sleep(seconds)` and a blockchain-height based timer, `sleepBlocks(n)` which sleeps till the number of new blocks added is equal to or greater than `sleepBlocks(n)`, think "wait for n confirmations". 
+In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is augmented with various timers. It implements `setInterval`, `clearInterval`, `setTimeout`, `clearTimeout` you may be used to using in browser windows. It also provides implementation for `sleep(seconds)` and a block based timer, `admin.sleepBlocks(n)` which sleeps till the number of new blocks added is equal to or greater than `admin.sleepBlocks(n)`, think "wait for n confirmations". 
 
 # JavaScript Console API
 
@@ -488,7 +488,9 @@ source = "contract test {\n" +
 "   }\n" +
 "} ";
 contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+txhash = eth.sendTransaction({from: primary, data: contract.code });
+// after it is uncluded
+contractaddress = eth.getTxReceipt(txhash);
 filename = "/tmp/info.json";
 contenthash = admin.saveInfo(contract.info, filename);
 ```
@@ -514,7 +516,9 @@ source = "contract test {\n" +
 "   }\n" +
 "} ";
 contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code });
+txhash = eth.sendTransaction({from: primary, data: contract.code });
+// after it is uncluded
+contractaddress = eth.getTxReceipt(txhash);
 filename = "/tmp/info.json";
 contenthash = admin.saveInfo(contract.info, filename);
 admin.register(primary, contractaddress, contenthash);
@@ -543,9 +547,12 @@ source = "contract test {\n" +
 "   }\n" +
 "} ";
 contract = eth.compile.solidity(source).test;
-contractaddress = eth.sendTransaction({from: primary, data: contract.code, gas: "1000000", gasPrice: "100000" });
+txhash = eth.sendTransaction({from: primary, data: contract.code });
+// after it is uncluded
+contractaddress = eth.getTxReceipt(txhash);
 filename = "/tmp/info.json";
-contenthash = admin.register(primary, contractaddress, contract, filename);
+contenthash = admin.saveInfo(contract.info, filename);
+admin.register(primary, contractaddress, contenthash);
 admin.registerUrl(primary, contenthash, "file://"+filename);
 ```
 
