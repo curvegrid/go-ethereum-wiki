@@ -28,7 +28,7 @@ Contracts can receive transfers just like externally controlled accounts, but th
 
 Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into byte code to be uploaded on the blockchain.
 
-Note that other languages also exist, notably [serpent](https://github.com/ethereum/wiki/wiki/Serpent) and [LLL](https://github.com/ethereum/cpp-ethereum/wiki/LLL). Legacy Mutan (an early c-like language) is no longer maintained.
+Note that other languages also exist, notably [serpent](https://github.com/ethereum/wiki/wiki/Serpent) and [LLL](https://github.com/ethereum/cpp-ethereum/wiki/LLL). Legacy Mutan (an early c-like language) is no longer officially maintained.
 
 ## Language Resources 
 
@@ -70,6 +70,7 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [Mix standalone IDE](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE) by ETHDEV
 * in-browser [Cosmo](http://meteor-dapp-cosmo.meteor.com) that connects to `geth` via RPC. By Nick Dodson
 * [embark framework](https://github.com/iurimatias/embark-framework/) by Iuri Mathias
+* [truffle](https://github.com/ConsenSys/truffle) by  Tim Coulter
 
 # Compiling a contract
 
@@ -88,7 +89,7 @@ eth_compileSolidity method not available: solc (solidity compiler) not found
     at <anonymous>:1:1
 ```
 
-After you found a way to install `solc`, you make sure it's in the path. If [`eth.getCompilers()`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetcompilers) still does not find it (returns an empty array), you can set a custom path to the `sol` executable on the command line using th `solc` flag.
+After you found a way to install `solc`, you make sure it's in the path. If [`eth.getCompilers()`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetcompilers) still does not find it (returns an empty array), you can set a custom path to the `solc` executable on the command line using th `solc` flag.
 
 ```
 geth --datadir ~/frontier/00 --solc /usr/local/bin/solc --natspec
@@ -98,7 +99,7 @@ You can also set this option at runtime via the console:
 
 ```js
 > admin.setSolc("/usr/local/bin/solc")
-solc v0.9.13
+solc v0.9.32
 Solidity Compiler: /usr/local/bin/solc
 Christian <c@ethdev.com> and Lefteris <lefteris@ethdev.com> (c) 2014-2015
 true
@@ -148,7 +149,7 @@ You are ready to compile solidity code in the `geth` JS console using [`eth.comp
 }
 ```
 
-The compiler is also available via [RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) and therefore via [web3.js](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity) to any in-browser Ðapp connecting to `geth` via RPC.
+The compiler is also available via [RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) and therefore via [web3.js](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethcompilesolidity) to any in-browser Ðapp connecting to `geth` via RPC/IPC.
 
 The following example shows how you interface `geth` via JSON-RPC to use the compiler.
 
@@ -210,7 +211,7 @@ So how did you pay for all this? Under the hood, the transaction specified a gas
 
 Gas limit is there to protect you from buggy code running until your funds are depleted. The product of `gasPrice` and `gas` represents the maximum amount of Wei that you are willing to pay for executing the transaction. What you specify as `gasPrice` is used by miners to rank transactions for inclusion in the blockchain. It is the price in Wei of one unit of gas, in which VM operations are priced.
 
-The gas expenditure incurred by running your contract will be bought by the ether you have in your account at a price you specified in the transaction with `gasPrice`. If you do not have the ether to cover all the gas requirements to complete running your code, the processing aborts and all intermediate state changes roll back to the pre-transaction snapshot. The gas used up to the point where execution stopped were used after all, so the ether balance of your account will be reduced. These parameters can be adjusted on the transaction object fields `gas` and `gasPrice`. The `value` field is used the same as in ether transfer transactions between normal accounts. In other words transferring funds is available between any two accounts, either normal (i.e. externally controlled) or contract. If your contract runs out of funds, you should see an insufficient funds error. Note that all funds on contract accounts will be irrecoverably lost, once we release [Homestead](https://github.com/ethereum/go-ethereum/wiki/Homestead) (see [the rules of the game](https://github.com/ethereum/go-ethereum/wiki/Frontier)).
+The gas expenditure incurred by running your contract will be bought by the ether you have in your account at a price you specified in the transaction with `gasPrice`. If you do not have the ether to cover all the gas requirements to complete running your code, the processing aborts and all intermediate state changes roll back to the pre-transaction snapshot. The gas used up to the point where execution stopped were used after all, so the ether balance of your account will be reduced. These parameters can be adjusted on the transaction object fields `gas` and `gasPrice`. The `value` field is used the same as in ether transfer transactions between normal accounts. In other words transferring funds is available between any two accounts, either normal (i.e. externally controlled) or contract. If your contract runs out of funds, you should see an insufficient funds error.
 
 For testing and playing with contracts you can use the test network or [set up a private node (or cluster)](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster) potentially isolated from all the other nodes. If you then mine, you can make sure that your transaction will be included in the next block. You can see the pending transactions with:
 
@@ -249,10 +250,10 @@ By using this scheme, it is sufficient to know a contract's address to look up t
 
 So if you are a conscientious contract creator, the steps are the following:
 
+0. Deploy the contract itself to the blockchain
 1. Get the contract info json file. 
 2. Deploy contract info json file to any url of your choice
 3. Register codehash ->content hash -> url
-4. Deploy the contract itself to the blockchain
 
 The JS API makes this process very easy by providing helpers. Call [`admin.register`]() to extract info from the contract, write out its json serialisation in the given file, calculates the content hash of the file and finally registers this content hash to the contract's code hash.
 Once you deployed that file to any url, you can use [`admin.registerUrl`]() to register the url with your content hash on the blockchain as well. (Note that in case a fixed content addressed model is used as document store, the url-hint is no longer necessary.)
@@ -303,11 +304,6 @@ var source = info.source;
 var abiDef = info.abiDefinition
 ```
 
-```js
-// verify an existing contract in blockchain (NOT IMPLEMENTED)
-admin.verifyContractInfo(address)
-```
-
 # NatSpec 
 
 This section will further elaborate what you can do with contracts and transactions building on a protocol NatSpec. Solidity implements smart comments doxigen style which then can be used to generate various facades meta documents of the code. One such use case is to generate custom messages for transaction confirmation that clients can prompt users with. 
@@ -346,7 +342,7 @@ Note that if we use content addressed storage system like swarm the second step 
 
 For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
 
-Now you are done as a dev, so swap seats as it were and pretend that you are a user who is sending a transaction to the infamous multiply7 contract. 
+Now you are done as a dev, so swap seats as it were and pretend that you are a user who is sending a transaction to the infamous `multiply7` contract. 
 
 You need to start the client with the `--natspec` flag to enable smart confirmations and contractInfo fetching. You can also set it on the console with `admin.startNatSpec()` and `admin.stopNatSpec()`.
 
@@ -399,7 +395,7 @@ eth.resend(tx, newGasPrice, newGasLimit)
 
 Often you need to resort to a low level strategy of testing and debugging contracts and transactions.
 This section introduces some debug tools and practices you can use.
-In order to test contracts and transactions without real-word consequences, you best test it on a private blockchain. This can be achieved with configuring an alternative network id (select a unique integer) and/or disable peers. fIt is recommended practice that for testing you use an alternative data directory and ports so that you never even accidentally clash with your live running node (assuming that runs using the defaults.
+In order to test contracts and transactions without real-word consequences, you best test it on a private blockchain. This can be achieved with configuring an alternative network id (select a unique integer) and/or disable peers. It is recommended practice that for testing you use an alternative data directory and ports so that you never even accidentally clash with your live running node (assuming that runs using the defaults.
 Starting your `geth` with in VM debug mode with profiling and highest logging verbosity level is recommended:
 
 ```js
@@ -424,9 +420,9 @@ primary = eth.accounts[0];
 // mine 10 blocks to generate ether 
 
 // starting miner
-miner.start();
-// wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
-debug.waitForBlocks(eth.blockNumber+10);
+miner.start(8);
+// sleep for 10 blocks.
+admin.sleepBlocks(10);
 // then stop mining (just not to burn heat in vain)
 miner.stop()  ;
 balance = web3.fromWei(eth.getBalance(primary), "ether");
@@ -435,16 +431,16 @@ balance = web3.fromWei(eth.getBalance(primary), "ether");
 After you create transactions, you can force process them with the following lines:
 
 ```
-confirmations = 10;
-miner.start();
-// wait for at least till we reach a height `eth.blockNumber+10` effectively: sleep for 10 blocks.
-debug.waitForBlocks(eth.blockNumber+confirmations);
+miner.start(1);
+admin.sleepBlocks(1);
 miner.stop()  ;
 ```
 
 you can check your pending transactions with 
 
 ```js
+// shows transaction pool
+txpool.status
 // number of pending txs
 eth.getBlockTransactionCount("pending");
 // print all pending txs
@@ -454,8 +450,9 @@ eth.getBlock("pending", true).transactions
 If you submitted contract creation transaction, you can check if the desired code actually got inserted in the current blockchain:
 
 ```js
-contractaddress = eth.sendTansaction({from:primary, data: code})
+txhash = eth.sendTansaction({from:primary, data: code})
 //... mining
+contractaddress = eth.getTxReceipt(txhash);
 eth.getCode(contractaddress)
 ```
 
@@ -593,7 +590,7 @@ personal.newAccount("")
 
 primary = eth.accounts[0];
 balance = web3.fromWei(eth.getBalance(primary), "ether");
-personal.unlockAccount(primary, "");
+personal.unlockAccount(primary, "00");
 // miner.setEtherbase(primary)
 
 miner.start(8); admin.sleepBlocks(10); miner.stop()  ;
@@ -613,6 +610,7 @@ globalRegistrarAddr = eth.getTransactionReceipt(globalRegistrarTxHash).contractA
 eth.getCode(globalRegistrarAddr);
 //...
 admin.setGlobalRegistrar(globalRegistrarAddr);
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
 
 hashRegTxHash = admin.setHashReg("0x0");
 hashRegTxHash = admin.setHashReg("", primary);
@@ -624,6 +622,8 @@ eth.getCode(hashRegAddr);
 registrar.reserve.sendTransaction("HashReg", {from:primary});
 registrar.setAddress.sendTransaction("HashReg",hashRegAddr,true, {from:primary});
 miner.start(1); admin.sleepBlocks(1); miner.stop();
+registrar.owner("HashReg");
+registrar.addr("HashReg");
 
 urlHintTxHash = admin.setUrlHint("", primary);
 miner.start(1); admin.sleepBlocks(1); miner.stop();
@@ -633,28 +633,37 @@ eth.getCode(urlHintAddr);
 registrar.reserve.sendTransaction("UrlHint", {from:primary});
 registrar.setAddress.sendTransaction("UrlHint",urlHintAddr,true, {from:primary});
 miner.start(1); admin.sleepBlocks(1); miner.stop();
-
-registrar = GlobalRegistrar.at(globalRegistrarAddr);
-registrar.owner("HashReg");
 registrar.owner("UrlHint");
-registrar.addr("HashReg");
 registrar.addr("UrlHint");
+
+globalRegistrarAddr = "0xfd719187089030b33a1463609b7dfea0e5de25f0"
+admin.setGlobalRegistrar(globalRegistrarAddr);
+registrar = GlobalRegistrar.at(globalRegistrarAddr);
+admin.setHashReg("");
+admin.setUrlHint("");
+
+///// ///////////////////////////////
 
 admin.stopNatSpec();
 primary = eth.accounts[0];
-personal.unlockAccount(primary, "")
+personal.unlockAccount(primary, "00")
 
-globalRegistrarAddr = "0x3d255836f5f8c9976ec861b1065f953b96908b07";
+globalRegistrarAddr = "0xfd719187089030b33a1463609b7dfea0e5de25f0";
 admin.setGlobalRegistrar(globalRegistrarAddr);
 registrar = GlobalRegistrar.at(globalRegistrarAddr);
-admin.setHashReg(registrar.addr("HashReg"));
-admin.setUrlHint(registrar.addr("UrlHint"));
+admin.setHashReg("0x0");
+admin.setHashReg("");
+admin.setUrlHint("0x0");
+admin.setUrlHint("");
+
 
 registrar.owner("HashReg");
 registrar.owner("UrlHint");
 registrar.addr("HashReg")
 registrar.addr("UrlHint");
 
+
+/////////////////////////////////////
 eth.getBlockTransactionCount("pending");
 miner.start(1); admin.sleepBlocks(1); miner.stop();
 
@@ -676,6 +685,13 @@ eth.getCode(contractaddress);
 multiply7 = eth.contract(contract.info.abiDefinition).at(contractaddress);
 fortytwo = multiply7.multiply.call(6);
 
+/////////////////////////////////
+
+// register a name for the contract
+registrar.reserve.sendTransaction(primary,  {from: primary});
+registrar.setAddress.sendTransaction("multiply7", contractaddress, true, {from: primary});
+////////////////////////
+
 admin.stopNatSpec();
 filename = "/info.json";
 contenthash = admin.saveInfo(contract.info, "/tmp" + filename);
@@ -687,99 +703,14 @@ admin.registerUrl(primary, contenthash, "file://" + filename);
 eth.getBlock("pending", true).transactions;
 miner.start(1); admin.sleepBlocks(1); miner.stop();
 
-// try Natspec
-admin.startNatSpec();
-info = admin.getContractInfo(contractaddress);
-multiply7 = eth.contract(info.abiDefinition).at(contractaddress);
-fortytwo = multiply7.multiply.sendTransaction(6, { from: primary });
-
-
-
-txpool.status
-eth.getBlockTransactionCount("pending")
-eth.getBlock("pending", true).transactions
-
-```
-
-old version (TODO merge)
-
-```
-// set your primary account address
-primary = eth.accounts[0];
-
-// set up registrar services
-globalRegistrarAddr = admin.setGlobalRegistrar("", primary);
-hashRegAddr = admin.setHashReg("", primary);
-urlHintAddr = admin.setUrlHint("", primary);
-// (re)sets the registrar variable to a GlobalRegistrar contract instance 
-registrar = GlobalRegistrar.at(globalRegistrarAddr);
-
-// example source code for multiply7
-source = "contract test {\n" +
-"   /// @notice will multiply `a` by 7.\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"      return a * 7;\n" +
-"   }\n" +
-"} ";
-
-contract = eth.compile.solidity(source).test;
-
-contractaddress = contract.new({from: primary, data: contract.code});
-
-// to check if the transaction went through to the pool:
-eth.getBlock("pending", true).transactions;
-
-// force mine txs
-miner.start();
-// waits until block height is minimum the number given.
-debug.waitForBlocks(eth.blockNumber+1);
-miner.stop()
-
-// use the contract
-// get abi definition from compiler output
-abiDef = contract.info.abiDefinition;
-// define the contract class
-Multiply7 = eth.contract(abiDef);
-// instantiate the contract instrance from an address
-multiply7 = Multiply7.at(contractaddress);
-
-// test the contract by calling the instance 
-fortytwo = myMultiply7.multiply.call(6, {from:primary});
-console.log("multiply7.multiply.call(6, {from:primary}) => "+fortytwo);
-
-// register a name for the contract
-registrar.reserve.sendTransaction(primary,  {from: primary});
-registrar.rsetAddress.sendTransaction("multiply7", contractaddress, true, {from: primary});
-// mine the registration into effect:
-miner.start(); 
-debug.waitForBlocks(eth.blockNumber+1);
-miner.stop();
-
-// save info json, for later use and register contract info with the location
-filename = "/tmp/info.json";
-contenthash = admin.saveInfo(contract.info, filename);
-// register contenthash to contract address (using the sha3 of the code on contractaddress as codehash 
-// using HashReg: codehash -> contenthash
-admin.register(primary, contractaddress, contenthash);
-// register a url hint with the content hash
-admin.registerUrl(primary, contenthash, "file://"+filename);
-
-// mine the registrations into effect:
-miner.start();
-debug.waitForBlocks(eth.blockNumber+1);
-miner.stop();
+////////////////////
 
 // retrieve contract address using global registrar entry with 'multply7'
 contractaddress = registrar.addr("multiply7);
 // retrieve the info using the url 
 info = admin.getContractInfo(contractaddress);
-abiDef = info.abiDefinition;
-Multiply7 = eth.contract(abiDef);
-multiply7 = Multiply7.at(contractaddress);
-
-// switch on Natspec
+multiply7 = eth.contract(info.abiDefinition).at(contractaddress);
+// try Natspec
 admin.startNatSpec();
-myMultiply7.multiply.sendTransaction(6, { from: primary });
-// 
-console.log("Pending TX count should be 0: "+eth.getTransactionCountForBlock("pending"));
+fortytwo = multiply7.multiply.sendTransaction(6, { from: primary });
 ```
