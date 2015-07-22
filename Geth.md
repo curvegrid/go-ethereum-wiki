@@ -55,11 +55,11 @@ The Ethereum Core Protocol licensed under the [GNU Lesser General Public License
 
 ## Troubleshooting
 
-If something went wrong first read our [Troubleshooting](https://github.com/ethereum/go-ethereum/wiki/Troubleshooting) checklist as well as the [FAQ](https://github.com/ethereum/go-ethereum/wiki/Troubleshooting). If you still didn't find your answer please open an issue on GitHub or contact our help desk.
+If something went wrong first read our [Troubleshooting](https://github.com/ethereum/go-ethereum/wiki/Troubleshooting) checklist as well as the [FAQ](https://github.com/ethereum/go-ethereum/wiki/Troubleshooting). If you still didn't find your answer please open an issue on GitHub or contact our help desk on helpdesk@ethereum.org.
 
 ## Reporting 
 
-Security issues are best sent to security@ethereum.org or shared in PM with devs on one of the channels.
+Security issues are best sent to security@ethereum.org or shared in PM with devs on one of the channels (see Community and Suppport).
 
 Non-sensitive bug reports are welcome on github. Please always state the version (on master) or commit of your build (if on develop), give as much detail as possible about the situation and the anomaly that occurred. Provide logs or stacktrace if you can.
 
