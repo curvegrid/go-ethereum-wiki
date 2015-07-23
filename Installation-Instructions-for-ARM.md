@@ -7,3 +7,5 @@ Geth is built for ARM using cross-compilation. See [Cross compiling Ethereum](ht
 1. Download the [precompiled binary from master branch](https://build.ethdev.com/builds/ARM%20Go%20master%20branch/geth-ARM-latest.tar.bz2)
 1. Copy it to a location in $PATH (i.e. /usr/bin/local)
 1. Run `geth`
+
+Further details: https://github.com/ethereum/wiki/wiki/Raspberry-Pi-instructions
