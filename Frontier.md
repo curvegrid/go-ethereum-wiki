@@ -2,15 +2,15 @@
 
 Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release.
 
-Issues are tracked [on github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
+Issues are tracked [on Github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
 
 ## Introduction
 
 Frontier is the first in a series of releases that punctuate the roadmap for the development of Ethereum. Frontier will be followed by ‘Homestead’, ‘Metropolis’ and ‘Serenity’ throughout the coming year, each adding new features and improving the user friendliness and security of the platform. 
 
-Ethereum is special and different from other software projects in that its release also involves launching the live network. After a year and a half of development the proof of concept series completed their 9 cycles. Iteration 10 (Proof of Concept series 9) led to the Olympic testnet, which gradually led to the release candidate client for Frontier. 
+Ethereum is special and different from other software projects in that its release also involves launching a live network. After a year and a half of development the Proof of Concept series completed 9 cycles. The 10th iteration resulted in the Olympic testnet, which gradually led to the Release Candidate client for Frontier.
 
-The ethereum network goes live when the clients consent on the **genesis block** and start mining transactions on it. The genesis block will reference an initial system state where all the accounts set up by the presale exist with the correct amount of pre-issued ether allocated. Synchronised to the Frontier launch several exchanges start offering trade of ether allowing pre-allocated ether owners to sell their holdings as well as miners to exit with their earnings. 
+The Ethereum network goes live when the clients consent on the **genesis block** and start mining transactions on it. The genesis block will reference an initial system state where all the accounts set up by the presale exist with the correct amount of pre-issued ether allocated. Synchronised to the Frontier launch several exchanges start offering trade of ether allowing pre-allocated ether owners to sell their holdings as well as miners to exit with their earnings. 
 
 During Frontier though some centralised kill switch functionality will still be in place as a contingency measure. These features will be removed in _Homestead_. As opposed to our earlier strategy, the decision is not to remove any contracts from the blockchain and likewise leave all ether balances carry over to Homestead. In other words, the state in Homestead will be a direct and unmodified continuation of the state in Frontier. 
 
@@ -33,7 +33,7 @@ By [installing and running `geth`](https://github.com/ethereum/go-ethereum/wiki/
 
 **WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the documentation and fully understand the [caveats and risks](https://github.com/ethereum/go-ethereum/wiki/Disclaimer). 
 
-Apart from `geth` the go cli, the Frontier release contains the following ingredients:
+Apart from `geth` the go cli, the Frontier release contains the following components:
 
 * `web3.js`  library implementing the [JavaScript Dapp API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
 * `solc` a standalone solidity compiler. You only need this if you want to use your Dapp or [console to compile solidity code](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#compiling-a-contract).
@@ -64,7 +64,7 @@ This process is centralized and will only run for the duration of Frontier. It h
 
 You probably are already familiar with our network stats monitor, https://stats.ethdev.com/. It gives a quick overview of the health of the network, block resolution time and Gas statistics. If you’d like to explore it further, I’ve made a brief video explaining the various KPIs. Remember that participation in the stats page is voluntary, and nodes have to add themselves before they appear on the panel.
 
-In addition to the stats page, we will have a status page at https://status.ethdev.com/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
+In addition to the stats page, we will have a status page at https://status.etheruem.org/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
 
 Finally, if any of the clients receive an invalid block, they will refuse to process it send it to the bad block website (AKA ‘Sentinel’). This could mean a bug, or something more serious, such as a fork. Either way, this process will alert our developers to potential issues on the network. The website itself is public and available at https://badblocks.ethdev.com (currently operating on the testnet).
 A Clean Testnet
