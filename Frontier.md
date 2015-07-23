@@ -32,7 +32,7 @@ The focus of Frontier is the go implementation of an ethereum full node, with a 
 
 By [installing and running `geth`](https://github.com/ethereum/go-ethereum/wiki/Geth), you can take part in the ethereum live testnet, mine, transfer funds between addresses, create contracts and send transactions. 
 
-**WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the official release notes and understand the caveats and risks. 
+**WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the documentation and understand the caveats and risks. 
 
 Apart from `geth` the go cli, the Frontier release contains the following ingredients:
 
