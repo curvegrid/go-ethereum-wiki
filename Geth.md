@@ -1,9 +1,3 @@
-**FRONTIER IS NOT YET LIVE**
-
-Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release.
-
-Issues are tracked [on github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
-
 # Geth
 
 `geth` is the the command line interface for running a full ethereum node implemented in Go. 
@@ -11,20 +5,12 @@ It is the main deliverable of the [Frontier Release](https://github.com/ethereum
 
 ## Capabilities
 
-By installing and running `geth`, you can take part in the ethereum live testnet and
-* mine real ether (at 10% of normal reward)
+By installing and running `geth`, you can take part in the ethereum frontier live testnet and
+* mine real ether 
 * transfer funds between addresses
 * create contracts and send transactions
 * explore block history
 * and much much more
-
-## Safety
-
-Frontier is a live testnet. It is here to help us prepare for the main release.
-
-* We fully expect instability and consensus flaws in the client, some of which may be exploitable
-* As curators, we fully reserve the right to ignore blocks at our discretion
-* As curators, from a final block that we solely determine, we will preserve all non-contract (i.e. code-less) account balances above the value of 1 ETH into the Homestead Genesis block
 
 ## Install 
 
@@ -125,4 +111,4 @@ https://dapplist.net/
 
 ### Helpdesk 
 
-On gitter, irc, skype
+On gitter, irc, skype or mail to helpdesk@ethereum.org
