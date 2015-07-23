@@ -58,14 +58,14 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 
 #### Compilers
 
-* [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum)
+* [Solidity realtime compiler](https://chriseth.github.io/browser-solidity/)
 
 ### Serpent 
 
 * [source on github](https://github.com/ethereum/serpent)
 * [serpent language spec](https://github.com/ethereum/wiki/wiki/Serpent)
 
-## Contract/Dapp development environments and framworks
+## Contract/Dapp development environments and frameworks
 
 * [Mix standalone IDE](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE) by ETHDEV
 * in-browser [Cosmo](http://meteor-dapp-cosmo.meteor.com) that connects to `geth` via RPC. By Nick Dodson
@@ -76,7 +76,7 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 
 Contracts live on the blockchain in an Ethereum-specific binary format (Ethereum Virtual Machine (=EVM) bytecode). However, contracts are typically written in some high level language such as [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) and then compiled into byte code to be uploaded on the blockchain.
 
-For the frontier release, `geth` supports solidity compilation through system call to `solc` the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/tree/develop/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE). 
+For the frontier release, `geth` supports solidity compilation through system call to `solc`, the command line [solidity compiler](https://github.com/ethereum/cpp-ethereum/tree/develop/solc) by Christian R. and Lefteris K. You can try [Solidity realtime compiler](https://chriseth.github.io/cpp-ethereum/) (by Christian R) or [Cosmo](http://meteor-dapp-cosmo.meteor.com) or [Mix](https://github.com/ethereum/wiki/wiki/Mix:-The-DApp-IDE). 
 
 If you start up your `geth` node, you can check if the solidity compiler is available. This is what happens, if it is not:
 
@@ -340,7 +340,11 @@ admin.registerUrl(contentHash, "http://dapphub.com/test/info.json")
 
 Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address of the content itself.
 
-For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. `admin.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")`.
+For the purposes of a painless example just simply use the file url scheme (not exactly the cloud, but will show you how it works) without needing to deploy. 
+
+```js
+admin.registerUrl(contentHash, "file:///home/nirname/dapps/shared/contracts/test/info.json")
+```
 
 Now you are done as a dev, so swap seats as it were and pretend that you are a user who is sending a transaction to the infamous `multiply7` contract. 
 
@@ -559,6 +563,15 @@ registrar.addr(name)
 HashReg and UrlHint can be used with the following abis:
 
 ```js
+hashRegAbi = '[{"constant":false,"inputs":[],"name":"setowner","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"_key","type":"uint256"},{"name":"_content","type":"uint256"}],"name":"register","outputs":[],"type":"function"}]'
+urlHintAbi = '[{"constant":false,"inputs":[{"name":"_hash","type":"uint256"},{"name":"idx","type":"uint8"},{"name":"_url","type":"uint256"}],"name":"register","outputs":[],"type":"function"}]'
+```
+
+setting up the contract instances: 
+
+```js
+hashReg = eth.contract(hashRegAbi).at(registrar.addr("HashReg")));
+urlHint = eth.contract(UrlHintAbi).at(registrar.addr("UrlHint")));
 ```
 
 Associate a content hash to a key hash:
@@ -573,7 +586,12 @@ Associate a url to a content hash:
 urlHint.register.sendTransaction(contenthash, url, {from:primary})
 ```
 
+To check resolution: 
 
+```js 
+contenthash = hashReg._hash(keyhash);
+url = urlHint._url(contenthash);
+```
 
 # Example script
 
