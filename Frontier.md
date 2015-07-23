@@ -27,9 +27,9 @@ Mining reward is the full amount of 5 ether per block (as opposed to our earlier
 
 The focus of Frontier is the Go implementation of an ethereum full node, with a command line interface codenamed "Geth". 
 
-By [installing and running `geth`](https://github.com/ethereum/go-ethereum/wiki/Geth), you can take part in the ethereum live testnet, mine, transfer funds between addresses, create contracts and send transactions. 
+By [installing and running `geth`](https://github.com/ethereum/go-ethereum/wiki/Geth), you can take part in the ethereum live network, mine ether on the blockchain, transfer funds between addresses, create contracts and send transactions. 
 
-**WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the documentation and fully understand the [caveats and risks](https://github.com/ethereum/go-ethereum/wiki/Disclaimer). 
+**WARNING**: before you use `geth` or interact with the ethereum Frontier live network, make sure you read the documentation and fully understand the [caveats and risks](https://github.com/ethereum/go-ethereum/wiki/Disclaimer). 
 
 Apart from `geth`, the Go CLI, the Frontier release contains the following components:
 
@@ -60,7 +60,7 @@ This process is centralized and will only run for the duration of Frontier. It h
 
 ## Stats, Status and Badblock websites
 
-You probably are already familiar with our network stats monitor, https://stats.ethdev.com/. It gives a quick overview of the health of the network, block resolution time and Gas statistics. If you’d like to explore it further, I’ve made a brief video explaining the various KPIs. Remember that participation in the stats page is voluntary, and nodes have to add themselves before they appear on the panel.
+You probably are already familiar with our network stats monitor, https://stats.ethdev.com/. It gives a quick overview of the health of the network, block resolution time and Gas statistics. Remember that participation in the stats page is voluntary, and nodes have to add themselves before they appear on the panel. See details on [network monitoring](https://github.com/ethereum/wiki/wiki/Network-Status)
 
 In addition to the stats page, we will have a status page at https://status.etheruem.org/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
 
