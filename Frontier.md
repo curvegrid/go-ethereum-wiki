@@ -1,8 +1,6 @@
 **FRONTIER IS COMING**
 
-Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release.
-
-Issues are tracked [on Github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
+Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release. Issues are tracked [on Github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
 
 ## Introduction
 
