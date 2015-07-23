@@ -5,7 +5,7 @@ It is the main deliverable of the [Frontier Release](https://github.com/ethereum
 
 ## Capabilities
 
-By installing and running `geth`, you can take part in the ethereum frontier live testnet and
+By installing and running `geth`, you can take part in the ethereum frontier live network and
 * mine real ether 
 * transfer funds between addresses
 * create contracts and send transactions
