@@ -8,6 +8,7 @@ your platform.
   * [Ubuntu](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu)
   * [Arch](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Arch)
 * [Installation Instructions for Windows](https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windows)
+* [Installation Instructions for ARM](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-ARM)
 * [Usage instructions for Docker](https://github.com/ethereum/go-ethereum/wiki/Running-in-Docker)
 
 Further links
