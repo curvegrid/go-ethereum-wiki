@@ -16,6 +16,8 @@
 
 [Contracts and transactions](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions)
 
+[Contract Tutorial](https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial)
+
 ### Interface Documentation
 
 [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)
