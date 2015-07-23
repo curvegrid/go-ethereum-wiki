@@ -18,13 +18,12 @@ Mining reward is the full amount of 5 ether per block (as opposed to our earlier
 
 ## Safety warnings
 
-* **You are responsible for your own computer security.** If your machine is compromised you **will** lose your ether, access to any contracts and maybe more.
 
+* **You are responsible for your own computer security.** If your machine is compromised you **will** lose your ether, access to any contracts and maybe more. 
 * **You are responsible for your own actions.** If you mess something up or break any laws while using this software, it's your fault, and your fault only.
-
 * **You are responsible for your own karma.** Don't be a jerk and respect others.
 
-* This software is open source under a [GNU Lesser General Public License](https://www.gnu.org/licenses/lgpl-3.0.en.html) license.
+**WARNING:** Before you interact with the ethereum Frontier live testnet, make sure you read the documentation and understand the caveats and risks. Please read the [legal disclaimer](https://github.com/ethereum/go-ethereum/wiki/Disclaimer)
 
 ## Components released
 
@@ -32,7 +31,7 @@ The focus of Frontier is the go implementation of an ethereum full node, with a 
 
 By [installing and running `geth`](https://github.com/ethereum/go-ethereum/wiki/Geth), you can take part in the ethereum live testnet, mine, transfer funds between addresses, create contracts and send transactions. 
 
-**WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the documentation and understand the caveats and risks. 
+**WARNING**: before you use `geth` or interact with the ethereum Frontier live testnet, make sure you read the documentation and fully understand the [caveats and risks](https://github.com/ethereum/go-ethereum/wiki/Disclaimer). 
 
 Apart from `geth` the go cli, the Frontier release contains the following ingredients:
 
