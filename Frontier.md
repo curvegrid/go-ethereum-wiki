@@ -21,7 +21,7 @@ Mining reward is the full amount of 5 ether per block (as opposed to our earlier
 * **You are responsible for your own actions.** If you mess something up or break any laws while using this software, it's your fault, and your fault only.
 * **You are responsible for your own karma.** Don't be a jerk and respect others.
 
-**WARNING:** Before you interact with the ethereum Frontier live testnet, make sure you read the documentation and understand the caveats and risks. Please read the [legal disclaimer](https://github.com/ethereum/go-ethereum/wiki/Disclaimer)
+**WARNING:** Before you interact with the ethereum Frontier network, make sure you read the documentation and understand the caveats and risks. Please read the [legal disclaimer](https://github.com/ethereum/go-ethereum/wiki/Disclaimer)
 
 ## Components released
 
@@ -65,7 +65,8 @@ You probably are already familiar with our network stats monitor, https://stats.
 In addition to the stats page, we will have a status page at https://status.etheruem.org/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
 
 Finally, if any of the clients receive an invalid block, they will refuse to process it send it to the bad block website (AKA ‘Sentinel’). This could mean a bug, or something more serious, such as a fork. Either way, this process will alert our developers to potential issues on the network. The website itself is public and available at https://badblocks.ethdev.com (currently operating on the testnet).
-A Clean Testnet
+
+## A Clean Testnet
 
 During the last couple of months, the Ethereum test network was pushed to its limits in order to test scalability and block propagation times. As part of this test we encouraged users to spam the network with transactions, contract creation code and call to contracts, at times reaching over 25 transactions per second. This has led the test network chain to grow to a rather unwieldy size, making it difficult for new users to catch up. For this reason, and shortly after the Frontier release, there will be a new test network following the same rules as Frontier.
 
@@ -79,4 +80,5 @@ Resources:
 - [Original announcement of the release scheme](https://blog.ethereum.org/2015/03/03/ethereum-launch-process) by Vinay Gupta
 - [Follow-up blogpost](https://blog.ethereum.org/2015/03/12/getting-to-the-frontier/)
 - [Least Authority audit blogpost](https://blog.ethereum.org/2015/07/07/know-ethereum-secure/) with links to the audit report, 
+- [Deja Vu audit blogpost](http://www.dejavusecurity.com/blog/2015/7/23/deja-vu-security-assists-in-ethereum-release)
 - [Olympic. Frontier prerelease](https://blog.ethereum.org/2015/05/09/olympic-frontier-pre-release/), Vitalik's blogpost detailing olympic rewards. 
