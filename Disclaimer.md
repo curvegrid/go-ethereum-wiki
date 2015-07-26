@@ -1,6 +1,4 @@
-SECURITY WARNINGS
------------------
-
+## Security warnings
 
 * **You are responsible for your own computer security.** If your machine is compromised you **will** lose your ether, access to any contracts and maybe more.
 
@@ -10,21 +8,16 @@ SECURITY WARNINGS
 
 * This software is open source under a [GNU Lesser General Public License](https://www.gnu.org/licenses/lgpl-3.0.en.html) license.
 
+## Legal warning: Disclaimer of Liabilites and Warranties
 
-
-LEGAL WARNING
--------------
- 
-### SHORT VERSION
-#### Disclaimer of Liabilites and Warranties
-
+# Short version 
 
 * **The user expressly knows and agrees that the user is using the ethereum platform at the user’s sole risk.**
 * **The user represents that the user has an adequate understanding of the risks, usage and intricacies of cryptographic tokens and blockchain-based open source software, eth platform and eth.** 
 * **The user acknowledges and agrees that, to the fullest extent permitted by any applicable law, the disclaimers of liability contained herein apply to any and all damages or injury whatsoever caused by or related to risks of, use of, or inability to use, eth or the ethereum platform under any cause or action whatsoever of any kind in any jurisdiction, including, without limitation, actions for breach of warranty, breach of contract or tort (including negligence) and that neither stiftung ethereum nor the ethereum team shall be liable for any indirect, incidental, special, exemplary or consequential damages, including for loss of profits, goodwill or data.** 
 * **Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for certain types of damages. therefore, some of the above limitations in this section may not apply to a user. In particular, nothing in these terms shall affect the statutory rights of any user or exclude injury arising from any willful misconduct or fraud of stiftung ethereum.**
 
-### LONG VERSION
+### Long Version: Terms and Conditions
  
 The following Terms and Conditions (“Terms”) govern the use of the Ethereum open source software platform (“Ethereum Platform”). Prior to any use of the Ethereum Platform, the User confirms to understand and expressly agrees to all of the Terms. All capitalized terms in this agreement will be given the same effect and meaning as in the Terms. The group of developers and other personnel that is now, or will be, employed by, or contracted with, Stiftung Ethereum (“Stiftung Ethereum”) is termed the “Ethereum Team.” The Platform will be developed by persons and entities who support Ethereum, including both volunteers and developers who are paid by nonprofit entities interested in supporting the Ethereum Platform.
  
