@@ -2,6 +2,8 @@
 
 Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release. Issues are tracked [on Github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
 
+# Ethereum Frontier Release
+
 ## Introduction
 
 Frontier is the first in a series of releases that punctuate the roadmap for the development of Ethereum. Frontier will be followed by ‘Homestead’, ‘Metropolis’ and ‘Serenity’ throughout the coming year, each adding new features and improving the user friendliness and security of the platform. 
