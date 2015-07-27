@@ -109,7 +109,7 @@ Testing only some methods:
 godep go test -v -cpu 4 ./eth -run TestMethod
 ```
 
-**Note**: here all tests with prefix TestMethod will be run, so if you got TestMethod, TestMethod1, then both!
+**Note**: here all tests with prefix _TestMethod_ will be run, so if you got TestMethod, TestMethod1, then both!
 
 Running benchmarks, eg.:
 
@@ -121,6 +121,11 @@ godep go test -v -cpu 4 -bench . -run BenchmarkJoin
 for more see [go test flags](http://golang.org/cmd/go/#hdr-Description_of_testing_flags)
 
 See integration testing information on the [Testing wiki page](https://github.com/ethereum/go-ethereum/wiki/Testing)
+
+## Metrics and monitoring
+
+`geth` can do node behaviour monitoring, aggragation and show perfomance metric charts. 
+Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring)
 
 ## Add and update dependencies 
 
