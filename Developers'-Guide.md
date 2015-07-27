@@ -1,9 +1,13 @@
 **NOTE: These instructions are for people who want to contribute Go source code changes.
 If you just want to run ethereum, use the normal [Installation Instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)**
 
-# Build and test
+# Developlers' guide 
 
-## Go environment  
+This document is the entry point for developers of the etherum go implemtation. Developers here refer to the hands-on tech-savvy users, who are interested in build, develop, debug, submit a bug report or pull request or contribute to `go-ethereum` with code.
+
+## Build and Test
+
+### Go environment  
 
 We assume that you have [`go` v1.4 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
@@ -17,7 +21,7 @@ Most likely you will be working from your fork of `go-ethereum`, let's say from 
 git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum/go-ethereum
 ```
 
-## Godep for dependency management
+### Godep for dependency management
 go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
 
 Install godep: 
@@ -40,14 +44,14 @@ Alternatively, you can prepend the go-ethereum Godeps directory to your current 
 GOPATH=`godep path`:$GOPATH
 ```
 
-## Building executables
+### Building executables
 
 Switch to the go-ethereum repository root directory (Godep expects a local [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) ).
 
 Each wrapper/executable found in 
 [the `cmd` directory](https://github.com/ethereum/go-ethereum/tree/develop/cmd) can be built individually.
 
-## Building Geth (CLI)
+### Building Geth (CLI)
 
 **Note**: Geth (the ethereum command line client) is the focus of the [Frontier release](https://github.com/ethereum/go-ethereum/wiki/Frontier).
 
@@ -59,9 +63,9 @@ godep go install -v ./cmd/geth
 
 See the [documentation on how to use Geth](https://github.com/ethereum/go-ethereum/wiki/Geth)
 
-## Building Mist (GUI)
+### Building Mist (GUI)
 
-**Note**: Mist is not officially released as part of [Frontier](https://github.com/ethereum/go-ethereum/wiki/Frontier)
+**Note**: Mist is not officially released as part of [Frontier](https://github.com/ethereum/go-ethereum/1wiki/Frontier)
 
 For the GUI, you need to [install `QT5`](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) and set variables.
 
@@ -89,11 +93,11 @@ or supply an absolute `-asset_path` option:
 
     mist -asset_path $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets
 
-## Git flow
+### Git flow
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
 
-## Testing
+### Testing
 
 Testing one library:
 
@@ -122,12 +126,12 @@ for more see [go test flags](http://golang.org/cmd/go/#hdr-Description_of_testin
 
 See integration testing information on the [Testing wiki page](https://github.com/ethereum/go-ethereum/wiki/Testing)
 
-## Metrics and monitoring
+### Metrics and monitoring
 
 `geth` can do node behaviour monitoring, aggragation and show perfomance metric charts. 
 Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring)
 
-## Add and update dependencies 
+### Add and update dependencies 
 
 To update a dependency version (for example, to include a new upstream fix), run 
 
@@ -146,14 +150,14 @@ Changes to the [Godeps folder](https://github.com/ethereum/go-ethereum/tree/deve
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
 
-# Contributing
+## Contributing
 
 Only github is used to track issues. (Please include the commit and branch when reporting an issue.)
 
 Pull requests should by default commit on the `develop` branch.
 The `master` branch is only used for finished stable major releases.
 
-# Stacktrace
+## Stacktrace
 
 The code uses `pprof` on localhost port 6060 by default if `geth` is started with the `--pprof` option. So bring up http://localhost:6060/debug/pprof to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
 
@@ -173,12 +177,12 @@ killall -QUIT geth
 
 This will dump stracktraces for each instance to their respective log file.
 
-# Code formatting 
+## Code formatting 
 
 Sources are formatted according to the [Go Formatting
 Style](http://golang.org/doc/effective_go.html#formatting).
 
-# Dev Tutorials 
+## Dev Tutorials 
 
 * [Private networks, local clusters and monitoring](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
 
