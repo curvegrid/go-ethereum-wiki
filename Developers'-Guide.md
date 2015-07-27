@@ -3,7 +3,7 @@ If you just want to run ethereum, use the normal [Installation Instructions](htt
 
 # Developlers' guide 
 
-This document is the entry point for developers of the etherum go implemtation. Developers here refer to the hands-on tech-savvy users, who are interested in build, develop, debug, submit a bug report or pull request or contribute to `go-ethereum` with code.
+This document is the entry point for developers of the etherum go implementation. Developers here refer to the hands-on: who are interested in build, develop, debug, submit a bug report or pull request or contribute to `go-ethereum` with code. 
 
 ## Build and Test
 
