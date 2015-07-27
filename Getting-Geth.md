@@ -4,7 +4,7 @@ The Frontier tool is called Geth (the old english third person singular conjugat
 
 In order to install Geth, open a command line or terminal tool (if you are unsure how to do this, consider waiting for a more user friendly release) and paste the command below:
 
-`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/cubedro/frontier.ethereum.org/master/bin/install.rb)"`
+    bash <(curl https://install-geth.ethereum.org)  
 
 This script will detect your OS and will attempt to install the ethereum CLI. For more options including package managers, check the OS-specific subsections.
 
@@ -12,7 +12,7 @@ This script will detect your OS and will attempt to install the ethereum CLI. Fo
 
 For the purposes of this guide, we will focus on the interactive console, a JavaScript environment. The history of the console is persisted between sessions, providing for a powerful and flexible way of using the client. You can navigate your command history by using the up and down arrow keys, like a standard command line. To get started Type the code below on your terminal
 
-`geth console`
+    geth console
 
 Once geth is fully started, you should see a `>` prompt, letting you know the console is ready. To exit, type `exit` at the prompt and hit `[enter]`.
 
