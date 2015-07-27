@@ -1,5 +1,7 @@
 **DO NOT FORGET YOUR PASSWORD** and **BACKUP YOUR KEYSTORE**
 
+# Backup & restore
+
 ## Data directory
 
 Everything `geth` persists gets written inside its data directory (except for the PoW Ethash DAG, see note below).
