@@ -63,36 +63,6 @@ godep go install -v ./cmd/geth
 
 See the [documentation on how to use Geth](https://github.com/ethereum/go-ethereum/wiki/Geth)
 
-### Building Mist (GUI)
-
-**Note**: Mist is not officially released as part of [Frontier](https://github.com/ethereum/go-ethereum/1wiki/Frontier)
-
-For the GUI, you need to [install `QT5`](https://github.com/ethereum/go-ethereum/wiki/Building-Qt) and set variables.
-
-On OSX with a brew install of `qt5`:
-
-``` bash
-export PKG_CONFIG_PATH=/usr/local/Cellar/qt5/5.4.0/lib/pkgconfig
-export CGO_CPPFLAGS=-I/usr/local/Cellar/qt5/5.4.0/include/QtCore/5.4.0/QtCore
-export LD_LIBRARY_PATH=/usr/local/Cellar/qt5/5.4.0/lib
-```
-
-See the instructions on the [wiki](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum%28Go%29)
-
-With these prerequisites in place, compile `mist` with:
-
-```
-godep go build -v ./cmd/mist
-```
-
-Mist does not automatically look in the right location for its GUI assets. For this reason you need to launch it from its build directory 
-
-    cd $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist && mist
-
-or supply an absolute `-asset_path` option:
-
-    mist -asset_path $GOPATH/src/github.com/ethereum/go-ethereum/cmd/mist/assets
-
 ### Git flow
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
