@@ -9,12 +9,10 @@ The successful PoW miner of the winning block receives:
 * All of the gas expended within the block, that is, all the gas consumed by the execution of all the transactions in the block submitted by the winning miner is compensated for by the senders. The gascost incurred is  credited to the miner's account as part of the consensus protocoll. Over time, it's expected these will dwarf the static block reward.
 - An extra reward for including Uncles as part of the block, in the form of an extra 1/32 per Uncle included  
 
-Uncles are stale blocks, ie with parent that are ancestors (max 6 block back) of the including block.
+Uncles are stale blocks, ie with parent that are ancestors (max 6 blocks back) of the including block.
 Valid uncles are rewarded in order to neutralise the effect of network lag on the dispersion of mining rewards, thereby increasing security. 
 Uncles included in a block formed by the successful PoW miner receive 7/8 of the static block reward = 4.375 ether
 A maximum of 2 uncles allowed per block.
-
-Note that following testing, there are no longer any plan to cap the rewards at 10% - Frontier will operate at 100% of the reward mechanism.
 
 ## Ethash DAG
 
@@ -29,7 +27,7 @@ geth makedag <block number> <outputdir>
 For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` (Mac/Linux) or `~/AppData/Ethash`  (Windows) for the DAG so that it can shared between clients. 
 
 
-# Mining with Geth
+# CPU Mining with Geth
 
 At Frontier, the first release of Ethereum, you'll just need a) a GPU and b) an Ethereum client, Geth. CPU mining will be possible but too inefficient to hold any value.
 
@@ -56,21 +54,22 @@ Note that mining for real ether only makes sense if you are in sync with the net
 
 In order to earn ether you must have your **etherbase** (or **coinbase**) address set. This etherbase defaults to your [primary account](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts). If you don't have an etherbase address, then `geth --mine` will not start up.
 
+You can set your etherbase on the command line:
+
 ```
-> eth.coinbase
-'0x'
-> account = personal.newAccount("mypassword")
-'0xffd25e388bf07765e6d7a00d6ae83fa750460c7e'
-> miner.setEtherbase(account)
+geth --etherbase 1 --mine  2>> geth.log // 1 is index: second account by creation order OR
+geth --etherbase '0xa4d8e9cae4d04b093aac82e6cd355b6b963fb7ff' --mine 2>> geth.log
+```
+```
+
+You can reset your etherbase on the console too:
+```
+miner.setEtherbase(eth.accounts[2])
 ```
 
 Note that your etherbase does not need to be an address of a local account, just an existing one. 
 
-```
-geth --etherbase '0xa4d8e9cae4d04b093aac82e6cd355b6b963fb7ff' --mine console 2>>geth.log
-```
-
-There is an option [to add extra Data](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminersetextra) (up to the limit of 1Kb) to your mined blocks. By convention this is interpreted as a unicode string, so you can set your vanity tag.
+There is an option [to add extra Data](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminersetextra) (32 bytes only) to your mined blocks. By convention this is interpreted as a unicode string, so you can set your short vanity tag.
 
 ```
 miner.setExtra("ΞTHΞЯSPHΞЯΞ")
@@ -90,7 +89,7 @@ Header:
 
 See also [this proposal](https://github.com/ethereum/wiki/wiki/Extra-Data)
 
-You can check your hashrate with [miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate) , the result is in H/s (Hash operations per second). 
+You can check your hashrate with [miner.hashrate](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#adminminerhashrate), the result is in H/s (Hash operations per second). 
 
 ```
 > miner.hashrate
@@ -107,7 +106,8 @@ After you successfully mined some blocks, you can check the ether balance of you
 In order to spend your earnings [on gas to transact](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions), you will need to have this account unlocked. 
 
 ```
-> personal.unlockAccount(eth.coinbase, "mypassword")
+> personal.unlockAccount(eth.coinbase)
+Password
 true
 ```
 
@@ -267,7 +267,6 @@ When running `ethminer` with `-M` (benchmark), you should see something like:
 
     Benchmarking on platform: { "platform": "NVIDIA CUDA", "device": "GeForce GTX 750 Ti", "version": "OpenCL 1.1 CUDA" }
 
-or 
 
     Benchmarking on platform: { "platform": "Apple", "device": "Intel(R) Xeon(R) CPU E5-1620 v2 @ 3.70GHz", "version": "OpenCL 1.2 " }
 
