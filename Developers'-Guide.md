@@ -63,6 +63,8 @@ godep go install -v ./cmd/geth
 
 See the [documentation on how to use Geth](https://github.com/ethereum/go-ethereum/wiki/Geth)
 
+Read about cross compilation of go-ethereum [here](https://github.com/ethereum/go-ethereum/wiki/Cross-compiling-Ethereum).
+
 ### Git flow
 
 To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
