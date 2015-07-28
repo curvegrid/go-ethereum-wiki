@@ -1,4 +1,4 @@
-* [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway) _(main wiki)_
+* [Introduction to Ethereum mining](https://github.com/ethereum/wiki/wiki/Mining#introduction) _(main wiki)_
 
 # CPU Mining with Geth
 
@@ -32,7 +32,6 @@ You can set your etherbase on the command line:
 ```
 geth --etherbase 1 --mine  2>> geth.log // 1 is index: second account by creation order OR
 geth --etherbase '0xa4d8e9cae4d04b093aac82e6cd355b6b963fb7ff' --mine 2>> geth.log
-```
 ```
 
 You can reset your etherbase on the console too:
