@@ -1,32 +1,5 @@
 * [So what is mining anyway?](https://github.com/ethereum/wiki/wiki/Mining#so-what-is-mining-anyway) _(main wiki)_
 
-## Mining Rewards
-
-Note that mining 'real' Ether will start with the Frontier release. On the Olympics testnet, the [Frontier pre-release](http://ethereum.gitbooks.io/frontier-guide/), the ether mined have no value (but see [Olympic rewards](https://blog.ethereum.org/2015/05/09/olympic-frontier-pre-release/)). 
-
-The successful PoW miner of the winning block receives:
-* A **static block reward** for the 'winning' block, consisting of exactly 5.0 Ether
-* All of the gas expended within the block, that is, all the gas consumed by the execution of all the transactions in the block submitted by the winning miner is compensated for by the senders. The gascost incurred is  credited to the miner's account as part of the consensus protocoll. Over time, it's expected these will dwarf the static block reward.
-- An extra reward for including Uncles as part of the block, in the form of an extra 1/32 per Uncle included  
-
-Uncles are stale blocks, ie with parent that are ancestors (max 6 blocks back) of the including block.
-Valid uncles are rewarded in order to neutralise the effect of network lag on the dispersion of mining rewards, thereby increasing security. 
-Uncles included in a block formed by the successful PoW miner receive 7/8 of the static block reward = 4.375 ether
-A maximum of 2 uncles allowed per block.
-
-## Ethash DAG
-
-Ethash uses a **DAG** (directed acyclic graph) for the proof of work algorithm, this is generated for each **epoch**, i.e every 30000 blocks (100 hours). The DAG takes a long time to generate. If clients only generate it on demand, you may see a long wait at each epoch transition before the first block of the new epoch is found. However, the DAG only depends on block number, so it CAN and SHOULD be calculated in advance to avoid long wait at each epoch transition. `geth` implements automatic DAG generation and maintains two DAGS at a time for smooth epoch transitions. Automatic DAG generation is turned on and off when mining is controlled from the console. It is also turned on by default if `geth` is launched with the `--mine` option. Note that clients share a DAG resource, so if you are running multiple instances of any client, make sure automatic dag generation is switched on in at most one client. 
-
-To generate the DAG for an arbitrary epoch:
-
-```
-geth makedag <block number> <outputdir>
-```
-
-For instance `geth makedag 360000 ~/.ethash`. Note that ethash uses `~/.ethash` (Mac/Linux) or `~/AppData/Ethash`  (Windows) for the DAG so that it can shared between clients. 
-
-
 # CPU Mining with Geth
 
 At Frontier, the first release of Ethereum, you'll just need a) a GPU and b) an Ethereum client, Geth. CPU mining will be possible but too inefficient to hold any value.
