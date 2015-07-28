@@ -1,3 +1,7 @@
+# Disclaimer 
+
+Safety caveats
+
 ## Security warnings
 
 * **You are responsible for your own computer security.** If your machine is compromised you **will** lose your ether, access to any contracts and maybe more.
@@ -10,7 +14,7 @@
 
 ## Legal warning: Disclaimer of Liabilites and Warranties
 
-# Short version 
+### Short version 
 
 * **The user expressly knows and agrees that the user is using the ethereum platform at the user’s sole risk.**
 * **The user represents that the user has an adequate understanding of the risks, usage and intricacies of cryptographic tokens and blockchain-based open source software, eth platform and eth.** 
