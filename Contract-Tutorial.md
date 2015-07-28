@@ -14,31 +14,31 @@ Now that you’ve mastered the basics of Ethereum, let’s move into your first 
 The Greeter is an intelligent digital entity that lives on the blockchain and is able to have conversations with anyone who interacts with it, based on its input. It might not be a talker, but it’s a great listener. Here is its code:
 
 ```js
-    contract mortal {
-        /* Define variable owner of the type address*/
-        address owner;
+contract mortal {
+    /* Define variable owner of the type address*/
+    address owner;
 
-        /* this function is executed at initialization and sets the owner of the contract */
-        function mortal() { owner = msg.sender; }
+    /* this function is executed at initialization and sets the owner of the contract */
+    function mortal() { owner = msg.sender; }
 
-        /* Function to recover the funds on the contract */
-        function kill() { if (msg.sender == owner) suicide(owner); }
+    /* Function to recover the funds on the contract */
+    function kill() { if (msg.sender == owner) suicide(owner); }
+}
+
+contract greeter is mortal {
+    /* define variable greeting of the type string */
+    string greeting;
+    
+    /* this runs when the contract is executed */
+    function greeter(string _greeting) public {
+        greeting = _greeting;
     }
 
-    contract greeter is mortal {
-        /* define variable greeting of the type string */
-        string greeting;
-        
-        /* this runs when the contract is executed */
-        function greeter(string _greeting) public {
-            greeting = _greeting;
-        }
-
-        /* main function */
-        function greet() constant returns (string) {
-            return greeting;
-        }
+    /* main function */
+    function greet() constant returns (string) {
+        return greeting;
     }
+}
 ```
 
 You'll notice that there are two different contracts in this code: _"mortal"_ and _"greeter"_.  This is because Solidity (the high level contract language we are using) has *inheritance*, meaning that one contract can inherit characteristics of another. This is very useful to simplify coding as common traits of contracts don't need to be rewritten every time, and all contracts can be written in smaller, more readable chunks. So by just declaring that _greeter is mortal_ you inherited all characteristics from the "mortal" contract and kept the greeter code simple and easy to read.
@@ -139,9 +139,17 @@ You have now compiled your code. Now you need to get it ready for deployment, th
     var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
     var greeter = greeterContract.new(_greeting,{from:web3.eth.accounts[0], data: greeterCompiled.greeter.code, gas: 1000000}, function(e, contract){
-        if (typeof contract.address != 'undefined') {
-            console.log("Contract mined! \naddress: " + contract.address);
+      if(!e) {
+
+        if(!contract.address) {
+          console.log("Contract transaction send: TransactionHash: " + contract.transactionHash " waiting to be mined...");
+
+        } else {
+          console.log("Contract mined! Address: " + contract.address);
+          console.log(contract);
         }
+
+      }
     })
 ```
 
@@ -275,8 +283,17 @@ Now let’s set up the contract, just like we did in the previous section. Chang
         data:tokenCompiled.token.code, 
         gas: 1000000
       }, function(e, contract){
-       console.log(e, contract);
-       console.log("Contract mined! \naddress: " + contract.address + "\ntransactionHash: " + contract.transactionHash);
+        if(!e) {
+
+          if(!contract.address) {
+            console.log("Contract transaction send: TransactionHash: " + contract.transactionHash " waiting to be mined...");
+
+          } else {
+            console.log("Contract mined! Address: " + contract.address);
+            console.log(contract);
+          }
+
+        }
     })
 
 #### Online Compiler
@@ -499,9 +516,17 @@ You know the drill: if you are using the solC compiler,[remove line breaks](http
         data:crowdsaleCompiled.Crowdsale.code, 
         gas: 1000000
       }, function(e, contract){
-       console.log(e, contract);
-       console.log("Contract mined! \naddress: " + contract.address + "\ntransactionHash: " + contract.transactionHash);
-    })
+        if(!e) {
+
+          if(!contract.address) {
+            console.log("Contract transaction send: TransactionHash: " + contract.transactionHash " waiting to be mined...");
+
+          } else {
+            console.log("Contract mined! Address: " + contract.address);
+            console.log(contract);
+          }
+
+        }    })
 
 **If you are using the _online compiler_ Copy the contract code to the [online solidity compiler](https://chriseth.github.io/cpp-ethereum/), and then grab the content of the box labeled **Geth Deploy**. Since you have already set the parameters, you don't need to change anything to that text, simply paste the resulting text on your geth window.**
 
@@ -753,9 +778,18 @@ With these default parameters anyone with any tokens can make a proposal on how 
           data:daoCompiled.Democracy.code, 
           gas: 3000000
         }, function(e, contract){
-         console.log(e, contract);
-         console.log("Contract mined! \naddress: " + contract.address + "\ntransactionHash: " + contract.transactionHash);
-      })
+          if(!e) {
+
+            if(!contract.address) {
+              console.log("Contract transaction send: TransactionHash: " + contract.transactionHash " waiting to be mined...");
+
+            } else {
+              console.log("Contract mined! Address: " + contract.address);
+              console.log(contract);
+            }
+
+          }      
+        })
 
 **If you are using the _online compiler_ Copy the contract code to the [online solidity compiler](https://chriseth.github.io/cpp-ethereum/), and then grab the content of the box labeled **Geth Deploy**. Since you have already set the parameters, you don't need to change anything to that text, simply paste the resulting text on your geth window.**
 
