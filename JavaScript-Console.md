@@ -62,11 +62,70 @@ Note that the other known limitation of Otto (namely the lack of timers) is take
 
 Since `ethereum.js` uses the [`bignumer.js`](https://github.com/MikeMcl/bignumber.js) library (MIT Expat Licence), it is also autoloded.
 
-# Timers
+## Timers
 
 In addition to the full functionality of JS (as per ECMA5), the ethereum JSRE is augmented with various timers. It implements `setInterval`, `clearInterval`, `setTimeout`, `clearTimeout` you may be used to using in browser windows. It also provides implementation for `admin.sleep(seconds)` and a block based timer, `admin.sleepBlocks(n)` which sleeps till the number of new blocks added is equal to or greater than `n`, think "wait for n confirmations". 
 
-# JavaScript Console API
+# Management APIs
+
+Beside the official [DApp API](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface the go ethereum node has support for additional management API's. These API's are offered using [JSON-RPC](http://www.jsonrpc.org/specification) and follow the same conventions as used in the DApp API. The go ethereum package comes with a console client which has support for all additional API's.
+
+# How to
+It is possible to specify the set of API's which are offered over an interface with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the `http` interface or `ipc` for an unix socket on unix or named pipe on Windows.
+
+For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3"` will
+* enable the admin, official DApp and miner API over the IPC interface
+* enable the eth and web3 API over the RPC interface
+
+Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable. By default geth enables all API's over the `ipc` interface and only the db,eth,net and web3 API's over the `rpc` interface.
+
+To determine which API's an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
+
+```
+echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
+```
+will give all enabled modules including the version number:
+```
+{  
+   "id":1,
+   "jsonrpc":"2.0",
+   "result":{  
+      "admin":"1.0",
+      "db":"1.0",
+      "debug":"1.0",
+      "eth":"1.0",
+      "miner":"1.0",
+      "net":"1.0",
+      "personal":"1.0",
+      "shh":"1.0",
+      "txpool":"1.0",
+      "web3":"1.0"
+   }
+}
+```
+
+## Integration
+These additional API's follow the same conventions as the official DApp API. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional API's. 
+
+The different functions are split into multiple smaller logically grouped API's. Examples are given for the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to a rpc request.
+
+**2 examples:**
+
+* Console: `miner.start()`
+
+* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | nc -U $datadir/geth.ipc`
+
+* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":74}' localhost:8545`
+
+With the number of THREADS as an arguments:
+
+* Console: `miner.start(4)`
+
+* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":1}' | nc -U $datadir/geth.ipc`
+
+* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
+
+## Management API Reference
 
 * [eth](#eth)
   * [sign](#ethsign)
