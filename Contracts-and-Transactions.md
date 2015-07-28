@@ -199,9 +199,9 @@ Also note that this step requires you to pay for execution. Your balance on the 
 The asynchronous way of doing the same looks like this:
 
 ```js
-MyContract.new([arg1, arg2, ...,]{from: primaryAccount, data: evmCode}, function(err, address) {
-  if (!err)
-    console.log(address); 
+MyContract.new([arg1, arg2, ...,]{from: primaryAccount, data: evmCode}, function(err, contract) {
+  if (!err && contract.address)
+    console.log(contract.address); 
 });
 ```
 
@@ -250,10 +250,10 @@ By using this scheme, it is sufficient to know a contract's address to look up t
 
 So if you are a conscientious contract creator, the steps are the following:
 
-0. Deploy the contract itself to the blockchain
-1. Get the contract info json file. 
-2. Deploy contract info json file to any url of your choice
-3. Register codehash ->content hash -> url
+1. Deploy the contract itself to the blockchain
+2. Get the contract info json file. 
+3. Deploy contract info json file to any url of your choice
+4. Register codehash ->content hash -> url
 
 The JS API makes this process very easy by providing helpers. Call [`admin.register`]() to extract info from the contract, write out its json serialisation in the given file, calculates the content hash of the file and finally registers this content hash to the contract's code hash.
 Once you deployed that file to any url, you can use [`admin.registerUrl`]() to register the url with your content hash on the blockchain as well. (Note that in case a fixed content addressed model is used as document store, the url-hint is no longer necessary.)
@@ -262,16 +262,19 @@ Once you deployed that file to any url, you can use [`admin.registerUrl`]() to r
 source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
 // compile with solc
 contract = eth.compile.solidity(source).test
-// send off the contract to the blockchain
-address = contract.new({from: primaryAccount, data: contract.code})
 // extracts info from contract, save the json serialisation in the given file, 
 contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
-// calculates the content hash and registers it with the code hash in `HashReg`
-// it uses address to send the transaction. 
-// returns the content hash that we use to register a url
-admin.register(primaryAccount, address, contenthash)
-// here you deploy ~/dapps/shared/contracts/test/info.json to a url
-admin.registerUrl(primaryAccount, hash, url)
+// send off the contract to the blockchain
+contract.new({from: primaryAccount, data: contract.code}, function(error, contract){
+  if(!error && contract.address) {
+    // calculates the content hash and registers it with the code hash in `HashReg`
+    // it uses address to send the transaction. 
+    // returns the content hash that we use to register a url
+    admin.register(primaryAccount, contract.address, contenthash)
+    // here you deploy ~/dapps/shared/contracts/test/info.json to a url
+    admin.registerUrl(primaryAccount, hash, url)
+  }
+});
 ```
 
 # Interacting with contracts
@@ -331,11 +334,14 @@ source = "contract test {
    }
 }"
 contract = eth.compile.solidity(source).test
-contractaddress = contract.new({from: primary, data: contract.code})
 contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
-admin.register(primary, contractaddress, contenthash)
-// put it up on your favourite oldworld site:
-admin.registerUrl(contentHash, "http://dapphub.com/test/info.json")
+contract.new({from: primary, data: contract.code}, function(error, contract){
+  if(!error && contract.address) {
+    admin.register(primary, contract.address, contenthash)
+    // put it up on your favourite oldworld site:
+    admin.registerUrl(contentHash, "http://dapphub.com/test/info.json")
+  }
+});
 ```
 
 Note that if we use content addressed storage system like swarm the second step is unnecessary, since the contenthash is (deterministically translates to) the unique address of the content itself.
