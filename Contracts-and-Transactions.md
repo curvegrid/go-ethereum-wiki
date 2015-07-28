@@ -42,7 +42,7 @@ Note that other languages also exist, notably [serpent](https://github.com/ether
 * [Dapps for beginners](https://dappsforbeginners.wordpress.com/)
 * [Tutorial 1](https://forum.ethereum.org/discussion/1634/tutorial-1-your-first-contract/p1)
 * [Tutorial 2](https://forum.ethereum.org/discussion/1635/tutorial-2-rainbow-coin)
-* [Tutorial 3 (JavaScript API for Ethereum)](https://forum.ethereum.org/discussion/1636/tutorial-3-introduction-to-the-javascript-api)
+* [Tutorial 3 (JavaScript API for Ethereum)](https://forum.ethereum.org/discussion/1636/tutorial-3-introduction-to-the-javascript-api) (Outdated)
 * [Solidity tutorial 1 by Eris Industries](https://eng.erisindustries.com/tutorials/2015/03/11/solidity-1/)
 * [Dapp tutorials by Andreas Olofsson (Eris Industries)](https://www.youtube.com/playlist?list=PL_kFomDrqPoZBu5uxd8OBGColQPYbuz3i)
 * [Eris Solidity resources](https://github.com/eris-ltd/solidity-resources)
