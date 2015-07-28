@@ -13,7 +13,7 @@ Now that you’ve mastered the basics of Ethereum, let’s move into your first 
 
 The Greeter is an intelligent digital entity that lives on the blockchain and is able to have conversations with anyone who interacts with it, based on its input. It might not be a talker, but it’s a great listener. Here is its code:
 
-
+```js
     contract mortal {
         /* Define variable owner of the type address*/
         address owner;
@@ -39,6 +39,7 @@ The Greeter is an intelligent digital entity that lives on the blockchain and is
             return greeting;
         }
     }
+```
 
 You'll notice that there are two different contracts in this code: _"mortal"_ and _"greeter"_.  This is because Solidity (the high level contract language we are using) has *inheritance*, meaning that one contract can inherit characteristics of another. This is very useful to simplify coding as common traits of contracts don't need to be rewritten every time, and all contracts can be written in smaller, more readable chunks. So by just declaring that _greeter is mortal_ you inherited all characteristics from the "mortal" contract and kept the greeter code simple and easy to read.
 
@@ -50,11 +51,15 @@ Before you are able to Deploy it though, you'll need two things: the compiled co
 
 The first you can get by using a compiler. You should have a solidity compiler built in on your geth console. To test it, use this command:
 
+```js
     eth.getCompilers()
+```
 
 If you have it installed, it should output something like this:
 
+```js
     ['Solidity' ]
+```
 
 If instead the command returns an error, then you need to install it. 
 
@@ -121,12 +126,15 @@ If you now have solC installed, then congratulations, you can keep reading. If y
 
 If you have the compiler installed, you need now reformat your contract by removing line-breaks so it fits into a string variable [(there are some online tools that will do this)](http://www.textfixer.com/tools/remove-line-breaks.php):
 
+```js
     var greeterSource = 'contract mortal { address owner; function mortal() { owner = msg.sender; } function kill() { if (msg.sender == owner) suicide(owner); } } contract greeter is mortal { string greeting; function greeter(string _greeting) public { greeting = _greeting; } function greet() constant returns (string) { return greeting; } }'
 
     var greeterCompiled = web3.eth.compile.solidity(greeterSource)
+```
 
 You have now compiled your code. Now you need to get it ready for deployment, this includes setting some variables up, like what is your greeting. Edit the first line below to something more interesting than 'Hello World!" and execute these commands:
 
+```js
     var _greeting = "Hello World!"
     var greeterContract = web3.eth.contract(greeterCompiled.greeter.info.abiDefinition);
 
@@ -135,13 +143,16 @@ You have now compiled your code. Now you need to get it ready for deployment, th
             console.log("Contract mined! \naddress: " + contract.address);
         }
     })
+```
 
 #### Using the online compiler
 
 If you don't have solC installed, you can simply use the online compiler. Copy the source code above to the [online solidity compiler](https://chriseth.github.io/cpp-ethereum/) and then your compiled code should appear on the left pane. Copy the code on the box labeled **Geth deploy** to a text file. Now change the first line to your greeting:
 
+```js
     var _greeting = "Hello World!"
- 
+```
+
 Now you can paste the resulting text on your geth window. Wait up to thirty seconds and you'll see a message like this:
 
     Contract mined! address: 0xdaa24d02bad7e9d6a80106db164bad9399a0423e 
