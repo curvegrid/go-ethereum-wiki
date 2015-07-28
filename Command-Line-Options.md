@@ -1,4 +1,4 @@
-# CLI client
+# Command line options
 
 ```
 eth [global options] command [command options] [arguments...]
@@ -147,7 +147,7 @@ geth --datadir /tmp/eth/42 --port 30342  js <(echo 'console.log(admin.nodeInfo()
 geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlock primary --minerthreads 4 --mine 2>> /tmp/eth/42.log
 ```
 
-# Attach
+### Attach
 Attach a console to a running geth instance. By default this happens over IPC over the default IPC endpoint but when necessary a custom endpoint could be specified:
 
 ```
