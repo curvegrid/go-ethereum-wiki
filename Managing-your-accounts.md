@@ -96,7 +96,7 @@ Repeat Passphrase:
 You supply a plaintext password file as argument to the `--password` flag. The data in the file consists of the raw characters of the password, followed by a single newline.
 
 **Note**: 
-Supplying the password directly as part of the command line is not encouraged, but you can always use shell trickery to get round this restriction.
+Supplying the password directly as part of the command line is not recommended, but you can always use shell trickery to get round this restriction.
 
 ```
 $ geth --password /path/to/password account new
@@ -219,7 +219,7 @@ From the command line, call the CLI with:
 
 ```
 $ geth account list
-Primary #0: {d1ade25ccd3d550a7eb532ac759cac7be09c2719}
+Account #0: {d1ade25ccd3d550a7eb532ac759cac7be09c2719}
 Account #1: {da65665fc30803cb1fb7e6d86691e20b1826dee0}
 Account #2: {e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32}
 Account #3: {f4dd5c3794f1fd0cdc0327a83aa472609c806e99}
