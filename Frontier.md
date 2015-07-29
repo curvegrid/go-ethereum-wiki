@@ -1,6 +1,6 @@
 **FRONTIER IS COMING**
 
-* [Frontier launch final steps](https://blog.etherelymum.org/2015/07/27/final-steps/)thereum/go-ethereum/milestones/Frontier).
+* [Frontier launch final steps](https://blog.ethereum.org/2015/07/27/final-steps/)
 * [Etherchain API](https://etherchain.org/frontier) look out for 
 * [Olympic network stats](https://stats.ethdev.com/)
 
