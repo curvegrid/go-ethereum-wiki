@@ -1,6 +1,9 @@
 **FRONTIER IS COMING**
 
-Watch this: if issues for [Milestone Frontier](https://github.com/ethereum/go-ethereum/milestones) are not 100% closed, we are not ready for release. Issues are tracked [on Github](https://github.com/ethereum/go-ethereum/milestones/Frontier).
+* [Frontier launch final steps](https://blog.etherelymum.org/2015/07/27/final-steps/)thereum/go-ethereum/milestones/Frontier).
+* [Etherchain API](https://etherchain.org/frontier) look out for 
+* [Olympic network stats](https://stats.ethdev.com/)
+
 
 # Ethereum Frontier Release
 
@@ -77,6 +80,7 @@ During the last couple of months, the Ethereum test network was pushed to its li
 During the Olympic phase there were a number of rewards for various achievements including mining prowess. These rewards will not be part of the Frontier Genesis block, but instead will be handed out by a Foundation bot during the weeks following the release.
 
 Resources: 
+- [Frontier launch final steps](https://blog.ethereum.org/2015/07/27/final-steps/)
 - [Frontier is coming](https://blog.ethereum.org/2015/07/22/frontier-is-coming-what-to-expect-and-how-to-prepare/) blogpost by Stephan Tual announcing the launch. 
 - [The frontier website](https://frontier.ethereum.org)
 - [Original announcement of the release scheme](https://blog.ethereum.org/2015/03/03/ethereum-launch-process) by Vinay Gupta
