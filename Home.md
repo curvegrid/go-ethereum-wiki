@@ -1,3 +1,9 @@
+
+* [Frontier launch final steps](https://blog.etherelymum.org/2015/07/27/final-steps/)thereum/go-ethereum/milestones/Frontier).
+* [Etherchain API](https://etherchain.org/frontier) look out for 
+* [Olympic network stats](https://stats.ethdev.com/)
+* [Frontier Gitbook, Ethereum User Guide and reference manual](http://ethereum.gitbooks.io/frontier-guide/content/)
+
 This is the Wiki for the Ethereum Go implementation. For generic Ethereum-related information (whitepaper, yellow paper, protocol and interface specs, APIs, DAPP development guides, etc) see the [Ethereum main wiki](https://github.com/ethereum/wiki/wiki). 
 
 
