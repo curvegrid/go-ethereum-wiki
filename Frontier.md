@@ -1,7 +1,7 @@
 **FRONTIER IS COMING**
 
 * [Frontier launch final steps](https://blog.ethereum.org/2015/07/27/final-steps/)
-* [Etherchain API](https://etherchain.org/frontier) look out for 
+* [Etherchain API](https://etherchain.org/frontier) look out for block #1028201
 * [Olympic network stats](https://stats.ethdev.com/)
 
 
