@@ -244,7 +244,7 @@ The idea is that
 * anyone can find out what the `url` is only knowing the contracts address
 
 These requirements are achieved very simply by using a 2 step blockchain registry. The first step registers the contract code (hash) with a content hash in a contract called `HashReg`. The second step registers a url with the content hash in the `UrlHint` contract. 
-These [simple registry contracts](https://github.com/ethereum/go-ethereum/blob/develop/common/resolver/contracts.go) will be part of the frontier proposition.
+These [simple registry contracts](https://github.com/ethereum/go-ethereum/blob/develop/common/registrar/contracts.go) will be part of the frontier proposition.
 
 By using this scheme, it is sufficient to know a contract's address to look up the url and fetch the actual contract metadata info bundle. Read on to learn why this is good.
 
