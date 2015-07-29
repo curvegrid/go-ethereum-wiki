@@ -262,10 +262,12 @@ Once you deployed that file to any url, you can use [`admin.registerUrl`]() to r
 source = "contract test { function multiply(uint a) returns(uint d) { return a * 7; } }"
 // compile with solc
 contract = eth.compile.solidity(source).test
+// create contract object
+var MyContract = eth.contract(contract.info.abiDefinition)
 // extracts info from contract, save the json serialisation in the given file, 
 contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
 // send off the contract to the blockchain
-contract.new({from: primaryAccount, data: contract.code}, function(error, contract){
+MyContract.new({from: primaryAccount, data: contract.code}, function(error, contract){
   if(!error && contract.address) {
     // calculates the content hash and registers it with the code hash in `HashReg`
     // it uses address to send the transaction. 
@@ -334,8 +336,9 @@ source = "contract test {
    }
 }"
 contract = eth.compile.solidity(source).test
+MyContract = eth.contract(contract.info.abiDefinition)
 contenthash = admin.saveInfo(contract.info, "~/dapps/shared/contracts/test/info.json")
-contract.new({from: primary, data: contract.code}, function(error, contract){
+MyContract.new({from: primary, data: contract.code}, function(error, contract){
   if(!error && contract.address) {
     admin.register(primary, contract.address, contenthash)
     // put it up on your favourite oldworld site:
