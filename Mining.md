@@ -224,7 +224,7 @@ To set up GPU mining you need a coinbase account. It can be an account created l
 
 ```
 geth account new
-geth --rpccorsdomain localhost 2>> geth.log &
+geth --rpc --rpccorsdomain localhost 2>> geth.log &
 ethminer -G  // -G for GPU, -M for benchmark
 tail -f geth.log
 ```
