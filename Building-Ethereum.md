@@ -13,7 +13,7 @@ your platform.
 
 You can also use a one-line script install Geth. Open a command line or terminal tool (if you are unsure how to do this, consider waiting for a more user friendly release) and paste the command below:
 
-    bash <(curl https://install-geth.ethereum.org)  
+    bash <(curl -L https://install-geth.ethereum.org)  
 
 This script will detect your OS and will attempt to install the ethereum CLI. For more options including package managers, check the OS-specific subsections.
 
