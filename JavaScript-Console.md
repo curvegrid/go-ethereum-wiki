@@ -712,7 +712,7 @@ Returns the current hash rate in H/s.
 
     miner.setExtra("extra data")
 
-**Sets** the extra data for the block when finding a block. Limited to 1024 bytes.
+**Sets** the extra data for the block when finding a block. Limited to 32 bytes.
 
 ***
 
