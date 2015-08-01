@@ -194,7 +194,7 @@ The `personal` api exposes method for personal  the methods to manage, control o
 ***
 
 #### personal.listAccounts
-    personal.listAccount
+    personal.listAccounts
 
 List all accounts
 
