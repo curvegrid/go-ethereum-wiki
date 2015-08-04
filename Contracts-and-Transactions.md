@@ -2,11 +2,11 @@
 
 There are two types of accounts in Ethereum state:
 * Normal or externally controlled accounts and
-* contracts, i.e., sinppets of code, think a class.
+* contracts, i.e., snippets of code, think a class.
 
 Both types of accounts have an ether balance.
 
-Transactions can be fired from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on the ethereum block chain is set in motion by transactions fired from externally controlled accounts.
+Transactions can be fired from both types of accounts, though contracts only fire transactions in response to other transactions that they have received. Therefore, all action on the ethereum block chain is set in motion by transactions fired from externally-controlled accounts.
 
 The simplest transactions are ether transfer transactions. But before we go into that you should read up on [accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts) and perhaps on [mining](https://github.com/ethereum/go-ethereum/wiki/Mining).
 
