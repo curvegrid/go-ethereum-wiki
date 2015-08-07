@@ -34,7 +34,7 @@ Install latest distribution of Go (v1.4) if you don't have it already:
 Building `geth` requires some external libraries to be installed:
 
 ```shell
-sudo apt-get install -y build-essential libgmp3-dev
+sudo apt-get install -y build-essential libgmp3-dev golang
 ```
 
 Finally, build the `geth` program using the following command.
