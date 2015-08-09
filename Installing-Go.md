@@ -18,11 +18,11 @@ If you are getting 'error 2' when building Geth or 'expected target' errors, it'
 #### Other distros
 Download the latest distribution
 
-`curl -O https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz`
+`curl -O https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz`
 
 Unpack it to the `/usr/local` (might require sudo)
 
-`tar -C /usr/local -xzf go1.4.1.linux-amd64.tar.gz`
+`tar -C /usr/local -xzf go1.4.2.linux-amd64.tar.gz`
 
 #### Set GOPATH and PATH
 
