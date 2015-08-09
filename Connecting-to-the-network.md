@@ -103,6 +103,32 @@ miners and will easily generate a lot of test ether to play around
 
 	geth -—networkid="12345" console
 
+It is also possible to run geth with a custom genesis block from a JSON file
+by supplying the `--genesis` flag. The genesis JSON file should have the following
+format:
+
+```js
+{
+  "alloc": {
+    "dbdbdb2cbd23b783741e8d7fcf51e459b497e4a6": { 
+        "balance": "1606938044258990275541962092341162602522202993782792835301376"
+    },
+    "e6716f9544a56c530d868e4bfbacb172315bdead": {
+      "balance": "1606938044258990275541962092341162602522202993782792835301376"
+    },
+    ...
+  },
+  "nonce": "0x000000000000002a",
+  "difficulty": "0x020000",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "timestamp": "0x00",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "0x",
+  "gasLimit": "0x2fefd8"
+}
+``` 
+
 ## Static nodes
 
 Geth also supports a feature called static nodes if you have certain
