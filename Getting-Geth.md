@@ -1,6 +1,6 @@
 # Getting Geth
 
-The Frontier tool is called Geth (the old english third person singular conjugation of "to go". Quite appropriate given geth is written in [Go](https://golang.org/). Geth is a multipurpose command line tool that runs a full Ethereum node implemented in Go. It offers three interfaces: the [command line subcommands and options](../Command-Line-Options), a Json-rpc server and an interactive console.  
+The Frontier tool is called Geth (the old english third person singular conjugation of "to go". Quite appropriate given geth is written in [Go](https://golang.org/). Geth is a multipurpose command line tool that runs a full Ethereum node implemented in Go. It offers three interfaces: the [command line subcommands and options](./Command-Line-Options), a Json-rpc server and an interactive console.  
 
 In order to install Geth, open a command line or terminal tool (if you are unsure how to do this, consider waiting for a more user friendly release) and paste the command below:
 
