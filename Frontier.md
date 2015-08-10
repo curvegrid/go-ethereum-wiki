@@ -67,7 +67,7 @@ This process is centralized and will only run for the duration of Frontier. It h
 
 You probably are already familiar with our network stats monitor, https://stats.ethdev.com/. It gives a quick overview of the health of the network, block resolution time and Gas statistics. Remember that participation in the stats page is voluntary, and nodes have to add themselves before they appear on the panel. See details on [network monitoring](https://github.com/ethereum/wiki/wiki/Network-Status)
 
-In addition to the stats page, we will have a status page at https://status.etheruem.org/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
+In addition to the stats page, we will have a status page at https://status.ethereum.org/ (no link as the site is not live yet) which will gives a concise overview of any issue that might be affecting Frontier. Use it as your first port of call if you think something might not be right.
 
 Finally, if any of the clients receive an invalid block, they will refuse to process it send it to the bad block website (AKA ‘Sentinel’). This could mean a bug, or something more serious, such as a fork. Either way, this process will alert our developers to potential issues on the network. The website itself is public and available at https://badblocks.ethdev.com (currently operating on the testnet).
 
