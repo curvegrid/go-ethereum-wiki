@@ -100,7 +100,7 @@ See integration testing information on the [Testing wiki page](https://github.co
 
 ### Metrics and monitoring
 
-`geth` can do node behaviour monitoring, aggregation and show perfomance metric charts. 
+`geth` can do node behaviour monitoring, aggregation and show performance metric charts. 
 Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring)
 
 ### Add and update dependencies 
