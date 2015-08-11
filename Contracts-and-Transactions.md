@@ -412,7 +412,7 @@ In order to test contracts and transactions without real-word consequences, you 
 Starting your `geth` with in VM debug mode with profiling and highest logging verbosity level is recommended:
 
 ```js
-geth --datadir ~/dapps/testing/00/ --port 30310 --rcpport 8110 --networkid 4567890 --nodiscover --maxpeers 0 --vmdebug --verbosity 6 --pprof --pprofport 6110 console 2>> ~/dapp/testint/00/00.log
+geth --datadir ~/dapps/testing/00/ --port 30310 --rpcport 8110 --networkid 4567890 --nodiscover --maxpeers 0 --vmdebug --verbosity 6 --pprof --pprofport 6110 console 2>> ~/dapp/testint/00/00.log
 ```
 
 Before you can submit any transactions, you need mine some ether on your private chain and for that you need an account. See the sections on [Mining](https://github.com/ethereum/go-ethereum/wiki/Mining) and [Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-Your-Accounts)
