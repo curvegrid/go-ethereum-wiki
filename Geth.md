@@ -85,6 +85,8 @@ IRC Freenode channels:
 * `#ethereum-dev`: for development specific questions and discussions
 * `##ethereum`: for offtopic and banter
 * `#ethereumjs`: for questions related to web3.js and node-ethereum
+* `#ethereum-markets`: Trading 
+* `#ethereum-mining` Mining
 * `#dappdevs`: Dapp developers channel
 * `#ethdev`: buildserver etc
 
