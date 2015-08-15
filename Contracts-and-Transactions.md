@@ -288,7 +288,7 @@ var Multiply7 = eth.contract(contract.info.abiDefinition);
 var myMultiply7 = Multiply7.at(address);
 ```
 
-Now all the function calls specified in the abi are made available on the contract instance. You can just call those methods on the contract instance and chain `sendTransaction({from: address})` or `call()` to it. The difference between the two is that `call` performs a "dry run" locally, on your computer, while `sendTransaction` would actually submit your transaction for inclusion in the block chain and the results of its execution will eventually become part of the global consensus. In other words, use `call`, if you are interested only in the return value and use `sendTransaction` if you only care about "side effects" on the state of the contract.
+Now all the function calls specified in the abi are made available on the contract instance. You can just call those methods on the contract instance and chain `sendTransaction(3, {from: address})` or `call(3)` to it. The difference between the two is that `call` performs a "dry run" locally, on your computer, while `sendTransaction` would actually submit your transaction for inclusion in the block chain and the results of its execution will eventually become part of the global consensus. In other words, use `call`, if you are interested only in the return value and use `sendTransaction` if you only care about "side effects" on the state of the contract.
 
 In the example above, there are no side effects, therefore `sendTransaction` only burns gas and increases the entropy of the universe. All "useful" functionality is exposed by `call`:
 
@@ -377,7 +377,7 @@ var myMultiply7 = Multiply7.at(address);
 And now try to send an actual transaction:
 
 ```js
-> myMultiply7.multiply.sendTransaction(6)
+> myMultiply7.multiply.sendTransaction(6, {from: eth.accounts[0]})
 NatSpec: Will multiply 6 by 7. 
 Confirm? [y/n] y
 >
