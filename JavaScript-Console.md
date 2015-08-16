@@ -185,6 +185,7 @@ With the number of THREADS as an arguments:
 * [eth](#eth)
 * [shh](#shh)
 * [db](#db)
+* [inspect](#inspect)
 
 ***
 
@@ -972,5 +973,11 @@ The `shh` is a shortcut for [web3.shh](https://github.com/ethereum/wiki/wiki/Jav
 
 #### db
 The `db` is a shortcut for [web3.db](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3db).
+
+***
+
+
+#### inspect
+The `inspect` method pretty prints the given value (supports colours)
 
 ***
