@@ -1,7 +1,7 @@
 # Command line options
 
 ```
-eth [global options] command [command options] [arguments...]
+geth [global options] command [command options] [arguments...]
 
 VERSION:
    1.0.0
