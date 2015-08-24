@@ -579,7 +579,7 @@ source = "contract test {\n" +
 contract = eth.compile.solidity(source).test;
 txhash = eth.sendTransaction({from: primary, data: contract.code });
 // after it is uncluded
-contractaddress = eth.getTxReceipt(txhash);
+contractaddress = eth.getTransactionReceipt(txhash);
 filename = "/tmp/info.json";
 contenthash = admin.saveInfo(contract.info, filename);
 admin.register(primary, contractaddress, contenthash);
@@ -610,7 +610,7 @@ source = "contract test {\n" +
 contract = eth.compile.solidity(source).test;
 txhash = eth.sendTransaction({from: primary, data: contract.code });
 // after it is uncluded
-contractaddress = eth.getTxReceipt(txhash);
+contractaddress = eth.getTransactionReceipt(txhash);
 filename = "/tmp/info.json";
 contenthash = admin.saveInfo(contract.info, filename);
 admin.register(primary, contractaddress, contenthash);
