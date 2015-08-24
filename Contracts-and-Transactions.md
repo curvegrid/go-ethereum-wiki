@@ -465,7 +465,7 @@ If you submitted contract creation transaction, you can check if the desired cod
 ```js
 txhash = eth.sendTansaction({from:primary, data: code})
 //... mining
-contractaddress = eth.getTxReceipt(txhash);
+contractaddress = eth.getTransactionReceipt(txhash);
 eth.getCode(contractaddress)
 ```
 
