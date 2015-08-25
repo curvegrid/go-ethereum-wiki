@@ -58,26 +58,26 @@ With the number of THREADS as an arguments:
 
 ## Admin
 Provides various functions for managing a geth node
-* [addPeer](#admin_addpeer)
+* [addPeer](#admin_addPeer)
 * [peers] (#admin_peers)
-* [importChain](#admin_importchain)
-* [exportChain](#admin_exportchain)
+* [importChain](#admin_importChain)
+* [exportChain](#admin_exportChain)
 * [verbosity](#admin_verbosity)
-* [setSolc](#admin_setsolc)
-* [startRPC](#admin_startrpc)
-* [stopRPC](#admin_stoprpc)
-* [chainSyncStatus](#admin_chainsyncstatus)
+* [setSolc](#admin_setColc)
+* [startRPC](#admin_startRPC)
+* [stopRPC](#admin_stopRPC)
+* [chainSyncStatus](#admin_chainSyncStatus)
 
 ## Db
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
 ## Debug
-* [dumpBlock](#debug_dumpblock)
-* [getBlockRlp] (#debug_getblockrlp)
-* [printBlock](#debug_printblock)
-* [processBlock](#debug_processblock)
-* [seedHash](#debug_seedhash)
-* [setHead](#debug_sethead)
+* [dumpBlock](#debug_dumpBlock)
+* [getBlockRlp] (#debug_getBlockRlp)
+* [printBlock](#debug_printBlock)
+* [processBlock](#debug_processBlock)
+* [seedHash](#debug_seedHash)
+* [setHead](#debug_setHead)
 
 ## Eth
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
@@ -87,23 +87,23 @@ Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wi
 * [start](#miner_start)
 * [stop](#miner_stop)
 * [hashrate](#miner_hashrate)
-* [setExtra](#miner_setextra)
-* [setGasPrice](#miner_setgasprice)
-* [startAutoDAG](#miner_startautodag)
-* [stopAutoDAG](#miner_stopautodag)
-* [makeDAG](#miner_makedag)
+* [setExtra](#miner_setExtra)
+* [setGasPrice](#miner_setGasPrice)
+* [startAutoDAG](#miner_startAutoDAG)
+* [stopAutoDAG](#miner_stopAutoDAG)
+* [makeDAG](#miner_makeDAG)
 
 ## Net
 Network related functions
-* [peerCount](#net_peercount)
+* [peerCount](#net_peerCount)
 * [listening](#net_listening)
 
 ## Personal
 Support for account management.
-* [listAccounts](#personal_listaccounts)
-* [newAccount](#personal_newaccount)
-* [deleteAccount](#personal_deleteaccount)
-* [unlockAccount](#personal_unlockaccount)
+* [listAccounts](#personal_listAccounts)
+* [newAccount](#personal_newAccount)
+* [deleteAccount](#personal_deleteAccount)
+* [unlockAccount](#personal_unlockAccount)
 
 ## Txpool
 Gives insight in the transaction pool
@@ -112,7 +112,7 @@ Gives insight in the transaction pool
 ## Web3
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
 
-### admin_addpeer
+### admin_addPeer
 Add peer to node
 
 #### Parameters
@@ -132,7 +132,7 @@ This property will show all connected peers.
 `admin.peers`
 ***
 
-### admin_importchain
+### admin_importChain
 Import an exported chain from file into node. This only works if no chain already exists: it does not delete any existing data.
 
 #### Parameters
@@ -145,7 +145,7 @@ Import an exported chain from file into node. This only works if no chain alread
 `admin.importChain("/tmp/chain.txt")`
 ***
 
-### admin_exportchain
+### admin_exportChain
 Export the blockchain to a file
 
 #### Parameters
@@ -184,8 +184,8 @@ Set the path to the solidity compiler for `eth.compileSolidity`.
 `admin.setSolc("/tmp/solc")`
 ***
 
-### admin_startrpc
-Start the http RPC interface
+### admin_startRPC
+Start the HTTP RPC interface
 
 #### Parameters
 * `ListenAddress`, open listener on this host
@@ -200,8 +200,8 @@ Start the http RPC interface
 `admin.startRPC("127.0.0.1", 8545, "*", "eth,net,web3")`
 ***
 
-### admin_stoprpc
-Stop the http RPC interface
+### admin_stopRPC
+Stop the HTTP RPC interface
 
 #### Return
 `boolean` indication if the interface was stopped
@@ -234,7 +234,7 @@ The blocksAvailable, blocks which have not been downloaded
 
 
 
-### debug_dumpblock
+### debug_dumpBlock
 Dump block
 
 #### Parameters
@@ -247,7 +247,7 @@ Dump block
 `debug.dumpBlock(0)`
 ***
 
-### debug_getblockrlp
+### debug_getBlockRlp
 Get RLP encoded block
 
 #### Parameters
@@ -260,7 +260,7 @@ Get RLP encoded block
 `debug.getBlockRlp(0)`
 ***
 
-### debug_printblock
+### debug_printBlock
 Pretty print block
 
 #### Parameters
@@ -273,7 +273,7 @@ Pretty print block
 `debug.printBlock(0)`
 ***
 
-### debug_processblock
+### debug_processBlock
 Reprocess a block
 
 #### Parameters
@@ -288,7 +288,7 @@ Reprocess a block
 ***
 
 
-### debug_seedhash
+### debug_seedHash
 Block seed hash
 
 #### Parameters
@@ -303,7 +303,7 @@ Block seed hash
 ***
 
 
-### debug_sethead
+### debug_setHead
 Rewind the chain to a specific block
 
 #### Parameters
@@ -441,7 +441,7 @@ none
 
 ***
 
-### personal_listaccounts
+### personal_listAccounts
 List all accounts
 
 #### Parameters
@@ -455,7 +455,7 @@ none
 
 ***
 
-### personal_newaccount
+### personal_newAccount
 Create a new account
 
 #### Parameters
@@ -469,7 +469,7 @@ Create a new account
 
 ***
 
-### personal_deleteaccount
+### personal_deleteAccount
 Delete an account
 
 #### Parameters
@@ -485,7 +485,7 @@ Delete an account
 
 ***
 
-### personal_unlockaccount
+### personal_unlockAccount
 Unlock an account
 
 #### Parameters
