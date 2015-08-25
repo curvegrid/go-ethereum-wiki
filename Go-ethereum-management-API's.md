@@ -491,7 +491,7 @@ Unlock an account
 #### Parameters
 `string`, address of the account to delete
 
-`string`, passphrase of the account to delete
+`string`, passphrase of the account to delete (optional in console, user will be prompted)
 
 `integer`, unlock account for duration seconds (optional)
 
