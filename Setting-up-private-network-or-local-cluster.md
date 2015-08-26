@@ -9,10 +9,11 @@ In order to run multiple ethereum nodes locally, you have to make sure:
 - each instance has a separate data directory
 - each instance runs on a different port (both eth and rpc)
 - the instances know about each other
+- on Windows the ipc interface is either disabled or unique for each instance, in these instructions the ipc interface is disabled
 
 You start the first node (let's make port explicit)
 ```bash
-geth --datadir="/tmp/eth/60/01" -verbosity 6 --port 30301 --rpcport 8101 console 2>> /tmp/eth/60/01.log
+geth --datadir="/tmp/eth/60/01" -verbosity 6 --ipcdisable --port 30301 --rpcport 8101 console 2>> /tmp/eth/60/01.log
 ```
 
 We started the node with the console, so that we can grab the enode for instance:
@@ -35,7 +36,7 @@ If your peers are not on the local network, you need to know your external IP ad
 Now you can launch a second node with:
 
 ```bash
-geth --datadir="/tmp/eth/60/02" --verbosity 6 --port 30302 --rpcport 8102 console 2>> /tmp/eth/60/02.log 
+geth --datadir="/tmp/eth/60/02" --verbosity 6 --ipcdisable --port 30302 --rpcport 8102 console 2>> /tmp/eth/60/02.log 
 ```
 
 You can test the connection  by typing in geth console:
