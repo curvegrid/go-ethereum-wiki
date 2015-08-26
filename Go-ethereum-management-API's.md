@@ -102,7 +102,6 @@ Network related functions
 Support for account management.
 * [listAccounts](#personal_listAccounts)
 * [newAccount](#personal_newAccount)
-* [deleteAccount](#personal_deleteAccount)
 * [unlockAccount](#personal_unlockAccount)
 
 ## Txpool
@@ -466,22 +465,6 @@ Create a new account
 
 #### Example
 ` personal.newAccount("mypasswd")`
-
-***
-
-### personal_deleteAccount
-Delete an account
-
-#### Parameters
-`string`, address of the account to delete
-
-`string`, passphrase of the account to delete
-
-#### Return
-`boolean` indication if the account was deleted
-
-#### Example
-` personal.deleteAccount(eth.coinbase, "mypasswd")`
 
 ***
 
