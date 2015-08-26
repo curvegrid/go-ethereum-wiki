@@ -33,7 +33,7 @@ Geth's blockchain and state databases can be removed with:
 geth removedb
 ```
 
-This is useful for deleting an old chain and sync'ing to a new one.
+This is useful for deleting an old chain and sync'ing to a new one. It only affects data directories that can be re-created on synchronisation and does not touch the keystore.
 
 ## Blockchain import/export
 
