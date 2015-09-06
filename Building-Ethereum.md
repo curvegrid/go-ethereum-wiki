@@ -11,6 +11,7 @@ your platform.
   * [Arch](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Arch)
   * [FreeBSD](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-FreeBSD)
 * [Setup for Raspberry Pi](https://github.com/ethereum/wiki/wiki/Raspberry-Pi-instructions)
+ *  [ARM](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-ARM)
 * [Usage instructions for Docker](https://github.com/ethereum/go-ethereum/wiki/Running-in-Docker)
 
 You can also use a one-line script install Geth. Open a command line or terminal tool (if you are unsure how to do this, consider waiting for a more user friendly release) and paste the command below:
