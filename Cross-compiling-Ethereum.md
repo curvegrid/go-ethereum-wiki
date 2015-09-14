@@ -51,13 +51,15 @@ compile itself and verifying that all cross compilations succeeded or not.
     ...
 
     $ ls -al
-    -rwxr-xr-x 1 root     root  2003880 May 12 20:56 xgo-darwin-386
-    -rwxr-xr-x 1 root     root  2496768 May 12 20:56 xgo-darwin-amd64
-    -rwxr-xr-x 1 root     root  2030416 May 12 20:56 xgo-linux-386
-    -rwxr-xr-x 1 root     root  2524536 May 12 20:56 xgo-linux-amd64
-    -rwxr-xr-x 1 root     root  2082648 May 12 20:56 xgo-linux-arm
-    -rwxr-xr-x 1 root     root  2176000 May 12 20:56 xgo-windows-386.exe
-    -rwxr-xr-x 1 root     root  2686976 May 12 20:56 xgo-windows-amd64.exe
+    -rwxr-xr-x  1 root     root      2792436 Sep 14 16:45 xgo-android-21-arm
+    -rwxr-xr-x  1 root     root      2353212 Sep 14 16:45 xgo-darwin-386
+    -rwxr-xr-x  1 root     root      2906128 Sep 14 16:45 xgo-darwin-amd64
+    -rwxr-xr-x  1 root     root      2388288 Sep 14 16:45 xgo-linux-386
+    -rwxr-xr-x  1 root     root      2960560 Sep 14 16:45 xgo-linux-amd64
+    -rwxr-xr-x  1 root     root      2437864 Sep 14 16:45 xgo-linux-arm
+    -rwxr-xr-x  1 root     root      2551808 Sep 14 16:45 xgo-windows-386.exe
+    -rwxr-xr-x  1 root     root      3130368 Sep 14 16:45 xgo-windows-amd64.exe
+
 
 ## Building Ethereum
 
@@ -114,14 +116,19 @@ instead of the upstream one. This can be done via the `--remote` flag:
           --branch=rpi-staging                                      \
           github.com/ethereum/go-ethereum
 
+By default `xgo` builds binaries for all supported platforms and architectures,
+with Android binaries defaulting to the highest released Android NDK platform.
+To limit the build targets or compile to a different Android platform, use the
+`--targets` CLI parameter.
+
+    $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
+          --pkg=cmd/geth                                            \
+          --targets=linux/arm,windows/*,android-16/*                \
+          github.com/ethereum/go-ethereum
+
 ### Cross compiler notes
 
 Currently `xgo` works with public repositories and import paths only. This means
 that in order to cross compile your local modifications to different platforms,
 you first must push it to a publicly fetchable URL (e.g. your GitHub fork of the
 project).
-
-Currently `xgo` does not feature a way to specify a single target platform for
-which to build to, and rather will cross compile to all supported architectures
-and operating systems. This may change in a future release, but for now it's good
-to be aware of.
