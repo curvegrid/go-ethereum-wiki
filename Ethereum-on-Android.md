@@ -25,7 +25,7 @@ To push a native binary onto an Android device, you'll need an Android SDK insta
 You can list the available devices via:
 
 ```
-$ ./adb devices
+$ adb devices
 List of devices attached
 0149CBF30201400E	device
 ```
@@ -33,14 +33,14 @@ List of devices attached
 Deploying the binary to an Android device can be done in two steps. First copy the binary into the non-executable `sdcard` filesystem on the device. You may be asked the first time by the device to grant developer permission (also developer mode should be enabled on the devices prior).
 
 ```
-$ ./adb push $PATH_TO_BINARY/geth-android-16-arm /sdcard/
+$ adb push $PATH_TO_BINARY/geth-android-16-arm /sdcard/
 1984 KB/s (23213348 bytes in 11.421s)
 ```
 
 Then the binary needs to be moved to a file system with executable permissions, and said permissions need to be granted. On an unrooted phone the following path should be accessible with USB developer options.
 
 ```
-$ ./adb shell
+$ adb shell
 $ cp /sdcard/geth-android-16-arm /data/local/tmp/geth
 $ cd /data/local/tmp
 $ chmod 751 geth
