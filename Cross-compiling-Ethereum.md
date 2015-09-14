@@ -78,13 +78,15 @@ Injecting the GNU Arithmetic Library dependency and selecting `geth` would be:
     ...
 
     $ ls -al
-    -rwxr-xr-x 1 root     root  12946188 May 12 21:07 geth-darwin-386
-    -rwxr-xr-x 1 root     root  15407084 May 12 21:07 geth-darwin-amd64
-    -rwxr-xr-x 1 root     root  17611290 May 12 21:07 geth-linux-386
-    -rwxr-xr-x 1 root     root  20780686 May 12 21:07 geth-linux-amd64
-    -rwxr-xr-x 1 root     root  16946493 May 12 21:07 geth-linux-arm
-    -rwxr-xr-x 1 root     root  17418752 May 12 21:07 geth-windows-386.exe
-    -rwxr-xr-x 1 root     root  20345856 May 12 21:07 geth-windows-amd64.exe
+    -rwxr-xr-x  1 root     root     23213372 Sep 14 17:59 geth-android-21-arm
+    -rwxr-xr-x  1 root     root     14373980 Sep 14 17:59 geth-darwin-386
+    -rwxr-xr-x  1 root     root     17373676 Sep 14 17:59 geth-darwin-amd64
+    -rwxr-xr-x  1 root     root     21098910 Sep 14 17:59 geth-linux-386
+    -rwxr-xr-x  1 root     root     25049693 Sep 14 17:59 geth-linux-amd64
+    -rwxr-xr-x  1 root     root     20578535 Sep 14 17:59 geth-linux-arm
+    -rwxr-xr-x  1 root     root     16351260 Sep 14 17:59 geth-windows-386.exe
+    -rwxr-xr-x  1 root     root     19418071 Sep 14 17:59 geth-windows-amd64.exe
+
 
 As the cross compiler needs to build all the dependencies as well as the main
 project itself for each platform, it may take a while for the build to complete
@@ -123,7 +125,7 @@ To limit the build targets or compile to a different Android platform, use the
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
           --pkg=cmd/geth                                            \
-          --targets=linux/arm,windows/*,android-16/*                \
+          --targets=android-16/arm,windows/*                        \
           github.com/ethereum/go-ethereum
 
 ### Cross compiler notes
