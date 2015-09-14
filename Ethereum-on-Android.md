@@ -59,6 +59,6 @@ I0911 11:09:05.832037    1427 backend.go:560] Server started
 I0911 11:09:05.848936    1427 server.go:552] Listening on [::]:30303
 ```
 
-A fancier way would be to start a terminal emulator on the Android device itself and run the binary expressly from it:
+A fancier way would be to start a terminal emulator on the Android device itself and run the binary expressly from it (remember, deployed at `/data/local/tmp/geth`):
 
 ![Geth on Android](http://i.imgur.com/wylOsBL.jpg)
