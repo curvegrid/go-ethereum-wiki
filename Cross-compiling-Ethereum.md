@@ -12,6 +12,7 @@ clean even after the complex requirements and mechanisms of a cross compilation.
 
 The currently supported target platforms are:
 
+ - ARMv7 Android
  - 32 bit, 64 bit and ARMv5 Linux
  - 32 bit and 64 bit Mac OSX
  - 32 bit and 64 bit Windows
