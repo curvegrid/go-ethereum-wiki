@@ -63,18 +63,15 @@ compile itself and verifying that all cross compilations succeeded or not.
 
 ## Building Ethereum
 
-Cross compiling Ethereum is analogous to the above example, but a few additional
-flags are required to satisfy the dependencies as well as select the specific
-command we would like to build:
+Cross compiling Ethereum is analogous to the above example, but an additional
+flags is required to satisfy the dependencies:
 
  - `--deps` is used to inject arbitrary C dependency packages and pre-build them
- - `--pkg` is used to select a sub-package if not the root is being built
 
 Injecting the GNU Arithmetic Library dependency and selecting `geth` would be:
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
-          --pkg=cmd/geth                                            \
-          github.com/ethereum/go-ethereum
+          github.com/ethereum/go-ethereum/cmd/geth
     ...
 
     $ ls -al
@@ -104,19 +101,17 @@ of the default `master` branch, you just need to specify it as an additional
 command line flag (`--branch`):
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
-          --pkg=cmd/geth                                            \
           --branch=develop                                          \
-          github.com/ethereum/go-ethereum
+          github.com/ethereum/go-ethereum/cmd/geth
 
 Additionally, during development you will most probably want to not only build
 a custom branch, but also one originating from your own fork of the repository
 instead of the upstream one. This can be done via the `--remote` flag:
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
-          --pkg=cmd/geth                                            \
           --remote=github.com/karalabe/go-ethereum                  \
           --branch=rpi-staging                                      \
-          github.com/ethereum/go-ethereum
+          github.com/ethereum/go-ethereum/cmd/geth
 
 By default `xgo` builds binaries for all supported platforms and architectures,
 with Android binaries defaulting to the highest released Android NDK platform.
@@ -124,13 +119,15 @@ To limit the build targets or compile to a different Android platform, use the
 `--targets` CLI parameter.
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
-          --pkg=cmd/geth                                            \
           --targets=android-16/arm,windows/*                        \
-          github.com/ethereum/go-ethereum
+          github.com/ethereum/go-ethereum/cmd/geth
 
-### Cross compiler notes
+### Building locally
 
-Currently `xgo` works with public repositories and import paths only. This means
-that in order to cross compile your local modifications to different platforms,
-you first must push it to a publicly fetchable URL (e.g. your GitHub fork of the
-project).
+If you would like to cross compile your local development version, simply specify
+a local path (starting with `.` or `/`), and `xgo` will use all local code from
+`GOPATH`, only downloading missing dependencies. In such a case of course, the
+`--branch`, `--remote` and `--pkg` arguments are no-op:
+
+    $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
+          ./cmd/geth
