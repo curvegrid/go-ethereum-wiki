@@ -26,3 +26,62 @@ _For more information see https://chocolatey.org/packages/geth-latest_
 1. Try building ethereum with go dep, navigate to `c:\godev\src\github.com\ethereum\go-ethereum\cmd\geth` and run `git checkout develop && godep go install`
 
 If you want to build from an other branch bypass `godep go install` for `go install` and checkout the dependencies manually.
+
+### Powershell script for building with Cygwin
+
+_**Warning:** This installation method currently fails to link properly. Giving the message "ld: cannot find -lmingwex" and "ld: cannot find -lmingw32"_
+
+```
+#REQUIRES -Version 3.0
+
+# Set local directory paths
+$basedir = $env:USERPROFILE
+$downloaddir = "$basedir\Downloads"
+
+# Set Go variables
+$golangroot = "$basedir\golang"
+$gosrcroot = "$basedir\go"
+$golangdl = "https://storage.googleapis.com/golang/"
+
+# Set cygwin variables
+$cygwinroot = "$basedir\cygwin"
+$cygwinpackages = "gcc-g++,binutils,make,git,gmp,libgmp10,libgmp-devel"
+$cygwinmirror = "http://cygwin.mirrorcatalogs.com"
+$cygwindl = "https://cygwin.com/"
+
+# Finalize paths based on processor architecture
+if ($ENV:PROCESSOR_ARCHITECTURE -eq "AMD64") {
+  $golangdl = $golangdl + "go1.5.1.windows-amd64.zip"
+  $cygwindl = $cygwindl + "setup-x86_64.exe"
+} else {
+  $golangdl = $golangdl + "go1.5.1.windows-386.zip"
+  $cygwindl = $cygwindl + "setup-x86.exe"
+}
+
+# Download dependencies
+Invoke-WebRequest $cygwindl -UseBasicParsing -OutFile "$downloaddir\cygwin-setup.exe"
+Invoke-WebRequest $golangdl -UseBasicParsing -OutFile "$downloaddir\golang.zip"
+
+# Install Cygwin & dependencies
+Invoke-Expression "$downloaddir\cygwin-setup.exe --root $cygwinroot --site $cygwinmirror --no-admin --quiet-mode --packages=$cygwinpackages"
+# Install Golang
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::ExtractToDirectory("$downloaddir\golang.zip", $golangroot)
+
+# Set environment variables
+# Only works locally
+$env:GOROOT = "$golangroot\go"
+$env:GOPATH = $gosrcroot
+$env:PATH = "$env:PATH;$cygwinroot\bin;$golangroot\go\bin;$gosrcroot\bin"
+# Only works in new sessions
+[Environment]::SetEnvironmentVariable("GOROOT", $env:GOROOT, "User")
+[Environment]::SetEnvironmentVariable("GOPATH", $env:GOPATH, "User")
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
+
+
+# Download go-ethereum source
+go get github.com/tools/godep
+git clone https://github.com/ethereum/go-ethereum $env:GOPATH/src/github.com
+cd $env:GOPATH/src/github.com/ethereum/go-ethereum
+godep go install .\cmd\geth
+```
