@@ -31,7 +31,7 @@ If you want to build from an other branch bypass `godep go install` for `go inst
 
 _**Warning:** This installation method currently fails to link properly. Giving the message "ld: cannot find -lmingwex" and "ld: cannot find -lmingw32"_
 
-```
+```posh
 #REQUIRES -Version 3.0
 
 # Set local directory paths
