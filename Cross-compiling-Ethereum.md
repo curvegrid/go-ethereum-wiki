@@ -109,7 +109,7 @@ a custom branch, but also one originating from your own fork of the repository
 instead of the upstream one. This can be done via the `--remote` flag:
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
-          --remote=github.com/karalabe/go-ethereum                  \
+          --remote=https://github.com/karalabe/go-ethereum          \
           --branch=rpi-staging                                      \
           github.com/ethereum/go-ethereum/cmd/geth
 
