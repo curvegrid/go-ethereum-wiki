@@ -1,12 +1,6 @@
-**FRONTIER IS COMING**
+Full documentation can be found at our [Ethereum User Guide and reference manual](http://ethereum.gitbooks.io/frontier-guide/content/)
 
-* [Frontier launch: A few last-minute notes](https://blog.ethereum.org/2015/07/30/a-few-last-minute-notes/)
-* [Frontier launch final steps](https://blog.ethereum.org/2015/07/27/final-steps/)
-* [Etherchain API](https://etherchain.org/frontier) look out for block #1028201
-* [Olympic network stats](https://stats.ethdev.com/)
-* [Frontier Gitbook, Ethereum User Guide and reference manual](http://ethereum.gitbooks.io/frontier-guide/content/)
-
-This is the Wiki for the Ethereum Go implementation. For generic Ethereum-related information (whitepaper, yellow paper, protocol and interface specs, APIs, DAPP development guides, etc) see the [Ethereum main wiki](https://github.com/ethereum/wiki/wiki). 
+This is the Wiki for the official Ethereum golang implementation. For generic Ethereum-related information (whitepaper, yellow paper, protocol and interface specs, APIs, DAPP development guides, etc) see the [Ethereum main wiki](https://github.com/ethereum/wiki/wiki). 
 
 
 Main entry points:
@@ -20,4 +14,3 @@ Main entry points:
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
 
 Sidebar lists all pages.
-
