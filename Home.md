@@ -1,4 +1,5 @@
-Full documentation can be found at our [Ethereum User Guide and reference manual](http://ethereum.gitbooks.io/frontier-guide/content/)
+* User documentation can be found at our [Ethereum User Guide and reference manual](http://ethereum.gitbooks.io/frontier-guide/content/).
+* For the API reference and developer documentation head over to the auto generated [GoDoc](https://godoc.org/github.com/ethereum/go-ethereum) documentation.
 
 This is the Wiki for the official Ethereum golang implementation. For generic Ethereum-related information (whitepaper, yellow paper, protocol and interface specs, APIs, DAPP development guides, etc) see the [Ethereum main wiki](https://github.com/ethereum/wiki/wiki). 
 
