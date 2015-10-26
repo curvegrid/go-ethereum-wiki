@@ -9,7 +9,7 @@ docker pull ethereum/client-go
 Start a node with:
 
 ```shell
-docker run -it -p 8545:8545 -p 30303:30303 ethereum/client-go
+docker run -it -p 30303:30303 ethereum/client-go
 ```
 
 To start a node that runs the JSON-RPC interface on port **8545**, run:
@@ -22,5 +22,5 @@ docker run -it -p 8545:8545 -p 30303:30303 ethereum/client-go --rpc
 To use the interactive JavaScript console, run:
 
 ```shell
-docker run -it -p 8545:8545 -p 30303:30303 ethereum/client-go console
+docker run -it -p 30303:30303 ethereum/client-go console
 ```
