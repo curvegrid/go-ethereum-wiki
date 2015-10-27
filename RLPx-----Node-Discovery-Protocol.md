@@ -3,42 +3,27 @@
 **Node**: an entity on the network  
 **Node ID**: 512 bit public key of node
 
-The Node Discovery protocol provides a way to find RLPx nodes
-that can be connected to. It uses a Kademlia-like protocol to maintain a
-distributed database of the IDs and endpoints of all listening nodes.
+The Node Discovery protocol provides a way to find RLPx nodes to connected to. It uses a Kademlia-like protocol to maintain a distributed database of the IDs and endpoints of all listening nodes.
 
-Each node keeps a node table as described in the Kademlia paper
-[[Maymounkov, Mazières 2002][kad-paper]]. The node table is configured
-with a bucket size of 16 (denoted `k` in Kademlia), and concurrency of 3
-(denoted `α` in Kademlia). The idle bucket-refresh interval is
-3600 seconds.
+Each node keeps a node table as described in the Kademlia paper [[Maymounkov, Mazières 2002][kad-paper]]. The node table is configured with a bucket size of 16 (denoted `k` in Kademlia), and concurrency of 3 (denoted `α` in Kademlia). The idle bucket-refresh interval is 3600 seconds.
 
-In order to maintain a well-formed network, RLPx nodes should try to connect
-to an unspecified number of close nodes. To increase resilience against Sybil attacks,
-nodes should also connect to randomly chosen, non-close nodes.
+To maintain a well-formed network, RLPx nodes should try to connect to an unspecified number of close nodes. To increase resilience against Sybil attacks, nodes should also connect to randomly chosen, non-close nodes.
 
-Each node runs the UDP-based RPC protocol defined below. The
-`FIND_DATA` and `STORE` requests from the Kademlia paper are not part
-of the protocol since the Node Discovery Protocol does not provide DHT
-functionality.
+Each node runs the UDP-based RPC protocol defined below. The `FIND_DATA` and `STORE` requests from the Kademlia paper are not part of the protocol since the Node Discovery Protocol does not provide DHT functionality.
 
 [kad-paper]: http://www.cs.rice.edu/Conferences/IPTPS02/109.pdf
 
 ## Joining the network
 
-When joining the network, fills its node table by perfoming a
-recursive Find Node operation with its own ID as the `Target`. The
-initial Find Node request is sent to one or more bootstrap nodes.
+When a node joins the network, it fills its node table by a recursive `Find Node` operation with its own ID as the `Target`. The initial `Find Node` request is sent to one or more bootstrap nodes.
 
 ## RPC Protocol
 
-RLPx nodes that want to accept incoming connections should listen on
-the same port number for UDP packets (Node Discovery Protocol) and
-TCP connections (RLPx protocol).
+RLPx nodes that want to accept incoming connections should listen on the same port number for UDP packets (Node Discovery Protocol) and TCP connections (RLPx protocol).
 
-All requests time out after are 300ms. Requests are not re-sent.
+All requests time out after 300ms. Requests are not re-sent.
 
-UDP packets are structured as follows:
+UDP packets:
 
 Offset  |||
 ------: | ----------| -------------------------------------------------------------------------
@@ -47,21 +32,17 @@ Offset  |||
 97      | type      | Single byte in range [1, 4] that determines the structure of Packet Data
 98      | data      | RLP encoded, see section Packet Data
 
-The packets are signed and authenticated. The sender's Node ID is determined by
-recovering the public key from the signature.
+The packets are signed and authenticated. The sender's Node ID is determined by recovering the public key from the signature.
 
     sender-pubkey = ECRECOVER(signature)
 
-The integrity of the packet can be verified by computing the
-expected MDC of the packet as:
+The integrity of the packet can be verified by computing the expected MDC of the packet as:
 
     MDC = SHA3(signature || type || data)
 
 ## Packet Data
 
-All packets contain an `Expiration` date to guard against replay attacks.
-The date should be interpreted as a UNIX timestamp.
-The receiver should discard any packet whose `Expiration` value is in the past.
+All packets contain an `Expiration` date to guard against replay attacks. The date should be interpreted as a UNIX timestamp. The receiver should discard any packet with `Expiration` value in the past.
 
 ### Ping (type 0x01)
 
