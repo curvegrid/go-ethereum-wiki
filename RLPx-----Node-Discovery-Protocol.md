@@ -1,5 +1,7 @@
 # Node Discovery Protocol
 
+# **THIS PAGE IS OUTDATED**
+
 **Node**: an entity on the network  
 **Node ID**: 512 bit public key of node
 
