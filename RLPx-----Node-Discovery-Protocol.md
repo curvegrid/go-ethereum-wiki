@@ -46,7 +46,7 @@ All packets contain an `Expiration` date to guard against replay attacks. The da
 
 ### Ping (type 0x01)
 
-Ping packets can be sent and received at any time. The receiver should reply with a Pong packet. When the sender receives a pong to her ping, she must update the IP/Port of the receiver in her node table.
+Ping packets can be sent and received at any time. The receiver should reply with a Pong packet. When the sender receives a Pong to her Ping, she must update the IP/Port of the receiver in her node table. If a node receives a ping, it will, after answering with a pong, send it's own ping to the first node. This ensures a node cannot trick a node through [https://en.wikipedia.org/wiki/IP_address_spoofing](IP address spoofing)
 
 RLP encoding: **[** `IP`, `Port`, `Expiration` **]**
 
