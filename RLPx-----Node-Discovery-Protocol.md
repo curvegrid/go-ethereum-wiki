@@ -1,6 +1,6 @@
 # Node Discovery Protocol
 
-# **THIS PAGE IS OUTDATED**
+## **THIS PAGE IS OUTDATED - please see [RLPx spec](https://github.com/ethereum/devp2p/blob/master/rlpx.md) for the up to date version**
 
 **Node**: an entity on the network  
 **Node ID**: 512 bit public key of node
