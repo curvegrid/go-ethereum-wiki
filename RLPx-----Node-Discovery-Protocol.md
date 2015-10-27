@@ -52,6 +52,7 @@ RLP encoding: **[** `IP`, `Port`, `Expiration` **]**
 
 Element   ||
 ----------|------------------------------------------------------------
+
 `IP`      | IP address (ASCII string) on which the node is listening
 `Port`    | listening port of the node
 
