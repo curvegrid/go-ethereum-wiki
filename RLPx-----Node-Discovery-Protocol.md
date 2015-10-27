@@ -65,9 +65,7 @@ The receiver should discard any packet whose `Expiration` value is in the past.
 
 ### Ping (type 0x01)
 
-Ping packets can be sent and received at any time. The receiver should
-reply with a Pong packet and update the IP/Port of the sender in its
-node table.
+Ping packets can be sent and received at any time. The receiver should reply with a Pong packet. When the sender receives a pong to her ping, she must update the IP/Port of the receiver in her node table.
 
 RLP encoding: **[** `IP`, `Port`, `Expiration` **]**
 
