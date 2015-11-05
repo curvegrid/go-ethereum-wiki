@@ -11,36 +11,36 @@ VERSION:
    1.3.1
    
 COMMANDS:
-   recover	Attempts to recover a corrupted database by setting a new block by number or hash
+   recover		Attempts to recover a corrupted database by setting a new block by number or hash
    blocktest	loads a block test file
-   import	import a blockchain file
-   export	export blockchain into file
+   import		import a blockchain file
+   export		export blockchain into file
    upgradedb	upgrade chainblock database
-   removedb	Remove blockchain and state databases
-   dump		dump a specific block from storage
-   monitor	Geth Monitor: node metrics monitoring and visualization
-   makedag	generate ethash dag (for testing)
-   gpuinfo	gpuinfo
-   gpubench	benchmark GPU
-   version	print ethereum version numbers
-   wallet	ethereum presale wallet
-   account	manage accounts
-   console	Geth Console: interactive JavaScript environment
-   attach	Geth Console: interactive JavaScript environment (connect to node)
-   js		executes the given JavaScript files in the Geth JavaScript VM
-   help, h	Shows a list of commands or help for one command
+   removedb		Remove blockchain and state databases
+   dump			dump a specific block from storage
+   monitor		Geth Monitor: node metrics monitoring and visualization
+   makedag		generate ethash dag (for testing)
+   gpuinfo		gpuinfo
+   gpubench		benchmark GPU
+   version		print ethereum version numbers
+   wallet		ethereum presale wallet
+   account		manage accounts
+   console		Geth Console: interactive JavaScript environment
+   attach		Geth Console: interactive JavaScript environment (connect to node)
+   js			executes the given JavaScript files in the Geth JavaScript VM
+   help, h		Shows a list of commands or help for one command
    
 ETHEREUM OPTIONS:
   --datadir "/home/youruser/.ethereum"	Data directory for the databases and keystore
-  --networkid "1"			Network identifier (integer, 0=Olympic, 1=Frontier, 2=Morden)
-  --olympic				Olympic network: pre-configured pre-release test network
-  --testnet				Morden network: pre-configured test network with modified starting nonces (replay protection)
-  --dev					Developer mode: pre-configured private network with several debugging flags
-  --genesis 				Insert/overwrite the genesis block (JSON format)
-  --identity 				Custom node name
-  --fast				Enables fast syncing through state downloads
-  --cache "0"				Megabytes of memory allocated to internal caching (min 16MB / database forced)
-  --blockchainversion "3"		Blockchain version (integer)
+  --networkid "1"						Network identifier (integer, 0=Olympic, 1=Frontier, 2=Morden)
+  --olympic								Olympic network: pre-configured pre-release test network
+  --testnet								Morden network: pre-configured test network with modified starting nonces (replay protection)
+  --dev									Developer mode: pre-configured private network with several debugging flags
+  --genesis 							Insert/overwrite the genesis block (JSON format)
+  --identity 							Custom node name
+  --fast								Enables fast syncing through state downloads
+  --cache "0"							Megabytes of memory allocated to internal caching (min 16MB / database forced)
+  --blockchainversion "3"				Blockchain version (integer)
   
 ACCOUNT OPTIONS:
   --unlock 	Unlock an account (may be creation index) until this program exits (prompts for password)
