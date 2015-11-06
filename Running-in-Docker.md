@@ -15,7 +15,7 @@ docker run -it -p 30303:30303 ethereum/client-go
 To start a node that runs the JSON-RPC interface on port **8545**, run:
 
 ```shell
-docker run -it -p 8545:8545 -p 30303:30303 ethereum/client-go --rpc
+docker run -it -p 8545:8545 -p 30303:30303 ethereum/client-go --rpc --rpcaddr "0.0.0.0"
 ```
 **WARNING: This opens your container to external calls**
 
