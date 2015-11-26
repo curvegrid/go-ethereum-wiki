@@ -12,7 +12,7 @@ clean even after the complex requirements and mechanisms of a cross compilation.
 
 The currently supported target platforms are:
 
- - ARMv7 Android
+ - ARMv7 Android and iOS
  - 32 bit, 64 bit and ARMv5 Linux
  - 32 bit and 64 bit Mac OSX
  - 32 bit and 64 bit Windows
@@ -131,3 +131,18 @@ a local path (starting with `.` or `/`), and `xgo` will use all local code from
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2 \
           ./cmd/geth
+
+## Using the Makefile
+
+Having understood the gist of `xgo` based cross compilation, you do not need to
+actually memorize and maintain these commands, as they have been incorporated into
+the official [Makefile](https://github.com/ethereum/go-ethereum/blob/master/Makefile)
+and can be invoked with a trivial `make` request:
+
+ * `make geth-cross`: Cross compiles to every supported OS and architecture
+ * `make geth-<os>`: Cross compiles supported architectures of a particular OS (e.g. `linux`)
+ * `make geth-<os>-<arch>: Cross compiles to a specific OS and architecture combo (e.g. `linux`, `arm`)
+
+We advise using the `make` based commands opposed to manually invoking `xgo` as we do
+maintain the Makefile actively whereas we cannot guarantee that this document will be
+always readily updated to latest advancements.
