@@ -146,3 +146,12 @@ and can be invoked with a trivial `make` request:
 We advise using the `make` based commands opposed to manually invoking `xgo` as we do
 maintain the Makefile actively whereas we cannot guarantee that this document will be
 always readily updated to latest advancements.
+
+### Tuning the cross builds
+
+A few of the `xgo` build options have also been surfaced directly into the Makefile to
+allow fine tuning builds to work around either upstream Go issues, or to enable some
+fancier mechanics:
+
+ - `make ... GO=<go>`: Use a specific Go runtime (e.g. `1.5.1`, `1.5-develop`, `develop)
+ - `make ... MODE=<mode>`: Build a specific target type (e.g. `exe`, `c-archive`). This is still very miuch experimental and prone to change.
