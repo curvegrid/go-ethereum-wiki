@@ -153,5 +153,5 @@ A few of the `xgo` build options have also been surfaced directly into the Makef
 allow fine tuning builds to work around either upstream Go issues, or to enable some
 fancier mechanics:
 
- - `make ... GO=<go>`: Use a specific Go runtime (e.g. `1.5.1`, `1.5-develop`, `develop)
+ - `make ... GO=<go>`: Use a specific Go runtime (e.g. `1.5.1`, `1.5-develop`, `develop`)
  - `make ... MODE=<mode>`: Build a specific target type (e.g. `exe`, `c-archive`). This is still very miuch experimental and prone to change.
