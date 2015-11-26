@@ -151,7 +151,10 @@ always readily updated to latest advancements.
 
 A few of the `xgo` build options have also been surfaced directly into the Makefile to
 allow fine tuning builds to work around either upstream Go issues, or to enable some
-fancier mechanics:
+fancier mechanics.
 
  - `make ... GO=<go>`: Use a specific Go runtime (e.g. `1.5.1`, `1.5-develop`, `develop`)
- - `make ... MODE=<mode>`: Build a specific target type (e.g. `exe`, `c-archive`). This is still very miuch experimental and prone to change.
+ - `make ... MODE=<mode>`: Build a specific target type (e.g. `exe`, `c-archive`).
+
+Please note that these are not yet fully finalized, so they may or may not change in
+the future as our code and the Go runtime features change.
