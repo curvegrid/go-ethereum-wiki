@@ -141,7 +141,7 @@ and can be invoked with a trivial `make` request:
 
  * `make geth-cross`: Cross compiles to every supported OS and architecture
  * `make geth-<os>`: Cross compiles supported architectures of a particular OS (e.g. `linux`)
- * `make geth-<os>-<arch>: Cross compiles to a specific OS and architecture combo (e.g. `linux`, `arm`)
+ * `make geth-<os>-<arch>`: Cross compiles to a specific OS and architecture combo (e.g. `linux`, `arm`)
 
 We advise using the `make` based commands opposed to manually invoking `xgo` as we do
 maintain the Makefile actively whereas we cannot guarantee that this document will be
