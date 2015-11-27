@@ -66,7 +66,6 @@ Provides various functions for managing a geth node
 * [setSolc](#admin_setColc)
 * [startRPC](#admin_startRPC)
 * [stopRPC](#admin_stopRPC)
-* [chainSyncStatus](#admin_chainSyncStatus)
 
 ## Db
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
@@ -209,27 +208,6 @@ Stop the HTTP RPC interface
 `admin.stopRPC()`
 
 ***
-
-
-### admin_chainSyncStatus
-The blocksAvailable, blocks which have not been downloaded
-
-#### Parameters
-`none`
-
-#### Return
-`blocksAvailable`, blocks which are available but not yet downloaded
-
-`blocksWaitingForImport`, downloaded blocks waiting before import
-
-`estimate`, a (very rough) estimate before the node has imported all blocks
-
-`importing`, blocks currently importing
-
-#### Example
-`admin.chainSyncStatus`
-***
-
 
 
 
