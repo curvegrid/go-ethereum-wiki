@@ -278,6 +278,7 @@ eth -m on -G -a <coinbase> -i -v 8 //
 # Further Resources:
 
 * [ether-proxy, a web interface for mining rigs](https://github.com/sammy007/ether-proxy)
+  (supports solo and pool mining proxy with web interface and rigs availability monitoring)
 * [ethereum forum mining FAQ live update](https://forum.ethereum.org/discussion/197/mining-faq-live-updates)
 * [yates randall mining video](https://www.youtube.com/watch?v=CnKnclkkbKg)
 * https://blog.ethereum.org/2014/07/05/stake/
