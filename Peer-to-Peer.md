@@ -3,11 +3,16 @@ The peer to peer package ([go-ethereum/p2p](https://github.com/ethereum/go-ether
 Starting the p2p service only requires you setup a `p2p.Server{}` with a few settings:
 
 ```go
+import "github.com/ethereum/go-ethereum/crypto"
+import "github.com/ethereum/go-ethereum/p2p"
+
+nodekey, _ := crypto.GenerateKey()
 srv := p2p.Server{
 	MaxPeers:   10,
-	Identity:   p2p.NewSimpleClientIdentity("my-p2p", "1.0", "", str512rnd),
+	PrivateKey: nodekey,
+	Name:       "my node name",
 	ListenAddr: ":30300",
-	Protocols: []p2p.Protocol{},
+	Protocols:  []p2p.Protocol{},
 }
 srv.Start()
 ```
@@ -87,8 +92,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/obscuren/secp256k1-go"
 )
 
 const messageId = 0
@@ -105,11 +110,11 @@ func MyProtocol() p2p.Protocol {
 }
 
 func main() {
-	pub, _ := secp256k1.GenerateKey()
-
+	nodekey, _ := crypto.GenerateKey()
 	srv := p2p.Server{
 		MaxPeers:   10,
-		Identity:   p2p.NewSimpleClientIdentity("my-p2p", "1.0", "", string(pub)),
+		PrivateKey: nodekey,
+		Name:       "my node name",
 		ListenAddr: ":30300",
 		Protocols:  []p2p.Protocol{MyProtocol()},
 	}
