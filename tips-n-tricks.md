@@ -23,3 +23,13 @@ eth.filter("latest", function(err, block) {
 	checkWork();
 });
 ```
+
+#### Quick scripts
+
+ * I want to get some data out without running a node!
+
+```
+$ geth --exec "eth.accounts" console 2>/dev/null
+
+["0x0000000000000000000000000000000000000000"]
+```
