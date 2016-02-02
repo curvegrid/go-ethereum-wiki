@@ -6,7 +6,7 @@ This is the Wiki for the official Ethereum golang implementation. For generic Et
 
 Main entry points:
 
-* [Tips & Tricks](https://github.com/ethereum/go-ethereum/wiki/tips-n-tricks)
+* [Bitchin' Tricks](https://github.com/ethereum/go-ethereum/wiki/tips-n-tricks)
 * [Ethereum Frontier Release](https://github.com/ethereum/go-ethereum/wiki/Frontier)
 * [Installation Instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
 * [Managing Accounts](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
