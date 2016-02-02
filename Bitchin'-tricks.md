@@ -1,4 +1,4 @@
-# Tips 'n tricks
+# Bitchin' tricks
 
 ### Geth
 
