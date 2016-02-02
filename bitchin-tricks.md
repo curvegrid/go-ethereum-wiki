@@ -4,7 +4,7 @@
 
 #### General
 
-* My shit doesn't work!
+* My ~shit~ client doesn't work! :fu:
 
 ```
 git pull
