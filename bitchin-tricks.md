@@ -2,6 +2,14 @@
 
 ### Geth
 
+#### General
+
+* My shit doesn't work
+
+```
+git pull
+```
+
 #### Mining
 
 * I only want to mine when there are transactions!
