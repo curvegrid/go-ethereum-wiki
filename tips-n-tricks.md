@@ -37,7 +37,6 @@ $ geth --exec "eth.accounts" console 2>/dev/null
  * I want to get some data out without RPC magic!
 
 ```
-$ geth // Running previously in some terminal
 $ geth --exec "eth.accounts" attach
 
 ["0x0000000000000000000000000000000000000000"]
