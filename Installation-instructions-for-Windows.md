@@ -30,9 +30,7 @@ _For more information see https://chocolatey.org/packages/geth-latest_
 
 ### Powershell script for building with Cygwin
 
-geth < 1.4.0 (MSYS2/GMP dependency): https://gist.github.com/tgerring/b93057e06960d906574c
-
-geth >= 1.4.0 (Cygwin/MingW): https://gist.github.com/tgerring/79f018954aadfb3f406e
+https://gist.github.com/tgerring/79f018954aadfb3f406e
 
 ## Building from source with winbuilds
 
