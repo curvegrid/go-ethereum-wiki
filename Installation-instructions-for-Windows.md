@@ -30,6 +30,8 @@ _For more information see https://chocolatey.org/packages/geth-latest_
 
 ### Powershell script for building with Cygwin
 
+This script installs Go, MSYS2 and the development version of geth.
+
 https://gist.github.com/tgerring/79f018954aadfb3f406e
 
 ## Building from source with winbuilds
