@@ -1,3 +1,7 @@
+**Note: All of these and much more have been merged into the project Makefile.
+You can cross build via `make-geth-<os>-platform` without needing to know any
+of these details from below.**
+
 Developers usually have a preferred platform that they feel most comfortable
 working in, with all the necessary tools, libraries and environments set up for
 an optimal workflow. However, there's often need to build for either a different
