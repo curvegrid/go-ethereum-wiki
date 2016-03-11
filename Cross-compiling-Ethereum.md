@@ -1,5 +1,5 @@
 **Note: All of these and much more have been merged into the project Makefile.
-You can cross build via `make-geth-<os>-<platform>` without needing to know any
+You can cross build via `make geth-<os>-<platform>` without needing to know any
 of these details from below.**
 
 Developers usually have a preferred platform that they feel most comfortable
