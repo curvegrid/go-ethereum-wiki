@@ -66,6 +66,8 @@ Provides various functions for managing a geth node
 * [setSolc](#admin_setColc)
 * [startRPC](#admin_startRPC)
 * [stopRPC](#admin_stopRPC)
+* [startWS](#admin_startWS)
+* [stopWS](#admin_stopWS)
 
 ## Db
 This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
@@ -186,16 +188,19 @@ Set the path to the solidity compiler for `eth.compileSolidity`.
 Start the HTTP RPC interface
 
 #### Parameters
-* `ListenAddress`, open listener on this host
-* `ListenPort`, open listener on this port
-* `CorsDomain`, the cross origin resource shared header
-* `Apis`, comma separated list with the API modules which are offered over this interface
+(support for optional arguments requires geth version >=1.4)
+* `ListenAddress`, open listener on this host (optional, default "localhost")
+* `ListenPort`, open listener on this port (optional, default 8545)
+* `CorsDomain`, the cross origin resource shared header (optional, default"")
+* `Apis`, comma separated list with the API modules which are offered over this interface (optional, default "eth,net,web3")
 
 #### Return
 `boolean` indication if the interface was started
 
 #### Example
 `admin.startRPC("127.0.0.1", 8545, "*", "eth,net,web3")`
+
+`admin.startRPC(null, null, "http://chriseth.github.io", null)`
 ***
 
 ### admin_stopRPC
@@ -209,7 +214,34 @@ Stop the HTTP RPC interface
 
 ***
 
+### admin_startWS
+Start the websocket RPC interface (requires geth version >=1.4)
 
+#### Parameters
+* `ListenAddress`, open listener on this host (optional, default "localhost")
+* `ListenPort`, open listener on this port (optional, default 8546)
+* `allowedDomains`, server side check on the Origin header (optional, default "")
+* `Apis`, comma separated list with the API modules which are offered over this interface (optional, default "eth,net,web3")
+
+#### Return
+`boolean` indication if the interface was started
+
+#### Example
+`admin.startWS("127.0.0.1", 8546, "*", "eth,net,web3")`
+
+`admin.startWS(null, null, "http://chriseth.github.io", null)`
+***
+
+### admin_stopWS
+Stop the websocket RPC interface
+
+#### Return
+`boolean` indication if the interface was stopped
+
+#### Example
+`admin.stopWS()`
+
+***
 
 ### debug_dumpBlock
 Dump block
