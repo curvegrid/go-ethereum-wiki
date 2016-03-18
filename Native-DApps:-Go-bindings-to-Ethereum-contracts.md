@@ -66,5 +66,5 @@ Where the flags are:
  * `--out`: Optional output path for the generated Go source file (not set = stdout)
 
 This will generate a type-safe Go binding for the Token contract. The generated code will
-look something like [token.go](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
+look something like [`token.go`](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
 please generate your own as this will change as more work is put into the generator.
