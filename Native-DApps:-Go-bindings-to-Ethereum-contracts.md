@@ -53,3 +53,18 @@ The single essential thing needed to generate a Go binding to an Ethereum contra
 contract's ABI definition `JSON` file. For our `Token` contract tutorial you can obtain this
 either by compiling the Solidity code yourself (e.g. via @chriseth's [online Solidity compiler](https://chriseth.github.io/browser-solidity/)), or you can download our pre-compiled [`token.abi`](https://gist.github.com/karalabe/b8dfdb6d301660f56c1b).
 
+To generate a binding, simply call:
+
+```
+$ abigen --abi token.abi --pkg main --out token.go
+```
+
+Where the flags are:
+
+ * `--abi`: Mandatory path to the contract ABI to bind to
+ * `--pgk`: Mandatory Go package name to place the Go code into
+ * `--out`: Optional output path for the generated Go source file (not set = stdout)
+
+This will generate a type-safe Go binding for the Token contract. The generated code will
+look something like [token.go](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
+please generate your own as this will change as more work is put into the generator.
