@@ -56,15 +56,58 @@ either by compiling the Solidity code yourself (e.g. via @chriseth's [online Sol
 To generate a binding, simply call:
 
 ```
-$ abigen --abi token.abi --pkg main --out token.go
+$ abigen --abi token.abi --pkg main --type Token --out token.go
 ```
 
 Where the flags are:
 
  * `--abi`: Mandatory path to the contract ABI to bind to
  * `--pgk`: Mandatory Go package name to place the Go code into
+ * `--type`: Optional Go type name to assign to the binding struct
  * `--out`: Optional output path for the generated Go source file (not set = stdout)
 
 This will generate a type-safe Go binding for the Token contract. The generated code will
 look something like [`token.go`](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
 please generate your own as this will change as more work is put into the generator.
+
+### Interacting with an Ethereum contract
+
+To interact with a contract deployed on the blockchain, you'll need to know the `address`
+of the contract itself, and need to specify a `backend` through which to access Ethereum.
+The binding generator provides out of the box an RPC backend through which you can attach
+to an existing Ethereum node via IPC, HTTP or WebSockets.
+
+We'll use the foundation's [Unicorn](https://ethereum.org/donate) token contract on the
+testnet (deployed at`0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`) to demonstrate calling
+contract methods.
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/rpc"
+)
+
+func main() {
+	// Create an IPC based RPC connection to a remote node
+	conn, err := rpc.NewIPCClient("/home/karalabe/.ethereum/testnet/geth.ipc")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	}
+	// Instantiate the contract and ready it's symbol
+	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
+	if err != nil {
+		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+	}
+	name, err := token.Name(nil)
+	if err != nil {
+		log.Fatalf("Failed to retrieve token name: %v", err)
+	}
+	fmt.Println("Token name: %s", name)
+}
+```
