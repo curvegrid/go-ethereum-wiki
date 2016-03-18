@@ -70,7 +70,7 @@ This will generate a type-safe Go binding for the Token contract. The generated 
 look something like [`token.go`](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
 please generate your own as this will change as more work is put into the generator.
 
-### Interacting with an Ethereum contract
+### Accessing an Ethereum contract
 
 To interact with a contract deployed on the blockchain, you'll need to know the `address`
 of the contract itself, and need to specify a `backend` through which to access Ethereum.
@@ -124,3 +124,9 @@ is a `*bind.CallOpts` type, which can be used to fine tune the call. Most import
 it can be used to specify whether to run the call against the current final state of the
 contract on the blockchain (default), or to also include any pending modifications
 (`&bind.CallOpts(Pending: true)`).
+
+### Transacting with an Ethereum contract
+
+### Authorized sessions
+
+### Deploying new instances of a contract
