@@ -14,6 +14,6 @@ be generated fully automatically from a contract ABI and optionally the EVM byte
 
 *This page is written in a more beginner friendly tutorial style to make it easier for
 people to start out with writing Go native Dapps. The used concepts will be introduced
-gradually as a developer would need/encounter them. We however, do assume that the reader
+gradually as a developer would need/encounter them. However, we do assume the reader
 is familiar with Ethereum in general, has a fair understanding of Solidity and can code
 Go.*
