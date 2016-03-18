@@ -120,10 +120,10 @@ Token name: Testnet Unicorn
 
 If you look at the method invoked to read the token name `token.Name(nil)`, it required
 a parameter to be passed, even though the original Solidity contract requires none. This
-is a `*bind.CallOpts` type, which can be used to fine tune the call. Most importantly,
-it can be used to specify whether to run the call against the current final state of the
-contract on the blockchain (default), or to also include any pending modifications
-(`&bind.CallOpts(Pending: true)`).
+is a `*bind.CallOpts` type, which can be used to fine tune the call.
+
+ * `Pending`: Whether to access pending contract state or the current stable one
+ * `GasLimit`: Place a limit on the computing resources the call might consume
 
 ### Transacting with an Ethereum contract
 
