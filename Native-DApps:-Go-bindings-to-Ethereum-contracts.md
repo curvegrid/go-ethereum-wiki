@@ -99,7 +99,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
-	// Instantiate the contract and ready it's symbol
+	// Instantiate the contract and ready its name
 	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
@@ -111,3 +111,16 @@ func main() {
 	fmt.Println("Token name: %s", name)
 }
 ```
+
+And the output (yay):
+
+```
+Testnet Unicorn
+```
+
+If you look at the method invoked to read the token name `token.Name(nil)`, it required
+a parameter to be passed, even though the original Solidity contract requires none. This
+is a `*bind.CallOpts` type, which can be used to fine tune the call. Most importantly,
+it can be used to specify whether to run the call against the current final state of the
+contract on the blockchain (default), or to also include any pending modifications via
+passing `&bind.CallOpts(Pending: true)`.
