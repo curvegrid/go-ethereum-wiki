@@ -47,7 +47,7 @@ $ cd $GOPATH/src/github.com/go-ethereum
 $ godep go install ./cmd/abigen
 ```
 
-### Generating Go bindings
+### Generating the bindings
 
 The single essential thing needed to generate a Go binding to an Ethereum contract is the
 contract's ABI definition `JSON` file. For our `Token` contract tutorial you can obtain this
