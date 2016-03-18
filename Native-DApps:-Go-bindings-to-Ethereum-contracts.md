@@ -181,10 +181,31 @@ func main() {
 }
 ```
 
+And the output (yay):
+
+```
+Transfer pending: 0x4f4aaeb29ed48e88dd653a81f0b05d4df64a86c99d4e83b5bfeb0f0006b0e55b
+```
+
 *Note, with high probability you won't have any testnet unicors available to spend, so the
 above program will fail with an error. Send at least 2.014 ethers to the foundation testnet
 donation account `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unicorn token and
 you'll be able to see the above code run without an error!*
+
+Similar to the method invocations in the previous section which only read contract state,
+transacting methods also require a mandatory first parameter to be passed, a `*bind.TransactOpts`
+type, which authorizes the transaction and potentially fine tunes it:
+
+ * `Account`: Address of the account to invoke the method with (mandatory)
+ * `Signer`: Method to sign an transaction locally before broadcasting it (mandatory)
+ * `Nonce`: Account nonce to use for the transaction ordering (optional)
+ * `GasLimit`: Place a limit on the computing resources the call might consume (optional)
+ * `GasPrice`: Explicitly set the gas price to run the transaction with (optional)
+ * `Value`: Any funds to transfer along with the method call (optional)
+
+The two mandatory fields are automatically set by the `bind` package if the auth options are
+constructed using `bind.NewTransactor`. The nonce and gas related fields are automatically
+derived by the binding if they are not set. An unset value is assumed to be zero.
 
 ### Authorized sessions
 
