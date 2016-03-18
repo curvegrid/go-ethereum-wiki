@@ -122,5 +122,5 @@ If you look at the method invoked to read the token name `token.Name(nil)`, it r
 a parameter to be passed, even though the original Solidity contract requires none. This
 is a `*bind.CallOpts` type, which can be used to fine tune the call. Most importantly,
 it can be used to specify whether to run the call against the current final state of the
-contract on the blockchain (default), or to also include any pending modifications via
-passing `&bind.CallOpts(Pending: true)`.
+contract on the blockchain (default), or to also include any pending modifications
+(`&bind.CallOpts(Pending: true)`).
