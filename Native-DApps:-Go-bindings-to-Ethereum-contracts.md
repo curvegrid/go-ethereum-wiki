@@ -168,7 +168,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
 	}
-	// Create an authorized transactor
+	// Create an authorized transactor and spend 1 unicorn
 	auth, err := bind.NewTransactor(key, "my awesome super secret password")
 	if err != nil {
 		log.Fatalf("Failed to create authorized transactor: %v", err)
@@ -180,6 +180,11 @@ func main() {
 	fmt.Printf("Transfer pending: 0x%x\n", tx.Hash())
 }
 ```
+
+*Note, with high probability you won't have any testnet unicors available to spend, so the
+above program will fail with an error. Send at least 2.014 ethers to the foundation testnet
+donation account `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unicorn token and
+you'll be able to see the above code run without an error!*
 
 ### Authorized sessions
 
