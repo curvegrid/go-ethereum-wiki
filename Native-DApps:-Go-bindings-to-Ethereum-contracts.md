@@ -99,7 +99,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
-	// Instantiate the contract and ready its name
+	// Instantiate the contract and display its name
 	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
@@ -126,6 +126,60 @@ is a `*bind.CallOpts` type, which can be used to fine tune the call.
  * `GasLimit`: Place a limit on the computing resources the call might consume
 
 ### Transacting with an Ethereum contract
+
+Invoking a method that changes contract state (i.e. transacting) is a bit more involved,
+as a live transaction needs to be authorized and broadcast into the network. **Opposed
+to the conventional way of storing accounts and keys in the node we attach to, Go bindings
+require signing transactions locally and do not delegate this to a remote node.** This is
+done so to facilitate the general direction of the Ethereum community where accounts are
+kept private to DApps, and not shared (by default) between them.
+
+Thus to allow transacting with a contract, your code needs to implement a method that
+given an input transaction, signs it and returns an authorized output transaction. Since
+most users have their keys in the [Web3 Secret Storage](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) format, the `bind` package contains a small utility method 
+(`bind.NewTransactor(keyjson, passphrase)`) that can create an authorized transactor from
+a key file and associate password, without the user needing to implement key signing himself.
+
+Changing the previous code snippet to send one unicorn to the zero address:
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"math/big"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/rpc"
+)
+
+const key = `paste the contents of your *testnet* key json here`
+
+func main() {
+	// Create an IPC based RPC connection to a remote node and instantiate a contract binding
+	conn, err := rpc.NewIPCClient("/home/karalabe/.ethereum/testnet/geth.ipc")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	}
+	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
+	if err != nil {
+		log.Fatalf("Failed to instantiate a Token contract: %v", err)
+	}
+	// Create an authorized transactor
+	auth, err := bind.NewTransactor(key, "my awesome super secret password")
+	if err != nil {
+		log.Fatalf("Failed to create authorized transactor: %v", err)
+	}
+	tx, err := token.Transfer(auth, common.HexToAddress("0x0000000000000000000000000000000000000000"), big.NewInt(1))
+	if err != nil {
+		log.Fatalf("Failed to request token transfer: %v", err)
+	}
+	fmt.Printf("Transfer pending: 0x%x\n", tx.Hash())
+}
+```
 
 ### Authorized sessions
 
