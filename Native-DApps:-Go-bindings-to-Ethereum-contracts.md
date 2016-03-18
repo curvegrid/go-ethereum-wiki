@@ -193,8 +193,8 @@ donation account `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unico
 you'll be able to see the above code run without an error!*
 
 Similar to the method invocations in the previous section which only read contract state,
-transacting methods also require a mandatory first parameter to be passed, a `*bind.TransactOpts`
-type, which authorizes the transaction and potentially fine tunes it:
+transacting methods also require a mandatory first parameter, a `*bind.TransactOpts` type,
+which authorizes the transaction and potentially fine tunes it:
 
  * `Account`: Address of the account to invoke the method with (mandatory)
  * `Signer`: Method to sign an transaction locally before broadcasting it (mandatory)
@@ -207,6 +207,36 @@ The two mandatory fields are automatically set by the `bind` package if the auth
 constructed using `bind.NewTransactor`. The nonce and gas related fields are automatically
 derived by the binding if they are not set. An unset value is assumed to be zero.
 
-### Authorized sessions
+### Pre-configured contract sessions
+
+As mentioned in the previous two sections, both reading as well as state modifying contract
+calls require a mandatory first parameter which can both authorize as well as fine tune some
+of the internal parameters. However, most of the time we want to use the same parameters and
+issue transactions with the same account, so always constructing the call/transact options or
+passing them along with the binding can become unwieldy.
+
+To avoid these scenarios, the generator also creates specialized wrappers that can be pre-
+configured with tuning and authorization parameters, allowing all the Solidity defined methods
+to be invoked without needing an extra parameter.
+
+These are named analogous to the original contract type name, just suffixed with `Sessions`:
+
+```go
+// Wrap the Token contract instance into a session
+session := &TokenSession{
+	Contract: token,
+	CallOpts: bind.CallOpts{
+		Pending: true,
+	},
+	TransactOpts: bind.TransactOpts{
+		Account:  auth.Account,
+		Signer:   auth.Signer,
+		GasLimit: big.NewInt(3141592),
+	},
+}
+// Call the previous methods without the option parameters
+session.Name()
+session.Transfer("0x0000000000000000000000000000000000000000"), big.NewInt(1))
+```
 
 ### Deploying new instances of a contract
