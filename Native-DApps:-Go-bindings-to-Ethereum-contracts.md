@@ -67,7 +67,7 @@ Where the flags are:
  * `--out`: Optional output path for the generated Go source file (not set = stdout)
 
 This will generate a type-safe Go binding for the Token contract. The generated code will
-look something like [`token.go`](https://gist.github.com/karalabe/52d08143c4c1dfa8971a), but
+look something like [`token.go`](https://gist.github.com/karalabe/6c2c5b9cc6b48e4721e0), but
 please generate your own as this will change as more work is put into the generator.
 
 ### Accessing an Ethereum contract
@@ -239,4 +239,82 @@ session.Name()
 session.Transfer("0x0000000000000000000000000000000000000000"), big.NewInt(1))
 ```
 
-### Deploying new instances of a contract
+### Deploying contracts to Ethereum
+
+Interacting with existing contracts is nice, but let's take it up a notch and deploy
+a brand new contract onto the Ethereum blockchain! To do so however, the contract ABI
+we used to generate the binding is not enough. We need the compiled bytecode too to
+allow deploying it.
+
+To get the bytecode, either go back to the online compiler with which you may generate it,
+or alternatively download our [`token.bin`](https://gist.github.com/karalabe/026548f6a5f5f97b54de).
+You'll need to rerun the Go generator with the bytecode included for it to create deploy
+code too:
+
+```
+$ abigen --abi token.abi --pkg main --type Token --out token.go --bin token.bin
+```
+
+This will generate something similar to [`token.go`](https://gist.github.com/karalabe/106873e5461ef50661ea).
+If you quickly skim this file, you'll find an extra `DeployToken` function that was just
+injected compared to the previous code. Beside all the parameters specified by Solidity,
+it also needs the usual authorization options to deploy the contract with and the Ethereum
+backend to deploy the contract through.
+
+Putting it all together would result in:
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"math/big"
+	"time"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
+	"github.com/ethereum/go-ethereum/rpc"
+)
+
+const key = `paste the contents of your *testnet* key json here`
+
+func main() {
+	// Create an IPC based RPC connection to a remote node and an authorized transactor
+	conn, err := rpc.NewIPCClient("/home/karalabe/.ethereum/testnet/geth.ipc")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	}
+	auth, err := bind.NewTransactor(key, "my awesome super secret password")
+	if err != nil {
+		log.Fatalf("Failed to create authorized transactor: %v", err)
+	}
+	// Deploy a new awesome contract for the binding demo
+	address, tx, token, err := DeployToken(auth, backends.NewRPCBackend(conn), new(big.Int), "Contracts in Go!!!", new(big.Int), "Go!")
+	if err != nil {
+		log.Fatalf("Failed to deploy new token contract: %v", err)
+	}
+	fmt.Printf("Contract pending deploy: 0x%x\n", address)
+	fmt.Printf("Transaction waiting to be mined: 0x%x\n\n", tx.Hash())
+
+	// Don't even wait, check its presence in the local pending state
+	time.Sleep(250 * time.Millisecond) // Allow it to be processed by the local node :P
+
+	name, err := token.Name(&bind.CallOpts{Pending: true})
+	if err != nil {
+		log.Fatalf("Failed to retrieve pending name: %v", err)
+	}
+	fmt.Println("Pending name:", name)
+}
+```
+
+And the code performs as expected: it requests the creation of a brand new Token contract
+on the Ethereum blockchain, which we can either wait for to be mined or as in the above code
+start calling methods on it in the pending state :)
+
+```
+Contract pending deploy: 0x46506d900559ad005feb4645dcbb2dbbf65e19cc
+Transaction waiting to be mined: 0x6a81231874edd2461879b7280ddde1a857162a744e3658ca7ec276984802183b
+
+Pending name: Contracts in Go!!!
+```
