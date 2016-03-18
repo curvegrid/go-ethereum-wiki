@@ -17,3 +17,39 @@ people to start out with writing Go native Dapps. The used concepts will be intr
 gradually as a developer would need/encounter them. However, we do assume the reader
 is familiar with Ethereum in general, has a fair understanding of Solidity and can code
 Go.*
+
+## Token contract 
+
+To avoid falling into the fallacy of useless academic examples, we're going to take the
+official [Token contract](https://ethereum.org/token) as the base for introducing the Go
+native bindings. If you're unfamiliar with the contract, skimming the linked page should
+probably be enough, the details aren't relevant for now. *In short the contract implements
+a custom token that can be deployed on top of Ethereum.* To make sure this tutorial doesn't
+go stale if the linked website changes, the Solidity source code of the Token contract is
+also available at [token.sol](https://gist.github.com/karalabe/08f4b780e01c8452d989).
+
+### Go binding generator
+
+Interacting with a contract on the Ethereum blockchain from Go (or any other language for
+a matter of fact) is already possible via the RPC interfaces exposed by Ethereum clients.
+However, writing the boilerplate code that translates decent Go language constructs into
+RPC calls and back is extremely time consuming and also extremely brittle: implementation
+bugs can only be detected during runtime and it's almost impossible to evolve a contract
+as even a tiny change in Solidity can be painful to port over to Go.
+
+To avoid all this mess, the go-ethereum implementation introduces a source code generator
+that can convert Ethereum ABI definitions into easy to use, type-safe Go packages. Assuming
+you have a valid Go development environment set up, `godep` installed and the go-ethereum
+repository checked out correctly, you can build the generator with:
+
+```
+$ cd $GOPATH/src/github.com/go-ethereum
+$ godep go install ./cmd/abigen
+```
+
+### Generating Go bindings
+
+The single essential thing needed to generate a Go binding to an Ethereum contract is the
+contract's ABI definition `JSON` file. For our `Token` contract tutorial you can obtain this
+either by compiling the Solidity code yourself (e.g. via @chriseth's [online Solidity compiler](https://chriseth.github.io/browser-solidity/)), or you can download our pre-compiled [`token.abi`](https://gist.github.com/karalabe/b8dfdb6d301660f56c1b).
+
