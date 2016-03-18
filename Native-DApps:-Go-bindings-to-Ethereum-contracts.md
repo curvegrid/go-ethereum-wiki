@@ -318,3 +318,74 @@ Transaction waiting to be mined: 0x6a81231874edd2461879b7280ddde1a857162a744e365
 
 Pending name: Contracts in Go!!!
 ```
+
+## Blockchain simulator
+
+Being able to deploy and access already deployed Ethereum contracts from within native Go
+code is an extremely powerful feature, but there is one facet with developing native code
+that not even the testnet lends itself well to: *automatic unit testing*. Using go-ethereum
+internal constructs it's possible to create test chains and verify them, but it is unfeasible
+to do high level contract testing with such low level mechanisms.
+
+To sort out this last issue that would make it hard to run (and test) native DApps, we've also
+implemented a *simulated blockchain*, that can be set as a backend to native contracts the same
+way as a live RPC backend could be: `backends.NewSimulatedBackend(genesisAccounts)`.
+
+```go
+package main
+
+import (
+	"crypto/rand"
+	"fmt"
+	"log"
+	"math/big"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/crypto"
+)
+
+func main() {
+	// Generate a new random account and a funded simulator
+	key := crypto.NewKey(rand.Reader)
+	sim := backends.NewSimulatedBackend(core.GenesisAccount{key.Address, big.NewInt(10000000000)})
+
+	// Convert the tester key to an authorized transactor for ease of use
+	auth := bind.NewKeyedTransactor(key)
+
+	// Deploy a token contract on the simulated blockchain
+	_, _, token, err := DeployToken(auth, sim, new(big.Int), "Simulated blockchain tokens", new(big.Int), "SBT")
+	if err != nil {
+		log.Fatalf("Failed to deploy new token contract: %v", err)
+	}
+	// Print the current (non existent) and pending name of the contract
+	name, _ := token.Name(nil)
+	fmt.Println("Pre-mining name:", name)
+
+	name, _ = token.Name(&bind.CallOpts{Pending: true})
+	fmt.Println("Pre-mining pending name:", name)
+
+	// Commit all pending transactions in the simulator and print the names again
+	sim.Commit()
+
+	name, _ = token.Name(nil)
+	fmt.Println("Post-mining name:", name)
+
+	name, _ = token.Name(&bind.CallOpts{Pending: true})
+	fmt.Println("Post-mining pending name:", name)
+}
+```
+
+And the output (yay):
+
+```
+Pre-mining name: 
+Pre-mining pending name: Simulated blockchain tokens
+Post-mining name: Simulated blockchain tokens
+Post-mining pending name: Simulated blockchain tokens
+```
+
+Note, that we don't have to wait for a local private chain miner, or testnet miner to
+integrate the currently pending transactions. When we decide to mine the next block,
+we simply `Commit()` the simulator.
