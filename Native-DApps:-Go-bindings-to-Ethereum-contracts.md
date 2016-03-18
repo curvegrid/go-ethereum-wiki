@@ -78,8 +78,8 @@ The binding generator provides out of the box an RPC backend through which you c
 to an existing Ethereum node via IPC, HTTP or WebSockets.
 
 We'll use the foundation's [Unicorn](https://ethereum.org/donate) token contract deployed
-on the testnet (`0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`) to demonstrate calling
-contract methods:
+on the testnet to demonstrate calling contract methods. It is deployed at the address
+`0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`.
 
 ```go
 package main
