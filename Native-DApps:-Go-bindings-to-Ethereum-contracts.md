@@ -26,7 +26,7 @@ native bindings. If you're unfamiliar with the contract, skimming the linked pag
 probably be enough, the details aren't relevant for now. *In short the contract implements
 a custom token that can be deployed on top of Ethereum.* To make sure this tutorial doesn't
 go stale if the linked website changes, the Solidity source code of the Token contract is
-also available at [token.sol](https://gist.github.com/karalabe/08f4b780e01c8452d989).
+also available at [`token.sol`](https://gist.github.com/karalabe/08f4b780e01c8452d989).
 
 ### Go binding generator
 
