@@ -77,9 +77,9 @@ of the contract itself, and need to specify a `backend` through which to access 
 The binding generator provides out of the box an RPC backend through which you can attach
 to an existing Ethereum node via IPC, HTTP or WebSockets.
 
-We'll use the foundation's [Unicorn](https://ethereum.org/donate) token contract on the
-testnet (deployed at`0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`) to demonstrate calling
-contract methods.
+We'll use the foundation's [Unicorn](https://ethereum.org/donate) token contract deployed
+on the testnet (`0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`) to demonstrate calling
+contract methods:
 
 ```go
 package main
