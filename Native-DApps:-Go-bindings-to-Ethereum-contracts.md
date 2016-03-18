@@ -108,14 +108,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to retrieve token name: %v", err)
 	}
-	fmt.Println("Token name: %s", name)
+	fmt.Println("Token name:", name)
 }
 ```
 
 And the output (yay):
 
 ```
-Testnet Unicorn
+Token name: Testnet Unicorn
 ```
 
 If you look at the method invoked to read the token name `token.Name(nil)`, it required
