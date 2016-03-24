@@ -344,7 +344,22 @@ Building a contract directly from Solidity has the nice side effect that all con
 contained within a Solidity source file are built and bound, so if your file contains many
 contract sources, each and every one of them will be available from Go code.
 
-### Go generate
+### Project integration (i.e. `go generate`)
+
+The `abigen` command was made in such a way as to play beautifully together with existing
+Go toolchains: instead of having to remember the exact command needed to bind an Ethereum
+contract into a Go project, we can leverage `go generate` to remember all the nitty-gritty
+details.
+
+Place the binding generation command into a Go source file before the package definition:
+
+```
+//go:generate abigen --sol token.sol --pkg main --out token.go
+```
+
+After which whenever the Solidity contract is modified, instead of needing to remember and
+run the above command, we can simply call `go generate` on the package (or even the entire
+source tree via `go generate ./...`), and it will correctly generate the new bindings for us.
 
 ## Blockchain simulator
 
