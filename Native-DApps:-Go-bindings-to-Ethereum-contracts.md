@@ -67,7 +67,7 @@ Where the flags are:
  * `--out`: Optional output path for the generated Go source file (not set = stdout)
 
 This will generate a type-safe Go binding for the Token contract. The generated code will
-look something like [`token.go`](https://gist.github.com/karalabe/6c2c5b9cc6b48e4721e0), but
+look something like [`token.go`](https://gist.github.com/karalabe/5954553b76d1fd997a43), but
 please generate your own as this will change as more work is put into the generator.
 
 ### Accessing an Ethereum contract
@@ -255,7 +255,7 @@ code too:
 $ abigen --abi token.abi --pkg main --type Token --out token.go --bin token.bin
 ```
 
-This will generate something similar to [`token.go`](https://gist.github.com/karalabe/106873e5461ef50661ea).
+This will generate something similar to [`token.go`](https://gist.github.com/karalabe/0aeba0c6f88875279eb5).
 If you quickly skim this file, you'll find an extra `DeployToken` function that was just
 injected compared to the previous code. Beside all the parameters specified by Solidity,
 it also needs the usual authorization options to deploy the contract with and the Ethereum
