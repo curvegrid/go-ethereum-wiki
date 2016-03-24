@@ -196,7 +196,7 @@ Similar to the method invocations in the previous section which only read contra
 transacting methods also require a mandatory first parameter, a `*bind.TransactOpts` type,
 which authorizes the transaction and potentially fine tunes it:
 
- * `Account`: Address of the account to invoke the method with (mandatory)
+ * `From`: Address of the account to invoke the method with (mandatory)
  * `Signer`: Method to sign an transaction locally before broadcasting it (mandatory)
  * `Nonce`: Account nonce to use for the transaction ordering (optional)
  * `GasLimit`: Place a limit on the computing resources the call might consume (optional)
@@ -229,7 +229,7 @@ session := &TokenSession{
 		Pending: true,
 	},
 	TransactOpts: bind.TransactOpts{
-		Account:  auth.Account,
+		From:     auth.From,
 		Signer:   auth.Signer,
 		GasLimit: big.NewInt(3141592),
 	},
@@ -318,6 +318,33 @@ Transaction waiting to be mined: 0x6a81231874edd2461879b7280ddde1a857162a744e365
 
 Pending name: Contracts in Go!!!
 ```
+
+## Bind Solidity directly
+
+If you've followed the tutorial along until this point you've probably realized that
+every contract modification needs to be recompiled, the produced ABIs and bytecodes
+(especially if you need multiple contracts) individually saved to files and then the
+binding executed for them. This can become a quite bothersome after the Nth iteration,
+so the `abigen` command supports binding from Solidity source files directly (`--sol`),
+which first compiles the source code (via `--solc`, defaulting to `solc`) into it's
+constituent components and binds using that.
+
+Binding the official Token contract [`token.sol`](https://gist.github.com/karalabe/08f4b780e01c8452d989)
+would then entail to running:
+
+```
+$ abigen --sol token.sol --pkg main --out token.go
+```
+
+*Note: Building from Solidity (`--sol`) is mutually exclusive with individually setting
+the bind components (`--abi`, `--bin` and `--type`), as all of them are extracted from
+the Solidity code and produced build results directly.*
+
+Building a contract directly from Solidity has the nice side effect that all contracts
+contained within a Solidity source file are built and bound, so if your file contains many
+contract sources, each and every one of them will be available from Go code.
+
+### Go generate
 
 ## Blockchain simulator
 
