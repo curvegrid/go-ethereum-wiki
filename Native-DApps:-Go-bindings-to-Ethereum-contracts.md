@@ -347,7 +347,8 @@ the Solidity code and produced build results directly.*
 
 Building a contract directly from Solidity has the nice side effect that all contracts
 contained within a Solidity source file are built and bound, so if your file contains many
-contract sources, each and every one of them will be available from Go code.
+contract sources, each and every one of them will be available from Go code. The sample
+Token solidity file results in [`token.go`](https://gist.github.com/karalabe/79f654db3bc1c4872100).
 
 ### Project integration (i.e. `go generate`)
 
