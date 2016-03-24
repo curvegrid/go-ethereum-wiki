@@ -1,3 +1,8 @@
+**[The features contained in this document will land when https://github.com/ethereum/go-ethereum/pull/2357
+gets merged into the main codebase (hopefully in a matter of hours). Also note, events are
+not yet implemented as they need some RPC subscription features that are still under
+review. They will hopefully get pushed out in a few days.]**
+
 The original roadmap and/or dream of the Ethereum platform was to provide a solid, high
 performing client implementation of the consensus protocol in various languages, which
 would provide an RPC interface for JavaScript DApps to communicate with, pushing towards
