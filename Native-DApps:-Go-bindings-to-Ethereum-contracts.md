@@ -154,6 +154,7 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
@@ -174,7 +175,7 @@ func main() {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
 	}
 	// Create an authorized transactor and spend 1 unicorn
-	auth, err := bind.NewTransactor(key, "my awesome super secret password")
+	auth, err := bind.NewTransactor(strings.NewReader(key), "my awesome super secret password")
 	if err != nil {
 		log.Fatalf("Failed to create authorized transactor: %v", err)
 	}
@@ -275,6 +276,7 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"strings"
 	"time"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -290,7 +292,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
-	auth, err := bind.NewTransactor(key, "my awesome super secret password")
+	auth, err := bind.NewTransactor(strings.NewReader(key), "my awesome super secret password")
 	if err != nil {
 		log.Fatalf("Failed to create authorized transactor: %v", err)
 	}
