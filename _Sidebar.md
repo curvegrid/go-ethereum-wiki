@@ -38,6 +38,10 @@
 
 [Community and support](https://github.com/ethereum/go-ethereum/wiki/geth#community-and-support)
 
+### Developers
+
+[Native DApps](https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts)
+
 ### Legacy
 
 [Legacy pages](https://github.com/ethereum/go-ethereum/wiki/Legacy)
