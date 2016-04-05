@@ -486,7 +486,7 @@ Unlock an account
 
 `string`, passphrase of the account to delete (optional in console, user will be prompted)
 
-`integer`, unlock account for duration seconds (optional)
+`integer`, unlock account for duration seconds, use 0 if the account must be locked forever. If not specified 300 is used by default.
 
 #### Return
 `boolean` indication if the account was unlocked
