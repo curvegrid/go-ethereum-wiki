@@ -8,7 +8,7 @@ For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3" --rpc` will
 * enable the admin, official DApp and miner API over the IPC interface
 * enable the eth and web3 API over the RPC interface
 
-The HTTP RPC interface must be explicitly enabled using the --rpc flag.
+The HTTP RPC interface must be explicitly enabled using the `--rpc` flag.
 Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which APIs you enable. By default geth enables all API's over the `ipc` interface and only the db,eth,net and web3 APIs over the `rpc` interface.
 
 To determine which API's an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
