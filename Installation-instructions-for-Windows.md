@@ -46,9 +46,9 @@ then clone the source.
 
 ```text
 C:\Users\xxx> set "GOPATH=%USERPROFILE%"
-C:\Users\xxx> set "PATH=%USERPROFILE%\bin;%PATH%"
+C:\Users\xxx> set "Path=%USERPROFILE%\bin;%Path%"
 C:\Users\xxx> setx GOPATH "%GOPATH%"
-C:\Users\xxx> setx PATH "%PATH%"
+C:\Users\xxx> setx Path "%Path%"
 C:\Users\xxx> go get github.com/tools/godep
 C:\Users\xxx> mkdir src\github.com\ethereum
 C:\Users\xxx> git clone https://github.com/ethereum/go-ethereum src\github.com\ethereum\go-ethereum
