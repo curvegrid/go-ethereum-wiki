@@ -10,7 +10,7 @@ All versions of Geth are built and available for download at https://build.ethde
 1. chdir <path to geth.exe>
 1. open geth.exe
 
-## ~~Installing from Chocolatey~~
+## ~~Installing the binary package from Chocolatey~~
 
 _**Note: Chocolatey is stuck at 1.2.2 and deprecated. Consider using another method**_
 
