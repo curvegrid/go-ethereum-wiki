@@ -39,9 +39,7 @@ we need:
 
 ```text
 C:\Windows\system32> choco install git
-
 C:\Windows\system32> choco install golang
-
 C:\Windows\system32> choco install mingw
 ``` 
 
@@ -49,36 +47,24 @@ Installing these packages will set up the `Path` environment variable.
 Open a new command prompt to get the new `Path`. The following steps don't
 need Administrator privileges.
 
-First we'll create and set up a Go workspace directory layout.
+First we'll create and set up a Go workspace directory layout,
+then clone the source.
 
 ```text
+C:\Users\xxx> set "GOPATH=%USERPROFILE%"
+C:\Users\xxx> set "PATH=%USERPROFILE%\bin;%PATH%"
+C:\Users\xxx> setx GOPATH "%GOPATH%"
+C:\Users\xxx> setx PATH "%PATH%"
+C:\Users\xxx> go get github.com/tools/godep
 C:\Users\xxx> mkdir src\github.com\ethereum
-
-C:\Users\xxx> setx GOPATH "%HOMEPATH%"
-
-SUCCESS: Specified value was saved.
-
-C:\Users\xxx> setx PATH "%HOMEPATH%\bin;%PATH%"
-
-SUCCESS: Specified value was saved.
-
-C:\Users\xxx> set "GOPATH=%HOMEPATH%"
-
-C:\Users\xxx> set "PATH=%HOMEPATH%\bin;%PATH%"
-```
-
-Now we clone the source code from github and enter the directory:
-
-```text
 C:\Users\xxx> git clone https://github.com/ethereum/go-ethereum src\github.com\ethereum\go-ethereum
-
 C:\Users\xxx> cd src\github.com\ethereum\go-ethereum
 ```
 
 Finally, the command to compile geth is:
 
 ```text
-C:\Users\xxx\src\github.com\ethereum\go-ethereum> go install -v ./...
+C:\Users\xxx\src\github.com\ethereum\go-ethereum> godep go install -v ./...
 ```
 
 ## Powershell script for building with Cygwin
