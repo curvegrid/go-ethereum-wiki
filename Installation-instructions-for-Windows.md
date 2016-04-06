@@ -28,13 +28,65 @@ _For more information see https://chocolatey.org/packages/geth-latest_
 
 # Source
 
-### Powershell script for building with Cygwin
+## Compiling geth with tools from chocolatey
+
+The Chocolatey package manager provides an easy way to get
+the required build tools installed. If you don't have chocolatey yet,
+follow the instructions on https://chocolatey.org to install it first.
+
+Then open an Administrator command prompt and install the build tools
+we need:
+
+```text
+C:\Windows\system32> choco install git
+
+C:\Windows\system32> choco install golang
+
+C:\Windows\system32> choco install mingw
+``` 
+
+Installing these packages will set up the `Path` environment variable.
+Open a new command prompt to get the new `Path`. The following steps don't
+need Administrator privileges.
+
+First we'll create and set up a Go workspace directory layout.
+
+```text
+C:\Users\xxx> mkdir src\github.com\ethereum
+
+C:\Users\xxx> setx GOPATH "%HOMEPATH%"
+
+SUCCESS: Specified value was saved.
+
+C:\Users\xxx> setx PATH "%HOMEPATH%\bin;%PATH%"
+
+SUCCESS: Specified value was saved.
+
+C:\Users\xxx> set "GOPATH=%HOMEPATH%"
+
+C:\Users\xxx> set "PATH=%HOMEPATH%\bin;%PATH%"
+```
+
+Now we clone the source code from github and enter the directory:
+
+```text
+C:\Users\xxx> git clone https://github.com/ethereum/go-ethereum src\github.com\ethereum\go-ethereum
+C:\Users\xxx> cd src\github.com\ethereum\go-ethereum
+```
+
+Finally, the command to compile geth is:
+
+```text
+C:\Users\xxx\src\github.com\ethereum\go-ethereum> go install -v ./...
+```
+
+## Powershell script for building with Cygwin
 
 This script installs Go, MSYS2 and the development version of geth.
 
 https://gist.github.com/tgerring/79f018954aadfb3f406e
 
-## Building from source with winbuilds
+## Compiling geth with tools from winbuilds
 
 1. Install Git from http://git-scm.com/downloads
 1. Install Golang from https://storage.googleapis.com/golang/go1.4.2.windows-amd64.msi
