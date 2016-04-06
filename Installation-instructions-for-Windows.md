@@ -12,19 +12,13 @@ All versions of Geth are built and available for download at https://build.ethde
 
 ## ~~Installing the binary package from Chocolatey~~
 
-_**Note: Chocolatey is stuck at 1.2.2 and deprecated. Consider using another method.**_
+_**Warning: Chocolatey is stuck at 1.2.2 and deprecated. Please use another method.**_
 
 For master branch:
 ```
 choco install geth-stable
 ```
 _For more information see https://chocolatey.org/packages/geth-stable_
-
-For develop branch:
-```
-choco install geth-latest
-```
-_For more information see https://chocolatey.org/packages/geth-latest_
 
 # Source
 
