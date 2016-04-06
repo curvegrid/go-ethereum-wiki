@@ -71,6 +71,7 @@ Now we clone the source code from github and enter the directory:
 
 ```text
 C:\Users\xxx> git clone https://github.com/ethereum/go-ethereum src\github.com\ethereum\go-ethereum
+
 C:\Users\xxx> cd src\github.com\ethereum\go-ethereum
 ```
 
