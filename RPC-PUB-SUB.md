@@ -24,7 +24,6 @@ Example:
 2. subscriptions require a full duplex connection. Geth offers such connections in the form of websockets (enable with --ws) and ipc (enabled by default).
 3. subscriptions are coupled to a connection. If the connection is closed all subscriptions that are created over this connection are removed.
 4. notifications are stored in an internal buffer and send from this buffer ato the client. If the client is unable to keep up and the number of buffered notifications reaches a limit (currently 10k) the connection is closed. Keep in mind that subscribing to some events can cause a flood of notifications, e.g. listening for all logs/blocks when the node starts to synchronize.
-5. subscriptions for which 5 minutes no notification has been send are considered inactive and silently removed. In the future we might send a notification to the client indicating that the subscription is removed.
 
 # Supported subscriptions
 Subscriptions are creates with the `eth_subscribe` RPC method with as first param the subscription name. If the subscription was created the subscription id is returned. To remove a subscription execute the `eth_unsubcribe` RPC method with the subscription id as first param.
