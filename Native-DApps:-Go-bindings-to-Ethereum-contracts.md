@@ -191,7 +191,7 @@ And the output (yay):
 Transfer pending: 0x4f4aaeb29ed48e88dd653a81f0b05d4df64a86c99d4e83b5bfeb0f0006b0e55b
 ```
 
-*Note, with high probability you won't have any testnet unicors available to spend, so the
+*Note, with high probability you won't have any testnet unicorns available to spend, so the
 above program will fail with an error. Send at least 2.014 ethers to the foundation testnet
 donation account `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unicorn token and
 you'll be able to see the above code run without an error!*
@@ -201,7 +201,7 @@ transacting methods also require a mandatory first parameter, a `*bind.TransactO
 which authorizes the transaction and potentially fine tunes it:
 
  * `From`: Address of the account to invoke the method with (mandatory)
- * `Signer`: Method to sign an transaction locally before broadcasting it (mandatory)
+ * `Signer`: Method to sign a transaction locally before broadcasting it (mandatory)
  * `Nonce`: Account nonce to use for the transaction ordering (optional)
  * `GasLimit`: Place a limit on the computing resources the call might consume (optional)
  * `GasPrice`: Explicitly set the gas price to run the transaction with (optional)
