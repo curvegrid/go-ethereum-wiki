@@ -316,7 +316,7 @@ http://ethereum.stackexchange.com/questions/2138/what-is-the-difference-between-
 
 * [source](https://github.com/ethereum/go-ethereum/tree/swarm)
 * [issues on github](https://github.com/ethereum/go-ethereum/labels/swarm)
-* [development roadmap]()
+* [development roadmap](https://github.com/ethereum/go-ethereum/wiki/swarm-roadmap)
 
 ## follow swarm 
 
