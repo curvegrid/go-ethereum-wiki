@@ -483,9 +483,9 @@ Create a new account
 Unlock an account
 
 #### Parameters
-`string`, address of the account to delete
+`string`, address of the account to unlock
 
-`string`, passphrase of the account to delete (optional in console, user will be prompted)
+`string`, passphrase of the account to unlock (optional in console, user will be prompted if empty)
 
 `integer`, unlock account for duration seconds, use 0 if the account must be locked forever. If not specified 300 is used by default.
 
