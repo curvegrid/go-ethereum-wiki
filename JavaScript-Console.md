@@ -82,7 +82,7 @@ For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3"` will
 * enable the admin, official DApp and miner API over the IPC interface
 * enable the eth and web3 API over the RPC interface
 
-Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable. By default geth enables all API's over the `ipc` interface and only the db,eth,net and web3 API's over the `rpc` interface.
+Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which API's you enable. By default geth enables all API's over the `ipc` interface and only the eth,net and web3 API's over the `rpc` and `ws` interface.
 
 To determine which API's an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
 
@@ -191,7 +191,6 @@ With the number of THREADS as an arguments:
 * [net](#net)
 * [eth](#eth)
 * [shh](#shh)
-* [db](#db)
 * [inspect](#inspect)
 
 ***
@@ -1013,11 +1012,6 @@ eth.resend(tx, web3.toWei(10, "szabo"))
 
 #### shh
 The `shh` is a shortcut for [web3.shh](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3shh).
-
-***
-
-#### db
-The `db` is a shortcut for [web3.db](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3db).
 
 ***
 
