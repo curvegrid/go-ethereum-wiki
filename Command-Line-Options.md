@@ -8,10 +8,9 @@ USAGE:
    geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.3.1
+   1.4.0
    
 COMMANDS:
-   recover      Attempts to recover a corrupted database by setting a new block by number or hash
    blocktest    loads a block test file
    import       import a blockchain file
    export       export blockchain into file
@@ -19,12 +18,13 @@ COMMANDS:
    removedb     Remove blockchain and state databases
    dump         dump a specific block from storage
    monitor      Geth Monitor: node metrics monitoring and visualization
+   account      manage accounts
+   wallet       ethereum presale wallet
    makedag      generate ethash dag (for testing)
    gpuinfo      gpuinfo
    gpubench     benchmark GPU
    version      print ethereum version numbers
-   wallet       ethereum presale wallet
-   account      manage accounts
+   init         bootstraps and initialises a new genesis block (JSON)
    console      Geth Console: interactive JavaScript environment
    attach       Geth Console: interactive JavaScript environment (connect to node)
    js           executes the given JavaScript files in the Geth JavaScript VM
@@ -32,6 +32,7 @@ COMMANDS:
    
 ETHEREUM OPTIONS:
   --datadir "/home/youruser/.ethereum"  Data directory for the databases and keystore
+  --keystore                            Directory for the keystore (default = inside the datadir)
   --networkid "1"                       Network identifier (integer, 0=Olympic, 1=Frontier, 2=Morden)
   --olympic                             Olympic network: pre-configured pre-release test network
   --testnet                             Morden network: pre-configured test network with modified starting nonces (replay protection)
@@ -39,6 +40,7 @@ ETHEREUM OPTIONS:
   --genesis                             Insert/overwrite the genesis block (JSON format)
   --identity                            Custom node name
   --fast                                Enables fast syncing through state downloads
+  --lightkdf				Reduce key-derivation RAM & CPU usage at some expense of KDF strength
   --cache "0"                           Megabytes of memory allocated to internal caching (min 16MB / database forced)
   --blockchainversion "3"               Blockchain version (integer)
   
@@ -51,18 +53,19 @@ API AND CONSOLE OPTIONS:
   --rpcaddr "localhost"                                                 HTTP-RPC server listening interface
   --rpcport "8545"                                                      HTTP-RPC server listening port
   --rpcapi "eth,net,web3"                                               API's offered over the HTTP-RPC interface
-  --ipcdisable                                                          Disable the IPC-RPC server
-  --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"      API's offered over the IPC-RPC interface
-  --ipcpath "/home/youruser/.ethereum/geth.ipc"                         Filename for IPC socket/pipe
   --rpccorsdomain                                                       Domains from which to accept cross origin requests (browser enforced)
   --ws                                                                  Enable the weboscket RPC server
   --wsaddr "localhost"                                                  WS-RPC server listening interface
   --wsport "8546"                                                       WS-RPC server listening port
   --wsapi "eth,net,web3"                                                API's offered over the WS-RPC interface
   --wsorigins                                                           Origins from which to accept websockets requests
+  --ipcdisable                                                          Disable the IPC-RPC server
+  --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"      API's offered over the IPC-RPC interface
+  --ipcpath "/home/youruser/.ethereum/geth.ipc"                         Filename for IPC socket/pipe
   --jspath "."                                                          JavaSript root path for `loadScript` and document root for `admin.httpGet`
   --exec                                                                Execute JavaScript statement (only in combination with console/attach)
-  
+  --preload                                                             Comma separated list of JavaScript files to preload into the console
+
 NETWORKING OPTIONS:
   --bootnodes           Space-separated enode URLs for P2P discovery bootstrap
   --port "30303"        Network listening port
@@ -79,11 +82,12 @@ MINER OPTIONS:
   --minergpus                   List of GPUs to use for mining (e.g. '0,1' will use the first two GPUs found)
   --autodag                     Enable automatic DAG pregeneration
   --etherbase "0"               Public address for block mining rewards (default = first account created)
-  --gasprice "50000000000"      Minimal gas price to accept for mining a transactions
+  --targetgaslimit "4712388"	Target gas limit sets the artificial target gas floor for the blocks to mine
+  --gasprice "20000000000"      Minimal gas price to accept for mining a transactions
   --extradata                   Block extra data set by the miner (default = client version)
   
 GAS PRICE ORACLE OPTIONS:
-  --gpomin "50000000000"        Minimum suggested gas price
+  --gpomin "20000000000"        Minimum suggested gas price
   --gpomax "500000000000"       Maximum suggested gas price
   --gpofull "80"                Full block threshold for gas price calculation (%)
   --gpobasedown "10"            Suggested gas price base step down ratio (1/1000)
@@ -91,19 +95,21 @@ GAS PRICE ORACLE OPTIONS:
   --gpobasecf "110"             Suggested gas price base correction factor (%)
   
 VIRTUAL MACHINE OPTIONS:
-  --vmdebug             Virtual Machine debug output
   --jitvm               Enable the JIT VM
   --forcejit            Force the JIT VM to take precedence
   --jitcache "64"       Amount of cached JIT VM programs
   
 LOGGING AND DEBUGGING OPTIONS:
-  --verbosity "3"       Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
-  --vmodule ""          Per-module verbosity: comma-separated list of <module>=<level>, where <module> is file literal or a glog pattern
-  --backtrace ":0"      Request a stack trace at a specific logging statement (e.g. "block.go:271")
-  --logfile             Log output file within the data dir (default = no log file generated)
-  --pprof               Enable the profiling server on localhost
-  --pprofport "6060"    Profile server listening port
-  --metrics             Enable metrics collection and reporting
+  --metrics			Enable metrics collection and reporting
+  --verbosity "3"               Logging verbosity: 0-6 (0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=debug detail)
+  --vmodule ""                  Per-module verbosity: comma-separated list of <module>=<level>, where <module> is file literal or a glog pattern
+  --backtrace ":0"              Request a stack trace at a specific logging statement (e.g. "block.go:271")
+  --pprof                       Enable the profiling server on localhost
+  --pprofport "6060"            Profile server listening port
+  --memprofilerate "524288"	Turn on memory profiling with the given rate
+  --blockprofilerate "0"	Turn on block profiling with the given rate
+  --cpuprofile 			Write CPU profile to the given file
+  --trace 			Write execution trace to the given file
   
 EXPERIMENTAL OPTIONS:
   --shh         Enable Whisper
