@@ -200,10 +200,32 @@ geth attach http://host:8545  # connect over HTTP
 geth attach ws://host:8546    # connect over websocket
 ```
 
-## Alternative ways to set flags
+### Init
+With the init command it is possible to create a chain with a custom genesis block and chain configuration (currently only the homestead transition block can be configured). It respects the `--datadir` argument and accepts a JSON file describing the chain configuration.
 
-**WARNING:** This is not available for the latest frontier.
+```
+geth --datadir <some/location/where/to/create/chain> init genesis.json
+```
 
-The same flags can be set via config file (by default `<datadir>/conf.ini`) as well as environment variables. 
+Example genesis.json file:
+```
+{
+        "config": {
+                "homesteadBlock": "10"
+        },
+        "nonce": "0",
+        "difficulty": "0x20000",
+        "mixhash": "0x00000000000000000000000000000000000000647572616c65787365646c6578",
+        "coinbase": "0x0000000000000000000000000000000000000000",
+        "timestamp": "0x00",
+        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "extraData": "0x",
+        "gasLimit": "0x2FEFD8",
+        "alloc": {}
+}
+```
 
-**Precedence**: default < config file < environment variables < command line
+To use the created chain start geth with:
+```
+geth --datadir <some/location/where/to/create/chain>
+```
