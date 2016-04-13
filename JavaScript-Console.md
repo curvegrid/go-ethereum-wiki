@@ -14,9 +14,10 @@ The `ethereum CLI` executable `geth` has a JavaScript console (a **Read, Evaluat
 The attach node accepts an endpoint in case the geth node is running with a non default ipc endpoint or you would like to connect over the rpc interface.
 
     $ geth attach ipc:/some/custom/path
-    $ geth attach rpc:http://191.168.1.1:8545
+    $ geth attach http://191.168.1.1:8545
+    $ geth attach ws://191.168.1.1:8546
 
-Note that by default the geth node doesn't start the rpc service and not all functionality is provided over this interface due to security reasons. These defaults can be overridden when the `--rpcapi` argument when the geth node is started, or with [admin.startRPC](admin_startRPC).
+Note that by default the geth node doesn't start the http and weboscket service and not all functionality is provided over these interfaces due to security reasons. These defaults can be overridden when the `--rpcapi` and `--wsapi` arguments when the geth node is started, or with [admin.startRPC](admin_startRPC) and [admin.startWS](admin_startWS).
 
 If you need log information, start with:
 
@@ -30,20 +31,24 @@ or
 
     $ geth --verbosity 0 console
 
-Note: Since the database can only be accessed by one process, this means you cannot run `geth console` if you have an instance of geth already running.
+Geth has support to load custom JavaScript files into the console through the `--preload` argument. This can be used to load often used functions, setup web3 contract objects, or ...
+```
+geth --preload "/my/scripts/folder/utils.js,/my/scripts/folder/contracts.js" console
+```
+
 
 ## Non-interactive use: JSRE script mode
 
-It's also possible to execute files to the JavaScript intepreter. The `console` and `attach` subcommand accept the `--exec` argument which is a javascript statement. 
+It's also possible to execute files to the JavaScript interpreter. The `console` and `attach` subcommand accept the `--exec` argument which is a javascript statement. 
 
     $ geth --exec "eth.blockNumber" attach
 
 This prints the current block number of a running geth instance.
 
-Or execute a script with more complex statements with:
+Or execute a local script with more complex statements on a remote node over http:
 
-    $ geth --exec 'loadScript("/tmp/checkbalances.js")' attach
-    $ geth --jspath "/tmp" --exec 'loadScript("checkbalances.js")' attach
+    $ geth --exec 'loadScript("/tmp/checkbalances.js")' attach http://123.123.123.123:8545
+    $ geth --jspath "/tmp" --exec 'loadScript("checkbalances.js")' attach http://123.123.123.123:8545
 
 Find an example script [here](https://github.com/ethereum/go-ethereum/wiki/Contracts-and-Transactions#example-script)
 
@@ -82,26 +87,26 @@ Please note that offering an API over the `rpc` interface will give everyone acc
 To determine which API's an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
 
 ```
-echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
+echo '{"jsonrpc":"2.0","method":"rpc_modules","params":[],"id":1}' | socat -,ignoreeof  UNIX-CONNECT:$HOME/.ethereum/geth.ipc
 ```
 will give all enabled modules including the version number:
 ```
-{  
-   "id":1,
-   "jsonrpc":"2.0",
-   "result":{  
-      "admin":"1.0",
-      "db":"1.0",
-      "debug":"1.0",
-      "eth":"1.0",
-      "miner":"1.0",
-      "net":"1.0",
-      "personal":"1.0",
-      "shh":"1.0",
-      "txpool":"1.0",
-      "web3":"1.0"
-   }
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "admin": "1.0",
+    "debug": "1.0",
+    "eth": "1.0",
+    "miner": "1.0",
+    "net": "1.0",
+    "personal": "1.0",
+    "rpc": "1.0",
+    "txpool": "1.0",
+    "web3": "1.0"
+  }
 }
+
 ```
 
 ## Integration
@@ -113,7 +118,7 @@ The different functions are split into multiple smaller logically grouped API's.
 
 * Console: `miner.start()`
 
-* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | nc -U $datadir/geth.ipc`
+* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | socat -,ignoreeof  UNIX-CONNECT:$HOME/.ethereum/geth.ipc`
 
 * RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":74}' localhost:8545`
 
@@ -121,9 +126,9 @@ With the number of THREADS as an arguments:
 
 * Console: `miner.start(4)`
 
-* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":1}' | nc -U $datadir/geth.ipc`
+* IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":["0x04"],"id":1}' | socat -,ignoreeof  UNIX-CONNECT:$HOME/.ethereum/geth.ipc`
 
-* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
+* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":["0x04"],"id":74}' localhost:8545`
 
 ## Management API Reference
 
@@ -141,6 +146,8 @@ With the number of THREADS as an arguments:
   * [chainSyncStatus](#adminchainsyncstatus)
   * [startRPC](#adminstartrpc)
   * [stopRPC](#adminstoprpc)
+  * [startWS](#adminstartws)
+  * [stopWS](#adminstopws)
   * [verbosity](#adminverbosity)
   * [setSolc](#adminsetsolc)
   * [sleepBlocks](#adminsleepblocks)
@@ -420,7 +427,7 @@ Starts the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/
 ##### Example
 
 ```javascript
-admin.startRPC("127.0.0.1", 8545, "*", "web3,db,net,eth")
+admin.startRPC("127.0.0.1", 8545, "*", "web3,net,eth")
 // true
 ```
 
@@ -440,6 +447,44 @@ Stops the HTTP server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/J
 
 ```javascript
 admin.stopRPC()
+// true
+```
+
+***
+
+#### admin.startWS
+
+     admin.startWS(host, portNumber, allowedOrigins, modules)
+
+Starts the websocket server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC). 
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```javascript
+admin.startWS("127.0.0.1", 8546, "*", "web3,net,eth")
+// true
+```
+
+***
+
+#### admin.stopWS
+
+    admin.stopWS() 
+
+Stops the websocket server for the [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+
+##### Returns
+
+`true` on success, otherwise `false`.
+
+##### Example
+
+```javascript
+admin.stopWS()
 // true
 ```
 
