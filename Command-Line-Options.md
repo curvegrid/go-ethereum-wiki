@@ -48,13 +48,18 @@ ACCOUNT OPTIONS:
   
 API AND CONSOLE OPTIONS:
   --rpc                                                                 Enable the HTTP-RPC server
-  --rpcaddr "127.0.0.1"                                                 HTTP-RPC server listening interface
+  --rpcaddr "localhost"                                                 HTTP-RPC server listening interface
   --rpcport "8545"                                                      HTTP-RPC server listening port
-  --rpcapi "db,eth,net,web3"                                            API's offered over the HTTP-RPC interface
+  --rpcapi "eth,net,web3"                                               API's offered over the HTTP-RPC interface
   --ipcdisable                                                          Disable the IPC-RPC server
   --ipcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"      API's offered over the IPC-RPC interface
   --ipcpath "/home/youruser/.ethereum/geth.ipc"                         Filename for IPC socket/pipe
   --rpccorsdomain                                                       Domains from which to accept cross origin requests (browser enforced)
+  --ws                                                                  Enable the weboscket RPC server
+  --wsaddr "localhost"                                                  WS-RPC server listening interface
+  --wsport "8546"                                                       WS-RPC server listening port
+  --wsapi "eth,net,web3"                                                API's offered over the WS-RPC interface
+  --wsorigins                                                           Origins from which to accept websockets requests
   --jspath "."                                                          JavaSript root path for `loadScript` and document root for `admin.httpGet`
   --exec                                                                Execute JavaScript statement (only in combination with console/attach)
   
@@ -157,7 +162,7 @@ Start two mining nodes using different data directories listening on ports 30303
     
 Start an rpc client on port 8000:
 
-    geth --rpc=true --rpcport 8000 --rpccorsdomain '"*"'
+    geth --rpc --rpcport 8000 --rpccorsdomain '"*"'
 
 Launch the client without network:
 
@@ -180,11 +185,13 @@ geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlo
 ```
 
 ### Attach
-Attach a console to a running geth instance. By default this happens over IPC over the default IPC endpoint but when necessary a custom endpoint could be specified:
+Attach a console to a running geth instance. By default this happens over IPC on the default IPC endpoint but when necessary a custom endpoint could be specified:
 
 ```
-geth attach ipc:/some/path
-geth attach rpc:http://host:8545
+geth attach                   # connect over IPC on default endpoint
+geth attach ipc:/some/path    # connect over IPC on custom endpoint
+geth attach http://host:8545  # connect over HTTP
+geth attach ws://host:8546    # connect over websocket
 ```
 
 ## Alternative ways to set flags
