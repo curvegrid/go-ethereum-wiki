@@ -25,8 +25,28 @@ Example:
 3. subscriptions are coupled to a connection. If the connection is closed all subscriptions that are created over this connection are removed.
 4. notifications are stored in an internal buffer and sent from this buffer to the client. If the client is unable to keep up and the number of buffered notifications reaches a limit (currently 10k) the connection is closed. Keep in mind that subscribing to some events can cause a flood of notifications, e.g. listening for all logs/blocks when the node starts to synchronize.
 
+## Create subscription
+Subscriptions are creates with a regular RPC call with `eth_subscribe` as method and the subscription name as first parameter. If successful it returns the subscription id.
+
+### Parameters
+1. subscription name
+2. optional arguments
+
+### Example
+   >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true}]}
+   << {"id": 1, "jsonrpc": "2.0", "result": "0x9cef478923ff08bf67fde6c64013158d"}
+
+## Cancel subscription
+Subscriptions are cancelled with a regular RPC call with `eth_unsubscribe` as method and the subscription id as first parameter. It returns a bool indicating if the subscription was cancelled successful.
+
+### Parameters
+1. subscription id
+
+### Example
+   >> {"id": 1, "method": "eth_unsubscribe", "params": ["0x9cef478923ff08bf67fde6c64013158d"]}
+   << {"jsonrpc":"2.0","id":1,"result":true}
+
 # Supported subscriptions
-Subscriptions are creates with the `eth_subscribe` RPC method with as first param the subscription name. If the subscription was created the subscription id is returned. To remove a subscription execute the `eth_unsubcribe` RPC method with the subscription id as first param.
 
 ## newBlocks
 Fires a notification each time a new block added to the chain, including chain reorganizations.
@@ -71,7 +91,6 @@ Fires a notification each time a new block added to the chain, including chain r
             "uncles":[]
         }
     }
-    }
 
 
 ## logs
@@ -79,7 +98,7 @@ Returns logs that are included in new imported blocks and match the given filter
 
 ### Parameters
 1. `object` with the following (optional) fields
-    - **address**, either an address or an array of addresses. Only logs that are created from these addresses are returns (optional)
+    - **address**, either an address or an array of addresses. Only logs that are created from these addresses are returned (optional)
     - **topics**, only logs which match the specified topics (optional)
 
 
@@ -90,7 +109,7 @@ Returns logs that are included in new imported blocks and match the given filter
     << {"jsonrpc":"2.0","method":"eth_subscription","params": {"subscription":"0x4a8a4c0517381924f9838102c5a4dcb7","result":[{"address":"0x8320fe7702b96808f7bbc0d4a888ed1468216cfd","blockHash":"0x61cdb2a09ab99abf791d474f20c2ea89bf8de2923a2d42bb49944c8c993cbf04","blockNumber":"0x29e87","data":"0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000003","logIndex":"0x0","topics":["0xd78a0cb8bb633d06981248b816e7bd33c2a35a6089241d099fa519e361cab902"],"transactionHash":"0xe044554a0a55067caafd07f8020ab9f2af60bdfe337e395ecd84b4877a3d1ab4","transactionIndex":"0x0"}]}}
 
 ## newPendingTransactions
-Returns all transactions that are added to the pending state and are signed with a key that is available in the node.
+Returns the hash for all transactions that are added to the pending state and are signed with a key that is available in the node.
 
 ### Parameters
 none
@@ -109,7 +128,7 @@ none
         }
 
 ## syncing
-Indicates when the node starts or stops synchronizing. The result can either be a boolean indicating that the synchronization has started (true), finished (false) or an object with various indicators.
+Indicates when the node starts or stops synchronizing. The result can either be a boolean indicating that the synchronization has started (true), finished (false) or an object with various progress indicators.
 
 ### Parameters
 none
