@@ -84,6 +84,10 @@ We'll use the foundation's [Unicorn](https://ethereum.org/donate) token contract
 on the testnet to demonstrate calling contract methods. It is deployed at the address
 `0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576`.
 
+To run the snippet below, please ensure a Geth instance is running and attached to the
+Morden test network where the above mentioned contract was deployed. Also please update
+the path to the IPC socket below to the one reported by your own local Geth node.
+
 ```go
 package main
 
@@ -141,7 +145,7 @@ Thus to allow transacting with a contract, your code needs to implement a method
 given an input transaction, signs it and returns an authorized output transaction. Since
 most users have their keys in the [Web3 Secret Storage](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) format, the `bind` package contains a small utility method 
 (`bind.NewTransactor(keyjson, passphrase)`) that can create an authorized transactor from
-a key file and associate password, without the user needing to implement key signing himself.
+a key file and associated password, without the user needing to implement key signing himself.
 
 Changing the previous code snippet to send one unicorn to the zero address:
 
@@ -192,8 +196,8 @@ Transfer pending: 0x4f4aaeb29ed48e88dd653a81f0b05d4df64a86c99d4e83b5bfeb0f0006b0
 ```
 
 *Note, with high probability you won't have any testnet unicorns available to spend, so the
-above program will fail with an error. Send at least 2.014 ethers to the foundation testnet
-donation account `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unicorn token and
+above program will fail with an error. Send at least 2.014 testnet(!) Ethers to the foundation
+testnet tipjar `0xDf7D0030bfed998Db43288C190b63470c2d18F50` to receive a unicorn token and
 you'll be able to see the above code run without an error!*
 
 Similar to the method invocations in the previous section which only read contract state,
@@ -259,7 +263,7 @@ code too:
 $ abigen --abi token.abi --pkg main --type Token --out token.go --bin token.bin
 ```
 
-This will generate something similar to [`token.go`](https://gist.github.com/karalabe/0aeba0c6f88875279eb5).
+This will generate something similar to [`token.go`](https://gist.github.com/karalabe/2153b087c1f80f651fd87dd4c439fac4).
 If you quickly skim this file, you'll find an extra `DeployToken` function that was just
 injected compared to the previous code. Beside all the parameters specified by Solidity,
 it also needs the usual authorization options to deploy the contract with and the Ethereum
@@ -295,7 +299,7 @@ func main() {
 		log.Fatalf("Failed to create authorized transactor: %v", err)
 	}
 	// Deploy a new awesome contract for the binding demo
-	address, tx, token, err := DeployToken(auth, backends.NewRPCBackend(conn), new(big.Int), "Contracts in Go!!!", new(big.Int), "Go!")
+	address, tx, token, err := DeployToken(auth, backends.NewRPCBackend(conn), new(big.Int), "Contracts in Go!!!", 0, "Go!")
 	if err != nil {
 		log.Fatalf("Failed to deploy new token contract: %v", err)
 	}
@@ -348,7 +352,7 @@ the Solidity code and produced build results directly.*
 Building a contract directly from Solidity has the nice side effect that all contracts
 contained within a Solidity source file are built and bound, so if your file contains many
 contract sources, each and every one of them will be available from Go code. The sample
-Token solidity file results in [`token.go`](https://gist.github.com/karalabe/79f654db3bc1c4872100).
+Token solidity file results in [`token.go`](https://gist.github.com/karalabe/c22aab73194ba7da834ab5b379621031).
 
 ### Project integration (i.e. `go generate`)
 
@@ -383,7 +387,6 @@ way as a live RPC backend could be: `backends.NewSimulatedBackend(genesisAccount
 package main
 
 import (
-	"crypto/rand"
 	"fmt"
 	"log"
 	"math/big"
@@ -396,14 +399,13 @@ import (
 
 func main() {
 	// Generate a new random account and a funded simulator
-	key := crypto.NewKey(rand.Reader)
-	sim := backends.NewSimulatedBackend(core.GenesisAccount{key.Address, big.NewInt(10000000000)})
-
-	// Convert the tester key to an authorized transactor for ease of use
+	key, _ := crypto.GenerateKey()
 	auth := bind.NewKeyedTransactor(key)
 
+	sim := backends.NewSimulatedBackend(core.GenesisAccount{Address: auth.From, Balance: big.NewInt(10000000000)})
+
 	// Deploy a token contract on the simulated blockchain
-	_, _, token, err := DeployToken(auth, sim, new(big.Int), "Simulated blockchain tokens", new(big.Int), "SBT")
+	_, _, token, err := DeployMyToken(auth, sim, new(big.Int), "Simulated blockchain tokens", 0, "SBT")
 	if err != nil {
 		log.Fatalf("Failed to deploy new token contract: %v", err)
 	}
