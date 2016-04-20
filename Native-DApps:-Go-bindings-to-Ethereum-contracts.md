@@ -70,8 +70,8 @@ Where the flags are:
  * `--out`: Optional output path for the generated Go source file (not set = stdout)
 
 This will generate a type-safe Go binding for the Token contract. The generated code will
-look something like [`token.go`](https://gist.github.com/karalabe/5954553b76d1fd997a43), but
-please generate your own as this will change as more work is put into the generator.
+look something like [`token.go`](https://gist.github.com/karalabe/5839509295afa4f7e2215bc4116c7a8f),
+but please generate your own as this will change as more work is put into the generator.
 
 ### Accessing an Ethereum contract
 
