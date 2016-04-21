@@ -46,7 +46,7 @@ you have a valid Go development environment set up, `godep` installed and the go
 repository checked out correctly, you can build the generator with:
 
 ```
-$ cd $GOPATH/src/github.com/go-ethereum
+$ cd $GOPATH/src/github.com/ethereum/go-ethereum
 $ godep go install ./cmd/abigen
 ```
 
