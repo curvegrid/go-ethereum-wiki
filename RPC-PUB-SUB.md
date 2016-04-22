@@ -1,6 +1,6 @@
 # Introduction
 
-From version 1.4 (to be confirmed) geth has **_experimental_** support for pub/sub using subscriptions as defined in the JSON-RPC 2.0 specification. This allows clients to wait for events instead of polling for them.
+From version 1.4 geth has **_experimental_** support for pub/sub using subscriptions as defined in the JSON-RPC 2.0 specification. This allows clients to wait for events instead of polling for them.
 
 It works by subscribing to particular events. The node will return a subscription id. For each event that matches the subscription a notification with relevant data is send together with the subscription id.
 
