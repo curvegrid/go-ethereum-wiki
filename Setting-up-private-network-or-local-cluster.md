@@ -19,7 +19,7 @@ geth --datadir="/tmp/eth/60/01" -verbosity 6 --ipcdisable --port 30301 --rpcport
 We started the node with the console, so that we can grab the enode url for instance:
 
 ```
-> admin.nodeInfo.NodeUrl
+> admin.nodeInfo.enode
 enode://8c544b4a07da02a9ee024def6f3ba24b2747272b64e16ec5dd6b17b55992f8980b77938155169d9d33807e501729ecb42f5c0a61018898c32799ced152e9f0d7@9[::]:30301
 ```
 
