@@ -1,21 +1,26 @@
-Beside the official [DApp APIs](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface go-ethereum has support for additional, Geth specific management APIs. Similar to the DApp APIs, these are also provided using [JSON-RPC](http://www.jsonrpc.org/specification) and follow exactly the same conventions. Geth comes with a console client which has support for all additional APIs described here.
+Beside the official [DApp APIs](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface go-ethereum has support for additional management APIs. Similar to the DApp APIs, these are also provided using [JSON-RPC](http://www.jsonrpc.org/specification) and follow exactly the same conventions. Geth comes with a console client which has support for all additional APIs described here.
 
-# How to
-It is possible to specify the set of APIs which are offered over an interface with the `--${interface}api` command line argument for the go ethereum daemon. Where `${interface}` can be `rpc` for the `http` interface or `ipc` for an unix socket on unix or named pipe on Windows.
+## Enabling the management APIs
 
-For example, `geth --ipcapi "admin,eth,miner" --rpcapi "eth,web3" --rpc` will
-* enable the admin, official DApp and miner API over the IPC interface
-* enable the eth and web3 API over the RPC interface
+To offer these APIs over the Geth RPC endpoints, please specify them with the `--${interface}api` command line argument (where `${interface}` can be `rpc` for the HTTP endpoint, `ws` for the WebSocket endpoint and `ipc` for the unix socket (Unix) or named pipe (Windows) endpoint).
+
+For example: `geth --ipcapi admin,eth,miner --rpcapi eth,web3 --rpc`
+
+* Enables the admin, official DApp and miner API over the IPC interface
+* Enables the official DApp and web3 API over the HTTP interface
 
 The HTTP RPC interface must be explicitly enabled using the `--rpc` flag.
-Please note that offering an API over the `rpc` interface will give everyone access to the API who can access this interface (e.g. DApp's). So be careful which APIs you enable. By default geth enables all APIs over the `ipc` interface and only the db,eth,net and web3 APIs over the `rpc` interface.
 
-To determine which APIs an interface provides the `modules` transaction can be used, e.g. over an `ipc` interface on unix systems:
+Please note, offering an API over the HTTP (`rpc`) or WebSocket (`ws`) interfaces will give everyone access to the APIs who can access this interface (DApps, browser tabs, etc). Be careful which APIs you enable. By default Geth enables all APIs over the IPC (`ipc`) interface and only the `db`, `eth`, `net` and `web3` APIs over the HTTP and WebSocket interfaces.
+
+To determine which APIs an interface provides, the `modules` JSON-RPC method can be invoked. For example over an `ipc` interface on unix systems:
 
 ```
 echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
 ```
+
 will give all enabled modules including the version number:
+
 ```
 {  
    "id":1,
@@ -35,10 +40,11 @@ will give all enabled modules including the version number:
 }
 ```
 
-## Integration
-These additional APIs follow the same conventions as the official DApp API. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional APIs. 
+## Consuming the management APIs
 
-The different functions are split into multiple smaller logically grouped APIs. Examples are given for the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to a rpc request.
+These additional APIs follow the same conventions as the official DApp APIs. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional APIs. 
+
+The different functions are split into multiple smaller logically grouped APIs. Examples are given for the [JavaScript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to an RPC request.
 
 **2 examples:**
 
@@ -46,7 +52,7 @@ The different functions are split into multiple smaller logically grouped APIs. 
 
 * IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | nc -U $datadir/geth.ipc`
 
-* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":74}' localhost:8545`
+* HTTP: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":74}' localhost:8545`
 
 With the number of THREADS as an arguments:
 
@@ -54,7 +60,7 @@ With the number of THREADS as an arguments:
 
 * IPC: `echo '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":1}' | nc -U $datadir/geth.ipc`
 
-* RPC: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
+* HTTP: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
 
 ## Admin
 Provides various functions for managing a geth node
