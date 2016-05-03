@@ -85,17 +85,24 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 | [startWS](#admin_startWS)         |                                     |                                     |                                          |                          |
 | [stopWS](#admin_stopWS)           |                                     |                                     |                                          |                          |
 
+## API endpoint reference
+
 ### admin_addPeer
-Add peer to node
 
-#### Parameters
-* `Url`, peer enode url
+AddPeer requests connecting to a remote node, and also maintaining the new
+connection at all times, even reconnecting if it is lost.
 
-#### Return
-`boolean` indicating if the peer was added
+| Client  | Method invocation                              |
+|---------|------------------------------------------------|
+| Go      | `admin.AddPeer(url string) bool`               |
+| Console | `admin.addPeer(url)` returns `boolean`         |
+| RPC     | `{"method": "admin_addPeer", "params": [url]}` |
 
-#### Example
-`admin.addPeer("enode://4d19a2d...167fa41@XXX.XXX.XXX.XXX:30303")`
+| Parameter | Description | Sample |
+|:---------:|-------------|--------|
+| `url`     | The [enode](https://github.com/ethereum/wiki/wiki/enode-url-format) URL of the remote peer | `"enode://4d19a2d...167fa41@XXX.XXX.XXX.XXX:30303"` |
+| | | |
+| `return` | Indicates if the peer was added | `true` |
 ***
 
 ### admin_peers
