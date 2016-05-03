@@ -89,20 +89,20 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 
 ### admin_addPeer
 
+Requests connecting to a remote node and also maintaining the new connection
+at all times, even reconnecting if it is lost.
+
 | Client  | Method invocation                              |
-|---------|------------------------------------------------|
+|:-------:|------------------------------------------------|
 | Go      | `admin.AddPeer(url string) bool`               |
 | Console | `admin.addPeer(url)` returns `boolean`         |
 | RPC     | `{"method": "admin_addPeer", "params": [url]}` |
 
-AddPeer requests connecting to a remote node, and also maintaining the new
-connection at all times, even reconnecting if it is lost.
+Reference:
+ * `url`: [enode](https://github.com/ethereum/wiki/wiki/enode-url-format) URL of the remote peer to start tracking
+   * `"enode://4d19a2d...167fa41@XXX.XXX.XXX.XXX:30303"`
+ * `return`: indicates whether the peer was accepted for tracking
 
-| Parameter | Description | Sample |
-|:---------:|-------------|--------|
-| `url`     | The [enode](https://github.com/ethereum/wiki/wiki/enode-url-format) URL of the remote peer | `"enode://4d19a2d...167fa41@W.X.Y.Z:30303"` |
-| | | |
-| `return` | Indicates if the peer was added | `true` |
 ***
 
 ### admin_peers
