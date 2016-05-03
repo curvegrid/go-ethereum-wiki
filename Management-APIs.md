@@ -62,61 +62,28 @@ With the number of THREADS as an arguments:
 
 * HTTP: `curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[4],"id":74}' localhost:8545`
 
-## Admin
-Provides various functions for managing a geth node
-* [addPeer](#admin_addPeer)
-* [peers] (#admin_peers)
-* [importChain](#admin_importChain)
-* [exportChain](#admin_exportChain)
-* [verbosity](#admin_verbosity)
-* [setSolc](#admin_setColc)
-* [startRPC](#admin_startRPC)
-* [stopRPC](#admin_stopRPC)
-* [startWS](#admin_startWS)
-* [stopWS](#admin_stopWS)
+## List of management APIs
 
-## Db
-This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth provides the following extra management API namespaces:
 
-## Debug
-* [dumpBlock](#debug_dumpBlock)
-* [getBlockRlp] (#debug_getBlockRlp)
-* [printBlock](#debug_printBlock)
-* [processBlock](#debug_processBlock)
-* [seedHash](#debug_seedHash)
-* [setHead](#debug_setHead)
+* `admin`: Geth node management
+* `debug`: Geth node debugging
+* `miner`: Miner and [DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG) management
+* `personal`: Account management
+* `txpool`: Transaction pool inspection
 
-## Eth
-This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
-
-## Miner
-Allows full control over the miner and [DAG](https://github.com/ethereum/wiki/wiki/Ethash-DAG).
-* [start](#miner_start)
-* [stop](#miner_stop)
-* [hashrate](#miner_hashrate)
-* [setExtra](#miner_setExtra)
-* [setGasPrice](#miner_setGasPrice)
-* [startAutoDAG](#miner_startAutoDAG)
-* [stopAutoDAG](#miner_stopAutoDAG)
-* [makeDAG](#miner_makeDAG)
-
-## Net
-Network related functions
-* [peerCount](#net_peerCount)
-* [listening](#net_listening)
-
-## Personal
-Support for account management.
-* [listAccounts](#personal_listAccounts)
-* [newAccount](#personal_newAccount)
-* [unlockAccount](#personal_unlockAccount)
-
-## Txpool
-Gives insight in the transaction pool
-* [status](#txpool_status)
-
-## Web3
-This is the official DApp API. See for more information [this page](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+| admin                             | debug                               | miner                               | personal                                 | txpool                   |
+|:---------------------------------:|:-----------------------------------:|:-----------------------------------:|:----------------------------------------:|:------------------------:|
+| [addPeer](#admin_addPeer)         | [dumpBlock](#debug_dumpBlock)       | [start](#miner_start)               | [listAccounts](#personal_listAccounts)   | [status](#txpool_status) |
+| [peers] (#admin_peers)            | [getBlockRlp] (#debug_getBlockRlp)  | [stop](#miner_stop)                 | [newAccount](#personal_newAccount)       |                          |
+| [importChain](#admin_importChain) | [printBlock](#debug_printBlock)     | [hashrate](#miner_hashrate)         | [unlockAccount](#personal_unlockAccount) |                          |
+| [exportChain](#admin_exportChain) | [processBlock](#debug_processBlock) | [setExtra](#miner_setExtra)         |                                          |                          |
+| [verbosity](#admin_verbosity)     | [seedHash](#debug_seedHash)         | [setGasPrice](#miner_setGasPrice)   |                                          |                          |
+| [setSolc](#admin_setColc)         | [setHead](#debug_setHead)           | [startAutoDAG](#miner_startAutoDAG) |                                          |                          |
+| [startRPC](#admin_startRPC)       |                                     | [stopAutoDAG](#miner_stopAutoDAG)   |                                          |                          |
+| [stopRPC](#admin_stopRPC)         |                                     | [makeDAG](#miner_makeDAG)           |                                          |                          |
+| [startWS](#admin_startWS)         |                                     |                                     |                                          |                          |
+| [stopWS](#admin_stopWS)           |                                     |                                     |                                          |                          |
 
 ### admin_addPeer
 Add peer to node
