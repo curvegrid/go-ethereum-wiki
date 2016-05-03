@@ -24,7 +24,7 @@
 
 [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
-[Management API](https://github.com/ethereum/go-ethereum/wiki/Go-ethereum-management-API's)
+[Management API](https://github.com/ethereum/go-ethereum/wiki/Management-APIs)
 
 [JSON-RPC server](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
