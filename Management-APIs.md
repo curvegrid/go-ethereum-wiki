@@ -72,7 +72,7 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| admin                             | debug                                           | miner                               | personal                                 | txpool                   |
+| admin                             | [debug](#debug)                                 | miner                               | personal                                 | txpool                   |
 |:---------------------------------:|:-----------------------------------------------:|:-----------------------------------:|:----------------------------------------:|:------------------------:|
 | [addPeer](#admin_addPeer)         | [dumpBlock](#debug_dumpblock)                   | [start](#miner_start)               | [listAccounts](#personal_listAccounts)   | [status](#txpool_status) |
 | [peers] (#admin_peers)            | [getBlockRlp] (#debug_getblockrlp)              | [stop](#miner_stop)                 | [newAccount](#personal_newAccount)       |                          |
