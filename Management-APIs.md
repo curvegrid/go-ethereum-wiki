@@ -84,9 +84,9 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 | [stopRPC](#admin_stopRPC)         | [traceBlock](#debug_traceblock)                 | [makeDAG](#miner_makeDAG)           |                                          |                          |
 | [startWS](#admin_startWS)         | [traceBlockFromFile](#debug_traceblockfromfile) |                                     |                                          |                          |
 | [stopWS](#admin_stopWS)           | [traceBlockByNumber](#debug_blockbynumber)      |                                     |                                          |                          |
-|                                   | [traceBlockByNumber](#debug_getblockrlp)        |                                     |                                          |                          |
-|                                   | [traceBlockByNumber](#debug_seedhash)           |                                     |                                          |                          |
-|                                   | [traceBlockByNumber](#debug_sethash)            |                                     |                                          |                          |
+|                                   | [getBlockRlp](#debug_getblockrlp)               |                                     |                                          |                          |
+|                                   | [seedHash](#debug_seedhash)                     |                                     |                                          |                          |
+|                                   | [setHead](#debug_sethead)                       |                                     |                                          |                          |
 
 ## API endpoint reference
 
