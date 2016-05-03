@@ -72,18 +72,21 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| admin                             | debug                               | miner                               | personal                                 | txpool                   |
-|:---------------------------------:|:-----------------------------------:|:-----------------------------------:|:----------------------------------------:|:------------------------:|
-| [addPeer](#admin_addPeer)         | [dumpBlock](#debug_dumpBlock)       | [start](#miner_start)               | [listAccounts](#personal_listAccounts)   | [status](#txpool_status) |
-| [peers] (#admin_peers)            | [getBlockRlp] (#debug_getBlockRlp)  | [stop](#miner_stop)                 | [newAccount](#personal_newAccount)       |                          |
-| [importChain](#admin_importChain) | [printBlock](#debug_printBlock)     | [hashrate](#miner_hashrate)         | [unlockAccount](#personal_unlockAccount) |                          |
-| [exportChain](#admin_exportChain) | [processBlock](#debug_processBlock) | [setExtra](#miner_setExtra)         |                                          |                          |
-| [verbosity](#admin_verbosity)     | [seedHash](#debug_seedHash)         | [setGasPrice](#miner_setGasPrice)   |                                          |                          |
-| [setSolc](#admin_setColc)         | [setHead](#debug_setHead)           | [startAutoDAG](#miner_startAutoDAG) |                                          |                          |
-| [startRPC](#admin_startRPC)       |                                     | [stopAutoDAG](#miner_stopAutoDAG)   |                                          |                          |
-| [stopRPC](#admin_stopRPC)         |                                     | [makeDAG](#miner_makeDAG)           |                                          |                          |
-| [startWS](#admin_startWS)         |                                     |                                     |                                          |                          |
-| [stopWS](#admin_stopWS)           |                                     |                                     |                                          |                          |
+| admin                             | debug                                           | miner                               | personal                                 | txpool                   |
+|:---------------------------------:|:-----------------------------------------------:|:-----------------------------------:|:----------------------------------------:|:------------------------:|
+| [addPeer](#admin_addPeer)         | [dumpBlock](#debug_dumpblock)                   | [start](#miner_start)               | [listAccounts](#personal_listAccounts)   | [status](#txpool_status) |
+| [peers] (#admin_peers)            | [getBlockRlp] (#debug_getblockrlp)              | [stop](#miner_stop)                 | [newAccount](#personal_newAccount)       |                          |
+| [importChain](#admin_importChain) | [printBlock](#debug_printblock)                 | [hashrate](#miner_hashrate)         | [unlockAccount](#personal_unlockAccount) |                          |
+| [exportChain](#admin_exportChain) | [processBlock](#debug_processblock)             | [setExtra](#miner_setExtra)         |                                          |                          |
+| [verbosity](#admin_verbosity)     | [seedHash](#debug_seedhash)                     | [setGasPrice](#miner_setGasPrice)   |                                          |                          |
+| [setSolc](#admin_setColc)         | [setHead](#debug_sethead)                       | [startAutoDAG](#miner_startAutoDAG) |                                          |                          |
+| [startRPC](#admin_startRPC)       | [traceTransaction](#debug_tracetrancaction)     | [stopAutoDAG](#miner_stopAutoDAG)   |                                          |                          |
+| [stopRPC](#admin_stopRPC)         | [traceBlock](#debug_traceblock)                 | [makeDAG](#miner_makeDAG)           |                                          |                          |
+| [startWS](#admin_startWS)         | [traceBlockFromFile](#debug_traceblockfromfile) |                                     |                                          |                          |
+| [stopWS](#admin_stopWS)           | [traceBlockByNumber](#debug_blockbynumber)      |                                     |                                          |                          |
+|                                   | [traceBlockByNumber](#debug_getblockrlp)        |                                     |                                          |                          |
+|                                   | [traceBlockByNumber](#debug_seedhash)           |                                     |                                          |                          |
+|                                   | [traceBlockByNumber](#debug_sethash)            |                                     |                                          |                          |
 
 ## API endpoint reference
 
