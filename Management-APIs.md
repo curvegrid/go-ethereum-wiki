@@ -1,8 +1,13 @@
-Beside the official [DApp APIs](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface go-ethereum has support for additional management APIs. Similar to the DApp APIs, these are also provided using [JSON-RPC](http://www.jsonrpc.org/specification) and follow exactly the same conventions. Geth comes with a console client which has support for all additional APIs described here.
+Beside the official [DApp APIs](https://github.com/ethereum/wiki/wiki/JSON-RPC) interface go-ethereum
+has support for additional management APIs. Similar to the DApp APIs, these are also provided using
+[JSON-RPC](http://www.jsonrpc.org/specification) and follow exactly the same conventions. Geth comes
+with a console client which has support for all additional APIs described here.
 
 ## Enabling the management APIs
 
-To offer these APIs over the Geth RPC endpoints, please specify them with the `--${interface}api` command line argument (where `${interface}` can be `rpc` for the HTTP endpoint, `ws` for the WebSocket endpoint and `ipc` for the unix socket (Unix) or named pipe (Windows) endpoint).
+To offer these APIs over the Geth RPC endpoints, please specify them with the `--${interface}api`
+command line argument (where `${interface}` can be `rpc` for the HTTP endpoint, `ws` for the WebSocket
+endpoint and `ipc` for the unix socket (Unix) or named pipe (Windows) endpoint).
 
 For example: `geth --ipcapi admin,eth,miner --rpcapi eth,web3 --rpc`
 
@@ -11,9 +16,13 @@ For example: `geth --ipcapi admin,eth,miner --rpcapi eth,web3 --rpc`
 
 The HTTP RPC interface must be explicitly enabled using the `--rpc` flag.
 
-Please note, offering an API over the HTTP (`rpc`) or WebSocket (`ws`) interfaces will give everyone access to the APIs who can access this interface (DApps, browser tabs, etc). Be careful which APIs you enable. By default Geth enables all APIs over the IPC (`ipc`) interface and only the `db`, `eth`, `net` and `web3` APIs over the HTTP and WebSocket interfaces.
+Please note, offering an API over the HTTP (`rpc`) or WebSocket (`ws`) interfaces will give everyone
+access to the APIs who can access this interface (DApps, browser tabs, etc). Be careful which APIs
+you enable. By default Geth enables all APIs over the IPC (`ipc`) interface and only the `db`, `eth`,
+`net` and `web3` APIs over the HTTP and WebSocket interfaces.
 
-To determine which APIs an interface provides, the `modules` JSON-RPC method can be invoked. For example over an `ipc` interface on unix systems:
+To determine which APIs an interface provides, the `modules` JSON-RPC method can be invoked. For
+example over an `ipc` interface on unix systems:
 
 ```
 echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
@@ -42,9 +51,12 @@ will give all enabled modules including the version number:
 
 ## Consuming the management APIs
 
-These additional APIs follow the same conventions as the official DApp APIs. Web3 can be [extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional APIs. 
+These additional APIs follow the same conventions as the official DApp APIs. Web3 can be
+[extended](https://github.com/ethereum/web3.js/pull/229) and used to consume these additional APIs. 
 
-The different functions are split into multiple smaller logically grouped APIs. Examples are given for the [JavaScript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but can easily be converted to an RPC request.
+The different functions are split into multiple smaller logically grouped APIs. Examples are given
+for the [JavaScript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) but
+can easily be converted to an RPC request.
 
 **2 examples:**
 
@@ -64,7 +76,8 @@ With the number of THREADS as an arguments:
 
 ## List of management APIs
 
-Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth provides the following extra management API namespaces:
+Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth provides the following
+extra management API namespaces:
 
 * `admin`: Geth node management
 * `debug`: Geth node debugging
@@ -75,156 +88,259 @@ Beside the officially exposed DApp API namespaces (`eth`, `shh`, `web3`), Geth p
 | admin                             | [debug](#debug)                                 | miner                               | personal                                 | txpool                   |
 |:---------------------------------:|:-----------------------------------------------:|:-----------------------------------:|:----------------------------------------:|:------------------------:|
 | [addPeer](#admin_addpeer)         | [dumpBlock](#debug_dumpblock)                   | [start](#miner_start)               | [listAccounts](#personal_listaccounts)   | [status](#txpool_status) |
-| [peers] (#admin_peers)            | [getBlockRlp] (#debug_getblockrlp)              | [stop](#miner_stop)                 | [newAccount](#personal_newaccount)       |                          |
-| [importChain](#admin_importchain) | [printBlock](#debug_printblock)                 | [hashrate](#miner_hashrate)         | [unlockAccount](#personal_unlockaccount) |                          |
-| [exportChain](#admin_exportchain) | [processBlock](#debug_processblock)             | [setExtra](#miner_setextra)         |                                          |                          |
-| [verbosity](#admin_verbosity)     | [seedHash](#debug_seedhash)                     | [setGasPrice](#miner_setgasprice)   |                                          |                          |
-| [setSolc](#admin_setcolc)         | [setHead](#debug_sethead)                       | [startAutoDAG](#miner_startautodag) |                                          |                          |
-| [startRPC](#admin_startrpc)       | [traceTransaction](#debug_tracetrancaction)     | [stopAutoDAG](#miner_stopAutodag)   |                                          |                          |
+| [datadir](#datadir)               | [getBlockRlp](#debug_getblockrlp)               | [stop](#miner_stop)                 | [newAccount](#personal_newaccount)       |                          |
+| [nodeInfo](#admin_nodeinfo)       | [printBlock](#debug_printblock)                 | [hashrate](#miner_hashrate)         | [unlockAccount](#personal_unlockaccount) |                          |
+| [peers](#admin_peers)             | [processBlock](#debug_processblock)             | [setExtra](#miner_setextra)         |                                          |                          |
+| [setSolc](#admin_setcolc)         | [seedHash](#debug_seedhash)                     | [setGasPrice](#miner_setgasprice)   |                                          |                          |
+| [startRPC](#admin_startrpc)       | [setHead](#debug_sethead)                       | [startAutoDAG](#miner_startautodag) |                                          |                          |
+| [startWS](#admin_startws)         | [traceTransaction](#debug_tracetrancaction)     | [stopAutoDAG](#miner_stopAutodag)   |                                          |                          |
 | [stopRPC](#admin_stoprpc)         | [traceBlock](#debug_traceblock)                 | [makeDAG](#miner_makedag)           |                                          |                          |
-| [startWS](#admin_startws)         | [traceBlockFromFile](#debug_traceblockfromfile) |                                     |                                          |                          |
-| [stopWS](#admin_stopws)           | [traceBlockByNumber](#debug_blockbynumber)      |                                     |                                          |                          |
-|                                   | [getBlockRlp](#debug_getblockrlp)               |                                     |                                          |                          |
-|                                   | [seedHash](#debug_seedhash)                     |                                     |                                          |                          |
-|                                   | [setHead](#debug_sethead)                       |                                     |                                          |                          |
+| [stopWS](#admin_stopws)           | [traceBlockFromFile](#debug_traceblockfromfile) |                                     |                                          |                          |
+|                                   | [traceBlockByNumber](#debug_blockbynumber)      |                                     |                                          |                          |
 
-## API endpoint reference
+## Admin
+
+The `admin` API gives you access to several non-standard RPC methods, which will allow you to have
+a fine grained control over your Geth instance, including but not limited to network peer and RPC
+endpoint management.
 
 ### admin_addPeer
 
-Requests connecting to a remote node and also maintaining the new connection
-at all times, even reconnecting if it is lost.
+The `addPeer` administrative method requests adding a new remote node to the list of tracked static
+nodes. The node will try to maintain connectivity to these nodes at all times, reconnecting every
+once in a while if the remote connection goes down.
+
+The method accepts a single argument, the [`enode`](https://github.com/ethereum/wiki/wiki/enode-url-format)
+URL of the remote peer to start tracking and returns a `BOOL` indicating whether the peer was accepted
+for tracking or some error occurred.
 
 | Client  | Method invocation                              |
 |:-------:|------------------------------------------------|
-| Go      | `admin.AddPeer(url string) bool`               |
-| Console | `admin.addPeer(url)` returns `boolean`         |
+| Go      | `admin.AddPeer(url string) (bool, error)`      |
+| Console | `admin.addPeer(url)`                           |
 | RPC     | `{"method": "admin_addPeer", "params": [url]}` |
 
-Reference:
- * `url`: [enode](https://github.com/ethereum/wiki/wiki/enode-url-format) URL of the remote peer to start tracking
-   * `"enode://4d19a2d...167fa41@XXX.XXX.XXX.XXX:30303"`
- * `return`: indicates whether the peer was accepted for tracking
+#### Example
 
-***
+```javascript
+> admin.addPeer("enode://a979fb575495b8d6db44f750317d0f4622bf4c2aa3365d6af7c284339968eef29b69ad0dce72a4d8db5ebb4968de0e3bec910127f134779fbcb0cb6d3331163c@52.16.188.185:30303")
+true
+```
+
+### admin_datadir
+
+The `datadir` administrative property can be queried for the absolute path the running Geth node
+currently uses to store all its databases.
+
+| Client  | Method invocation                 |
+|:-------:|-----------------------------------|
+| Go      | `admin.Datadir() (string, error`) |
+| Console | `admin.datadir`                   |
+| RPC     | `{"method": "admin_datadir"}`     |
+
+#### Example
+
+```javascript
+> admin.datadir
+"/home/karalabe/.ethereum"
+```
+
+### admin_nodeInfo
+
+The `nodeInfo` administrative property can be queried for all the information known about the running
+Geth node at the networking granularity. These include general information about the node itself as a
+participant of the [ÐΞVp2p](https://github.com/ethereum/wiki/wiki/%C3%90%CE%9EVp2p-Wire-Protocol) P2P
+overlay protocol, as well as specialized information added by each of the running application protocols
+(e.g. `eth`, `les`, `shh`, `bzz`).
+
+| Client  | Method invocation                         |
+|:-------:|-------------------------------------------|
+| Go      | `admin.NodeInfo() (*p2p.NodeInfo, error`) |
+| Console | `admin.nodeInfo`                          |
+| RPC     | `{"method": "admin_nodeInfo"}`            |
+
+#### Example
+
+```javascript
+> admin.nodeInfo
+{
+  enode: "enode://44826a5d6a55f88a18298bca4773fca5749cdc3a5c9f308aa7d810e9b31123f3e7c5fba0b1d70aac5308426f47df2a128a6747040a3815cc7dd7167d03be320d@[::]:30303",
+  id: "44826a5d6a55f88a18298bca4773fca5749cdc3a5c9f308aa7d810e9b31123f3e7c5fba0b1d70aac5308426f47df2a128a6747040a3815cc7dd7167d03be320d",
+  ip: "::",
+  listenAddr: "[::]:30303",
+  name: "Geth/v1.5.0-unstable/linux/go1.6",
+  ports: {
+    discovery: 30303,
+    listener: 30303
+  },
+  protocols: {
+    eth: {
+      difficulty: 17334254859343145000,
+      genesis: "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3",
+      head: "0xb83f73fbe6220c111136aefd27b160bf4a34085c65ba89f24246b3162257c36a",
+      network: 1
+    }
+  }
+}
+```
 
 ### admin_peers
-This property will show all connected peers.
+
+The `peers` administrative property can be queried for all the information known about the connected
+remote nodes at the networking granularity. These include general information about the nodes themselves
+as participants of the [ÐΞVp2p](https://github.com/ethereum/wiki/wiki/%C3%90%CE%9EVp2p-Wire-Protocol)
+P2P overlay protocol, as well as specialized information added by each of the running application
+protocols (e.g. `eth`, `les`, `shh`, `bzz`).
+
+| Client  | Method invocation                        |
+|:-------:|------------------------------------------|
+| Go      | `admin.Peers() ([]*p2p.PeerInfo, error`) |
+| Console | `admin.peers`                            |
+| RPC     | `{"method": "admin_peers"}`              |
 
 #### Example
-`admin.peers`
-***
 
-### admin_importChain
-Import an exported chain from file into node. This only works if no chain already exists: it does not delete any existing data.
-
-#### Parameters
-* `Filename`, the fully qualified path to the file containing the chain to be imported
-
-#### Return
-`boolean` indicating if chain was imported
-
-#### Example
-`admin.importChain("/tmp/chain.txt")`
-***
-
-### admin_exportChain
-Export the blockchain to a file
-
-#### Parameters
-* `Filename`, the fully qualified path to the file where the blockchain must be exported
-
-#### Return
-`boolean` indicating if chain was exported
-
-#### Example
-`admin.exportChain("/tmp/chain.txt")`
-***
-
-### admin_verbosity
-Set loglevel
-
-#### Parameters
-* `Level`, the verbosity level with 0 the least and 6 the most verbose
-
-#### Return
-`boolean` indicating if chain was exported
-
-#### Example
-`admin.verbosity(5)`
-***
+```javascript
+> admin.peers
+[{
+    caps: ["eth/61", "eth/62", "eth/63"],
+    id: "08a6b39263470c78d3e4f58e3c997cd2e7af623afce64656cfc56480babcea7a9138f3d09d7b9879344c2d2e457679e3655d4b56eaff5fd4fd7f147bdb045124",
+    name: "Geth/v1.5.0-unstable/linux/go1.5.1",
+    network: {
+      localAddress: "192.168.0.104:51068",
+      remoteAddress: "71.62.31.72:30303"
+    },
+    protocols: {
+      eth: {
+        difficulty: 17334052235346465000,
+        head: "5794b768dae6c6ee5366e6ca7662bdff2882576e09609bf778633e470e0e7852",
+        version: 63
+      }
+    }
+}, /* ... */ {
+    caps: ["eth/61", "eth/62", "eth/63"],
+    id: "fcad9f6d3faf89a0908a11ddae9d4be3a1039108263b06c96171eb3b0f3ba85a7095a03bb65198c35a04829032d198759edfca9b63a8b69dc47a205d94fce7cc",
+    name: "Geth/v1.3.5-506c9277/linux/go1.4.2",
+    network: {
+      localAddress: "192.168.0.104:55968",
+      remoteAddress: "121.196.232.205:30303"
+    },
+    protocols: {
+      eth: {
+        difficulty: 17335165914080772000,
+        head: "5794b768dae6c6ee5366e6ca7662bdff2882576e09609bf778633e470e0e7852",
+        version: 63
+      }
+    }
+}]
+```
 
 ### admin_setSolc
-Set the path to the solidity compiler for `eth.compileSolidity`.
 
-#### Parameters
-* `Path`, full path to solidity compiler
+The `setSolc` administrative method sets the Solidity compiler path to be used by the node when
+invoking the `eth_compileSolidity` RPC method. The Solidity compiler path defaults to `/usr/bin/solc`
+if not set, so you only need to change it for using a non-standard compiler location.
 
-#### Return
-`string` in case the path was valid a brief description about the solidity compiler
+The method accepts an absolute path to the Solidity compiler to use (specifying a relative path
+would depend on the current – to the user unknown – working directory of Geth), and returns the
+version string reported by `solc --version`.
+
+| Client  | Method invocation                               |
+|:-------:|-------------------------------------------------|
+| Go      | `admin.SetSolc(path string) (string, error`)    |
+| Console | `admin.setSolc(path)`                           |
+| RPC     | `{"method": "admin_setSolc", "params": [path]}` |
 
 #### Example
-`admin.setSolc("/tmp/solc")`
-***
+
+```javascript
+> admin.setSolc("/usr/bin/solc")
+"solc, the solidity compiler commandline interface\nVersion: 0.3.2-0/Release-Linux/g++/Interpreter\n\npath: /usr/bin/solc"
+```
 
 ### admin_startRPC
-Start the HTTP RPC interface
 
-#### Parameters
-(support for optional arguments requires geth version >=1.4)
-* `ListenAddress`, open listener on this host (optional, default "localhost")
-* `ListenPort`, open listener on this port (optional, default 8545)
-* `CorsDomain`, the cross origin resource shared header (optional, default"")
-* `Apis`, comma separated list with the API modules which are offered over this interface (optional, default "eth,net,web3")
+The `startRPC` administrative method starts an HTTP based [JSON RPC](http://www.jsonrpc.org/specification)
+API webserver to handle client requests. All the parameters are optional:
 
-#### Return
-`boolean` indication if the interface was started
+* `host`: network interface to open the listener socket on (defaults to `"localhost"`)
+* `port`: network port to open the listener socket on (defaults to `8545`)
+* `cors`: [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) header to use (defaults to `""`)
+* `apis`: API modules to offer over this interface (defaults to `"eth,net,web3"`)
 
-#### Example
-`admin.startRPC("127.0.0.1", 8545, "*", "eth,net,web3")`
+The method returns a boolean flag specifying whether the HTTP RPC listener was opened or not. Please note, only one HTTP endpoint is allowed to be active at any time.
 
-`admin.startRPC(null, null, "http://chriseth.github.io", null)`
-***
-
-### admin_stopRPC
-Stop the HTTP RPC interface
-
-#### Return
-`boolean` indication if the interface was stopped
+| Client  | Method invocation                                                                             |
+|:-------:|-----------------------------------------------------------------------------------------------|
+| Go      | `admin.StartRPC(host *string, port *rpc.HexNumber, cors *string, apis *string) (bool, error)` |
+| Console | `admin.startRPC(host, port, cors, apis)`                                                      |
+| RPC     | `{"method": "admin_startRPC", "params": [host, port, cors, apis]}`                            |
 
 #### Example
-`admin.stopRPC()`
 
-***
+```javascript
+> admin.startRPC("127.0.0.1", 8545)
+true
+```
 
 ### admin_startWS
-Start the websocket RPC interface (requires geth version >=1.4)
 
-#### Parameters
-* `ListenAddress`, open listener on this host (optional, default "localhost")
-* `ListenPort`, open listener on this port (optional, default 8546)
-* `allowedDomains`, server side check on the Origin header (optional, default "")
-* `Apis`, comma separated list with the API modules which are offered over this interface (optional, default "eth,net,web3")
+The `startWS` administrative method starts an WebSocket based [JSON RPC](http://www.jsonrpc.org/specification)
+API webserver to handle client requests. All the parameters are optional:
 
-#### Return
-`boolean` indication if the interface was started
+* `host`: network interface to open the listener socket on (defaults to `"localhost"`)
+* `port`: network port to open the listener socket on (defaults to `8546`)
+* `cors`: [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) header to use (defaults to `""`)
+* `apis`: API modules to offer over this interface (defaults to `"eth,net,web3"`)
+
+The method returns a boolean flag specifying whether the WebSocket RPC listener was opened or not. Please note, only one WebSocket endpoint is allowed to be active at any time.
+
+| Client  | Method invocation                                                                             |
+|:-------:|-----------------------------------------------------------------------------------------------|
+| Go      | `admin.StartWS(host *string, port *rpc.HexNumber, cors *string, apis *string) (bool, error)` |
+| Console | `admin.startWS(host, port, cors, apis)`                                                      |
+| RPC     | `{"method": "admin_startWS", "params": [host, port, cors, apis]}`                            |
 
 #### Example
-`admin.startWS("127.0.0.1", 8546, "*", "eth,net,web3")`
 
-`admin.startWS(null, null, "http://chriseth.github.io", null)`
-***
+```javascript
+> admin.startWS("127.0.0.1", 8546)
+true
+```
+
+### admin_stopRPC
+
+The `stopRPC` administrative method closes the currently open HTTP RPC endpoint. As the node can only have a single HTTP endpoint running, this method takes no parameters, returning a boolean whether the endpoint was closed or not.
+
+| Client  | Method invocation               |
+|:-------:|---------------------------------|
+| Go      | `admin.StopRPC() (bool, error`) |
+| Console | `admin.stopRPC()`               |
+| RPC     | `{"method": "admin_stopRPC"`    |
+
+#### Example
+
+```javascript
+> admin.stopRPC()
+true
+```
 
 ### admin_stopWS
-Stop the websocket RPC interface
 
-#### Return
-`boolean` indication if the interface was stopped
+The `stopWS` administrative method closes the currently open WebSocket RPC endpoint. As the node can only have a single WebSocket endpoint running, this method takes no parameters, returning a boolean whether the endpoint was closed or not.
+
+| Client  | Method invocation              |
+|:-------:|--------------------------------|
+| Go      | `admin.StopWS() (bool, error`) |
+| Console | `admin.stopWS()`               |
+| RPC     | `{"method": "admin_stopWS"`    |
 
 #### Example
-`admin.stopWS()`
 
-***
+```javascript
+> admin.stopWS()
+true
+```
 
 ## Debug
 
@@ -429,8 +545,7 @@ Retrieves and returns the RLP encoded block by number.
 | Console | `debug.getBlockRlp(number, [options])`                |
 | RPC     | `{"method": "debug_getBlockRlp", "params": [number]}` |
 
-References:
-[RLP](https://github.com/ethereum/wiki/wiki/RLP)
+References: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
 
 ### debug_seedHash
 
@@ -551,34 +666,6 @@ none
 
 #### Return
 `boolean` indication if the command was successful
-
-***
-
-### net_peerCount
-The number of connected peers
-
-#### Parameters
-none
-
-#### Return
-`integer` number of peers
-
-#### Example
-` net.peerCount`
-
-***
-
-### net_listening
-Indication if this node is currently listening for new peers
-
-#### Parameters
-none
-
-#### Return
-`boolean` indication if this node accepts new peers
-
-#### Example
-` net.listening`
 
 ***
 
