@@ -87,33 +87,31 @@ extra management API namespaces:
 
 | [admin](#admin)                    | [debug](#debug)                                   | [miner](#miner)                      | [personal](personal)                      | [txpool](#txpool)           |
 | :--------------------------------- | :-----------------------------------------------  | :----------------------------------- | :---------------------------------------- | :-------------------------- |
-| [addPeer](#admin_addpeer)          | [dumpBlock](#debug_dumpblock)                     | [start](#miner_start)                | [listAccounts](#personal_listaccounts)    | [content](#txpool_content)  |
-| [datadir](#datadir)                | [getBlockRlp](#debug_getblockrlp)                 | [stop](#miner_stop)                  | [newAccount](#personal_newaccount)        | [inspect](#txpool_inspect)  |
-| [nodeInfo](#admin_nodeinfo)        | [printBlock](#debug_printblock)                   | [hashrate](#miner_hashrate)          | [unlockAccount](#personal_unlockaccount)  | [status](#txpool_status)    |
-| [peers](#admin_peers)              | [processBlock](#debug_processblock)               | [setExtra](#miner_setextra)          | [lockAccount](#personal_lockaccount)      |                             |
-| [setSolc](#admin_setcolc)          | [seedHash](#debug_seedhash)                       | [setGasPrice](#miner_setgasprice)    | [importRawKey](#personal_importrawkey)    |                             |
-| [startRPC](#admin_startrpc)        | [setHead](#debug_sethead)                         | [startAutoDAG](#miner_startautodag)  |                                           |                             |
-| [startWS](#admin_startws)          | [traceTransaction](#debug_tracetrancaction)       | [stopAutoDAG](#miner_stopAutodag)    |                                           |                             |
-| [stopRPC](#admin_stoprpc)          | [traceBlock](#debug_traceblock)                   | [makeDAG](#miner_makedag)            |                                           |                             |
-| [stopWS](#admin_stopws)            | [traceBlockFromFile](#debug_traceblockfromfile)   |                                      |                                           |                             |
+| [addPeer](#admin_addpeer)          | [backtraceAt](#debug_backtraceAt)                 | [start](#miner_start)                | [listAccounts](#personal_listaccounts)    | [content](#txpool_content)  |
+| [datadir](#datadir)                | [blockProfile](#debug_blockProfile)               | [stop](#miner_stop)                  | [newAccount](#personal_newaccount)        | [inspect](#txpool_inspect)  |
+| [nodeInfo](#admin_nodeinfo)        | [cpuProfile](#debug_cpuProfile)                   | [hashrate](#miner_hashrate)          | [unlockAccount](#personal_unlockaccount)  | [status](#txpool_status)    |
+| [peers](#admin_peers)              | [dumpBlock](#debug_dumpblock)                     | [setExtra](#miner_setextra)          | [lockAccount](#personal_lockaccount)      |                             |
+| [setSolc](#admin_setcolc)          | [gcStats](#debug_gcStats)                         | [setGasPrice](#miner_setgasprice)    | [importRawKey](#personal_importrawkey)    |                             |
+| [startRPC](#admin_startrpc)        | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag)  |                                           |                             |
+| [startWS](#admin_startws)          | [goTrace](#debug_goTrace)                         | [stopAutoDAG](#miner_stopAutodag)    |                                           |                             |
+| [stopRPC](#admin_stoprpc)          | [memStats](#debug_memStats)                       | [makeDAG](#miner_makedag)            |                                           |                             |
+| [stopWS](#admin_stopws)            | [seedHash](#debug_seedhash)                       |                                      |                                           |                             |
+|                                    | [setBlockProfileRate](#debug_setBlockProfileRate) |                                      |                                           |                             |
+|                                    | [setHead](#debug_sethead)                         |                                      |                                           |                             |
+|                                    | [stacks](#debug_stacks)                           |                                      |                                           |                             |
+|                                    | [startCPUProfile](#debug_startCPUProfile)         |                                      |                                           |                             |
+|                                    | [startGoTrace](#debug_startGoTrace)               |                                      |                                           |                             |
+|                                    | [stopCPUProfile](#debug_stopCPUProfile)           |                                      |                                           |                             |
+|                                    | [stopGoTrace](#debug_stopGoTrace)                 |                                      |                                           |                             |
+|                                    | [traceBlock](#debug_traceblock)                   |                                      |                                           |                             |
 |                                    | [traceBlockByNumber](#debug_blockbynumber)        |                                      |                                           |                             |
+|                                    | [traceBlockByHash](#debug_blockbyhash)            |                                      |                                           |                             |
+|                                    | [traceBlockFromFile](#debug_traceblockfromfile)   |                                      |                                           |                             |
+|                                    | [traceTransaction](#debug_tracetrancaction)       |                                      |                                           |                             |
 |                                    | [verbosity](#debug_verbosity)                     |                                      |                                           |                             |
 |                                    | [vmodule](#debug_vmodule)                         |                                      |                                           |                             |
-|                                    | [backtraceAt](#debug_backtraceAt)                 |                                      |                                           |                             |
-|                                    | [stacks](#debug_stacks)                           |                                      |                                           |                             |
-|                                    | [memStats](#debug_memStats)                       |                                      |                                           |                             |
-|                                    | [gcStats](#debug_gcStats)                         |                                      |                                           |                             |
-|                                    | [cpuProfile](#debug_cpuProfile)                   |                                      |                                           |                             |
-|                                    | [startCPUProfile](#debug_startCPUProfile)         |                                      |                                           |                             |
-|                                    | [stopCPUProfile](#debug_stopCPUProfile)           |                                      |                                           |                             |
-|                                    | [goTrace](#debug_goTrace)                         |                                      |                                           |                             |
-|                                    | [startGoTrace](#debug_startGoTrace)               |                                      |                                           |                             |
-|                                    | [stopGoTrace](#debug_stopGoTrace)                 |                                      |                                           |                             |
-|                                    | [blockProfile](#debug_blockProfile)               |                                      |                                           |                             |
 |                                    | [writeBlockProfile](#debug_writeBlockProfile)     |                                      |                                           |                             |
 |                                    | [writeMemProfile](#debug_writeMemProfile)         |                                      |                                           |                             |
-|                                    | [setBlockProfileRate](#debug_setBlockProfileRate) |                                      |                                           |                             |
-
 
 ## Admin
 
@@ -364,64 +362,214 @@ true
 The `debug` API gives you access to several non-standard RPC methods, which will allow you to inspect,
 debug and set certain debugging flags during runtime.
 
-### debug_traceTransaction
 
-The `traceTransaction` debugging method will attempt to run the transaction in the exact same manner
-as it was executed on the network. It will replay any transaction that may have been executed prior
-to this one before it will finally attempt to execute the transaction that corresponds to the given
-hash.
+### debug_backtraceAt
 
-In addition to the hash of the transaction you may give it a secondary *optional* argument, which
-specifies the options for this specific call. The possible options are:
+Sets the logging backtrace location. When a backtrace location
+is set and a log message is emitted at that location, the stack
+of the goroutine executing the log statement will be printed to stderr.
 
-* `disableStorage`: `BOOL`. Setting this to true will disable storage capture (default = false).
-* `disableMemory`: `BOOL`. Setting this to true will disable memory capture (default = false).
-* `disableStack`: `BOOL`. Setting this to true will disable stack capture (default = false).
-* `fullStorage`: `BOOL`. Setting this to true will return you, for each opcode, the full storage,
-    including everything which hasn't changed. This is a slow process and is therefor defaulted to `false`. By default it will only ever give you the changed storage values.
+The location is specified as `<filename>:<line>`.
 
-| Client  | Method invocation                                                                            |
-|:-------:|----------------------------------------------------------------------------------------------|
-| Go      | `debug.TraceTransaction(txHash common.Hash, logger *vm.LogConfig) (*ExecutionResurt, error)` |
-| Console | `debug.traceTransaction(txHash, [options])`                                                  |
-| RPC     | `{"method": "debug_traceTransaction", "params": [txHash, {}]}`                               |
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|
+| Console | `debug.backtraceAt(string)`                           |
+| RPC     | `{"method": "debug_backtraceAt", "params": [string]}` |
 
+Example:
+
+``` javascript
+> debug.backtraceAt("server.go:443")
+```
+
+### debug_blockProfile
+
+Turns on block profiling for the given duration and writes
+profile data to disk. It uses a profile rate of 1 for most
+accurate information. If a different rate is desired, set
+the rate and write the profile manually using
+`debug_writeBlockProfile`.
+
+| Client  | Method invocation                                              |
+|:-------:|----------------------------------------------------------------|
+| Console | `debug.blockProfile(file, seconds)`                            |
+| RPC     | `{"method": "debug_blockProfile", "params": [string, number]}` |
+
+### debug_cpuProfile
+
+Turns on CPU profiling for the given duration and writes
+profile data to disk.
+
+| Client  | Method invocation                                            |
+|:-------:|--------------------------------------------------------------|
+| Console | `debug.cpuProfile(file, seconds)`                            |
+| RPC     | `{"method": "debug_cpuProfile", "params": [string, number]}` |
+
+### debug_dumpBlock
+
+Retrieves the state that corresponds to the block number and returns a list of accounts (including
+storage and code).
+
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|
+| Go      | `debug.DumpBlock(number uint64) (state.World, error)` |
+| Console | `debug.traceBlockByHash(number, [options])`           |
+| RPC     | `{"method": "debug_dumpBlock", "params": [number]}`   |
 
 #### Example
 
 ```javascript
-> debug.traceTransaction("0x2059dd53ecac9827faad14d364f9e04b1d5fe5b506e3acc886eff7a6f88a696a")
+> debug.dumpBlock(10)
 {
-  gas: 85301,
-  returnValue: "",
-  structLogs: [{
-      depth: 1,
-      error: "",
-      gas: 162106,
-      gasCost: 3,
-      memory: null,
-      op: "PUSH1",
-      pc: 0,
-      stack: [],
+    fff7ac99c8e4feb60c9750054bdc14ce1857f181: {
+      balance: "49358640978154672",
+      code: "",
+      codeHash: "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+      nonce: 2,
+      root: "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
       storage: {}
+    },
+    fffbca3a38c3c5fcb3adbb8e63c04c3e629aafce: {
+      balance: "3460945928",
+      code: "",
+      codeHash: "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+      nonce: 657,
+      root: "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+      storage: {}
+    }
   },
-    /* snip */
-  {
-      depth: 1,
-      error: "",
-      gas: 100000,
-      gasCost: 0,
-      memory: ["0000000000000000000000000000000000000000000000000000000000000006", "0000000000000000000000000000000000000000000000000000000000000000", "0000000000000000000000000000000000000000000000000000000000000060"],
-      op: "STOP",
-      pc: 120,
-      stack: ["00000000000000000000000000000000000000000000000000000000d67cbec9"],
-      storage: {
-        0000000000000000000000000000000000000000000000000000000000000004: "8241fa522772837f0d05511f20caa6da1d5a3209000000000000000400000001",
-        0000000000000000000000000000000000000000000000000000000000000006: "0000000000000000000000000000000000000000000000000000000000000001",
-        f652222313e28459528d920b65115c16c04f3efc82aaedc97be59f3f377c0d3f: "00000000000000000000000002e816afc1b5c0f39852131959d946eb3b07b5ad"
-      }
-  }]
+  root: "19f4ed94e188dd9c7eb04226bd240fa6b449401a6c656d6d2816a87ccaf206f1"
+}
 ```
+
+### debug_gcStats
+
+Returns GC statistics.
+
+See https://golang.org/pkg/runtime/debug/#GCStats for information about
+the fields of the returned object.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.gcStats()`                                 |
+| RPC     | `{"method": "debug_gcStats", "params": []}`       |
+
+### debug_getBlockRlp
+
+Retrieves and returns the RLP encoded block by number.
+
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|
+| Go      | `debug.GetBlockRlp(number uint64) (string, error)`    |
+| Console | `debug.getBlockRlp(number, [options])`                |
+| RPC     | `{"method": "debug_getBlockRlp", "params": [number]}` |
+
+References: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
+
+### debug_goTrace
+
+Turns on Go runtime tracing for the given duration and writes
+trace data to disk.
+
+| Client  | Method invocation                                         |
+|:-------:|-----------------------------------------------------------|
+| Console | `debug.goTrace(file, seconds)`                            |
+| RPC     | `{"method": "debug_goTrace", "params": [string, number]}` |
+
+### debug_memStats
+
+Returns detailed runtime memory statistics.
+
+See https://golang.org/pkg/runtime/#MemStats for information about
+the fields of the returned object.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.memStats()`                                |
+| RPC     | `{"method": "debug_memStats", "params": []}`      |
+
+### debug_seedHash
+
+Fetches and retrieves the seed hash of the block by number
+
+| Client  | Method invocation                                  |
+|:-------:|----------------------------------------------------|
+| Go      | `debug.SeedHash(number uint64) (string, error)`    |
+| Console | `debug.seedHash(number, [options])`                |
+| RPC     | `{"method": "debug_seedHash", "params": [number]}` |
+
+### debug_setHead
+
+Sets the current head of the local chain by block number. **Note**, this is a
+destructive action and may severely damage your chain. Use with *extreme* caution.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Go      | `debug.SetHead(number uint64)`                    |
+| Console | `debug.setHead(number)`                           |
+| RPC     | `{"method": "debug_setHead", "params": [number]}` |
+
+References:
+[Ethash](https://github.com/ethereum/wiki/wiki/Mining#the-algorithm)
+
+### debug_setBlockProfileRate
+
+Sets the rate (in samples/sec) of goroutine block profile
+data collection. A non-zero rate enables block profiling,
+setting it to zero stops the profile. Collected profile data
+can be written using `debug_writeBlockProfile`.
+
+| Client  | Method invocation                                             |
+|:-------:|---------------------------------------------------------------|
+| Console | `debug.setBlockProfileRate(rate)`                             |
+| RPC     | `{"method": "debug_setBlockProfileRate", "params": [number]}` |
+
+### debug_stacks
+
+Returns a printed representation of the stacks of all goroutines.
+Note that the web3 wrapper for this method takes care of the printing
+and does not return the string.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.stacks()`                                  |
+| RPC     | `{"method": "debug_stacks", "params": []}`        |
+
+### debug_startCPUProfile
+
+Turns on CPU profiling indefinitely, writing to the given file.
+
+| Client  | Method invocation                                         |
+|:-------:|-----------------------------------------------------------|
+| Console | `debug.startCPUProfile(file)`                             |
+| RPC     | `{"method": "debug_startCPUProfile", "params": [string]}` |
+
+### debug_startGoTrace
+
+Starts writing a Go runtime trace to the given file.
+
+| Client  | Method invocation                                      |
+|:-------:|--------------------------------------------------------|
+| Console | `debug.startGoTrace(file)`                             |
+| RPC     | `{"method": "debug_startGoTrace", "params": [string]}` |
+
+### debug_stopCPUProfile
+
+Stops an ongoing CPU profile.
+
+| Client  | Method invocation                                  |
+|:-------:|----------------------------------------------------|
+| Console | `debug.stopCPUProfile()`                           |
+| RPC     | `{"method": "debug_stopCPUProfile", "params": []}` |
+
+### debug_stopGoTrace
+
+Stops writing the Go runtime trace.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.startGoTrace(file)`                        |
+| RPC     | `{"method": "debug_stopGoTrace", "params": []}`   |
 
 ### debug_traceBlock
 
@@ -474,19 +622,6 @@ References:
   }]
 ```
 
-### debug_traceBlockFromFile
-
-Similar to [debug_traceBlock](#debug_traceBlock), `traceBlockFromFile` accepts a file containing the RLP of the block.
-
-| Client  | Method invocation                                                                |
-|:-------:|----------------------------------------------------------------------------------|
-| Go      | `debug.TraceBlockFromFile(fileName string, config. *vm.Config) BlockTraceResult` |
-| Console | `debug.traceBlockFromFile(fileName, [options])`                                  |
-| RPC     | `{"method": "debug_traceBlockFromFile", "params": [fileName, {}]}`               |
-
-References:
-[RLP](https://github.com/ethereum/wiki/wiki/RLP)
-
 ### debug_traceBlockByNumber
 
 Similar to [debug_traceBlock](#debug_traceBlock), `traceBlockByNumber` accepts a block number and will replay the
@@ -515,78 +650,76 @@ block that is already present in the database.
 References:
 [RLP](https://github.com/ethereum/wiki/wiki/RLP)
 
-### debug_dumpBlock
+### debug_traceBlockFromFile
 
-Retrieves the state that corresponds to the block number and returns a list of accounts (including
-storage and code).
+Similar to [debug_traceBlock](#debug_traceBlock), `traceBlockFromFile` accepts a file containing the RLP of the block.
 
-| Client  | Method invocation                                     |
-|:-------:|-------------------------------------------------------|
-| Go      | `debug.DumpBlock(number uint64) (state.World, error)` |
-| Console | `debug.traceBlockByHash(number, [options])`           |
-| RPC     | `{"method": "debug_dumpBlock", "params": [number]}`   |
+| Client  | Method invocation                                                                |
+|:-------:|----------------------------------------------------------------------------------|
+| Go      | `debug.TraceBlockFromFile(fileName string, config. *vm.Config) BlockTraceResult` |
+| Console | `debug.traceBlockFromFile(fileName, [options])`                                  |
+| RPC     | `{"method": "debug_traceBlockFromFile", "params": [fileName, {}]}`               |
+
+References:
+[RLP](https://github.com/ethereum/wiki/wiki/RLP)
+
+### debug_traceTransaction
+
+The `traceTransaction` debugging method will attempt to run the transaction in the exact same manner
+as it was executed on the network. It will replay any transaction that may have been executed prior
+to this one before it will finally attempt to execute the transaction that corresponds to the given
+hash.
+
+In addition to the hash of the transaction you may give it a secondary *optional* argument, which
+specifies the options for this specific call. The possible options are:
+
+* `disableStorage`: `BOOL`. Setting this to true will disable storage capture (default = false).
+* `disableMemory`: `BOOL`. Setting this to true will disable memory capture (default = false).
+* `disableStack`: `BOOL`. Setting this to true will disable stack capture (default = false).
+* `fullStorage`: `BOOL`. Setting this to true will return you, for each opcode, the full storage,
+    including everything which hasn't changed. This is a slow process and is therefor defaulted to `false`. By default it will only ever give you the changed storage values.
+
+| Client  | Method invocation                                                                            |
+|:-------:|----------------------------------------------------------------------------------------------|
+| Go      | `debug.TraceTransaction(txHash common.Hash, logger *vm.LogConfig) (*ExecutionResurt, error)` |
+| Console | `debug.traceTransaction(txHash, [options])`                                                  |
+| RPC     | `{"method": "debug_traceTransaction", "params": [txHash, {}]}`                               |
 
 #### Example
 
 ```javascript
-> debug.dumpBlock(10)
+> debug.traceTransaction("0x2059dd53ecac9827faad14d364f9e04b1d5fe5b506e3acc886eff7a6f88a696a")
 {
-    fff7ac99c8e4feb60c9750054bdc14ce1857f181: {
-      balance: "49358640978154672",
-      code: "",
-      codeHash: "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
-      nonce: 2,
-      root: "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+  gas: 85301,
+  returnValue: "",
+  structLogs: [{
+      depth: 1,
+      error: "",
+      gas: 162106,
+      gasCost: 3,
+      memory: null,
+      op: "PUSH1",
+      pc: 0,
+      stack: [],
       storage: {}
-    },
-    fffbca3a38c3c5fcb3adbb8e63c04c3e629aafce: {
-      balance: "3460945928",
-      code: "",
-      codeHash: "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
-      nonce: 657,
-      root: "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
-      storage: {}
-    }
   },
-  root: "19f4ed94e188dd9c7eb04226bd240fa6b449401a6c656d6d2816a87ccaf206f1"
-}
+    /* snip */
+  {
+      depth: 1,
+      error: "",
+      gas: 100000,
+      gasCost: 0,
+      memory: ["0000000000000000000000000000000000000000000000000000000000000006", "0000000000000000000000000000000000000000000000000000000000000000", "0000000000000000000000000000000000000000000000000000000000000060"],
+      op: "STOP",
+      pc: 120,
+      stack: ["00000000000000000000000000000000000000000000000000000000d67cbec9"],
+      storage: {
+        0000000000000000000000000000000000000000000000000000000000000004: "8241fa522772837f0d05511f20caa6da1d5a3209000000000000000400000001",
+        0000000000000000000000000000000000000000000000000000000000000006: "0000000000000000000000000000000000000000000000000000000000000001",
+        f652222313e28459528d920b65115c16c04f3efc82aaedc97be59f3f377c0d3f: "00000000000000000000000002e816afc1b5c0f39852131959d946eb3b07b5ad"
+      }
+  }]
 ```
-
-### debug_getBlockRlp
-
-Retrieves and returns the RLP encoded block by number.
-
-| Client  | Method invocation                                     |
-|:-------:|-------------------------------------------------------|
-| Go      | `debug.GetBlockRlp(number uint64) (string, error)`    |
-| Console | `debug.getBlockRlp(number, [options])`                |
-| RPC     | `{"method": "debug_getBlockRlp", "params": [number]}` |
-
-References: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
-
-### debug_seedHash
-
-Fetches and retrieves the seed hash of the block by number
-
-| Client  | Method invocation                                  |
-|:-------:|----------------------------------------------------|
-| Go      | `debug.SeedHash(number uint64) (string, error)`    |
-| Console | `debug.seedHash(number, [options])`                |
-| RPC     | `{"method": "debug_seedHash", "params": [number]}` |
-
-References:
-[Ethash](https://github.com/ethereum/wiki/wiki/Mining#the-algorithm)
-
-### debug_setHead
-
-Sets the current head of the local chain by block number. **Note**, this is a
-destructive action and may severely damage your chain. Use with *extreme* caution.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Go      | `debug.SetHead(number uint64)`                    |
-| Console | `debug.setHead(number)`                           |
-| RPC     | `{"method": "debug_setHead", "params": [number]}` |
 
 ### debug_verbosity
 
@@ -641,142 +774,6 @@ at level <= 5, use:
 ``` javascript
 debug.vmodule("eth/*/peer.go=6,p2p=5")
 ```
-
-### debug_backtraceAt
-
-Sets the logging backtrace location. When a backtrace location
-is set and a log message is emitted at that location, the stack
-of the goroutine executing the log statement will be printed to stderr.
-
-The location is specified as `<filename>:<line>`.
-
-| Client  | Method invocation                                     |
-|:-------:|-------------------------------------------------------|
-| Console | `debug.backtraceAt(string)`                           |
-| RPC     | `{"method": "debug_backtraceAt", "params": [string]}` |
-
-Example:
-
-``` javascript
-> debug.backtraceAt("server.go:443")
-```
-
-### debug_stacks
-
-Returns a printed representation of the stacks of all goroutines.
-Note that the web3 wrapper for this method takes care of the printing
-and does not return the string.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Console | `debug.stacks()`                                  |
-| RPC     | `{"method": "debug_stacks", "params": []}`        |
-
-
-### debug_memStats
-
-Returns detailed runtime memory statistics.
-
-See https://golang.org/pkg/runtime/#MemStats for information about
-the fields of the returned object.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Console | `debug.memStats()`                                |
-| RPC     | `{"method": "debug_memStats", "params": []}`      |
-
-### debug_gcStats
-
-Returns GC statistics.
-
-See https://golang.org/pkg/runtime/debug/#GCStats for information about
-the fields of the returned object.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Console | `debug.gcStats()`                                 |
-| RPC     | `{"method": "debug_gcStats", "params": []}`       |
-
-### debug_cpuProfile
-
-Turns on CPU profiling for the given duration and writes
-profile data to disk.
-
-| Client  | Method invocation                                            |
-|:-------:|--------------------------------------------------------------|
-| Console | `debug.cpuProfile(file, seconds)`                            |
-| RPC     | `{"method": "debug_cpuProfile", "params": [string, number]}` |
-
-### debug_startCPUProfile
-
-Turns on CPU profiling indefinitely, writing to the given file.
-
-| Client  | Method invocation                                         |
-|:-------:|-----------------------------------------------------------|
-| Console | `debug.startCPUProfile(file)`                             |
-| RPC     | `{"method": "debug_startCPUProfile", "params": [string]}` |
-
-### debug_stopCPUProfile
-
-Stops an ongoing CPU profile.
-
-| Client  | Method invocation                                  |
-|:-------:|----------------------------------------------------|
-| Console | `debug.stopCPUProfile()`                           |
-| RPC     | `{"method": "debug_stopCPUProfile", "params": []}` |
-
-### debug_goTrace
-
-Turns on Go runtime tracing for the given duration and writes
-trace data to disk.
-
-| Client  | Method invocation                                         |
-|:-------:|-----------------------------------------------------------|
-| Console | `debug.goTrace(file, seconds)`                            |
-| RPC     | `{"method": "debug_goTrace", "params": [string, number]}` |
-
-### debug_startGoTrace
-
-Starts writing a Go runtime trace to the given file.
-
-| Client  | Method invocation                                      |
-|:-------:|--------------------------------------------------------|
-| Console | `debug.startGoTrace(file)`                             |
-| RPC     | `{"method": "debug_startGoTrace", "params": [string]}` |
-
-### debug_stopGoTrace
-
-Stops writing the Go runtime trace.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Console | `debug.startGoTrace(file)`                        |
-| RPC     | `{"method": "debug_stopGoTrace", "params": []}`   |
-
-### debug_blockProfile
-
-Turns on block profiling for the given duration and writes
-profile data to disk. It uses a profile rate of 1 for most
-accurate information. If a different rate is desired, set
-the rate and write the profile manually using
-`debug_writeBlockProfile`.
-
-| Client  | Method invocation                                              |
-|:-------:|----------------------------------------------------------------|
-| Console | `debug.blockProfile(file, seconds)`                            |
-| RPC     | `{"method": "debug_blockProfile", "params": [string, number]}` |
-
-### debug_setBlockProfileRate
-
-Sets the rate (in samples/sec) of goroutine block profile
-data collection. A non-zero rate enables block profiling,
-setting it to zero stops the profile. Collected profile data
-can be written using `debug_writeBlockProfile`.
-
-| Client  | Method invocation                                             |
-|:-------:|---------------------------------------------------------------|
-| Console | `debug.setBlockProfileRate(rate)`                             |
-| RPC     | `{"method": "debug_setBlockProfileRate", "params": [number]}` |
 
 ### debug_writeBlockProfile
 
