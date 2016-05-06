@@ -85,33 +85,33 @@ extra management API namespaces:
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| [admin](#admin)                    | [debug](#debug)                                   | [miner](#miner)                      | [personal](personal)                      | [txpool](#txpool)           |
-| :--------------------------------- | :-----------------------------------------------  | :----------------------------------- | :---------------------------------------- | :-------------------------- |
-| [addPeer](#admin_addpeer)          | [backtraceAt](#debug_backtraceAt)                 | [start](#miner_start)                | [listAccounts](#personal_listaccounts)    | [content](#txpool_content)  |
-| [datadir](#datadir)                | [blockProfile](#debug_blockProfile)               | [stop](#miner_stop)                  | [newAccount](#personal_newaccount)        | [inspect](#txpool_inspect)  |
-| [nodeInfo](#admin_nodeinfo)        | [cpuProfile](#debug_cpuProfile)                   | [hashrate](#miner_hashrate)          | [unlockAccount](#personal_unlockaccount)  | [status](#txpool_status)    |
-| [peers](#admin_peers)              | [dumpBlock](#debug_dumpblock)                     | [setExtra](#miner_setextra)          | [lockAccount](#personal_lockaccount)      |                             |
-| [setSolc](#admin_setcolc)          | [gcStats](#debug_gcStats)                         | [setGasPrice](#miner_setgasprice)    | [importRawKey](#personal_importrawkey)    |                             |
-| [startRPC](#admin_startrpc)        | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag)  |                                           |                             |
-| [startWS](#admin_startws)          | [goTrace](#debug_goTrace)                         | [stopAutoDAG](#miner_stopAutodag)    |                                           |                             |
-| [stopRPC](#admin_stoprpc)          | [memStats](#debug_memStats)                       | [makeDAG](#miner_makedag)            |                                           |                             |
-| [stopWS](#admin_stopws)            | [seedHash](#debug_seedhash)                       |                                      |                                           |                             |
-|                                    | [setBlockProfileRate](#debug_setBlockProfileRate) |                                      |                                           |                             |
-|                                    | [setHead](#debug_sethead)                         |                                      |                                           |                             |
-|                                    | [stacks](#debug_stacks)                           |                                      |                                           |                             |
-|                                    | [startCPUProfile](#debug_startCPUProfile)         |                                      |                                           |                             |
-|                                    | [startGoTrace](#debug_startGoTrace)               |                                      |                                           |                             |
-|                                    | [stopCPUProfile](#debug_stopCPUProfile)           |                                      |                                           |                             |
-|                                    | [stopGoTrace](#debug_stopGoTrace)                 |                                      |                                           |                             |
-|                                    | [traceBlock](#debug_traceblock)                   |                                      |                                           |                             |
-|                                    | [traceBlockByNumber](#debug_blockbynumber)        |                                      |                                           |                             |
-|                                    | [traceBlockByHash](#debug_blockbyhash)            |                                      |                                           |                             |
-|                                    | [traceBlockFromFile](#debug_traceblockfromfile)   |                                      |                                           |                             |
-|                                    | [traceTransaction](#debug_tracetrancaction)       |                                      |                                           |                             |
-|                                    | [verbosity](#debug_verbosity)                     |                                      |                                           |                             |
-|                                    | [vmodule](#debug_vmodule)                         |                                      |                                           |                             |
-|                                    | [writeBlockProfile](#debug_writeBlockProfile)     |                                      |                                           |                             |
-|                                    | [writeMemProfile](#debug_writeMemProfile)         |                                      |                                           |                             |
+| [admin](#admin)              | [debug](#debug)                                   | [miner](#miner)                     | [personal](personal)                     | [txpool](#txpool)          |
+| :--------------------------- | :-----------------------------------------------  | :---------------------------------- | :--------------------------------------- | :------------------------- |
+| [addPeer](#admin_addpeer)    | [backtraceAt](#debug_backtraceAt)                 | [hashrate](#miner_hashrate)         | [importRawKey](#personal_importrawkey)   | [content](#txpool_content) |
+| [datadir](#datadir)          | [blockProfile](#debug_blockProfile)               | [makeDAG](#miner_makedag)           | [listAccounts](#personal_listaccounts)   | [inspect](#txpool_inspect) |
+| [nodeInfo](#admin_nodeinfo)  | [cpuProfile](#debug_cpuProfile)                   | [setExtra](#miner_setextra)         | [lockAccount](#personal_lockaccount)     | [status](#txpool_status)   |
+| [peers](#admin_peers)        | [dumpBlock](#debug_dumpblock)                     | [setGasPrice](#miner_setgasprice)   | [newAccount](#personal_newaccount)       |                            |
+| [setSolc](#admin_setcolc)    | [gcStats](#debug_gcStats)                         | [start](#miner_start)               | [unlockAccount](#personal_unlockaccount) |                            |
+| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag) |                                          |                            |
+| [startWS](#admin_startws)    | [goTrace](#debug_goTrace)                         | [stop](#miner_stop)                 |                                          |                            |
+| [stopRPC](#admin_stoprpc)    | [memStats](#debug_memStats)                       | [stopAutoDAG](#miner_stopAutodag)   |                                          |                            |
+| [stopWS](#admin_stopws)      | [seedHash](#debug_seedhash)                       |                                     |                                          |                            |
+|                              | [setBlockProfileRate](#debug_setBlockProfileRate) |                                     |                                          |                            |
+|                              | [setHead](#debug_sethead)                         |                                     |                                          |                            |
+|                              | [stacks](#debug_stacks)                           |                                     |                                          |                            |
+|                              | [startCPUProfile](#debug_startCPUProfile)         |                                     |                                          |                            |
+|                              | [startGoTrace](#debug_startGoTrace)               |                                     |                                          |                            |
+|                              | [stopCPUProfile](#debug_stopCPUProfile)           |                                     |                                          |                            |
+|                              | [stopGoTrace](#debug_stopGoTrace)                 |                                     |                                          |                            |
+|                              | [traceBlock](#debug_traceblock)                   |                                     |                                          |                            |
+|                              | [traceBlockByNumber](#debug_blockbynumber)        |                                     |                                          |                            |
+|                              | [traceBlockByHash](#debug_blockbyhash)            |                                     |                                          |                            |
+|                              | [traceBlockFromFile](#debug_traceblockfromfile)   |                                     |                                          |                            |
+|                              | [traceTransaction](#debug_tracetrancaction)       |                                     |                                          |                            |
+|                              | [verbosity](#debug_verbosity)                     |                                     |                                          |                            |
+|                              | [vmodule](#debug_vmodule)                         |                                     |                                          |                            |
+|                              | [writeBlockProfile](#debug_writeBlockProfile)     |                                     |                                          |                            |
+|                              | [writeMemProfile](#debug_writeMemProfile)         |                                     |                                          |                            |
 
 ## Admin
 
@@ -801,27 +801,6 @@ flag.
 The `miner` API allows you to remote control the node's mining operation and set various
 mining specific settings.
 
-### miner_start
-
-Start the CPU mining process with the given number of threads and generate a new DAG
-if need be.
-
-| Client  | Method invocation                                   |
-|:-------:|-----------------------------------------------------|
-| Go      | `miner.Start(threads *rpc.HexNumber) (bool, error)` |
-| Console | `miner.start(number)`                               |
-| RPC     | `{"method": "miner_start", "params": [number]}`     |
-
-### miner_stop
-
-Stop the CPU mining operation.
-
-| Client  | Method invocation                            |
-|:-------:|----------------------------------------------|
-| Go      | `miner.Stop() bool`                          |
-| Console | `miner.stop()`                               |
-| RPC     | `{"method": "miner_stop", "params": []}`     |
-
 ### miner_hashrate
 
 Returns the current amount of hashes per second generated by the CPU miner
@@ -832,6 +811,19 @@ and any other [external](#miner_submithashrate) miners connected to the node.
 | Go      | `miner.Hashrate() *rpc.HexNumber`            |
 | Console | `miner.hashrate()`                           |
 | RPC     | `{"method": "miner_hashrate", "params": []}` |
+
+### miner_makeDAG
+
+Initiates a new DAG creation process for the given block number. This procces is 
+required for the CPU (and GPU) mining operations unless [auto DAG generation](#miner_startautodag) is
+turned on. This also allows you to create DAGs far in advance and might be diserable for slower
+running devices.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Go      | `miner.MakeDAG(number *rpc.HexNumber) bool`       |
+| Console | `miner.makeDAG(number)`                           |
+| RPC     | `{"method": "miner_makeDAG", "params": [number]}` |
 
 ### miner_setExtra
 
@@ -856,6 +848,17 @@ below this limit are excluded from the mining process.
 | Console | `miner.setGasPrice(number)`                           |
 | RPC     | `{"method": "miner_setGasPrice", "params": [number]}` |
 
+### miner_start
+
+Start the CPU mining process with the given number of threads and generate a new DAG
+if need be.
+
+| Client  | Method invocation                                   |
+|:-------:|-----------------------------------------------------|
+| Go      | `miner.Start(threads *rpc.HexNumber) (bool, error)` |
+| Console | `miner.start(number)`                               |
+| RPC     | `{"method": "miner_start", "params": [number]}`     |
+
 ### miner_startAutoDAG
 
 Pregenerate the DAG, this will allow for a seamless transition between the different
@@ -869,6 +872,15 @@ generated.
 | Console | `miner.startAutoDAG()`                                 |
 | RPC     | `{"method": "miner_startAutoDAG", "params": [number]}` |
 
+### miner_stop
+
+Stop the CPU mining operation.
+
+| Client  | Method invocation                            |
+|:-------:|----------------------------------------------|
+| Go      | `miner.Stop() bool`                          |
+| Console | `miner.stop()`                               |
+| RPC     | `{"method": "miner_stop", "params": []}`     |
 
 ### miner_stopAutoDAG
 
@@ -881,23 +893,21 @@ Stop DAG pregeneration.
 | RPC     | `{"method": "miner_stopAutoDAG", "params": []}` |
 
 
-### miner_makeDAG
-
-Initiates a new DAG creation process for the given block number. This procces is 
-required for the CPU (and GPU) mining operations unless [auto DAG generation](#miner_startautodag) is
-turned on. This also allows you to create DAGs far in advance and might be diserable for slower
-running devices.
-
-| Client  | Method invocation                                 |
-|:-------:|---------------------------------------------------|
-| Go      | `miner.MakeDAG(number *rpc.HexNumber) bool`       |
-| Console | `miner.makeDAG(number)`                           |
-| RPC     | `{"method": "miner_makeDAG", "params": [number]}` |
-
-
 ## Personal
 
 The personal API manages private keys in the key store.
+
+### personal_importRawKey
+
+Imports the given unencrypted private key (hex string) into the key store,
+encrypting it with the passphrase.
+
+Returns the address of the new account.
+ 
+| Client    | Method invocation                                                 |
+| :-------: | ----------------------------------------------------------------- |
+| Console   | `personal.importRawKey(keydata, passphrase)`                      |
+| RPC       | `{"method": "personal_importRawKey", "params": [string, string]}` |
 
 ### personal_listAccounts
 
@@ -916,6 +926,15 @@ in the key store.
 ["0x5e97870f263700f46aa00d967821199b9bc5a120", "0x3d80b31a78c30fc628f20b2c89d7ddbf6e53cedc"]
 ```
 
+### personal_lockAccount
+
+Removes the private key with given address from memory.
+The account can no longer be used to send transactions.
+ 
+| Client    | Method invocation                                        |
+| :-------: | -------------------------------------------------------- |
+| Console   | `personal.lockAccount(address)`                          |
+| RPC       | `{"method": "personal_lockAccount", "params": [string]}` |
 
 ### personal_newAccount
 
@@ -946,7 +965,6 @@ The passphrase can also be supplied as a string.
 > personal.newAccount("h4ck3r")
 "0x3d80b31a78c30fc628f20b2c89d7ddbf6e53cedc"
 ```
-
 
 ### personal_unlockAccount
 
@@ -992,30 +1010,6 @@ Unlock account 0x5e97870f263700f46aa00d967821199b9bc5a120
 Passphrase: 
 true
 ```
-
-
-### personal_lockAccount
-
-Removes the private key with given address from memory.
-The account can no longer be used to send transactions.
- 
-| Client    | Method invocation                                        |
-| :-------: | -------------------------------------------------------- |
-| Console   | `personal.lockAccount(address)`                          |
-| RPC       | `{"method": "personal_lockAccount", "params": [string]}` |
-
-
-### personal_importRawKey
-
-Imports the given unencrypted private key (hex string) into the key store,
-encrypting it with the passphrase.
-
-Returns the address of the new account.
- 
-| Client    | Method invocation                                                 |
-| :-------: | ----------------------------------------------------------------- |
-| Console   | `personal.importRawKey(keydata, passphrase)`                      |
-| RPC       | `{"method": "personal_importRawKey", "params": [string, string]}` |
 
 
 ## Txpool
