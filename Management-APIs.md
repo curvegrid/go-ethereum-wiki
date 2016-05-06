@@ -85,18 +85,35 @@ extra management API namespaces:
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| [admin](#admin)                   | [debug](#debug)                                 | miner                               | [personal](personal)                     | [txpool](#txpool)          |
-|:---------------------------------:|:-----------------------------------------------:|:-----------------------------------:|:----------------------------------------:|:--------------------------:|
-| [addPeer](#admin_addpeer)         | [dumpBlock](#debug_dumpblock)                   | [start](#miner_start)               | [importRawKey](#personal_importrawkey)   | [content](#txpool_content) |
-| [datadir](#datadir)               | [getBlockRlp](#debug_getblockrlp)               | [stop](#miner_stop)                 | [listAccounts](#personal_listaccounts)   | [inspect](#txpool_inspect) |
-| [nodeInfo](#admin_nodeinfo)       | [printBlock](#debug_printblock)                 | [hashrate](#miner_hashrate)         | [lockAccounts](#personal_lockaccount)    | [status](#txpool_status)   |
-| [peers](#admin_peers)             | [processBlock](#debug_processblock)             | [setExtra](#miner_setextra)         | [newAccount](#personal_newaccount)       |                            |
-| [setSolc](#admin_setcolc)         | [seedHash](#debug_seedhash)                     | [setGasPrice](#miner_setgasprice)   | [unlockAccount](#personal_unlockaccount) |                            |
-| [startRPC](#admin_startrpc)       | [setHead](#debug_sethead)                       | [startAutoDAG](#miner_startautodag) |                                          |                            |
-| [startWS](#admin_startws)         | [traceTransaction](#debug_tracetrancaction)     | [stopAutoDAG](#miner_stopAutodag)   |                                          |                            |
-| [stopRPC](#admin_stoprpc)         | [traceBlock](#debug_traceblock)                 | [makeDAG](#miner_makedag)           |                                          |                            |
-| [stopWS](#admin_stopws)           | [traceBlockFromFile](#debug_traceblockfromfile) |                                     |                                          |                            |
-|                                   | [traceBlockByNumber](#debug_blockbynumber)      |                                     |                                          |                            |
+| [admin](#admin)                    | [debug](#debug)                                   | [miner](#miner)                      | [personal](personal)                      | [txpool](#txpool)           |
+| :--------------------------------- | :-----------------------------------------------  | :----------------------------------- | :---------------------------------------- | :-------------------------- |
+| [addPeer](#admin_addpeer)          | [dumpBlock](#debug_dumpblock)                     | [start](#miner_start)                | [listAccounts](#personal_listaccounts)    | [content](#txpool_content)  |
+| [datadir](#datadir)                | [getBlockRlp](#debug_getblockrlp)                 | [stop](#miner_stop)                  | [newAccount](#personal_newaccount)        | [inspect](#txpool_inspect)  |
+| [nodeInfo](#admin_nodeinfo)        | [printBlock](#debug_printblock)                   | [hashrate](#miner_hashrate)          | [unlockAccount](#personal_unlockaccount)  | [status](#txpool_status)    |
+| [peers](#admin_peers)              | [processBlock](#debug_processblock)               | [setExtra](#miner_setextra)          | [lockAccount](#personal_lockaccount)      |                             |
+| [setSolc](#admin_setcolc)          | [seedHash](#debug_seedhash)                       | [setGasPrice](#miner_setgasprice)    | [importRawKey](#personal_importrawkey)    |                             |
+| [startRPC](#admin_startrpc)        | [setHead](#debug_sethead)                         | [startAutoDAG](#miner_startautodag)  |                                           |                             |
+| [startWS](#admin_startws)          | [traceTransaction](#debug_tracetrancaction)       | [stopAutoDAG](#miner_stopAutodag)    |                                           |                             |
+| [stopRPC](#admin_stoprpc)          | [traceBlock](#debug_traceblock)                   | [makeDAG](#miner_makedag)            |                                           |                             |
+| [stopWS](#admin_stopws)            | [traceBlockFromFile](#debug_traceblockfromfile)   |                                      |                                           |                             |
+|                                    | [traceBlockByNumber](#debug_blockbynumber)        |                                      |                                           |                             |
+|                                    | [verbosity](#debug_verbosity)                     |                                      |                                           |                             |
+|                                    | [vmodule](#debug_vmodule)                         |                                      |                                           |                             |
+|                                    | [backtraceAt](#debug_backtraceAt)                 |                                      |                                           |                             |
+|                                    | [stacks](#debug_stacks)                           |                                      |                                           |                             |
+|                                    | [memStats](#debug_memStats)                       |                                      |                                           |                             |
+|                                    | [gcStats](#debug_gcStats)                         |                                      |                                           |                             |
+|                                    | [cpuProfile](#debug_cpuProfile)                   |                                      |                                           |                             |
+|                                    | [startCPUProfile](#debug_startCPUProfile)         |                                      |                                           |                             |
+|                                    | [stopCPUProfile](#debug_stopCPUProfile)           |                                      |                                           |                             |
+|                                    | [goTrace](#debug_goTrace)                         |                                      |                                           |                             |
+|                                    | [startGoTrace](#debug_startGoTrace)               |                                      |                                           |                             |
+|                                    | [stopGoTrace](#debug_stopGoTrace)                 |                                      |                                           |                             |
+|                                    | [blockProfile](#debug_blockProfile)               |                                      |                                           |                             |
+|                                    | [writeBlockProfile](#debug_writeBlockProfile)     |                                      |                                           |                             |
+|                                    | [writeMemProfile](#debug_writeMemProfile)         |                                      |                                           |                             |
+|                                    | [setBlockProfileRate](#debug_setBlockProfileRate) |                                      |                                           |                             |
+
 
 ## Admin
 
@@ -571,6 +588,222 @@ destructive action and may severely damage your chain. Use with *extreme* cautio
 | Console | `debug.setHead(number)`                           |
 | RPC     | `{"method": "debug_setHead", "params": [number]}` |
 
+### debug_verbosity
+
+Sets the logging verbosity ceiling. Log messages with level 
+up to and including the given level will be printed.
+
+The verbosity of individual packages and source files
+can be raised using `debug_vmodule`.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.verbosity(level)`                          |
+| RPC     | `{"method": "debug_vmodule", "params": [number]}` |
+
+### debug_vmodule
+
+Sets the logging verbosity pattern.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.vmodule(string)`                           |
+| RPC     | `{"method": "debug_vmodule", "params": [string]}` |
+
+
+#### Examples
+
+If you want to see messages from a particular Go package (directory)
+and all subdirectories, use:
+
+``` javascript
+> debug.vmodule("eth/*=6")
+```
+
+If you want to restrict messages to a particular package (e.g. p2p)
+but exclude subdirectories, use:
+
+``` javascript
+> debug.vmodule("p2p=6")
+```
+
+If you want to see log messages from a particular source file, use
+
+``` javascript
+> debug.vmodule("server.go=6")
+```
+
+You can compose these basic patterns. If you want to see all
+output from peer.go in a package below eth (eth/peer.go,
+eth/downloader/peer.go) as well as output from package p2p
+at level <= 5, use:
+
+``` javascript
+debug.vmodule("eth/*/peer.go=6,p2p=5")
+```
+
+### debug_backtraceAt
+
+Sets the logging backtrace location. When a backtrace location
+is set and a log message is emitted at that location, the stack
+of the goroutine executing the log statement will be printed to stderr.
+
+The location is specified as `<filename>:<line>`.
+
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|
+| Console | `debug.backtraceAt(string)`                           |
+| RPC     | `{"method": "debug_backtraceAt", "params": [string]}` |
+
+Example:
+
+``` javascript
+> debug.backtraceAt("server.go:443")
+```
+
+### debug_stacks
+
+Returns a printed representation of the stacks of all goroutines.
+Note that the web3 wrapper for this method takes care of the printing
+and does not return the string.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.stacks()`                                  |
+| RPC     | `{"method": "debug_stacks", "params": []}`        |
+
+
+### debug_memStats
+
+Returns detailed runtime memory statistics.
+
+See https://golang.org/pkg/runtime/#MemStats for information about
+the fields of the returned object.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.memStats()`                                |
+| RPC     | `{"method": "debug_memStats", "params": []}`      |
+
+### debug_gcStats
+
+Returns GC statistics.
+
+See https://golang.org/pkg/runtime/debug/#GCStats for information about
+the fields of the returned object.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.gcStats()`                                 |
+| RPC     | `{"method": "debug_gcStats", "params": []}`       |
+
+### debug_cpuProfile
+
+Turns on CPU profiling for the given duration and writes
+profile data to disk.
+
+| Client  | Method invocation                                            |
+|:-------:|--------------------------------------------------------------|
+| Console | `debug.cpuProfile(file, seconds)`                            |
+| RPC     | `{"method": "debug_cpuProfile", "params": [string, number]}` |
+
+### debug_startCPUProfile
+
+Turns on CPU profiling indefinitely, writing to the given file.
+
+| Client  | Method invocation                                         |
+|:-------:|-----------------------------------------------------------|
+| Console | `debug.startCPUProfile(file)`                             |
+| RPC     | `{"method": "debug_startCPUProfile", "params": [string]}` |
+
+### debug_stopCPUProfile
+
+Stops an ongoing CPU profile.
+
+| Client  | Method invocation                                  |
+|:-------:|----------------------------------------------------|
+| Console | `debug.stopCPUProfile()`                           |
+| RPC     | `{"method": "debug_stopCPUProfile", "params": []}` |
+
+### debug_goTrace
+
+Turns on Go runtime tracing for the given duration and writes
+trace data to disk.
+
+| Client  | Method invocation                                         |
+|:-------:|-----------------------------------------------------------|
+| Console | `debug.goTrace(file, seconds)`                            |
+| RPC     | `{"method": "debug_goTrace", "params": [string, number]}` |
+
+### debug_startGoTrace
+
+Starts writing a Go runtime trace to the given file.
+
+| Client  | Method invocation                                      |
+|:-------:|--------------------------------------------------------|
+| Console | `debug.startGoTrace(file)`                             |
+| RPC     | `{"method": "debug_startGoTrace", "params": [string]}` |
+
+### debug_stopGoTrace
+
+Stops writing the Go runtime trace.
+
+| Client  | Method invocation                                 |
+|:-------:|---------------------------------------------------|
+| Console | `debug.startGoTrace(file)`                        |
+| RPC     | `{"method": "debug_stopGoTrace", "params": []}`   |
+
+### debug_blockProfile
+
+Turns on block profiling for the given duration and writes
+profile data to disk. It uses a profile rate of 1 for most
+accurate information. If a different rate is desired, set
+the rate and write the profile manually using
+`debug_writeBlockProfile`.
+
+| Client  | Method invocation                                              |
+|:-------:|----------------------------------------------------------------|
+| Console | `debug.blockProfile(file, seconds)`                            |
+| RPC     | `{"method": "debug_blockProfile", "params": [string, number]}` |
+
+### debug_setBlockProfileRate
+
+Sets the rate (in samples/sec) of goroutine block profile
+data collection. A non-zero rate enables block profiling,
+setting it to zero stops the profile. Collected profile data
+can be written using `debug_writeBlockProfile`.
+
+| Client  | Method invocation                                             |
+|:-------:|---------------------------------------------------------------|
+| Console | `debug.setBlockProfileRate(rate)`                             |
+| RPC     | `{"method": "debug_setBlockProfileRate", "params": [number]}` |
+
+### debug_writeBlockProfile
+
+Writes a goroutine blocking profile to the given file.
+
+| Client  | Method invocation                                           |
+|:-------:|-------------------------------------------------------------|
+| Console | `debug.writeBlockProfile(file)`                             |
+| RPC     | `{"method": "debug_writeBlockProfile", "params": [string]}` |
+
+### debug_writeMemProfile
+
+Writes an allocation profile to the given file.
+Note that the profiling rate cannot be set through the API,
+it must be set on the command line using the `--memprofilerate`
+flag.
+
+| Client  | Method invocation                                           |
+|:-------:|-------------------------------------------------------------|
+| Console | `debug.writeMemProfile(file string)`                        |
+| RPC     | `{"method": "debug_writeBlockProfile", "params": [string]}` |
+
+## Miner
+
+The `miner` API allows you to remote control the node's mining operation and set various
+mining specific settings.
+
 ### miner_start
 
 Start the CPU mining process with the given number of threads and generate a new DAG
@@ -651,7 +884,6 @@ Stop DAG pregeneration.
 | RPC     | `{"method": "miner_stopAutoDAG", "params": []}` |
 
 
-
 ### miner_makeDAG
 
 Initiates a new DAG creation process for the given block number. This procces is 
@@ -666,49 +898,127 @@ running devices.
 | RPC     | `{"method": "miner_makeDAG", "params": [number]}` |
 
 
+## Personal
+
+The personal API manages private keys in the key store.
+
 ### personal_listAccounts
-List all accounts
 
-#### Parameters
-none
+Returns all the Ethereum account addresses of all keys
+in the key store.
 
-#### Return
-`array` collection with accounts
+| Client    | Method invocation                                   |
+| :-------: | --------------------------------------------------- |
+| Console   | `personal.listAccounts`                             |
+| RPC       | `{"method": "personal_listAccounts", "params": []}` |
 
 #### Example
-` personal.listAccounts`
 
-***
+``` javascript
+> personal.listAccounts
+["0x5e97870f263700f46aa00d967821199b9bc5a120", "0x3d80b31a78c30fc628f20b2c89d7ddbf6e53cedc"]
+```
+
 
 ### personal_newAccount
-Create a new account
 
-#### Parameters
-`string`, passphrase to protect the account
+Generates a new private key and stores it in the key store directory.
+The key file is encrypted with the given passphrase.
+Returns the address of the new account.
 
-#### Return
-`string` address of the new account
+At the geth console, `newAccount` will prompt for a passphrase when 
+it is not supplied as the argument.
+
+| Client    | Method invocation                                       |
+| :-------: | ---------------------------------------------------     |
+| Console   | `personal.newAccount()`                                 |
+| RPC       | `{"method": "personal_newAccount", "params": [string]}` |
 
 #### Example
-` personal.newAccount("mypasswd")`
+ 
+``` javascript
+> personal.newAccount()
+Passphrase: 
+Repeat passphrase: 
+"0x5e97870f263700f46aa00d967821199b9bc5a120"
+```
 
-***
+The passphrase can also be supplied as a string.
+
+``` javascript
+> personal.newAccount("h4ck3r")
+"0x3d80b31a78c30fc628f20b2c89d7ddbf6e53cedc"
+```
+
 
 ### personal_unlockAccount
-Unlock an account
 
-#### Parameters
-`string`, address of the account to unlock
+Decrypts the key with the given address from the key store.
 
-`string`, passphrase of the account to unlock (optional in console, user will be prompted if empty)
+Both passphrase and unlock duration are optional when using the JavaScript console.
+If the passphrase is not supplied as an argument, the console will prompt for
+the passphrase interactively.
 
-`integer`, unlock account for duration seconds, use 0 if the account must be locked forever. If not specified 300 is used by default.
+The unencrypted key will be held in memory until the unlock duration expires.
+If the unlock duration defaults to 300 seconds. An explicit duration
+of zero seconds unlocks the key until geth exits.
 
-#### Return
-`boolean` indication if the account was unlocked
+The account can be used with `eth_sign` and `eth_sendTransaction` while it is unlocked.
+ 
+| Client    | Method invocation                                                          |
+| :-------: | -------------------------------------------------------------------------- |
+| Console   | `personal.unlockAccount(address, passphrase, duration)`                    |
+| RPC       | `{"method": "personal_unlockAccount", "params": [string, string, number]}` |
 
-#### Example
-` personal.unlockAccount(eth.coinbase, "mypasswd", 300)`
+#### Examples
+
+``` javascript
+> personal.unlockAccount("0x5e97870f263700f46aa00d967821199b9bc5a120")
+Unlock account 0x5e97870f263700f46aa00d967821199b9bc5a120
+Passphrase: 
+true
+```
+
+Supplying the passphrase and unlock duration as arguments:
+
+``` javascript
+> personal.unlockAccount("0x5e97870f263700f46aa00d967821199b9bc5a120", "foo", 30)
+true
+```
+
+If you want to type in the passphrase and stil override the default unlock duration,
+pass `null` as the passphrase.
+
+```
+> personal.unlockAccount("0x5e97870f263700f46aa00d967821199b9bc5a120", null, 30)
+Unlock account 0x5e97870f263700f46aa00d967821199b9bc5a120
+Passphrase: 
+true
+```
+
+
+### personal_lockAccount
+
+Removes the private key with given address from memory.
+The account can no longer be used to send transactions.
+ 
+| Client    | Method invocation                                        |
+| :-------: | -------------------------------------------------------- |
+| Console   | `personal.lockAccount(address)`                          |
+| RPC       | `{"method": "personal_lockAccount", "params": [string]}` |
+
+
+### personal_importRawKey
+
+Imports the given unencrypted private key (hex string) into the key store,
+encrypting it with the passphrase.
+
+Returns the address of the new account.
+ 
+| Client    | Method invocation                                                 |
+| :-------: | ----------------------------------------------------------------- |
+| Console   | `personal.importRawKey(keydata, passphrase)`                      |
+| RPC       | `{"method": "personal_importRawKey", "params": [string, string]}` |
 
 
 ## Txpool
