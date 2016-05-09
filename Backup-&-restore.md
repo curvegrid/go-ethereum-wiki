@@ -15,7 +15,7 @@ Accounts are stored in the `keystore` subdirectory. The contents of this directo
 
 To configure the location of the data directory, the `--datadir` parameter can be specified. See [CLI Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options) for more details.
 
-_**Note:** The [Ethash DAG](https://github.com/ethereum/go-ethereum/wiki/Mining#ethash-dag) is stored at `~/.ethash` (Mac/Linux) or `~/AppData/Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
+_**Note:** The [Ethash DAG](https://github.com/ethereum/go-ethereum/wiki/Mining#ethash-dag) is stored at `~/.ethash` (Mac/Linux) or `%APPDATA%\Ethash` (Windows) so that it can be reused by all clients. You can store this in a different location by using a symbolic link._
 
 ## Upgrades
 
