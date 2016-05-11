@@ -4,23 +4,21 @@
 
 * [x] underground dev testnet launched on BZZ day (3.22 is l33t for BZZ)
 * [x] create ansible and docker for node deployment
-* [ ] a few public gateways 
+* [x] a few public gateways 
 
-## POC0.2 Homestead swarm 
+## POC0.2 Homestead sworm 
 
-* [ ] rebase on geth 1.4 
+* [x] rebase on geth 1.5 
 
 ## Release of content 
 
-* [ ] orange paper series released on swarm 
-* [ ] landing page for swarm with some minimal info
+* [x] orange paper series released on swarm 
+* [x] landing page for swarm with some minimal info
 
-## Roadmap for network (testing)
+## Stages of network (testing)
 
 * [ ] see that private network is working correctly
 * [ ] see that the private network is working and benchmarking the influence of block propagation gives satisfying results
-* [ ] publish the two papers about the incentives
-* [ ] upgrade to geth 1.4 or by that time maybe 1.5
 * [ ] an upgraded swarm on a private network is opened up for public participation
 * [ ] the private test network with community gives us another order of magnitude bigger network to test on
 * [ ] homestead-compatible swarm is joining the Morden testnet
