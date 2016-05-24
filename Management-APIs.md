@@ -92,7 +92,7 @@ extra management API namespaces:
 | [nodeInfo](#admin_nodeinfo)  | [cpuProfile](#debug_cpuProfile)                   | [setExtra](#miner_setextra)         | [lockAccount](#personal_lockaccount)     | [status](#txpool_status)   |
 | [peers](#admin_peers)        | [dumpBlock](#debug_dumpblock)                     | [setGasPrice](#miner_setgasprice)   | [newAccount](#personal_newaccount)       |                            |
 | [setSolc](#admin_setcolc)    | [gcStats](#debug_gcStats)                         | [start](#miner_start)               | [unlockAccount](#personal_unlockaccount) |                            |
-| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag) |                                          |                            |
+| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag) |  [signAndSendTransaction](#personal_signAndSendTransaction)                          |                                     |
 | [startWS](#admin_startws)    | [goTrace](#debug_goTrace)                         | [stop](#miner_stop)                 |                                          |                            |
 | [stopRPC](#admin_stoprpc)    | [memStats](#debug_memStats)                       | [stopAutoDAG](#miner_stopAutodag)   |                                          |                            |
 | [stopWS](#admin_stopws)      | [seedHash](#debug_seedhash)                       |                                     |                                          |                            |
@@ -1011,6 +1011,25 @@ Passphrase:
 true
 ```
 
+### personal_signAndSendTransaction
+
+Validate the given passphrase and submit transaction.
+
+The transaction is the same argument as for `eth_sendTransaction` and contains the `from` address. If the passphrase can be used to decrypt the private key belogging to `tx.from` the transaction is verified, signed and send onto the network. The account is not unlocked globally in the node and cannot be used in other RPC calls.
+
+| Client    | Method invocation                                                          |
+| :-------: | -------------------------------------------------------------------------- |
+| Console   | `personal.signAndSendTransaction(tx, passphrase)`                          |
+| RPC       | `{"method": "personal_signAndSendTransaction", "params": [tx, string]}`    |
+
+#### Examples
+
+``` javascript
+> var tx = {from: "0x391694e7e0b0cce554cb130d723a9d27458f9298", to: "0xafa3f8684e54059998bc3a7b0d2b0da075154d66", value: web3.toWei(1.23, "ether")}
+undefined
+> personal.signAndSendTransaction(tx, "passphrase")
+0x8474441674cdd47b35b875fd1a530b800b51a5264b9975fb21129eeb8c18582f
+```
 
 ## Txpool
 
