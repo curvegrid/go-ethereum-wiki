@@ -162,7 +162,6 @@ With the number of THREADS as an arguments:
   * [startAutoDAG](#minerstartautodag)
   * [stopAutoDAG](#minerstopautodag)
   * [makeDAG](#minermakedag)
-  * [hashrate](#minerhashrate)
   * [setExtra](#minersetextra) 
   * [setGasPrice] (#minersetgasprice)
   * [setEtherbase] (#minersetetherbase)
@@ -740,16 +739,6 @@ If `dir` is the empty string, then ethash will use the default directories `~/.e
 ##### Returns
 
 `true` on success, otherwise `false`.
-
-***
-
-#### miner.hashrate
-    
-    miner.hashrate
-
-##### Returns
-
-Returns the current hash rate in H/s.
 
 ***
 
