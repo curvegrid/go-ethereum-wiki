@@ -224,25 +224,15 @@ Create a new password protected account
 #### Example
 ` personal.newAccount("mypasswd")`
 
-***
-
-#### personal.deleteAccount
-    personal.deleteAccount(addr, passwd)
-
-Delete the account with the given address and password
-
-#### Return
-indication if the account was deleted
-
-#### Example
-` personal.deleteAccount(eth.coinbase, "mypasswd")`
+` personal.newAccount() # will prompt for the password`
 
 ***
+
 
 #### personal.unlockAccount
     personal.unlockAccount(addr, passwd, duration)
 
-Unlock the account with the given address, password and an optional duration (in seconds)
+Unlock the account with the given address, password and an optional duration (in seconds). If password is not given you will be prompted for it.
 
 #### Return
 `boolean` indication if the account was unlocked
@@ -275,34 +265,6 @@ The `admin` exposes the methods to manage, control or monitor your node. It allo
 
 ***
 
-#### admin.chainSyncStatus
-
-    admin.chainSyncStatus
-
-Prints info on blockchain synching.
-
-### return
-`blocksAvailable`, blocks which have not been downloaded
-
-`blocksWaitingForImport`, downloaded blocks waiting before import
-
-`estimate`, a (very rough) estimate before the node has imported all blocks
-
-`importing`, blocks currently importing
-
-***
-
-#### admin.verbosity
-
-    admin.verbosity(level)
-
-**Sets** logger verbosity level to _level_. 1-6: silent, error, warn, info, debug, detail
-
-##### Example
-
-    > admin.verbosity(6)
-
-***
 
 #### admin.nodeInfo
 
