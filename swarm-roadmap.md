@@ -29,7 +29,7 @@
 * [ ] finish scripted network tests 
 * [ ] syncer, forwarder, depo unit tests
 * [ ] remove [BZZ] tag from logs swarm - enhancement [#2345](https://github.com/ethereum/go-ethereum/issues/2345)
-* [ ] support for separate url schemes for dns enabled, immutable and raw manifest - feature [#2279](https://github.com/ethereum/go-ethereum/issues/2279)
+* [x] support for separate url schemes for dns enabled, immutable and raw manifest - feature [#2279](https://github.com/ethereum/go-ethereum/issues/2279)
 * [ ] deliveries should not enter the sync pool - enhancement [#2046](https://github.com/ethereum/go-ethereum/issues/2046)
 * [ ] push on delete - feature [#2045](https://github.com/ethereum/go-ethereum/issues/2045)
 * [ ] smart peer propagation enhancement feature [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
@@ -49,19 +49,7 @@ The features and enhancements below will be prioritised and for the basis of the
   * [ ] swarm DNS - enhancement [#2422](https://github.com/ethereum/go-ethereum/issues/2422)
   * [ ] implementation for [EIP-26](https://github.com/ethereum/EIPs/issues/26)
   * [ ] swarm namereg/natspec rewrite - enhancement [#2048](https://github.com/ethereum/go-ethereum/issues/2048)
-  * [ ] solidity contractInfo standard and contract source verification support
-* [ ] network and bzz protocol improvements
-  * [ ] 
-  * [ ] new p2p API integration - feature [#2060](https://github.com/ethereum/go-ethereum/issues/2060)
-  * [ ] multinode swarm - inproc cluster support with swormhole kademlia 
-  * [ ] beeline retrieval using adhoc UDP callbacks - no beeline for anonymous browsing 
-  * [ ] configurable retrieval : +- beeline, +- proof response, +- priority +- erasure boost 16 types :)
-  * [ ] leeching channels
-  * [ ] protocol stack abstraction, pluggable subprotocols - hive/protocol refactor
-  * [ ] unicast/multicast messaging over swarm - pss 
-* [ ] swarm DB support 
-  * [ ] [SWarm On-demand Retrieval Daemon](https://gist.github.com/zelig/aa6eb43615e12d834d9f) - feature [#2049](https://github.com/ethereum/go-ethereum/issues/2049) = sword. ethereum state, contract storage, receipts, blocks on swarm
-  * [ ] distributed indexing
+    * [ ] distributed indexing
 * [ ] chunker and document level API improvements
   * [ ] integrate smash hash and swarm hash
   * [ ] rerwite chunk size encoding
