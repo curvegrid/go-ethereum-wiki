@@ -92,7 +92,7 @@ extra management API namespaces:
 | [nodeInfo](#admin_nodeinfo)  | [cpuProfile](#debug_cpuProfile)                   | [setExtra](#miner_setextra)         | [lockAccount](#personal_lockaccount)     | [status](#txpool_status)   |
 | [peers](#admin_peers)        | [dumpBlock](#debug_dumpblock)                     | [setGasPrice](#miner_setgasprice)   | [newAccount](#personal_newaccount)       |                            |
 | [setSolc](#admin_setcolc)    | [gcStats](#debug_gcStats)                         | [start](#miner_start)               | [unlockAccount](#personal_unlockaccount) |                            |
-| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag) |  [signAndSendTransaction](#personal_sendTransaction)                          |                                     |
+| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [startAutoDAG](#miner_startautodag) |  [sendTransaction](#personal_sendTransaction)                          |                                     |
 | [startWS](#admin_startws)    | [goTrace](#debug_goTrace)                         | [stop](#miner_stop)                 |                                          |                            |
 | [stopRPC](#admin_stoprpc)    | [memStats](#debug_memStats)                       | [stopAutoDAG](#miner_stopAutodag)   |                                          |                            |
 | [stopWS](#admin_stopws)      | [seedHash](#debug_seedhash)                       |                                     |                                          |                            |
