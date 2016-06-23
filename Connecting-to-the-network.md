@@ -14,9 +14,9 @@ geth uses a set of bootstrap nodes whose endpoints are recorded in the
 source code.
 
 To change the bootnodes on startup, use the `--bootnodes` option and
-separate the nodes by spaces. For example:
+separate the nodes by commas. For example:
 
-    geth --bootnodes "enode://pubkey1@ip1:port1 enode://pubkey2@ip2:port2 enode://pubkey3@ip3:port3"
+    geth --bootnodes enode://pubkey1@ip1:port1,enode://pubkey2@ip2:port2,enode://pubkey3@ip3:port3
 
 ## Common Problems With Connectivity
 
