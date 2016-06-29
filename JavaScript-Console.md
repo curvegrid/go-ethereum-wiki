@@ -150,6 +150,7 @@ With the number of THREADS as an arguments:
   * [stopWS](#adminstopws)
   * [verbosity](#adminverbosity)
   * [setSolc](#adminsetsolc)
+  * [sleep](#adminsleep)
   * [sleepBlocks](#adminsleepblocks)
   * [startNatSpec](#adminstartnatspec)
   * [stopNatSpec](#adminstopnatspec)
@@ -181,7 +182,6 @@ With the number of THREADS as an arguments:
   * [dumpBlock](#debugdumpblock)
   * [metrics](#debugmetrics)
 * [loadScript](#loadscript)
-* [sleep](#sleep)
 * [setInterval](#setInterval)
 * [clearInterval](#clearInterval)
 * [setTimeout](#setTimeout)
@@ -447,6 +447,14 @@ Stops the websocket server for the [JSON-RPC](https://github.com/ethereum/wiki/w
 admin.stopWS()
 // true
 ```
+
+*** 
+
+#### admin.sleep
+
+    admin.sleep(s)
+
+Sleeps for s seconds. 
 
 ***
 
@@ -899,12 +907,6 @@ Collection of metrics, see for more information [this](https://github.com/ethere
      loadScript('/path/to/myfile.js');
 
 Loads a JavaScript file and executes it. Relative paths are interpreted as relative to `jspath` which is specified as a command line flag, see [Command Line Options](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options). 
-
-#### sleep 
-
-    sleep(s)
-
-Sleeps for s seconds. 
 
 #### setInterval
 
