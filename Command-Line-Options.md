@@ -211,7 +211,7 @@ Example genesis.json file:
 ```
 {
         "config": {
-                "homesteadBlock": "10"
+                "homesteadBlock": 10
         },
         "nonce": "0",
         "difficulty": "0x20000",
