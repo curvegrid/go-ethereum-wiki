@@ -1017,10 +1017,12 @@ Validate the given passphrase and submit transaction.
 
 The transaction is the same argument as for `eth_sendTransaction` and contains the `from` address. If the passphrase can be used to decrypt the private key belogging to `tx.from` the transaction is verified, signed and send onto the network. The account is not unlocked globally in the node and cannot be used in other RPC calls.
 
-| Client    | Method invocation                                                          |
-| :-------: | -------------------------------------------------------------------------- |
-| Console   | `personal.signAndSendTransaction(tx, passphrase)`                          |
-| RPC       | `{"method": "personal_sendTransaction", "params": [tx, string]}`    |
+| Client    | Method invocation                                                |
+| :-------: | -----------------------------------------------------------------|
+| Console   | `personal.sendTransaction(tx, passphrase)`                       |
+| RPC       | `{"method": "personal_sendTransaction", "params": [tx, string]}` |
+
+*Note, prior to Geth 1.5, please use `personal_signAndSendTransaction` as that was the original introductory name and only later renamed to the current final version.*
 
 #### Examples
 
