@@ -657,9 +657,7 @@ miner.start()
 
 #### miner.stop
 
-    miner.stop(threadCount)
-
-Stops `threadCount` miners. This is an optional argument.
+    miner.stop()
 
 ##### Returns
 
