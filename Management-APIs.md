@@ -85,7 +85,7 @@ extra management API namespaces:
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| [admin](#admin)              | [debug](#debug)                                   | [miner](#miner)                     | [personal](personal)                     | [txpool](#txpool)          |
+| [admin](#admin)              | [debug](#debug)                                   | [miner](#miner)                     | [personal](#personal)                     | [txpool](#txpool)          |
 | :--------------------------- | :-----------------------------------------------  | :---------------------------------- | :--------------------------------------- | :------------------------- |
 | [addPeer](#admin_addpeer)    | [backtraceAt](#debug_backtraceAt)                 | [hashrate](#miner_hashrate)         | [importRawKey](#personal_importrawkey)   | [content](#txpool_content) |
 | [datadir](#datadir)          | [blockProfile](#debug_blockProfile)               | [makeDAG](#miner_makedag)           | [listAccounts](#personal_listaccounts)   | [inspect](#txpool_inspect) |
