@@ -23,7 +23,7 @@ function checkWork() {
         console.log("== Pending transactions! Mining...");
         miner.start(mining_threads);
     } else {
-        miner.stop(0);  // This param means nothing
+        miner.stop();  // This param means nothing
         console.log("== No transactions! Mining stopped.");
     }
 }
