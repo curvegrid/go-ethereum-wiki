@@ -134,7 +134,7 @@ Indicates when the node starts or stops synchronizing. The result can either be 
 none
 
 ### Example
-    >> {"id": 1, "method": "eth_subscribe", "params": ["sycning"]}
+    >> {"id": 1, "method": "eth_subscribe", "params": ["syncing"]}
     << {"jsonrpc":"2.0","id":2,"result":"0xe2ffeb2703bcf602d42922385829ce96"}
 
     << {"subscription":"0xe2ffeb2703bcf602d42922385829ce96","result":{"syncing":true,"status":{"startingBlock":674427,"currentBlock":67400,"highestBlock":674432,"pulledStates":0,"knownStates":0}}}}
