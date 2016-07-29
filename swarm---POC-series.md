@@ -1,30 +1,45 @@
-* [ ] with POC 0.2 homestead-compatible swarm is joining the Morden testnet on 6.22.
+## POC 0.1: plan bee
 
-## Fixes and backlog
+* [x] underground dev testnet launched on BZZ day (3.22 is l33t for BZZ)
+* [x] create ansible and docker for node deployment
+* [x] a few public gateways 
 
-* [ ] finish scripted network tests 
-* [ ] syncer, forwarder, depo unit tests
-* [ ] remove [BZZ] tag from logs swarm - enhancement [#2345](https://github.com/ethereum/go-ethereum/issues/2345)
-* [ ] deliveries should not enter the sync pool - enhancement [#2046](https://github.com/ethereum/go-ethereum
-/issues/2046)
-* [ ] push on delete - feature [#2045](https://github.com/ethereum/go-ethereum/issues/2045)
+## POC 0.2 sworm 
 
-## POC 3 features
+* [x] rebase on geth 1.5 edge
+* [x] small toynet deployed, see [network monitor](http://146.185.130.117/)
+* [x] Ethereum name service integration
+* [x] scripted network tests, cluster control framework (to be obsoleted by eth/
+* [x] algorithmic improvements on chunker split/join
+* [x] algorithmic improvements on upload/download
+* [x] algorithmic improvements in kademlia and hive peers manager 
+* [x] calibrating kademlia connectivity parameters to toynet scale
+* [x] orange paper series released on [swarm toynet](
+* [x] minimalistic [swarm homepage](swarm-gateways.net/bzz:/swarm)
+* [ ] adapt to felix's rpc-client-as-eth-backend scheme to run swarm as a separate daemon 
+* [ ] merge into main repo develop branch
 
+## POC 3 
+
+The following features are prioritised for POC 3 (subject to change)
+
+* [ ] docker on azure: complete test cluster deployment and remote node control framework
+* [ ] comprehensive suite of typical network scenarios
+* [ ] syncer rewrite - syncdb refactor to storage
+* [ ] mist integration
 * [ ] storage monitoring and parameter setting API for Mist swarm dashboard
 * [ ] bzz protocol should implement info for reporting - feature [#2042](https://github.com/ethereum/go-ethereum/issues/2042)
-* [ ] swarm DNS - enhancement [#2422](https://github.com/ethereum/go-ethereum/issues/2422)
-* [ ] implementation for [EIP-26](https://github.com/ethereum/EIPs/issues/26)
+* [ ] implement (a reviewed version of) [EIP-26](https://github.com/ethereum/EIPs/issues/26)
 * [ ] swarm namereg/natspec rewrite - enhancement [#2048](https://github.com/ethereum/go-ethereum/issues/2048)
-* [ ] solidity contractInfo standard and contract source verification support
-* [ ] smart peer propagation enhancement feature [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
-* [ ] protocol stack abstraction, pluggable subprotocols - hive/protocol refactor
-
-## POC 4 features
-
-* [ ] network simulation framework
-* [ ] enhanced network monitoring, structured logging and stats aggregation
+* [ ] solidity [contractInfo standard](https://github.com/ethereum/solidity/pull/645) and contract source verification support
+* [ ] improved peer propagation [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
+* [ ] protocol stack abstraction, pluggable subprotocol components - (swap, hive/protocol, syncer, peers) for pss
 * [ ] new p2p API integration - feature [#2060](https://github.com/ethereum/go-ethereum/issues/2060)
+
+## POC 4-
+
+* [ ] abstract network simulation framework using shadow
+* [ ] enhanced network monitoring, structured logging and stats aggregation
 * [ ] unicast/multicast messaging over swarm - pss 
 * [ ] swarm DB support phase 0 - compact manifest trie and proof requests
 * [ ] [SWarm On-demand Retrieval Daemon](https://gist.github.com/zelig/aa6eb43615e12d834d9f) - feature [#2049](https://github.com/ethereum/go-ethereum/issues/2049) = sword. ethereum state, contract storage, receipts, blocks on swarm
