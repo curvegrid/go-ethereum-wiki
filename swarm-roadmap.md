@@ -70,7 +70,6 @@ The features and enhancements below will be prioritised and for the basis of the
   * [ ] skeleton manifests [#2437](https://github.com/ethereum/go-ethereum/issues/2437)
   * [ ] file system watcher - dropbox backend API
 * [ ] remove [BZZ] tag from logs swarm - enhancement [#2345](https://github.com/ethereum/go-ethereum/issues/2345)
-* [x] support for separate url schemes for dns enabled, immutable and raw manifest - feature [#2279](https://github.com/ethereum/go-ethereum/issues/2279)
 
 ## services
 
