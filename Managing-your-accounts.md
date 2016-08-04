@@ -285,13 +285,16 @@ To check your the etherbase account balance:
 
 Print all balances with a JavaScript function:
 ```
-function checkAllBalances() { 
-var i =0; 
-eth.accounts.forEach( function(e){
- 	console.log("  eth.accounts["+i+"]: " +  e + " \tbalance: " + web3.fromWei(eth.getBalance(e), "ether") + " ether"); 
-i++; 
-})
-}; 
+function checkAllBalances() {
+    var totalBal = 0;
+    for (var acctNum in eth.accounts) {
+        var acct = eth.accounts[acctNum];
+        var acctBal = web3.fromWei(eth.getBalance(acct), "ether");
+        totalBal += parseFloat(acctBal);
+        console.log("  eth.accounts[" + acctNum + "]: \t" + acct + " \tbalance: " + acctBal + " ether");
+    }
+    console.log("  Total balance: " + totalBal + " ether");
+};
 ```
 That can then be executed with:
 ```
