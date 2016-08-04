@@ -201,7 +201,7 @@ geth attach ws://host:8546    # connect over websocket
 ```
 
 ### Init
-With the init command it is possible to create a chain with a custom genesis block and chain configuration (currently only the homestead transition block can be configured). It respects the `--datadir` argument and accepts a JSON file describing the chain configuration.
+With the init command it is possible to create a chain with a custom genesis block and chain configuration (currently only the homestead transition block can be configured). It respects the `--datadir` argument and accepts a JSON file describing the chain configuration. If you omit the `--datadir` flag the genesis block will be written in the default datadir. If there is a synced chain in the default datadir it will be destroyed.
 
 ```
 geth --datadir <some/location/where/to/create/chain> init genesis.json
@@ -210,18 +210,25 @@ geth --datadir <some/location/where/to/create/chain> init genesis.json
 Example genesis.json file:
 ```
 {
-        "config": {
-                "homesteadBlock": 10
-        },
-        "nonce": "0",
-        "difficulty": "0x20000",
-        "mixhash": "0x00000000000000000000000000000000000000647572616c65787365646c6578",
-        "coinbase": "0x0000000000000000000000000000000000000000",
-        "timestamp": "0x00",
-        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-        "extraData": "0x",
-        "gasLimit": "0x2FEFD8",
-        "alloc": {}
+   "coinbase": "0x0000000000000000000000000000000000000000",
+   "config": {
+      "homesteadBlock": 5
+   },
+   "difficulty": "0x20000",
+   "extraData": "0x",
+   "gasLimit": "0x2FEFD8",
+   "mixhash": "0x00000000000000000000000000000000000000647572616c65787365646c6578",
+   "nonce": "0x0",
+   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+   "timestamp": "0x00",
+   "alloc": {
+      "dbdbdb2cbd23b783741e8d7fcf51e459b497e4a6":{
+         "balance":"100000000000000000000000000000"
+      },
+      "e6716f9544a56c530d868e4bfbacb172315bdead":{
+         "balance":"100000000000000000000000000000"
+      }
+   }
 }
 ```
 
