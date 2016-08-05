@@ -168,7 +168,7 @@ Start two mining nodes using different data directories listening on ports 30303
     
 Start an rpc client on port 8000:
 
-    geth --rpc --rpcport 8000 --rpccorsdomain '"*"'
+    geth --rpc --rpcport 8000 --rpccorsdomain "*"
 
 Launch the client without network:
 
