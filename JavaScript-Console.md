@@ -176,7 +176,6 @@ With the number of THREADS as an arguments:
 * [debug](#debug)
   * [setHead](#debugsethead)
   * [seedHash](#debugseedhash)
-  * [processBlock](#debugprocessblock)
   * [getBlockRlp](#debuggetblockrlp)
   * [printBlock](#debugprintblock)
   * [dumpBlock](#debugdumpblock)
@@ -773,25 +772,6 @@ hash in hex format
     '0xf2e59013a0a379837166b59f871b20a8a0d101d1c355ea85d35329360e69c000'
 
 ***
-
-#### debug.processBlock
-
-    debug.processBlock(blockNumber)
-
-Processes the given block referred to by _blockNumber_ with the VM in debug mode.
-See [web3.eth.getBlock](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetblock) for more details on block fields and lookup by number or hash.
-In combination with `setHead`, this can be used to replay processing of a block to debug VM execution.
-
-##### Returns 
-
-`true` on success, otherwise `false`.
-
-##### Example 
-
-    debug.processBlock(140101)
-
-***
-
 
 #### debug.getBlockRlp
 
