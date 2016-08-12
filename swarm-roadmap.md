@@ -72,6 +72,7 @@ The features and enhancements below will be prioritised and for the basis of the
   * [ ] skeleton manifests [#2437](https://github.com/ethereum/go-ethereum/issues/2437)
   * [ ] file system watcher - dropbox backend API
 * [ ] remove [BZZ] tag from logs swarm - enhancement [#2345](https://github.com/ethereum/go-ethereum/issues/2345)
+* [ ] support CBOR binary json
 
 ## services
 
