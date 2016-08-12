@@ -44,12 +44,14 @@ The features and enhancements below will be prioritised and for the basis of the
 * [ ] unicast/multicast messaging over swarm - pss 
 * [ ] improved peer propagation [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
 * [ ] protocol stack abstraction, pluggable subprotocol components - (swap, hive/protocol, syncer, peers) for pss
+* [ ] channels for live-streaming 
 * [ ] new p2p API integration - feature [#2060](https://github.com/ethereum/go-ethereum/issues/2060)
 
 ## storage
 * [ ] syncdb/netstore rewrite
+* [ ] pyramid chunker and channel support for live-streaming
 * [ ] push on delete - feature [#2045](https://github.com/ethereum/go-ethereum/issues/2045)
-* [ ] storage parametera setting API
+* [ ] storage parameters setting API
 * [ ] storage monitoring  for Mist swarm dashboard
 * [ ] integrate smash hash and swarm hash
 * [ ] rewrite chunk size encoding
