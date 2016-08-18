@@ -48,7 +48,9 @@ Subscriptions are cancelled with a regular RPC call with `eth_unsubscribe` as me
 
 # Supported subscriptions
 
-## newBlocks
+## newBlocks (deprecated, see newHeads)
+From geth release 1.5 newBlocks is removed. Light clients won't download full blocks and thus cannot notify the client with full blocks. This subscription is succeeded by the newHeads subscription that only give header information back when the chain is extended with one block in case of a full client or header in case of a light client.
+
 Fires a notification each time a new block added to the chain, including chain reorganizations.
 
 ### Parameters
@@ -92,6 +94,40 @@ Fires a notification each time a new block added to the chain, including chain r
         }
     }
 
+
+## newHeads
+Fires a notification each time a new header is appended to the chain, including chain reorganizations. Users can use the bloom filter to determine if the block contains logs that are interested to them.
+
+### Example
+```
+    >> {"id": 1, "method": "eth_subscribe", "params": ["newHeads"]}
+    << {"jsonrpc":"2.0","id":2,"result":"0x9ce59a13059e417087c02d3236a0b1cc"}
+
+    << {
+  "jsonrpc": "2.0",
+  "method": "eth_subscription",
+  "params": {
+    "result": {
+      "difficulty": "0x15d9223a23aa",
+      "extraData": "0xd983010305844765746887676f312e342e328777696e646f7773",
+      "gasLimit": "0x47e7c4",
+      "gasUsed": "0x38658",
+      "hash": "0x950427f707bf395fda0092d4f5dcbcf32d632106fb08e397124d0726082693e6",
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "miner": "0xf8b483dba2c3b7176a3da549ad41a48bb3121069",
+      "nonce": "0x084149998194cc5f",
+      "number": "0x1348c9",
+      "parentHash": "0x7736fab79e05dc611604d22470dadad26f56fe494421b5b333de816ce1f25701",
+      "receiptRoot": "0x2fab35823ad00c7bb388595cb46652fe7886e00660a01e867824d3dceb1c8d36",
+      "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+      "stateRoot": "0xb3346685172db67de536d8765c43c31009d0eb3bd9c501c9be3229203f15f378",
+      "timestamp": "0x56ffeff8",
+      "transactionsRoot": "0x0167ffa60e3ebc0b080cdb95f7c0087dd6c0e61413140e39d94d3468d7c9689f"
+    },
+    "subscription": "0x9ce59a13059e417087c02d3236a0b1cc"
+  }
+}
+```
 
 ## logs
 Returns logs that are included in new imported blocks and match the given filter criteria.
