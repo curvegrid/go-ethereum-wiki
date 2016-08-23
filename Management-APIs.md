@@ -769,7 +769,7 @@ Note that several values are Golang big.Int objects, not JavaScript numbers or J
 
 Usage example, returns the stack at each CALL opcode only:
 
-    debug.traceTransaction(txhash, {tracer: "{data: [], step: function(log) { if(log.op.String() == "CALL") this.data.Add(log.stack); }, result: function() { return this.data; }}"})
+    debug.traceTransaction(txhash, {tracer: '{data: [], step: function(log) { if(log.op.toString() == "CALL") this.data.push(log.stack); }, result: function() { return this.data; }}'});
 
 ### debug_verbosity
 
