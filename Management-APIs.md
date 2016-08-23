@@ -742,6 +742,18 @@ Specifying the `tracer` option in the second argument enables JavaScript-based t
 
 If `err` is non-null, all other fields should be ignored.
 
+For efficiency, the same `log` object is reused on each execution step, updated with current values; make sure to copy values you want to preserve beyond the current call. For instance, this step function will not work:
+
+    function(log) {
+      this.logs.append(log);
+    }
+
+But this step function will:
+
+    function(log) {
+      this.logs.append({gas: log.gas, pc: log.pc, ...});
+    }
+
 `log.op` has the following methods:
 
  - `isPush()` - returns true iff the opcode is a PUSHn
