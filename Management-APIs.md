@@ -678,6 +678,8 @@ specifies the options for this specific call. The possible options are:
 * `disableStack`: `BOOL`. Setting this to true will disable stack capture (default = false).
 * `fullStorage`: `BOOL`. Setting this to true will return you, for each opcode, the full storage,
     including everything which hasn't changed. This is a slow process and is therefor defaulted to `false`. By default it will only ever give you the changed storage values.
+* `tracer`: `STRING`. Setting this will enable JavaScript-based transaction tracing, described below. If set, the previous four arguments will be ignored.
+* `timeout`: `STRING`. Overrides the default timeout of 5 seconds for JavaScript-based tracing calls. Valid values are described [here](https://golang.org/pkg/time/#ParseDuration).
 
 | Client  | Method invocation                                                                            |
 |:-------:|----------------------------------------------------------------------------------------------|
@@ -720,6 +722,54 @@ specifies the options for this specific call. The possible options are:
       }
   }]
 ```
+
+#### JavaScript-based tracing
+Specifying the `tracer` option in the second argument enables JavaScript-based tracing. In this mode, `tracer` is interpreted as a JavaScript expression that is expected to evaluate to an object with (at least) two methods, named `step` and `result`.
+
+`step`is a function that takes two arguments, log and db, and is called for each step of the EVM, or when an error occurs, as the specified transaction is traced.
+
+`log` has the following fields:
+
+ - `pc`: Number, the current program counter
+ - `op`: Object, an OpCode object representing the current opcode
+ - `gas`: Number, the amount of gas remaining
+ - `gasPrice`: Number, the cost in wei of each unit of gas
+ - `memory`: Object, a structure representing the contract's memory space
+ - `stack`: array[big.Int], the EVM execution stack
+ - `depth`: The execution depth
+ - `account`: The address of the account executing the current operation
+ - `err`: If an error occured, information about the error
+
+If `err` is non-null, all other fields should be ignored.
+
+`log.op` has the following methods:
+
+ - `isPush()` - returns true iff the opcode is a PUSHn
+ - `toString()` - returns the string representation of the opcode
+ - `toNumber()` - returns the opcode's number
+
+`log.memory` has the following methods:
+
+ - `slice(start, stop)` - returns the specified segment of memory as a byte slice
+ - `length()` - returns the length of the memory
+
+`db` has the following methods:
+
+ - `getBalance(address)` - returns a `big.Int` with the specified account's balance
+ - `getNonce(address)` - returns a Number with the specified account's nonce
+ - `getCode(address)` - returns a byte slice with the code for the specified account
+ - `getState(address, hash)` - returns the state value for the specified account and the specified hash
+ - `exists(address)` - returns true if the specified address exists
+
+The second function, 'result', takes no arguments, and is expected to return a JSON-serializable value to return to the RPC caller.
+
+If the step function throws an exception or executes an illegal operation at any point, it will not be called on any further VM steps, and the error will be returned to the caller.
+
+Note that several values are Golang big.Int objects, not JavaScript numbers or JS bigints. As such, they have the same interface as described in the godocs. Their default serialization to JSON is as a Javascript number; to serialize large numbers accurately call `.String()` on them. For convenience, `big.NewInt(x)` is provided, and will convert a uint to a Go BigInt.
+
+Usage example, returns the stack at each CALL opcode only:
+
+    debug.traceTransaction(txhash, {tracer: "{data: [], step: function(log) { if(log.op.String() == "CALL") this.data.Add(log.stack); }, result: function() { return this.data; }}"})
 
 ### debug_verbosity
 
