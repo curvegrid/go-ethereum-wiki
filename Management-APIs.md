@@ -107,7 +107,7 @@ extra management API namespaces:
 |                              | [traceBlockByNumber](#debug_blockbynumber)        |                                     |                                          |                            |
 |                              | [traceBlockByHash](#debug_blockbyhash)            |                                     |                                          |                            |
 |                              | [traceBlockFromFile](#debug_traceblockfromfile)   |                                     |                                          |                            |
-|                              | [traceTransaction](#debug_tracetrancaction)       |                                     |                                          |                            |
+|                              | [traceTransaction](#debug_tracetransaction)       |                                     |                                          |                            |
 |                              | [verbosity](#debug_verbosity)                     |                                     |                                          |                            |
 |                              | [vmodule](#debug_vmodule)                         |                                     |                                          |                            |
 |                              | [writeBlockProfile](#debug_writeBlockProfile)     |                                     |                                          |                            |
