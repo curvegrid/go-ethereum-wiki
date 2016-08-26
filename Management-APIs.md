@@ -765,6 +765,11 @@ But this step function will:
  - `slice(start, stop)` - returns the specified segment of memory as a byte slice
  - `length()` - returns the length of the memory
 
+`log.stack` has the following methods:
+
+ - `peek(idx)` - returns the idx-th element from the top of the stack (0 is the topmost element) as a big.Int
+ - `length()` - returns the number of elements in the stack
+
 `db` has the following methods:
 
  - `getBalance(address)` - returns a `big.Int` with the specified account's balance
@@ -779,9 +784,9 @@ If the step function throws an exception or executes an illegal operation at any
 
 Note that several values are Golang big.Int objects, not JavaScript numbers or JS bigints. As such, they have the same interface as described in the godocs. Their default serialization to JSON is as a Javascript number; to serialize large numbers accurately call `.String()` on them. For convenience, `big.NewInt(x)` is provided, and will convert a uint to a Go BigInt.
 
-Usage example, returns the stack at each CALL opcode only:
+Usage example, returns the top element of the stack at each CALL opcode only:
 
-    debug.traceTransaction(txhash, {tracer: '{data: [], step: function(log) { if(log.op.toString() == "CALL") this.data.push(log.stack); }, result: function() { return this.data; }}'});
+    debug.traceTransaction(txhash, {tracer: '{data: [], step: function(log) { if(log.op.toString() == "CALL") this.data.push(log.stack.peek(0)); }, result: function() { return this.data; }}'});
 
 ### debug_verbosity
 
