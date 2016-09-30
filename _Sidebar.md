@@ -40,7 +40,7 @@
 
 ### Developers
 
-[Mobile Clients](https://github.com/ethereum/go-ethereum/wiki/Mobile-Clients:-Libraries-and-In-Process-Ethereum-Nodes)
+[Mobile Clients](https://github.com/ethereum/go-ethereum/wiki/Mobile-Clients:-Libraries-and-Inproc-Ethereum-Nodes)
 
 [Native DApps](https://github.com/ethereum/go-ethereum/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts)
 
