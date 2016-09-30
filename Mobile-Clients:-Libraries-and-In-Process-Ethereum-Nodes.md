@@ -1,4 +1,4 @@
-*This page is meant to be a guide on using go-ethereum from mobile platforms. Since neither the mobile libraries nor the client client protocol is finalized, the content here will be sparse, with emphasis being put on how to get your hands dirty. As the APIs stabilize this section will be expanded accordingly.*
+*This page is meant to be a guide on using go-ethereum from mobile platforms. Since neither the mobile libraries nor the light client protocol is finalized, the content here will be sparse, with emphasis being put on how to get your hands dirty. As the APIs stabilize this section will be expanded accordingly.*
 
 ### Changelog
 
@@ -77,3 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+
+#### Known quirks
+
+ * Many constructors (those that would throw exceptions) are of the form `Geth.newXXX()`, instead of simply the Java style `new XXX()` This is an upstream limitation of the [gomobile](https://github.com/golang/mobile) project, one which is currently being worked on to resolve.
