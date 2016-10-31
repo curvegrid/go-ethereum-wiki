@@ -78,8 +78,8 @@ Take note of the path given by the last line, you'll need it soon.
 
 You need [brew](http://brew.sh) in order to install on your mac
 
-    brew install cpp-ethereum
-    brew linkapps cpp-ethereum
+    brew tap ethereum/ethereum
+    brew install solidity
     which solc
 
 Take note of the path given by the last line, you'll need it soon.
