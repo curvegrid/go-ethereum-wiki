@@ -1,5 +1,3 @@
-# Install Go Ethereum
-
 The Go implementation of Ethereum can be installed using a variety of ways. These include obtaining it as part of Mist; installing it via your favorite package manager; downloading a standalone pre-built binary; running as a docker container; or building it yourself. This document will detail all of these possibilities to get you quickly joining the Ethereum network using whatever means you prefer.
 
  * [Install from a package manager](#package-manager)
