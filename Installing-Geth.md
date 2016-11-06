@@ -6,7 +6,7 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
    * [Install on Windows via Chocolatey](#chocolatey)
  * [Download standalone binary](#download)
  * [Pull a docker container](#docker)
- * [Build it yourself](#build)
+ * [Build it yourself](#build-it-yourself)
 
 ## <a name="package-manager"></a> Install from a package manager
 
@@ -20,5 +20,5 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
 
 ## <a name="docker"></a>Pull a docker container
 
-## <a name="build"></a>Build it yourself
+## Build it yourself
 
