@@ -4,23 +4,23 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
 
  * [Install from a package manager](#package-manager)
    * [Install on macOS via Homebrew](#homebrew)
-   * Install on Ubuntu via PPAs
-   * Install on Windows via Chocolatey
- * Download standalone binary
- * Pull a docker container
- * Build it yourself
+   * [Install on Ubuntu via PPAs](#ppa)
+   * [Install on Windows via Chocolatey](#chocolatey)
+ * [Download standalone binary](#download)
+ * [Pull a docker container](#docker)
+ * [Build it yourself](#build)
 
 ## <a name="package-manager"></a> Install from a package manager
 
-### Install on macOS via Homebrew
+### <a name="homebrew">Install on macOS via Homebrew
 
-### Install on Ubuntu via PPAs
+### <a name="ppa">Install on Ubuntu via PPAs
 
-### Install on Windows via Chocolatey
+### <a name="chocolatey">Install on Windows via Chocolatey
 
-## Download standalone binary
+## <a name="download">Download standalone binary
 
-## Pull a docker container
+## <a name="docker">Pull a docker container
 
-## Build it yourself
+## <a name="build">Build it yourself
 
