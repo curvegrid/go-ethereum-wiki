@@ -7,6 +7,7 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
  * [Download standalone bundle](#download-standalone-bundle)
  * [Run inside docker container](#run-inside-docker-container)
  * [Build it from source code](#build-it-from-source-code)
+   * [Building without a Go workflow](#building-without-a-go-workflow)
 
 ## Install from a package manager
 
@@ -34,3 +35,30 @@ To download these bundles, please head the [Go Ethereum Downloads](https://geth.
 
 ## Build it from source code
 
+Go Ethereum (as its name implies) is written in [Go](https://golang.org), and as such to build from source code you'll need to ensure that you have at least Go 1.5 installed (preferably the latest version, currently at 1.7). This guide will not go into details on how to install Go itself, for that please consult the [Go installation instructions](https://golang.org/doc/install) and grab any needed bundles from the [Go download page](https://golang.org/dl/).
+
+Assuming you have Go installed, you can download our project via:
+
+```
+go get -d github.com/ethereum/go-ethereum
+```
+
+The above command will checkout the default version of Go Ethereum into your local `GOPATH` work space, but it will not build any executables for you. To do that you can either build one specifically:
+
+```
+go install github.com/ethereum/go-ethereum/cmd/geth
+```
+
+Or you can also build the entire project and install `geth` along with all developer tools by running `go install ./...` in the repository root inside your `GOPATH` work space.
+
+### Building without a Go workflow
+
+If you do not want to set up Go work spaces on your machine, only build `geth` and forget about the build process, you can clone our repository directly into a folder of your choosing and invoke `make`, which will configure everything for a temporary build and clean up after itself:
+
+```
+git clone https://github.com/ethereum/go-ethereum.git
+cd go-ethereum
+make geth
+```
+
+This will create a `geth` (or `geth.exe` on Windows) executable file in the `go-ethereum/build/bin` folder that you can move wherever you want to run from. The binary is standalone and doesn't require any additional files.
