@@ -26,7 +26,7 @@ We create the following standalone bundles:
  * 64bit archives (`.tar.gz`) on macOS
  * 32bit and 64bit archives (`.zip`) and installers (`.exe`) on Windows
 
-For all archives we provide separate ones containing only Geth, and separate ones containing Geth along with all the developer tools from our repository (`abigen`, `bootnode`, `disasm`, `evm`, `rlpdump`).
+For all archives we provide separate ones containing only Geth, and separate ones containing Geth along with all the developer tools from our repository (`abigen`, `bootnode`, `disasm`, `evm`, `rlpdump`). Please see our [`README`](https://github.com/ethereum/go-ethereum#executables) for more information about these executables.
 
 To download these bundles, please head the [Go Ethereum Downloads](https://geth.ethereum.org/downloads) page.
 
