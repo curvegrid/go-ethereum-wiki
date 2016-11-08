@@ -33,6 +33,27 @@ To download these bundles, please head the [Go Ethereum Downloads](https://geth.
 
 ## Run inside docker container
 
+If you prefer containerized processes, you can run go-ethereum as a docker container too. We currently maintain four different docker images for running the latest stable or develop versions of Geth, on Alpine or Ubuntu based distributions:
+
+ * `ethereum/client-go:latest` is the latest stable release in an Ubuntu image
+ * `ethereum/client-go:develop` is the latest develop build in an Ubuntu image
+ * `ethereum/client-go:alpine` is the latest stable release in an Alpine image
+ * `ethereum/client-go:alpine-develop` is the latest develop build in an Alpine image
+
+Unless you want to build more complex images on top of ours as a base image, we suggest downloading and using the Alpine images as they are significantly smaller than the Ubuntu counterparts:
+
+```
+docker pull ethereum/client-go:alpine
+```
+
+The image has three ports automatically exposed:
+
+ * `30303` used by the P2P protocol running the Ethereum network
+ * `8545` used by the HTTP based JSON RPC API
+ * `8546` used by the WebSocket based JSON RPC API
+
+*Note, if you are running an Ethereum client inside a docker container, you might want to mount in a data volume as the client's data directory (located at `/root/.ethereum` inside the container) to ensure that downloaded data is preserved between restarts and/or container life-cycles.*
+
 ## Build it from source code
 
 Go Ethereum (as its name implies) is written in [Go](https://golang.org), and as such to build from source code you'll need to ensure that you have at least Go 1.5 installed (preferably the latest version, currently at 1.7). This guide will not go into details on how to install Go itself, for that please consult the [Go installation instructions](https://golang.org/doc/install) and grab any needed bundles from the [Go download page](https://golang.org/dl/).
