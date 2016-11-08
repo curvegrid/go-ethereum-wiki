@@ -5,8 +5,8 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
    * [Install on Ubuntu via PPAs](#install-on-ubuntu-via-ppas)
    * [Install on Windows via Chocolatey](#install-on-windows-via-chocolatey)
  * [Download standalone bundle](#download-standalone-bundle)
- * [Pull a docker container](#pull-a-docker-container)
- * [Build it yourself](#build-it-yourself)
+ * [Run inside docker container](#run-inside-docker-container)
+ * [Build it from source code](#build-it-from-source-code)
 
 ## Install from a package manager
 
@@ -30,7 +30,7 @@ For all archives we provide separate ones containing only Geth, and separate one
 
 To download these bundles, please head the [Go Ethereum Downloads](https://geth.ethereum.org/downloads) page.
 
-## Pull a docker container
+## Run inside docker container
 
-## Build it yourself
+## Build it from source code
 
