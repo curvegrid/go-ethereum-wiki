@@ -15,7 +15,31 @@ The Go implementation of Ethereum can be installed using a variety of ways. Thes
 
 ### Install on Ubuntu via PPAs
 
+The simplest way to install go-ethereum on Ubuntu distributions is via the built in Launchpad PPAs (Personal Package Archives). We provide a single PPA `ppa:ethereum/ethereum` that contains both our stable as well as our develop releases for Ubuntu versions `trusty`, `wily`, `xenial` and `yakkety`.
+
+To enable out launchpad repository please run:
+
+```
+sudo add-apt-repository -y ppa:ethereum/ethereum
+```
+
+After that you can install the stable version of Go Ethereum:
+
+```
+sudo apt-get update
+sudo apt-get install ethereum
+```
+
+Or the develop version via:
+
+```
+sudo apt-get update
+sudo apt-get install ethereum-unstable
+```
+
 ### Install on Windows via Chocolatey
+
+Although we were shipping Chocolatey packages for a time after Frontier, it has fallen out of date due to the constant manual approval process. With our new build infrastructure in place we will attempt to negotiate trusted package status for go-ethereum to be able to reinstate the Chocolatey workflow. Until then please grab a Windows installer from our [downloads](https://geth.ethereum.org/downloads) page.
 
 ## Download standalone bundle
 
