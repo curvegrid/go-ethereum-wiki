@@ -72,9 +72,9 @@ docker pull ethereum/client-go:alpine
 
 The image has three ports automatically exposed:
 
- * `30303` used by the P2P protocol running the Ethereum network
  * `8545` used by the HTTP based JSON RPC API
  * `8546` used by the WebSocket based JSON RPC API
+ * `30303` used by the P2P protocol running the Ethereum network
 
 *Note, if you are running an Ethereum client inside a docker container, you might want to mount in a data volume as the client's data directory (located at `/root/.ethereum` inside the container) to ensure that downloaded data is preserved between restarts and/or container life-cycles.*
 
