@@ -16,34 +16,34 @@ The features and enhancements below will be prioritised and for the basis of the
 
 ### Stages of network (testing)
 
-* [ ] see that private network is working correctly
+* [x] with POC 0.2 homestead-compatible on a toy testnet 
+* [!] abstract network simulation framework using shadow
+* [x] see that private network is working correctly
 * [ ] see that the private network is working and benchmarking the influence of block propagation gives satisfying results
 * [ ] an upgraded swarm on a private network is opened up for public participation
 * [ ] the private test network with community gives us another order of magnitude bigger network to test on
-* [ ] homestead-compatible swarm is joining the Morden testnet
+* [ ] joining the Morden testnet
 * [ ] swarm integrated in Mist and allowed on the main net
-* [ ] with POC 0.2 homestead-compatible on a toy testnet 
 * [ ] continue to expand and open to the public
-* [ ] abstract network simulation framework using shadow
 
 
 
 ## network
 
-* [x] scripted network tests, cluster control framework (to be obsoleted by eth/
+* [x] simple scripted network tests, cluster control framework (to be obsoleted)
 * [x] algorithmic improvements on chunker split/join
 * [x] algorithmic improvements on upload/download
 * [x] algorithmic improvements in kademlia and hive peers manager 
 * [x] calibrating kademlia connectivity parameters to toynet scale
-* [ ]  adapt to [felix's rpc-client-as-eth-backend scheme](http://twurst.com/articles/geth-1.5-api.html) to run swarm as a separate daemon 
+* [x] adapt to [felix's rpc-client-as-eth-backend scheme](http://twurst.com/articles/geth-1.5-api.html) to run swarm as a separate daemon 
 * [ ] deliveries should not enter the sync pool - enhancement [#2046](https://github.com/ethereum/go-ethereum /issues/2046)
 * [ ] smart peer propagation enhancement feature [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
 * [ ] IPFS integration: [IPFS & SWARM](https://github.com/ethereum/go-ethereum/wiki/IPFS-&-SWARM)  feature [#2050](https://github.com/ethereum/go-ethereum/issues/2050)
 * [ ] abstract out hive kademlia  routing from protocol
 * [ ] enhanced network monitoring, structured logging and stats aggregation
 * [ ] unicast/multicast messaging over swarm - pss 
-* [ ] improved peer propagation [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
-* [ ] protocol stack abstraction, pluggable subprotocol components - (swap, hive/protocol, syncer, peers) for pss
+* [x] improved peer propagation [#2044](https://github.com/ethereum/go-ethereum/issues/2044)
+* [x] protocol stack abstraction, pluggable subprotocol components - (swap, hive/protocol, syncer, peers) for pss
 * [ ] channels for live-streaming 
 * [ ] new p2p API integration - feature [#2060](https://github.com/ethereum/go-ethereum/issues/2060)
 
@@ -99,6 +99,6 @@ The features and enhancements below will be prioritised and for the basis of the
 * [ ] file manager
 * [ ] dropbox
 * [ ] swatch
-* [ ] git/github
+* [ ] git/github/mango
 * [ ] tubee
 
