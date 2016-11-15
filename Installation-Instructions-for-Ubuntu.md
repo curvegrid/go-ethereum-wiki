@@ -1,14 +1,13 @@
 ## Installing from PPA
 
-For the latest development snapshot, both `ppa:ethereum/ethereum` and `ppa:ethereum/ethereum-dev` are needed. If you want the stable version from the last PoC release, add only the first one.
-
 ```shell
 sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ethereum/ethereum
-sudo add-apt-repository -y ppa:ethereum/ethereum-dev
 sudo apt-get update
 sudo apt-get install ethereum
 ```
+
+If you want to stay on the bleeding edge, install the `ethereum-unstable` package instead.
 
 After installing, run `geth account new` to create an account on your node.
 
