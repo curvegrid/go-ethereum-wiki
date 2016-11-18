@@ -1,3 +1,13 @@
+## Installation using pacman
+
+The `geth` package is available from the [community repo](https://www.archlinux.org/packages/community/x86_64/geth/).
+
+You can install it using
+
+```shell
+pacman -S geth
+```
+
 ## Installing from source
 Install dependencies
 ```shell
