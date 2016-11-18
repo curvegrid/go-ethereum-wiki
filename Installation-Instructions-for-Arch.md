@@ -1,7 +1,7 @@
 ## Installing from source
 Install dependencies
 ```shell
-pacman -S git go gcc gmp
+pacman -S git go gcc
 ```
 
 Download and build geth
