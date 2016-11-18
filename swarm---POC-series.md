@@ -41,8 +41,12 @@ The following features are prioritised for POC 3 (subject to change)
 
 * [ ] enhanced network monitoring, structured logging and stats aggregation
 * [ ] unicast/multicast messaging over swarm - pss 
+* [ ] swear and swindle http://swarm-gateways.net/bzz:/swarm/ethersphere/orange-papers/1/sw%5E3.pdf
+* [ ] smash/crash proof of custody http://swarm-gateways.net/bzz:/swarm/ethersphere/orange-papers/2/smash.pdf
 * [ ] swarm DB support phase 0 - compact manifest trie and proof requests
 * [ ] [SWarm On-demand Retrieval Daemon](https://gist.github.com/zelig/aa6eb43615e12d834d9f) - feature [#2049](https://github.com/ethereum/go-ethereum/issues/2049) = sword. ethereum state, contract storage, receipts, blocks on swarm
-* [ ] implement (a reviewed version of) [EIP-26](https://github.com/ethereum/EIPs/issues/26)
+* [x] ~implement (a reviewed version of) [EIP-26](https://github.com/ethereum/EIPs/issues/26)~ obsoleted by ENS and the vickrey auction
 * [ ] swarm namereg/natspec rewrite - enhancement [#2048](https://github.com/ethereum/go-ethereum/issues/2048)
-* [ ] solidity [contractInfo standard](https://github.com/ethereum/solidity/pull/645) and contract source verification support
+* [x] ~solidity [contractInfo standard](https://github.com/ethereum/solidity/pull/645) and contract source verification support~ https://www.reddit.com/r/ethereum/comments/5d5lyd/first_contract_to_contain_swarm_hash_to_its/
+
+## POC 0.5 
