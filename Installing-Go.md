@@ -2,27 +2,31 @@
 
 Download and run the installer found at http://golang.org/doc/install
 
-
 ### OS X
+
 Download an install the darwin binary from https://golang.org/dl/
+
+You can also install go using the Homebrew package manager.
 
 ### Linux
 
-#### Ubuntu 14.04 
+#### Ubuntu
 
-The apt-get repositories for 14.04 contain golang 1.2.1.  Version 1.4.2 is required, so you can download directly (as above). Alternatively, you can [add the ethereum apt repository](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu#installing-from-ppa), which hosts golang 1.4.2. Then you can use `sudo apt-get install golang` to install. You will still have to set the $GOPATH and $PATH variables as specified below.
+The Ubuntu repositories carry an old version of Go.
 
-If you are getting 'error 2' when building Geth or 'expected target' errors, it's because you compiled geth while using Go 1.3.x. Run 'make clean' in the go-ethereum folder then run 'make geth' again to solve the issue.
-
+Ubuntu users can use the 'gophers' PPA to install an up to date version of Go (version 1.7 or later is preferred).
+See https://launchpad.net/~gophers/+archive/ubuntu/archive for more information.
+Note that this PPA requires adding `/usr/lib/go-1.X/bin` to the executable PATH.
 
 #### Other distros
+
 Download the latest distribution
 
-`curl -O https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz`
+`curl -O https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz`
 
 Unpack it to the `/usr/local` (might require sudo)
 
-`tar -C /usr/local -xzf go1.4.2.linux-amd64.tar.gz`
+`tar -C /usr/local -xzf go1.7.3.linux-amd64.tar.gz`
 
 #### Set GOPATH and PATH
 
