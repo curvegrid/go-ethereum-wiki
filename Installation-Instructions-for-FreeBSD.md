@@ -8,13 +8,10 @@ Clone the repository to a directory of your choosing:
 git clone https://github.com/ethereum/go-ethereum
 ```
 
-Building `geth` requires some external libraries to be installed:
-
-* [GMP](https://gmplib.org)
-* [Go](https://golang.org)
+Building `geth` requires the Go compiler:
 
 ```shell
-pkg install gmp go
+pkg install go
 ```
 
 If your golang version is >= 1.5, build the `geth` program using the following command.
@@ -27,6 +24,5 @@ If your golang version is < 1.5 (quarterly packages, for example), use the follo
 cd go-ethereum
 CC=clang make geth
 ```
-
 
 You can now run `build/bin/geth` to start your node.
