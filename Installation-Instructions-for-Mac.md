@@ -34,13 +34,10 @@ Clone the repository to a directory of your choosing:
 git clone https://github.com/ethereum/go-ethereum
 ```
 
-Building `geth` requires some external libraries to be installed:
-
-* [GMP](https://gmplib.org)
-* [Go](https://golang.org)
+Building `geth` requires the Go compiler:
 
 ```shell
-brew install gmp go
+brew install go
 ```
 
 Finally, build the `geth` program using the following command.
