@@ -9,7 +9,7 @@ This document is the entry point for developers of the etherum go implementation
 
 ### Go environment  
 
-We assume that you have [`go` v1.4 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
+We assume that you have [`go` v1.7 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
 **Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`.
 
@@ -21,47 +21,33 @@ Most likely you will be working from your fork of `go-ethereum`, let's say from 
 git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum/go-ethereum
 ```
 
-### Godep for dependency management
-go-ethereum uses [Godep](https://github.com/tools/godep) to manage dependencies.
+### Updating non-vendored Dependencies
 
-Install godep: 
+Most go-ethereum dependencies are tracked in the vendor/ directory, with one exception:
 
-```
-go get github.com/tools/godep
-```
-
-Make sure that go binaries are on your executable path:
+The golang.org/x/net/context package needs to be installed using `go get`. To do that, run
 
 ```
-PATH=$GOPATH/bin:$PATH
+go get
 ```
 
-`godep` should be prepended to all go calls `build`, `install` and `test`. 
-
-Alternatively, you can prepend the go-ethereum Godeps directory to your current `GOPATH`:
-
-```
-GOPATH=`godep path`:$GOPATH
-```
+in the repository root after cloning the repository.
 
 ### Building executables
 
-Switch to the go-ethereum repository root directory (Godep expects a local [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) ).
+Switch to the go-ethereum repository root directory.
 
-Each wrapper/executable found in 
-[the `cmd` directory](https://github.com/ethereum/go-ethereum/tree/develop/cmd) can be built individually.
+You can build all code using the go tool, placing the resulting binary in `$GOPATH/bin`.
 
-### Building Geth (CLI)
-
-**Note**: Geth (the ethereum command line client) is the focus of the [Frontier release](https://github.com/ethereum/go-ethereum/wiki/Frontier).
-
-To build the CLI:
-
-```
-godep go install -v ./cmd/geth
+```text
+go install -v ./...
 ```
 
-See the [documentation on how to use Geth](https://github.com/ethereum/go-ethereum/wiki/Geth)
+go-ethereum exectuables can be built individually. To build just geth, use:
+
+```text
+go install -v ./cmd/geth
+```
 
 Read about cross compilation of go-ethereum [here](https://github.com/ethereum/go-ethereum/wiki/Cross-compiling-Ethereum).
 
@@ -74,7 +60,7 @@ To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branch
 Testing one library:
 
 ```
-godep go test -v -cpu 4 ./eth  
+go test -v -cpu 4 ./eth  
 ```
 
 Using options `-cpu` (number of cores allowed) and `-v` (logging even if no error) is recommended.
@@ -82,7 +68,7 @@ Using options `-cpu` (number of cores allowed) and `-v` (logging even if no erro
 Testing only some methods:
 
 ```
-godep go test -v -cpu 4 ./eth -run TestMethod
+go test -v -cpu 4 ./eth -run TestMethod
 ```
 
 **Note**: here all tests with prefix _TestMethod_ will be run, so if you got TestMethod, TestMethod1, then both!
@@ -90,8 +76,7 @@ godep go test -v -cpu 4 ./eth -run TestMethod
 Running benchmarks, eg.:
 
 ```
-cd bzz
-godep go test -v -cpu 4 -bench . -run BenchmarkJoin
+go test -v -cpu 4 -bench . -run BenchmarkJoin
 ```
 
 for more see [go test flags](http://golang.org/cmd/go/#hdr-Description_of_testing_flags)
@@ -102,25 +87,6 @@ See integration testing information on the [Testing wiki page](https://github.co
 
 `geth` can do node behaviour monitoring, aggregation and show performance metric charts. 
 Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring)
-
-### Add and update dependencies 
-
-To update a dependency version (for example, to include a new upstream fix), run 
-
-```
-go get -u <foo/bar>
-godep update <foo/...>
-```
-
-To track a new dependency, add it to the project as normal than run 
-
-```
-godep save ./...
-```
-
-Changes to the [Godeps folder](https://github.com/ethereum/go-ethereum/tree/develop/Godeps) should be manually verified then committed.
-
-To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branching-model/) it sets this all up and streamlines your work flow.
 
 ## Contributing
 
