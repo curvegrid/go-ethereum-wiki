@@ -34,6 +34,8 @@ Installing these packages will set up the `Path` environment variable.
 Open a new command prompt to get the new `Path`. The following steps don't
 need Administrator privileges.
 
+Please ensure that the installed Go version is 1.7 (or any later version).
+
 First we'll create and set up a Go workspace directory layout,
 then clone the source.
 
