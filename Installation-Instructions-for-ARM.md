@@ -4,7 +4,7 @@ Geth is built for ARM using cross-compilation. See [Cross compiling Ethereum](ht
 
 ## RasPi 2
 
-1. Download the precompiled binary from (https://geth.ethereum.org/downloads/)
+1. Download the precompiled binary from https://geth.ethereum.org/downloads/
 1. Copy it to a location in $PATH (i.e. /usr/local/bin)
 1. Run `geth`
 
