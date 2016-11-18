@@ -15,5 +15,5 @@ your platform.
 
 ## Quick Links
 
-* [Ubuntu PPA](https://launchpad.net/~ethereum)
+* [Ubuntu PPA](https://launchpad.net/~ethereum/+archive/ubuntu/ethereum)
 * [Download Page](https://geth.ethereum.org/downloads)
