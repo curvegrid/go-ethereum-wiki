@@ -11,7 +11,7 @@ This document is the entry point for developers of the etherum go implementation
 
 We assume that you have [`go` v1.4 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
-**Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`. You also usually want to checkout the `develop` branch (instead of master).
+**Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`.
 
 Since `go` does not use relative path for import, working in any other directory will have no effect, since the import paths will be appended to `$GOPATH/src`, and if the lib does not exist, the version at master HEAD will be downloaded.
 
@@ -126,8 +126,7 @@ To make life easier try [git flow](http://nvie.com/posts/a-successful-git-branch
 
 Only github is used to track issues. (Please include the commit and branch when reporting an issue.)
 
-Pull requests should by default commit on the `develop` branch.
-The `master` branch is only used for finished stable major releases.
+Pull requests should by default commit on the `master` branch.
 
 ## Stacktrace
 
