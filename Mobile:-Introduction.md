@@ -12,5 +12,5 @@ Similarly to our reusable Go libraries, the mobile wrappers also focus on four m
 
 - Simplified client side account management
 - Remote node interfacing via different transports
-- Programmatic contract interaction and binding generation
+- Contract interactions through auto-generated bindings
 - In-process Ethereum, Whisper and Swarm peer-to-peer node
