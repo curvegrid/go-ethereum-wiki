@@ -4,4 +4,13 @@ The first incarnation towards this dream of web3 was a command line client provi
 
 As many DApps have more complex requirements than what a browser environment can handle, it became apparent that providing programmatic access to the web3 pillars would open the door towards a new class of applications. As such, the second incarnation of the web3 dream is to open up all our technologies for other projects as reusable components.
 
-This was achieved starting with the 1.5 release family of `go-ethereum`, when we transitioned away from providing only a full blown Ethereum client. Instead, `go-ethereum` also started shipping official Go packages that could be embedded into third party poták, desktop and server applications. It took only a small leap from here to realize that porting our code to mobile platforms would provide an enormous value to the community.
+Starting with the 1.5 release family of `go-ethereum`, we transitioned away from providing only a full blown Ethereum client and started shipping official Go packages that could be embedded into third party desktop and server applications. It took only a small leap from here to begin porting our code to mobile platforms.
+
+## Quick overview
+
+Similarly to our reusable Go libraries, the mobile wrappers also focus on four main usage areas:
+
+- Simplified client side account management
+- Remote node interfacing via different transports
+- Programmatic contract interaction and binding generation
+- In-process embedded Ethereum, Whisper and Swarm peer-to-peer node
