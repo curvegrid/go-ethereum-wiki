@@ -14,3 +14,7 @@ Similarly to our reusable Go libraries, the mobile wrappers also focus on four m
 - Remote node interfacing via different transports
 - Contract interactions through auto-generated bindings
 - In-process Ethereum, Whisper and Swarm peer-to-peer node
+
+You can watch a quick overview about these in Peter's (@karalabe) talk titled "Import Geth: Ethereum from Go and beyond", presented at the Ethereum Devcon2 developer conference in September, 2016 (Shanghai). Slides are [available here](https://ethereum.karalabe.com/talks/2016-devcon.html).
+
+[![Peter's Devcon2 talk](https://img.youtube.com/vi/R0Ia1U9Gxjg/0.jpg)](https://www.youtube.com/watch?v=R0Ia1U9Gxjg)
