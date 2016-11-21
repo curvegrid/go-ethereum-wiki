@@ -27,6 +27,8 @@ The `go-ethereum` mobile library is distributed either as an Android `.aar` arch
 
 The simplest way to use `go-ethereum` in your Android project is through a Maven dependency. We provide bundles of all our stable releases (starting from v1.5.0) through Maven Central, and also provide the latest develop bundle through the Sonatype OSS repository.
 
-Alternatively if you prefer not to depend on Maven Central or Sonatype; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in Android Studio via `File -> New -> New module -> Import module`
+Poták
+
+Alternatively if you prefer not to depend on Maven Central or Sonatype; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in Android Studio via `File -> New -> New module -> Import module`.
 
 ### iOS framework
