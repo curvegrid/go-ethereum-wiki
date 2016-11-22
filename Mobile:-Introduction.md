@@ -73,3 +73,21 @@ dependencies {
 ```
 
 ### iOS framework
+
+The simplest way to use `go-ethereum` in your iOS project is through a [CocoaPods](https://cocoapods.org/) dependency. We provide bundles of all our stable releases (starting from v1.5.0) and also latest develop versions.
+
+#### Automatic dependency
+
+To add an iOS dependency to the current stable or latest develop version of `go-ethereum`, you'll need to ensure that your iOS XCode project is configured to use CocoaPods. Detailing that is out of scope in this document, but you can find a guide in the upstream [Using CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html) page. Afterwards you can edit your `Podfile` to list `go-ethereum` as a dependency:
+
+```ruby
+target 'MyApp' do
+    # All your previous dependencies
+    pod 'Geth', '1.5.3'
+end
+```
+
+Alternatively, if you'd like to use the latest develop version, replace the package name `Geth` with `GethDevelop` and potentially also set a dynamic version number (e.g. `'~> 1.5'`) to always switch to the latest bundle in that release family.
+
+#### Manual dependency
+
