@@ -27,8 +27,49 @@ The `go-ethereum` mobile library is distributed either as an Android `.aar` arch
 
 The simplest way to use `go-ethereum` in your Android project is through a Maven dependency. We provide bundles of all our stable releases (starting from v1.5.0) through Maven Central, and also provide the latest develop bundle through the Sonatype OSS repository.
 
-Poták
+#### Stable dependency (Maven Central)
 
-Alternatively if you prefer not to depend on Maven Central or Sonatype; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in Android Studio via `File -> New -> New module -> Import module`.
+To add an Android dependency to the **stable** library release of `go-ethereum`, you'll need to ensure that the Maven Central repository is enabled in your Android project, and that the `go-ethereum` code is listed as a required dependency of your application. You can do both of these by editing the `build.gradle` script in your Android app's folder:
+
+```gradle
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // All your previous dependencies
+    compile 'org.ethereum:geth:1.5.2' // Change the version to whatever the latest release is
+}
+```
+
+#### Develop dependency (Sonatype)
+
+To add an Android dependency to the current **develop** version of `go-ethereum`, you'll need to ensure that the Sonatype snapshot repository is enabled in your Android project, and that the `go-ethereum` code is listed as a required `SNAPSHOT` dependency of your application. You can do both of these by editing the `build.gradle` script in your Android app's folder:
+
+```gradle
+repositories {
+    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+}
+
+dependencies {
+    // All your previous dependencies
+    compile 'org.ethereum:geth:1.5.3-SNAPSHOT' // Change the version to whatever the latest release is
+}
+```
+
+#### Custom dependency
+
+If you prefer not to depend on Maven Central or Sonatype; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in Android Studio via `File -> New -> New module... -> Import .JAR/.AAR Package`.
+
+You will also need to configure `gradle` to link the mobile library bundle to your application. This can be done by adding a new entry to the `dependencies` section of your `build.gradle` script, pointing it to the module you just added (named `geth` by default).
+
+```gradle
+dependencies {
+    // All your previous dependencies
+    compile project(':geth')
+}
+```
 
 ### iOS framework
