@@ -38,7 +38,7 @@ repositories {
 
 dependencies {
     // All your previous dependencies
-    compile 'org.ethereum:geth:1.5.2' // Change the version to whatever the latest release is
+    compile 'org.ethereum:geth:1.5.2' // Change the version to the latest release
 }
 ```
 
@@ -55,7 +55,7 @@ repositories {
 
 dependencies {
     // All your previous dependencies
-    compile 'org.ethereum:geth:1.5.3-SNAPSHOT' // Change the version to whatever the latest release is
+    compile 'org.ethereum:geth:1.5.3-SNAPSHOT' // Change the version to the latest release
 }
 ```
 
@@ -83,7 +83,7 @@ To add an iOS dependency to the current stable or latest develop version of `go-
 ```ruby
 target 'MyApp' do
     # All your previous dependencies
-    pod 'Geth', '1.5.3'
+    pod 'Geth', '1.5.3' # Change the version to the latest release
 end
 ```
 
