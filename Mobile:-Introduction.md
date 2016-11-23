@@ -91,3 +91,10 @@ Alternatively, if you'd like to use the latest develop version, replace the pack
 
 #### Manual dependency
 
+If you prefer not to depend on CocoaPods; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in XCode via `Project Settings -> Build Phases -> Link Binary With Libraries`.
+
+Do not forget to extract the framework from the compressed `.tar.gz` archive. You can do that either using a GUI tool or from the command line via (replace the archive with your downloaded file):
+
+```
+tar -zxvf geth-ios-all-1.5.3-unstable-e05d35e6.tar.gz
+```
