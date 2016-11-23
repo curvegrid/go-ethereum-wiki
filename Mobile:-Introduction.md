@@ -74,7 +74,7 @@ dependencies {
 
 ### iOS framework
 
-The simplest way to use `go-ethereum` in your iOS project is through a [CocoaPods](https://cocoapods.org/) dependency. We provide bundles of all our stable releases (starting from v1.5.0) and also latest develop versions.
+The simplest way to use `go-ethereum` in your iOS project is through a [CocoaPods](https://cocoapods.org/) dependency. We provide bundles of all our stable releases (starting from v1.5.3) and also latest develop versions.
 
 #### Automatic dependency
 
