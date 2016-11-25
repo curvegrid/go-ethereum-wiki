@@ -72,6 +72,17 @@ dependencies {
 }
 ```
 
+#### Manual builds
+
+Lastly, if you would like to make modifications to the `go-ethereum` mobile code and/or build it yourself locally instead of downloading a pre-built bundle, you can do so using a `make` command. This will create an Android archive called `geth.aar` in the `build/bin` folder that you can import into your Android Studio as described above.
+
+```bash
+$ make android
+[...]
+Done building.
+Import "build/bin/geth.aar" to use the library.
+```
+
 ### iOS framework
 
 The simplest way to use `go-ethereum` in your iOS project is through a [CocoaPods](https://cocoapods.org/) dependency. We provide bundles of all our stable releases (starting from v1.5.3) and also latest develop versions.
@@ -89,7 +100,7 @@ end
 
 Alternatively, if you'd like to use the latest develop version, replace the package name `Geth` with `GethDevelop` and potentially also set a dynamic version number (e.g. `'~> 1.5'`) to always switch to the latest bundle in that release family.
 
-#### Manual dependency
+#### Custom dependency
 
 If you prefer not to depend on CocoaPods; or would like to access an older develop build not available any more as an online dependency, you can download any bundle directly from [our website](https://geth.ethereum.org/downloads/) and insert it into your project in XCode via `Project Settings -> Build Phases -> Link Binary With Libraries`.
 
@@ -97,4 +108,15 @@ Do not forget to extract the framework from the compressed `.tar.gz` archive. Yo
 
 ```
 tar -zxvf geth-ios-all-1.5.3-unstable-e05d35e6.tar.gz
+```
+
+#### Manual builds
+
+Lastly, if you would like to make modifications to the `go-ethereum` mobile code and/or build it yourself locally instead of downloading a pre-built bundle, you can do so using a `make` command. This will create an iOS XCode framework called `Geth.framework` in the `build/bin` folder that you can import into XCode as described above.
+
+```bash
+$ make ios
+[...]
+Done building.
+Import "build/bin/Geth.framework" to use the library.
 ```
