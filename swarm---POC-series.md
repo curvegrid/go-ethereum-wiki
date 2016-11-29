@@ -15,8 +15,8 @@
 * [x] algorithmic improvements on upload/download
 * [x] algorithmic improvements in kademlia and hive peers manager 
 * [x] calibrating kademlia connectivity parameters to toynet scale
-* [x] orange paper series released hosted on [swarm toynet](swarm-gateways.net/bzz:/swarm#the-thsphr-orange-papers)
-* [x] minimalistic [swarm homepage](swarm-gateways.net/bzz:/swarm)
+* [x] orange paper series released hosted on [swarm toynet](http://swarm-gateways.net/bzz:/swarm#the-thsphr-orange-papers)
+* [x] minimalistic [swarm homepage](http://swarm-gateways.net/bzz:/swarm)
 * [x] adapt to felix's rpc-client-as-eth-backend scheme to run swarm as a separate daemon 
 * [x] merge into main repo develop branch
 
