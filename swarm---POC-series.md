@@ -1,3 +1,6 @@
+now project features and POC milestones are managed under
+https://github.com/ethereum/go-ethereum/projects/6
+
 ## POC 0.1: plan bee
 
 * [x] underground dev testnet launched on BZZ day (3.22 is l33t for BZZ)
