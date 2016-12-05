@@ -2,7 +2,7 @@
 
 ## Download stable binaries
 
-All versions of Geth are built and available for download at https://geth.ethereum.org/download/.
+All versions of Geth are built and available for download at https://geth.ethereum.org/downloads/.
 
 The download page provides an installer as well as a zip file. The installer puts geth into your
 PATH automatically. The zip file contains the command .exe files and can be used without installing.
