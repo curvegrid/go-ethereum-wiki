@@ -28,4 +28,18 @@ import org.ethereum.geth.AccountManager;
 import org.ethereum.geth.Geth;
 ```
 
+Afterwards you can create a new encrypted account manager via:
+
+```java
+try {
+    AccountManager am = new AccountManager("/path/to/keystore", Geth.LightScryptN, Geth.LightScryptP);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+```
+
+The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's data directory. If you are creating the `AccountManager` from within a class extending an Android object, you will most probably have access to the `Context.getFilesDir()` method via `this.getFilesDir()`, so you could set the keystore path to `this.getFilesDir() + "/keystore"`.
+
+The last two arguments of the `AccountManager` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
+
 ### Keystores from iOS
