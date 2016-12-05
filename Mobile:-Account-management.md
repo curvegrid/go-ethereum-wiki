@@ -12,8 +12,8 @@ Although handling your users' accounts locally on their own mobile device does p
 
 The important thing to know when using the encrypted keystore is that the cryptographic primitives used within can operate either in *standard* or *light* mode. The former provides a higher level of security at the cost of increased computational burden and resource consumption:
 
- * *standard* requires 256MB memory and 1 second processing on a modern CPU to access a key
- * *light* requires 4MB memory and 100 millisecond processing on a modern CPU to access a key
+ * *standard* needs 256MB memory and 1 second processing on a modern CPU to access a key
+ * *light* needs 4MB memory and 100 millisecond processing on a modern CPU to access a key
 
 As such, *light* is more suitable for mobile applications, but you should be aware of the trade-offs nonetheless.
 
