@@ -94,11 +94,11 @@ To add an iOS dependency to the current stable or latest develop version of `go-
 ```ruby
 target 'MyApp' do
     # All your previous dependencies
-    pod 'Geth', '1.5.3' # Change the version to the latest release
+    pod 'Geth', '1.5.4' # Change the version to the latest release
 end
 ```
 
-Alternatively, if you'd like to use the latest develop version, replace the package name `Geth` with `GethDevelop` and potentially also set a dynamic version number (e.g. `'~> 1.5'`) to always switch to the latest bundle in that release family.
+Alternatively, if you'd like to use the latest develop version, replace the package version `1.5.4` with `~> 1.5.5-unstable` to switch to pre-releases and to always pull in the latest bundle from a particular release family.
 
 #### Custom dependency
 
