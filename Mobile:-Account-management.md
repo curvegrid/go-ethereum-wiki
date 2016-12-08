@@ -121,3 +121,7 @@ let impAcc  = try! am?.importKey(jsonKey, passphrase: "Export password", newPass
 ```
 
 *Although instances of `GethAccount` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
+
+## Signing authorization
+
+We will not go into signing transactions just yet, however it's important to know the different ways one can authorize the account manager to execute signing operations, along with the various advantages and drawbacks the different methods entail.
