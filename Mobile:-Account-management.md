@@ -17,9 +17,9 @@ The important thing to know when using the encrypted keystore is that the crypto
 
 As such, *light* is more suitable for mobile applications, but you should be aware of the trade-offs nonetheless.
 
-*For those interested in the cryptographic and/or implementation details, the key-store uses the `secp256k1` elliptic curve as defined in the [Standards for Efficient Cryptography](http://www.secg.org/sec2-v2.pdf), implemented by the [`libsecp256k`](https://github.com/bitcoin-core/secp256k1) library and wrapped by [`github.com/ethereum/go-ethereum/accounts`](https://godoc.org/github.com/ethereum/go-ethereum/accounts).*
+*For those interested in the cryptographic and/or implementation details, the key-store uses the `secp256k1` elliptic curve as defined in the [Standards for Efficient Cryptography](http://www.secg.org/sec2-v2.pdf), implemented by the [`libsecp256k`](https://github.com/bitcoin-core/secp256k1) library and wrapped by [`github.com/ethereum/go-ethereum/accounts`](https://godoc.org/github.com/ethereum/go-ethereum/accounts). Accounts are stored on disk in the [Web3 Secret Storage](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) format.*
 
-### Keystores from Android (Java)
+### Keystores on Android (Java)
 
 The encrypted keystore on Android is implemented by the `AccountManager` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management on Android, you'll need to import two classes into your Java code:
 
@@ -38,7 +38,7 @@ The path to the keystore folder needs to be a location that is writable by the l
 
 The last two arguments of the `AccountManager` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
 
-### Keystores from iOS (Swift)
+### Keystores on iOS (Swift)
 
 The encrypted keystore on iOS is implemented by the `GethAccountManager` class from the `Geth` framework. The configuration constants (for the *standard* or *light* security modes described above) are located in the same namespace as global variables. Hence to do client side account management on iOS, you'll need to import the framework into your Swift code:
 
@@ -55,3 +55,46 @@ let am = GethNewAccountManager("/path/to/keystore", GethLightScryptN, GethLightS
 The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's document directory. You should be able to retrieve the document directory via `let datadir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]`, so you could set the keystore path to `datadir + "/keystore"`.
 
 The last two arguments of the `GethNewAccountManager` factory method are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `GethStandardScryptN, GethStandardScryptP`, `GethLightScryptN, GethLightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version.
+
+## Account lifecycle
+
+Having created an encrypted keystore for your Ethereum accounts, you can use this account manager for the entire account lifecycle requirements of your mobile application. This includes the basic functionality of creating new accounts and deleting existing ones; as well as the more advanced functionality of updating access credentials, exporting existing accounts, and importing them on another device.
+
+Although the keystore defines the encryption strength it uses to store your accounts, there is no global master password that can grant access to all of them. Rather each account is maintained individually, and stored on disk in its [encrypted format](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) individually, ensuring a much cleaner and stricter separation of credentials.
+
+This individuality however means that any operation requiring access to an account will need to provide the necessary authentication credentials for that particular account in the form of a passphrase:
+
+ * When creating a new account, the caller must supply a passphrase to encrypt the account with. This passphrase will be required for any subsequent access, the lack of which will forever forfeit using the newly created account.
+ * When deleting an existing account, the caller must supply a passphrase to verify ownership of the account. This isn't cryptographically necessary, rather a protective measure agaist accidental loss of accounts.
+ * When updating an existing account, the caller must supply both current and new passphrases. After completing the operation, the account will not be accessible via the old passphrase any more.
+ * When exporting an existing account, the caller must supply both the current passphrase to decrypt the account, as well as an export passphrase to re-encrypt it with before returning the key-file to the user. This is required to allow moving accounts between devices without sharing original credentials.
+ * When importing a new account, the caller must supply both the encryption passphrase of the key-file being imported, as well as a new passhprase with which to store the account. This is required to allow storing account with different credentials than used for moving them around.
+
+*Please note, there is no recovery mechanisms for losing the passphrases. The cryptographic properties of the encrypted keystore (if using the provided parameters) guarantee that account credentials cannot be brute forced in any meaningful time.*
+
+### Accounts on Android (Java)
+
+An Ethereum account on Android is implemented by the `Account` class from the `org.ethereum.geth` package. Assuming we already have an instance of an `AccountManager` called `am` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
+
+```java
+// Create a new account with the specified encryption passphrase.
+Account newAcc = am.newAccount("Creation password");
+
+// Export the newly created account with a different passphrase. The returned
+// data from this method invocation is a JSON encoded, encrypted key-file.
+byte[] jsonAcc = am.exportKey(newAcc, "Creation password", "Export password");
+
+// Update the passphrase on the account created above inside the local keystore.
+am.updateAccount(newAcc, "Creation password", "Update password");
+
+// Delete the account updated above from the local keystore.
+am.deleteAccount(newAcc, "Update password");
+
+// Import back the account we've exported (and then deleted) above with yet
+// again a fresh passphrase.
+Account impAcc = am.importKey(jsonAcc, "Export password", "Import password");
+```
+
+*Although instances of `Account` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
+
+### Accounts on iOS (Swift)
