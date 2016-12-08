@@ -38,7 +38,7 @@ The path to the keystore folder needs to be a location that is writable by the l
 
 The last two arguments of the `AccountManager` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
 
-### Keystores on iOS (Swift)
+### Keystores on iOS (Swift 3)
 
 The encrypted keystore on iOS is implemented by the `GethAccountManager` class from the `Geth` framework. The configuration constants (for the *standard* or *light* security modes described above) are located in the same namespace as global variables. Hence to do client side account management on iOS, you'll need to import the framework into your Swift code:
 
@@ -52,7 +52,7 @@ Afterwards you can create a new encrypted account manager via:
 let am = GethNewAccountManager("/path/to/keystore", GethLightScryptN, GethLightScryptP);
 ```
 
-The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's document directory. You should be able to retrieve the document directory via `let datadir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]`, so you could set the keystore path to `datadir + "/keystore"`.
+The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's document directory. You should be able to retrieve the document directory via `let datadir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]`, so you could set the keystore path to `datadir + "/keystore"`.
 
 The last two arguments of the `GethNewAccountManager` factory method are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `GethStandardScryptN, GethStandardScryptP`, `GethLightScryptN, GethLightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version.
 
@@ -97,4 +97,25 @@ Account impAcc = am.importKey(jsonAcc, "Export password", "Import password");
 
 *Although instances of `Account` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
 
-### Accounts on iOS (Swift)
+### Accounts on iOS (Swift 3)
+
+```swift
+// Create a new account with the specified encryption passphrase.
+let newAcc = try! am?.newAccount("Creation password")
+
+// Export the newly created account with a different passphrase. The returned
+// data from this method invocation is a JSON encoded, encrypted key-file.
+let jsonKey = try! am?.exportKey(newAcc!, passphrase: "Creation password", newPassphrase: "Export password")
+
+// Update the passphrase on the account created above inside the local keystore.
+try! am?.update(newAcc, passphrase: "Creation Password", newPassphrase: "Update password")
+
+// Delete the account updated above from the local keystore.
+try! am?.delete(newAcc, passphrase: "Update password")
+
+// Import back the account we've exported (and then deleted) above with yet
+// again a fresh passphrase.
+let impAcc  = try! am?.importKey(jsonKey, passphrase: "Export password", newPassphrase: "Import password")
+```
+
+*Although instances of `GethAccount` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
