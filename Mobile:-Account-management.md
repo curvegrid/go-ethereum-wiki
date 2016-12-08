@@ -19,7 +19,7 @@ As such, *light* is more suitable for mobile applications, but you should be awa
 
 *For those interested in the cryptographic and/or implementation details, the key-store uses the `secp256k1` elliptic curve as defined in the [Standards for Efficient Cryptography](http://www.secg.org/sec2-v2.pdf), implemented by the [`libsecp256k`](https://github.com/bitcoin-core/secp256k1) library and wrapped by [`github.com/ethereum/go-ethereum/accounts`](https://godoc.org/github.com/ethereum/go-ethereum/accounts).*
 
-### Keystores from Android
+### Keystores from Android (Java)
 
 The encrypted keystore on Android is implemented by the `AccountManager` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management on Android, you'll need to import two classes into your Java code:
 
