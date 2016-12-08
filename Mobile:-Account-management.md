@@ -21,7 +21,7 @@ As such, *light* is more suitable for mobile applications, but you should be awa
 
 ### Keystores from Android
 
-The encrypted keystore in Android is implemented by the `AccountManager` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management in Android, you'll need to import two classes into your Java code:
+The encrypted keystore on Android is implemented by the `AccountManager` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management on Android, you'll need to import two classes into your Java code:
 
 ```java
 import org.ethereum.geth.AccountManager;
@@ -31,15 +31,27 @@ import org.ethereum.geth.Geth;
 Afterwards you can create a new encrypted account manager via:
 
 ```java
-try {
-    AccountManager am = new AccountManager("/path/to/keystore", Geth.LightScryptN, Geth.LightScryptP);
-} catch (Exception e) {
-    e.printStackTrace();
-}
+AccountManager am = new AccountManager("/path/to/keystore", Geth.LightScryptN, Geth.LightScryptP);
 ```
 
 The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's data directory. If you are creating the `AccountManager` from within a class extending an Android object, you will most probably have access to the `Context.getFilesDir()` method via `this.getFilesDir()`, so you could set the keystore path to `this.getFilesDir() + "/keystore"`.
 
 The last two arguments of the `AccountManager` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
 
-### Keystores from iOS
+### Keystores from iOS (Swift)
+
+The encrypted keystore on iOS is implemented by the `GethAccountManager` class from the `Geth` framework. The configuration constants (for the *standard* or *light* security modes described above) are located in the same namespace as global variables. Hence to do client side account management on iOS, you'll need to import the framework into your Swift code:
+
+```swift
+import Geth
+```
+
+Afterwards you can create a new encrypted account manager via:
+
+```swift
+let am = GethNewAccountManager("/path/to/keystore", GethLightScryptN, GethLightScryptP);
+```
+
+The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's document directory. You should be able to retrieve the document directory via `let datadir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]`, so you could set the keystore path to `datadir + "/keystore"`.
+
+The last two arguments of the `GethNewAccountManager` factory method are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `GethStandardScryptN, GethStandardScryptP`, `GethLightScryptN, GethLightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version.
