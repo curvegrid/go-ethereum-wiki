@@ -99,6 +99,8 @@ Account impAcc = am.importKey(jsonAcc, "Export password", "Import password");
 
 ### Accounts on iOS (Swift 3)
 
+An Ethereum account on iOS is implemented by the `GethAccount` class from the `Geth` framework. Assuming we already have an instance of an `GethAccountManager` called `am` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
+
 ```swift
 // Create a new account with the specified encryption passphrase.
 let newAcc = try! am?.newAccount("Creation password")
