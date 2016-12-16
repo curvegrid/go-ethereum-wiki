@@ -1,18 +1,18 @@
-# Command line options
-
 ```
+$ geth help
 NAME:
    geth - the go-ethereum command line interface
 
    Copyright 2013-2016 The go-ethereum Authors
-
+                                             
 USAGE:
    geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.5.1-unstable
+   1.5.5-unstable
    
 COMMANDS:
+   init       Bootstrap and initialize a new genesis block
    import     Import a blockchain file
    export     Export blockchain into file
    upgradedb  Upgrade chainblock database
@@ -26,16 +26,15 @@ COMMANDS:
    js         Execute the specified JavaScript files
    makedag    Generate ethash DAG (for testing)
    version    Print version numbers
-   init       Bootstrap and initialize a new genesis block
    license    Display license information
    help, h    Shows a list of commands or help for one command
    
 ETHEREUM OPTIONS:
   --datadir "/home/tron/.ethereum"  Data directory for the databases and keystore
   --keystore                        Directory for the keystore (default = inside the datadir)
-  --networkid value                 Network identifier (integer, 0=Olympic, 1=Frontier, 2=Morden) (default: 1)
+  --networkid value                 Network identifier (integer, 0=Olympic (disused), 1=Frontier, 2=Morden (disused), 3=Ropsten) (default: 1)
   --olympic                         Olympic network: pre-configured pre-release test network
-  --testnet                         Morden network: pre-configured test network with modified starting nonces (replay protection)
+  --testnet                         Ropsten network: pre-configured test network
   --dev                             Developer mode: pre-configured private network with several debugging flags
   --identity value                  Custom node name
   --fast                            Enable fast syncing through state downloads
@@ -48,6 +47,7 @@ PERFORMANCE TUNING OPTIONS:
   --cache value            Megabytes of memory allocated to internal caching (min 16MB / database forced) (default: 128)
   --trie-cache-gens value  Number of trie node generations to keep in memory (default: 120)
   
+                                                                                                                  
 ACCOUNT OPTIONS:
   --unlock value    Comma separated list of accounts to unlock
   --password value  Password file to use for non-inteactive password input
@@ -66,7 +66,7 @@ API AND CONSOLE OPTIONS:
   --ipcapi value         APIs offered over the IPC-RPC interface (default: "admin,debug,eth,miner,net,personal,shh,txpool,web3")
   --ipcpath "geth.ipc"   Filename for IPC socket/pipe within the datadir (explicit paths escape it)
   --rpccorsdomain value  Comma separated list of domains from which to accept cross origin requests (browser enforced)
-  --jspath loadScript    JavaScript root path for loadScript and document root for `admin.httpGet` (default: ".")
+  --jspath loadScript    JavaScript root path for loadScript (default: ".")
   --exec value           Execute JavaScript statement (only in combination with console/attach)
   --preload value        Comma separated list of JavaScript files to preload into the console
   
@@ -104,6 +104,7 @@ VIRTUAL MACHINE OPTIONS:
   --jitcache value  Amount of cached JIT VM programs (default: 64)
   
 LOGGING AND DEBUGGING OPTIONS:
+  --ethstats value          Reporting URL of a ethstats service (nodename:secret@host:port)
   --metrics                 Enable metrics collection and reporting
   --fakepow                 Disables proof-of-work verification
   --verbosity value         Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=core, 5=debug, 6=detail (default: 3)
@@ -122,126 +123,8 @@ EXPERIMENTAL OPTIONS:
   --natspec  Enable NatSpec confirmation notice
   
 MISCELLANEOUS OPTIONS:
-  --solc value        Solidity compiler command to be used (default: "solc")
-  --support-dao-fork  Updates the chain rules to support the DAO hard-fork
-  --oppose-dao-fork   Updates the chain rules to oppose the DAO hard-fork
-  --help, -h          show help
-
-```
-
-Note that the default for datadir is platform-specific. See [backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore) for more information.
-
-## Examples
-
-### Accounts
-See [Account management](https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts)
-
-Import ether presale wallet into your node (prompts for password):
-
-    geth wallet import /path/to/my/etherwallet.json
-
-Import an EC privatekey into an ethereum account (prompts for password):
-
-    geth account import /path/to/key.prv
-
-### Geth JavaScript Runtime Environment 
-
-See [Geth javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
-
-Bring up the geth javascript console:
-
-    geth --verbosity 5 --jspath /mydapp/js console 2>> /path/to/logfile
-
-Execute `test.js` javascript using js API and log Debug-level messages to `/path/to/logfile`:
-
-    geth --verbosity 6 js test.js  2>> /path/to/logfile
-
-### Import/export chains and dump blocks
-
-Import a blockchain from file:
-
-    geth import blockchain.bin
-
-### Upgrade chainblock database
-
-When the consensus algorithm is changed blocks in the blockchain must be reimported with the new algorithm. Geth will inform the user with instructions when and how to do this when it's necessary.
-
-    geth upgradedb
-
-### Mining and networking
-
-Start two mining nodes using different data directories listening on ports 30303 and 30304, respectively:
-
-    geth --mine --minerthreads 4 --datadir /usr/local/share/ethereum/30303 --port 30303
-    geth --mine --minerthreads 4 --datadir /usr/local/share/ethereum/30304 --port 30304
-    
-Start an rpc client on port 8000:
-
-    geth --rpc --rpcport 8000 --rpccorsdomain "*"
-
-Launch the client without network:
-
-    geth --maxpeers 0 --nodiscover --networdid 3301 js justwannarunthis.js
-
-#### Resetting the blockchain
-
-In the datadir, delete the blockchain directory.  For an example above:
-
-    rm -rf /usr/local/share/ethereum/30303/blockchain
-
-### Sample usage in testing environment
-
-The lines below are meant only for test network and safe environments for non-interactive scripted use.
-
-```
-geth --datadir /tmp/eth/42 --password <(echo -n notsosecret) account new 2>> /tmp/eth/42.log
-geth --datadir /tmp/eth/42 --port 30342  js <(echo 'console.log(admin.nodeInfo().NodeUrl)') > enode 2>> /tmp/eth/42.log
-geth --datadir /tmp/eth/42 --port 30342 --password <(echo -n notsosecret) --unlock primary --minerthreads 4 --mine 2>> /tmp/eth/42.log
-```
-
-### Attach
-Attach a console to a running geth instance. By default this happens over IPC on the default IPC endpoint but when necessary a custom endpoint could be specified:
-
-```
-geth attach                   # connect over IPC on default endpoint
-geth attach ipc:/some/path    # connect over IPC on custom endpoint
-geth attach http://host:8545  # connect over HTTP
-geth attach ws://host:8546    # connect over websocket
-```
-
-### Init
-With the init command it is possible to create a chain with a custom genesis block and chain configuration (currently only the homestead transition block can be configured). It respects the `--datadir` argument and accepts a JSON file describing the chain configuration. If you omit the `--datadir` flag the genesis block will be written in the default datadir. If there is a synced chain in the default datadir it will be destroyed.
-
-```
-geth --datadir <some/location/where/to/create/chain> init genesis.json
-```
-
-Example genesis.json file:
-```
-{
-   "coinbase": "0x0000000000000000000000000000000000000000",
-   "config": {
-      "homesteadBlock": 5
-   },
-   "difficulty": "0x20000",
-   "extraData": "0x",
-   "gasLimit": "0x2FEFD8",
-   "mixhash": "0x00000000000000000000000000000000000000647572616c65787365646c6578",
-   "nonce": "0x0",
-   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-   "timestamp": "0x00",
-   "alloc": {
-      "dbdbdb2cbd23b783741e8d7fcf51e459b497e4a6":{
-         "balance":"100000000000000000000000000000"
-      },
-      "e6716f9544a56c530d868e4bfbacb172315bdead":{
-         "balance":"100000000000000000000000000000"
-      }
-   }
-}
-```
-
-To use the created chain start geth with:
-```
-geth --datadir <some/location/where/to/create/chain>
+  --solc value         Solidity compiler command to be used (default: "solc")
+  --netrestrict value  Restricts network communication to the given IP networks (CIDR masks)
+  --help, -h           show help
+  
 ```
