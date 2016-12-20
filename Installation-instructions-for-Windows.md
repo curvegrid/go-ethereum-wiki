@@ -47,6 +47,7 @@ C:\Users\xxx> setx Path "%Path%"
 C:\Users\xxx> mkdir src\github.com\ethereum
 C:\Users\xxx> git clone https://github.com/ethereum/go-ethereum src\github.com\ethereum\go-ethereum
 C:\Users\xxx> cd src\github.com\ethereum\go-ethereum
+C:\Users\xxx> go get -u -v golang.org/x/net/context
 ```
 
 Finally, the command to compile geth is:
