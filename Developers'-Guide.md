@@ -90,9 +90,37 @@ Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki
 
 ## Contributing
 
-Only github is used to track issues. (Please include the commit and branch when reporting an issue.)
+Thank you for considering to help out with the source code! We welcome contributions from
+anyone on the internet, and are grateful for even the smallest of fixes!
 
-Pull requests should by default commit on the `master` branch.
+Only github is used to track issues and contribute code, suggestions, feature requests 
+or documentation.
+
+If you'd like to contribute to go-ethereum, please fork, fix, commit and send a pull request
+for the maintainers to review and merge into the main code base. If you wish to submit more
+complex changes though, please check up with the core devs first on [our gitter channel](https://gitter.im/ethereum/go-ethereum)
+to ensure those changes are in line with the general philosophy of the project and/or get some
+early feedback which can make both your efforts much lighter as well as our review and merge
+procedures quick and simple.
+
+We encourage a PR early approach meaning, you create the PR the earliest even without the fix/feature, so 
+that devs and other volunteers know you picked up an issue. These early PRs should indicate 'in progress' 
+status. 
+Please make sure your contributions adhere to our coding guidelines:
+
+* Pull requests need to be based on and opened against the `master` branch (unless by explicit 
+  agreement, you contribute to a complex feature branch).
+* Commit messages should be prefixed with the (sub)package(s) they modify, e.g.:
+   * "eth, rpc: make trace configs optional" or
+   * "swarm/network: change default networkId to 3"
+* The first line of commit messages should not exceed 72 characters
+* If your PR fixes a bug or implements an improvement that is documented in a github issue, it is good
+  practice to reference that issue. Using [special magic keywords](https://help.github.com/articles/closing-issues-via-commit-messages/) you can even make sure that, once your PR is reviewed and merged, the referenced issue is closed, e.g.:
+  * closes #3444
+  * fixes #3444 
+* Golang code must adhere to the official Go [formatting](https://golang.org/doc/effective_go.html#formatting) guidelines (i.e. uses [gofmt](https://golang.org/cmd/gofmt/)).
+* Golang code must be documented adhering to the official Go [commentary](https://golang.org/doc/effective_go.html#commentary) guidelines.
+ 
 
 ## Stacktrace
 
