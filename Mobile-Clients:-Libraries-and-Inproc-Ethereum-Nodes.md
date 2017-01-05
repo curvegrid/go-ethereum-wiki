@@ -1,3 +1,7 @@
+**This page has been obsoleted. An new guide is in the progress, starting at [[Mobile: Introduction]]**
+
+---
+
 *This page is meant to be a guide on using go-ethereum from mobile platforms. Since neither the mobile libraries nor the light client protocol is finalized, the content here will be sparse, with emphasis being put on how to get your hands dirty. As the APIs stabilize this section will be expanded accordingly.*
 
 ### Changelog
