@@ -1,4 +1,4 @@
-**This page has been obsoleted. An new guide is in the progress, starting at [[Mobile: Introduction]]**
+**This page has been obsoleted. An new guide is in the progress at [[Mobile: Introduction]]**
 
 ---
 
