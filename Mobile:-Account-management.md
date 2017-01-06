@@ -130,3 +130,35 @@ There are a few different ways one can authorize the account manager to execute 
 
  * **Single authorization**: The simplest way to sign a transaction via the account manager is to provide the passphrase of the account every time something needs to be signed, which will ephemerally decrypt the private key, execute the signing operation and immediately throw away the decrypted key. The drawbacks are that the passphrase needs to be queried from the user every time, which can become annoying if done frequently; or the application needs to keep the passphrase in memory, which can have security consequences if not done properly; and depending on the keystore's configured strength, constantly decrypting keys can result in non-negligible resource requirements.
  * **Multiple authorizations**: A more complex way of signing transactions via the account manager is to unlock the account via its passphrase once, and allow the account manager to cache the decrypted private key, enabling all subsequent signing requests to complete without the passphrase. The lifetime of the cached private key may be managed manually (by explicitly locking the account back up) or automatically (by providing a timeout during unlock). This mechanism is useful for scenarios where the user may need to sign many transactions or the application would need to do so without requiring user input. The crucial aspect to remember is that **anyone with access to the account manager can sign transactions while a particular account is unlocked** (e.g. device left unattended; application running untrusted code).
+
+*Note, creating transactions is out of scope here, so the remainder of this section will assume we already have a transaction hash to sign, and will focus only on creating a cryptographic signature authorizing it. Creating an actual transaction and injecting the authorization signature into it will be covered later.*
+
+### Signing on Android (Java)
+
+Assuming we already have an instance of an `AccountManager` called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+
+```java
+// Create a new account to sign transactions with
+Account signer = am.newAccount("Signer password");
+Hash    txHash = new Hash("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+```
+
+With the boilerplate out of the way, we can now sign transaction using the authorization methods described above:
+
+```java
+// Sign a transaction with a single authorization
+byte[] signature = am.signWithPassphrase(signer, "Signer password", txHash.getBytes());
+
+// Sign a transaction with multiple manually cancelled authorizations
+am.unlock(signer, "Signer password");
+signature = am.sign(signer.getAddress(), txHash.getBytes());
+am.lock(signer.getAddress());
+
+// Sign a transaction with multiple automatically cancelled authorizations
+am.timedUnlock(signer, "Signer password", 1000000000); // 1 second in nanoseconds
+signature = am.sign(signer.getAddress(), txHash.getBytes());
+```
+
+You may wonder why `signWithPassphrase` takes an `Account` as the signer, whereas `sign` takes only an `Address`. The reason is that an `Account` object may also contain a custom key-path, allowing `signWithPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
+
+### Signing on iOS (Swift 3)
