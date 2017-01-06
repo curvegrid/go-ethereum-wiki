@@ -110,7 +110,7 @@ let newAcc = try! am?.newAccount("Creation password")
 let jsonKey = try! am?.exportKey(newAcc!, passphrase: "Creation password", newPassphrase: "Export password")
 
 // Update the passphrase on the account created above inside the local keystore.
-try! am?.update(newAcc, passphrase: "Creation Password", newPassphrase: "Update password")
+try! am?.update(newAcc, passphrase: "Creation password", newPassphrase: "Update password")
 
 // Delete the account updated above from the local keystore.
 try! am?.delete(newAcc, passphrase: "Update password")
