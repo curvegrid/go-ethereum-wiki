@@ -187,7 +187,7 @@ signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
 try! am?.lock(signer?.getAddress())
 
 // Sign a transaction with multiple automatically cancelled authorizations
-try! am?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000)
+try! am?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000) // 1 second in nanoseconds
 signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
 ```
 
