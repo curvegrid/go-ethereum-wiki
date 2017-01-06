@@ -147,7 +147,7 @@ With the boilerplate out of the way, we can now sign transaction using the autho
 
 ```java
 // Sign a transaction with a single authorization
-byte[] signature = am.signWithPassphrase(signer, "Signer password", txHash.getBytes());
+byte[] signature = am.signPassphrase(signer, "Signer password", txHash.getBytes());
 
 // Sign a transaction with multiple manually cancelled authorizations
 am.unlock(signer, "Signer password");
@@ -159,6 +159,36 @@ am.timedUnlock(signer, "Signer password", 1000000000); // 1 second in nanosecond
 signature = am.sign(signer.getAddress(), txHash.getBytes());
 ```
 
-You may wonder why `signWithPassphrase` takes an `Account` as the signer, whereas `sign` takes only an `Address`. The reason is that an `Account` object may also contain a custom key-path, allowing `signWithPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
+You may wonder why `signPassphrase` takes an `Account` as the signer, whereas `sign` takes only an `Address`. The reason is that an `Account` object may also contain a custom key-path, allowing `signPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
 
 ### Signing on iOS (Swift 3)
+
+Assuming we already have an instance of a `GethAccountManager` called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+
+```swift
+// Create a new account to sign transactions with
+let signer = try! am?.newAccount("Signer password")
+
+var error: NSError?
+let txHash = GethNewHashFromHex("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", &error)
+```
+
+*Note, although Swift usually rewrites `NSError` returns to throws, this particular instance seems to have been missed for some reason (possibly due to it being a constructor). It will be fixed in a later version of the iOS bindings when the appropriate fixed are implemented upstream in the `gomobile` project.*
+
+With the boilerplate out of the way, we can now sign transaction using the authorization methods described above:
+
+```swift
+// Sign a transaction with a single authorization
+var signature = try! am?.signPassphrase(signer, passphrase: "Signer password", hash: txHash?.getBytes())
+
+// Sign a transaction with multiple manually cancelled authorizations
+try! am?.unlock(signer, passphrase: "Signer password")
+signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
+try! am?.lock(signer?.getAddress())
+
+// Sign a transaction with multiple automatically cancelled authorizations
+try! am?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000)
+signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
+```
+
+You may wonder why `signPassphrase` takes a `GethAccount` as the signer, whereas `sign` takes only a `GethAddress`. The reason is that a `GethAccount` object may also contain a custom key-path, allowing `signPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
