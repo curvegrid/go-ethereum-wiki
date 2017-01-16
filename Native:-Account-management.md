@@ -91,7 +91,7 @@ There are a few different ways one can authorize the account manager to execute 
 
 ### Signing from Go
 
-Assuming we already have an instance of an [`accounts.Manager`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager) called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated [`NewAccount`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.NewAccount) method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+Assuming we already have an instance of an [`accounts.Manager`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager) called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated [`NewAccount`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.NewAccount) method; and to avoid going into transaction creation for now, we can hard-code a random [`common.Hash`](https://godoc.org/github.com/ethereum/go-ethereum/common#Hash) to sign instead.
 
 ```go
 // Create a new account to sign transactions with
