@@ -65,7 +65,7 @@ Although the keystore defines the encryption strength it uses to store your acco
 This individuality however means that any operation requiring access to an account will need to provide the necessary authentication credentials for that particular account in the form of a passphrase:
 
  * When creating a new account, the caller must supply a passphrase to encrypt the account with. This passphrase will be required for any subsequent access, the lack of which will forever forfeit using the newly created account.
- * When deleting an existing account, the caller must supply a passphrase to verify ownership of the account. This isn't cryptographically necessary, rather a protective measure agaist accidental loss of accounts.
+ * When deleting an existing account, the caller must supply a passphrase to verify ownership of the account. This isn't cryptographically necessary, rather a protective measure against accidental loss of accounts.
  * When updating an existing account, the caller must supply both current and new passphrases. After completing the operation, the account will not be accessible via the old passphrase any more.
  * When exporting an existing account, the caller must supply both the current passphrase to decrypt the account, as well as an export passphrase to re-encrypt it with before returning the key-file to the user. This is required to allow moving accounts between devices without sharing original credentials.
  * When importing a new account, the caller must supply both the encryption passphrase of the key-file being imported, as well as a new passhprase with which to store the account. This is required to allow storing account with different credentials than used for moving them around.
