@@ -143,7 +143,7 @@ Account signer = am.newAccount("Signer password");
 Hash    txHash = new Hash("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
 ```
 
-With the boilerplate out of the way, we can now sign transaction using the authorization methods described above:
+With the boilerplate out of the way, we can now sign transaction using the authorization mechanisms described above:
 
 ```java
 // Sign a transaction with a single authorization
