@@ -23,8 +23,18 @@ You can watch a quick overview about these in Peter's (@karalabe) talk titled "I
 
 ## Go packages
 
-The `go-ethereum` library is distributed as a collection of standard Go packages straight from our GitHub repository. The packages can be used directly via the official Go toolkit, without needing any third party tools.
+The `go-ethereum` library is distributed as a collection of standard Go packages straight from our GitHub repository. The packages can be used directly via the official Go toolkit, without needing any third party tools. External dependencies are vendored locally into `vendor`, ensuring both self-containment as well as code stability. If you reuse `go-ethereum` in your own project, please follow these best practices and vendor it yourself too to avoid any accidental API breakages!
 
-External dependencies are vendored locally into `vendor`, ensuring both self-containment as well as code stability. If you reuse `go-ethereum` in your own project, please follow these best practices and vendor it yourself too to avoid any accidental API breakages!
+The canonical import path for `go-ethereum` is `github.com/ethereum/go-ethereum`, with all packages residing underneath. Although there are [quite a number](https://godoc.org/github.com/ethereum/go-ethereum#pkg-subdirectories) of them, you'll only need to care about a limited subset, each of which will be properly introduced in their relevant section.
 
-The canonical import path for `go-ethereum` is `github.com/ethereum/go-ethereum`, with all packages residing underneath. Although there are [quite a number](https://godoc.org/github.com/ethereum/go-ethereum#pkg-subdirectories) of them, you'll only need to care about a limited subset, each of which will be properly introduced in their relevant pages.
+You can download all our packages via:
+
+```
+$ go get -d github.com/ethereum/go-ethereum/...
+```
+
+You may also need Go's original context package. Although this was moved into the official Go SDK in Go 1.7, `go-ethereum` will depend on the original `golang.org/x/net/context` package until we officially drop support for Go 1.5 and Go 1.6.
+
+```
+$ go get -u golang.org/x/net/context
+```
