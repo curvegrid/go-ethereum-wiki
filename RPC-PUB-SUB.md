@@ -98,6 +98,8 @@ Fires a notification each time a new block added to the chain, including chain r
 ## newHeads
 Fires a notification each time a new header is appended to the chain, including chain reorganizations. Users can use the bloom filter to determine if the block contains logs that are interested to them.
 
+In case of a chain reorganization the subscription will emit all new headers for the new chain. Therefore the subscription can emit multiple headers on the same height.
+
 ### Example
 ```
     >> {"id": 1, "method": "eth_subscribe", "params": ["newHeads"]}
@@ -131,6 +133,8 @@ Fires a notification each time a new header is appended to the chain, including 
 
 ## logs
 Returns logs that are included in new imported blocks and match the given filter criteria.
+
+In case of a chain reorganization previous sent logs that are on the old chain will be resend with the `removed` property set to true. Logs from transactions that ended up in the new chain are emitted. Therefore a subscription can emit logs for the same transaction multiple times.
 
 ### Parameters
 1. `object` with the following (optional) fields
