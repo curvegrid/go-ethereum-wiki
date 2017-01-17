@@ -69,7 +69,7 @@ jsonAcc, _ := am.Export(newAcc, "Creation password", "Export password");
 am.Update(newAcc, "Creation password", "Update password");
 
 // Delete the account updated above from the local keystore.
-am.DeleteAccount(newAcc, "Update password");
+am.Delete(newAcc, "Update password");
 
 // Import back the account we've exported (and then deleted) above with yet
 // again a fresh passphrase.
@@ -95,7 +95,7 @@ Assuming we already have an instance of an [`accounts.Manager`](https://godoc.or
 
 ```go
 // Create a new account to sign transactions with
-signer := am.NewAccount("Signer password");
+signer, _ := am.NewAccount("Signer password");
 txHash := common.HexToHash("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
 ```
 
@@ -103,16 +103,16 @@ With the boilerplate out of the way, we can now sign transaction using the autho
 
 ```go
 // Sign a transaction with a single authorization
-signature, _ := am.SignWithPassphrase(signer, "Signer password", txHash);
+signature, _ := am.SignWithPassphrase(signer, "Signer password", txHash.Bytes());
 
 // Sign a transaction with multiple manually cancelled authorizations
 am.Unlock(signer, "Signer password");
-signature, _ = am.Sign(signer.Address, txHash);
+signature, _ = am.Sign(signer.Address, txHash.Bytes());
 am.Lock(signer.Address);
 
 // Sign a transaction with multiple automatically cancelled authorizations
 am.TimedUnlock(signer, "Signer password", time.Second);
-signature, _ = am.Sign(signer.Address, txHash);
+signature, _ = am.Sign(signer.Address, txHash.Bytes());
 ```
 
 You may wonder why [`SignWithPassphrase`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.SignWithPassphrase) takes an [`accounts.Account`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Account) as the signer, whereas [`Sign`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.Sign) takes only a [`common.Address`](https://godoc.org/github.com/ethereum/go-ethereum/common#Address). The reason is that an [`accounts.Account`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Account) object may also contain a custom key-path, allowing [`SignWithPassphrase`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.SignWithPassphrase) to sign using accounts outside of the keystore; however [`Sign`](https://godoc.org/github.com/ethereum/go-ethereum/accounts#Manager.Sign) relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
