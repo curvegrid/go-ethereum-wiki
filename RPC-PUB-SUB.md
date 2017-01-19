@@ -183,7 +183,7 @@ none
 
 
 ## Possible future subscription:
-- balanceChanges
+- balance changes
 - account changes
 - nonce changes
 - storage changes in contracts
