@@ -85,17 +85,17 @@ extra management API namespaces:
 * `personal`: Account management
 * `txpool`: Transaction pool inspection
 
-| [admin](#admin)              | [debug](#debug)                                   | [miner](#miner)                     | [personal](#personal)                     | [txpool](#txpool)          |
+| [admin](#admin)              | [debug](#debug)                                   | [miner](#miner)                     | [personal](#personal)                    | [txpool](#txpool)          |
 | :--------------------------- | :-----------------------------------------------  | :---------------------------------- | :--------------------------------------- | :------------------------- |
-| [addPeer](#admin_addpeer)    | [backtraceAt](#debug_backtraceAt)                 | [makeDAG](#miner_makedag)         | [importRawKey](#personal_importrawkey)   | [content](#txpool_content) |
-| [datadir](#datadir)          | [blockProfile](#debug_blockProfile)               | [setExtra](#miner_setextra)           | [listAccounts](#personal_listaccounts)   | [inspect](#txpool_inspect) |
-| [nodeInfo](#admin_nodeinfo)  | [cpuProfile](#debug_cpuProfile)                   | [setGasPrice](#miner_setgasprice)         | [lockAccount](#personal_lockaccount)     | [status](#txpool_status)   |
-| [peers](#admin_peers)        | [dumpBlock](#debug_dumpblock)                     | [start](#miner_start)   | [newAccount](#personal_newaccount)       |                            |
-| [setSolc](#admin_setcolc)    | [gcStats](#debug_gcStats)                         | [startAutoDAG](#miner_startautodag)               | [unlockAccount](#personal_unlockaccount) |                            |
-| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [stop](#miner_stop) |  [sendTransaction](#personal_sendtransaction)                          |                                     |
-| [startWS](#admin_startws)    | [goTrace](#debug_goTrace)                         | [stopAutoDAG](#miner_stopAutodag)                 |                                          |                            |
-| [stopRPC](#admin_stoprpc)    | [memStats](#debug_memStats)                       |    |                                          |                            |
-| [stopWS](#admin_stopws)      | [seedHash](#debug_seedhash)                       |                                     |                                          |                            |
+| [addPeer](#admin_addpeer)    | [backtraceAt](#debug_backtraceAt)                 | [makeDAG](#miner_makedag)           | [ecRecover](#personal_ecrecover)         | [content](#txpool_content) |
+| [datadir](#datadir)          | [blockProfile](#debug_blockProfile)               | [setExtra](#miner_setextra)         | [importRawKey](#personal_importrawkey)   | [inspect](#txpool_inspect) |
+| [nodeInfo](#admin_nodeinfo)  | [cpuProfile](#debug_cpuProfile)                   | [setGasPrice](#miner_setgasprice)   | [listAccounts](#personal_listaccounts)   | [status](#txpool_status)   |
+| [peers](#admin_peers)        | [dumpBlock](#debug_dumpblock)                     | [start](#miner_start)               | [lockAccount](#personal_lockaccount)     |                            |
+| [setSolc](#admin_setcolc)    | [gcStats](#debug_gcStats)                         | [startAutoDAG](#miner_startautodag) | [newAccount](#personal_newaccount)       |                            |
+| [startRPC](#admin_startrpc)  | [getBlockRlp](#debug_getblockrlp)                 | [stop](#miner_stop)                 | [unlockAccount](#personal_unlockaccount) |                            |
+| [startWS](#admin_startws)    | [goTrace](#debug_goTrace)                         | [stopAutoDAG](#miner_stopAutodag)   | [sendTransaction](#personal_sendtransaction) |                        |
+| [stopRPC](#admin_stoprpc)    | [memStats](#debug_memStats)                       |                                     | [sign](#personal_sign)                   |                            |
+| [stopWS](#admin_stopws)      | [seedHash](#debug_seedhash)[sign](#personal_sign)|                                      |                                          |                            |
 |                              | [setBlockProfileRate](#debug_setBlockProfileRate) |                                     |                                          |                            |
 |                              | [setHead](#debug_sethead)                         |                                     |                                          |                            |
 |                              | [stacks](#debug_stacks)                           |                                     |                                          |                            |
@@ -1088,6 +1088,33 @@ undefined
 > personal.sendTransaction(tx, "passphrase")
 0x8474441674cdd47b35b875fd1a530b800b51a5264b9975fb21129eeb8c18582f
 ```
+
+### personal_sign
+
+The sign method calculates an Ethereum specific signature with:
+`sign(keccack256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
+See ecRecover to verify the signature.
+
+#### Examples
+
+``` javascript
+> personal.sign("0xdeadbeaf", "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "")
+"0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
+```
+
+### personal_ecRecover
+
+`ecRecover` returns the address associated with the private key that was used to calculate the signature in `personal_sign`. 
+
+#### Examples
+
+``` javascript
+> personal.sign("0xdeadbeaf", "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "")
+"0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
+> personal.ecRecover("0xdeadbeaf", "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b")
+"0x9b2055d370f73ec7d8a03e965129118dc8f5bf83"
+```
+
 
 ## Txpool
 
