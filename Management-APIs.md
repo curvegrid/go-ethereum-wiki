@@ -1095,6 +1095,12 @@ The sign method calculates an Ethereum specific signature with:
 `sign(keccack256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
 See ecRecover to verify the signature.
 
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|   
+| Console | `personal.sign(data hex, account, [password])`                |
+| RPC     | `{"method": "personal_sign", "params": [data, account, password]}` |
+
+
 #### Examples
 
 ``` javascript
@@ -1105,6 +1111,12 @@ See ecRecover to verify the signature.
 ### personal_ecRecover
 
 `ecRecover` returns the address associated with the private key that was used to calculate the signature in `personal_sign`. 
+
+| Client  | Method invocation                                     |
+|:-------:|-------------------------------------------------------|   
+| Console | `personal.ecRecover(data hex, account, [password])`                |
+| RPC     | `{"method": "personal_ecRecover", "params": [data, account, password]}` |
+
 
 #### Examples
 
