@@ -1114,8 +1114,8 @@ See ecRecover to verify the signature.
 
 | Client  | Method invocation                                     |
 |:-------:|-------------------------------------------------------|   
-| Console | `personal.ecRecover(data hex, account, [password])`                |
-| RPC     | `{"method": "personal_ecRecover", "params": [data, account, password]}` |
+| Console | `personal.ecRecover(data, signature)`                 |
+| RPC     | `{"method": "personal_ecRecover", "params": [data, signature]}` |
 
 
 #### Examples
