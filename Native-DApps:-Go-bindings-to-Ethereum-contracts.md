@@ -1,5 +1,5 @@
 **[Please note, events are not yet implemented as they need some RPC subscription
-features that are still under review. They will hopefully get pushed out in a few days.]**
+features that are still under review.]**
 
 The original roadmap and/or dream of the Ethereum platform was to provide a solid, high
 performing client implementation of the consensus protocol in various languages, which
@@ -95,19 +95,18 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 func main() {
 	// Create an IPC based RPC connection to a remote node
-	conn, err := rpc.NewIPCClient("/home/karalabe/.ethereum/testnet/geth.ipc")
+	conn, err := ethclient.Dial("/home/karalabe/.ethereum/testnet/geth.ipc")
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
 	// Instantiate the contract and display its name
-	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
+	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), conn)
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
 	}
@@ -159,20 +158,19 @@ import (
 	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 const key = `paste the contents of your *testnet* key json here`
 
 func main() {
 	// Create an IPC based RPC connection to a remote node and instantiate a contract binding
-	conn, err := rpc.NewIPCClient("/home/karalabe/.ethereum/testnet/geth.ipc")
+	conn, err := ethclient.Dial("/home/karalabe/.ethereum/testnet/geth.ipc")
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
-	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), backends.NewRPCBackend(conn))
+	token, err := NewToken(common.HexToAddress("0x21e6fc92f93c8a1bb41e2be64b4e1f88a54d3576"), conn)
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Token contract: %v", err)
 	}
@@ -282,8 +280,7 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind/backends"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 const key = `paste the contents of your *testnet* key json here`
@@ -299,7 +296,7 @@ func main() {
 		log.Fatalf("Failed to create authorized transactor: %v", err)
 	}
 	// Deploy a new awesome contract for the binding demo
-	address, tx, token, err := DeployToken(auth, backends.NewRPCBackend(conn), new(big.Int), "Contracts in Go!!!", 0, "Go!")
+	address, tx, token, err := DeployToken(auth, conn), new(big.Int), "Contracts in Go!!!", 0, "Go!")
 	if err != nil {
 		log.Fatalf("Failed to deploy new token contract: %v", err)
 	}
