@@ -3,11 +3,11 @@ If you just want to run ethereum, use the normal [Installation Instructions](htt
 
 # Developers' guide 
 
-This document is the entry point for developers of the etherum go implementation. Developers here refer to the hands-on: who are interested in build, develop, debug, submit a bug report or pull request or contribute to `go-ethereum` with code. 
+This document is the entry point for developers of the Go implementation of Ethereum. Developers here refer to the hands-on: who are interested in build, develop, debug, submit a bug report or pull request or contribute code to go-ethereum.
 
-## Build and Test
+## Building and Testing
 
-### Go environment  
+### Go Environment
 
 We assume that you have [`go` v1.7 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
@@ -21,7 +21,7 @@ Most likely you will be working from your fork of `go-ethereum`, let's say from 
 git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum/go-ethereum
 ```
 
-### Updating non-vendored Dependencies
+### Updating Non-Vendored Dependencies (required step)
 
 Most go-ethereum dependencies are tracked in the vendor/ directory, with one exception:
 
@@ -33,7 +33,18 @@ go get
 
 in the repository root after cloning the repository.
 
-### Building executables
+### Managing Vendored Dependencies
+
+All other dependencies are tracked in the vendor/ directory. We use [govendor](https://github.com/kardianos/govendor) to manage them.
+
+If you want to add a new dependency, run `govendor fetch <import-path>`, then commit the result.
+
+If you want to update all dependencies to their latest upstream version, run `govendor fetch +v`.
+
+You can also use govendor to run certain commands on all go-ethereum packages, excluding vendored
+code. Example: to recreate all generated code, run `govendor generate +l`. 
+
+### Building Executables
 
 Switch to the go-ethereum repository root directory.
 
@@ -88,12 +99,32 @@ See integration testing information on the [Testing wiki page](https://github.co
 `geth` can do node behaviour monitoring, aggregation and show performance metric charts. 
 Read about [metrics and monitoring](https://github.com/ethereum/go-ethereum/wiki/Metrics-and-Monitoring)
 
+### Getting Stack Traces
+
+If `geth` is started with the `--pprof` option, a debugging HTTP server is made available on port 6060. You can bring up http://localhost:6060/debug/pprof to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
+
+Note that if you run multiple instances of `geth`, this port will only work for the first instance that was launched. If you want to generate stacktraces for these other instances, you need to start them up choosing an alternative pprof port. Make sure you are redirecting stderr to a logfile. 
+
+```
+geth -port=30300 -verbosity 5 --pprof --pprofport 6060 2>> /tmp/00.glog
+geth -port=30301 -verbosity 5 --pprof --pprofport 6061 2>> /tmp/01.glog
+geth -port=30302 -verbosity 5 --pprof --pprofport 6062 2>> /tmp/02.glog
+```
+
+Alternatively if you want to kill the clients (in case they hang or stalled syncing, etc) but have the stacktrace too, you can use the `-QUIT` signal with `kill`:
+
+```
+killall -QUIT geth 
+```
+
+This will dump stracktraces for each instance to their respective log file.
+
 ## Contributing
 
 Thank you for considering to help out with the source code! We welcome contributions from
 anyone on the internet, and are grateful for even the smallest of fixes!
 
-Only github is used to track issues and contribute code, suggestions, feature requests 
+GitHub is used to track issues and contribute code, suggestions, feature requests 
 or documentation.
 
 If you'd like to contribute to go-ethereum, please fork, fix, commit and send a pull request
@@ -114,40 +145,14 @@ Please make sure your contributions adhere to our coding guidelines:
    * "eth, rpc: make trace configs optional" or
    * "swarm/network: change default networkId to 3"
 * The first line of commit messages should not exceed 72 characters
-* If your PR fixes a bug or implements an improvement that is documented in a github issue, it is good
+* If your PR fixes a bug or implements an improvement that is documented in a GitHub issue, it is good
   practice to reference that issue. Using [special magic keywords](https://help.github.com/articles/closing-issues-via-commit-messages/) you can even make sure that, once your PR is reviewed and merged, the referenced issue is closed, e.g.:
   * closes #3444
   * fixes #3444 
-* Golang code must adhere to the official Go [formatting](https://golang.org/doc/effective_go.html#formatting) guidelines (i.e. uses [gofmt](https://golang.org/cmd/gofmt/)).
+* Go code must adhere to the official Go [formatting](https://golang.org/doc/effective_go.html#formatting) guidelines. Please use [goimports](https://golang.org/x/tools/cmd/goimports) to format your code before submitting changes.
 * Golang code must be documented adhering to the official Go [commentary](https://golang.org/doc/effective_go.html#commentary) guidelines.
  
-
-## Stacktrace
-
-The code uses `pprof` on localhost port 6060 by default if `geth` is started with the `--pprof` option. So bring up http://localhost:6060/debug/pprof to see the heap, running routines etc. By clicking full goroutine stack dump (clicking http://localhost:6060/debug/pprof/goroutine?debug=2) you can generate trace that is useful for debugging.
-
-Note that if you run multiple instances of `geth`, this port will only work for the first instance that was launched. If you want to generate stacktraces for these other instances, you need to start them up choosing an alternative pprof port. Make sure you are redirecting stderr to a logfile. 
-
-```
-geth -port=30300 -loglevel 5 --pprof --pprofport 6060 2>> /tmp/00.glog
-geth -port=30301 -loglevel 5 --pprof --pprofport 6061 2>> /tmp/01.glog
-geth -port=30302 -loglevel 5 --pprof --pprofport 6062 2>> /tmp/02.glog
-```
-
-Alternatively if you want to kill the clients (in case they hang or stalled synching, etc) but have the stacktrace too, you can use the `-QUIT` signal with `kill`:
-
-```
-killall -QUIT geth 
-```
-
-This will dump stracktraces for each instance to their respective log file.
-
-## Code formatting 
-
-Sources are formatted according to the [Go Formatting
-Style](http://golang.org/doc/effective_go.html#formatting).
-
-## Dev Tutorials 
+## Dev Tutorials (mostly outdated)
 
 * [Private networks, local clusters and monitoring](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
 
