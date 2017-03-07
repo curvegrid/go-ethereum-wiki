@@ -117,7 +117,7 @@ Alternatively if you want to kill the clients (in case they hang or stalled sync
 killall -QUIT geth 
 ```
 
-This will dump stracktraces for each instance to their respective log file.
+This will dump stack traces for each instance to their respective log file.
 
 ## Contributing
 
