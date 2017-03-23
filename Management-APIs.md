@@ -25,7 +25,7 @@ To determine which APIs an interface provides, the `modules` JSON-RPC method can
 example over an `ipc` interface on unix systems:
 
 ```
-echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
+echo '{"jsonrpc":"2.0","method":"rpc_modules","params":[],"id":1}' | nc -U $datadir/geth.ipc
 ```
 
 will give all enabled modules including the version number:
