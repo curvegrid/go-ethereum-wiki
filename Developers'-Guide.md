@@ -9,7 +9,7 @@ This document is the entry point for developers of the Go implementation of Ethe
 
 ### Go Environment
 
-We assume that you have [`go` v1.7 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
+We assume that you have [`go` v1.8 installed](https://github.com/ethereum/go-ethereum/wiki/Installing-Go), and `GOPATH` is set.
 
 **Note**:You must have your working copy under `$GOPATH/src/github.com/ethereum/go-ethereum`.
 
@@ -20,18 +20,6 @@ Most likely you will be working from your fork of `go-ethereum`, let's say from 
 ```
 git clone git@github.com:nirname/go-ethereum.git $GOPATH/src/github.com/ethereum/go-ethereum
 ```
-
-### Updating Non-Vendored Dependencies (required step)
-
-Most go-ethereum dependencies are tracked in the vendor/ directory, with one exception:
-
-The golang.org/x/net/context package needs to be installed using `go get`. To do that, run
-
-```
-go get
-```
-
-in the repository root after cloning the repository.
 
 ### Managing Vendored Dependencies
 
