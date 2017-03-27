@@ -59,7 +59,7 @@ See [`gethcluster.sh`](https://github.com/ethersphere/eth-utils) script, and the
 
 ## Private network 
 
-An ethereum network is a private network if the nodes are not connected to the main network nodes. In this context private only means reserved or isolated, rather than protected or secure. Since connections between nodes are valid only if peers have identical protocol version and network id, you can effectively isolate your network by setting either of these to a non default value. We recommend using the semantic `networkid` command line option for this. Its argument is an integer, the main network has id 1 (the default). So if you supply your own custom network id which is different than the main network your nodes will not connect to other nodes and form a private network.
+See [[the Private Network Page|Private network]] for more information.
 
 ### Setup bootnode
 
