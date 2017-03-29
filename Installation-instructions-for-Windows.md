@@ -53,5 +53,5 @@ C:\Users\xxx> go get -u -v golang.org/x/net/context
 Finally, the command to compile geth is:
 
 ```text
-C:\Users\xxx\src\github.com\ethereum\go-ethereum> go install -v ./...
+C:\Users\xxx\src\github.com\ethereum\go-ethereum> go install -v ./cmd/...
 ```
