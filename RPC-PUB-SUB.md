@@ -18,7 +18,6 @@ Example:
     >> {"id": 1, "method": "eth_unsubscribe", "params": ["0xcd0c3e8af590364c09d0fa6a1210faf5"]}
     << {"jsonrpc":"2.0","id":1,"result":true}
 
-
 # Considerations
 1. notifications are send for current events and not for past events. If your use case requires you not to miss any notifications than subscriptions are probably not the best option.
 2. subscriptions require a full duplex connection. Geth offers such connections in the form of websockets (enable with --ws) and ipc (enabled by default).
@@ -33,8 +32,9 @@ Subscriptions are creates with a regular RPC call with `eth_subscribe` as method
 2. optional arguments
 
 ### Example
-   >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true}]}
-   << {"id": 1, "jsonrpc": "2.0", "result": "0x9cef478923ff08bf67fde6c64013158d"}
+
+    >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true}]}
+    << {"id": 1, "jsonrpc": "2.0", "result": "0x9cef478923ff08bf67fde6c64013158d"}
 
 ## Cancel subscription
 Subscriptions are cancelled with a regular RPC call with `eth_unsubscribe` as method and the subscription id as first parameter. It returns a bool indicating if the subscription was cancelled successful.
@@ -43,57 +43,11 @@ Subscriptions are cancelled with a regular RPC call with `eth_unsubscribe` as me
 1. subscription id
 
 ### Example
-   >> {"id": 1, "method": "eth_unsubscribe", "params": ["0x9cef478923ff08bf67fde6c64013158d"]}
-   << {"jsonrpc":"2.0","id":1,"result":true}
+
+    >> {"id": 1, "method": "eth_unsubscribe", "params": ["0x9cef478923ff08bf67fde6c64013158d"]}
+    << {"jsonrpc":"2.0","id":1,"result":true}
 
 # Supported subscriptions
-
-## newBlocks (deprecated, see newHeads)
-From geth release 1.5 newBlocks is removed. Light clients won't download full blocks and thus cannot notify the client with full blocks. This subscription is succeeded by the newHeads subscription that only give header information back when the chain is extended with one block in case of a full client or header in case of a light client.
-
-Fires a notification each time a new block added to the chain, including chain reorganizations.
-
-### Parameters
-1. `object` with the following (optional) fields
-    - **includeTransactions**, bool include transaction hashes in the notification (default false)
-    - **transactionDetails**,  bool include full transaction details in the notification (default false)
-
-### Example
-    >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true, "transactionDetails": false}]}
-    << {"jsonrpc":"2.0","id":2,"result":"0x1106ab6329eea81560caf51f1ebff6d2"}
-
-    << {
-        "subscription":"0x1106ab6329eea81560caf51f1ebff6d2",
-        "result":{
-            "difficulty":"0x1010ed252a01",
-            "extraData":"0xd983010305844765746887676f312e342e328777696e646f7773",
-            "gasLimit":"0x3f8fc0",
-            "gasUsed":"0x1ec30",
-            "hash":"0x27f188384f739c9a3d063ff623046acceaab4e892f2dbb5801e602b1d429beea",
-                  "logsBloom":"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-            "miner":"0xf8b483dba2c3b7176a3da549ad41a48bb3121069",
-            "nonce":"0x511e7a1ae0783aca",
-            "number":"0x10ee93",
-            "parentHash":"0xdd9bfdee7c618e0978797b3f93577252e27f8dffc520853b32d32ce583495ae0",
-            "receiptRoot":"0x54d52af8f19adff0147e4f1cf5d92558499c9d801fb463c51dec9e08c51f2877",
-            "sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
-            "size":"0x4c6",
-            "stateRoot":"0x6052a897dc9607faab5092855162bdb1719f6cccc03f12a1811b6e90c655cb2e",
-            "timestamp":"0x56dc83a0",
-            "totalDifficulty":"0x785a9b2d1e7984f6",
-            "transactions":[
-                "0x70556b4fab329d6e6ed448620943903c28f5fe5bb1e7ac1cace2cf3ae51a1725",
-                "0x527ad361db2dd1e501258e1810dc6f76d03fab330c52c6135c5fa7f0c023a5b6",
-                "0xdf9f8895d5bc5751c63d68e14786994b51cc5820d5c621ff17487fb25b95e82a",
-                "0xc87eb784b9268cf6e0557e73ea831f7ed7e23d50979d44a12c7419caeea23490",
-                "0x4784a4b4fb764eaf0d9ddb2a392aee255fe75fc2d92f1660a9b03b9e3cf9ceb3",
-                "0x2a76f3a67e7aae67051250b02653fb87bec537b5b44c4979e7f1b79d0cf8fbbd"
-            ],
-            "transactionsRoot":"0xce8215a15df64b593b4e570fafe80501d0631d428fcf2692d7d35c0a1f4db22f",
-            "uncles":[]
-        }
-    }
-
 
 ## newHeads
 Fires a notification each time a new header is appended to the chain, including chain reorganizations. Users can use the bloom filter to determine if the block contains logs that are interested to them.
@@ -114,7 +68,6 @@ In case of a chain reorganization the subscription will emit all new headers for
       "extraData": "0xd983010305844765746887676f312e342e328777696e646f7773",
       "gasLimit": "0x47e7c4",
       "gasUsed": "0x38658",
-      "hash": "0x950427f707bf395fda0092d4f5dcbcf32d632106fb08e397124d0726082693e6",
       "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
       "miner": "0xf8b483dba2c3b7176a3da549ad41a48bb3121069",
       "nonce": "0x084149998194cc5f",
