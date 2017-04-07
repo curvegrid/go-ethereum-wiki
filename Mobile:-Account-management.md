@@ -164,14 +164,16 @@ signed = ks.signTx(signer, tx, chain);
 
 ### Signing on iOS (Swift 3)
 
-Assuming we already have an instance of a `GethKeyStore` called `ks` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+Assuming we already have an instance of a `GethKeyStore` called `ks` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random transaction to sign instead.
 
 ```swift
 // Create a new account to sign transactions with
-let signer = try! ks?.newAccount("Signer password")
-
 var error: NSError?
-let txHash = GethNewHashFromHex("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", &error)
+let signer = try! ks?.newAccount("Signer password")
+        
+let to    = GethNewAddressFromHex("0x0000000000000000000000000000000000000000", &error)
+let tx    = GethNewTransaction(1, to, GethNewBigInt(0), GethNewBigInt(0), GethNewBigInt(0), nil) // Random empty transaction
+let chain = GethNewBigInt(1) // Chain identifier of the main net
 ```
 
 *Note, although Swift usually rewrites `NSError` returns to throws, this particular instance seems to have been missed for some reason (possibly due to it being a constructor). It will be fixed in a later version of the iOS bindings when the appropriate fixed are implemented upstream in the `gomobile` project.*
@@ -180,14 +182,14 @@ With the boilerplate out of the way, we can now sign transaction using the autho
 
 ```swift
 // Sign a transaction with a single authorization
-var signature = try! ks?.signPassphrase(signer, passphrase: "Signer password", hash: txHash?.getBytes())
+var signed = try! ks?.signTxPassphrase(signer, passphrase: "Signer password", tx: tx, chainID: chain)
 
 // Sign a transaction with multiple manually cancelled authorizations
 try! ks?.unlock(signer, passphrase: "Signer password")
-signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
+signed = try! ks?.signTx(signer, tx: tx, chainID: chain)
 try! ks?.lock(signer?.getAddress())
 
 // Sign a transaction with multiple automatically cancelled authorizations
-try! ks?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000) // 1 second in nanoseconds
-signature = try! ks?.sign(signer?.getAddress(), hash: txHash?.getBytes())
+try! ks?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000)
+signed = try! ks?.signTx(signer, tx: tx, chainID: chain)
 ```
