@@ -21,26 +21,26 @@ As such, *light* is more suitable for mobile applications, but you should be awa
 
 ### Keystores on Android (Java)
 
-The encrypted keystore on Android is implemented by the `AccountManager` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management on Android, you'll need to import two classes into your Java code:
+The encrypted keystore on Android is implemented by the `KeyStore` class from the `org.ethereum.geth` package. The configuration constants (for the *standard* or *light* security modes described above) are located in the `Geth` abstract class, similarly from the `org.ethereum.geth` package. Hence to do client side account management on Android, you'll need to import two classes into your Java code:
 
 ```java
-import org.ethereum.geth.AccountManager;
 import org.ethereum.geth.Geth;
+import org.ethereum.geth.KeyStore;
 ```
 
-Afterwards you can create a new encrypted account manager via:
+Afterwards you can create a new encrypted keystore via:
 
 ```java
-AccountManager am = new AccountManager("/path/to/keystore", Geth.LightScryptN, Geth.LightScryptP);
+KeyStore ks = new KeyStore("/path/to/keystore", Geth.LightScryptN, Geth.LightScryptP);
 ```
 
-The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's data directory. If you are creating the `AccountManager` from within a class extending an Android object, you will most probably have access to the `Context.getFilesDir()` method via `this.getFilesDir()`, so you could set the keystore path to `this.getFilesDir() + "/keystore"`.
+The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's data directory. If you are creating the `KeyStore` from within a class extending an Android object, you will most probably have access to the `Context.getFilesDir()` method via `this.getFilesDir()`, so you could set the keystore path to `this.getFilesDir() + "/keystore"`.
 
-The last two arguments of the `AccountManager` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
+The last two arguments of the `KeyStore` constructor are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `Geth.StandardScryptN, Geth.StandardScryptP`, `Geth.LightScryptN, Geth.LightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version. 
 
 ### Keystores on iOS (Swift 3)
 
-The encrypted keystore on iOS is implemented by the `GethAccountManager` class from the `Geth` framework. The configuration constants (for the *standard* or *light* security modes described above) are located in the same namespace as global variables. Hence to do client side account management on iOS, you'll need to import the framework into your Swift code:
+The encrypted keystore on iOS is implemented by the `GethKeyStore` class from the `Geth` framework. The configuration constants (for the *standard* or *light* security modes described above) are located in the same namespace as global variables. Hence to do client side account management on iOS, you'll need to import the framework into your Swift code:
 
 ```swift
 import Geth
@@ -49,16 +49,16 @@ import Geth
 Afterwards you can create a new encrypted account manager via:
 
 ```swift
-let am = GethNewAccountManager("/path/to/keystore", GethLightScryptN, GethLightScryptP);
+let ks = GethNewKeyStore("/path/to/keystore", GethLightScryptN, GethLightScryptP);
 ```
 
 The path to the keystore folder needs to be a location that is writable by the local mobile application but non-readable for other installed applications (for security reasons obviously), so we'd recommend placing it inside your app's document directory. You should be able to retrieve the document directory via `let datadir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]`, so you could set the keystore path to `datadir + "/keystore"`.
 
-The last two arguments of the `GethNewAccountManager` factory method are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `GethStandardScryptN, GethStandardScryptP`, `GethLightScryptN, GethLightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version.
+The last two arguments of the `GethNewKeyStore` factory method are the crypto parameters defining how resource-intensive the keystore encryption should be. You can choose between `GethStandardScryptN, GethStandardScryptP`, `GethLightScryptN, GethLightScryptP` or specify your own numbers (please make sure you understand the underlying cryptography for this). We recommend using the *light* version.
 
 ## Account lifecycle
 
-Having created an encrypted keystore for your Ethereum accounts, you can use this account manager for the entire account lifecycle requirements of your mobile application. This includes the basic functionality of creating new accounts and deleting existing ones; as well as the more advanced functionality of updating access credentials, exporting existing accounts, and importing them on another device.
+Having created an encrypted keystore for your Ethereum accounts, you can use this for the entire account lifecycle requirements of your mobile application. This includes the basic functionality of creating new accounts and deleting existing ones; as well as the more advanced functionality of updating access credentials, exporting existing accounts, and importing them on another device.
 
 Although the keystore defines the encryption strength it uses to store your accounts, there is no global master password that can grant access to all of them. Rather each account is maintained individually, and stored on disk in its [encrypted format](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) individually, ensuring a much cleaner and stricter separation of credentials.
 
@@ -74,50 +74,50 @@ This individuality however means that any operation requiring access to an accou
 
 ### Accounts on Android (Java)
 
-An Ethereum account on Android is implemented by the `Account` class from the `org.ethereum.geth` package. Assuming we already have an instance of an `AccountManager` called `am` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
+An Ethereum account on Android is implemented by the `Account` class from the `org.ethereum.geth` package. Assuming we already have an instance of a `KeyStore` called `ks` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
 
 ```java
 // Create a new account with the specified encryption passphrase.
-Account newAcc = am.newAccount("Creation password");
+Account newAcc = ksm.newAccount("Creation password");
 
 // Export the newly created account with a different passphrase. The returned
 // data from this method invocation is a JSON encoded, encrypted key-file.
-byte[] jsonAcc = am.exportKey(newAcc, "Creation password", "Export password");
+byte[] jsonAcc = ks.exportKey(newAcc, "Creation password", "Export password");
 
 // Update the passphrase on the account created above inside the local keystore.
-am.updateAccount(newAcc, "Creation password", "Update password");
+ks.updateAccount(newAcc, "Creation password", "Update password");
 
 // Delete the account updated above from the local keystore.
-am.deleteAccount(newAcc, "Update password");
+ks.deleteAccount(newAcc, "Update password");
 
 // Import back the account we've exported (and then deleted) above with yet
 // again a fresh passphrase.
-Account impAcc = am.importKey(jsonAcc, "Export password", "Import password");
+Account impAcc = ks.importKey(jsonAcc, "Export password", "Import password");
 ```
 
 *Although instances of `Account` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
 
 ### Accounts on iOS (Swift 3)
 
-An Ethereum account on iOS is implemented by the `GethAccount` class from the `Geth` framework. Assuming we already have an instance of an `GethAccountManager` called `am` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
+An Ethereum account on iOS is implemented by the `GethAccount` class from the `Geth` framework. Assuming we already have an instance of a `GethKeyStore` called `ks` from the previous section, we can easily execute all of the described lifecycle operations with a handful of function calls.
 
 ```swift
 // Create a new account with the specified encryption passphrase.
-let newAcc = try! am?.newAccount("Creation password")
+let newAcc = try! ks?.newAccount("Creation password")
 
 // Export the newly created account with a different passphrase. The returned
 // data from this method invocation is a JSON encoded, encrypted key-file.
-let jsonKey = try! am?.exportKey(newAcc!, passphrase: "Creation password", newPassphrase: "Export password")
+let jsonKey = try! ks?.exportKey(newAcc!, passphrase: "Creation password", newPassphrase: "Export password")
 
 // Update the passphrase on the account created above inside the local keystore.
-try! am?.update(newAcc, passphrase: "Creation password", newPassphrase: "Update password")
+try! ks?.update(newAcc, passphrase: "Creation password", newPassphrase: "Update password")
 
 // Delete the account updated above from the local keystore.
-try! am?.delete(newAcc, passphrase: "Update password")
+try! ks?.delete(newAcc, passphrase: "Update password")
 
 // Import back the account we've exported (and then deleted) above with yet
 // again a fresh passphrase.
-let impAcc  = try! am?.importKey(jsonKey, passphrase: "Export password", newPassphrase: "Import password")
+let impAcc  = try! ks?.importKey(jsonKey, passphrase: "Export password", newPassphrase: "Import password")
 ```
 
 *Although instances of `GethAccount` can be used to access various information about specific Ethereum accounts, they do not contain any sensitive data (such as passphrases or private keys), rather act solely as identifiers for client code and the keystore.*
@@ -128,46 +128,47 @@ As mentioned above, account objects do not hold the sensitive private keys of th
 
 There are a few different ways one can authorize the account manager to execute signing operations, each having its advantages and drawbacks. Since the different methods have wildly different security guarantees, it is essential to be clear on how each works:
 
- * **Single authorization**: The simplest way to sign a transaction via the account manager is to provide the passphrase of the account every time something needs to be signed, which will ephemerally decrypt the private key, execute the signing operation and immediately throw away the decrypted key. The drawbacks are that the passphrase needs to be queried from the user every time, which can become annoying if done frequently; or the application needs to keep the passphrase in memory, which can have security consequences if not done properly; and depending on the keystore's configured strength, constantly decrypting keys can result in non-negligible resource requirements.
- * **Multiple authorizations**: A more complex way of signing transactions via the account manager is to unlock the account via its passphrase once, and allow the account manager to cache the decrypted private key, enabling all subsequent signing requests to complete without the passphrase. The lifetime of the cached private key may be managed manually (by explicitly locking the account back up) or automatically (by providing a timeout during unlock). This mechanism is useful for scenarios where the user may need to sign many transactions or the application would need to do so without requiring user input. The crucial aspect to remember is that **anyone with access to the account manager can sign transactions while a particular account is unlocked** (e.g. device left unattended; application running untrusted code).
+ * **Single authorization**: The simplest way to sign a transaction via the keystore is to provide the passphrase of the account every time something needs to be signed, which will ephemerally decrypt the private key, execute the signing operation and immediately throw away the decrypted key. The drawbacks are that the passphrase needs to be queried from the user every time, which can become annoying if done frequently; or the application needs to keep the passphrase in memory, which can have security consequences if not done properly; and depending on the keystore's configured strength, constantly decrypting keys can result in non-negligible resource requirements.
+ * **Multiple authorizations**: A more complex way of signing transactions via the keystore is to unlock the account via its passphrase once, and allow the account manager to cache the decrypted private key, enabling all subsequent signing requests to complete without the passphrase. The lifetime of the cached private key may be managed manually (by explicitly locking the account back up) or automatically (by providing a timeout during unlock). This mechanism is useful for scenarios where the user may need to sign many transactions or the application would need to do so without requiring user input. The crucial aspect to remember is that **anyone with access to the account manager can sign transactions while a particular account is unlocked** (e.g. device left unattended; application running untrusted code).
 
-*Note, creating transactions is out of scope here, so the remainder of this section will assume we already have a transaction hash to sign, and will focus only on creating a cryptographic signature authorizing it. Creating an actual transaction and injecting the authorization signature into it will be covered later.*
+*Note, creating transactions is out of scope here, so the remainder of this section will assume we already have a transaction to sign, and will focus only on creating an authorized version of it. Creating an actually meaningful transaction will be covered later.*
 
 ### Signing on Android (Java)
 
-Assuming we already have an instance of an `AccountManager` called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+Assuming we already have an instance of a `KeyStore` called `ks` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random transaction to sign instead.
 
 ```java
 // Create a new account to sign transactions with
-Account signer = am.newAccount("Signer password");
-Hash    txHash = new Hash("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+Account signer = ks.newAccount("Signer password");
+Transaction tx = new Transaction(
+	1, new Address("0x0000000000000000000000000000000000000000"),
+	new BigInt(0), new BigInt(0), new BigInt(1), null); // Random empty transaction
+BigInt chain = new BigInt(1); // Chain identifier of the main net
 ```
 
 With the boilerplate out of the way, we can now sign transaction using the authorization mechanisms described above:
 
 ```java
 // Sign a transaction with a single authorization
-byte[] signature = am.signPassphrase(signer, "Signer password", txHash.getBytes());
+Transaction signed = ks.signTxPassphrase(signer, "Signer password", tx, chain);
 
 // Sign a transaction with multiple manually cancelled authorizations
-am.unlock(signer, "Signer password");
-signature = am.sign(signer.getAddress(), txHash.getBytes());
-am.lock(signer.getAddress());
+ks.unlock(signer, "Signer password");
+signed = ks.signTx(signer, tx, chain);
+ks.lock(signer.getAddress());
 
 // Sign a transaction with multiple automatically cancelled authorizations
-am.timedUnlock(signer, "Signer password", 1000000000); // 1 second in nanoseconds
-signature = am.sign(signer.getAddress(), txHash.getBytes());
+ks.timedUnlock(signer, "Signer password", 1000000000);
+signed = ks.signTx(signer, tx, chain);
 ```
-
-You may wonder why `signPassphrase` takes an `Account` as the signer, whereas `sign` takes only an `Address`. The reason is that an `Account` object may also contain a custom key-path, allowing `signPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
 
 ### Signing on iOS (Swift 3)
 
-Assuming we already have an instance of a `GethAccountManager` called `am` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
+Assuming we already have an instance of a `GethKeyStore` called `ks` from the previous sections, we can create a new account to sign transactions with via it's already demonstrated `newAccount` method; and to avoid going into transaction creation for now, we can hard-code a random `Hash` to sign instead.
 
 ```swift
 // Create a new account to sign transactions with
-let signer = try! am?.newAccount("Signer password")
+let signer = try! ks?.newAccount("Signer password")
 
 var error: NSError?
 let txHash = GethNewHashFromHex("0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", &error)
@@ -179,16 +180,14 @@ With the boilerplate out of the way, we can now sign transaction using the autho
 
 ```swift
 // Sign a transaction with a single authorization
-var signature = try! am?.signPassphrase(signer, passphrase: "Signer password", hash: txHash?.getBytes())
+var signature = try! ks?.signPassphrase(signer, passphrase: "Signer password", hash: txHash?.getBytes())
 
 // Sign a transaction with multiple manually cancelled authorizations
-try! am?.unlock(signer, passphrase: "Signer password")
+try! ks?.unlock(signer, passphrase: "Signer password")
 signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
-try! am?.lock(signer?.getAddress())
+try! ks?.lock(signer?.getAddress())
 
 // Sign a transaction with multiple automatically cancelled authorizations
-try! am?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000) // 1 second in nanoseconds
-signature = try! am?.sign(signer?.getAddress(), hash: txHash?.getBytes())
+try! ks?.timedUnlock(signer, passphrase: "Signer password", timeout: 1000000000) // 1 second in nanoseconds
+signature = try! ks?.sign(signer?.getAddress(), hash: txHash?.getBytes())
 ```
-
-You may wonder why `signPassphrase` takes a `GethAccount` as the signer, whereas `sign` takes only a `GethAddress`. The reason is that a `GethAccount` object may also contain a custom key-path, allowing `signPassphrase` to sign using accounts outside of the keystore; however `sign` relies on accounts already unlocked within the keystore, so it cannot specify custom paths.
