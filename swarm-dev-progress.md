@@ -48,11 +48,11 @@ Next Phase
 * local cluster https://github.com/ethereum/go-ethereum/pull/14353 
 * add tests for cmd/swarm CLI functionality
 * to provide the first real network type to interact with the simulation backend
-* network scenario driver
+* network scenario driver https://gist.github.com/lmars/a0b90f0208b153ff313d9e0a1aeb3258
 * simplify code by removing messenger abstraction https://github.com/ethersphere/go-ethereum/pull/69
 * https://gist.github.com/lmars/1461c8b51150613a595225753f0ff0d3
 
-* event type refactor and visualiser improvements (@holisticode)
+* event type refactor and visualiser improvements (@holisticode) https://github.com/holisticode/simple-p2p-d3/tree/snapshotsUX
 
 ### API changes issues  (@homotopycolimit)
 
