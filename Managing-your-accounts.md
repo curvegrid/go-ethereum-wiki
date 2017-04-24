@@ -249,7 +249,7 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id"
 }
 ```
 
-If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes a whitespace separated list of accounts (in hex or index) as argument so you can unlock the accounts programmatically for one session. This is useful if you want to use your account from Dapps via RPC. `--unlock ` will unlock the first account. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
+If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes a comma separated list of accounts (in hex or index) as argument so you can unlock the accounts programmatically for one session. This is useful if you want to use your account from Dapps via RPC. `--unlock ` will unlock the first account. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
 
 Unlocking one account:
 ```
@@ -259,10 +259,10 @@ geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain loc
 
 Instead of the account address, you can use integer indexes which refers to the address position in the account listing (and corresponds to order of creation)
 
-The command line allows you to unlock multiple accounts. In this case the argument to unlock is a whitespace delimited list of accounts addresses or indexes. 
+The command line allows you to unlock multiple accounts. In this case the argument to unlock is a comma delimited list of accounts addresses or indexes. 
 
 ```
-geth --unlock "0x407d73d8a49eeb85d32cf465507dd71d507100c1 0 5 e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32"
+geth --unlock "0x407d73d8a49eeb85d32cf465507dd71d507100c1,0,5,e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32"
 ```
 
 If this construction is used non-interactively, your password file will need to contain the respective passwords for the accounts in question, one per line. 
