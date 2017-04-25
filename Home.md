@@ -14,5 +14,6 @@ Main entry points:
 * [JavaScript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 * [Private Network](https://github.com/ethereum/go-ethereum/wiki/Private-network)
 * [Developers' Guide](https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide)
+* [Whisper v5](https://github.com/ethereum/go-ethereum/wiki/Whisper)
 
 Sidebar lists all pages.
