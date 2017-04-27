@@ -6,16 +6,30 @@ Dev diary Q2 2017 on the way to swarm POC 3
 * new bmt package to offer a suite of BMT hash implementations ready for base chunk hash for the swarm hash 
 * BMT cleanup, let it go. https://github.com/ethereum/go-ethereum/pull/14334 slight controvercy around 
 
+Phase 1
+* write tests for write (you can write to the hash writer arbitrary size blobs and still get the same result
+* finalise and test the SegmentWriter interface to the Hasher
+* define inclusion proofs on BMTHasher
+* clean up, remove unused implementations
+
 ### Pyramid chunker (@jmozah, @holisticode)
 
+Phase 0
 * https://github.com/ethersphere/go-ethereum/pull/67
-Priority 
 * infinite (size-less) chunking
 * append to hash (file)
+* https://github.com/ethereum/go-ethereum/pull/14382
+
+Phase 1
 * use SegmentWriter interface for chunk hash (provided by BMTHasher)
+* define a SegmentWriter wrapper for plain SHA3 chunkhash
+* benchmark pyramid + SHA3 vs pyramid BMT
 
-Next Phase
+Phase 2
+* append from arbitrary offset
+* inclusion proofs and verifiers for arbitrary offset and length 
 
+Phase 3
 * obfuscation for plausible deniability: https://gist.github.com/nagydani/6ffc790c2e65af9c121489899e659b1d
 * use infinite hash stream in 3rd gen syncer implementation 
 * implement inclusion proofs and solidity verifiers for arbitrary files and segments
@@ -28,9 +42,13 @@ Next Phase
 
 ### interim syncer fix
 
+phase 0
 * https://github.com/ethereum/go-ethereum/pull/3780 being tested on the testnet
 * invalid chunks errors happening still see this comment  how to reproduce https://github.com/ethereum/go-ethereum/pull/3780#issuecomment-295449342
-* I got a hunch, will update soon
+
+phase 1
+* the db bug finally fixed as of 26th April, also fixed syncer issues
+* final review of https://github.com/ethereum/go-ethereum/pull/3780 and testing on testnet
 
 ### PSS (@nolash)
 
@@ -62,4 +80,3 @@ Next Phase
 * soft links as redirect 
 * default entry as a manifest-wide 
 
-*
