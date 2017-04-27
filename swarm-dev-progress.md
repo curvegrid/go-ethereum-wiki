@@ -81,3 +81,7 @@ phase 1
 * soft links as redirect 
 * default entry as a manifest-wide 
 
+### Documentation
+
+* update the swarm guide to include documentation for the swarm manifest, ls subcommands, and most importantly the extended upload/download options (multipart, tar stream) 
+
