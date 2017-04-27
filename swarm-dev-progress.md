@@ -21,6 +21,7 @@ Phase 0
 * https://github.com/ethereum/go-ethereum/pull/14382
 
 Phase 1
+* add subtree length to root hash 
 * use SegmentWriter interface for chunk hash (provided by BMTHasher)
 * define a SegmentWriter wrapper for plain SHA3 chunkhash
 * benchmark pyramid + SHA3 vs pyramid BMT
