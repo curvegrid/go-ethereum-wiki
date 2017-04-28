@@ -3,6 +3,8 @@
 **WARNING**
 Remember your password. 
 
+Geth 1.7 will reorganize the current set of commands and flags. This will gradually be merged into master and eventually shipped in 1.7. See for documentation [this](https://github.com/ethereum/go-ethereum/wiki/Manage-your-accounts-1.7) page. 
+
 If you lose the password you use to encrypt your account, you will not be able to access that account.
 Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
 
