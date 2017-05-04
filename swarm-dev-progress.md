@@ -14,12 +14,15 @@ Phase 1
 
 ### Pyramid chunker (@jmozah, @holisticode)
 
+2017-04-17
+2017-04-24
 Phase 0
 * https://github.com/ethersphere/go-ethereum/pull/67
 * infinite (size-less) chunking
 * append to hash (file)
 * https://github.com/ethereum/go-ethereum/pull/14382
 
+2017-05-01
 Phase 1
 * add subtree length to root hash 
 * use SegmentWriter interface for chunk hash (provided by BMTHasher)
@@ -41,6 +44,11 @@ Phase 3
 * streamer
 * request handler
 
+2017-05-01
+* fixed kademlia async send and nil pointer bugs
+* started to refactor swarm to be composed of a multiple apiservices and protocol modules
+
+
 ### interim syncer fix
 
 2017-04-17
@@ -52,6 +60,10 @@ phase 0
 phase 1
 * the db bug finally fixed as of 26th April, also fixed syncer issues
 * final review of https://github.com/ethereum/go-ethereum/pull/3780 and testing on testnet
+
+2017-05-01
+* http://swarm-gateways.net/bzz:/04772f473ba96a39b4f875d8fa22728691119a49cb981e9f6c22706ee3faf2d7/
+* synced chunks cannot be retrieved, strange bug to hunt again
 
 ### PSS (@nolash)
 
@@ -68,6 +80,10 @@ phase 1
 * proper API + documentation, see updated whisper 5 doc  https://github.com/ethereum/go-ethereum/wiki/Whisper
 * (API client for p2p protocols using a p2p.MsgReadWriter implementation that ReadMsg via RPC subscribe and Write via SendRaw, handles peer via API also.
 
+2017-05-01
+* RPC Api done
+* large scale tests (lil flaky)
+* refactor, simplifications and imrovements
 
 ### Network testing and simulation framework (@lmars, @nolash, @homotopycolimit, @holisticode, @zelig)
 
@@ -107,6 +123,10 @@ Upcoming:
 * Add some hooks for storing benchmarks and metrics in a time-series database (perhaps
   [Prometheus](https://prometheus.io/)).
 
+2017-05-01
+* preparing for the GRAND PR 
+* refactor
+* event type  refactor
 
 ### Light swarm nodes
 
