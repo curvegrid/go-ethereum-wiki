@@ -49,7 +49,7 @@ Plaintext (unencrypted) message is formed as a concatenation of a single byte fo
     payload: byte array of arbitrary size
     optional signature: 65 bytes
 
-Those unable to decrypt the message data are also unable to access the signature. The signature, if provided, is the ECDSA signature of the Keccak-256 hash of the unencrypted payload using the secret key of the originator identity. The signature is serialised as the concatenation of the `R`, `S` and `V` parameters of the SECP-256k1 ECDSA signature, in that order. `R` and `S` are both big-endian encoded, fixed-width 256-bit unsigned. `V` is an 8-bit big-endian encoded, non-normalised and should be either 27 or 28. 
+Those unable to decrypt the message data are also unable to access the signature. The signature, if provided, is the ECDSA signature of the Keccak-256 hash of the unencrypted data using the secret key of the originator identity. The signature is serialised as the concatenation of the `R`, `S` and `V` parameters of the SECP-256k1 ECDSA signature, in that order. `R` and `S` are both big-endian encoded, fixed-width 256-bit unsigned. `V` is an 8-bit big-endian encoded, non-normalised and should be either 27 or 28. 
 
 The padding is introduced in order to align the message size, since message size alone might reveal important metainformation. The padding is supposed to contain random data (at least this is the default behaviour in version 5). However, it is possible to set arbitrary padding data, which might even be used for steganographic purposes. The API allows easy access to the padding data.
 
