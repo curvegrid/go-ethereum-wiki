@@ -22,8 +22,7 @@ Envelopes are the packets sent and received by Whisper nodes. Envelopes contain 
 
 	[ Version, Expiry, TTL, Topic, AESNonce, Data, EnvNonce ]
 
-Version: up to 4 bytes (currently one byte containing zero).
-If Version is higher than current, envelope could not be decrypted, and therefore only forwarded to the peers.
+Version: up to 4 bytes (currently one byte containing zero). Version indicates encryption method. If Version is higher than current, envelope could not be decrypted, and therefore only forwarded to the peers.
 
 Expiry time: 4 bytes (UNIX time in seconds).
 
