@@ -37,6 +37,7 @@ Phase 3
 * obfuscation for plausible deniability: https://gist.github.com/nagydani/6ffc790c2e65af9c121489899e659b1d
 * use infinite hash stream in 3rd gen syncer implementation 
 * implement inclusion proofs and solidity verifiers for arbitrary files and segments (@nagydani)
+* solidity swarm hash implementation (need to update when bmt comes) https://github.com/ethereum/solidity/pull/2115
 
 ### network layer rewrite
 2017-04-17
