@@ -66,7 +66,6 @@ Name or blame = list of contributors:
 ### Ethereum on social media
 
 - Main site: https://www.ethereum.org
-- ETHDEV: https://ethdev.com
 - Forum: https://forum.ethereum.org
 - Github: https://github.com/ethereum
 - Blog: https://blog.ethereum.org
