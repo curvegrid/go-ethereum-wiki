@@ -38,7 +38,7 @@ In case of several participants (e.g. a group chat) they just need one additiona
 
 ### Plausible Deniability
 
-In some jurisdictions authorities might order a user to reveal his key (or any information). In case he signed any message with his private key, it might be used as an evidence against him. So, the user might prefer to use his key only to establish the session, and then engage in symmetrically encrypted communication without signing the messages. His peer may be sure that he has written the message, since the symmetric key was signed with his private key. But these messages can not be used as an evidence in a court of law, since this message could have been sent by anyone in possession of the symmetric key, especially if this key was used in a group chat session.
+In some jurisdictions authorities might order a user to reveal his key (or any information). In case he signed any message with his private key, it might be used as evidence against him. So, the user might prefer to use his key only to establish the session, and then engage in symmetrically encrypted communication without signing the messages. His peer may be sure about his identity, since the symmetric key was signed with his private key. But these messages can not be used as evidence in a court of law, since this message could have been sent by anyone in possession of the symmetric key, especially if this key was used in a group chat session.
 
 ### Steganography
 
