@@ -1,4 +1,4 @@
-# Whisper API 5.0
+# Whisper RPC API 5.0
 
 This is the proposed API for whisper v5.
 
