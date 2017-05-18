@@ -96,3 +96,929 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageLength","params
 ```
 
 ***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+***
+
+#### shh_xxxxxx
+
+xxxxxxxxxxxxxxxxxx
+
+
+##### Parameters
+
+1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+
+##### Returns
+
+`Boolean` - `true` on success and an error on failure.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
