@@ -95,32 +95,35 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageLength","params
 }
 ```
 
+
+
+
+
 ***
 
-#### shh_xxxxxx
+#### shh_getFloatingMessages
 
-xxxxxxxxxxxxxxxxxx
-
+Retrieves all the floating messages that match a specific filter. It is likely to be called once per session, right after Subscribe call.
 
 ##### Parameters
 
-1. `xxxxxxxxx`: xxxxxxxxxxxxxxxx.
+1. `args`: WhisperFilterArgs.
 
 ##### Returns
 
-`Boolean` - `true` on success and an error on failure.
+`[]WhisperMessage` - array of Whisper messages.
 
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_xxxxxxx","params":[234567],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[xxxxxxxx],"id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": [xxxxxxxxxxxxxxxxxxxxxxxxxxxx]
 }
 ```
 
