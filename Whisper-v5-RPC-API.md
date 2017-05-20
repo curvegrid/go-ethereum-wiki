@@ -16,7 +16,7 @@ none
 
 ##### Returns
 
-`String` - The semver version number.
+`String` - The version number.
 
 ##### Example
 ```js
@@ -606,10 +606,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{type: 'asym
 
 ### Parameters of Subscribe
 
-<pre><code>func (self *PublicWhisperAPI) Subscribe(args WhisperFilterArgs) (string, error)
-</code></pre>
-
-The argument of Subscribe function is a JSON object with the following format:
+The argument of Subscribe function (`SubscribeArgs`) is a JSON object with the following format:
 
 		type       string
 		key        string
@@ -632,10 +629,7 @@ The argument of Subscribe function is a JSON object with the following format:
 
 ### Parameters of Post
 
-<pre><code>func (self *PublicWhisperAPI) Post(args PostArgs) error
-</code></pre>
-
-The argument of Post function is a JSON object with the following format:
+The argument of Post function (`PostArgs`) is a JSON object with the following format:
 
 	type       string
 	ttl        uint32
