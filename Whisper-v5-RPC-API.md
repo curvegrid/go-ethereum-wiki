@@ -120,7 +120,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinimumPoW","params":[12.
 
 ***
 
-#### shh_allowP2PMessagesFromPeer
+#### shh_allowTrustedPeer
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
@@ -135,7 +135,7 @@ Marks specific peer trusted, which will allow it to send historic (expired) mess
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_allowP2PMessagesFromPeer","params":[enode://d25474361659861e9e651bc728a17e807a3359ca0d344afd544ed0f11a31faecaf4d74b55db53c6670fd624f08d5c79adfc8da5dd4a11b9213db49a3b750845e@52.178.209.125:30379],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_allowTrustedPeer","params":[enode://d25474361659861e9e651bc728a17e807a3359ca0d344afd544ed0f11a31faecaf4d74b55db53c6670fd624f08d5c79adfc8da5dd4a11b9213db49a3b750845e@52.178.209.125:30379],"id":1}'
 
 // Result
 {
@@ -309,7 +309,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["8b
 
 ***
 
-#### shh_generateSymmetricKey
+#### shh_newSymKey
 
 Generates a random symmetric key and stores it under id, which is then returned. Will be used in the future for session key exchange.
 
@@ -324,7 +324,7 @@ none
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_generateSymmetricKey","id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey","id":1}'
 
 // Result
 {
@@ -336,13 +336,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_generateSymmetricKey","id":1
 
 ***
 
-#### shh_addSymmetricKeyDirect
+#### shh_addSymKey
 
 Stores the key, and returns its id.
 
 ##### Parameters
 
-1. `hexutil.Bytes`: the key.
+1. `hexutil.Bytes`: the key for symmetric encryption in hexadecimal format.
 
 ##### Returns
 
@@ -351,7 +351,7 @@ Stores the key, and returns its id.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addSymmetricKeyDirect","params":["0xf6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addSymKey","params":["0xf6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
 
 // Result
 {
@@ -363,7 +363,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addSymmetricKeyDirect","para
 
 ***
 
-#### shh_addSymmetricKeyFromPassword
+#### shh_generateSymKeyFromPassword
 
 Generates the key from password, stores it, and returns its ID.
 
@@ -378,7 +378,7 @@ Generates the key from password, stores it, and returns its ID.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addSymmetricKeyFromPassword","params":["test"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_generateSymKeyFromPassword","params":["test"],"id":1}'
 
 // Result
 {
@@ -390,7 +390,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addSymmetricKeyFromPassword"
 
 ***
 
-#### shh_getSymmetricKey
+#### shh_getSymKey
 
 Returns the symmetric key associated with the given ID.
 
@@ -405,7 +405,7 @@ Returns the symmetric key associated with the given ID.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymmetricKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
 
 // Result
 {
@@ -417,7 +417,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymmetricKey","params":["
 
 ***
 
-#### shh_hasSymmetricKey
+#### shh_hasSymKey
 
 Returns true if there is a key associated with the name string. Otherwise, returns false.
 
@@ -432,7 +432,7 @@ Returns true if there is a key associated with the name string. Otherwise, retur
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasSymmetricKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasSymKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
 
 // Result
 {
@@ -444,7 +444,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasSymmetricKey","params":["
 
 ***
 
-#### shh_deleteSymmetricKey
+#### shh_deleteSymKey
 
 Deletes the key associated with the name string if it exists.
 
@@ -471,7 +471,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteSymmetricKey","params"
 
 ***
 
-#### shh_getNewSubscriptionMessages
+#### shh_pollSubscription
 
 Retrieves all the new messages matched by a filter since the last retrieval.
 
@@ -486,7 +486,7 @@ Retrieves all the new messages matched by a filter since the last retrieval.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getNewSubscriptionMessages","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
 
 // Result
 {
@@ -500,11 +500,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getNewSubscriptionMessages",
 
 #### shh_getFloatingMessages
 
-Retrieves all the floating messages associated with specific subscription. It is likely to be called once per session, right after Subscribe call.
+Retrieves all the floating messages associated with specific subscription.
 
 ##### Parameters
 
-1. `String`: subscription ID.
+1. `SubscribeArgs`, same as parameter of shh_subscribe. Detailed explaination see below. 
 
 ##### Returns
 
@@ -513,7 +513,7 @@ Retrieves all the floating messages associated with specific subscription. It is
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":["02c1f5c953804acee3b68eda6c0afe3f1b4e0bec73c7445e10d45da333616412"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{type: 'asym', pow: 12.3, topics: ['0x5a4ea131', '0x11223344'], key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea', sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6'}],"id":1}'
 
 // Result
 {
@@ -531,7 +531,7 @@ Creates and registers a new subscription to watch for inbound whisper messages. 
 
 ##### Parameters
 
-1. `SubscribeArgs`.
+1. `SubscribeArgs`. Detailed explaination see below. 
 
 ##### Returns
 
@@ -585,7 +585,7 @@ Creates a whisper message and injects it into the network for distribution.
 
 ##### Parameters
 
-1. `PostArgs`.
+1. `PostArgs`. Detailed explaination see below. 
 
 ##### Returns
 
@@ -606,12 +606,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{type: 'asym
 
 ### Parameters of Subscribe
 
+***
+
 The argument of Subscribe function (`SubscribeArgs`) is a JSON object with the following format:
 
 		type       string
 		key        string
 		sig        string
-		minPoW     float64
+		minPow     float64
 		topics     [][]byte
 		allowP2P   bool
 
@@ -621,13 +623,17 @@ The argument of Subscribe function (`SubscribeArgs`) is a JSON object with the f
 
 `sig`: Public key of the signature.
 
-`minPoW`: Minimal PoW requirement for incoming messages.
+`minPow`: Minimal PoW requirement for incoming messages.
 
 `topics`: Array of possible topics (or partial topics).
 
 `allowP2P`: Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
 
+***
+
 ### Parameters of Post
+
+***
 
 The argument of Post function (`PostArgs`) is a JSON object with the following format:
 
@@ -661,3 +667,5 @@ The argument of Post function (`PostArgs`) is a JSON object with the following f
 `powTarget`: Minimal PoW target required for this message.
 
 `targetPeer`: Optional peer ID (for peer-to-peer message only).
+
+***
