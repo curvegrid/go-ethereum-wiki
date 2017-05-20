@@ -4,6 +4,8 @@ This is the proposed API for whisper v5.
 
 ### Specs
 
+***
+
 #### shh_version
 
 Returns the current semver version number.
@@ -205,7 +207,7 @@ Generates a new cryptographic identity for the client, and injects it into the k
 
 ##### Parameters
 
-None.
+none
 
 ##### Returns
 
@@ -313,7 +315,7 @@ Generates a random symmetric key and stores it under id, which is then returned.
 
 ##### Parameters
 
-None.
+none
 
 ##### Returns
 
