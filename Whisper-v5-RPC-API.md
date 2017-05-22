@@ -4,6 +4,30 @@ This is the proposed API for whisper v5.
 
 ### Specs
 
+- [shh_version](#shh_version)
+- [shh_info](#shh_info)
+- [shh_setMaxMessageSize](#shh_setmaxmessagesize)
+- [shh_setMinPoW](#shh_setminpow)
+- [shh_allowTrustedPeer](#shh_allowtrustedpeer)
+- [shh_newKeyPair](#shh_newkeypair)
+- [shh_addPrivateKey](#shh_addprivatekey)
+- [shh_deleteKeyPair](#shh_deletekeypair)
+- [shh_hasKeyPair](#shh_haskeypair)
+- [shh_getPublicKey](#shh_getpublickey)
+- [shh_getPrivateKey](#shh_getprivatekey)
+- [shh_newSymKey](#shh_newsymkey)
+- [shh_addSymKey](#shh_addsymkey)
+- [shh_generateSymKeyFromPassword](#shh_generatesymkeyfrompassword)
+- [shh_hasSymKey](#shh_hassymkey)
+- [shh_getSymKey](#shh_getsymkey)
+- [shh_deleteSymKey](#shh_deletesymkey)
+- [shh_subscribe](#shh_subscribe)
+- [shh_unsubscribe](#shh_unsubscribe)
+- [shh_pollSubscription](#shh_pollsubscription)
+- [shh_getFloatingMessages](#shh_getfloatingmessages)
+- [shh_post](#shh_post)
+
+
 ***
 
 #### shh_version
