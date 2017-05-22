@@ -493,10 +493,10 @@ Creates and registers a new subscription to receive notifications for inbound wh
   - `key` - `Object`: A object with key type and ID as follows:
     - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
     - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
-  - `sig` - `String`: Public key of the signature.
-  - `minPow` - `Number`: Minimal PoW requirement for incoming messages.
-  - `topics` - `Array`: Array of possible topics (or partial topics).
-  - `allowP2P` - `Boolean`: Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
+  - `sig` - `String`  (optional): Public key of the signature.
+  - `minPow` - `Number`  (optional): Minimal PoW requirement for incoming messages.
+  - `topics` - `Array`  (optional when asym key): Array of possible topics (or partial topics).
+  - `allowP2P` - `Boolean`  (optional): Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
 
 
 ##### Returns
@@ -562,7 +562,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
 
 #### shh_unsubscribe
 
-Disables and removes an existing subscription.
+Cancels and removes an existing subscription.
 
 ##### Parameters
 
@@ -570,7 +570,7 @@ Disables and removes an existing subscription.
 
 ##### Returns
 
-`Boolean` (`true` or `false`).
+`Boolean`: `true` or `false`.
 
 ##### Example
 ```js
@@ -588,7 +588,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_unsubscribe","params":["02c1
 
 ***
 
-#### shh_pollSubscription
+#### shh_pollSubscription (experimental) // TODO ?
 
 Retrieves all the new messages matched by a filter since the last retrieval.
 
@@ -598,7 +598,7 @@ Retrieves all the new messages matched by a filter since the last retrieval.
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details.
+`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
 
 ##### Example
 ```js
@@ -610,7 +610,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":[
   "id":1,
   "jsonrpc": "2.0",
   "result": [{
-
+      "sig": "0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6",
+      "ttl": "0x34",
+      "timestamp": "0xa34444",
+      "topic": "0x5a4ea131",
+      "payload": "0x3456435243142fdf1d2312",
+      "padding": "0xaaa3df1d231456435243142f456435243142f2",
+      "pow": "0xa",
+      "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
   },{...}]
 }
 ```
@@ -619,16 +626,16 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":[
 
 #### shh_getFloatingMessages
 
-Retrieves all the floating messages associated with specific subscription.
+Retrieves all the floating messages matching the options.
 
 ##### Parameters
 
-1. `Objects`: Same as parameter of (shh_subscribe)(#shh_subscribe).
+1. `Objects`: Same as the options parameter of [shh_subscribe](#shh_subscribe).
 
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details.
+`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
 
 
 ##### Example
@@ -649,7 +656,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params
   "id":1,
   "jsonrpc": "2.0",
   "result": [{
-
+      "sig": "0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6",
+      "ttl": "0x34",
+      "timestamp": "0xa34444",
+      "topic": "0x5a4ea131",
+      "payload": "0x3456435243142fdf1d2312",
+      "padding": "0xaaa3df1d231456435243142f456435243142f2",
+      "pow": "0xa",
+      "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
   },{...}]
 }
 ```
@@ -666,14 +680,14 @@ Creates a whisper message and injects it into the network for distribution.
   - `key` - `Object`: A object with key type and ID as follows:
     - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
     - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
-  - `sig` - `String`: ID of the signing key.
+  - `sig` - `String` (optional): ID of the signing key.
   - `ttl` - `Number`: Time-to-live in seconds.
-  - `topic` - `String` 4 Bytes: Message topic.
+  - `topic` - `String` 4 Bytes (optional when key is asym): Message topic.
   - `payload` - `String`: Payload to be encrypted.
-  - `padding` - `String`: Optional padding (byte array of arbitrary length).
-  - `powTime` - `Number`: Maximal time in seconds to be spent on prrof of work.
+  - `padding` - `String` (optional): Optional padding (byte array of arbitrary length).
+  - `powTime` - `Number`: Maximal time in seconds to be spent on proof of work.
   - `powTarget` - `Number`: Minimal PoW target required for this message.
-  - `targetPeer` - `String`: Optional peer ID (for peer-to-peer message only).
+  - `targetPeer` - `String` (optional): Optional peer ID (for peer-to-peer message only).
 
 
 ##### Returns
