@@ -623,7 +623,7 @@ Retrieves all the new messages matched by a filter since the last retrieval.
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
+`Array` - containing whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
 
 ##### Example
 ```js
@@ -660,7 +660,7 @@ Retrieves all the floating messages matching the options.
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
+`Array` - containing whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
 
 
 ##### Example
@@ -717,7 +717,7 @@ Creates a whisper message and injects it into the network for distribution.
 
 ##### Returns
 
-`Boolean` (`true`) on success and an error on failure.
+`Boolean`: `true` on success and an error on failure.
 
 ##### Example
 ```
