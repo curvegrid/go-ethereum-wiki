@@ -57,8 +57,10 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_info","params":[],"id":1}'
   "id":1,
   "jsonrpc": "2.0",
   "result": {
+    "minPow": 12.5,
+    "maxMessageSize": 20000, // Number of bytes
     "memory": 10000,
-    "messages": 20
+    "messages": 20,
   }
 }
 ```
@@ -93,9 +95,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageSize","params":
 
 ***
 
-#### shh_setMinPoW
+#### shh_setMinPoW (experimental)
 
 Sets the minimal PoW required by this node.
+
+**Note** This function is currently experimental.
 
 ##### Parameters
 
@@ -120,7 +124,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinPoW","params":[12.3],"
 
 ***
 
-#### shh_allowTrustedPeer
+#### shh_allowTrustedPeer (shh_addTrustedPeer ?)
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
@@ -149,28 +153,57 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_allowTrustedPeer","params":[
 
 ***
 
-#### shh_hasKeyPair
 
-Checks if the whisper node has a private key of a key pair matching the given ID.
+#### shh_newKeyPair
+
+Generates a new public and private key pair for message decryption and encryption.
 
 ##### Parameters
 
-1. `String`: ID of key pair.
+none
 
 ##### Returns
 
-`Boolean`: (`true` or `false`) and error on failure.
+`String`: Key ID on success and an error on failure.
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasKeyPair","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newKeyPair","id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": false
+  "result": "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
+}
+```
+
+***
+
+
+#### shh_addPrivateKey
+
+Stores the key pair, and returns its ID.
+
+##### Parameters
+
+1. `String`: private key as HEX bytes.
+
+##### Returns
+
+`String`: Key ID on success and an error on failure.
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["0x8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15"],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": "3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 }
 ```
 
@@ -203,28 +236,29 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteKeyPair","params":["5e
 
 ***
 
-#### shh_newKeyPair
 
-Generates a new cryptographic identity for the client, and injects it into the known identities for message decryption.
+#### shh_hasKeyPair
+
+Checks if the whisper node has a private key of a key pair matching the given ID.
 
 ##### Parameters
 
-none
+1. `String`: ID of key pair.
 
 ##### Returns
 
-`String`: Key ID on success and an error on failure.
+`Boolean`: (`true` or `false`) and error on failure.
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newKeyPair","id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasKeyPair","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
+  "result": false
 }
 ```
 
@@ -284,37 +318,10 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPrivateKey","params":["86
 
 ***
 
-#### shh_addPrivateKey
-
-Stores the key pair, and returns its ID.
-
-##### Parameters
-
-1. `String`: private key as HEX bytes.
-
-##### Returns
-
-`String`: Key ID on success and an error on failure. // TODO ? 
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["0x8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15"],"id":1}'
-
-// Result
-{
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": "3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
-}
-```
-
-***
-
 #### shh_newSymKey
 
 Generates a random symmetric key and stores it under an ID, which is then returned.
-Can be used in the future for session key exchange.
+Can be used encrypting and decrypting messages where the key is known to both parties.
 
 ##### Parameters
 
@@ -387,9 +394,37 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_generateSymKeyFromPassword",
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
+  "result": "2e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 }
 ```
+
+***
+
+#### shh_hasSymKey
+
+Returns true if there is a key associated with the name string. Otherwise, returns false.
+
+##### Parameters
+
+1. `String`: key ID.
+
+##### Returns
+
+`Boolean` (`true` or `false`) on success and an error on failure.
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasSymKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
 
 ***
 
@@ -418,32 +453,6 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymKey","params":["f6dcf2
 }
 ```
 
-***
-
-#### shh_hasSymKey
-
-Returns true if there is a key associated with the name string. Otherwise, returns false.
-
-##### Parameters
-
-1. `String`: key ID.
-
-##### Returns
-
-`Boolean` (`true` or `false`) on success and an error on failure.
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_hasSymKey","params":["f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92"],"id":1}'
-
-// Result
-{
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
-}
-```
 
 ***
 
@@ -476,14 +485,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteSymmetricKey","params"
 
 #### shh_subscribe
 
-Creates and registers a new subscription to watch for inbound whisper messages. Returns the ID of the newly created subscription.
+Creates and registers a new subscription to receive notifications for inbound whisper messages. Returns the ID of the newly created subscription.
 
 ##### Parameters
 
 1. `Object`. Options object with the following properties:
-
-  - `keyType` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
-  - `key` - `String`: ID of the decryption key (symmetric or asymmetric).
+  - `key` - `Object`: A object with key type and ID as follows:
+    - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
+    - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
   - `sig` - `String`: Public key of the signature.
   - `minPow` - `Number`: Minimal PoW requirement for incoming messages.
   - `topics` - `Array`: Array of possible topics (or partial topics).
@@ -498,16 +507,25 @@ Creates and registers a new subscription to watch for inbound whisper messages. 
 ##### Notification Return
 
 `Object`: The whisper message matching the subscription options, with the following parameters:
-
+  - `sig` - `String`: Public key who signed this message.
+  - `ttl` - `Number`: Time-to-live in seconds.
+  - `timestamp` - `Number`: Unix timestamp of the message genertion.
+  - `topic` - `String` 4 Bytes: Message topic.
+  - `payload` - `String`: Decrypted payload.
+  - `padding` - `String`: Optional padding (byte array of arbitrary length).
+  - `pow` - `Number`: Proof of work value.
+  - `hash` - `String`: Hash of the enveloved message.
 
 
 ##### Example
-```js
+```
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
   topics: ['0x5a4ea131', '0x11223344'],
-  keyType: 'asym',
-  key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
+  key: {
+    type: 'asym',
+    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
+  },
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
   pow: 12.3
   }],"id":1}'
@@ -523,10 +541,18 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
 // Notification Result
 {
   "jsonrpc": "2.0",
-  "result": {
+  "method": "eth_subscription",
+  "params": {
     subscription: "02c1f5c953804acee3b68eda6c0afe3f1b4e0bec73c7445e10d45da333616412",
     result: {
-      // whisper message
+      "sig": "0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6",
+      "ttl": "0x34",
+      "timestamp": "0xa34444",
+      "topic": "0x5a4ea131",
+      "payload": "0x3456435243142fdf1d2312",
+      "padding": "0xaaa3df1d231456435243142f456435243142f2",
+      "pow": "0xa",
+      "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
     }
   }
 }
@@ -606,12 +632,14 @@ Retrieves all the floating messages associated with specific subscription.
 
 
 ##### Example
-```js
+```
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{
   topics: ['0x5a4ea131', '0x11223344'],
-  keyType: 'asym',
-  key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
+  key: {
+    type: 'asym',
+    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
+  },
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
   pow: 12.3
   }],"id":1}'
@@ -635,8 +663,9 @@ Creates a whisper message and injects it into the network for distribution.
 ##### Parameters
 
 1. `Object`. Post options object with the following properties:
-  - `keyType` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
-  - `key` - `String`: Key ID (in case of symmetric encryption) or public key (in case of asymmetric).
+  - `key` - `Object`: A object with key type and ID as follows:
+    - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
+    - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
   - `sig` - `String`: ID of the signing key.
   - `ttl` - `Number`: Time-to-live in seconds.
   - `topic` - `String` 4 Bytes: Message topic.
@@ -652,11 +681,13 @@ Creates a whisper message and injects it into the network for distribution.
 `Boolean` (`true`) on success and an error on failure.
 
 ##### Example
-```js
+```
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{
-  keyType: 'asym',
-  key: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
+  key: {
+    type: 'asym',
+    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
+  },
   ttl: 7,
   topic: '0x07678231',
   powTarget: 2.01,
