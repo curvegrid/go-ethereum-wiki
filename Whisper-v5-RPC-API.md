@@ -76,7 +76,7 @@ Incoming and outgoing messages with a larger size will be rejected.
 
 ##### Returns
 
-`Boolean` (`true`) on success and an error on failure.
+`Boolean`: (`true`) on success and an error on failure.
 
 ##### Example
 ```js
@@ -93,22 +93,22 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageSize","params":
 
 ***
 
-#### shh_setMinimumPoW
+#### shh_setMinPoW
 
 Sets the minimal PoW required by this node.
 
 ##### Parameters
 
-1. `val`: the new PoW requirement.
+1. `Number`: The new PoW requirement.
 
 ##### Returns
 
-`Boolean` - `true` on success and an error on failure.
+`Boolean`: `true` on success and an error on failure.
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinimumPoW","params":[12.3],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinPoW","params":[12.3],"id":1}'
 
 // Result
 {
@@ -124,9 +124,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinimumPoW","params":[12.
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
+**Note** This function is not adding new nodes, the node needs to exists as a peer. // TODO (?)
+
 ##### Parameters
 
-1. `String`: enode of the trusted peer.
+1. `String`: Enode of the trusted peer.
 
 ##### Returns
 
@@ -149,7 +151,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_allowTrustedPeer","params":[
 
 #### shh_hasKeyPair
 
-Checks if the whisper node is configured with the private key of the specified public pair.
+Checks if the whisper node has a private key of a key pair matching the given ID.
 
 ##### Parameters
 
@@ -157,7 +159,7 @@ Checks if the whisper node is configured with the private key of the specified p
 
 ##### Returns
 
-`Boolean` (`true` or `false`) and error on failure.
+`Boolean`: (`true` or `false`) and error on failure.
 
 ##### Example
 ```js
@@ -184,7 +186,7 @@ Deletes the specifies key if it exists.
 
 ##### Returns
 
-`Boolean` (`true`) on success and an error on failure.
+`Boolean`: `true` on success and an error on failure.
 
 ##### Example
 ```js
@@ -211,7 +213,7 @@ none
 
 ##### Returns
 
-`String` (ID) on success and an error on failure.
+`String`: Key ID on success and an error on failure.
 
 ##### Example
 ```js
@@ -238,7 +240,7 @@ Returns the public key for identity ID.
 
 ##### Returns
 
-`String` (public key) on success and an error on failure.
+`String`: Public key on success and an error on failure.
 
 ##### Example
 ```js
@@ -249,7 +251,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPublicKey","params":["86e
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": "0x3e22b9ffc2387e18636e0534534a3d0c56b023264c16e78a2adc"
 }
 ```
 
@@ -257,15 +259,15 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPublicKey","params":["86e
 
 #### shh_getPrivateKey
 
-Returns the private key for identity id.
+Returns the private key for identity ID.
 
 ##### Parameters
 
-1. `String`: ID of key pair.
+1. `String`: ID of the key pair.
 
 ##### Returns
 
-`String` (public key) on success and an error on failure.
+`String`: Private key on success and an error on failure.
 
 ##### Example
 ```js
@@ -276,7 +278,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPrivateKey","params":["86
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": "0x234234e22b9ffc2387e18636e0534534a3d0c56b0243567432453264c16e78a2adc"
 }
 ```
 
@@ -288,22 +290,22 @@ Stores the key pair, and returns its ID.
 
 ##### Parameters
 
-1. `String`: private key in hexadecimal representation.
+1. `String`: private key as HEX bytes.
 
 ##### Returns
 
-`String` (ID) on success and an error on failure.
+`String`: Key ID on success and an error on failure. // TODO ? 
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["0x8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15"],"id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": "3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 }
 ```
 
@@ -311,7 +313,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_addPrivateKey","params":["8b
 
 #### shh_newSymKey
 
-Generates a random symmetric key and stores it under id, which is then returned. Will be used in the future for session key exchange.
+Generates a random symmetric key and stores it under an ID, which is then returned.
+Can be used in the future for session key exchange.
 
 ##### Parameters
 
@@ -319,12 +322,12 @@ none
 
 ##### Returns
 
-`String` (key ID) on success and an error on failure.
+`String`: Key ID on success and an error on failure.
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey","id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey", params: [], "id":1}'
 
 // Result
 {
@@ -338,15 +341,15 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey","id":1}'
 
 #### shh_addSymKey
 
-Stores the key, and returns its id.
+Stores the key, and returns its ID.
 
 ##### Parameters
 
-1. `hexutil.Bytes`: the key for symmetric encryption in hexadecimal format.
+1. `String`: The raw key for symmetric encryption as HEX bytes.
 
 ##### Returns
 
-`String` (key ID) on success and an error on failure.
+`String`: Key ID on success and an error on failure.
 
 ##### Example
 ```js
@@ -373,7 +376,7 @@ Generates the key from password, stores it, and returns its ID.
 
 ##### Returns
 
-`String` (key ID) on success and an error on failure.
+`String`: Key ID on success and an error on failure.
 
 ##### Example
 ```js
@@ -400,7 +403,7 @@ Returns the symmetric key associated with the given ID.
 
 ##### Returns
 
-`hexutil.Bytes` (raw key) on success and an error on failure.
+`String`: Raw key on success and an error on failure.
 
 ##### Example
 ```js
@@ -411,7 +414,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymKey","params":["f6dcf2
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "aeb7b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e77dd"
+  "result": "0xaeb7b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e77dd"
 }
 ```
 
@@ -471,82 +474,61 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteSymmetricKey","params"
 
 ***
 
-#### shh_pollSubscription
-
-Retrieves all the new messages matched by a filter since the last retrieval.
-
-##### Parameters
-
-1. `String`: subscription ID.
-
-##### Returns
-
-`[]WhisperMessage` on success and an error on failure.
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
-
-// Result
-{
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": []
-}
-```
-
-***
-
-#### shh_getFloatingMessages
-
-Retrieves all the floating messages associated with specific subscription.
-
-##### Parameters
-
-1. `SubscribeArgs`, same as parameter of shh_subscribe. Detailed explaination see below. 
-
-##### Returns
-
-`[]WhisperMessage` on success and an error on failure.
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{type: 'asym', pow: 12.3, topics: ['0x5a4ea131', '0x11223344'], key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea', sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6'}],"id":1}'
-
-// Result
-{
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": []
-}
-```
-
-***
-
 #### shh_subscribe
 
 Creates and registers a new subscription to watch for inbound whisper messages. Returns the ID of the newly created subscription.
 
 ##### Parameters
 
-1. `SubscribeArgs`. Detailed explaination see below. 
+1. `Object`. Options object with the following properties:
+
+  - `keyType` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
+  - `key` - `String`: ID of the decryption key (symmetric or asymmetric).
+  - `sig` - `String`: Public key of the signature.
+  - `minPow` - `Number`: Minimal PoW requirement for incoming messages.
+  - `topics` - `Array`: Array of possible topics (or partial topics).
+  - `allowP2P` - `Boolean`: Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
+
 
 ##### Returns
 
-`Boolean` - `true` on success and an error on failure.
+`String` - The subscription ID on success, the error on failure.
+
+
+##### Notification Return
+
+`Object`: The whisper message matching the subscription options, with the following parameters:
+
+
 
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{type: 'asym', pow: 12.3, topics: ['0x5a4ea131', '0x11223344'], key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea', sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6'}],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
+  topics: ['0x5a4ea131', '0x11223344'],
+  keyType: 'asym',
+  key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
+  sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
+  pow: 12.3
+  }],"id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": "02c1f5c953804acee3b68eda6c0afe3f1b4e0bec73c7445e10d45da333616412"
+}
+
+
+// Notification Result
+{
+  "jsonrpc": "2.0",
+  "result": {
+    subscription: "02c1f5c953804acee3b68eda6c0afe3f1b4e0bec73c7445e10d45da333616412",
+    result: {
+      // whisper message
+    }
+  }
 }
 ```
 
@@ -577,6 +559,73 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_unsubscribe","params":["02c1
 }
 ```
 
+
+***
+
+#### shh_pollSubscription
+
+Retrieves all the new messages matched by a filter since the last retrieval.
+
+##### Parameters
+
+1. `String`: subscription ID.
+
+##### Returns
+
+`[]WhisperMessage` on success and an error on failure.
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": [{
+
+  },{...}]
+}
+```
+
+***
+
+#### shh_getFloatingMessages
+
+Retrieves all the floating messages associated with specific subscription.
+
+##### Parameters
+
+1. `Objects`: Same as parameter of (shh_subscribe)(#shh_subscribe).
+
+
+##### Returns
+
+`Array` - with whisper message objects on success and an error on failure. See (shh_pollSubscription)[#shh_pollSubscription] for details.
+
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{
+  topics: ['0x5a4ea131', '0x11223344'],
+  keyType: 'asym',
+  key: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
+  sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
+  pow: 12.3
+  }],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": [{
+
+  },{...}]
+}
+```
+
 ***
 
 #### shh_post
@@ -585,7 +634,18 @@ Creates a whisper message and injects it into the network for distribution.
 
 ##### Parameters
 
-1. `PostArgs`. Detailed explaination see below. 
+1. `Object`. Post options object with the following properties:
+  - `keyType` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
+  - `key` - `String`: Key ID (in case of symmetric encryption) or public key (in case of asymmetric).
+  - `sig` - `String`: ID of the signing key.
+  - `ttl` - `Number`: Time-to-live in seconds.
+  - `topic` - `String` 4 Bytes: Message topic.
+  - `payload` - `String`: Payload to be encrypted.
+  - `padding` - `String`: Optional padding (byte array of arbitrary length).
+  - `powTime` - `Number`: Maximal time in seconds to be spent on prrof of work.
+  - `powTarget` - `Number`: Minimal PoW target required for this message.
+  - `targetPeer` - `String`: Optional peer ID (for peer-to-peer message only).
+
 
 ##### Returns
 
@@ -594,7 +654,15 @@ Creates a whisper message and injects it into the network for distribution.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{type: 'asym', ttl: 7, topic: '0x07678231', powTarget: 2.01, powTime: 2, payload: '0x68656c6c6f', key: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6'}],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{
+  keyType: 'asym',
+  key: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
+  ttl: 7,
+  topic: '0x07678231',
+  powTarget: 2.01,
+  powTime: 2,
+  payload: '0x68656c6c6f'
+  }],"id":1}'
 
 // Result
 {
@@ -603,69 +671,3 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{type: 'asym
   "result": true
 }
 ```
-
-### Parameters of Subscribe
-
-***
-
-The argument of Subscribe function (`SubscribeArgs`) is a JSON object with the following format:
-
-		type       string
-		key        string
-		sig        string
-		minPow     float64
-		topics     [][]byte
-		allowP2P   bool
-
-`type`: Encryption type (symetric/asymmetric). The only valid values are "sym" or "asym".
-
-`key`: ID of the decryption key (symmetric or asymmetric).
-
-`sig`: Public key of the signature.
-
-`minPow`: Minimal PoW requirement for incoming messages.
-
-`topics`: Array of possible topics (or partial topics).
-
-`allowP2P`: Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
-
-***
-
-### Parameters of Post
-
-***
-
-The argument of Post function (`PostArgs`) is a JSON object with the following format:
-
-	type       string
-	ttl        uint32
-	sig        string
-	key        string
-	topic      [4]byte
-	padding    []byte
-	payload    []byte
-	powTime    uint32
-	powTarget  float64
-	targetPeer string
-	
-`type`: Encryption type (symetric/asymmetric). The only valid values are "sym" or "asym".
-
-`ttl`: Time-to-live in seconds.
-
-`sig`: ID of the signing key.
-
-`key`: Key ID (in case of symmetric encryption) or public key (in case of asymmetric).
-
-`topic`: Message topic (four bytes of arbitrary data).
-
-`payload`: Payload to be encrypted.
-
-`padding`: Optional padding (byte array of arbitrary length).
-
-`powTime`: Maximal time in seconds to be spent on prrof of work.
-
-`powTarget`: Minimal PoW target required for this message.
-
-`targetPeer`: Optional peer ID (for peer-to-peer message only).
-
-***
