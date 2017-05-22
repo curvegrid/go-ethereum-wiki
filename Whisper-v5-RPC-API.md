@@ -598,7 +598,7 @@ Retrieves all the new messages matched by a filter since the last retrieval.
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See (shh_subscribe)[#shh_subscribe] for details.
+`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details.
 
 ##### Example
 ```js
@@ -628,7 +628,7 @@ Retrieves all the floating messages associated with specific subscription.
 
 ##### Returns
 
-`Array` - with whisper message objects on success and an error on failure. See (shh_subscribe)[#shh_subscribe] for details.
+`Array` - with whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details.
 
 
 ##### Example
