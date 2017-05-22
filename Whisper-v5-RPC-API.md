@@ -148,7 +148,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinPoW","params":[12.3],"
 
 ***
 
-#### shh_allowTrustedPeer (shh_addTrustedPeer ?)
+#### shh_allowTrustedPeer
+(shh_addTrustedPeer ?)
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
