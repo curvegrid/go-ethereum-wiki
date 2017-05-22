@@ -552,7 +552,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
     id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
   },
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
-  pow: 12.3
+  pow: 12.3(?)
   }],"id":1}'
 
 // Result
@@ -576,7 +576,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
       "topic": "0x5a4ea131",
       "payload": "0x3456435243142fdf1d2312",
       "padding": "0xaaa3df1d231456435243142f456435243142f2",
-      "pow": "0xa",
+      "pow": "0xa",(?)
       "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
     }
   }
@@ -641,7 +641,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":[
       "topic": "0x5a4ea131",
       "payload": "0x3456435243142fdf1d2312",
       "padding": "0xaaa3df1d231456435243142f456435243142f2",
-      "pow": "0xa",
+      "pow": "0xa",(?)
       "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
   },{...}]
 }
@@ -673,7 +673,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params
     id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
   },
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
-  pow: 12.3
+  pow: 12.3 (?)
   }],"id":1}'
 
 // Result
@@ -687,7 +687,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params
       "topic": "0x5a4ea131",
       "payload": "0x3456435243142fdf1d2312",
       "padding": "0xaaa3df1d231456435243142f456435243142f2",
-      "pow": "0xa",
+      "pow": "0xa",(?)
       "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
   },{...}]
 }
