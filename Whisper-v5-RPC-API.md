@@ -8,7 +8,7 @@ This is the proposed API for whisper v5.
 - [shh_info](#shh_info)
 - [shh_setMaxMessageSize](#shh_setmaxmessagesize)
 - [shh_setMinPoW](#shh_setminpow)
-- [shh_allowTrustedPeer](#shh_allowtrustedpeer)
+- [shh_markTrustedPeer](#shh_marktrustedpeer)
 - [shh_newKeyPair](#shh_newkeypair)
 - [shh_addPrivateKey](#shh_addprivatekey)
 - [shh_deleteKeyPair](#shh_deletekeypair)
@@ -68,6 +68,8 @@ none
 ##### Returns
 
 `Object` - diagnostic information with the following properties:
+  - `minPow` - `Number`: current minimum PoW requirement.
+  - `maxMessageSize` - `Float`: current messgae size limit in bytes.
   - `memory` - `Number`: Memory size of the floating messages in bytes.
   - `message` - `Number`: Number of floating messages.
 
@@ -82,7 +84,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_info","params":[],"id":1}'
   "jsonrpc": "2.0",
   "result": {
     "minPow": 12.5,
-    "maxMessageSize": 20000, // Number of bytes
+    "maxMessageSize": 20000,
     "memory": 10000,
     "messages": 20,
   }
@@ -95,6 +97,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_info","params":[],"id":1}'
 
 Sets the maximal message size allowed by this node.
 Incoming and outgoing messages with a larger size will be rejected.
+Whisper message size can never exceed the limit imposed by the underlying P2P protocol (10 Mb).
 
 ##### Parameters
 
@@ -123,6 +126,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageSize","params":
 
 Sets the minimal PoW required by this node.
 
+This function was introduced for the future dynamic adjustment of PoW requirement. If the node is overwhelmed with messages, it should raise the PoW requirement and notify the peers. The new value should be set relative to the old value (e.g. double). The old value could be obtained via shh_info call.
+
 **Note** This function is currently experimental.
 
 ##### Parameters
@@ -148,12 +153,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMinPoW","params":[12.3],"
 
 ***
 
-#### shh_allowTrustedPeer
-(shh_addTrustedPeer ?)
+#### shh_markTrustedPeer
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
-**Note** This function is not adding new nodes, the node needs to exists as a peer. // TODO (?)
+**Note** This function is not adding new nodes, the node needs to exists as a peer.
 
 ##### Parameters
 
@@ -514,15 +518,17 @@ Creates and registers a new subscription to receive notifications for inbound wh
 
 ##### Parameters
 
-1. `Object`. Options object with the following properties:
-  - `key` - `Object`: A object with key type and ID as follows:
-    - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
-    - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
+1. `id` - `String`: identifier of function call. In case of Whisper must contain the value "messages".
+
+2. `Object`. Options object with the following properties:
+  - `symKeyID` - `String`: ID of symmetric key for message encryption.
+  - `pubKey` - `String`: public key for message encryption.
   - `sig` - `String`  (optional): Public key of the signature.
   - `minPow` - `Number`  (optional): Minimal PoW requirement for incoming messages.
   - `topics` - `Array`  (optional when asym key): Array of possible topics (or partial topics).
   - `allowP2P` - `Boolean`  (optional): Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
 
+Either `symKeyID` or `pubKey` must be present. Can not be both.
 
 ##### Returns
 
@@ -547,10 +553,7 @@ Creates and registers a new subscription to receive notifications for inbound wh
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
   topics: ['0x5a4ea131', '0x11223344'],
-  key: {
-    type: 'asym',
-    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
-  },
+  symKeyID: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
   pow: 12.3(?)
   }],"id":1}'
@@ -668,10 +671,7 @@ Retrieves all the floating messages matching the options.
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{
   topics: ['0x5a4ea131', '0x11223344'],
-  key: {
-    type: 'asym',
-    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
-  },
+  symKeyID: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
   pow: 12.3 (?)
   }],"id":1}'
@@ -697,14 +697,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params
 
 #### shh_post
 
-Creates a whisper message and injects it into the network for distribution. 
+Creates a whisper message and injects it into the network for distribution.
 
 ##### Parameters
 
 1. `Object`. Post options object with the following properties:
-  - `key` - `Object`: A object with key type and ID as follows:
-    - `type` - `String`: Encryption type (symetric/asymmetric). Values are `"sym"` or `"asym"`.
-    - `id` - `String`: ID of the decryption key (symmetric or asymmetric).
+  - `symKeyID` - `String`: ID of symmetric key for message encryption.
+  - `pubKey` - `String`: public key for message encryption.
   - `sig` - `String` (optional): ID of the signing key.
   - `ttl` - `Number`: Time-to-live in seconds.
   - `topic` - `String` 4 Bytes (optional when key is asym): Message topic.
@@ -714,6 +713,7 @@ Creates a whisper message and injects it into the network for distribution.
   - `powTarget` - `Number`: Minimal PoW target required for this message.
   - `targetPeer` - `String` (optional): Optional peer ID (for peer-to-peer message only).
 
+Either `symKeyID` or `pubKey` must be present. Can not be both.
 
 ##### Returns
 
@@ -723,10 +723,7 @@ Creates a whisper message and injects it into the network for distribution.
 ```
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{
-  key: {
-    type: 'asym',
-    id: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea'
-  },
+  pubKey: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
   ttl: 7,
   topic: '0x07678231',
   powTarget: 2.01,
