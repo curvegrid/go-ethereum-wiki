@@ -122,11 +122,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_setMaxMessageSize","params":
 
 ***
 
-#### shh_setMinPoW (experimental)
+#### shh_setMinPoW
 
 Sets the minimal PoW required by this node.
 
-This function was introduced for the future dynamic adjustment of PoW requirement. If the node is overwhelmed with messages, it should raise the PoW requirement and notify the peers. The new value should be set relative to the old value (e.g. double). The old value could be obtained via shh_info call.
+This experimental function was introduced for the future dynamic adjustment of PoW requirement. If the node is overwhelmed with messages, it should raise the PoW requirement and notify the peers. The new value should be set relative to the old value (e.g. double). The old value could be obtained via shh_info call.
 
 **Note** This function is currently experimental.
 
