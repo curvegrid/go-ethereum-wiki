@@ -521,14 +521,14 @@ Creates and registers a new subscription to receive notifications for inbound wh
 1. `id` - `String`: identifier of function call. In case of Whisper must contain the value "messages".
 
 2. `Object`. Options object with the following properties:
-  - `symKeyID` - `String`: ID of symmetric key for message encryption.
-  - `pubKey` - `String`: public key for message encryption.
+  - `symKeyID` - `String`: ID of symmetric key for message decryption.
+  - `privateKeyID` - `String`: ID of private (asymmetric) key for message decryption.
   - `sig` - `String`  (optional): Public key of the signature.
   - `minPow` - `Number`  (optional): Minimal PoW requirement for incoming messages.
   - `topics` - `Array`  (optional when asym key): Array of possible topics (or partial topics).
   - `allowP2P` - `Boolean`  (optional): Indicates if this filter allows processing of direct peer-to-peer messages (which are not to be forwarded any further, because they might be expired). This might be the case in some very rare cases, e.g. if you intend to communicate to MailServers, etc.
 
-Either `symKeyID` or `pubKey` must be present. Can not be both.
+Either `symKeyID` or `privateKeyID` must be present. Can not be both.
 
 ##### Returns
 
