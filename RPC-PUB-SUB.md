@@ -7,7 +7,7 @@ It works by subscribing to particular events. The node will return a subscriptio
 Example:
 
     // create subscription
-    >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {}]}
+    >> {"id": 1, "method": "eth_subscribe", "params": ["newHeads", {}]}
     << {"jsonrpc":"2.0","id":1,"result":"0xcd0c3e8af590364c09d0fa6a1210faf5"}
 
     // incoming notifications
@@ -33,7 +33,7 @@ Subscriptions are creates with a regular RPC call with `eth_subscribe` as method
 
 ### Example
 
-    >> {"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true}]}
+    >> {"id": 1, "method": "eth_subscribe", "params": ["newHeads", {"includeTransactions": true}]}
     << {"id": 1, "jsonrpc": "2.0", "result": "0x9cef478923ff08bf67fde6c64013158d"}
 
 ## Cancel subscription
