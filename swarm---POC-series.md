@@ -39,6 +39,8 @@ The following features are prioritised for POC 3 (subject to change)
 * [x] protocol stack abstraction, pluggable subprotocol components - (swap, hive/protocol, syncer, peers) for pss
 * [ ] new p2p API integration - feature [#2060](https://github.com/ethereum/go-ethereum/issues/2060)
 * [ ] pss - unicast
+* [ ] swap rewrite
+* [ ] obfuscation for plausible deniability
 
 ## POC 0.4
 
