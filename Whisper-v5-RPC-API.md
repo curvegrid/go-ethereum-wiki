@@ -23,8 +23,9 @@ This is the proposed API for whisper v5.
 - [shh_deleteSymKey](#shh_deletesymkey)
 - [shh_subscribe](#shh_subscribe)
 - [shh_unsubscribe](#shh_unsubscribe)
-- [shh_pollSubscription](#shh_pollsubscription)
-- [shh_getFloatingMessages](#shh_getfloatingmessages)
+- [shh_newMessageFilter](#shh_newMessageFilter)
+- [shh_deleteMessageFilter](#shh_deleteMessageFilter)
+- [shh_getFilterMessages](#shh_getFilterMessages)
 - [shh_post](#shh_post)
 
 
@@ -170,7 +171,7 @@ Marks specific peer trusted, which will allow it to send historic (expired) mess
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_allowTrustedPeer","params":[enode://d25474361659861e9e651bc728a17e807a3359ca0d344afd544ed0f11a31faecaf4d74b55db53c6670fd624f08d5c79adfc8da5dd4a11b9213db49a3b750845e@52.178.209.125:30379],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_markTrustedPeer","params":["enode://d25474361659861e9e651bc728a17e807a3359ca0d344afd544ed0f11a31faecaf4d74b55db53c6670fd624f08d5c79adfc8da5dd4a11b9213db49a3b750845e@52.178.209.125:30379"],"id":1}'
 
 // Result
 {
@@ -314,7 +315,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPublicKey","params":["86e
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "0x3e22b9ffc2387e18636e0534534a3d0c56b023264c16e78a2adc"
+  "result": "0x04d1574d4eab8f3dde4d2dc7ed2c4d699d77cbbdd09167b8fffa099652ce4df00c4c6e0263eafe05007a46fdf0c8d32b11aeabcd3abbc7b2bc2bb967368a68e9c6"
 }
 ```
 
@@ -335,7 +336,7 @@ Returns the private key for identity ID.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPrivateKey","params":["86e658cbc6da63120b79b5eec0c67d5dcfb6865a8f983eff08932477282b77bb"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getPrivateKey","params":["0xc862bf3cf4565d46abcbadaf4712a8940bfea729a91b9b0e338eab5166341ab5"],"id":1}'
 
 // Result
 {
@@ -363,13 +364,13 @@ none
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey", params: [], "id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newSymKey", "params": [], "id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
+  "result": "cec94d139ff51d7df1d228812b90c23ec1f909afa0840ed80f1e04030bb681e4"
 }
 ```
 
@@ -478,7 +479,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getSymKey","params":["f6dcf2
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "0xaeb7b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e77dd"
+  "result": "0xa82a520aff70f7a989098376e48ec128f25f767085e84d7fb995a9815eebff0a"
 }
 ```
 
@@ -500,7 +501,7 @@ Deletes the key associated with the name string if it exists.
 ##### Example
 ```js
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteSymmetricKey","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_deleteSymKey","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
 
 // Result
 {
@@ -551,7 +552,7 @@ Either `symKeyID` or `privateKeyID` must be present. Can not be both.
 ##### Example
 ```
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":["messages", {
   topics: ['0x5a4ea131', '0x11223344'],
   symKeyID: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
   sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
@@ -581,6 +582,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_subscribe","params":[{
       "padding": "0xaaa3df1d231456435243142f456435243142f2",
       "pow": "0xa",(?)
       "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
+      "recipientPublicKey": "0x04d1574d4eab8f3dde4d2dc7ed2c4d699d77cbbdd09167b8fffa099652ce4df00c4c6e0263eafe05007a46fdf0c8d32b11aeabcd3abbc7b2bc2bb967368a68e9c6"
     }
   }
 }
@@ -613,85 +615,125 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_unsubscribe","params":["02c1
 }
 ```
 
-
 ***
 
-#### shh_pollSubscription (experimental) // TODO ?
+#### shh_newMessageFilter
 
-Retrieves all the new messages matched by a filter since the last retrieval.
+Create a new filter within the node. This filter can be used to poll for new messages that match the set of criteria.
 
 ##### Parameters
 
-1. `String`: subscription ID.
-
+1. `criteria` - `Object`: see `shh_subscribe`
+ 
 ##### Returns
 
-`Array` - containing whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_pollSubscription","params":["5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"],"id":1}'
-
-// Result
-{
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": [{
-      "sig": "0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6",
-      "ttl": "0x34",
-      "timestamp": "0xa34444",
-      "topic": "0x5a4ea131",
-      "payload": "0x3456435243142fdf1d2312",
-      "padding": "0xaaa3df1d231456435243142f456435243142f2",
-      "pow": "0xa",(?)
-      "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
-  },{...}]
-}
-```
-
-***
-
-#### shh_getFloatingMessages
-
-Retrieves all the floating messages matching the options.
-
-##### Parameters
-
-1. `Objects`: Same as the options parameter of [shh_subscribe](#shh_subscribe).
-
-
-##### Returns
-
-`Array` - containing whisper message objects on success and an error on failure. See [shh_subscribe](#shh_subscribe) for details of the object.
-
+`String`: filter identifier
 
 ##### Example
 ```
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFloatingMessages","params":[{
-  topics: ['0x5a4ea131', '0x11223344'],
-  symKeyID: 'b874f3bbaf031214a567485b703a025cec27d26b2c4457d6b139e56ad8734cea',
-  sig: '0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6',
-  pow: 12.3 (?)
-  }],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newMessageFilter","params":[{"symKeyID": "3742c75e4232325d54143707e4b73d17c2f86a5e4abe3359021be5653f5b2c81"}],"id":1}' localhost:8545
+
+// Result
+{"jsonrpc":"2.0","id":1,"result":"2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326"}
+
+```
+
+
+***
+
+#### shh_deleteMessageFilter
+
+Uninstall a message filter in the node
+
+##### Parameters
+
+1. `id` - `String`: filter identifier as returned when the filter was created
+ 
+##### Returns
+
+`String`: filter identifier
+
+##### Example
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_newMessageFilter","params":[{"symKeyID": "3742c75e4232325d54143707e4b73d17c2f86a5e4abe3359021be5653f5b2c81"}],"id":1}' localhost:8545
+
+// Result
+{"jsonrpc":"2.0","id":1,"result":"2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326"}
+
+```
+
+
+***
+
+#### shh_getFilterMessages
+
+Retrieve messages that match the filter criteria and are received between the last time this
+function was called and now.
+
+##### Parameters
+
+1. `id` - `String`: ID of filter that was created with `shh_newMessageFilter`
+ 
+
+##### Returns
+
+`Array of messages`: `true` on success and an error on failure.
+
+`Object`: whisper message:
+  - `sig` - `String`: Public key who signed this message.
+  - `ttl` - `Number`: Time-to-live in seconds.
+  - `timestamp` - `Number`: Unix timestamp of the message generation.
+  - `topic` - `String` 4 Bytes: Message topic.
+  - `payload` - `String`: Decrypted payload.
+  - `padding` - `String`: Optional padding (byte array of arbitrary length).
+  - `pow` - `Number`: Proof of work value.
+  - `hash` - `String`: Hash of the enveloped message.
+  - `recipientPublicKey` - `String`: recipient public key
+
+##### Example
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFilterMessages","params":["2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326"],"id":1}'
 
 // Result
 {
-  "id":1,
+  "id": 1,
   "jsonrpc": "2.0",
-  "result": [{
-      "sig": "0x048229fb947363cf13bb9f9532e124f08840cd6287ecae6b537cda2947ec2b23dbdc3a07bdf7cd2bfb288c25c4d0d0461d91c719da736a22b7bebbcf912298d1e6",
-      "ttl": "0x34",
-      "timestamp": "0xa34444",
-      "topic": "0x5a4ea131",
-      "payload": "0x3456435243142fdf1d2312",
-      "padding": "0xaaa3df1d231456435243142f456435243142f2",
-      "pow": "0xa",(?)
-      "hash": "0xddaa3df1d231456435243142af45aa3df1d2314564352431426435243142f2",
-  },{...}]
+  "result": [
+    {
+      "hash": "0xe05c4be74d667bd4c57dba2a8dbfb097d6fc2719d5c0d699d2f84a2442a4d8c2",
+      "padding": "0x6e3e82571c7aa91f2a9e82e20344ede0d1112205555843d9dafffeb1536741a1fca758ff30cc01320bb0775aa5b82b9c9f48deb10bff8b5c61354bf8f95f2ab7289c7894c52e285b1d750ea2ffa78edd374bc7386a901d36a59022d73208c852dedaca8709087693ef6831b861139f42a89263af5931cb2b9253216dc42edc1393afd03940f91c561d20080f7a258aa52d30dcf4b1b921b7c910ad429f73ed9308cb6218537f0444d915e993ba8c9bb00af311aab3574bf1722b5640632bf5bb6b12406e1b89d0c98628117b1d8f55ea6b974e251b34969d4c49dfb6036d40e0d90414c65a8b036ae985396d6a4bf28332676e85dc0a0d352a58680200cc",
+      "payload": "0xabcd",
+      "pow": 0.5371803278688525,
+      "recipientPublicKey": "0x",
+      "sig": "0x",
+      "timestamp": 1496991875,
+      "topic": "0x01020304",
+      "ttl": 50
+    },
+    {
+      "hash": "0x4158eb81ad8e30cfcee67f20b1372983d388f1243a96e39f94fd2797b1e9c78e",
+      "padding": "0xc15f786f34e5cef0fef6ce7c1185d799ecdb5ebca72b3310648c5588db2e99a0d73301c7a8d90115a91213f0bc9c72295fbaf584bf14dc97800550ea53577c9fb57c0249caeb081733b4e605cdb1a6011cee8b6d8fddb972c2b90157e23ba3baae6c68d4f0b5822242bb2c4cd821b9568d3033f10ec1114f641668fc1083bf79ebb9f5c15457b538249a97b22a4bcc4f02f06dec7318c16758f7c008001c2e14eba67d26218ec7502ad6ba81b2402159d7c29b068b8937892e3d4f0d4ad1fb9be5e66fb61d3d21a1c3163bce74c0a9d16891e2573146aa92ecd7b91ea96a6987ece052edc5ffb620a8987a83ac5b8b6140d8df6e92e64251bf3a2cec0cca",
+      "payload": "0xdeadbeaf",
+      "pow": 0.5371803278688525,
+      "recipientPublicKey": "0x",
+      "sig": "0x",
+      "timestamp": 1496991876,
+      "topic": "0x01020304",
+      "ttl": 50
+    }
+  ]
 }
+
 ```
+
+
+
+
+
+
 
 ***
 
@@ -706,7 +748,7 @@ Creates a whisper message and injects it into the network for distribution.
   - `pubKey` - `String`: public key for message encryption.
   - `sig` - `String` (optional): ID of the signing key.
   - `ttl` - `Number`: Time-to-live in seconds.
-  - `topic` - `String` 4 Bytes (optional when key is asym): Message topic.
+  - `topic` - `String` 4 Bytes (mandatory when key is symmetric): Message topic.
   - `payload` - `String`: Payload to be encrypted.
   - `padding` - `String` (optional): Optional padding (byte array of arbitrary length).
   - `powTime` - `Number`: Maximal time in seconds to be spent on proof of work.
