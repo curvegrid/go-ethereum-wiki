@@ -23,9 +23,9 @@ This is the proposed API for whisper v5.
 - [shh_deleteSymKey](#shh_deletesymkey)
 - [shh_subscribe](#shh_subscribe)
 - [shh_unsubscribe](#shh_unsubscribe)
-- [shh_newMessageFilter](#shh_newMessageFilter)
-- [shh_deleteMessageFilter](#shh_deleteMessageFilter)
-- [shh_getFilterMessages](#shh_getFilterMessages)
+- [shh_newMessageFilter](#shh_newmessagefilter)
+- [shh_deleteMessageFilter](#shh_deletemessagefilter)
+- [shh_getFilterMessages](#shh_getfiltermessages)
 - [shh_post](#shh_post)
 
 
