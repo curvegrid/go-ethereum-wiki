@@ -623,7 +623,7 @@ Create a new filter within the node. This filter can be used to poll for new mes
 
 ##### Parameters
 
-1. `criteria` - `Object`: see `shh_subscribe`
+1. `criteria` - `Object`: see [shh_subscribe](#shh_subscribe)
  
 ##### Returns
 
