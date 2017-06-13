@@ -143,7 +143,6 @@ With the number of THREADS as an arguments:
   * [datadir](#admindatadir)
   * [importChain](#adminimportchain)
   * [exportChain](#adminexportchain)
-  * [chainSyncStatus](#adminchainsyncstatus)
   * [startRPC](#adminstartrpc)
   * [stopRPC](#adminstoprpc)
   * [startWS](#adminstartws)
