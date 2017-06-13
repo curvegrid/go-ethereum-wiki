@@ -707,8 +707,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFilterMessages","params":
       "padding": "0x6e3e82571c7aa91f2a9e82e20344ede0d1112205555843d9dafffeb1536741a1fca758ff30cc01320bb0775aa5b82b9c9f48deb10bff8b5c61354bf8f95f2ab7289c7894c52e285b1d750ea2ffa78edd374bc7386a901d36a59022d73208c852dedaca8709087693ef6831b861139f42a89263af5931cb2b9253216dc42edc1393afd03940f91c561d20080f7a258aa52d30dcf4b1b921b7c910ad429f73ed9308cb6218537f0444d915e993ba8c9bb00af311aab3574bf1722b5640632bf5bb6b12406e1b89d0c98628117b1d8f55ea6b974e251b34969d4c49dfb6036d40e0d90414c65a8b036ae985396d6a4bf28332676e85dc0a0d352a58680200cc",
       "payload": "0xabcd",
       "pow": 0.5371803278688525,
-      "recipientPublicKey": "0x",
-      "sig": "0x",
+      "recipientPublicKey": null,
+      "sig": null,
       "timestamp": 1496991875,
       "topic": "0x01020304",
       "ttl": 50
@@ -718,8 +718,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getFilterMessages","params":
       "padding": "0xc15f786f34e5cef0fef6ce7c1185d799ecdb5ebca72b3310648c5588db2e99a0d73301c7a8d90115a91213f0bc9c72295fbaf584bf14dc97800550ea53577c9fb57c0249caeb081733b4e605cdb1a6011cee8b6d8fddb972c2b90157e23ba3baae6c68d4f0b5822242bb2c4cd821b9568d3033f10ec1114f641668fc1083bf79ebb9f5c15457b538249a97b22a4bcc4f02f06dec7318c16758f7c008001c2e14eba67d26218ec7502ad6ba81b2402159d7c29b068b8937892e3d4f0d4ad1fb9be5e66fb61d3d21a1c3163bce74c0a9d16891e2573146aa92ecd7b91ea96a6987ece052edc5ffb620a8987a83ac5b8b6140d8df6e92e64251bf3a2cec0cca",
       "payload": "0xdeadbeaf",
       "pow": 0.5371803278688525,
-      "recipientPublicKey": "0x",
-      "sig": "0x",
+      "recipientPublicKey": null,
+      "sig": null,
       "timestamp": 1496991876,
       "topic": "0x01020304",
       "ttl": 50
