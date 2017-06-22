@@ -52,7 +52,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"shh_version","params":[],"id":1}
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "5.0.0"
+  "result": "5.0"
 }
 ```
 
@@ -72,7 +72,7 @@ none
   - `minPow` - `Number`: current minimum PoW requirement.
   - `maxMessageSize` - `Float`: current messgae size limit in bytes.
   - `memory` - `Number`: Memory size of the floating messages in bytes.
-  - `message` - `Number`: Number of floating messages.
+  - `messages` - `Number`: Number of floating messages.
 
 ##### Example
 ```js
