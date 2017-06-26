@@ -63,7 +63,7 @@ Now check the balance in your test account.
 > 
 ```
 
-Our test account has 40 Ether in it, which at 5 Ether per block means it mined 8 blocks in 8 seconds on a contemporary iMac, including generating the [DAG][what-is-a-dag].
+Our test account has 40 Ether in it, which at 5 Ether per block means it mined 8 blocks in 8 seconds on a contemporary iMac, including generating the [DAG](https://ethereum.stackexchange.com/questions/1993/what-actually-is-a-dag).
 
 ## Test network alternatives
 
