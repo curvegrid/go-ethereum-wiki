@@ -1,5 +1,14 @@
 geth has a development mode which sets up a single node Ethereum test network along with a number of helpful options. It can be enabled with a single command line option, `geth --dev`.
 
+Here's a summary of what geth dev mode does:
+
+* Initializes the data directory with a testing genesis block
+* Sets max peers to 0
+* Turns off discovery by other nodes
+* Sets the gas price to 0
+* Uses a testing consensus algorithm (proof of work) which generates blocks quickly
+* Prevents the consensus (proof of work) difficulty from ever increasing
+
 ## geth dev mode basics
 
 You will need to create and specify a data directory for dev mode.
@@ -56,13 +65,13 @@ Now check the balance in your test account.
 
 Our test account has 40 Ether in it, which at 5 Ether per block means it mined 8 blocks in 8 seconds on a contemporary iMac, including generating the [DAG][what-is-a-dag].
 
-# Test network alternatives
+## Test network alternatives
 
-Instead of geth dev mode, we could have chosen to run on a private test network:
+Instead of geth dev mode, you could use a private test network:
 
 * [Private network](https://github.com/ethereum/go-ethereum/wiki/Private-network)
 * [Setting up private network or local cluster](https://github.com/ethereum/go-ethereum/wiki/Setting-up-private-network-or-local-cluster)
 
-We could run on one of the public test networks, but that would mean exposing our smart contract to that network in addition to incurring all of the performance and capacity implications associated with public test networks.
+Or you could run one of the public test networks. It would mean exposing your smart contract to the network in addition to incurring all of the performance and capacity implications associated with public test networks.
 
-Alternatively we could run on the main network, but that would be expensive (June 2017: Ethereum transactions cost about US$0.30 each).
+Alternatively, one could use the main network, at a cost (June 2017: Ethereum transactions cost about US$0.30 each).
